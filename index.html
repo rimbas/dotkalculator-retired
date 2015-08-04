@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dotkalculator</title>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Dota 2 calculator" />
+    <meta name="keywords" content="Dota 2, calculator" />
+	<meta name="author" content="Rimbas4" />
+	<link href="jquery-ui.min.css" rel="stylesheet" type="text/css" />
+	<link href="styles/global.css" rel="stylesheet" type="text/css" />
+	<link href="images/mini-heroes.css" rel="stylesheet" type="text/css" />
+	<script src="jquery-2.1.3.js"></script>
+	<script src="jquery-ui.min.js"></script>
+	<script src="jquery.tablesorter.js"></script>
+	<script src="data/data-heroes.js"></script>
+	<script src="data/HeroInstance.js"></script>
+	<script src="main-table/table-logic.js"></script>
+	<link href="main-table/table.css" rel="stylesheet" type="text/css" />
+	<script src="hero-picker/hero-picker.js"></script>
+	<link href="hero-picker/hero-picker.css" rel="stylesheet" type="text/css" />
+	
+	<script src="onLoad.js"></script>
+</head>
+<body>
+	<header>
+		<a href="/">Dotkalculator</a>
+		<button id="hero-picker-header-button">Add Hero</button>
+	</header>
+	
+	<div id="main-table-wrapper">
+		<table id="main-table">
+		</table>
+	</div>
+	
+	<div class="window" id="hero-picker"><!-- hero picker container -->
+		<div class="drag-bar">Hero picker<div class="drag-bar-close" id="hero-picker-close"></div></div>
+		<table id="hero-picker-table">
+			<thead>
+				<tr>
+					<th>Strength</th>
+					<th>Agility</th>
+					<th>Intelligence</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td id="hero-picker-Radiant-Strength"></td>
+					<td id="hero-picker-Radiant-Agility"></td>
+					<td id="hero-picker-Radiant-Intelligence"></td>
+				</tr>
+				<tr>
+					<td id="hero-picker-Dire-Strength"></td>
+					<td id="hero-picker-Dire-Agility"></td>
+					<td id="hero-picker-Dire-Intelligence"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+</body>
+</html>

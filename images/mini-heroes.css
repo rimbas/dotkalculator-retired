@@ -1,0 +1,340 @@
+.mheroicon{
+	background-image: url("mini-heroes.png");
+	background-clip: content-box;
+	background-origin: content-box;
+	background-repeat: no-repeat;
+	background-position: 32px 32px;
+	height: 32px;
+	width: 32px;
+}
+.mheroicon.abaddon{
+background-position: -0px -96px;
+}
+.mheroicon.alchemist{
+background-position: -0px -64px;
+}
+.mheroicon.ancient_apparition{
+background-position: -0px -32px;
+}
+.mheroicon.antimage{
+background-position: -0px -0px;
+}
+.mheroicon.axe{
+background-position: -128px -320px;
+}
+.mheroicon.bane{
+background-position: -288px -288px;
+}
+.mheroicon.batrider{
+background-position: -288px -256px;
+}
+.mheroicon.beastmaster{
+background-position: -288px -224px;
+}
+.mheroicon.bloodseeker{
+background-position: -288px -192px;
+}
+.mheroicon.bounty_hunter{
+background-position: -288px -160px;
+}
+.mheroicon.brewmaster{
+background-position: -288px -128px;
+}
+.mheroicon.bristleback{
+background-position: -288px -96px;
+}
+.mheroicon.broodmother{
+background-position: -288px -64px;
+}
+.mheroicon.centaur{
+background-position: -288px -32px;
+}
+.mheroicon.chaos_knight{
+background-position: -288px -0px;
+}
+.mheroicon.chen{
+background-position: -256px -320px;
+}
+.mheroicon.clinkz{
+background-position: -256px -288px;
+}
+.mheroicon.rattletrap{
+background-position: -256px -256px;
+}
+.mheroicon.crystal_maiden{
+background-position: -256px -224px;
+}
+.mheroicon.dark_seer{
+background-position: -256px -192px;
+}
+.mheroicon.dazzle{
+background-position: -256px -160px;
+}
+.mheroicon.death_prophet{
+background-position: -256px -128px;
+}
+.mheroicon.disruptor{
+background-position: -256px -96px;
+}
+.mheroicon.doom{
+background-position: -256px -64px;
+}
+.mheroicon.dragon_knight{
+background-position: -256px -32px;
+}
+.mheroicon.drow_ranger{
+background-position: -256px -0px;
+}
+.mheroicon.earth_spirit{
+background-position: -224px -320px;
+}
+.mheroicon.earthshaker{
+background-position: -224px -288px;
+}
+.mheroicon.elder_titan{
+background-position: -224px -256px;
+}
+.mheroicon.ember_spirit{
+background-position: -224px -224px;
+}
+.mheroicon.enchantress{
+background-position: -224px -192px;
+}
+.mheroicon.enigma{
+background-position: -224px -160px;
+}
+.mheroicon.faceless_void{
+background-position: -224px -128px;
+}
+.mheroicon.furion{
+background-position: -224px -96px;
+}
+.mheroicon.gyrocopter{
+background-position: -224px -64px;
+}
+.mheroicon.huskar{
+background-position: -224px -32px;
+}
+.mheroicon.invoker{
+background-position: -224px -0px;
+}
+.mheroicon.jakiro{
+background-position: -192px -320px;
+}
+.mheroicon.juggernaut{
+background-position: -192px -288px;
+}
+.mheroicon.keeper_of_the_light{
+background-position: -192px -256px;
+}
+.mheroicon.kunkka{
+background-position: -192px -224px;
+}
+.mheroicon.legion_commander{
+background-position: -192px -192px;
+}
+.mheroicon.leshrac{
+background-position: -192px -160px;
+}
+.mheroicon.lich{
+background-position: -192px -96px;
+}
+.mheroicon.life_stealer{
+background-position: -192px -64px;
+}
+.mheroicon.lina{
+background-position: -192px -32px;
+}
+.mheroicon.lion{
+background-position: -192px -0px;
+}
+.mheroicon.lone_druid{
+background-position: -160px -320px;
+}
+.mheroicon.luna{
+background-position: -160px -288px;
+}
+.mheroicon.lycan{
+background-position: -192px -128px;
+}
+.mheroicon.magnataur{
+background-position: -160px -256px;
+}
+.mheroicon.medusa{
+background-position: -160px -224px;
+}
+.mheroicon.meepo{
+background-position: -160px -192px;
+}
+.mheroicon.mirana{
+background-position: -160px -160px;
+}
+.mheroicon.morphling{
+background-position: -160px -128px;
+}
+.mheroicon.naga_siren{
+background-position: -160px -96px;
+}
+.mheroicon.necrolyte{
+background-position: -160px -64px;
+}
+.mheroicon.night_stalker{
+background-position: -160px -32px;
+}
+.mheroicon.nyx_assassin{
+background-position: -160px -0px;
+}
+.mheroicon.ogre_magi{
+background-position: -288px -320px;
+}
+.mheroicon.omniknight{
+background-position: -128px -288px;
+}
+.mheroicon.oracle{
+background-position: -128px -256px;
+}
+.mheroicon.obsidian_destroyer{
+background-position: -128px -224px;
+}
+.mheroicon.phantom_assassin{
+background-position: -128px -192px;
+}
+.mheroicon.phantom_lancer{
+background-position: -128px -160px;
+}
+.mheroicon.phoenix{
+background-position: -128px -128px;
+}
+.mheroicon.puck{
+background-position: -128px -96px;
+}
+.mheroicon.pudge{
+background-position: -128px -64px;
+}
+.mheroicon.pugna{
+background-position: -128px -32px;
+}
+.mheroicon.queenofpain{
+background-position: -128px -0px;
+}
+.mheroicon.razor{
+background-position: -96px -320px;
+}
+.mheroicon.riki{
+background-position: -96px -288px;
+}
+.mheroicon.rubick{
+background-position: -96px -256px;
+}
+.mheroicon.sand_king{
+background-position: -96px -224px;
+}
+.mheroicon.shadow_demon{
+background-position: -96px -192px;
+}
+.mheroicon.nevermore{
+background-position: -96px -160px;
+}
+.mheroicon.shadow_shaman{
+background-position: -96px -128px;
+}
+.mheroicon.silencer{
+background-position: -96px -96px;
+}
+.mheroicon.skywrath_mage{
+background-position: -96px -64px;
+}
+.mheroicon.slardar{
+background-position: -96px -32px;
+}
+.mheroicon.slark{
+background-position: -96px -0px;
+}
+.mheroicon.sniper{
+background-position: -64px -320px;
+}
+.mheroicon.spectre{
+background-position: -64px -288px;
+}
+.mheroicon.spirit_breaker{
+background-position: -64px -256px;
+}
+.mheroicon.storm_spirit{
+background-position: -64px -224px;
+}
+.mheroicon.sven{
+background-position: -64px -192px;
+}
+.mheroicon.techies{
+background-position: -64px -160px;
+}
+.mheroicon.templar_assassin{
+background-position: -64px -128px;
+}
+.mheroicon.terrorblade{
+background-position: -64px -96px;
+}
+.mheroicon.tidehunter{
+background-position: -64px -64px;
+}
+.mheroicon.shredder{
+background-position: -64px -32px;
+}
+.mheroicon.tinker{
+background-position: -32px -320px;
+}
+.mheroicon.tiny{
+background-position: -64px -0px;
+}
+.mheroicon.treant{
+background-position: -32px -288px;
+}
+.mheroicon.troll_warlord{
+background-position: -32px -256px;
+}
+.mheroicon.tusk{
+background-position: -32px -224px;
+}
+.mheroicon.undying{
+background-position: -32px -192px;
+}
+.mheroicon.ursa{
+background-position: -32px -160px;
+}
+.mheroicon.vengefulspirit{
+background-position: -32px -128px;
+}
+.mheroicon.venomancer{
+background-position: -32px -96px;
+}
+.mheroicon.viper{
+background-position: -32px -64px;
+}
+.mheroicon.visage{
+background-position: -32px -32px;
+}
+.mheroicon.warlock{
+background-position: -32px -0px;
+}
+.mheroicon.weaver{
+background-position: -0px -320px;
+}
+.mheroicon.windrunner{
+background-position: -0px -288px;
+}
+.mheroicon.winter_wyvern{
+background-position: -0px -256px;
+}
+.mheroicon.wisp{
+background-position: -0px -224px;
+}
+.mheroicon.witch_doctor{
+background-position: -0px -192px;
+}
+/* THE ONLY KING THAT MATTERS */
+.mheroicon.skeleton_king{
+background-position: -0px -160px;
+}
+.mheroicon.zuus{
+background-position: -0px -128px;
+}
