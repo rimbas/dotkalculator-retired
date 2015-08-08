@@ -8,13 +8,19 @@ $(function(){
 		a.className = "hero-picker-button mheroicon " + name;
 		document.getElementById("hero-picker-"+hero.Team+"-"+ hero.AttributePrimary).appendChild(a);
 	}	
-	$("#hero-picker").toggle();
+	$("#hero-picker").toggle(false);
 	
 	$("#hero-picker-header-button").on("click", 
 		function(){ 
 			$("#hero-picker").toggle();
 		});
 	$("#hero-picker-header-button").one("click",
+		function(){
+			var picker = document.getElementById("hero-picker");
+			picker.style.left = screen.width / 2 - picker.offsetWidth  / 2 + "px"
+			picker.style.top = "15vh";
+		});
+	$("#hero-picker-header-button").on("dblclick",
 		function(){
 			var picker = document.getElementById("hero-picker");
 			picker.style.left = screen.width / 2 - picker.offsetWidth  / 2 + "px";

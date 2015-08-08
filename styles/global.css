@@ -3,13 +3,16 @@ body {
 	padding: 0px;
 	background-color: #003045;
 	font-family: sans-serif;
+	overflow-x: hidden;
 }
 header {
 	display: block;
 	height: 2em;
-	background-color: rgba(0,0,0,0.2);
+	background-color: #003045;
 	border-bottom: 4px solid #9A1E00;
 	font-size: 14pt;
+	z-index: 9999;
+	position: relative;
 }
 header * {
 	display: inline-block;

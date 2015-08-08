@@ -2,15 +2,17 @@
 
 var MainTable;
 
-$(function(){
+//document.addEventListener("load", 
+$(function(e){
 	$(".window").draggable({
 		handle: ".drag-bar",
 		cursor: "grabbed",
 		containment: "document"
-	})
-	MainTable = new HeroTable("main-table");
-	MainTable.addHero(new HeroInstance("alchemist"));
+	}) 
+	MainTable = new HeroTable("main-table-wrapper");
+	
+	MainTable.addHero(new HeroInstance("alchemist", 16, []));
 	MainTable.addHero("vengefulspirit");
 	MainTable.addHero("techies");
-	$("#main-table").tablesorter();
+	//a$(".hero-table").tablesorter();
 })

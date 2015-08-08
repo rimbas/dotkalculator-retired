@@ -1,10 +1,29 @@
-#main-table {
+.hero-table {
 	margin: 10px;
+	font-size: 12pt;
 }
-#main-table td {
+.hero-table td {
 	padding-left: 4px;
 	padding-right: 4px;
 }
-#main-table tr:nth-child(2n), #main-table thead > tr {
+.hero-table tr:nth-child(2n), .hero-table thead > tr {
 	background-color: rgba(0, 0, 0, 0.5);
 }
+
+.ui-widget {
+	font-family: sans-serif;
+	background: none;
+	border-width: 1px;
+}
+
+.ui-spinner-input {
+	margin: 0px;
+	text-indent: 2px;
+	color: gold;
+	width: 100%;
+}
+
+.ui-spinner, .ui-spinner-button, .ui-spinner-button.ui-state-default {
+	border-color: gold;
+}
+

@@ -1,14 +1,14 @@
-
 DotaData = {};
 
 // Returns a new instance of complete hero propery data
 // heroId (string) - internal hero ID
-DotaData.getHeroProperties = function ( heroId ) {
-	if ( ! (heroId in DotaData.heroes) ) throw "No such id \"" + heroId + "\" in hero list";
-	var obj = {}, i,
-		base = DotaData.heroes.base, 
+DotaData.getHeroProperties = function (heroId) {
+	if (!(heroId in DotaData.heroes)) throw "No such id \"" + heroId + "\" in hero list";
+	var obj = {},
+		i,
+		base = DotaData.heroes._base,
 		hero = DotaData.heroes[heroId];
-	
+
 	for (var prop in base) {
 		obj[prop] = base[prop];
 	}
@@ -20,12 +20,11 @@ DotaData.getHeroProperties = function ( heroId ) {
 
 // mostly auto generated and regexed-up data
 DotaData.heroes = {
-	"base": // Special base entry
+	"_base": // Special base entry
 	{
 		"Name": "NO-DISPLAY-NAME",
 		"Ability5": "attribute_bonus",
 		"AbilityLayout": 4,
-		"ArmorBase": -1,
 		"AttackAnimationPoint": 0.75,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 1,
@@ -42,7 +41,8 @@ DotaData.heroes = {
 		"Enabled": -1,
 		"HasInventory": 1,
 		"Level": 1,
-		"MagicalResistance": 25,
+		"StatusArmorBase": -1,
+		"StatusMagicalResistance": 0.25,
 		"MovementSpeedBase": 300,
 		"MovementTurnRate": 0.5,
 		"ProjectileSpeed": 900,
@@ -53,15 +53,14 @@ DotaData.heroes = {
 		"VisionDaytimeRange": 1800,
 		"VisionNighttimeRange": 800
 	},
-	"abaddon":
-	{
+	"abaddon": {
 		"Name": "Abaddon",
 		"Ability1": "abaddon_death_coil",
 		"Ability2": "abaddon_aphotic_shield",
 		"Ability3": "abaddon_frostmourne",
 		"Ability4": "abaddon_borrowed_time",
 		"Ability5": "attribute_bonus",
-		"ArmorBase": -1.0,
+		"StatusArmorBase": -1.0,
 		"AttackAnimationPoint": 0.56,
 		"AttackType": "Melee",
 		"AttackDamageMax": 42,
@@ -80,8 +79,7 @@ DotaData.heroes = {
 		"MovementTurnRate": 0.5,
 		"Team": "Dire"
 	},
-	"abyssal_underlord":
-	{
+	"abyssal_underlord": {
 		"Name": "Abyssal Underlord",
 		"Ability1": "abyssal_underlord_firestorm",
 		"Ability2": "abyssal_underlord_pit_of_malice",
@@ -89,7 +87,7 @@ DotaData.heroes = {
 		"Ability4": "abyssal_underlord_dark_rift",
 		"Ability5": "abyssal_underlord_cancel_dark_rift",
 		"Ability6": "attribute_bonus",
-		"ArmorBase": 2.0,
+		"StatusArmorBase": 2.0,
 		"AttackAnimationPoint": 0.45,
 		"AttackType": "Melee",
 		"AttackDamageMax": 43,
@@ -108,8 +106,7 @@ DotaData.heroes = {
 		"MovementTurnRate": 0.6,
 		"Team": "Dire"
 	},
-	"alchemist":
-	{
+	"alchemist": {
 		"Name": "Alchemist",
 		"Ability1": "alchemist_acid_spray",
 		"Ability2": "alchemist_unstable_concoction",
@@ -117,7 +114,7 @@ DotaData.heroes = {
 		"Ability4": "alchemist_chemical_rage",
 		"Ability5": "attribute_bonus",
 		"Ability6": "alchemist_unstable_concoction_throw",
-		"ArmorBase": 0,
+		"StatusArmorBase": 0,
 		"AttackAnimationPoint": 0.35,
 		"AttackType": "Melee",
 		"AttackDamageMax": 33,
@@ -136,8 +133,7 @@ DotaData.heroes = {
 		"MovementTurnRate": 0.6,
 		"Team": "Radiant"
 	},
-	"ancient_apparition":
-	{
+	"ancient_apparition": {
 		"Name": "Ancient Apparition",
 		"Ability1": "ancient_apparition_cold_feet",
 		"Ability2": "ancient_apparition_ice_vortex",
@@ -145,7 +141,7 @@ DotaData.heroes = {
 		"Ability4": "ancient_apparition_ice_blast",
 		"Ability5": "ancient_apparition_ice_blast_release",
 		"Ability6": "attribute_bonus",
-		"ArmorBase": -1,
+		"StatusArmorBase": -1,
 		"AttackAnimationPoint": 0.45,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 29,
@@ -165,14 +161,13 @@ DotaData.heroes = {
 		"ProjectileSpeed": 1250,
 		"Team": "Dire"
 	},
-	"antimage":
-	{
+	"antimage": {
 		"Name": "Anti-Mage",
 		"Ability1": "antimage_mana_break",
 		"Ability2": "antimage_blink",
 		"Ability3": "antimage_spell_shield",
 		"Ability4": "antimage_mana_void",
-		"ArmorBase": -1,
+		"StatusArmorBase": -1,
 		"AttackAnimationPoint": 0.3,
 		"AttackType": "Melee",
 		"AttackDamageMax": 31,
@@ -192,14 +187,13 @@ DotaData.heroes = {
 		"ProjectileSpeed": 0,
 		"Team": "Radiant"
 	},
-	"axe":
-	{
+	"axe": {
 		"Name": "Axe",
 		"Ability1": "axe_berserkers_call",
 		"Ability2": "axe_battle_hunger",
 		"Ability3": "axe_counter_helix",
 		"Ability4": "axe_culling_blade",
-		"ArmorBase": -1,
+		"StatusArmorBase": -1,
 		"AttackAnimationPoint": 0.5,
 		"AttackType": "Melee",
 		"AttackDamageMax": 28,
@@ -219,8 +213,7 @@ DotaData.heroes = {
 		"StatusHealthRegenBase": 3.0,
 		"Team": "Dire"
 	},
-	"bane":
-	{
+	"bane": {
 		"Name": "Bane",
 		"Ability1": "bane_enfeeble",
 		"Ability2": "bane_brain_sap",
@@ -228,7 +221,7 @@ DotaData.heroes = {
 		"Ability4": "bane_fiends_grip",
 		"Ability5": "attribute_bonus",
 		"Ability6": "bane_nightmare_end",
-		"ArmorBase": 1,
+		"StatusArmorBase": 1,
 		"AttackAnimationPoint": 0.3,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 39,
@@ -248,14 +241,13 @@ DotaData.heroes = {
 		"ProjectileSpeed": 900,
 		"Team": "Dire"
 	},
-	"batrider":
-	{
+	"batrider": {
 		"Name": "Batrider",
 		"Ability1": "batrider_sticky_napalm",
 		"Ability2": "batrider_flamebreak",
 		"Ability3": "batrider_firefly",
 		"Ability4": "batrider_flaming_lasso",
-		"ArmorBase": 0,
+		"StatusArmorBase": 0,
 		"AttackAnimationPoint": 0.3,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 18,
@@ -276,8 +268,7 @@ DotaData.heroes = {
 		"Team": "Dire",
 		"VisionDaytimeRange": 1200
 	},
-	"beastmaster":
-	{
+	"beastmaster": {
 		"Name": "Beastmaster",
 		"Ability1": "beastmaster_wild_axes",
 		"Ability2": "beastmaster_call_of_the_wild",
@@ -286,7 +277,7 @@ DotaData.heroes = {
 		"Ability5": "beastmaster_primal_roar",
 		"Ability6": "attribute_bonus",
 		"AbilityLayout": 5,
-		"ArmorBase": 2,
+		"StatusArmorBase": 2,
 		"AttackAnimationPoint": 0.3,
 		"AttackType": "Melee",
 		"AttackDamageMax": 45,
@@ -306,14 +297,13 @@ DotaData.heroes = {
 		"ProjectileSpeed": 0,
 		"Team": "Radiant"
 	},
-	"bloodseeker":
-	{
+	"bloodseeker": {
 		"Name": "Bloodseeker",
 		"Ability1": "bloodseeker_bloodrage",
 		"Ability2": "bloodseeker_blood_bath",
 		"Ability3": "bloodseeker_thirst",
 		"Ability4": "bloodseeker_rupture",
-		"ArmorBase": 0,
+		"StatusArmorBase": 0,
 		"AttackAnimationPoint": 0.43,
 		"AttackType": "Melee",
 		"AttackDamageMax": 35,
@@ -332,14 +322,13 @@ DotaData.heroes = {
 		"MovementTurnRate": 0.5,
 		"Team": "Dire"
 	},
-	"bounty_hunter":
-	{
+	"bounty_hunter": {
 		"Name": "Bounty Hunter",
 		"Ability1": "bounty_hunter_shuriken_toss",
 		"Ability2": "bounty_hunter_jinada",
 		"Ability3": "bounty_hunter_wind_walk",
 		"Ability4": "bounty_hunter_track",
-		"ArmorBase": 3,
+		"StatusArmorBase": 3,
 		"AttackAnimationPoint": 0.59,
 		"AttackType": "Melee",
 		"AttackDamageMax": 38,
@@ -361,15 +350,14 @@ DotaData.heroes = {
 		"VisionDaytimeRange": 1800,
 		"VisionNighttimeRange": 1000
 	},
-	"brewmaster":
-	{
+	"brewmaster": {
 		"Name": "Brewmaster",
 		"Ability1": "brewmaster_thunder_clap",
 		"Ability2": "brewmaster_drunken_haze",
 		"Ability3": "brewmaster_drunken_brawler",
 		"Ability4": "brewmaster_primal_split",
 		"Ability5": "attribute_bonus",
-		"ArmorBase": -1.0,
+		"StatusArmorBase": -1.0,
 		"AttackAnimationPoint": 0.35,
 		"AttackType": "Melee",
 		"AttackDamageMax": 36,
@@ -389,15 +377,14 @@ DotaData.heroes = {
 		"StatusHealthRegenBase": 0.75,
 		"Team": "Radiant"
 	},
-	"bristleback":
-	{
+	"bristleback": {
 		"Name": "Bristleback",
 		"Ability1": "bristleback_viscous_nasal_goo",
 		"Ability2": "bristleback_quill_spray",
 		"Ability3": "bristleback_bristleback",
 		"Ability4": "bristleback_warpath",
 		"Ability5": "attribute_bonus",
-		"ArmorBase": 1.0,
+		"StatusArmorBase": 1.0,
 		"AttackAnimationPoint": 0.3,
 		"AttackType": "Melee",
 		"AttackDamageMax": 36,
@@ -416,14 +403,13 @@ DotaData.heroes = {
 		"MovementTurnRate": 1.0,
 		"Team": "Radiant"
 	},
-	"broodmother":
-	{
+	"broodmother": {
 		"Name": "Broodmother",
 		"Ability1": "broodmother_spawn_spiderlings",
 		"Ability2": "broodmother_spin_web",
 		"Ability3": "broodmother_incapacitating_bite",
 		"Ability4": "broodmother_insatiable_hunger",
-		"ArmorBase": 0,
+		"StatusArmorBase": 0,
 		"AttackAnimationPoint": 0.4,
 		"AttackType": "Melee",
 		"AttackDamageMax": 32,
@@ -442,15 +428,14 @@ DotaData.heroes = {
 		"MovementTurnRate": 0.5,
 		"Team": "Dire"
 	},
-	"centaur":
-	{
+	"centaur": {
 		"Name": "Centaur Warrunner",
 		"Ability1": "centaur_hoof_stomp",
 		"Ability2": "centaur_double_edge",
 		"Ability3": "centaur_return",
 		"Ability4": "centaur_stampede",
 		"Ability5": "attribute_bonus",
-		"ArmorBase": 1,
+		"StatusArmorBase": 1,
 		"AttackAnimationPoint": 0.3,
 		"AttackType": "Melee",
 		"AttackDamageMax": 34,
@@ -469,15 +454,14 @@ DotaData.heroes = {
 		"MovementTurnRate": 0.5,
 		"Team": "Radiant"
 	},
-	"chaos_knight":
-	{
+	"chaos_knight": {
 		"Name": "Chaos knight",
 		"Ability1": "chaos_knight_chaos_bolt",
 		"Ability2": "chaos_knight_reality_rift",
 		"Ability3": "chaos_knight_chaos_strike",
 		"Ability4": "chaos_knight_phantasm",
 		"Ability5": "attribute_bonus",
-		"ArmorBase": 2,
+		"StatusArmorBase": 2,
 		"AttackAnimationPoint": 0.5,
 		"AttackType": "Melee",
 		"AttackDamageMax": 59,
@@ -496,8 +480,7 @@ DotaData.heroes = {
 		"MovementTurnRate": 0.5,
 		"Team": "Dire"
 	},
-	"chen":
-	{
+	"chen": {
 		"Name": "Chen",
 		"Ability1": "chen_penitence",
 		"Ability2": "chen_test_of_faith",
@@ -506,7 +489,7 @@ DotaData.heroes = {
 		"Ability5": "chen_hand_of_god",
 		"Ability6": "attribute_bonus",
 		"AbilityLayout": 5,
-		"ArmorBase": -1,
+		"StatusArmorBase": -1,
 		"AttackAnimationPoint": 0.5,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 32,
@@ -526,14 +509,13 @@ DotaData.heroes = {
 		"ProjectileSpeed": 1100,
 		"Team": "Radiant"
 	},
-	"clinkz":
-	{
+	"clinkz": {
 		"Name": "Clinkz",
 		"Ability1": "clinkz_strafe",
 		"Ability2": "clinkz_searing_arrows",
 		"Ability3": "clinkz_wind_walk",
 		"Ability4": "clinkz_death_pact",
-		"ArmorBase": -1,
+		"StatusArmorBase": -1,
 		"AttackAnimationPoint": 0.7,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 21,
@@ -553,14 +535,13 @@ DotaData.heroes = {
 		"ProjectileSpeed": 900,
 		"Team": "Dire"
 	},
-	"crystal_maiden":
-	{
+	"crystal_maiden": {
 		"Name": "Crystal Maiden",
 		"Ability1": "crystal_maiden_crystal_nova",
 		"Ability2": "crystal_maiden_frostbite",
 		"Ability3": "crystal_maiden_brilliance_aura",
 		"Ability4": "crystal_maiden_freezing_field",
-		"ArmorBase": -1,
+		"StatusArmorBase": -1,
 		"AttackAnimationPoint": 0.55,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 25,
@@ -580,14 +561,13 @@ DotaData.heroes = {
 		"ProjectileSpeed": 900,
 		"Team": "Radiant"
 	},
-	"dark_seer":
-	{
+	"dark_seer": {
 		"Name": "Dark Seer",
 		"Ability1": "dark_seer_vacuum",
 		"Ability2": "dark_seer_ion_shell",
 		"Ability3": "dark_seer_surge",
 		"Ability4": "dark_seer_wall_of_replica",
-		"ArmorBase": 5,
+		"StatusArmorBase": 5,
 		"AttackAnimationPoint": 0.59,
 		"AttackType": "Melee",
 		"AttackDamageMax": 37,
@@ -606,14 +586,13 @@ DotaData.heroes = {
 		"MovementTurnRate": 0.6,
 		"Team": "Dire"
 	},
-	"dazzle":
-	{
+	"dazzle": {
 		"Name": "Dazzle",
 		"Ability1": "dazzle_poison_touch",
 		"Ability2": "dazzle_shallow_grave",
 		"Ability3": "dazzle_shadow_wave",
 		"Ability4": "dazzle_weave",
-		"ArmorBase": -1,
+		"StatusArmorBase": -1,
 		"AttackAnimationPoint": 0.3,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 32,
@@ -633,14 +612,13 @@ DotaData.heroes = {
 		"ProjectileSpeed": 1200,
 		"Team": "Dire"
 	},
-	"death_prophet":
-	{
+	"death_prophet": {
 		"Name": "Death Prophet",
 		"Ability1": "death_prophet_carrion_swarm",
 		"Ability2": "death_prophet_silence",
 		"Ability3": "death_prophet_witchcraft",
 		"Ability4": "death_prophet_exorcism",
-		"ArmorBase": 1,
+		"StatusArmorBase": 1,
 		"AttackAnimationPoint": 0.56,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 36,
@@ -661,15 +639,14 @@ DotaData.heroes = {
 		"StatusHealthRegenBase": 0.75,
 		"Team": "Dire"
 	},
-	"disruptor":
-	{
+	"disruptor": {
 		"Name": "Disruptor",
 		"Ability1": "disruptor_thunder_strike",
 		"Ability2": "disruptor_glimpse",
 		"Ability3": "disruptor_kinetic_field",
 		"Ability4": "disruptor_static_storm",
 		"Ability5": "attribute_bonus",
-		"ArmorBase": -1.0,
+		"StatusArmorBase": -1.0,
 		"AttackAnimationPoint": 0.4,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 31,
@@ -689,8 +666,7 @@ DotaData.heroes = {
 		"ProjectileSpeed": 1200,
 		"Team": "Radiant"
 	},
-	"doom":
-	{
+	"doom": {
 		"Name": "Doom",
 		"Ability1": "doom_bringer_devour",
 		"Ability2": "doom_bringer_scorched_earth",
@@ -700,7 +676,7 @@ DotaData.heroes = {
 		"Ability6": "doom_bringer_doom",
 		"Ability7": "attribute_bonus",
 		"AbilityLayout": 6,
-		"ArmorBase": -1,
+		"StatusArmorBase": -1,
 		"AttackAnimationPoint": 0.5,
 		"AttackType": "Melee",
 		"AttackDamageMax": 43,
@@ -719,14 +695,13 @@ DotaData.heroes = {
 		"MovementTurnRate": 0.5,
 		"Team": "Dire"
 	},
-	"dragon_knight":
-	{
+	"dragon_knight": {
 		"Name": "Dragon Knight",
 		"Ability1": "dragon_knight_breathe_fire",
 		"Ability2": "dragon_knight_dragon_tail",
 		"Ability3": "dragon_knight_dragon_blood",
 		"Ability4": "dragon_knight_elder_dragon_form",
-		"ArmorBase": 1,
+		"StatusArmorBase": 1,
 		"AttackAnimationPoint": 0.5,
 		"AttackType": "Melee",
 		"AttackDamageMax": 33,
@@ -746,14 +721,13 @@ DotaData.heroes = {
 		"ProjectileSpeed": 900,
 		"Team": "Radiant"
 	},
-	"drow_ranger":
-	{
+	"drow_ranger": {
 		"Name": "Drow Ranger",
 		"Ability1": "drow_ranger_frost_arrows",
 		"Ability2": "drow_ranger_wave_of_silence",
 		"Ability3": "drow_ranger_trueshot",
 		"Ability4": "drow_ranger_marksmanship",
-		"ArmorBase": -3,
+		"StatusArmorBase": -3,
 		"AttackAnimationPoint": 0.7,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 29,
@@ -773,8 +747,7 @@ DotaData.heroes = {
 		"ProjectileSpeed": 1250,
 		"Team": "Radiant"
 	},
-	"earth_spirit":
-	{
+	"earth_spirit": {
 		"Name": "Earth Spirit",
 		"Ability1": "earth_spirit_boulder_smash",
 		"Ability2": "earth_spirit_rolling_boulder",
@@ -784,7 +757,7 @@ DotaData.heroes = {
 		"Ability6": "earth_spirit_magnetize",
 		"Ability7": "attribute_bonus",
 		"AbilityLayout": 5,
-		"ArmorBase": 1.0,
+		"StatusArmorBase": 1.0,
 		"AttackAnimationPoint": 0.35,
 		"AttackType": "Melee",
 		"AttackDamageMax": 35,
@@ -803,14 +776,13 @@ DotaData.heroes = {
 		"MovementTurnRate": 0.6,
 		"Team": "Radiant"
 	},
-	"earthshaker":
-	{
+	"earthshaker": {
 		"Name": "Earthshaker",
 		"Ability1": "earthshaker_fissure",
 		"Ability2": "earthshaker_enchant_totem",
 		"Ability3": "earthshaker_aftershock",
 		"Ability4": "earthshaker_echo_slam",
-		"ArmorBase": 1,
+		"StatusArmorBase": 1,
 		"AttackAnimationPoint": 0.467,
 		"AttackType": "Melee",
 		"AttackDamageMax": 34,
@@ -830,8 +802,7 @@ DotaData.heroes = {
 		"ProjectileSpeed": 0,
 		"Team": "Radiant"
 	},
-	"elder_titan":
-	{
+	"elder_titan": {
 		"Name": "Elder Titan",
 		"Ability1": "elder_titan_echo_stomp",
 		"Ability2": "elder_titan_ancestral_spirit",
@@ -839,7 +810,7 @@ DotaData.heroes = {
 		"Ability4": "elder_titan_return_spirit",
 		"Ability5": "elder_titan_earth_splitter",
 		"Ability6": "attribute_bonus",
-		"ArmorBase": 1.0,
+		"StatusArmorBase": 1.0,
 		"AttackAnimationPoint": 0.35,
 		"AttackType": "Melee",
 		"AttackDamageMax": 33,
@@ -858,8 +829,7 @@ DotaData.heroes = {
 		"MovementTurnRate": 0.4,
 		"Team": "Radiant"
 	},
-	"ember_spirit":
-	{
+	"ember_spirit": {
 		"Name": "Ember Spirit",
 		"Ability1": "ember_spirit_searing_chains",
 		"Ability2": "ember_spirit_sleight_of_fist",
@@ -868,7 +838,7 @@ DotaData.heroes = {
 		"Ability5": "ember_spirit_fire_remnant",
 		"Ability6": "attribute_bonus",
 		"AbilityLayout": 5,
-		"ArmorBase": -2.0,
+		"StatusArmorBase": -2.0,
 		"AttackAnimationPoint": 0.4,
 		"AttackType": "Melee",
 		"AttackDamageMax": 34,
@@ -888,14 +858,13 @@ DotaData.heroes = {
 		"StatusHealthRegenBase": 0.75,
 		"Team": "Radiant"
 	},
-	"enchantress":
-	{
+	"enchantress": {
 		"Name": "Enchantress",
 		"Ability1": "enchantress_untouchable",
 		"Ability2": "enchantress_enchant",
 		"Ability3": "enchantress_natures_attendants",
 		"Ability4": "enchantress_impetus",
-		"ArmorBase": -2.0,
+		"StatusArmorBase": -2.0,
 		"AttackAnimationPoint": 0.3,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 41,
@@ -915,14 +884,13 @@ DotaData.heroes = {
 		"ProjectileSpeed": 900,
 		"Team": "Radiant"
 	},
-	"enigma":
-	{
+	"enigma": {
 		"Name": "Enigma",
 		"Ability1": "enigma_malefice",
 		"Ability2": "enigma_demonic_conversion",
 		"Ability3": "enigma_midnight_pulse",
 		"Ability4": "enigma_black_hole",
-		"ArmorBase": 2,
+		"StatusArmorBase": 2,
 		"AttackAnimationPoint": 0.4,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 28,
@@ -942,14 +910,13 @@ DotaData.heroes = {
 		"ProjectileSpeed": 900,
 		"Team": "Dire"
 	},
-	"faceless_void":
-	{
+	"faceless_void": {
 		"Name": "Faceless Void",
 		"Ability1": "faceless_void_time_walk",
 		"Ability2": "faceless_void_backtrack",
 		"Ability3": "faceless_void_time_lock",
 		"Ability4": "faceless_void_chronosphere",
-		"ArmorBase": 1,
+		"StatusArmorBase": 1,
 		"AttackAnimationPoint": 0.5,
 		"AttackType": "Melee",
 		"AttackDamageMax": 43,
@@ -969,14 +936,13 @@ DotaData.heroes = {
 		"StatusHealthRegenBase": 0.75,
 		"Team": "Dire"
 	},
-	"furion":
-	{
+	"furion": {
 		"Name": "Natures Prophet",
 		"Ability1": "furion_sprout",
 		"Ability2": "furion_teleportation",
 		"Ability3": "furion_force_of_nature",
 		"Ability4": "furion_wrath_of_nature",
-		"ArmorBase": 1,
+		"StatusArmorBase": 1,
 		"AttackAnimationPoint": 0.4,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 38,
@@ -996,15 +962,14 @@ DotaData.heroes = {
 		"ProjectileSpeed": 1125,
 		"Team": "Radiant"
 	},
-	"gyrocopter":
-	{
+	"gyrocopter": {
 		"Name": "Gyrocopter",
 		"Ability1": "gyrocopter_rocket_barrage",
 		"Ability2": "gyrocopter_homing_missile",
 		"Ability3": "gyrocopter_flak_cannon",
 		"Ability5": "attribute_bonus",
 		"Ability6": "gyrocopter_call_down",
-		"ArmorBase": 1,
+		"StatusArmorBase": 1,
 		"AttackAnimationPoint": 0.2,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 27,
@@ -1024,14 +989,13 @@ DotaData.heroes = {
 		"ProjectileSpeed": 3000,
 		"Team": "Radiant"
 	},
-	"huskar":
-	{
+	"huskar": {
 		"Name": "Huskar",
 		"Ability1": "huskar_inner_vitality",
 		"Ability2": "huskar_burning_spear",
 		"Ability3": "huskar_berserkers_blood",
 		"Ability4": "huskar_life_break",
-		"ArmorBase": -1,
+		"StatusArmorBase": -1,
 		"AttackAnimationPoint": 0.4,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 30,
@@ -1051,8 +1015,7 @@ DotaData.heroes = {
 		"ProjectileSpeed": 1400,
 		"Team": "Radiant"
 	},
-	"invoker":
-	{
+	"invoker": {
 		"Name": "Invoker",
 		"Ability1": "invoker_quas",
 		"Ability2": "invoker_wex",
@@ -1071,7 +1034,7 @@ DotaData.heroes = {
 		"Ability15": "invoker_ice_wall",
 		"Ability16": "invoker_deafening_blast",
 		"AbilityLayout": 6,
-		"ArmorBase": -1,
+		"StatusArmorBase": -1,
 		"AttackAnimationPoint": 0.4,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 19,
@@ -1091,14 +1054,13 @@ DotaData.heroes = {
 		"ProjectileSpeed": 900,
 		"Team": "Dire"
 	},
-	"jakiro":
-	{
+	"jakiro": {
 		"Name": "Jakiro",
 		"Ability1": "jakiro_dual_breath",
 		"Ability2": "jakiro_ice_path",
 		"Ability3": "jakiro_liquid_fire",
 		"Ability4": "jakiro_macropyre",
-		"ArmorBase": 1,
+		"StatusArmorBase": 1,
 		"AttackAnimationPoint": 0.4,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 26,
@@ -1118,14 +1080,13 @@ DotaData.heroes = {
 		"ProjectileSpeed": 1100,
 		"Team": "Radiant"
 	},
-	"juggernaut":
-	{
+	"juggernaut": {
 		"Name": "Juggernaut",
 		"Ability1": "juggernaut_blade_fury",
 		"Ability2": "juggernaut_healing_ward",
 		"Ability3": "juggernaut_blade_dance",
 		"Ability4": "juggernaut_omni_slash",
-		"ArmorBase": 0,
+		"StatusArmorBase": 0,
 		"AttackAnimationPoint": 0.33,
 		"AttackType": "Melee",
 		"AttackDamageMax": 28,
@@ -1146,8 +1107,7 @@ DotaData.heroes = {
 		"StatusHealthRegenBase": 0.75,
 		"Team": "Radiant"
 	},
-	"keeper_of_the_light":
-	{
+	"keeper_of_the_light": {
 		"Name": "Keeper of the Light",
 		"Ability1": "keeper_of_the_light_illuminate",
 		"Ability10": "attribute_bonus",
@@ -1160,7 +1120,7 @@ DotaData.heroes = {
 		"Ability8": "keeper_of_the_light_spirit_form_illuminate",
 		"Ability9": "keeper_of_the_light_spirit_form_illuminate_end",
 		"AbilityLayout": 6,
-		"ArmorBase": -1.0,
+		"StatusArmorBase": -1.0,
 		"AttackAnimationPoint": 0.3,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 32,
@@ -1180,15 +1140,14 @@ DotaData.heroes = {
 		"ProjectileSpeed": 900,
 		"Team": "Radiant"
 	},
-	"kunkka":
-	{
+	"kunkka": {
 		"Name": "Kunkka",
 		"Ability1": "kunkka_torrent",
 		"Ability2": "kunkka_tidebringer",
 		"Ability3": "kunkka_x_marks_the_spot",
 		"Ability4": "kunkka_ghostship",
 		"Ability6": "kunkka_return",
-		"ArmorBase": 0,
+		"StatusArmorBase": 0,
 		"AttackAnimationPoint": 0.4,
 		"AttackType": "Melee",
 		"AttackDamageMax": 36,
@@ -1207,15 +1166,14 @@ DotaData.heroes = {
 		"MovementTurnRate": 0.6,
 		"Team": "Radiant"
 	},
-	"legion_commander":
-	{
+	"legion_commander": {
 		"Name": "Legion Commander",
 		"Ability1": "legion_commander_overwhelming_odds",
 		"Ability2": "legion_commander_press_the_attack",
 		"Ability3": "legion_commander_moment_of_courage",
 		"Ability4": "legion_commander_duel",
 		"Ability5": "attribute_bonus",
-		"ArmorBase": 0.0,
+		"StatusArmorBase": 0.0,
 		"AttackAnimationPoint": 0.46,
 		"AttackType": "Melee",
 		"AttackDamageMax": 35,
@@ -1234,14 +1192,13 @@ DotaData.heroes = {
 		"MovementTurnRate": 0.5,
 		"Team": "Radiant"
 	},
-	"leshrac":
-	{
+	"leshrac": {
 		"Name": "Leshrac",
 		"Ability1": "leshrac_split_earth",
 		"Ability2": "leshrac_diabolic_edict",
 		"Ability3": "leshrac_lightning_storm",
 		"Ability4": "leshrac_pulse_nova",
-		"ArmorBase": 0,
+		"StatusArmorBase": 0,
 		"AttackAnimationPoint": 0.4,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 23,
@@ -1261,14 +1218,13 @@ DotaData.heroes = {
 		"ProjectileSpeed": 900,
 		"Team": "Dire"
 	},
-	"lich":
-	{
+	"lich": {
 		"Name": "Lich",
 		"Ability1": "lich_frost_nova",
 		"Ability2": "lich_frost_armor",
 		"Ability3": "lich_dark_ritual",
 		"Ability4": "lich_chain_frost",
-		"ArmorBase": -1,
+		"StatusArmorBase": -1,
 		"AttackAnimationPoint": 0.46,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 33,
@@ -1288,8 +1244,7 @@ DotaData.heroes = {
 		"ProjectileSpeed": 900,
 		"Team": "Dire"
 	},
-	"life_stealer":
-	{
+	"life_stealer": {
 		"Name": "Lifestealer",
 		"Ability1": "life_stealer_rage",
 		"Ability2": "life_stealer_feast",
@@ -1300,7 +1255,7 @@ DotaData.heroes = {
 		"Ability7": "life_stealer_control",
 		"Ability8": "life_stealer_consume",
 		"Ability9": "attribute_bonus",
-		"ArmorBase": -1,
+		"StatusArmorBase": -1,
 		"AttackAnimationPoint": 0.39,
 		"AttackType": "Melee",
 		"AttackDamageMax": 42,
@@ -1319,14 +1274,13 @@ DotaData.heroes = {
 		"MovementTurnRate": 1.0,
 		"Team": "Dire"
 	},
-	"lina":
-	{
+	"lina": {
 		"Name": "Lina",
 		"Ability1": "lina_dragon_slave",
 		"Ability2": "lina_light_strike_array",
 		"Ability3": "lina_fiery_soul",
 		"Ability4": "lina_laguna_blade",
-		"ArmorBase": -1,
+		"StatusArmorBase": -1,
 		"AttackAnimationPoint": 0.75,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 31,
@@ -1346,14 +1300,13 @@ DotaData.heroes = {
 		"ProjectileSpeed": 1000,
 		"Team": "Radiant"
 	},
-	"lion":
-	{
+	"lion": {
 		"Name": "Lion",
 		"Ability1": "lion_impale",
 		"Ability2": "lion_voodoo",
 		"Ability3": "lion_mana_drain",
 		"Ability4": "lion_finger_of_death",
-		"ArmorBase": -1,
+		"StatusArmorBase": -1,
 		"AttackAnimationPoint": 0.43,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 33,
@@ -1373,8 +1326,7 @@ DotaData.heroes = {
 		"ProjectileSpeed": 900,
 		"Team": "Dire"
 	},
-	"lone_druid":
-	{
+	"lone_druid": {
 		"Name": "Lone Druid",
 		"Ability1": "lone_druid_spirit_bear",
 		"Ability2": "lone_druid_rabid",
@@ -1384,7 +1336,7 @@ DotaData.heroes = {
 		"Ability6": "lone_druid_true_form_druid",
 		"Ability7": "attribute_bonus",
 		"AbilityLayout": 5,
-		"ArmorBase": 0,
+		"StatusArmorBase": 0,
 		"AttackAnimationPoint": 0.33,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 26,
@@ -1405,14 +1357,13 @@ DotaData.heroes = {
 		"StatusHealthRegenBase": 0.5,
 		"Team": "Radiant"
 	},
-	"luna":
-	{
+	"luna": {
 		"Name": "Luna",
 		"Ability1": "luna_lucent_beam",
 		"Ability2": "luna_moon_glaive",
 		"Ability3": "luna_lunar_blessing",
 		"Ability4": "luna_eclipse",
-		"ArmorBase": 1,
+		"StatusArmorBase": 1,
 		"AttackAnimationPoint": 0.46,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 32,
@@ -1432,15 +1383,14 @@ DotaData.heroes = {
 		"ProjectileSpeed": 900,
 		"Team": "Radiant"
 	},
-	"lycan":
-	{
+	"lycan": {
 		"Name": "Lycan",
 		"Ability1": "lycan_summon_wolves",
 		"Ability2": "lycan_howl",
 		"Ability3": "lycan_feral_impulse",
 		"Ability4": "lycan_shapeshift",
 		"Ability5": "attribute_bonus",
-		"ArmorBase": 1,
+		"StatusArmorBase": 1,
 		"AttackAnimationPoint": 0.55,
 		"AttackType": "Melee",
 		"AttackDamageMax": 41,
@@ -1459,15 +1409,14 @@ DotaData.heroes = {
 		"MovementTurnRate": 0.5,
 		"Team": "Dire"
 	},
-	"magnataur":
-	{
+	"magnataur": {
 		"Name": "Magnus",
 		"Ability1": "magnataur_shockwave",
 		"Ability2": "magnataur_empower",
 		"Ability3": "magnataur_skewer",
 		"Ability4": "magnataur_reverse_polarity",
 		"Ability5": "attribute_bonus",
-		"ArmorBase": 2,
+		"StatusArmorBase": 2,
 		"AttackAnimationPoint": 0.5,
 		"AttackType": "Melee",
 		"AttackDamageMax": 40,
@@ -1486,15 +1435,14 @@ DotaData.heroes = {
 		"MovementTurnRate": 0.8,
 		"Team": "Dire"
 	},
-	"medusa":
-	{
+	"medusa": {
 		"Name": "Medusa",
 		"Ability1": "medusa_split_shot",
 		"Ability2": "medusa_mystic_snake",
 		"Ability3": "medusa_mana_shield",
 		"Ability4": "medusa_stone_gaze",
 		"Ability5": "attribute_bonus",
-		"ArmorBase": -1,
+		"StatusArmorBase": -1,
 		"AttackAnimationPoint": 0.5,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 30,
@@ -1514,15 +1462,14 @@ DotaData.heroes = {
 		"ProjectileSpeed": 1200,
 		"Team": "Dire"
 	},
-	"meepo":
-	{
+	"meepo": {
 		"Name": "Meepo",
 		"Ability1": "meepo_earthbind",
 		"Ability2": "meepo_poof",
 		"Ability3": "meepo_geostrike",
 		"Ability4": "meepo_divided_we_stand",
 		"Ability5": "attribute_bonus",
-		"ArmorBase": 1.0,
+		"StatusArmorBase": 1.0,
 		"AttackAnimationPoint": 0.38,
 		"AttackType": "Melee",
 		"AttackDamageMax": 22,
@@ -1537,19 +1484,18 @@ DotaData.heroes = {
 		"AttributePrimary": "Agility",
 		"AttributeStrengthGain": 1.6,
 		"Enabled": 1,
-		"MagicalResistance": 35,
+		"StatusMagicalResistance": 0.35,
 		"MovementSpeedBase": 315,
 		"MovementTurnRate": 0.65,
 		"Team": "Dire"
 	},
-	"mirana":
-	{
+	"mirana": {
 		"Name": "Mirana",
 		"Ability1": "mirana_starfall",
 		"Ability2": "mirana_arrow",
 		"Ability3": "mirana_leap",
 		"Ability4": "mirana_invis",
-		"ArmorBase": -1,
+		"StatusArmorBase": -1,
 		"AttackAnimationPoint": 0.3,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 29,
@@ -1569,8 +1515,7 @@ DotaData.heroes = {
 		"ProjectileSpeed": 900,
 		"Team": "Radiant"
 	},
-	"morphling":
-	{
+	"morphling": {
 		"Name": "Morphling",
 		"Ability1": "morphling_waveform",
 		"Ability2": "morphling_adaptive_strike",
@@ -1582,7 +1527,7 @@ DotaData.heroes = {
 		"Ability8": "morphling_morph_replicate",
 		"Ability9": "attribute_bonus",
 		"AbilityLayout": 5,
-		"ArmorBase": -2,
+		"StatusArmorBase": -2,
 		"AttackAnimationPoint": 0.5,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 22,
@@ -1602,8 +1547,7 @@ DotaData.heroes = {
 		"ProjectileSpeed": 1300,
 		"Team": "Radiant"
 	},
-	"naga_siren":
-	{
+	"naga_siren": {
 		"Name": "Naga Siren",
 		"Ability1": "naga_siren_mirror_image",
 		"Ability2": "naga_siren_ensnare",
@@ -1611,7 +1555,7 @@ DotaData.heroes = {
 		"Ability4": "naga_siren_song_of_the_siren",
 		"Ability5": "naga_siren_song_of_the_siren_cancel",
 		"Ability6": "attribute_bonus",
-		"ArmorBase": 3,
+		"StatusArmorBase": 3,
 		"AttackAnimationPoint": 0.5,
 		"AttackType": "Melee",
 		"AttackDamageMax": 25,
@@ -1631,14 +1575,13 @@ DotaData.heroes = {
 		"StatusHealthRegenBase": 0.75,
 		"Team": "Radiant"
 	},
-	"necrolyte":
-	{
+	"necrolyte": {
 		"Name": "Necrophos",
 		"Ability1": "necrolyte_death_pulse",
 		"Ability2": "necrolyte_heartstopper_aura",
 		"Ability3": "necrolyte_sadist",
 		"Ability4": "necrolyte_reapers_scythe",
-		"ArmorBase": 0,
+		"StatusArmorBase": 0,
 		"AttackAnimationPoint": 0.53,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 26,
@@ -1658,8 +1601,7 @@ DotaData.heroes = {
 		"ProjectileSpeed": 900,
 		"Team": "Dire"
 	},
-	"nevermore":
-	{
+	"nevermore": {
 		"Name": "Shadow Fiend",
 		"Ability1": "nevermore_shadowraze1",
 		"Ability2": "nevermore_shadowraze2",
@@ -1669,7 +1611,7 @@ DotaData.heroes = {
 		"Ability6": "nevermore_requiem",
 		"Ability7": "attribute_bonus",
 		"AbilityLayout": 6,
-		"ArmorBase": -1,
+		"StatusArmorBase": -1,
 		"AttackAnimationPoint": 0.5,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 21,
@@ -1690,14 +1632,13 @@ DotaData.heroes = {
 		"StatusHealthRegenBase": 0.5,
 		"Team": "Dire"
 	},
-	"night_stalker":
-	{
+	"night_stalker": {
 		"Name": "Night Stalker",
 		"Ability1": "night_stalker_void",
 		"Ability2": "night_stalker_crippling_fear",
 		"Ability3": "night_stalker_hunter_in_the_night",
 		"Ability4": "night_stalker_darkness",
-		"ArmorBase": 3,
+		"StatusArmorBase": 3,
 		"AttackAnimationPoint": 0.55,
 		"AttackType": "Melee",
 		"AttackDamageMax": 42,
@@ -1718,8 +1659,7 @@ DotaData.heroes = {
 		"VisionDaytimeRange": 1200,
 		"VisionNighttimeRange": 1800
 	},
-	"nyx_assassin":
-	{
+	"nyx_assassin": {
 		"Name": "Nyx Assassin",
 		"Ability1": "nyx_assassin_impale",
 		"Ability2": "nyx_assassin_mana_burn",
@@ -1728,7 +1668,7 @@ DotaData.heroes = {
 		"Ability5": "nyx_assassin_unburrow",
 		"Ability6": "nyx_assassin_vendetta",
 		"Ability7": "attribute_bonus",
-		"ArmorBase": 1.0,
+		"StatusArmorBase": 1.0,
 		"AttackAnimationPoint": 0.46,
 		"AttackType": "Melee",
 		"AttackDamageMax": 34,
@@ -1748,15 +1688,14 @@ DotaData.heroes = {
 		"StatusHealthRegenBase": 2.5,
 		"Team": "Dire"
 	},
-	"obsidian_destroyer":
-	{
+	"obsidian_destroyer": {
 		"Name": "Outworld Devourer",
 		"Ability1": "obsidian_destroyer_arcane_orb",
 		"Ability2": "obsidian_destroyer_astral_imprisonment",
 		"Ability3": "obsidian_destroyer_essence_aura",
 		"Ability4": "obsidian_destroyer_sanity_eclipse",
 		"Ability5": "attribute_bonus",
-		"ArmorBase": 2,
+		"StatusArmorBase": 2,
 		"AttackAnimationPoint": 0.46,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 35,
@@ -1776,8 +1715,7 @@ DotaData.heroes = {
 		"ProjectileSpeed": 900,
 		"Team": "Dire"
 	},
-	"ogre_magi":
-	{
+	"ogre_magi": {
 		"Name": "Ogre Magi",
 		"Ability1": "ogre_magi_fireblast",
 		"Ability2": "ogre_magi_ignite",
@@ -1785,7 +1723,7 @@ DotaData.heroes = {
 		"Ability4": "ogre_magi_unrefined_fireblast",
 		"Ability5": "ogre_magi_multicast",
 		"Ability6": "attribute_bonus",
-		"ArmorBase": 5.0,
+		"StatusArmorBase": 5.0,
 		"AttackAnimationPoint": 0.3,
 		"AttackType": "Melee",
 		"AttackDamageMax": 47,
@@ -1805,14 +1743,13 @@ DotaData.heroes = {
 		"StatusHealthRegenBase": 2.5,
 		"Team": "Radiant"
 	},
-	"omniknight":
-	{
+	"omniknight": {
 		"Name": "Omniknight",
 		"Ability1": "omniknight_purification",
 		"Ability2": "omniknight_repel",
 		"Ability3": "omniknight_degen_aura",
 		"Ability4": "omniknight_guardian_angel",
-		"ArmorBase": 3,
+		"StatusArmorBase": 3,
 		"AttackAnimationPoint": 0.433,
 		"AttackType": "Melee",
 		"AttackDamageMax": 41,
@@ -1831,15 +1768,14 @@ DotaData.heroes = {
 		"MovementTurnRate": 0.6,
 		"Team": "Radiant"
 	},
-	"oracle":
-	{
+	"oracle": {
 		"Name": "Oracle",
 		"Ability1": "oracle_fortunes_end",
 		"Ability2": "oracle_fates_edict",
 		"Ability3": "oracle_purifying_flames",
 		"Ability4": "oracle_false_promise",
 		"Ability5": "attribute_bonus",
-		"ArmorBase": 0,
+		"StatusArmorBase": 0,
 		"AttackAnimationPoint": 0.3,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 28,
@@ -1860,14 +1796,13 @@ DotaData.heroes = {
 		"ProjectileSpeed": 900,
 		"Team": "Radiant"
 	},
-	"phantom_assassin":
-	{
+	"phantom_assassin": {
 		"Name": "Phantom Asssassin",
 		"Ability1": "phantom_assassin_stifling_dagger",
 		"Ability2": "phantom_assassin_phantom_strike",
 		"Ability3": "phantom_assassin_blur",
 		"Ability4": "phantom_assassin_coup_de_grace",
-		"ArmorBase": 1,
+		"StatusArmorBase": 1,
 		"AttackAnimationPoint": 0.3,
 		"AttackType": "Melee",
 		"AttackDamageMax": 25,
@@ -1886,14 +1821,13 @@ DotaData.heroes = {
 		"MovementTurnRate": 0.4,
 		"Team": "Dire"
 	},
-	"phantom_lancer":
-	{
+	"phantom_lancer": {
 		"Name": "Phantom Lancer",
 		"Ability1": "phantom_lancer_spirit_lance",
 		"Ability2": "phantom_lancer_doppelwalk",
 		"Ability3": "phantom_lancer_phantom_edge",
 		"Ability4": "phantom_lancer_juxtapose",
-		"ArmorBase": 0,
+		"StatusArmorBase": 0,
 		"AttackAnimationPoint": 0.5,
 		"AttackType": "Melee",
 		"AttackDamageMax": 44,
@@ -1913,8 +1847,7 @@ DotaData.heroes = {
 		"StatusHealthRegenBase": 0.75,
 		"Team": "Radiant"
 	},
-	"phoenix":
-	{
+	"phoenix": {
 		"Name": "Phoenix",
 		"Ability1": "phoenix_icarus_dive",
 		"Ability2": "phoenix_fire_spirits",
@@ -1927,7 +1860,7 @@ DotaData.heroes = {
 		"Ability9": "phoenix_sun_ray_toggle_move",
 		"Ability10": "attribute_bonus",
 		"AbilityLayout": 5,
-		"ArmorBase": -2,
+		"StatusArmorBase": -2,
 		"AttackAnimationPoint": 0.35,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 36,
@@ -1948,8 +1881,7 @@ DotaData.heroes = {
 		"ProjectileSpeed": 1100,
 		"Team": "Radiant"
 	},
-	"puck":
-	{
+	"puck": {
 		"Name": "Puck",
 		"Ability1": "puck_illusory_orb",
 		"Ability2": "puck_waning_rift",
@@ -1958,7 +1890,7 @@ DotaData.heroes = {
 		"Ability5": "puck_dream_coil",
 		"Ability6": "attribute_bonus",
 		"AbilityLayout": 5,
-		"ArmorBase": -1,
+		"StatusArmorBase": -1,
 		"AttackAnimationPoint": 0.5,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 33,
@@ -1979,14 +1911,13 @@ DotaData.heroes = {
 		"Team": "Radiant",
 		"VisionNighttimeRange": 800
 	},
-	"pudge":
-	{
+	"pudge": {
 		"Name": "Pudge",
 		"Ability1": "pudge_meat_hook",
 		"Ability2": "pudge_rot",
 		"Ability3": "pudge_flesh_heap",
 		"Ability4": "pudge_dismember",
-		"ArmorBase": -1,
+		"StatusArmorBase": -1,
 		"AttackAnimationPoint": 0.5,
 		"AttackType": "Melee",
 		"AttackDamageMax": 33,
@@ -2006,14 +1937,13 @@ DotaData.heroes = {
 		"ProjectileSpeed": 0,
 		"Team": "Dire"
 	},
-	"pugna":
-	{
+	"pugna": {
 		"Name": "Pugna",
 		"Ability1": "pugna_nether_blast",
 		"Ability2": "pugna_decrepify",
 		"Ability3": "pugna_nether_ward",
 		"Ability4": "pugna_life_drain",
-		"ArmorBase": -1,
+		"StatusArmorBase": -1,
 		"AttackAnimationPoint": 0.5,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 27,
@@ -2033,14 +1963,13 @@ DotaData.heroes = {
 		"ProjectileSpeed": 900,
 		"Team": "Dire"
 	},
-	"queenofpain":
-	{
+	"queenofpain": {
 		"Name": "Queen of Pain",
 		"Ability1": "queenofpain_shadow_strike",
 		"Ability2": "queenofpain_blink",
 		"Ability3": "queenofpain_scream_of_pain",
 		"Ability4": "queenofpain_sonic_wave",
-		"ArmorBase": -1,
+		"StatusArmorBase": -1,
 		"AttackAnimationPoint": 0.56,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 33,
@@ -2060,14 +1989,13 @@ DotaData.heroes = {
 		"ProjectileSpeed": 1500,
 		"Team": "Dire"
 	},
-	"rattletrap":
-	{
+	"rattletrap": {
 		"Name": "Clockwerk",
 		"Ability1": "rattletrap_battery_assault",
 		"Ability2": "rattletrap_power_cogs",
 		"Ability3": "rattletrap_rocket_flare",
 		"Ability4": "rattletrap_hookshot",
-		"ArmorBase": 0,
+		"StatusArmorBase": 0,
 		"AttackAnimationPoint": 0.33,
 		"AttackType": "Melee",
 		"AttackDamageMax": 33,
@@ -2086,14 +2014,13 @@ DotaData.heroes = {
 		"MovementTurnRate": 0.6,
 		"Team": "Radiant"
 	},
-	"razor":
-	{
+	"razor": {
 		"Name": "Razor",
 		"Ability1": "razor_plasma_field",
 		"Ability2": "razor_static_link",
 		"Ability3": "razor_unstable_current",
 		"Ability4": "razor_eye_of_the_storm",
-		"ArmorBase": -1,
+		"StatusArmorBase": -1,
 		"AttackAnimationPoint": 0.3,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 25,
@@ -2113,14 +2040,13 @@ DotaData.heroes = {
 		"ProjectileSpeed": 2000,
 		"Team": "Dire"
 	},
-	"riki":
-	{
+	"riki": {
 		"Name": "Riki",
 		"Ability1": "riki_smoke_screen",
 		"Ability2": "riki_permanent_invisibility",
 		"Ability3": "riki_backstab",
 		"Ability4": "riki_blink_strike",
-		"ArmorBase": 1,
+		"StatusArmorBase": 1,
 		"AttackAnimationPoint": 0.3,
 		"AttackType": "Melee",
 		"AttackDamageMax": 8,
@@ -2140,8 +2066,7 @@ DotaData.heroes = {
 		"StatusHealthRegenBase": 0.25,
 		"Team": "Radiant"
 	},
-	"rubick":
-	{
+	"rubick": {
 		"Name": "Rubick",
 		"Ability1": "rubick_telekinesis",
 		"Ability10": "rubick_hidden2",
@@ -2155,7 +2080,7 @@ DotaData.heroes = {
 		"Ability8": "attribute_bonus",
 		"Ability9": "rubick_hidden1",
 		"AbilityLayout": 6,
-		"ArmorBase": -1.0,
+		"StatusArmorBase": -1.0,
 		"AttackAnimationPoint": 0.4,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 27,
@@ -2175,14 +2100,13 @@ DotaData.heroes = {
 		"ProjectileSpeed": 1125,
 		"Team": "Radiant"
 	},
-	"sand_king":
-	{
+	"sand_king": {
 		"Name": "Sand King",
 		"Ability1": "sandking_burrowstrike",
 		"Ability2": "sandking_sand_storm",
 		"Ability3": "sandking_caustic_finale",
 		"Ability4": "sandking_epicenter",
-		"ArmorBase": -0,
+		"StatusArmorBase": -0,
 		"AttackAnimationPoint": 0.53,
 		"AttackType": "Melee",
 		"AttackDamageMax": 41,
@@ -2201,8 +2125,7 @@ DotaData.heroes = {
 		"MovementTurnRate": 0.5,
 		"Team": "Dire"
 	},
-	"shadow_demon":
-	{
+	"shadow_demon": {
 		"Name": "Shadow Demon",
 		"Ability1": "shadow_demon_disruption",
 		"Ability2": "shadow_demon_soul_catcher",
@@ -2211,7 +2134,7 @@ DotaData.heroes = {
 		"Ability5": "shadow_demon_demonic_purge",
 		"Ability6": "attribute_bonus",
 		"AbilityLayout": 5,
-		"ArmorBase": 0,
+		"StatusArmorBase": 0,
 		"AttackAnimationPoint": 0.35,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 31,
@@ -2231,14 +2154,13 @@ DotaData.heroes = {
 		"ProjectileSpeed": 900,
 		"Team": "Dire"
 	},
-	"shadow_shaman":
-	{
+	"shadow_shaman": {
 		"Name": "Shadow Shaman",
 		"Ability1": "shadow_shaman_ether_shock",
 		"Ability2": "shadow_shaman_voodoo",
 		"Ability3": "shadow_shaman_shackles",
 		"Ability4": "shadow_shaman_mass_serpent_ward",
-		"ArmorBase": -1,
+		"StatusArmorBase": -1,
 		"AttackAnimationPoint": 0.3,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 33,
@@ -2258,8 +2180,7 @@ DotaData.heroes = {
 		"ProjectileSpeed": 900,
 		"Team": "Radiant"
 	},
-	"shredder":
-	{
+	"shredder": {
 		"Name": "Timbersaw",
 		"Ability1": "shredder_whirling_death",
 		"Ability2": "shredder_timber_chain",
@@ -2270,7 +2191,7 @@ DotaData.heroes = {
 		"Ability7": "shredder_return_chakram",
 		"Ability8": "attribute_bonus",
 		"AbilityLayout": 4,
-		"ArmorBase": -2,
+		"StatusArmorBase": -2,
 		"AttackAnimationPoint": 0.36,
 		"AttackType": "Melee",
 		"AttackDamageMax": 30,
@@ -2289,15 +2210,14 @@ DotaData.heroes = {
 		"MovementTurnRate": 0.6,
 		"Team": "Radiant"
 	},
-	"silencer":
-	{
+	"silencer": {
 		"Name": "Silencer",
 		"Ability1": "silencer_curse_of_the_silent",
 		"Ability2": "silencer_glaives_of_wisdom",
 		"Ability3": "silencer_last_word",
 		"Ability4": "silencer_global_silence",
 		"Ability5": "attribute_bonus",
-		"ArmorBase": -1,
+		"StatusArmorBase": -1,
 		"AttackAnimationPoint": 0.5,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 30,
@@ -2312,20 +2232,19 @@ DotaData.heroes = {
 		"AttributePrimary": "Intelligence",
 		"AttributeStrengthGain": 2.2,
 		"Enabled": 1,
-		"MagicalResistance": 25,
+		"StatusMagicalResistance": 0.25,
 		"MovementSpeedBase": 295,
 		"MovementTurnRate": 0.6,
 		"ProjectileSpeed": 1000,
 		"Team": "Radiant"
 	},
-	"skeleton_king":
-	{
+	"skeleton_king": {
 		"Name": "Wraith King",
 		"Ability1": "skeleton_king_hellfire_blast",
 		"Ability2": "skeleton_king_vampiric_aura",
 		"Ability3": "skeleton_king_mortal_strike",
 		"Ability4": "skeleton_king_reincarnation",
-		"ArmorBase": 0,
+		"StatusArmorBase": 0,
 		"AttackAnimationPoint": 0.56,
 		"AttackType": "Melee",
 		"AttackDamageMax": 34,
@@ -2345,14 +2264,13 @@ DotaData.heroes = {
 		"ProjectileSpeed": 0,
 		"Team": "Dire"
 	},
-	"skywrath_mage":
-	{
+	"skywrath_mage": {
 		"Name": "Skywrath Mage",
 		"Ability1": "skywrath_mage_arcane_bolt",
 		"Ability2": "skywrath_mage_concussive_shot",
 		"Ability3": "skywrath_mage_ancient_seal",
 		"Ability4": "skywrath_mage_mystic_flare",
-		"ArmorBase": -2,
+		"StatusArmorBase": -2,
 		"AttackAnimationPoint": 0.4,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 22,
@@ -2372,14 +2290,13 @@ DotaData.heroes = {
 		"ProjectileSpeed": 1000,
 		"Team": "Radiant"
 	},
-	"slardar":
-	{
+	"slardar": {
 		"Name": "Slardar",
 		"Ability1": "slardar_sprint",
 		"Ability2": "slardar_slithereen_crush",
 		"Ability3": "slardar_bash",
 		"Ability4": "slardar_amplify_damage",
-		"ArmorBase": 3,
+		"StatusArmorBase": 3,
 		"AttackAnimationPoint": 0.36,
 		"AttackType": "Melee",
 		"AttackDamageMax": 38,
@@ -2399,15 +2316,14 @@ DotaData.heroes = {
 		"ProjectileSpeed": 0,
 		"Team": "Dire"
 	},
-	"slark":
-	{
+	"slark": {
 		"Name": "Slark",
 		"Ability1": "slark_dark_pact",
 		"Ability2": "slark_pounce",
 		"Ability3": "slark_essence_shift",
 		"Ability4": "slark_shadow_dance",
 		"Ability5": "attribute_bonus",
-		"ArmorBase": -1,
+		"StatusArmorBase": -1,
 		"AttackAnimationPoint": 0.5,
 		"AttackType": "Melee",
 		"AttackDamageMax": 41,
@@ -2429,14 +2345,13 @@ DotaData.heroes = {
 		"VisionDaytimeRange": 1800,
 		"VisionNighttimeRange": 1800
 	},
-	"sniper":
-	{
+	"sniper": {
 		"Name": "Sniper",
 		"Ability1": "sniper_shrapnel",
 		"Ability2": "sniper_headshot",
 		"Ability3": "sniper_take_aim",
 		"Ability4": "sniper_assassinate",
-		"ArmorBase": -1,
+		"StatusArmorBase": -1,
 		"AttackAnimationPoint": 0.17,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 21,
@@ -2457,8 +2372,7 @@ DotaData.heroes = {
 		"Team": "Radiant",
 		"VisionNighttimeRange": 1000
 	},
-	"spectre":
-	{
+	"spectre": {
 		"Name": "Spectre",
 		"Ability1": "spectre_spectral_dagger",
 		"Ability2": "spectre_desolate",
@@ -2467,7 +2381,7 @@ DotaData.heroes = {
 		"Ability5": "spectre_haunt",
 		"Ability6": "attribute_bonus",
 		"AbilityLayout": 5,
-		"ArmorBase": 0,
+		"StatusArmorBase": 0,
 		"AttackAnimationPoint": 0.3,
 		"AttackType": "Melee",
 		"AttackDamageMax": 27,
@@ -2486,15 +2400,14 @@ DotaData.heroes = {
 		"MovementTurnRate": 0.4,
 		"Team": "Dire"
 	},
-	"spirit_breaker":
-	{
+	"spirit_breaker": {
 		"Name": "Spirit Breaker",
 		"Ability1": "spirit_breaker_charge_of_darkness",
 		"Ability2": "spirit_breaker_empowering_haste",
 		"Ability3": "spirit_breaker_greater_bash",
 		"Ability4": "spirit_breaker_nether_strike",
 		"Ability5": "attribute_bonus",
-		"ArmorBase": 3.0,
+		"StatusArmorBase": 3.0,
 		"AttackAnimationPoint": 0.6,
 		"AttackType": "Melee",
 		"AttackDamageMax": 41,
@@ -2514,14 +2427,13 @@ DotaData.heroes = {
 		"StatusHealthRegenBase": 0.75,
 		"Team": "Dire"
 	},
-	"storm_spirit":
-	{
+	"storm_spirit": {
 		"Name": "Storm Spirit",
 		"Ability1": "storm_spirit_static_remnant",
 		"Ability2": "storm_spirit_electric_vortex",
 		"Ability3": "storm_spirit_overload",
 		"Ability4": "storm_spirit_ball_lightning",
-		"ArmorBase": 2,
+		"StatusArmorBase": 2,
 		"AttackAnimationPoint": 0.5,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 32,
@@ -2541,14 +2453,13 @@ DotaData.heroes = {
 		"ProjectileSpeed": 1100,
 		"Team": "Radiant"
 	},
-	"sven":
-	{
+	"sven": {
 		"Name": "Sven",
 		"Ability1": "sven_storm_bolt",
 		"Ability2": "sven_great_cleave",
 		"Ability3": "sven_warcry",
 		"Ability4": "sven_gods_strength",
-		"ArmorBase": 2,
+		"StatusArmorBase": 2,
 		"AttackAnimationPoint": 0.4,
 		"AttackType": "Melee",
 		"AttackDamageMax": 39,
@@ -2568,8 +2479,7 @@ DotaData.heroes = {
 		"ProjectileSpeed": 0,
 		"Team": "Radiant"
 	},
-	"techies":
-	{
+	"techies": {
 		"Name": "Techies",
 		"Ability1": "techies_land_mines",
 		"Ability2": "techies_stasis_trap",
@@ -2579,7 +2489,7 @@ DotaData.heroes = {
 		"Ability6": "techies_remote_mines",
 		"Ability7": "attribute_bonus",
 		"AbilityLayout": 6,
-		"ArmorBase": 5,
+		"StatusArmorBase": 5,
 		"AttackAnimationPoint": 0.5,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 9,
@@ -2596,15 +2506,14 @@ DotaData.heroes = {
 		"AttributeStrengthGain": 2.0,
 		"BaseClass": "techies",
 		"Enabled": 1,
-		"MagicalResistance": 25,
+		"StatusMagicalResistance": 0.25,
 		"MovementSpeedBase": 270,
 		"MovementTurnRate": 0.5,
 		"ProjectileSpeed": 900,
 		"StatusManaRegenBase": 0.02,
 		"Team": "Radiant"
 	},
-	"templar_assassin":
-	{
+	"templar_assassin": {
 		"Name": "Templar assassin",
 		"Ability1": "templar_assassin_refraction",
 		"Ability2": "templar_assassin_meld",
@@ -2613,7 +2522,7 @@ DotaData.heroes = {
 		"Ability5": "templar_assassin_psionic_trap",
 		"Ability6": "attribute_bonus",
 		"AbilityLayout": 5,
-		"ArmorBase": 1,
+		"StatusArmorBase": 1,
 		"AttackAnimationPoint": 0.3,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 36,
@@ -2633,14 +2542,13 @@ DotaData.heroes = {
 		"ProjectileSpeed": 900,
 		"Team": "Radiant"
 	},
-	"terrorblade":
-	{
+	"terrorblade": {
 		"Name": "Terrorblade",
 		"Ability1": "terrorblade_reflection",
 		"Ability2": "terrorblade_conjure_image",
 		"Ability3": "terrorblade_metamorphosis",
 		"Ability4": "terrorblade_sunder",
-		"ArmorBase": 4,
+		"StatusArmorBase": 4,
 		"AttackAnimationPoint": 0.3,
 		"AttackType": "Melee",
 		"AttackDamageMax": 32,
@@ -2661,14 +2569,13 @@ DotaData.heroes = {
 		"StatusHealthRegenBase": 2.0,
 		"Team": "Dire"
 	},
-	"tidehunter":
-	{
+	"tidehunter": {
 		"Name": "Tidehunter",
 		"Ability1": "tidehunter_gush",
 		"Ability2": "tidehunter_kraken_shell",
 		"Ability3": "tidehunter_anchor_smash",
 		"Ability4": "tidehunter_ravage",
-		"ArmorBase": 1,
+		"StatusArmorBase": 1,
 		"AttackAnimationPoint": 0.6,
 		"AttackType": "Melee",
 		"AttackDamageMax": 31,
@@ -2687,14 +2594,13 @@ DotaData.heroes = {
 		"MovementTurnRate": 0.4,
 		"Team": "Dire"
 	},
-	"tinker":
-	{
+	"tinker": {
 		"Name": "Tinker",
 		"Ability1": "tinker_laser",
 		"Ability2": "tinker_heat_seeking_missile",
 		"Ability3": "tinker_march_of_the_machines",
 		"Ability4": "tinker_rearm",
-		"ArmorBase": 2,
+		"StatusArmorBase": 2,
 		"AttackAnimationPoint": 0.35,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 28,
@@ -2714,14 +2620,13 @@ DotaData.heroes = {
 		"ProjectileSpeed": 900,
 		"Team": "Radiant"
 	},
-	"tiny":
-	{
+	"tiny": {
 		"Name": "Tiny",
 		"Ability1": "tiny_avalanche",
 		"Ability2": "tiny_toss",
 		"Ability3": "tiny_craggy_exterior",
 		"Ability4": "tiny_grow",
-		"ArmorBase": -1,
+		"StatusArmorBase": -1,
 		"AttackAnimationPoint": 0.49,
 		"AttackType": "Melee",
 		"AttackDamageMax": 43,
@@ -2740,8 +2645,7 @@ DotaData.heroes = {
 		"MovementTurnRate": 0.5,
 		"Team": "Radiant"
 	},
-	"treant":
-	{
+	"treant": {
 		"Name": "Treant Protector",
 		"Ability1": "treant_natures_guise",
 		"Ability2": "treant_leech_seed",
@@ -2749,7 +2653,7 @@ DotaData.heroes = {
 		"Ability4": "treant_eyes_in_the_forest",
 		"Ability5": "treant_overgrowth",
 		"Ability6": "attribute_bonus",
-		"ArmorBase": -1,
+		"StatusArmorBase": -1,
 		"AttackAnimationPoint": 0.6,
 		"AttackType": "Melee",
 		"AttackDamageMax": 64,
@@ -2768,8 +2672,7 @@ DotaData.heroes = {
 		"MovementTurnRate": 0.5,
 		"Team": "Radiant"
 	},
-	"troll_warlord":
-	{
+	"troll_warlord": {
 		"Name": "Troll Warlord",
 		"Ability1": "troll_warlord_berserkers_rage",
 		"Ability2": "troll_warlord_whirling_axes_ranged",
@@ -2777,7 +2680,7 @@ DotaData.heroes = {
 		"Ability4": "troll_warlord_fervor",
 		"Ability5": "troll_warlord_battle_trance",
 		"Ability6": "attribute_bonus",
-		"ArmorBase": -1,
+		"StatusArmorBase": -1,
 		"AttackAnimationPoint": 0.3,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 35,
@@ -2797,8 +2700,7 @@ DotaData.heroes = {
 		"ProjectileSpeed": 1200,
 		"Team": "Radiant"
 	},
-	"tusk":
-	{
+	"tusk": {
 		"Name": "Tusk",
 		"Ability1": "tusk_ice_shards",
 		"Ability2": "tusk_snowball",
@@ -2808,7 +2710,7 @@ DotaData.heroes = {
 		"Ability6": "tusk_walrus_punch",
 		"Ability7": "attribute_bonus",
 		"AbilityLayout": 5,
-		"ArmorBase": 0.0,
+		"StatusArmorBase": 0.0,
 		"AttackAnimationPoint": 0.36,
 		"AttackType": "Melee",
 		"AttackDamageMax": 31,
@@ -2827,15 +2729,14 @@ DotaData.heroes = {
 		"MovementTurnRate": 0.5,
 		"Team": "Radiant"
 	},
-	"undying":
-	{
+	"undying": {
 		"Name": "Undying",
 		"Ability1": "undying_decay",
 		"Ability2": "undying_soul_rip",
 		"Ability3": "undying_tombstone",
 		"Ability4": "undying_flesh_golem",
 		"Ability5": "attribute_bonus",
-		"ArmorBase": 2,
+		"StatusArmorBase": 2,
 		"AttackAnimationPoint": 0.3,
 		"AttackType": "Melee",
 		"AttackDamageMax": 43,
@@ -2854,15 +2755,14 @@ DotaData.heroes = {
 		"MovementTurnRate": 0.6,
 		"Team": "Dire"
 	},
-	"ursa":
-	{
+	"ursa": {
 		"Name": "Ursa",
 		"Ability1": "ursa_earthshock",
 		"Ability2": "ursa_overpower",
 		"Ability3": "ursa_fury_swipes",
 		"Ability5": "attribute_bonus",
 		"Ability6": "ursa_enrage",
-		"ArmorBase": 3,
+		"StatusArmorBase": 3,
 		"AttackAnimationPoint": 0.3,
 		"AttackType": "Melee",
 		"AttackDamageMax": 31,
@@ -2881,14 +2781,13 @@ DotaData.heroes = {
 		"MovementTurnRate": 0.5,
 		"Team": "Radiant"
 	},
-	"vengefulspirit":
-	{
+	"vengefulspirit": {
 		"Name": "Vengeful Spirit",
 		"Ability1": "vengefulspirit_magic_missile",
 		"Ability2": "vengefulspirit_wave_of_terror",
 		"Ability3": "vengefulspirit_command_aura",
 		"Ability4": "vengefulspirit_nether_swap",
-		"ArmorBase": 0,
+		"StatusArmorBase": 0,
 		"AttackAnimationPoint": 0.33,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 26,
@@ -2908,14 +2807,13 @@ DotaData.heroes = {
 		"ProjectileSpeed": 1500,
 		"Team": "Radiant"
 	},
-	"venomancer":
-	{
+	"venomancer": {
 		"Name": "Venomancer",
 		"Ability1": "venomancer_venomous_gale",
 		"Ability2": "venomancer_poison_sting",
 		"Ability3": "venomancer_plague_ward",
 		"Ability4": "venomancer_poison_nova",
-		"ArmorBase": 0,
+		"StatusArmorBase": 0,
 		"AttackAnimationPoint": 0.3,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 21,
@@ -2936,14 +2834,13 @@ DotaData.heroes = {
 		"StatusHealthRegenBase": 0.25,
 		"Team": "Dire"
 	},
-	"viper":
-	{
+	"viper": {
 		"Name": "Viper",
 		"Ability1": "viper_poison_attack",
 		"Ability2": "viper_nethertoxin",
 		"Ability3": "viper_corrosive_skin",
 		"Ability4": "viper_viper_strike",
-		"ArmorBase": -1,
+		"StatusArmorBase": -1,
 		"AttackAnimationPoint": 0.33,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 25,
@@ -2963,15 +2860,14 @@ DotaData.heroes = {
 		"ProjectileSpeed": 1200,
 		"Team": "Dire"
 	},
-	"visage":
-	{
+	"visage": {
 		"Name": "Visage",
 		"Ability1": "visage_grave_chill",
 		"Ability2": "visage_soul_assumption",
 		"Ability3": "visage_gravekeepers_cloak",
 		"Ability4": "visage_summon_familiars",
 		"Ability5": "attribute_bonus",
-		"ArmorBase": -2.0,
+		"StatusArmorBase": -2.0,
 		"AttackAnimationPoint": 0.46,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 34,
@@ -2986,20 +2882,19 @@ DotaData.heroes = {
 		"AttributePrimary": "Intelligence",
 		"AttributeStrengthGain": 2.4,
 		"Enabled": 1,
-		"MagicalResistance": 10,
+		"StatusMagicalResistance": 0.10,
 		"MovementSpeedBase": 285,
 		"MovementTurnRate": 0.5,
 		"ProjectileSpeed": 900,
 		"Team": "Dire"
 	},
-	"warlock":
-	{
+	"warlock": {
 		"Name": "Warlock",
 		"Ability1": "warlock_fatal_bonds",
 		"Ability2": "warlock_shadow_word",
 		"Ability3": "warlock_upheaval",
 		"Ability4": "warlock_rain_of_chaos",
-		"ArmorBase": 1,
+		"StatusArmorBase": 1,
 		"AttackAnimationPoint": 0.3,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 32,
@@ -3019,14 +2914,13 @@ DotaData.heroes = {
 		"ProjectileSpeed": 1200,
 		"Team": "Dire"
 	},
-	"weaver":
-	{
+	"weaver": {
 		"Name": "Weaver",
 		"Ability1": "weaver_the_swarm",
 		"Ability2": "weaver_shukuchi",
 		"Ability3": "weaver_geminate_attack",
 		"Ability4": "weaver_time_lapse",
-		"ArmorBase": -1,
+		"StatusArmorBase": -1,
 		"AttackAnimationPoint": 0.64,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 46,
@@ -3046,14 +2940,13 @@ DotaData.heroes = {
 		"ProjectileSpeed": 900,
 		"Team": "Dire"
 	},
-	"windrunner":
-	{
+	"windrunner": {
 		"Name": "Windranger",
 		"Ability1": "windrunner_shackleshot",
 		"Ability2": "windrunner_powershot",
 		"Ability3": "windrunner_windrun",
 		"Ability4": "windrunner_focusfire",
-		"ArmorBase": -1,
+		"StatusArmorBase": -1,
 		"AttackAnimationPoint": 0.4,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 34,
@@ -3073,20 +2966,19 @@ DotaData.heroes = {
 		"ProjectileSpeed": 1250,
 		"Team": "Radiant"
 	},
-	"winter_wyvern":
-	{
+	"winter_wyvern": {
 		"Name": "Winter Wyvern",
 		"Ability1": "winter_wyvern_arctic_burn",
 		"Ability2": "winter_wyvern_splinter_blast",
 		"Ability3": "winter_wyvern_cold_embrace",
 		"Ability4": "winter_wyvern_winters_curse",
 		"Ability5": "attribute_bonus",
-		"ArmorBase": -1,
+		"StatusArmorBase": -1,
 		"AttackAnimationPoint": 0.25,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 20,
 		"AttackDamageMin": 13,
-		"AttackDamageType": "DAMAGE_TYPE_ArmorBase",
+		"AttackDamageType": "DAMAGE_TYPE_StatusArmorBase",
 		"AttackRange": 425,
 		"AttackRateBase": 1.7,
 		"AttributeAgilityGain": 1.9,
@@ -3098,7 +2990,7 @@ DotaData.heroes = {
 		"AttributeStrengthGain": 2.1,
 		"BaseClass": "winter_wyvern",
 		"Enabled": 1,
-		"MagicalResistance": 25,
+		"StatusMagicalResistance": 0.25,
 		"MovementSpeedBase": 285,
 		"MovementTurnRate": 0.4,
 		"ProjectileSpeed": 700,
@@ -3106,8 +2998,7 @@ DotaData.heroes = {
 		"VisionDaytimeRange": 1800,
 		"VisionNighttimeRange": 800
 	},
-	"wisp":
-	{
+	"wisp": {
 		"Name": "IO",
 		"Ability1": "wisp_tether",
 		"Ability10": "wisp_spirits_out",
@@ -3120,7 +3011,7 @@ DotaData.heroes = {
 		"Ability8": "attribute_bonus",
 		"Ability9": "wisp_spirits_in",
 		"AbilityLayout": 6,
-		"ArmorBase": -2.0,
+		"StatusArmorBase": -2.0,
 		"AttackAnimationPoint": 0.15,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 35,
@@ -3140,14 +3031,13 @@ DotaData.heroes = {
 		"ProjectileSpeed": 1200,
 		"Team": "Radiant"
 	},
-	"witch_doctor":
-	{
+	"witch_doctor": {
 		"Name": "Witch Doctor",
 		"Ability1": "witch_doctor_paralyzing_cask",
 		"Ability2": "witch_doctor_voodoo_restoration",
 		"Ability3": "witch_doctor_maledict",
 		"Ability4": "witch_doctor_death_ward",
-		"ArmorBase": -1,
+		"StatusArmorBase": -1,
 		"AttackAnimationPoint": 0.4,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 37,
@@ -3167,14 +3057,13 @@ DotaData.heroes = {
 		"ProjectileSpeed": 1200,
 		"Team": "Dire"
 	},
-	"zuus":
-	{
+	"zuus": {
 		"Name": "Zeus",
 		"Ability1": "zuus_arc_lightning",
 		"Ability2": "zuus_lightning_bolt",
 		"Ability3": "zuus_static_field",
 		"Ability4": "zuus_thundergods_wrath",
-		"ArmorBase": 0,
+		"StatusArmorBase": 0,
 		"AttackAnimationPoint": 0.633,
 		"AttackType": "Ranged",
 		"AttackDamageMax": 29,
@@ -3195,5 +3084,3 @@ DotaData.heroes = {
 		"Team": "Radiant"
 	}
 }
-
-

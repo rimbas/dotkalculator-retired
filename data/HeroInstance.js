@@ -7,95 +7,146 @@
 // [level] (integer 1..25)    - desired hero level
 // [items] (array of strings) - items for the inventory
 function HeroInstance(heroId, level, items) {
-	var BaseProperties = DotaData.getHeroProperties(heroId);
-	for ( var prop in BaseProperties ) {
-		this[prop] = BaseProperties[prop];	
-	}
+	level = Math.min(Math.max(level, 1), 25) || 1;
+	this.Stats = DotaData.getHeroProperties(heroId);
 	this.HeroId = heroId;
-	this.Level = Math.min(Math.max(level || 1, 1), 25);
-	this.Items = items;
-	this.EvaluateAll();
+	this.SkillList = [];
+	this.Skills = {};
+	this.ItemList = Array.isArray(items) ? items : [];
+	this.Items = {};
+	this.AuraList = [];
+	this.Auras = {};
+	this.BuffList = []
+	this.Buffs = {};
+	this.Level(level);
+	//this.Skills()
+	//this.Items();
+	//console.log( "Hero " + this.Stats.Name + " created", this);
 }
-Object.defineProperty(HeroInstance.prototype, "LevelMult", { get: function () { return this.Level - 1; } } )
 
-// Instance copier
-HeroInstance.prototype.clone = function () {
-	return new HeroInstance(this.HeroId, this.Level, this.Items.slice(0));
+HeroInstance.prototype.toString = function() {
+	return "[HeroInstance "+this.HeroId+"]";
 }
 
-HeroInstance.prototype.EvaluateAll = function() {
-	for (var ev in this.eval) {
-		this.eval[ev].call(this)
+HeroInstance.addHandler = function (name, binds, handler) {
+	if (name in HeroInstance.prototype) throw "Handler \"" + name + "\"already exists";
+	if (typeof name !== "string") throw "No handler name set!";
+	if (typeof handler !== "function" ) throw "No handler passed!";
+	
+	var wrapper = function(value) 
+		{
+			handler.call(this, value);
+			this.propagateChange(this[name].binds);
+		}
+	wrapper.binds = [];
+	HeroInstance.prototype[name] = wrapper;
+	
+	for ( var i in binds ) {
+		var bind = binds[i];
+		this.prototype[bind].binds.push(name);
 	}
 }
 
-// Calls the evaluation function for the property, changes internal variables 
-// returns main value
-// property (string) - valid property
-HeroInstance.prototype.Evaluate = function( property ) {
-	if ( property in this.eval ) return this.eval[property].call(this)
-}
-HeroInstance.prototype.eval = {};
-
-// Strength evaluation function
-// Sets:
-// AttributeStrengthRaw   - Base strength + level gain strength
-// AttributeStrengthBonus - Strength gained from items
-// AttributeStrengthTotal - Total strength
-HeroInstance.prototype.eval.Strength = function () {
-	var rawStr = Math.floor(this.AttributeStrengthBase + this.AttributeStrengthGain * this.LevelMult),
-		bonusStr = 0; // todo: calculate item bonus
-	this.AttributeStrengthRaw = rawStr;
-	this.AttributeStrengthBonus = bonusStr;
-	this.AttributeStrengthTotal = rawStr + bonusStr;
-	return this.AttributeStrengthTotal;
+HeroInstance.prototype.propagateChange = function (properties) {
+	if (!Array.isArray(properties)) throw "Array expected, got " + properties;
+	if (!properties.length) return;
+	var propagation = [];
+	for ( var propId in properties ) {
+		var prop = properties[propId];
+			propagation.concat(this[prop].binds);
+			this[prop]();
+	}
+	this.propagateChange(propagation);
 }
 
-// Agility evaluation function
-// Sets:
-// AttributeAgilityRaw   - Base + level gain agility
-// AttributeAgilityBonus - Agility gained from items
-// AttributeAgilityTotal - Total agility
-HeroInstance.prototype.eval.Agility = function () {
-	var rawAgi = Math.floor(this.AttributeAgilityBase + this.AttributeAgilityGain * this.LevelMult),
-		bonusAgi = 0; // todo: calculate item bonus
-	this.AttributeAgilityRaw = rawAgi;
-	this.AttributeAgilityBonus = bonusAgi;
-	this.AttributeAgilityTotal = rawAgi + bonusAgi;
-	return this.AttributeAgilityTotal;
-}
+HeroInstance.addHandler(
+	"Level",
+	[],
+	function(value){
+		this.Stats.Level = value;
+		this.Stats.LevelMult = value - 1;
+	}
+);
 
-HeroInstance.prototype.eval.Intelligence = function () {
-	var rawInt = Math.floor(this.AttributeIntelligenceBase + this.AttributeIntelligenceGain * this.LevelMult),
-		bonusInt = 0; // todo: calculate item bonus
-	this.AttributeIntelligenceRaw = rawInt;
-	this.AttributeIntelligenceBonus = bonusInt;
-	this.AttributeIntelligenceTotal = rawInt + bonusInt;
-	return this.AttributeIntelligenceTotal;
-}
+HeroInstance.addHandler( 
+		"Strength", 
+		["Level"],
+		function() { 
+			var rawStr = this.Stats.AttributeStrengthBase + this.Stats.AttributeStrengthGain * this.Stats.LevelMult,
+				bonusStr = 0; // todo: calculate item bonus
+			this.Stats.AttributeStrengthRaw = rawStr;
+			this.Stats.AttributeStrengthBonus = bonusStr;
+			this.Stats.AttributeStrengthTotal = rawStr + bonusStr;
+		});
 
+HeroInstance.addHandler( 
+		"Agility", 
+		["Level"],
+		function() { 
+			var rawAgi = this.Stats.AttributeAgilityBase + this.Stats.AttributeAgilityGain * this.Stats.LevelMult,
+				bonusAgi = 0; // todo: calculate item bonus
+			this.Stats.AttributeAgilityRaw = rawAgi;
+			this.Stats.AttributeAgilityBonus = bonusAgi;
+			this.Stats.AttributeAgilityTotal = rawAgi + bonusAgi;
+		});
 
-// Evaluates Strength, returns health
-HeroInstance.prototype.eval.Health = function () {
-	this.StatusHealthTotal = this.StatusHealthBase + this.Evaluate("Strength") * 19;
-	return this.StatusHealthTotal;
-}
+HeroInstance.addHandler( 
+		"Intelligence", 
+		["Level"],
+		function() { 
+			var rawInt = this.Stats.AttributeIntelligenceBase + this.Stats.AttributeIntelligenceGain * this.Stats.LevelMult,
+				bonusInt = 0; // todo: calculate item bonus
+			this.Stats.AttributeIntelligenceRaw = rawInt;
+			this.Stats.AttributeIntelligenceBonus = bonusInt;
+			this.Stats.AttributeIntelligenceTotal = rawInt + bonusInt;
+		}
+);
 
-HeroInstance.prototype.eval.Mana = function () {
-	this.StatusManaTotal = this.StatusManaBase + this.Evaluate("Intelligence") * 13;
-	return this.StatusManaTotal;
-}
+HeroInstance.addHandler(
+	"Health",
+	["Strength"],
+	function() {
+		var hp = this.Stats.StatusHealthBase + this.Stats.AttributeStrengthTotal * 19;
+		this.Stats.StatusHealthTotal = Math.round(hp);
+	});
 
-HeroInstance.prototype.eval.Armor = function () {
-	var floatArmor = this.ArmorBase + this.Evaluate("Agility") * 0.14;
-	this.ArmorTotal = Math.round( floatArmor * 100 ) / 100;
-	return this.ArmorTotal;
-}
+HeroInstance.addHandler(
+	"Mana",
+	["Intelligence"],
+	function() {
+		var mp = this.Stats.StatusManaBase + this.Stats.AttributeIntelligenceTotal * 13;
+		this.Stats.StatusManaTotal = Math.round(mp);
+	});
 
-HeroInstance.prototype.eval.Damage = function() {
+HeroInstance.addHandler(
+	"Armor",
+	["Agility"],
+	function() {
+		var armor = this.Stats.StatusArmorBase + this.Stats.AttributeAgilityTotal * 0.14;
+		this.Stats.StatusArmorTotal = Math.round( armor * 100 ) / 100;
+	});
+
+HeroInstance.addHandler(
+	"PhysicalResistance",
+	["Armor"],
+	function() {
+		var res = (0.06 * this.Stats.StatusArmorTotal) / (1 + 0.06 * this.Stats.StatusArmorTotal);
+		res = Math.round( res * 100 ) / 100;
+		this.Stats.StatusPhysicalResistance = res;
+	});
+
+HeroInstance.addHandler(
+	"Damage",
+	["Strength", "Agility", "Intelligence"],
+	function(){
+		var attack
+	}
+	);
+
+/*HeroInstance.prototype.eval.Damage = function() {
 	var statDamage = this.Evaluate(this.AttributePrimary);
 	var baseDamage = Math.round( (this.AttackDamageMin + this.AttackDamageMax) / 2 );
 	this.AttackDamageBase = baseDamage + statDamage;
 	return this.AttackDamageBase;
-}
+}*/
 
