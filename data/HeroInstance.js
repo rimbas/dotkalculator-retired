@@ -2,7 +2,8 @@
 	Hero instance class
 */
 
-// Hero instance constructor
+// 		Hero instance constructor
+//
 // heroId  (string)           - hero to retrieve from hero data
 // [level] (integer 1..25)    - desired hero level
 // [items] (array of strings) - items for the inventory
@@ -29,9 +30,12 @@ HeroInstance.prototype.toString = function() {
 }
 
 HeroInstance.addHandler = function (name, binds, handler) {
-	if (name in HeroInstance.prototype) throw "Handler \"" + name + "\"already exists";
-	if (typeof name !== "string") throw "No handler name set!";
-	if (typeof handler !== "function" ) throw "No handler passed!";
+	if (name in HeroInstance.prototype) 
+		throw "Handler \"" + name + "\"already exists!";
+	if (typeof name !== "string") 
+		throw "No handler name set!";
+	if (typeof handler !== "function" ) 
+		throw "No handler passed!";
 	
 	var wrapper = function(value) 
 		{
@@ -48,8 +52,10 @@ HeroInstance.addHandler = function (name, binds, handler) {
 }
 
 HeroInstance.prototype.propagateChange = function (properties) {
-	if (!Array.isArray(properties)) throw "Array expected, got " + properties;
-	if (!properties.length) return;
+	if (!Array.isArray(properties)) 
+		throw "Array expected, got " + properties;
+	if (!properties.length) 
+		return;
 	var propagation = [];
 	for ( var propId in properties ) {
 		var prop = properties[propId];
