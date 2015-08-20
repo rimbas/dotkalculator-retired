@@ -5,20 +5,31 @@
 // HeroTable handler constructor
 // tableId - table Id
 // wrapperId - element to insert the table into
-function HeroTable(tableId, wrapperId) {
+HeroTable.tableList = {}
+
+function HeroTable(tableName, tableId, wrapperId) {
+	HeroTable.tableList[tableId] = {reference: this, displayName: tableName};
+	
 	this._tableId = tableId;
+	this._tableName = tableName;
 	this._table = document.createElement("table");
 	this._table.id = tableId;
 	this._table.className = "hero-table";
 	document.getElementById(wrapperId).appendChild(this._table);
 	this._table.HeroTableController = this;
+	
+	var caption = document.createElement("caption");
+	caption.textContent = tableName;
+	this._table.appendChild(caption);
+	
 	this._thead = document.createElement("thead");
 	this._table.appendChild(this._thead);
 	this._tbody = document.createElement("tbody");
 	this._table.appendChild(this._tbody);
 	
 	this.heroList = [];
-	this.columnList = ["Name", "Label", "Portrait", "Level", "Strength", "Health", "Mana", "Armor", "PhysicalResistance"];
+	this.columnList = ["Delete", "Name", "Label", "Portrait", "Level", "Health", "Mana", "Armor"];
+	
 	var thr = document.createElement("tr");
 	for ( var i in this.columnList ) {
 		var col = this.columnList[i];
@@ -35,8 +46,8 @@ HeroTable.prototype.toString = function () {
 	return "[HeroTable " + this._tableId + "]";
 }
 
+
 HeroTable.prototype.refreshHero = function (heroInstance) {
-	console.log(heroInstance);
 	for (var i = 0; i < heroInstance.InstanceRow.childNodes.length; i++) {
 		var cell = heroInstance.InstanceRow.childNodes[i],
 			evaluatorId = cell.evaluatorId;
@@ -131,6 +142,12 @@ HeroTable.prototype.addHero = function (heroInstance) {
 	$(this._table).trigger("update");
 }
 
+HeroTable.prototype.removeHero = function (heroInstance) {
+	this.heroList.splice(this.heroList.indexOf(heroInstance),1)
+	heroInstance.InstanceRow.parentElement.removeChild(heroInstance.InstanceRow);
+	$(this._table).trigger("update");
+}
+
 HeroTable.prototype.updateSorting = function () {
 	$(this._table).trigger("update");
 }
@@ -155,7 +172,6 @@ $.tablesorter.addParser({
 		return false;
 	},
 	format: function(s, table, cell) {
-		console.log(cell, cell.childNodes[0].childNodes[0].value || cell.childNodes[0].childNodes[0].textContent)
 		return cell.childNodes[0].childNodes[0].value || cell.childNodes[0].childNodes[0].textContent;
 	},
 	type: "numeric"
@@ -263,9 +279,23 @@ HeroTable.addHandler("Label", "Label", "Label",
 		var label = document.createElement("input");
 		label.value = heroInstance.Stats.Name;
 		label.className = "hero-label";
+		label.onchange = (function(){
+			this.updateSorting();
+		}).bind(this);
 		cell.appendChild(label);
 	},
 	"firstChildText",
 	true)
-
-
+HeroTable.addHandler("Delete", "Delete", "",
+	function(cell, heroInstance){
+		var button = document.createElement("button");
+		button.className = "delete-button";
+		cell.appendChild(button);
+		button.HeroInstanceRef = heroInstance;
+		button.TableInstanceRef = this;
+		button.onclick = function(){
+			this.TableInstanceRef.removeHero(this.HeroInstanceRef);
+		};
+	},
+	false,
+	true);

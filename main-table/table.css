@@ -2,6 +2,11 @@
 	margin: 10px;
 	font-size: 12pt;
 }
+.hero-table caption {
+	border: 4px solid #9A1E00;
+	border-bottom: none;
+	font-size: 16pt;
+}
 .hero-table td {
 	padding-left: 4px;
 	padding-right: 4px;
@@ -43,7 +48,14 @@
 	border: 1px solid gold;
 	width: 9em;
 }
-
 .vertical-separators td:not(:first-child), .vertical-separators th:not(:first-child) {
 	border-left: 2px solid #9A1E00;
+}
+.delete-button {
+	width: 16px;
+	height: 16px;
+	border: none;
+	background: url(delete-icon16.png);
+	vertical-align: middle;
+	cursor: pointer;
 }

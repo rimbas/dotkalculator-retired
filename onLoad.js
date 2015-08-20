@@ -9,11 +9,12 @@ $(function(e){
 		cursor: "grabbed",
 		containment: "document"
 	}) 
-	MainTable = new HeroTable("main-table", "main-table-wrapper");
+	MainTable = new HeroTable("Comparison table", "main-table", "main-table-wrapper");
 	MainTable.addHero(new HeroInstance("alchemist", 16, []));
 	MainTable.addHero("vengefulspirit");
 	MainTable.addHero("techies");
 	//$("#main-table").addClass("vertical-separators");
 	
-	$("#table-settings").toggle(false);
+	//$("#table-settings").toggle(false);
+	$(".table-selector").selectmenu();
 })
