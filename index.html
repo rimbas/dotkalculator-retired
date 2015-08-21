@@ -19,7 +19,8 @@
 	<link href="main-table/table.css" rel="stylesheet" type="text/css" />
 	<script src="hero-picker/hero-picker.js"></script>
 	<link href="hero-picker/hero-picker.css" rel="stylesheet" type="text/css" />
-	
+	<script src="table-settings/table-settings.js"></script>
+	<link href="table-settings/table-settings.css" rel="stylesheet" type="text/css" />	
 	<script src="onLoad.js"></script>
 </head>
 <body>
@@ -39,7 +40,6 @@
 			<label for="hero-picker-table-selector">Target table: </label>
 			<select id="hero-picker-table-selector" class="table-selector">
 				<option value="main-table">Comparison table</option>
-				<option value="kappa">Very kappa</option>
 			</select>
 		</div>
 		<table id="hero-picker-table">
@@ -67,9 +67,18 @@
 	
 	<div class="window" id="table-settings">
 		<div class="drag-bar">Table settings<div class="drag-bar-close" id="table-settings-close"></div></div>
-		
+		<div id="table-settings-table-selector-wrapper" class="table-selector-wrapper">
+			<label for="table-settings-table-selector">Target table: </label>
+			<select id="table-settings-table-selector" class="table-selector">
+				<option value="main-table">Comparison table</option>
+			</select>
+		</div>
+		<div class="table-settings-base-wrapper" id="table-settings-base-wrapper">
+			<div class="table-settings-list-container">
+				<span>Active items</span>
+				<ul id="table-settings-items-active"></ul>
+				<span>Remove item</span>
+				<ul id="table-settings-items-bin"></ul></div></div>
 	</div>
-	
-	
 </body>
 </html>

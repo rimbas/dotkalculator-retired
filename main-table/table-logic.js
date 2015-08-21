@@ -76,20 +76,48 @@ HeroTable.prototype.sorterSettings = function () {
 	return sorterSetup;
 }
 
+HeroTable.prototype.getEvaluators = function () {
+	var evaluators = {};
+	evaluators.all = [];
+	evaluators.active = [];
+	evaluators.exclude = {};
+	
+	for (var i in this.columnList) {
+		var id = this.columnList[i];
+		evaluators.active.push({
+			nameId: id,
+			fullName: this.evaluator[id].fullName,
+			type: this.evaluator[id].type
+		});
+		evaluators.exclude[id] = true;
+	}
+	
+	for (var id in this.evaluator) {
+		evaluators.all.push({
+			nameId: id,
+			fullName: this.evaluator[id].fullName,
+			type: this.evaluator[id].type
+		});
+	}
+	return evaluators;
+}
+
 HeroTable.prototype.evaluator = {};
+HeroTable.evaluatorGroups = {};
 
 // 		Cell handler adder
 //
 // nameID 	   (string)     - internal ID of handler
 // fullName (string)        - full name of handler (for usage in selection menus)
-// displayName				- display label (for usage in table headers)
+// displayName (string)		- display label (for usage in table headers)
+// type (string)			- evaluator type
 // cellEvaluator (function) - html element processor
 // sortingMethod 		    - column sorting handling
 //			        (false) - disallow column sorting
 //                   (true) - uses default sorting method
 //			       (string) - uses a defined sorting method
 // [static] (boolean)       - should the contents be evaluated only once?
-HeroTable.addHandler = function(nameID, fullName, displayName, cellEvaluator, sortingMethod, static) {
+HeroTable.addHandler = function(nameID, fullName, displayName, type, cellEvaluator, sortingMethod, static) {
 	fullName = fullName || nameID;
 	if (nameID in HeroTable.prototype.evaluator) 
 		throw "Handler \"" + nameID + "\" already exists!";
@@ -104,12 +132,17 @@ HeroTable.addHandler = function(nameID, fullName, displayName, cellEvaluator, so
 	
 	var handler = {};
 	HeroTable.prototype.evaluator[nameID] = handler;
+	if (!HeroTable.evaluatorGroups[type]) {
+		HeroTable.evaluatorGroups[type] = [];	
+	}
+	HeroTable.evaluatorGroups[type].push({"nameId": nameID,"fullName": fullName});
 	handler.nameId = nameID;
 	handler.cellEvaluator = cellEvaluator;
 	handler.sortingMethod = sortingMethod;
 	handler.fullName = fullName;
 	handler.displayName = displayName;
 	handler.static = static;
+	handler.type = type;
 }
 
 // Adds a hero to the table and evaluates it
@@ -217,12 +250,12 @@ $.tablesorter.addParser({
 	type: "numeric"
 });
 
-HeroTable.addHandler("Name","Name","Name",
+HeroTable.addHandler("Name","Name","Name","General",
 	function(cell, heroInstance){
 		cell.textContent = heroInstance.Stats.Name;
 	});
 
-HeroTable.addHandler("Level", "Level", "LVL",
+HeroTable.addHandler("Level", "Level", "LVL","Base",
 	function(cell, heroInstance) {
 		var input = document.createElement("input");
 		input.value = heroInstance.Stats.Level;
@@ -240,27 +273,27 @@ HeroTable.addHandler("Level", "Level", "LVL",
 	},
 	"firstChildFirstChildNumeric",
 	true);
-HeroTable.addHandler("Health", "Health", "HP",
+HeroTable.addHandler("Health", "Health", "HP","Derived",
 	function(cell, heroInstance){
 		cell.textContent = heroInstance.Stats.StatusHealthTotal;
 	},
 	"number")
-HeroTable.addHandler("Strength", "Strength", "Str",
+HeroTable.addHandler("Strength", "Strength", "Str","Base",
 	function(cell, heroInstance){
 		cell.textContent = Math.floor(heroInstance.Stats.AttributeStrengthTotal);
 	},
 	"number")
-HeroTable.addHandler("Mana", "Mana", "MP",
+HeroTable.addHandler("Mana", "Mana", "MP","Derived",
 	function(cell, heroInstance){
 		cell.textContent = heroInstance.Stats.StatusManaTotal;
 	},
 	"number")
-HeroTable.addHandler("Armor", "Armor", "ARM",
+HeroTable.addHandler("Armor", "Armor", "ARM","Derived",
 	function(cell, heroInstance){
 		cell.textContent = heroInstance.Stats.StatusArmorTotal;
 	},			
 	"number")
-HeroTable.addHandler("Portrait", "Portrait", "",
+HeroTable.addHandler("Portrait", "Portrait", "","General",
 	function(cell, heroInstance){
 		var el = document.createElement("div");
 		el.className = "mheroicon " + heroInstance.HeroId;
@@ -269,12 +302,12 @@ HeroTable.addHandler("Portrait", "Portrait", "",
 	},
 	"propertyText",
 	true)
-HeroTable.addHandler("PhysicalResistance", "Physical Resistance", "P. Res.",
+HeroTable.addHandler("PhysicalResistance", "Physical Resistance", "P. Res.","Derived",
 	function(cell, heroInstance){
 		cell.textContent = Math.round(heroInstance.Stats.StatusPhysicalResistance*100) + "%";
 	},
 	"percent")
-HeroTable.addHandler("Label", "Label", "Label",
+HeroTable.addHandler("Label", "Label", "Label","General",
 	function(cell, heroInstance){
 		var label = document.createElement("input");
 		label.value = heroInstance.Stats.Name;
@@ -286,7 +319,7 @@ HeroTable.addHandler("Label", "Label", "Label",
 	},
 	"firstChildText",
 	true)
-HeroTable.addHandler("Delete", "Delete", "",
+HeroTable.addHandler("Delete", "Delete", "","General",
 	function(cell, heroInstance){
 		var button = document.createElement("button");
 		button.className = "delete-button";

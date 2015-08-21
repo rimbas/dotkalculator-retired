@@ -17,14 +17,14 @@ $(function(){
 	$("#hero-picker-header-button").one("click",
 		function(){
 			var picker = document.getElementById("hero-picker");
-			picker.style.left = screen.width / 2 - picker.offsetWidth  / 2 + "px"
-			picker.style.top = "15vh";
+			picker.style.left = "11px"
+			picker.style.top = "52px";
 		});
 	$("#hero-picker-header-button").on("dblclick",
 		function(){
 			var picker = document.getElementById("hero-picker");
-			picker.style.left = screen.width / 2 - picker.offsetWidth  / 2 + "px";
-			picker.style.top = "15vh";
+			picker.style.left = "11px"
+			picker.style.top = "52px";
 		});
 	$("#hero-picker-close").on("click", 
 		function() {
