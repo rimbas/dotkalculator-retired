@@ -39,7 +39,7 @@ function HeroTable(tableName, tableId, wrapperId) {
 		thr.appendChild(cell);
 	}
 	this._thead.appendChild(thr);
-	this.sorterSettings();
+	this._tableSorterCreated = false;
 }
 
 HeroTable.prototype.toString = function () {
@@ -156,8 +156,13 @@ HeroTable.prototype.addHero = function (heroInstance) {
 		throw "Invalid parameter:" + heroInstance;
 	}
 	var pos = this.heroList.push(heroInstance);
-	if (this.heroList.length < 2)
-		$(this._table).tablesorter(this.sorterSettings());
+	//if (this.heroList.length < 2)
+	//	$(this._table).tablesorter(this.sorterSettings());
+	if ( !this._tableSorterCreated )
+	{
+		$(this._table).tablesorter(this.sorterSettings());	
+		this._tableSorterCreated = true;
+	}
 	
 	var row = document.createElement("tr");
 	row.HeroInstanceRef = heroInstance;
