@@ -43,7 +43,7 @@ $(function(){
 	function populateList() 
 	{
 		var selector = document.getElementById("table-settings-table-selector"),
-			tableRef = HeroTable.tableList[selector.value].reference,
+			tableRef = HeroTable.tableList[selector.value],
 			activeListElement = document.getElementById("table-settings-items-active"),
 			activeEvaluators = tableRef.getEvaluators();
 		for (var i = 0; i < activeEvaluators.length; i++){

@@ -8,24 +8,27 @@
 HeroTable.tableList = {}
 
 function HeroTable(tableName, tableId, wrapperId) {
-	HeroTable.tableList[tableId] = {reference: this, displayName: tableName};
+	HeroTable.tableList[tableId] = this;
 	
-	this._tableId = tableId;
 	this._tableName = tableName;
+	this._tableId = tableId;
+	this._wrapperId = wrapperId;
+
 	this._table = document.createElement("table");
+	document.getElementById(wrapperId).appendChild(this._table);
 	this._table.id = tableId;
 	this._table.className = "hero-table";
-	document.getElementById(wrapperId).appendChild(this._table);
 	this._table.HeroTableController = this;
 	
 	var caption = document.createElement("caption");
 	caption.textContent = tableName;
 	this._table.appendChild(caption);
 	
-	this._thead = document.createElement("thead");
-	this._table.appendChild(this._thead);
-	this._tbody = document.createElement("tbody");
-	this._table.appendChild(this._tbody);
+	var thead = document.createElement("thead");
+	this._table.appendChild(thead);
+	var tbody = document.createElement("tbody");
+	this._table.appendChild(tbody);
+	this._table.body = tbody;
 	
 	this.heroList = [];
 	this.columnList = ["Delete", "Name", "Label", "Portrait", "Level", "Health", "Mana", "Armor"];
@@ -38,14 +41,13 @@ function HeroTable(tableName, tableId, wrapperId) {
 		cell.evaluatorId = col;
 		thr.appendChild(cell);
 	}
-	this._thead.appendChild(thr);
+	thead.appendChild(thr);
 	this._tableSorterCreated = false;
 }
 
 HeroTable.prototype.toString = function () {
 	return "[HeroTable " + this._tableId + "]";
 }
-
 
 HeroTable.prototype.refreshHero = function (heroInstance) {
 	for (var i = 0; i < heroInstance.InstanceRow.childNodes.length; i++) {
@@ -134,15 +136,12 @@ HeroTable.prototype.addHero = function (heroInstance) {
 		throw "Invalid parameter:" + heroInstance;
 	}
 	var pos = this.heroList.push(heroInstance);
-	//if (this.heroList.length < 2)
-	//	$(this._table).tablesorter(this.sorterSettings());
 	if ( !this._tableSorterCreated )
 	{
 		$(this._table).tablesorter(this.sorterSettings());	
 		this._tableSorterCreated = true;
 	}
-	
-	var row = document.createElement("tr");
+	var row = this._table.body.insertRow(-1);
 	row.HeroInstanceRef = heroInstance;
 	for ( var i in this.columnList ) {
 		var prop = this.columnList[i],
@@ -153,7 +152,6 @@ HeroTable.prototype.addHero = function (heroInstance) {
 		cell.evaluatorId = prop;
 		row.appendChild(cell);
 	}
-	this._tbody.appendChild(row);
 	heroInstance.InstanceRow = row;
 	$(this._table).trigger("update");
 }

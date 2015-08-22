@@ -34,6 +34,6 @@ $(function(){
 		function() {
 			var heroId = this.getAttribute("data-hero");
 		 	var selector = document.getElementById("hero-picker-table-selector");
-			HeroTable.tableList[selector.value].reference.addHero(heroId);
+			HeroTable.tableList[selector.value].addHero(heroId);
 		});
 })
