@@ -114,3 +114,7 @@ label {
 .ui-selectmenu-button span.ui-selectmenu-text {
 	padding: 2px 0px 2px 4px;
 }
+input.ui-button{
+	padding: 4px;
+	vertical-align: text-bottom;
+}

@@ -77,29 +77,7 @@ HeroTable.prototype.sorterSettings = function () {
 }
 
 HeroTable.prototype.getEvaluators = function () {
-	var evaluators = {};
-	evaluators.all = [];
-	evaluators.active = [];
-	evaluators.exclude = {};
-	
-	for (var i in this.columnList) {
-		var id = this.columnList[i];
-		evaluators.active.push({
-			nameId: id,
-			fullName: this.evaluator[id].fullName,
-			type: this.evaluator[id].type
-		});
-		evaluators.exclude[id] = true;
-	}
-	
-	for (var id in this.evaluator) {
-		evaluators.all.push({
-			nameId: id,
-			fullName: this.evaluator[id].fullName,
-			type: this.evaluator[id].type
-		});
-	}
-	return evaluators;
+	return this.columnList;
 }
 
 HeroTable.prototype.evaluator = {};

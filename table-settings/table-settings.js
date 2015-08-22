@@ -22,11 +22,13 @@ $(function(){
 	var groupLists = {},
 		allListItems = {};
 	
-	for (var group in HeroTable.evaluatorGroups) {
+	for (var group in HeroTable.evaluatorGroups) 
+	{
 		var array = HeroTable.evaluatorGroups[group];
 		groupLists[group] = createEmptyList(group);
 		
-		for (var i in array) {
+		for (var i in array) 
+		{
 			var object = array[i],
 				li = document.createElement("li");
 			li.textContent = object.fullName;
@@ -38,6 +40,19 @@ $(function(){
 		}
 	}
 	
+	function populateList() 
+	{
+		var selector = document.getElementById("table-settings-table-selector"),
+			tableRef = HeroTable.tableList[selector.value].reference,
+			activeListElement = document.getElementById("table-settings-items-active"),
+			activeEvaluators = tableRef.getEvaluators();
+		for (var i = 0; i < activeEvaluators.length; i++){
+			var evaluator = activeEvaluators[i],
+				element = allListItems[evaluator];
+			element.parentElement.removeChild(element);
+			activeListElement.appendChild(element);
+		}
+	}
 	
 	$("#table-settings-header-button").on("click", 
 		function(){ 
@@ -53,6 +68,7 @@ $(function(){
 			var picker = document.getElementById("table-settings");
 			picker.style.left = "11px"
 			picker.style.top = "52px";
+			populateList();
 		});
 	$("#table-settings-header-button").on("dblclick",
 		function(){
@@ -61,14 +77,20 @@ $(function(){
 			picker.style.top = "52px";
 		});
 	
-	
 	$("#table-settings-items-active").sortable({
 		connectWith: "#table-settings-items-bin"
 	});
 	$(".table-settings-items").sortable({
 		connectWith: "#table-settings-items-active"
 	});
-	$("#table-settings-items-bin").sortable();
+	$("#table-settings-items-bin").sortable({
+		receive: function(e,u){
+			var transfer = u.item[0];
+			transfer.parentElement.removeChild(transfer);
+			transfer.homeList.appendChild(transfer);
+		}
+	});
+	$("#table-settings-submit").button();
 });
 
 
