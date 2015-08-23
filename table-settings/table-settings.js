@@ -20,7 +20,8 @@ $(function(){
 	}
 	
 	var groupLists = {},
-		allListItems = {};
+		allListItems = {},
+		activeItems = [];
 	
 	for (var group in HeroTable.evaluatorGroups) 
 	{
@@ -42,18 +43,34 @@ $(function(){
 	
 	function populateList() 
 	{
+		for( var id in allListItems) {
+			var item = allListItems[id];
+			if (item.parentElement !== item.homeList) {
+				item.parentElement.removeChild(item);
+				item.homeList.appendChild(item);
+			}
+		}
+		
+		for(var i in activeItems) {
+			var activeItem = activeItems[i];
+			activeItem.parentElement.removeChild(activeItem);
+			activeItem.homeList.appendChild(activeItem);
+		}
+		
 		var selector = document.getElementById("table-settings-table-selector"),
 			tableRef = HeroTable.tableList[selector.value],
 			activeListElement = document.getElementById("table-settings-items-active"),
 			activeEvaluators = tableRef.getEvaluators();
-		for (var i = 0; i < activeEvaluators.length; i++){
+		for (i = 0; i < activeEvaluators.length; i++){
 			var evaluator = activeEvaluators[i],
 				element = allListItems[evaluator];
 			element.parentElement.removeChild(element);
 			activeListElement.appendChild(element);
+			activeItems.push(element);
 		}
 	}
 	
+	$("#table-settings").toggle(false);
 	$("#table-settings-header-button").on("click", 
 		function(){ 
 			$("#table-settings").toggle();
@@ -61,8 +78,8 @@ $(function(){
 	$("#table-settings-close").on("click", 
 		function() {
 			$("#table-settings").toggle(false);
+			populateList();
 		});
-	
 	$("#table-settings-header-button").one("click",
 		function(){
 			var picker = document.getElementById("table-settings");
@@ -75,6 +92,7 @@ $(function(){
 			var picker = document.getElementById("table-settings");
 			picker.style.left = "11px"
 			picker.style.top = "52px";
+			populateList();
 		});
 	
 	$("#table-settings-items-active").sortable({
@@ -90,7 +108,19 @@ $(function(){
 			transfer.homeList.appendChild(transfer);
 		}
 	});
+	
 	$("#table-settings-submit").button();
+	$("#table-settings-submit").on("click", function(){
+		var selector = document.getElementById("table-settings-table-selector"),
+			tableRef = HeroTable.tableList[selector.value],
+			list = document.getElementById("table-settings-items-active"),
+			listItems = list.childNodes,
+			columns = [];
+		for (var i = 0; i < listItems.length; i++) {
+			columns.push(listItems[i].evaluatorId);
+		}
+		tableRef.setColumnList(columns);
+	});
 });
 
 

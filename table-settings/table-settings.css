@@ -28,10 +28,11 @@
 }
 .table-settings-list-container li {
 	list-style: none;
-	width: 200px;
+	min-width: 150px;
 	padding: 2px;
 	margin: 1px;
 	border: 1px solid gold;
+	cursor: move;
 }
 .table-settings-list-container ul:empty {
 	border: 1px solid #9A1E00;

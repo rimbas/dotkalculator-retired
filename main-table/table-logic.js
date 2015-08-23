@@ -10,80 +10,15 @@ HeroTable.tableList = {}
 function HeroTable(tableName, tableId, wrapperId) {
 	HeroTable.tableList[tableId] = this;
 	
+	this._wrapperElement = document.getElementById(wrapperId);
 	this._tableName = tableName;
 	this._tableId = tableId;
-	this._wrapperId = wrapperId;
-
-	this._table = document.createElement("table");
-	document.getElementById(wrapperId).appendChild(this._table);
-	this._table.id = tableId;
-	this._table.className = "hero-table";
-	this._table.HeroTableController = this;
-	
-	var caption = document.createElement("caption");
-	caption.textContent = tableName;
-	this._table.appendChild(caption);
-	
-	var thead = document.createElement("thead");
-	this._table.appendChild(thead);
-	var tbody = document.createElement("tbody");
-	this._table.appendChild(tbody);
-	this._table.body = tbody;
-	
 	this.heroList = [];
 	this.columnList = ["Delete", "Name", "Label", "Portrait", "Level", "Health", "Mana", "Armor"];
-	
-	var thr = document.createElement("tr");
-	for ( var i in this.columnList ) {
-		var col = this.columnList[i];
-		var cell = document.createElement("th");
-		cell.textContent = this.evaluator[col].displayName;
-		cell.evaluatorId = col;
-		thr.appendChild(cell);
-	}
-	thead.appendChild(thr);
 	this._tableSorterCreated = false;
-}
-
-HeroTable.prototype.toString = function () {
-	return "[HeroTable " + this._tableId + "]";
-}
-
-HeroTable.prototype.refreshHero = function (heroInstance) {
-	for (var i = 0; i < heroInstance.InstanceRow.childNodes.length; i++) {
-		var cell = heroInstance.InstanceRow.childNodes[i],
-			evaluatorId = cell.evaluatorId;
-		if (!this.evaluator[evaluatorId].static )
-		{
-			this.evaluator[evaluatorId].cellEvaluator.call(this, cell, heroInstance);
-		}
-	}
-	this.updateSorting();
-}
-
-HeroTable.prototype.sorterSettings = function () {
-	var sorterSetup = {};
-	sorterSetup.headers = {};
 	
-	for (var i in this.columnList ) {
-		var col = this.columnList[i];
-		var evaluator = this.evaluator[col];
-		if (evaluator.sortingMethod !== true) {
-			sorterSetup.headers[i] = {};
-			sorterSetup.headers[i].sorter = evaluator.sortingMethod;
-		}
-	}
-	
-	this.SortingSetup = sorterSetup;
-	return sorterSetup;
+	this.createTable();
 }
-
-HeroTable.prototype.getEvaluators = function () {
-	return this.columnList;
-}
-
-HeroTable.prototype.evaluator = {};
-HeroTable.evaluatorGroups = {};
 
 // 		Cell handler adder
 //
@@ -125,6 +60,93 @@ HeroTable.addHandler = function(nameID, fullName, displayName, type, cellEvaluat
 	handler.type = type;
 }
 
+HeroTable.prototype.toString = function () {
+	return "[HeroTable " + this._tableId + "]";
+}
+
+HeroTable.prototype.createTable = function () {
+	if (this._table) 
+	{
+		this._table.parentElement.removeChild(this._table);
+	}
+	this._table = document.createElement("table");
+	this._wrapperElement.appendChild(this._table);
+	this._table.id = this._tableId;
+	this._table.className = "hero-table";
+	this._table.HeroTableController = this;
+	
+	var caption = document.createElement("caption");
+	caption.textContent = this._tableName;
+	this._table.appendChild(caption);
+	
+	var thead = document.createElement("thead");
+	this._table.appendChild(thead);
+	var tbody = document.createElement("tbody");
+	this._table.appendChild(tbody);
+	this._table.body = tbody;
+	
+	var thr = document.createElement("tr");
+	for ( var i in this.columnList ) {
+		var col = this.columnList[i];
+		var cell = document.createElement("th");
+		cell.textContent = this.evaluator[col].displayName;
+		cell.evaluatorId = col;
+		thr.appendChild(cell);
+	}
+	thead.appendChild(thr);
+	this._tableSorterCreated = false;
+	
+	//for (var i = 0; i < this.heroList.length; i++) {
+	//	this.addHero(this.heroList[i]);	
+	//}
+	for (i in this.heroList) {
+		var hero = this.heroList[i];	
+		this.createHeroRow(hero);
+	}
+}
+
+HeroTable.prototype.setColumnList = function(columns) {
+	this.columnList = columns;
+	this.createTable();
+}
+
+
+HeroTable.prototype.refreshHero = function (heroInstance) {
+	for (var i = 0; i < heroInstance.InstanceRow.childNodes.length; i++) {
+		var cell = heroInstance.InstanceRow.childNodes[i],
+			evaluatorId = cell.evaluatorId;
+		if (!this.evaluator[evaluatorId].static )
+		{
+			this.evaluator[evaluatorId].cellEvaluator.call(this, cell, heroInstance);
+		}
+	}
+	this.updateSorting();
+}
+
+// header settings for tablesorter plugin
+HeroTable.prototype.sorterSettings = function () {
+	var sorterSetup = {};
+	sorterSetup.headers = {};
+	
+	for (var i in this.columnList ) {
+		var col = this.columnList[i];
+		var evaluator = this.evaluator[col];
+		if (evaluator.sortingMethod !== true) {
+			sorterSetup.headers[i] = {};
+			sorterSetup.headers[i].sorter = evaluator.sortingMethod;
+		}
+	}
+	this.SortingSetup = sorterSetup;
+	return sorterSetup;
+}
+
+HeroTable.prototype.getEvaluators = function () {
+	return this.columnList;
+}
+
+HeroTable.prototype.evaluator = {};
+HeroTable.evaluatorGroups = {};
+
 // Adds a hero to the table and evaluates it
 // heroInstance (HeroInstance) - valid HeroInstance object
 // heroInstance (string)	   - a heroId string
@@ -135,12 +157,17 @@ HeroTable.prototype.addHero = function (heroInstance) {
 	else if (!heroInstance instanceof HeroInstance) {
 		throw "Invalid parameter:" + heroInstance;
 	}
-	var pos = this.heroList.push(heroInstance);
+	this.heroList.push(heroInstance);
+	this.createHeroRow(heroInstance)
+}
+
+HeroTable.prototype.createHeroRow = function (heroInstance) {
 	if ( !this._tableSorterCreated )
 	{
 		$(this._table).tablesorter(this.sorterSettings());	
 		this._tableSorterCreated = true;
 	}
+	
 	var row = this._table.body.insertRow(-1);
 	row.HeroInstanceRef = heroInstance;
 	for ( var i in this.columnList ) {
@@ -155,6 +182,7 @@ HeroTable.prototype.addHero = function (heroInstance) {
 	heroInstance.InstanceRow = row;
 	$(this._table).trigger("update");
 }
+
 
 HeroTable.prototype.removeHero = function (heroInstance) {
 	this.heroList.splice(this.heroList.indexOf(heroInstance),1)
@@ -235,7 +263,7 @@ HeroTable.addHandler("Name","Name","Name","General",
 	function(cell, heroInstance){
 		cell.textContent = heroInstance.Stats.Name;
 	});
-
+inputsTest = [];
 HeroTable.addHandler("Level", "Level", "LVL","Base",
 	function(cell, heroInstance) {
 		var input = document.createElement("input");
@@ -291,11 +319,12 @@ HeroTable.addHandler("PhysicalResistance", "Physical Resistance", "P. Res.","Der
 HeroTable.addHandler("Label", "Label", "Label","General",
 	function(cell, heroInstance){
 		var label = document.createElement("input");
-		label.value = heroInstance.Stats.Name;
+		label.value = heroInstance.Stats.Label || heroInstance.Stats.Name;
 		label.className = "hero-label";
-		label.onchange = (function(){
+		label.onchange = (function(hero){
+			hero.Stats.Label = this.value;
 			this.updateSorting();
-		}).bind(this);
+		}).bind(this), heroInstance;
 		cell.appendChild(label);
 	},
 	"firstChildText",
