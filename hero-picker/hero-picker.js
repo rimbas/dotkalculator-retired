@@ -1,13 +1,17 @@
 $(function(){
-	for ( name in DotaData.heroes ) {
-		var hero = DotaData.heroes[name]
-		if ( hero.Enabled < 1 ) continue;
-		var a = document.createElement("button");
-		a.setAttribute("type", "button");
-		a.setAttribute("data-hero", name);
-		a.className = "hero-picker-button mheroicon " + name;
-		document.getElementById("hero-picker-"+hero.Team+"-"+ hero.AttributePrimary).appendChild(a);
-	}	
+	(function(){
+		var list = DotaData.getCurrentHeroList();
+		for ( name in list ) {
+			var hero = list[name];
+			if ( hero.Enabled <= 0 ) continue;
+			var a = document.createElement("button");
+			a.setAttribute("type", "button");
+			a.setAttribute("data-hero", name);
+			a.setAttribute("title", hero.Name);
+			a.className = "hero-picker-button mheroicon " + name;
+			document.getElementById("hero-picker-"+hero.Team+"-"+ hero.AttributePrimary).appendChild(a);
+		}
+	})();
 	$("#hero-picker").toggle(false);
 	
 	$("#hero-picker-header-button").on("click", 

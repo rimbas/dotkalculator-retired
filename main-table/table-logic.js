@@ -151,7 +151,7 @@ HeroTable.evaluatorGroups = {};
 // heroInstance (HeroInstance) - valid HeroInstance object
 // heroInstance (string)	   - a heroId string
 HeroTable.prototype.addHero = function (heroInstance) {
-	if (heroInstance in DotaData.heroes) {
+	if (heroInstance in DotaData.getCurrentHeroList()) {
 		heroInstance = new HeroInstance(heroInstance);
 	}
 	else if (!heroInstance instanceof HeroInstance) {
