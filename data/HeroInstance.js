@@ -107,6 +107,28 @@ HeroInstance.addHandler(
 			this.Stats.AttributeIntelligenceTotal = rawInt + bonusInt;
 		}
 );
+HeroInstance.addHandler( 
+		"Primary", 
+		["Level"],
+		function() { 
+			var rawPrimary = 0, bonusPrimary = 0;
+			if ( this.Stats.AttributePrimary === "Strength" ) {
+				rawPrimary = this.Stats.AttributeStrengthBase + this.Stats.AttributeStrengthGain * this.Stats.LevelMult,
+				bonusPrimary = 0;
+			}
+			else if ( this.Stats.AttributePrimary === "Agility" ) {
+				rawPrimary = this.Stats.AttributeAgilityBase + this.Stats.AttributeAgilityGain * this.Stats.LevelMult,
+				bonusPrimary = 0;
+			}
+			else if ( this.Stats.AttributePrimary === "Intelligence" ) {
+				rawPrimary = this.Stats.AttributeIntelligenceBase + this.Stats.AttributeIntelligenceGain * this.Stats.LevelMult,
+				bonusPrimary = 0;
+			}
+			this.Stats.AttributePrimaryRaw = rawPrimary;
+			this.Stats.AttributePrimaryBonus = bonusPrimary;
+			this.Stats.AttributePrimaryTotal = rawPrimary + bonusPrimary;
+		}
+);
 
 HeroInstance.addHandler(
 	"Health",
@@ -143,16 +165,11 @@ HeroInstance.addHandler(
 
 HeroInstance.addHandler(
 	"Damage",
-	["Strength", "Agility", "Intelligence"],
+	["Primary"],
 	function(){
-		var attack
-	}
-	);
-
-/*HeroInstance.prototype.eval.Damage = function() {
-	var statDamage = this.Evaluate(this.AttributePrimary);
-	var baseDamage = Math.round( (this.AttackDamageMin + this.AttackDamageMax) / 2 );
-	this.AttackDamageBase = baseDamage + statDamage;
-	return this.AttackDamageBase;
-}*/
-
+		var attackBase = Math.floor((this.Stats.AttackDamageMin+this.Stats.AttackDamageMax)/2) + this.Stats.AttributePrimaryTotal;
+		var attackBonus = 0;
+		this.Stats.AttackDamageBase = attackBase;
+		this.Stats.AttackDamageBonus = attackBonus;
+		this.Stats.AttackDamageTotal = attackBase + attackBonus;
+	});

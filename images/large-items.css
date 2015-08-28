@@ -1,0 +1,501 @@
+.litemicon{
+	background-image: url(large-items.png);
+	background-clip: content-box;
+	background-origin: content-box;
+	background-repeat: no-repeat;
+	background-position: 792px 640px;
+	height: 64px;
+	width: 88px;
+}
+.litemicon.abyssal_blade{
+background-position: 440px 0px;
+}
+.litemicon.aegis{
+background-position: 352px 896px;
+}
+.litemicon.ancient_janggo{
+background-position: 352px 832px;
+}
+.litemicon.arcane_boots{
+background-position: 352px 768px;
+}
+.litemicon.arcane_boots2{
+background-position: 352px 704px;
+}
+.litemicon.armlet{
+background-position: 352px 640px;
+}
+.litemicon.armlet_active{
+background-position: 352px 576px;
+}
+.litemicon.assault{
+background-position: 352px 512px;
+}
+.litemicon.band_of_elvenskin{
+background-position: 352px 448px;
+}
+.litemicon.basher{
+background-position: 352px 384px;
+}
+.litemicon.belt_of_strength{
+background-position: 352px 320px;
+}
+.litemicon.bfury{
+background-position: 352px 256px;
+}
+.litemicon.black_king_bar{
+background-position: 352px 192px;
+}
+.litemicon.blade_mail{
+background-position: 352px 128px;
+}
+.litemicon.blade_of_alacrity{
+background-position: 352px 64px;
+}
+.litemicon.blades_of_attack{
+background-position: 352px 0px;
+}
+.litemicon.blink{
+background-position: 264px 896px;
+}
+.litemicon.bloodstone{
+background-position: 264px 832px;
+}
+.litemicon.boots{
+background-position: 264px 768px;
+}
+.litemicon.boots_of_elves{
+background-position: 264px 704px;
+}
+.litemicon.bottle{
+background-position: 264px 640px;
+}
+.litemicon.bottle_bounty{
+background-position: 264px 576px;
+}
+.litemicon.bottle_doubledamage{
+background-position: 264px 512px;
+}
+.litemicon.bottle_empty{
+background-position: 264px 448px;
+}
+.litemicon.bottle_haste{
+background-position: 264px 384px;
+}
+.litemicon.bottle_illusion{
+background-position: 264px 320px;
+}
+.litemicon.bottle_invisibility{
+background-position: 264px 256px;
+}
+.litemicon.bottle_medium{
+background-position: 264px 192px;
+}
+.litemicon.bottle_regeneration{
+background-position: 264px 128px;
+}
+.litemicon.bottle_small{
+background-position: 264px 64px;
+}
+.litemicon.bracer{
+background-position: 264px 0px;
+}
+.litemicon.branches{
+background-position: 176px 896px;
+}
+.litemicon.broadsword{
+background-position: 176px 832px;
+}
+.litemicon.buckler{
+background-position: 176px 768px;
+}
+.litemicon.butterfly{
+background-position: 176px 704px;
+}
+.litemicon.chainmail{
+background-position: 176px 640px;
+}
+.litemicon.cheese{
+background-position: 176px 576px;
+}
+.litemicon.circlet{
+background-position: 176px 448px;
+}
+.litemicon.clarity{
+background-position: 176px 320px;
+}
+.litemicon.claymore{
+background-position: 176px 384px;
+}
+.litemicon.cloak{
+background-position: 176px 256px;
+}
+.litemicon.courier{
+background-position: 176px 192px;
+}
+.litemicon.courier_radiant_flying{
+background-position: 176px 128px;
+}
+.litemicon.crimson_guard{
+background-position: 176px 64px;
+}
+.litemicon.cyclone{
+background-position: 176px 512px;
+}
+.litemicon.dagon{
+background-position: 176px 0px;
+}
+.litemicon.dagon_2{
+background-position: 88px 896px;
+}
+.litemicon.dagon_3{
+background-position: 88px 832px;
+}
+.litemicon.dagon_4{
+background-position: 88px 768px;
+}
+.litemicon.dagon_5{
+background-position: 88px 704px;
+}
+.litemicon.demon_edge{
+background-position: 88px 640px;
+}
+.litemicon.desolator{
+background-position: 88px 576px;
+}
+.litemicon.diffusal_blade{
+background-position: 88px 512px;
+}
+.litemicon.diffusal_blade_2{
+background-position: 88px 448px;
+}
+.litemicon.dust{
+background-position: 88px 384px;
+}
+.litemicon.eagle{
+background-position: 88px 320px;
+}
+.litemicon.emptyitembg{
+background-position: 88px 256px;
+}
+.litemicon.energy_booster{
+background-position: 88px 192px;
+}
+.litemicon.ethereal_blade{
+background-position: 88px 128px;
+}
+.litemicon.flying_courier{
+background-position: 176px 128px;
+}
+.litemicon.force_staff{
+background-position: 88px 64px;
+}
+.litemicon.gauntlets{
+background-position: 88px 0px;
+}
+.litemicon.gem{
+background-position: 0px 896px;
+}
+.litemicon.ghost{
+background-position: 0px 832px;
+}
+.litemicon.gloves_of_haste{
+background-position: 0px 768px;
+}
+.litemicon.greater_crit{
+background-position: 0px 704px;
+}
+.litemicon.hand_of_midas{
+background-position: 0px 640px;
+}
+.litemicon.headdress{
+background-position: 0px 576px;
+}
+.litemicon.heart{
+background-position: 0px 512px;
+}
+.litemicon.heavens_halberd{
+background-position: 0px 448px;
+}
+.litemicon.helm_of_iron_will{
+background-position: 0px 384px;
+}
+.litemicon.helm_of_the_dominator{
+background-position: 0px 320px;
+}
+.litemicon.hood_of_defiance{
+background-position: 0px 192px;
+}
+.litemicon.hyperstone{
+background-position: 0px 256px;
+}
+.litemicon.invis_sword{
+background-position: 0px 64px;
+}
+.litemicon.javelin{
+background-position: 0px 0px;
+}
+.litemicon.lesser_crit{
+background-position: 440px 384px;
+}
+.litemicon.lifesteal{
+background-position: 880px 704px;
+}
+.litemicon.maelstrom{
+background-position: 880px 640px;
+}
+.litemicon.magic_stick{
+background-position: 880px 576px;
+}
+.litemicon.magic_wand{
+background-position: 880px 512px;
+}
+.litemicon.manta{
+background-position: 880px 448px;
+}
+.litemicon.mantle{
+background-position: 880px 384px;
+}
+.litemicon.mask_of_madness{
+background-position: 880px 320px;
+}
+.litemicon.medallion_of_courage{
+background-position: 880px 256px;
+}
+.litemicon.mekansm{
+background-position: 880px 192px;
+}
+.litemicon.mithril_hammer{
+background-position: 880px 64px;
+}
+.litemicon.mjollnir{
+background-position: 880px 0px;
+}
+.litemicon.monkey_king_bar{
+background-position: 792px 896px;
+}
+.litemicon.mystic_staff{
+background-position: 880px 128px;
+}
+.litemicon.necronomicon{
+background-position: 792px 832px;
+}
+.litemicon.necronomicon_2{
+background-position: 792px 768px;
+}
+.litemicon.necronomicon_3{
+background-position: 792px 704px;
+}
+.litemicon.noicon{
+background-position: 792px 640px;
+}
+.litemicon.null_talisman{
+background-position: 792px 576px;
+}
+.litemicon.oblivion_staff{
+background-position: 792px 512px;
+}
+.litemicon.ogre_axe{
+background-position: 792px 448px;
+}
+.litemicon.orb_of_venom{
+background-position: 792px 384px;
+}
+.litemicon.orchid{
+background-position: 792px 320px;
+}
+.litemicon.pers{
+background-position: 792px 256px;
+}
+.litemicon.phase_boots{
+background-position: 792px 192px;
+}
+.litemicon.pipe{
+background-position: 792px 128px;
+}
+.litemicon.platemail{
+background-position: 792px 64px;
+}
+.litemicon.point_booster{
+background-position: 792px 0px;
+}
+.litemicon.poor_mans_shield{
+background-position: 704px 896px;
+}
+.litemicon.power_treads{
+background-position: 704px 832px;
+}
+.litemicon.power_treads_agi{
+background-position: 704px 768px;
+}
+.litemicon.power_treads_int{
+background-position: 704px 704px;
+}
+.litemicon.power_treads_str{
+background-position: 704px 640px;
+}
+.litemicon.quarterstaff{
+background-position: 704px 576px;
+}
+.litemicon.quelling_blade{
+background-position: 704px 512px;
+}
+.litemicon.radiance{
+background-position: 704px 448px;
+}
+.litemicon.radiance_inactive{
+background-position: 704px 384px;
+}
+.litemicon.rapier{
+background-position: 704px 320px;
+}
+.litemicon.reaver{
+background-position: 704px 256px;
+}
+.litemicon.recipe{
+background-position: 704px 192px;
+}
+.litemicon.refresher{
+background-position: 704px 128px;
+}
+.litemicon.relic{
+background-position: 704px 64px;
+}
+.litemicon.ring_of_aquila{
+background-position: 704px 0px;
+}
+.litemicon.ring_of_aquila_active{
+background-position: 616px 896px;
+}
+.litemicon.ring_of_basilius{
+background-position: 616px 832px;
+}
+.litemicon.ring_of_basilius_active{
+background-position: 616px 768px;
+}
+.litemicon.ring_of_health{
+background-position: 616px 704px;
+}
+.litemicon.ring_of_protection{
+background-position: 616px 640px;
+}
+.litemicon.ring_of_regen{
+background-position: 616px 576px;
+}
+.litemicon.robe{
+background-position: 616px 512px;
+}
+.litemicon.rod_of_atos{
+background-position: 616px 448px;
+}
+.litemicon.salve{
+background-position: 616px 384px;
+}
+.litemicon.sange{
+background-position: 616px 320px;
+}
+.litemicon.sange_and_yasha{
+background-position: 616px 256px;
+}
+.litemicon.satanic{
+background-position: 616px 192px;
+}
+.litemicon.shadow_amulet{
+background-position: 616px 128px;
+}
+.litemicon.sheepstick{
+background-position: 616px 64px;
+}
+.litemicon.shivas_guard{
+background-position: 616px 0px;
+}
+.litemicon.skadi{
+background-position: 528px 896px;
+}
+.litemicon.slippers{
+background-position: 528px 832px;
+}
+.litemicon.slippers_of_halcyon{
+background-position: 528px 768px;
+}
+.litemicon.smoke_of_deceit{
+background-position: 528px 704px;
+}
+.litemicon.sobi_mask{
+background-position: 528px 640px;
+}
+.litemicon.soul_booster{
+background-position: 528px 576px;
+}
+.litemicon.soul_ring{
+background-position: 528px 512px;
+}
+.litemicon.sphere{
+background-position: 528px 448px;
+}
+.litemicon.staff_of_wizardry{
+background-position: 528px 384px;
+}
+.litemicon.stout_shield{
+background-position: 528px 320px;
+}
+.litemicon.talisman_of_evasion{
+background-position: 528px 256px;
+}
+.litemicon.tango{
+background-position: 528px 192px;
+}
+.litemicon.tango_single{
+background-position: 528px 128px;
+}
+.litemicon.tpscroll{
+background-position: 528px 64px;
+}
+.litemicon.tranquil_boots{
+background-position: 528px 0px;
+}
+.litemicon.tranquil_boots_active{
+background-position: 440px 896px;
+}
+.litemicon.travel_boots{
+background-position: 440px 832px;
+}
+.litemicon.travel_boots_tinker{
+background-position: 440px 768px;
+}
+.litemicon.ultimate_orb{
+background-position: 440px 704px;
+}
+.litemicon.ultimate_scepter{
+background-position: 440px 640px;
+}
+.litemicon.urn_of_shadows{
+background-position: 440px 576px;
+}
+.litemicon.vanguard{
+background-position: 440px 512px;
+}
+.litemicon.veil_of_discord{
+background-position: 440px 448px;
+}
+.litemicon.vitality_booster{
+background-position: 880px 768px;
+}
+.litemicon.vladmir{
+background-position: 440px 320px;
+}
+.litemicon.void_stone{
+background-position: 440px 256px;
+}
+.litemicon.ward_observer{
+background-position: 440px 192px;
+}
+.litemicon.ward_sentry{
+background-position: 440px 128px;
+}
+.litemicon.wraith_band{
+background-position: 440px 64px;
+}
+.litemicon.yasha{
+background-position: 0px 128px;
+}

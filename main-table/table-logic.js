@@ -342,3 +342,8 @@ HeroTable.addHandler("Delete", "Delete", "","General",
 	},
 	false,
 	true);
+HeroTable.addHandler("Damage", "Damage", "Dmg", "Derived",
+	function(cell, heroInstance){
+		cell.textContent = heroInstance.Stats.AttackDamageTotal;
+	},
+	"number");
