@@ -261,13 +261,13 @@ $.tablesorter.addParser({
 
 HeroTable.addHandler("Name","Name","Name","General",
 	function(cell, heroInstance){
-		cell.textContent = heroInstance.Stats.Name;
+		cell.textContent = heroInstance.Raw.Name;
 	});
 inputsTest = [];
 HeroTable.addHandler("Level", "Level", "LVL","Base",
 	function(cell, heroInstance) {
 		var input = document.createElement("input");
-		input.value = heroInstance.Stats.Level;
+		input.value = heroInstance.Raw.Level;
 		input.style.width = "2.5em";
 		var change = (function(hero,e,u) {
 				hero.Level(u.value); 
@@ -284,45 +284,50 @@ HeroTable.addHandler("Level", "Level", "LVL","Base",
 	true);
 HeroTable.addHandler("Health", "Health", "HP","Derived",
 	function(cell, heroInstance){
-		cell.textContent = heroInstance.Stats.StatusHealthTotal;
+		cell.textContent = heroInstance.Base.Health;
 	},
 	"number")
 HeroTable.addHandler("Strength", "Strength", "Str","Base",
 	function(cell, heroInstance){
-		cell.textContent = Math.floor(heroInstance.Stats.AttributeStrengthTotal);
+		cell.textContent = Math.floor(heroInstance.Base.Strength);
+	},
+	"number")
+HeroTable.addHandler("Agility", "Agility", "Agi","Base",
+	function(cell, heroInstance){
+		cell.textContent = Math.floor(heroInstance.Base.Agility);
+	},
+	"number")
+HeroTable.addHandler("Intelligence", "Intelligence", "Int","Base",
+	function(cell, heroInstance){
+		cell.textContent = Math.floor(heroInstance.Base.Intelligence);
 	},
 	"number")
 HeroTable.addHandler("Mana", "Mana", "MP","Derived",
 	function(cell, heroInstance){
-		cell.textContent = heroInstance.Stats.StatusManaTotal;
+		cell.textContent = heroInstance.Base.Mana;
 	},
 	"number")
-HeroTable.addHandler("Armor", "Armor", "ARM","Derived",
+HeroTable.addHandler("Armor", "Armor", "⛨","Derived", //unicode shenanigans
 	function(cell, heroInstance){
-		cell.textContent = heroInstance.Stats.StatusArmorTotal;
+		cell.textContent = Math.round(heroInstance.Base.Armor * 10)/10;
 	},			
 	"number")
 HeroTable.addHandler("Portrait", "Portrait", "","General",
 	function(cell, heroInstance){
 		var el = document.createElement("div");
-		el.className = "mheroicon " + heroInstance.HeroId;
+		el.className = "mheroicon " + heroInstance.Meta.ID;
 		cell.appendChild(el);
-	cell.sorterText = heroInstance.Stats.Name;
+	cell.sorterText = heroInstance.Raw.Name;
 	},
 	"propertyText",
 	true)
-HeroTable.addHandler("PhysicalResistance", "Physical Resistance", "P. Res.","Derived",
-	function(cell, heroInstance){
-		cell.textContent = Math.round(heroInstance.Stats.StatusPhysicalResistance*100) + "%";
-	},
-	"percent")
 HeroTable.addHandler("Label", "Label", "Label","General",
 	function(cell, heroInstance){
 		var label = document.createElement("input");
-		label.value = heroInstance.Stats.Label || heroInstance.Stats.Name;
+		label.value = heroInstance.Meta.Label;
 		label.className = "hero-label";
 		label.onchange = (function(hero){
-			hero.Stats.Label = this.value;
+			hero.Meta.Label = this.value;
 			this.updateSorting();
 		}).bind(this), heroInstance;
 		cell.appendChild(label);
@@ -343,7 +348,7 @@ HeroTable.addHandler("Delete", "Delete", "","General",
 	false,
 	true);
 HeroTable.addHandler("Damage", "Damage", "Dmg", "Derived",
-	function(cell, heroInstance){
-		cell.textContent = heroInstance.Stats.AttackDamageTotal;
+	function(cell, hero){
+		cell.textContent = Math.floor((hero.Base.DamageMin+hero.Base.DamageMax)/2);
 	},
 	"number");

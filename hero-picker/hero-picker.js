@@ -9,7 +9,7 @@ $(function(){
 			a.setAttribute("data-hero", name);
 			a.setAttribute("title", hero.Name);
 			a.className = "hero-picker-button mheroicon " + name;
-			document.getElementById("hero-picker-"+hero.Team+"-"+ hero.AttributePrimary).appendChild(a);
+			document.getElementById("hero-picker-"+hero.Side+"-"+ hero.Type).appendChild(a);
 		}
 	})();
 	$("#hero-picker").toggle(false);

@@ -1,0 +1,117 @@
+
+* - usage not implemented
+
+Raw stat definition
+	Name 							- Dota 2 name of the hero
+	LoreName*						- Alternate name
+	Type							- Primary attribute of the hero
+	Side							- Dire/Radiant
+	Ability[\d]+					- Ability in associated slot
+	AbilityLayout					- Ability display type (most heroes/Puck,IO/Rubick, Doom)
+	AttackType						- Attack type (Ranged/Melee)
+	DamageMax						- Higher value of the damage
+	DamageMin						- Lower value of the damage
+	Range							- Attack range of the hero
+	AttackRate						- Base attack time
+	AttackPoint						- Attack point
+	StrengthGain					- Base Strength gain per level
+	StrengthBase					- Base Strength points
+	AgilityGain						- Base Agility gain per level
+	AgilityBase						- Base Agility points
+	IntelligenceGain				- Base Intelligence gain per level
+	IntelligenceBase				- Base Intelligence points
+	Enabled							- Meta information
+	HasInventory					- Does the unit have an inventory
+	Level							- Hardcoded base level of the unit
+	Armor							- Base Armor
+	MagicalResistance				- Base Magic resistance
+	MovementSpeed					- Base movement speed
+	TurnRate						- Base turn speed
+	ProjectileSpeed					- Base ranged projectile speed
+	Health							- Base health
+	HealthRegen						- Base health regen
+	Mana							- Base mana
+	ManaRegen						- Base mana regen
+	Version							- Version of the hero
+	VisionDaytime					- Vision during daytime
+	VisionNighttime					- Vision during nighttime
+
+Meta
+	Team							- 
+	Label							- 
+	Dead							- 
+	
+Hero stats, after calculating with level
+	Strength						- 
+	Agility							-
+	Intelligence					-
+	Armor							-
+	Health							- 
+	HealthRegen						- 
+	Mana							-
+	ManaRegen						-
+	DamageMin						-
+	DamageMax						-
+
+Item stats
+	Cost							- 
+	Components						-
+	Strength						- 
+	Agility							- 
+	Intelligence					- 
+	MovementSpeedFlat	  			- Boots, Euls
+	MovementSpeedPercentage			- Sange
+	Armor							- 
+	Evasion							- Talisman of Evasion
+	MagicalResistance				- Cloak
+	Health							- 
+	HealthRegen						- 
+	Mana							- 
+	ManaRegen						- (FROM INT)
+	ManaRegenFlat					- Bloodstone
+	ManaRegenPercentage				- 
+	Damage							- 
+	AttackSpeed						- Hyperstone
+	Range							- 
+	VisionDay						- 
+	VisionNight						- Moon shard
+	
+	
+Skill stats
+	Strength						- 
+	Agility							-
+	Intelligence					-
+	MoveSpeedFlat					- Tiny Grow
+	MoveSpeedPercentage				- Bara, DP, Razor
+	Armor							- Tiny
+	Evasion							- Blur
+	MagicalResistance				- Pudge
+	Health							- Troll warlord
+	Mana							- Outsourced Developer
+	ManaRegen						- 
+	ManaRegenFlat					- Crystal Maiden
+	ManaRegenPercentage				-
+	Damage							- 
+	AttackSpeed						- 
+	Range							- Sniper
+	
+Aura/Buff stats
+	Strength						- Undy Q, Pudge E, 
+	Agility							- Slark E
+	Intelligence					- Silencer
+	MoveSpeedFlat					- 
+	MoveSpeedPercentage				- 
+	Armor							- AC
+	Evasion							- Solar crest
+	Blind							- Solar crest, Blinding light
+	MagicalResistance				- Pipe
+	Health							- Ancient Granite Golem aura
+	Mana							- 
+	ManaRegen						-
+	ManaRegenFlat					- CM aura
+	ManaRegenPercentage				- 
+	Damage							- LC Duel
+	DamagePercentage				- Vlads, Empower
+	Range							-  
+	
+

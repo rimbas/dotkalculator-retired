@@ -5,12 +5,28 @@ DotaData.TargetVersion = DotaData.NewestVersion;
 
 // Returns a new instance of complete hero propery data
 // heroId (string) - internal hero ID
-DotaData.getHeroProperties = function (heroId) {
-	var version = DotaData.Versions[DotaData.TargetVersion];
+DotaData.getHeroProperties = function (heroId, versionOverride) {
+	var version = DotaData.Versions[versionOverride] || DotaData.Versions[DotaData.TargetVersion];
 	if (!(heroId in version.Heroes)) throw "No such id \"" + heroId + "\" in hero list";
 	var obj = {}, i, prop,
 		base = version.Heroes._base,
 		hero = version.Heroes[heroId];
+	
+	for (prop in base) {
+		obj[prop] = base[prop];
+	}
+	for (prop in hero) {
+		obj[prop] = hero[prop];
+	}
+	return obj;
+}
+
+DotaData.getItemProperties = function (itemId, versionOverride) {
+	var version = DotaData.Versions[versionOverride] || DotaData.Versions[DotaData.TargetVersion];
+	if (!(itemId in version.Heroes)) throw "No such id \"" + itemId + "\" in item list";
+	var obj = {}, i, prop,
+		base = version.Items._base,
+		hero = version.Items[itemId];
 	
 	for (prop in base) {
 		obj[prop] = base[prop];

@@ -7,22 +7,16 @@
 // heroId  (string)           - hero to retrieve from hero data
 // [level] (integer 1..25)    - desired hero level
 // [items] (array of strings) - items for the inventory
-function HeroInstance(heroId, level, items) {
+function HeroInstance(heroId, level, team, items) {
 	level = Math.min(Math.max(level, 1), 25) || 1;
-	this.Stats = DotaData.getHeroProperties(heroId);
-	this.HeroId = heroId;
-	this.SkillList = [];
-	this.Skills = {};
-	this.ItemList = Array.isArray(items) ? items : [];
-	this.Items = {};
-	this.AuraList = [];
-	this.Auras = {};
-	this.BuffList = []
-	this.Buffs = {};
+	this.Raw = DotaData.getHeroProperties(heroId);
+	this.Base = {};
+	this.Items = [];
+	this.Item = {};
+	this.Auras = [];
+	this.Aura = {};
+	this.Meta = { "ID": heroId, "Label": this.Raw.Name, "Team": team || "None", "Dead": false };
 	this.Level(level);
-	//this.Skills()
-	//this.Items();
-	//console.log( "Hero " + this.Stats.Name + " created", this);
 }
 
 HeroInstance.prototype.toString = function() {
@@ -68,108 +62,53 @@ HeroInstance.prototype.propagateChange = function (properties) {
 HeroInstance.addHandler(
 	"Level",
 	[],
-	function(value){
-		this.Stats.Level = value;
-		this.Stats.LevelMult = value - 1;
+	function(lvl){
+		this.Raw.Level = lvl
+		this.Base.Strength = this.Raw.StrengthBase + this.Raw.StrengthGain * (lvl-1);
+		this.Base.Agility = this.Raw.AgilityBase + this.Raw.AgilityGain * (lvl-1);
+		this.Base.Intelligence = this.Raw.IntelligenceBase + this.Raw.IntelligenceGain * (lvl-1);
+		this.Base.Armor = this.Raw.Armor + this.Base.Agility * 0.14;
+		this.Base.Health = this.Raw.Health + this.Base.Strength * 19;
+		this.Base.HealthRegen = this.Raw.HealthRegen + this.Base.Strength * 0.03;
+		this.Base.Mana = this.Raw.Mana + this.Base.Intelligence * 13;
+		this.Base.ManaRegen = this.Raw.ManaRegen + this.Base.Intelligence * 0.04;
+		var primaryStat = 0;
+		if ( this.Raw.Type == "Strength" )
+			primaryStat = this.Base.Strength;
+		if ( this.Raw.Type == "Agility" )
+			primaryStat = this.Base.Agility;
+		if ( this.Raw.Type == "Intelligence" )
+			primaryStat = this.Base.Intelligence;
+		this.Base.DamageMin = this.Raw.DamageMin + primaryStat;	
+		this.Base.DamageMax = this.Raw.DamageMax + primaryStat;
 	}
 );
 
-HeroInstance.addHandler( 
-		"Strength", 
-		["Level"],
-		function() { 
-			var rawStr = this.Stats.AttributeStrengthBase + this.Stats.AttributeStrengthGain * this.Stats.LevelMult,
-				bonusStr = 0; // todo: calculate item bonus
-			this.Stats.AttributeStrengthRaw = rawStr;
-			this.Stats.AttributeStrengthBonus = bonusStr;
-			this.Stats.AttributeStrengthTotal = rawStr + bonusStr;
-		});
-
-HeroInstance.addHandler( 
-		"Agility", 
-		["Level"],
-		function() { 
-			var rawAgi = this.Stats.AttributeAgilityBase + this.Stats.AttributeAgilityGain * this.Stats.LevelMult,
-				bonusAgi = 0; // todo: calculate item bonus
-			this.Stats.AttributeAgilityRaw = rawAgi;
-			this.Stats.AttributeAgilityBonus = bonusAgi;
-			this.Stats.AttributeAgilityTotal = rawAgi + bonusAgi;
-		});
-
-HeroInstance.addHandler( 
-		"Intelligence", 
-		["Level"],
-		function() { 
-			var rawInt = this.Stats.AttributeIntelligenceBase + this.Stats.AttributeIntelligenceGain * this.Stats.LevelMult,
-				bonusInt = 0; // todo: calculate item bonus
-			this.Stats.AttributeIntelligenceRaw = rawInt;
-			this.Stats.AttributeIntelligenceBonus = bonusInt;
-			this.Stats.AttributeIntelligenceTotal = rawInt + bonusInt;
+HeroInstance.addHandler(
+	"Items",
+	[],
+	function() {
+		var a = { "Strength": 0, "Agility":0, "Intelligence":0, 
+			"MovementSpeedFlat":0, "MovementSpeedPercentage":0,
+			"Armor":0, "MagicResistance": 0, "Evasion":0,
+			"Health":0, "HealthRagen":0, "Mana":0, "ManaRegen":0,
+			"ManaRegenFlat":0, "ManaRegenPercentage": 0,
+			"Damage": 0, "AttackSpeed": 0, "Range":0,
+			"VisionDay": 0, "VisionNight": 0 };
+		for (var i = 0; i < this.Items.length; i++) {
+			for (var prop in a) {
+				var value = this.Items[i][prop];
+				a[prop] += value;
+			}
 		}
-);
-HeroInstance.addHandler( 
-		"Primary", 
-		["Level"],
-		function() { 
-			var rawPrimary = 0, bonusPrimary = 0;
-			if ( this.Stats.AttributePrimary === "Strength" ) {
-				rawPrimary = this.Stats.AttributeStrengthBase + this.Stats.AttributeStrengthGain * this.Stats.LevelMult,
-				bonusPrimary = 0;
-			}
-			else if ( this.Stats.AttributePrimary === "Agility" ) {
-				rawPrimary = this.Stats.AttributeAgilityBase + this.Stats.AttributeAgilityGain * this.Stats.LevelMult,
-				bonusPrimary = 0;
-			}
-			else if ( this.Stats.AttributePrimary === "Intelligence" ) {
-				rawPrimary = this.Stats.AttributeIntelligenceBase + this.Stats.AttributeIntelligenceGain * this.Stats.LevelMult,
-				bonusPrimary = 0;
-			}
-			this.Stats.AttributePrimaryRaw = rawPrimary;
-			this.Stats.AttributePrimaryBonus = bonusPrimary;
-			this.Stats.AttributePrimaryTotal = rawPrimary + bonusPrimary;
-		}
+		this.Item = a;
+	}
 );
 
-HeroInstance.addHandler(
-	"Health",
-	["Strength"],
-	function() {
-		var hp = this.Stats.StatusHealthBase + this.Stats.AttributeStrengthTotal * 19;
-		this.Stats.StatusHealthTotal = Math.round(hp);
-	});
 
-HeroInstance.addHandler(
-	"Mana",
-	["Intelligence"],
-	function() {
-		var mp = this.Stats.StatusManaBase + this.Stats.AttributeIntelligenceTotal * 13;
-		this.Stats.StatusManaTotal = Math.round(mp);
-	});
 
-HeroInstance.addHandler(
-	"Armor",
-	["Agility"],
-	function() {
-		var armor = this.Stats.StatusArmorBase + this.Stats.AttributeAgilityTotal * 0.14;
-		this.Stats.StatusArmorTotal = Math.round( armor * 100 ) / 100;
-	});
 
-HeroInstance.addHandler(
-	"PhysicalResistance",
-	["Armor"],
-	function() {
-		var res = (0.06 * this.Stats.StatusArmorTotal) / (1 + 0.06 * this.Stats.StatusArmorTotal);
-		res = Math.round( res * 100 ) / 100;
-		this.Stats.StatusPhysicalResistance = res;
-	});
 
-HeroInstance.addHandler(
-	"Damage",
-	["Primary"],
-	function(){
-		var attackBase = Math.floor((this.Stats.AttackDamageMin+this.Stats.AttackDamageMax)/2) + this.Stats.AttributePrimaryTotal;
-		var attackBonus = 0;
-		this.Stats.AttackDamageBase = attackBase;
-		this.Stats.AttackDamageBonus = attackBonus;
-		this.Stats.AttackDamageTotal = attackBase + attackBonus;
-	});
+
+
+
