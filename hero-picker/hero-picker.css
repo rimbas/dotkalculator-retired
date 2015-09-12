@@ -32,3 +32,8 @@
 .hero-picker-button:nth-child(6n+7) {
 	clear: both;
 }
+#hero-picker-table th img {
+	height: 1.5em;
+	vertical-align: middle;
+	padding-bottom: 2px;
+}

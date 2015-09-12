@@ -267,17 +267,17 @@ inputsTest = [];
 HeroTable.addHandler("Level", "Level", "LVL","Base",
 	function(cell, heroInstance) {
 		var input = document.createElement("input");
-		input.value = heroInstance.Raw.Level;
+		input.value = heroInstance.Meta.Level;
 		input.style.width = "2.5em";
 		var change = (function(hero,e,u) {
-				hero.Level(u.value); 
+				hero.Level(e.target.value);
 				this.refreshHero(hero);
-			}).bind(this, heroInstance)
+			}).bind(this, heroInstance);
 		cell.appendChild(input);
 		$(input).spinner({
 			min: 1,
 			max: 25,
-			spin: change
+			stop: change
 		});
 	},
 	"firstChildFirstChildNumeric",

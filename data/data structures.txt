@@ -1,9 +1,9 @@
 
-* - usage not implemented
+Hero (unit) stat property structure
 
 Raw stat definition
 	Name 							- Dota 2 name of the hero
-	LoreName*						- Alternate name
+	LoreName						- Alternate name
 	Type							- Primary attribute of the hero
 	Side							- Dire/Radiant
 	Ability[\d]+					- Ability in associated slot
@@ -33,13 +33,18 @@ Raw stat definition
 	Mana							- Base mana
 	ManaRegen						- Base mana regen
 	Version							- Version of the hero
+	Vision							- Ground or Flying
 	VisionDaytime					- Vision during daytime
 	VisionNighttime					- Vision during nighttime
+	TrueSight						- True sight range (wards, towers and fountain)
 
 Meta
-	Team							- 
-	Label							- 
-	Dead							- 
+	ID								- Internal ID of the unit
+	Level							- current level of the unit
+	Experience						- current experience
+	Team							- Used to differentiate for auras
+	Label							- User defined value
+	Dead							- Used to differentiate for auras and skills
 	
 Hero stats, after calculating with level
 	Strength						- 
@@ -49,13 +54,15 @@ Hero stats, after calculating with level
 	Health							- 
 	HealthRegen						- 
 	Mana							-
-	ManaRegen						-
+	ManaRegen						- 
 	DamageMin						-
 	DamageMax						-
 
 Item stats
+	Name							-
 	Cost							- 
-	Components						-
+	Components						- (items + numerical recipe value)
+	Section							- (shop sections)
 	Strength						- 
 	Agility							- 
 	Intelligence					- 
@@ -75,9 +82,12 @@ Item stats
 	Range							- 
 	VisionDay						- 
 	VisionNight						- Moon shard
-	
-	
+	Aura							-
+
 Skill stats
+	Name							-
+	Class							- Ability, Ultimate
+	Level							-
 	Strength						- 
 	Agility							-
 	Intelligence					-
@@ -92,10 +102,18 @@ Skill stats
 	ManaRegenFlat					- Crystal Maiden
 	ManaRegenPercentage				-
 	Damage							- 
+	DamageBase						- Tiny grow
 	AttackSpeed						- 
 	Range							- Sniper
+	VisionDay						-
+	VisionNight						- 
+	TrueSight						- (necro creep)
+	Aura							- CM, Luna, Venge
 	
 Aura/Buff stats
+	Name							- 
+	Level							- 
+	Stacking						- Huskar, Meepo
 	Strength						- Undy Q, Pudge E, 
 	Agility							- Slark E
 	Intelligence					- Silencer
@@ -112,6 +130,30 @@ Aura/Buff stats
 	ManaRegenPercentage				- 
 	Damage							- LC Duel
 	DamagePercentage				- Vlads, Empower
+	DamageReduction					- Enfeeble
+	DamageReductionPercentage		- Dragon's Breath, Focus Fire
 	Range							-  
 	
-
+Total
+	Strenght						- Item + Skill + Aura
+	Agility							- Item + Skill + Aura	
+	Intelligence					- Item + Skill + Aura
+	MovementSpeedBase				- Raw.MovementSpeed + Item/Skill/Aura.MovementSpeedFlat
+	MovementSpeed					- MovementSpeedBase * (1 + Item/Skill/Aura.MoveSpeedPercentage)
+	Armor							- Raw.Armor + Total.Agility * 0.14 + Item/Skill/Aura.Armor
+	Evasion							- Diminishing calculation
+	Blind							- 
+	MagicalResistance				- Diminishing calculation
+	Health							- (Raw.Health + Total.Strength*19 + Items/Skills/Aura.Health)*(1+Item/Skill/Aura.HealthPercentage)
+	Mana							- Raw.Mana + Total.Intelligence*13+ Items/Skills/Aura.Mana
+	ManaRegenerationBase			- Raw.ManaRegeneration + Total.Intelligence * 0.04
+	ManaRegenerationFlat			- Item/Skill/Aura.ManaRegenerationFlat
+	ManaRegenerationPercentage		- Item/Skill/Aura.ManaRegenerationPercentage
+	ManaRegeneration				- Total.ManaRegenerationBase * (1+Total.ManaRegenerationPercentage)
+	DamageBaseMin					- Raw.DamageMin + Total./Primary/ + Skill.DamageBase
+	DamageBaseMax					- Raw.DamageMax + Total./Primary/ + Skill.DamageBase
+	DamageBase						- floor((DamageBaseMin + DamageBaseMax) / 2)
+	DamageBonus						- Total.DamageBase * Aura.DamagePercentage + Item/Skill/Aura.Damage
+	Damage							- (Total.DamageBase + Total.DamageBonus) * (1 + Aura.DamageReductionPercentage
+	
+	

@@ -10,12 +10,13 @@
 function HeroInstance(heroId, level, team, items) {
 	level = Math.min(Math.max(level, 1), 25) || 1;
 	this.Raw = DotaData.getHeroProperties(heroId);
+	this.Meta = { "ID": heroId, "Level": this.Raw.Level, "Label": this.Raw.Name, "Team": team || "None", "Dead": false };
 	this.Base = {};
 	this.Items = [];
 	this.Item = {};
+	this.Skill = {}
 	this.Auras = [];
 	this.Aura = {};
-	this.Meta = { "ID": heroId, "Label": this.Raw.Name, "Team": team || "None", "Dead": false };
 	this.Level(level);
 }
 
@@ -63,10 +64,10 @@ HeroInstance.addHandler(
 	"Level",
 	[],
 	function(lvl){
-		this.Raw.Level = lvl
-		this.Base.Strength = this.Raw.StrengthBase + this.Raw.StrengthGain * (lvl-1);
-		this.Base.Agility = this.Raw.AgilityBase + this.Raw.AgilityGain * (lvl-1);
-		this.Base.Intelligence = this.Raw.IntelligenceBase + this.Raw.IntelligenceGain * (lvl-1);
+		this.Meta.Level = lvl
+		this.Base.Strength = Math.floor(this.Raw.StrengthBase + this.Raw.StrengthGain * (lvl-1));
+		this.Base.Agility = Math.floor(this.Raw.AgilityBase + this.Raw.AgilityGain * (lvl-1));
+		this.Base.Intelligence = Math.floor(this.Raw.IntelligenceBase + this.Raw.IntelligenceGain * (lvl-1));
 		this.Base.Armor = this.Raw.Armor + this.Base.Agility * 0.14;
 		this.Base.Health = this.Raw.Health + this.Base.Strength * 19;
 		this.Base.HealthRegen = this.Raw.HealthRegen + this.Base.Strength * 0.03;
@@ -91,19 +92,97 @@ HeroInstance.addHandler(
 		var a = { "Strength": 0, "Agility":0, "Intelligence":0, 
 			"MovementSpeedFlat":0, "MovementSpeedPercentage":0,
 			"Armor":0, "MagicResistance": 0, "Evasion":0,
-			"Health":0, "HealthRagen":0, "Mana":0, "ManaRegen":0,
-			"ManaRegenFlat":0, "ManaRegenPercentage": 0,
-			"Damage": 0, "AttackSpeed": 0, "Range":0,
-			"VisionDay": 0, "VisionNight": 0 };
+			"Health":0, "HealthRegeneration":0, "Mana":0, "ManaRegenerationFlat": 0,
+			"ManaRegenerationPercentage": 0, "Damage": 0, "AttackSpeed": 0,
+			"Range":0, "VisionDay": 0, "VisionNight": 0 };
 		for (var i = 0; i < this.Items.length; i++) {
 			for (var prop in a) {
 				var value = this.Items[i][prop];
-				a[prop] += value;
+				if (prop == "Evasion" || prop == "MagicResistance") {
+					a[prop] += (1-a[prop]) * value;
+				}
+				else {
+					a[prop] += value;
+				}
 			}
 		}
 		this.Item = a;
 	}
 );
+
+HeroInstance.addHandler(
+	"Skills",
+	[],
+	function() {
+		var a = { "Strength": 0, "Agility":0, "Intelligence":0, 
+			"MovementSpeedFlat":0, "MovementSpeedPercentage":0,
+			"Armor":0, "MagicResistance": 0, "Evasion":0,
+			"Health":0, "HealthRegeneration":0, "Mana":0, "ManaRegenerationFlat": 0,
+			"ManaRegenerationPercentage": 0, "Damage": 0, "AttackSpeed": 0,
+			"Range":0, "VisionDay": 0, "VisionNight": 0 },
+			bootSpeed = 0;
+		
+		for (var i = 0; i < this.Skills.length; i++) {
+			for (var prop in a) {
+				var value = this.Skills[i][prop];
+				if (prop.IsBoot && prop.MovementSpeedFlat > bootSpeed) {
+					bootSpeed = prop.MovementSpeedFlat;
+				}
+				else if (prop == "Evasion" || prop == "MagicResistance") {
+					a[prop] += (1-a[prop]) * value;
+				}
+				else {
+					a[prop] += value;
+				}
+			}
+		}
+		a.MovementSpeedFlat += bootSpeed;
+		this.Skill = a;
+	}
+);
+
+HeroInstance.addHandler(
+	"Total",
+	[],
+	function() {
+		var a = {};
+		a.StrengthBonus = this.Item.Strength + this.Skill.Strength;
+		a.Strength = this.Base.Strength + a.StrengthBonus;
+		a.AgilityBonus = this.Item.Agility + this.Skill.Agility;
+		a.Agility = this.Base.Agility + a.AgilityBonus;
+		a.IntelligenceBonus = this.Item.Intelligence + this.Skill.Intelligence;
+		a.Intelligence = this.Base.Intelligence + a.IntelligenceBonus;
+		a.MovementSpeedBase = this.Raw.MovementSpeed + this.Item.MovementSpeedFlat + this.Skill.MovementSpeedFlat;
+		a.MovementSpeedPercentage = this.Item.MovementSpeedPercentage + this.Skill.MovementSpeedPercentage;
+		a.MovementSpeed = Math.max(a.MovementSpeedBase * (1+ a.MovementSpeedPercentage), 100);
+		a.ArmorBonus = this.Item.Armor + this.Skill.Armor;
+		a.ArmorBase = this.Raw.Armor + a.Agility * 0.14;
+		a.Evasion = this.Item.Evasion + (1-this.Item.Evasion) * this.Skill.Evasion;
+		a.MagicalResistance = this.Raw.MagicalResistance + (1-this.Raw.MagicalResistance) * this.Skill.MagicalResistance;
+		a.HealthBase = this.Raw.Health + a.Strength * 19;
+		a.Health = a.HealthBase + this.Item.Health + this.Skill.Health
+		a.HealthRegenerationBase = this.Raw.HealthRegeneration + a.Strength * 0.03;
+		a.HealthRegenerationBonus = this.Item.HealthRegeneration + this.Skill.HealthRegeneration;
+		a.HealthRegeneration = a.HealthRegenerationBase + a.HealthRegenerationBonus;
+		a.ManaBase = this.Raw.Mana + a.Intelligence * 13;
+		a.ManaBonus = this.Item.Mana + this.Skill.Mana;
+		a.Mana = a.ManaBase + a.ManaBonus;
+		a.ManaRegenerationBase = this.Raw.ManaRegeneration + a.Intelligence * 0.04;
+		a.ManaRegenerationFlat = this.Skill.ManaRegenerationFlat;
+		a.ManaRegenerationPercentage = this.Item.ManaRegenerationPercentage + this.Skill.ManaRegenerationPercentage;
+		a.ManaRegeneration = a.ManaRegenerationBase * (1 + a.ManaRegenerationPercentage) + a.ManaRegenerationFlat;
+		a.DamageBaseMin = this.Base.DamageMin + this.Base[this.Raw.Type] + this.Skill.DamageBase;
+		a.DamageBaseMax = this.Base.DamageMax + this.Base[this.Raw.Type] + this.Skill.DamageBase;
+		a.DamageBase = Math.floor((a.DamageBaseMin +a.DamageBaseMax)/2);
+		a.DamageBonus = this.Item.Damage + this.Skill.Damage;
+		a.AttackSpeed = 100;
+		a.Range = this.Raw.Range + this.Skill.Range;
+		a.VisionDay = this.Raw.VisionDaytime;
+		a.VisionNight = this.Raw.VisionNighttime + this.Skill.VisionNight + this.Item.VisionNight;
+		
+		this.Total = a;
+	});
+	
 
 
 

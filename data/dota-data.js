@@ -23,16 +23,30 @@ DotaData.getHeroProperties = function (heroId, versionOverride) {
 
 DotaData.getItemProperties = function (itemId, versionOverride) {
 	var version = DotaData.Versions[versionOverride] || DotaData.Versions[DotaData.TargetVersion];
-	if (!(itemId in version.Heroes)) throw "No such id \"" + itemId + "\" in item list";
+	if (!(itemId in version.Items)) throw "No such id \"" + itemId + "\" in item list";
 	var obj = {}, i, prop,
 		base = version.Items._base,
-		hero = version.Items[itemId];
+		item = version.Items[itemId];
 	
 	for (prop in base) {
 		obj[prop] = base[prop];
 	}
-	for (prop in hero) {
-		obj[prop] = hero[prop];
+	for (prop in item) {
+		obj[prop] = item[prop];
+	}
+	return obj;
+}
+
+DotaData.getSkillProperties = function (skillId, versionOverride) {
+	var version = DotaData.Versions[versionOverride] || DotaData.Versions[DotaData.TargetVersion];
+	//if (!(skillId in version.Skills)) throw "No such id \"" + skillId + "\" in item list";
+	// while not all skills are implemented
+	if (!(skillId in version.Skills)) Console.warn("No such id \"" + skillId + "\" in item list");
+	var obj = {}, i, prop,
+		skill = version.Skills[skillId];
+	
+	for (prop in skill) {
+		obj[prop] = skill[prop];
 	}
 	return obj;
 }
@@ -42,7 +56,7 @@ DotaData.getCurrentHeroList = function() {
 }
 
 DotaData.addVersion = function (version, data) {
-	this.Versions[version] = data;
+	DotaData.Versions[version] = data;
 }
 
 

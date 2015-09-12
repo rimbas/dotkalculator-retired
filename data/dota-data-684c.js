@@ -30,9 +30,9 @@ DotaData.addVersion( "6.84c",
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 900,
 			"Health": 150,
-			"HealthRegen": 0.25,
+			"HealthRegeneration": 0.25,
 			"Mana": 0,
-			"ManaRegen": 0.01,
+			"ManaRegeneration": 0.01,
 			"Version": "6.84c",
 			"VisionDaytime": 1800,
 			"VisionNighttime": 800
@@ -194,7 +194,7 @@ DotaData.addVersion( "6.84c",
 			"Enabled": 1,
 			"MovementSpeed": 290,
 			"TurnRate": 0.6,
-			"HealthRegen": 3.0,
+			"HealthRegeneration": 3.0,
 			"Side": "Dire"
 		},
 		"bane": {
@@ -329,7 +329,7 @@ DotaData.addVersion( "6.84c",
 			"Enabled": 1,
 			"MovementSpeed": 315,
 			"TurnRate": 0.6,
-			"HealthRegen": 0.75,
+			"HealthRegeneration": 0.75,
 			"Side": "Radiant",
 			"VisionDaytime": 1800,
 			"VisionNighttime": 1000
@@ -358,7 +358,7 @@ DotaData.addVersion( "6.84c",
 			"Enabled": 1,
 			"MovementSpeed": 300,
 			"TurnRate": 0.6,
-			"HealthRegen": 0.75,
+			"HealthRegeneration": 0.75,
 			"Side": "Radiant"
 		},
 		"bristleback": {
@@ -620,7 +620,7 @@ DotaData.addVersion( "6.84c",
 			"MovementSpeed": 280,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 1000,
-			"HealthRegen": 0.75,
+			"HealthRegeneration": 0.75,
 			"Side": "Dire"
 		},
 		"disruptor": {
@@ -839,7 +839,7 @@ DotaData.addVersion( "6.84c",
 			"Enabled": 1,
 			"MovementSpeed": 310,
 			"TurnRate": 0.5,
-			"HealthRegen": 0.75,
+			"HealthRegeneration": 0.75,
 			"Side": "Radiant"
 		},
 		"enchantress": {
@@ -917,7 +917,7 @@ DotaData.addVersion( "6.84c",
 			"Enabled": 1,
 			"MovementSpeed": 300,
 			"TurnRate": 1.0,
-			"HealthRegen": 0.75,
+			"HealthRegeneration": 0.75,
 			"Side": "Dire"
 		},
 		"furion": {
@@ -1088,7 +1088,7 @@ DotaData.addVersion( "6.84c",
 			"MovementSpeed": 305,
 			"TurnRate": 0.6,
 			"ProjectileSpeed": 0,
-			"HealthRegen": 0.75,
+			"HealthRegeneration": 0.75,
 			"Side": "Radiant"
 		},
 		"keeper_of_the_light": {
@@ -1338,7 +1338,7 @@ DotaData.addVersion( "6.84c",
 			"MovementSpeed": 325,
 			"TurnRate": 0.4,
 			"ProjectileSpeed": 900,
-			"HealthRegen": 0.5,
+			"HealthRegeneration": 0.5,
 			"Side": "Radiant"
 		},
 		"luna": {
@@ -1556,7 +1556,7 @@ DotaData.addVersion( "6.84c",
 			"Enabled": 1,
 			"MovementSpeed": 320,
 			"TurnRate": 0.5,
-			"HealthRegen": 0.75,
+			"HealthRegeneration": 0.75,
 			"Side": "Radiant"
 		},
 		"necrolyte": {
@@ -1613,7 +1613,7 @@ DotaData.addVersion( "6.84c",
 			"MovementSpeed": 305,
 			"TurnRate": 1.0,
 			"ProjectileSpeed": 1200,
-			"HealthRegen": 0.5,
+			"HealthRegeneration": 0.5,
 			"Side": "Dire"
 		},
 		"night_stalker": {
@@ -1669,7 +1669,7 @@ DotaData.addVersion( "6.84c",
 			"Enabled": 1,
 			"MovementSpeed": 300,
 			"TurnRate": 0.5,
-			"HealthRegen": 2.5,
+			"HealthRegeneration": 2.5,
 			"Side": "Dire"
 		},
 		"obsidian_destroyer": {
@@ -1724,7 +1724,7 @@ DotaData.addVersion( "6.84c",
 			"Enabled": 1,
 			"MovementSpeed": 295,
 			"TurnRate": 0.6,
-			"HealthRegen": 2.5,
+			"HealthRegeneration": 2.5,
 			"Side": "Radiant"
 		},
 		"omniknight": {
@@ -1828,7 +1828,7 @@ DotaData.addVersion( "6.84c",
 			"Enabled": 1,
 			"MovementSpeed": 290,
 			"TurnRate": 0.6,
-			"HealthRegen": 0.75,
+			"HealthRegeneration": 0.75,
 			"Side": "Radiant"
 		},
 		"phoenix": {
@@ -2047,7 +2047,7 @@ DotaData.addVersion( "6.84c",
 			"Enabled": 1,
 			"MovementSpeed": 290,
 			"TurnRate": 0.6,
-			"HealthRegen": 0.25,
+			"HealthRegeneration": 0.25,
 			"Side": "Radiant"
 		},
 		"rubick": {
@@ -2408,7 +2408,7 @@ DotaData.addVersion( "6.84c",
 			"Enabled": 1,
 			"MovementSpeed": 290,
 			"TurnRate": 0.4,
-			"HealthRegen": 0.75,
+			"HealthRegeneration": 0.75,
 			"Side": "Dire"
 		},
 		"storm_spirit": {
@@ -2494,7 +2494,7 @@ DotaData.addVersion( "6.84c",
 			"MovementSpeed": 270,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 900,
-			"ManaRegen": 0.02,
+			"ManaRegeneration": 0.02,
 			"Side": "Radiant"
 		},
 		"templar_assassin": {
@@ -2550,7 +2550,7 @@ DotaData.addVersion( "6.84c",
 			"MovementSpeed": 315,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 900,
-			"HealthRegen": 2.0,
+			"HealthRegeneration": 2.0,
 			"Side": "Dire"
 		},
 		"tidehunter": {
@@ -2815,7 +2815,7 @@ DotaData.addVersion( "6.84c",
 			"MovementSpeed": 285,
 			"TurnRate": 0.4,
 			"ProjectileSpeed": 900,
-			"HealthRegen": 0.25,
+			"HealthRegeneration": 0.25,
 			"Side": "Dire"
 		},
 		"viper": {
@@ -3074,6 +3074,7 @@ DotaData.addVersion( "6.84c",
 			"Version": "6.84c",
 			"Cost": 0,
 			"Components": 0,
+			"Section": "None",
 			"Strength": 0,
 			"Agility": 0,
 			"Intelligence": 0,
@@ -3091,9 +3092,9 @@ DotaData.addVersion( "6.84c",
 			"Health": 0,
 			"HealthRegeneration": 0,
 			"Mana": 0,
-			"ManaRegen": 0,
-			"ManaRegenFlat": 0,
-			"ManaRegenPercentage": 0,
+			"ManaRegeneration": 0,
+			"ManaRegenerationFlat": 0,
+			"ManaRegenerationPercentage": 0,
 			"Charges": 0,
 			"Consumable": false
 		},
@@ -3162,12 +3163,82 @@ DotaData.addVersion( "6.84c",
 			"ManaRegenerationPercentage": 2,
 			"ManaRegenerationFlat": function() { return this.Charges },
 			"Charges": 8
+		},
+		"circlet": {
+			"Name": "Circlet",
+			"Cost": 165,
+			"Strength": 2,
+			"Agility": 2,
+			"Intelligence": 2
+		},
+		"gauntlets": {
+			"Name": "Gauntlets of Strength",
+			"Cost": 150,
+			"Strength": 3
+		},
+		"slippers": {
+			"Name": "Slippers of Agility",
+			"Cost": 150,
+			"Agility": 3
+		},
+		"mantle": {
+			"Name": "Mantle of Intelligence",
+			"Cost": 150,
+			"Intelligence": 3
+		},
+		"bracer": {
+			"Name": "Bracer",
+			"Cost": 525,
+			"Components": ["circlet", "gauntlets", 210],
+			"Strength": 6,
+			"Agility": 3,
+			"Intelligence": 3,
+			"Damage": 3
+		},
+		"wraith_band": {
+			"Name": "Wraith band",
+			"Cost": 485,
+			"Components": ["circlet", "slippers", 170],
+			"Strength": 3,
+			"Agility": 6,
+			"Intelligence": 3,
+			"Damage": 3	
+		},
+		"null_talisman": {
+			"Name": "Null talisman", //con fuckign gratis you can buy null talis
+			"Cost": 470,
+			"Components": ["circlet", "slippers", 155],
+			"Strength": 3,
+			"Agility": 3,
+			"Intelligence": 6,
+			"Damage": 3	
+		},
+		"boots": {
+			"Name": "Boots of speed",
+			"Cost": 450,
+			"MovementSpeedFlat": 50,
+			"IsBoot": true
 		}
 		
-		
-		
-		
-		
+	},
+	"Skills": {
+		"_base": {
+			"Name": "Dummy skill",
+			"Version": "6.84c",
+			"Level": 0,
+			"LevelMax": "4",
+			"Class": "Ability"
+		},
+		"attribute_bonus": {
+			"Name": "Attribute bonus",
+			"Level": 0,
+			"LevelMax": 10,
+			"Strength": function() { return this.Level * 2 },
+			"Agility": function() { return this.Level * 2 },
+			"Intelligence": function() { return this.Level * 2 }
+		}
+			
 	}
+	
 }
 );
