@@ -135,7 +135,7 @@ Aura/Buff stats
 	Range							-  
 	
 Total
-	Strenght						- Item + Skill + Aura
+	Strength							- Item + Skill + Aura
 	Agility							- Item + Skill + Aura	
 	Intelligence					- Item + Skill + Aura
 	MovementSpeedBase				- Raw.MovementSpeed + Item/Skill/Aura.MovementSpeedFlat

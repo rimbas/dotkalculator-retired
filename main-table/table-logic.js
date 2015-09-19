@@ -14,7 +14,7 @@ function HeroTable(tableName, tableId, wrapperId) {
 	this._tableName = tableName;
 	this._tableId = tableId;
 	this.heroList = [];
-	this.columnList = ["Delete", "Name", "Label", "Portrait", "Level", "Health", "Mana", "Armor"];
+	this.columnList = ["Delete", "Name", "Portrait", "Level", "Health", "Mana", "Items" ];
 	this._tableSorterCreated = false;
 	
 	this.createTable();
@@ -96,9 +96,6 @@ HeroTable.prototype.createTable = function () {
 	thead.appendChild(thr);
 	this._tableSorterCreated = false;
 	
-	//for (var i = 0; i < this.heroList.length; i++) {
-	//	this.addHero(this.heroList[i]);	
-	//}
 	for (i in this.heroList) {
 		var hero = this.heroList[i];	
 		this.createHeroRow(hero);
@@ -180,6 +177,7 @@ HeroTable.prototype.createHeroRow = function (heroInstance) {
 		row.appendChild(cell);
 	}
 	heroInstance.InstanceRow = row;
+	heroInstance.InstanceTable = this;
 	$(this._table).trigger("update");
 }
 
@@ -270,7 +268,7 @@ HeroTable.addHandler("Level", "Level", "LVL","Base",
 		input.value = heroInstance.Meta.Level;
 		input.style.width = "2.5em";
 		var change = (function(hero,e,u) {
-				hero.Level(e.target.value);
+				hero.LevelChange(e.target.value);
 				this.refreshHero(hero);
 			}).bind(this, heroInstance);
 		cell.appendChild(input);
@@ -284,32 +282,36 @@ HeroTable.addHandler("Level", "Level", "LVL","Base",
 	true);
 HeroTable.addHandler("Health", "Health", "HP","Derived",
 	function(cell, heroInstance){
-		cell.textContent = heroInstance.Base.Health;
+		cell.textContent = heroInstance.Total.Health;
 	},
 	"number")
 HeroTable.addHandler("Strength", "Strength", "Str","Base",
 	function(cell, heroInstance){
-		cell.textContent = Math.floor(heroInstance.Base.Strength);
+	var bonus = Math.floor(heroInstance.Total.StrengthBonus)
+		cell.textContent = Math.floor(heroInstance.Base.Strength) + (bonus === 0 ? "" : "+" + bonus);
 	},
 	"number")
 HeroTable.addHandler("Agility", "Agility", "Agi","Base",
 	function(cell, heroInstance){
-		cell.textContent = Math.floor(heroInstance.Base.Agility);
+	var bonus = Math.floor(heroInstance.Total.AgilityBonus)
+		cell.textContent = Math.floor(heroInstance.Base.Agility) + (bonus === 0 ? "" : "+" + bonus);
 	},
 	"number")
 HeroTable.addHandler("Intelligence", "Intelligence", "Int","Base",
 	function(cell, heroInstance){
-		cell.textContent = Math.floor(heroInstance.Base.Intelligence);
+	var bonus = Math.floor(heroInstance.Total.IntelligenceBonus)
+		cell.textContent = Math.floor(heroInstance.Base.Intelligence) + (bonus === 0 ? "" : "+" + bonus);
 	},
 	"number")
 HeroTable.addHandler("Mana", "Mana", "MP","Derived",
 	function(cell, heroInstance){
-		cell.textContent = heroInstance.Base.Mana;
+		cell.textContent = heroInstance.Total.Mana;
 	},
 	"number")
 HeroTable.addHandler("Armor", "Armor", "⛨","Derived", //unicode shenanigans
 	function(cell, heroInstance){
-		cell.textContent = Math.round(heroInstance.Base.Armor * 10)/10;
+		//cell.textContent = Math.round(heroInstance.Total.Armor * 10)/10;
+		cell.textContent = heroInstance.Total.Armor;
 	},			
 	"number")
 HeroTable.addHandler("Portrait", "Portrait", "","General",
@@ -349,6 +351,13 @@ HeroTable.addHandler("Delete", "Delete", "","General",
 	true);
 HeroTable.addHandler("Damage", "Damage", "Dmg", "Derived",
 	function(cell, hero){
-		cell.textContent = Math.floor((hero.Base.DamageMin+hero.Base.DamageMax)/2);
+	var bonus = hero.Total.DamageBonus;
+		cell.textContent = hero.Total.DamageBase + (bonus === 0 ? "" : "+" + bonus);
 	},
 	"number");
+HeroTable.addHandler("Items", "Items", "Items", "General",
+	function(cell, hero) {
+		cell.innerHTML = '<div class="item-container"></div>';
+	},
+	false,
+	false);

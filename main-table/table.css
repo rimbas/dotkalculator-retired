@@ -27,19 +27,17 @@
 	background: none;
 	border-width: 1px;
 }
-
 .ui-spinner-input {
 	margin: 0px;
 	text-indent: 2px;
 	color: gold;
 	width: 100%;
 }
-
 .ui-spinner, .ui-spinner-button, .ui-spinner-button.ui-state-default {
 	border-color: gold;
 }
 
-.hero-label {
+.hero-table .hero-label {
 	background: none;
 	border: none;
 	outline: none;
@@ -51,11 +49,21 @@
 .vertical-separators td:not(:first-child), .vertical-separators th:not(:first-child) {
 	border-left: 2px solid #9A1E00;
 }
-.delete-button {
+.hero-table .delete-button {
 	width: 16px;
 	height: 16px;
 	border: none;
 	background: url(delete-icon16.png);
 	vertical-align: middle;
 	cursor: pointer;
+}
+.hero-table .item-container {
+	display: block;
+	border: 1px solid gold;
+	min-width: 33px;
+	height: 24px;
+}
+.hero-table .item-container .item-image {
+	width: 33px;
+	height: 24px;
 }
