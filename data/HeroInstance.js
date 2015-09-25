@@ -4,18 +4,17 @@
 
 // 		Hero instance constructor
 //
-// heroId  (string)           - hero to retrieve from hero data
-// [level] (integer 1..25)    - desired hero level
-// [items] (array of strings) - items for the inventory
-function HeroInstance(heroId, level, team, items) {
-	level = Math.min(Math.max(level, 1), 25) || 1;
+// heroId  (string) - hero to retrieve from hero data
+// init    (object)	- settings
+function HeroInstance(heroId, init) {
+	if (!init) init = {};
 	this.Raw = DotaData.getHeroProperties(heroId);
 	this.Meta = { "ID": heroId, 
-				  "Level": this.Raw.Level, 
-				  "Label": this.Raw.Name, 
-				  "Team": team || "None", 
-				  "Dead": false,
-				  "Gold": 625 };
+				  "Level": Math.min(Math.max(init.Level, 1), 25) || this.Raw.Level, 
+				  "Label": init.Label || this.Raw.Name, 
+				  "Team": init.Team || "None", 
+				  "Dead": init.Dead || false,
+				  "Gold": Number.isInteger(init.Gold) || 625 };
 	this.Base = {};
 	this.Item = {};
 	this.Items = [];
@@ -23,7 +22,7 @@ function HeroInstance(heroId, level, team, items) {
 	this.Skills = [];
 	this.Aura = {};
 	this.Auras = [];
-	this.LevelChange(level);
+	this.LevelChange();
 	this.ItemChange();
 }
 
@@ -31,25 +30,25 @@ HeroInstance.prototype.toString = function() {
 	return "[HeroInstance "+this.HeroId+"]";
 }
 
-HeroInstance.addHandler = function (name, binds, handler) {
-	if (name in HeroInstance.prototype) 
-		throw "Handler \"" + name + "\"already exists!";
-	if (typeof name !== "string") 
+HeroInstance.addHandler = function (handler) {
+	if (handler.Name in HeroInstance.prototype) 
+		throw "Handler \"" + handler.Name + "\"already exists!";
+	if (typeof handler.Name !== "string") 
 		throw "No handler name set!";
-	if (typeof handler !== "function" ) 
+	if (typeof handler.Handler !== "function" ) 
 		throw "No handler passed!";
 	
 	var wrapper = (function(value) 
 		{
-			handler.call(this, value);
-			this.propagateChange(this[name].binds);
+			handler.Handler.call(this, value);
+			this.propagateChange(this[handler.Name].binds);
 		})
-	HeroInstance.prototype[name] = wrapper;
-	HeroInstance.prototype[name].binds = [];
+	HeroInstance.prototype[handler.Name] = wrapper;
+	HeroInstance.prototype[handler.Name].binds = [];
 	
-	for ( var i in binds ) {
-		var bind = binds[i];
-		this.prototype[bind].binds.push(name);
+	for ( var i in handler.Binds ) {
+		var bind = handler.Binds[i];
+		this.prototype[bind].binds.push(handler.Name);
 	}
 }
 
@@ -77,30 +76,35 @@ HeroInstance.prototype.addItem = function (item, forceInsert) {
 		return false;
 	}
 	var index = this.Items.push(item);
-	item._Index = index;
 	this.ItemChange();
+	return index;
 }
 
+// removes item from a hero
+// item (integer) - removes item at index
+// item (itemInstance) - removes itemInstance
 HeroInstance.prototype.removeItem = function (item) {
 	if (Number.isInteger(item)) {
 		this.Items.splice(item, 1);	
 	}
 	else if (item instanceof ItemInstance) {
-		this.Items.splice(item._Index, 1);
+		this.Items.splice(this.Items.indexOf(item), 1);
 	}
 	this.ItemChange();
 }
 
-HeroInstance.addHandler(
-	"LevelChange",
-	[],
-	function(lvl){
-		this.Meta.Level = lvl
-		this.Base.StrengthFloat = this.Raw.StrengthBase + this.Raw.StrengthGain * (lvl-1);
+HeroInstance.addHandler({
+	Name: "LevelChange",
+	Binds: [],
+	Handler: function(lvl){
+		if (lvl) {
+			this.Meta.Level = lvl;
+		}
+		this.Base.StrengthFloat = this.Raw.StrengthBase + this.Raw.StrengthGain * (this.Meta.Level-1);
 		this.Base.Strength = Math.floor(this.Base.StrengthFloat);
-		this.Base.AgilityFloat = this.Raw.AgilityBase + this.Raw.AgilityGain * (lvl-1);
+		this.Base.AgilityFloat = this.Raw.AgilityBase + this.Raw.AgilityGain * (this.Meta.Level-1);
 		this.Base.Agility = Math.floor(this.Base.AgilityFloat);
-		this.Base.IntelligenceFloat = this.Raw.IntelligenceBase + this.Raw.IntelligenceGain * (lvl-1);
+		this.Base.IntelligenceFloat = this.Raw.IntelligenceBase + this.Raw.IntelligenceGain * (this.Meta.Level-1);
 		this.Base.Intelligence = Math.floor(this.Base.IntelligenceFloat);
 		this.Base.Armor = this.Raw.Armor + this.Base.Agility * 0.14;
 		this.Base.Health = this.Raw.Health + this.Base.Strength * 19;
@@ -117,12 +121,12 @@ HeroInstance.addHandler(
 		this.Base.DamageMin = this.Raw.DamageMin + primaryStat;	
 		this.Base.DamageMax = this.Raw.DamageMax + primaryStat;
 	}
-);
+});
 
-HeroInstance.addHandler(
-	"ItemChange",
-	[],
-	function() {
+HeroInstance.addHandler({
+	Name: "ItemChange",
+	Binds: [],
+	Handler: function() {
 		var a = { "Strength": 0, "Agility":0, "Intelligence":0, 
 			"MovementSpeedFlat":0, "MovementSpeedPercentage":0,
 			"Armor":0, "MagicResistance": 0, "Evasion":0,
@@ -142,12 +146,12 @@ HeroInstance.addHandler(
 		}
 		this.Item = a;
 	}
-);
+});
 
-HeroInstance.addHandler(
-	"SkillChange",
-	["LevelChange"],
-	function() {
+HeroInstance.addHandler({
+	Name: "SkillChange",
+	Binds: ["LevelChange"],
+	Handler: function() {
 		var a = { "Strength": 0, "Agility":0, "Intelligence":0, 
 			"MovementSpeedFlat":0, "MovementSpeedPercentage":0,
 			"Armor":0, "MagicResistance": 0, "Evasion":0,
@@ -173,12 +177,12 @@ HeroInstance.addHandler(
 		a.MovementSpeedFlat += bootSpeed;
 		this.Skill = a;
 	}
-);
+});
 
-HeroInstance.addHandler(
-	"TotalChange",
-	["LevelChange", "ItemChange", "SkillChange"],
-	function() {
+HeroInstance.addHandler({
+	Name: "TotalChange",
+	Binds: ["LevelChange", "ItemChange", "SkillChange"],
+	Handler: function() {
 		var a = {};
 		a.StrengthBonus = this.Item.Strength + this.Skill.Strength;
 		a.Strength = this.Base.Strength + a.StrengthBonus;
@@ -217,7 +221,8 @@ HeroInstance.addHandler(
 		a.VisionNight = this.Raw.VisionNighttime + this.Skill.VisionNight + this.Item.VisionNight;
 
 		this.Total = a;
-	});
+	}
+});
 	
 
 

@@ -10,10 +10,9 @@ $(function(e){
 		containment: "document"
 	}) 
 	MainTable = new HeroTable("Comparison table", "main-table", "main-table-wrapper");
-	MainTable.addHero(new HeroInstance("alchemist", 16, []));
-	MainTable.addHero("vengefulspirit");
-	MainTable.addHero("techies");
-	//$("#main-table").addClass("vertical-separators");
+	MainTable.addHero(new HeroInstance("techies", { Level: 1 }));
+	MainTable.addHero(new HeroInstance("techies", { Level: 2 }));
+	MainTable.addHero(new HeroInstance("techies", { Level: 3 }));
 	
 	//$("#table-settings").toggle(false);
 	$(".table-selector").selectmenu();

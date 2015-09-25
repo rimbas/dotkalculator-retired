@@ -14,50 +14,53 @@ function HeroTable(tableName, tableId, wrapperId) {
 	this._tableName = tableName;
 	this._tableId = tableId;
 	this.heroList = [];
-	this.columnList = ["Delete", "Name", "Portrait", "Level", "Health", "Mana", "Items" ];
+	this.columnList = ["Delete", "Name", "Portrait", "Level", "Strength", "Agility", "Intelligence", "Damage" ];
 	this._tableSorterCreated = false;
 	
 	this.createTable();
 }
 
-// 		Cell handler adder
-//
-// nameID 	   (string)     - internal ID of handler
-// fullName (string)        - full name of handler (for usage in selection menus)
-// displayName (string)		- display label (for usage in table headers)
-// type (string)			- evaluator type
-// cellEvaluator (function) - html element processor
-// sortingMethod 		    - column sorting handling
-//			        (false) - disallow column sorting
-//                   (true) - uses default sorting method
-//			       (string) - uses a defined sorting method
-// [static] (boolean)       - should the contents be evaluated only once?
-HeroTable.addHandler = function(nameID, fullName, displayName, type, cellEvaluator, sortingMethod, static) {
-	fullName = fullName || nameID;
-	if (nameID in HeroTable.prototype.evaluator) 
-		throw "Handler \"" + nameID + "\" already exists!";
-	if (typeof(fullName) !== "string") 
-		throw "Invalid descriptive name!";
-	if (typeof(displayName) !== "string") 
-		throw "Invalid display name!";
-	if (!cellEvaluator instanceof Function)
-		throw "Invalid cell evaluator!";
-	sortingMethod = sortingMethod != undefined ? sortingMethod : true;
-	static = static || false;
-	
-	var handler = {};
-	HeroTable.prototype.evaluator[nameID] = handler;
-	if (!HeroTable.evaluatorGroups[type]) {
-		HeroTable.evaluatorGroups[type] = [];	
+HeroTable.prototype.evaluator = {};
+HeroTable.evaluatorGroups = {};
+
+// 
+//   Evaluator implementation registering for HeroInstance handling
+// 
+// ID			(string)    - ID for the handler
+// name			(string)    - Readable name
+// header		(undefined) - Nothing to display in header cell
+//				(string)    - String to display in the header cell
+//				(function)  - function(<th>) to process display in header
+// type			(string)    - Category of the handler
+//				(undefined) - Defaults to "General"
+// init			(function)  - function(<td>) to run for initialisation purposes
+//				(undefined) - No cell initialisation required
+// eval			(function)  - function(<td>) to run on evaluation
+//				(undefined) - No re-evaluation function, content is static
+// sorter 		(undefined) - Default sorter (<td>.textContent)
+//				(true)      - Default sorter (<td>.textContent)
+// 				(false)     - Column sorting disabled
+//        		(string)    - Sorter id as defined in $.tablesorter.addParser
+// description  (string)	- Description for the evaluator
+//				(undefined) - do you hate users?
+HeroTable.addEvaluator = function(evaluator) {
+	if (evaluator.ID in HeroTable.prototype.evaluator) 
+		throw "Evaluator \"" + evaluator.ID + "\" already exists!";
+	if (!evaluator.init && !evaluator.eval) 
+		throw "No handlers (Init or Eval) set!";
+	HeroTable.prototype.evaluator[evaluator.ID] = evaluator;
+	if (!HeroTable.evaluatorGroups[evaluator.type]) {
+		HeroTable.evaluatorGroups[evaluator.type] = [];	
 	}
-	HeroTable.evaluatorGroups[type].push({"nameId": nameID,"fullName": fullName});
-	handler.nameId = nameID;
-	handler.cellEvaluator = cellEvaluator;
-	handler.sortingMethod = sortingMethod;
-	handler.fullName = fullName;
-	handler.displayName = displayName;
-	handler.static = static;
-	handler.type = type;
+	HeroTable.evaluatorGroups[evaluator.type].push({
+		"ID": evaluator.ID,
+		"name": evaluator.name, 
+		"description": evaluator.description 
+	});
+}
+
+HeroTable.prototype.getActiveEvaluators = function () {
+	return this.columnList;
 }
 
 HeroTable.prototype.toString = function () {
@@ -65,31 +68,37 @@ HeroTable.prototype.toString = function () {
 }
 
 HeroTable.prototype.createTable = function () {
-	if (this._table) 
+	if (this._tableElement) 
 	{
-		this._table.parentElement.removeChild(this._table);
+		this._tableElement.parentElement.removeChild(this._tableElement);
 	}
-	this._table = document.createElement("table");
-	this._wrapperElement.appendChild(this._table);
-	this._table.id = this._tableId;
-	this._table.className = "hero-table";
-	this._table.HeroTableController = this;
+	this._tableElement = document.createElement("table");
+	this._wrapperElement.appendChild(this._tableElement);
+	this._tableElement.id = this._tableId;
+	this._tableElement.className = "hero-table";
+	this._tableElement.HeroTableController = this;
 	
 	var caption = document.createElement("caption");
 	caption.textContent = this._tableName;
-	this._table.appendChild(caption);
+	this._tableElement.appendChild(caption);
 	
 	var thead = document.createElement("thead");
-	this._table.appendChild(thead);
+	this._tableElement.appendChild(thead);
 	var tbody = document.createElement("tbody");
-	this._table.appendChild(tbody);
-	this._table.body = tbody;
+	this._tableElement.appendChild(tbody);
+	this._tableElement.body = tbody;
 	
 	var thr = document.createElement("tr");
 	for ( var i in this.columnList ) {
 		var col = this.columnList[i];
 		var cell = document.createElement("th");
-		cell.textContent = this.evaluator[col].displayName;
+		if (this.evaluator[col].header instanceof Function) {
+			this.evaluator[col].header(cell);
+			//cell.textContent = 
+		}
+		else if (typeof this.evaluator[col].header === "string") {
+			cell.textContent = this.evaluator[col].header;
+		}
 		cell.evaluatorId = col;
 		thr.appendChild(cell);
 	}
@@ -107,19 +116,6 @@ HeroTable.prototype.setColumnList = function(columns) {
 	this.createTable();
 }
 
-
-HeroTable.prototype.refreshHero = function (heroInstance) {
-	for (var i = 0; i < heroInstance.InstanceRow.childNodes.length; i++) {
-		var cell = heroInstance.InstanceRow.childNodes[i],
-			evaluatorId = cell.evaluatorId;
-		if (!this.evaluator[evaluatorId].static )
-		{
-			this.evaluator[evaluatorId].cellEvaluator.call(this, cell, heroInstance);
-		}
-	}
-	this.updateSorting();
-}
-
 // header settings for tablesorter plugin
 HeroTable.prototype.sorterSettings = function () {
 	var sorterSetup = {};
@@ -128,21 +124,14 @@ HeroTable.prototype.sorterSettings = function () {
 	for (var i in this.columnList ) {
 		var col = this.columnList[i];
 		var evaluator = this.evaluator[col];
-		if (evaluator.sortingMethod !== true) {
+		if (evaluator.sorter !== undefined && evaluator.sorter !== true) {
 			sorterSetup.headers[i] = {};
-			sorterSetup.headers[i].sorter = evaluator.sortingMethod;
+			sorterSetup.headers[i].sorter = evaluator.sorter;
 		}
 	}
 	this.SortingSetup = sorterSetup;
 	return sorterSetup;
 }
-
-HeroTable.prototype.getEvaluators = function () {
-	return this.columnList;
-}
-
-HeroTable.prototype.evaluator = {};
-HeroTable.evaluatorGroups = {};
 
 // Adds a hero to the table and evaluates it
 // heroInstance (HeroInstance) - valid HeroInstance object
@@ -158,38 +147,57 @@ HeroTable.prototype.addHero = function (heroInstance) {
 	this.createHeroRow(heroInstance)
 }
 
+// Creates a row in the table with the HeroInstance attached
 HeroTable.prototype.createHeroRow = function (heroInstance) {
 	if ( !this._tableSorterCreated )
 	{
-		$(this._table).tablesorter(this.sorterSettings());	
+		$(this._tableElement).tablesorter(this.sorterSettings());	
 		this._tableSorterCreated = true;
 	}
 	
-	var row = this._table.body.insertRow(-1);
+	var row = this._tableElement.body.insertRow(-1);
 	row.HeroInstanceRef = heroInstance;
 	for ( var i in this.columnList ) {
 		var prop = this.columnList[i],
 			cell = document.createElement("td");
-		this.evaluator[prop].cellEvaluator.call(this, cell, heroInstance);
-		if (this.evaluator[prop].static)
-			cell.static = true;
+		
+		if (this.evaluator[prop].init) {
+			this.evaluator[prop].init.call(this, cell, heroInstance);
+		}
+		if (this.evaluator[prop].eval) {
+			this.evaluator[prop].eval.call(this, cell, heroInstance);
+		}
+		
 		cell.evaluatorId = prop;
 		row.appendChild(cell);
 	}
+	//Object.defineProperty(heroInstance, "InstanceRow", { value: row });
 	heroInstance.InstanceRow = row;
-	heroInstance.InstanceTable = this;
-	$(this._table).trigger("update");
+	//Object.defineProperty(heroInstance, "InstanceTable", { value: this});
+	$(this._tableElement).trigger("update");
 }
-
 
 HeroTable.prototype.removeHero = function (heroInstance) {
 	this.heroList.splice(this.heroList.indexOf(heroInstance),1)
 	heroInstance.InstanceRow.parentElement.removeChild(heroInstance.InstanceRow);
-	$(this._table).trigger("update");
+	$(this._tableElement).trigger("update");
+}
+
+// Update cells in the table
+HeroTable.prototype.refreshHero = function (heroInstance) {
+	for (var i = 0; i < heroInstance.InstanceRow.childNodes.length; i++) {
+		var cell = heroInstance.InstanceRow.childNodes[i],
+			evaluatorId = cell.evaluatorId;
+		if (this.evaluator[evaluatorId].eval )
+		{
+			this.evaluator[evaluatorId].eval.call(this, cell, heroInstance);
+		}
+	}
+	this.updateSorting();
 }
 
 HeroTable.prototype.updateSorting = function () {
-	$(this._table).trigger("update");
+	$(this._tableElement).trigger("update");
 }
 
 /*--------------------------------------------------
@@ -236,34 +244,43 @@ $.tablesorter.addParser({
 	},
 	type: "text"
 });
+// Uses element's property "sortingProperty" to sort as text
 $.tablesorter.addParser({
 	id: "propertyText",
-	is: function(s){
-		return false;
-	},
+	is: function(s){ return false; },
 	format: function(s, table, cell) {
-		return cell.sorterText;
+		return cell.sortingProperty;
 	},
 	type: "text"
 });
+// Uses element's property "sortingProperty" to sort as text
 $.tablesorter.addParser({
 	id: "propertyNumeric",
-	is: function(s){
-		return false;
-	},
+	is: function(s){ return false; },
 	format: function(s, table, cell) {
-		return cell.sorterText;
+		return cell.sortingProperty;
 	},
 	type: "numeric"
 });
 
-HeroTable.addHandler("Name","Name","Name","General",
-	function(cell, heroInstance){
+HeroTable.addEvaluator({
+	ID:"Name",
+	name: "Name",
+	header: "Name",
+	type: "General",
+	description: "Displays hero name",
+	init: function(cell, heroInstance){
 		cell.textContent = heroInstance.Raw.Name;
-	});
-inputsTest = [];
-HeroTable.addHandler("Level", "Level", "LVL","Base",
-	function(cell, heroInstance) {
+	}
+});
+
+HeroTable.addEvaluator({
+	ID: "Level",
+	name: "Level",
+	header: "Level",
+	type: "Base",
+	description: "Displays hero level",
+	init: function(cell, heroInstance) {
 		var input = document.createElement("input");
 		input.value = heroInstance.Meta.Level;
 		input.style.width = "2.5em";
@@ -278,53 +295,106 @@ HeroTable.addHandler("Level", "Level", "LVL","Base",
 			stop: change
 		});
 	},
-	"firstChildFirstChildNumeric",
-	true);
-HeroTable.addHandler("Health", "Health", "HP","Derived",
-	function(cell, heroInstance){
+	sorter: "firstChildFirstChildNumeric"
+});
+
+HeroTable.addEvaluator({
+	ID: "Health", 
+	name: "Health",
+	header: "HP",
+	type: "Derived",
+	description: "Displays hero health",
+	eval: function(cell, heroInstance){
 		cell.textContent = heroInstance.Total.Health;
 	},
-	"number")
-HeroTable.addHandler("Strength", "Strength", "Str","Base",
-	function(cell, heroInstance){
+	sorter: "number"
+});
+
+HeroTable.addEvaluator({
+	ID: "Strength", 
+	name: "Strength", 
+	header: "Str",
+	type: "Base",
+	description: "Displays hero strength points",
+	eval: function(cell, heroInstance){
 	var bonus = Math.floor(heroInstance.Total.StrengthBonus)
 		cell.textContent = Math.floor(heroInstance.Base.Strength) + (bonus === 0 ? "" : "+" + bonus);
 	},
-	"number")
-HeroTable.addHandler("Agility", "Agility", "Agi","Base",
-	function(cell, heroInstance){
+	sorter: "number"
+});
+
+HeroTable.addEvaluator({
+	ID: "Agility", 
+	name: "Agility", 
+	header: "Agi",
+	type: "Base",
+	description: "Displays hero agility points",
+	eval: function(cell, heroInstance){
 	var bonus = Math.floor(heroInstance.Total.AgilityBonus)
 		cell.textContent = Math.floor(heroInstance.Base.Agility) + (bonus === 0 ? "" : "+" + bonus);
 	},
-	"number")
-HeroTable.addHandler("Intelligence", "Intelligence", "Int","Base",
-	function(cell, heroInstance){
+	sorter: "number"
+});
+
+HeroTable.addEvaluator({
+	ID: "Intelligence", 
+	name: "Intelligence", 
+	header: "Int",
+	type: "Base",
+	description: "Displays hero intelligence points",
+	eval: function(cell, heroInstance){
 	var bonus = Math.floor(heroInstance.Total.IntelligenceBonus)
 		cell.textContent = Math.floor(heroInstance.Base.Intelligence) + (bonus === 0 ? "" : "+" + bonus);
 	},
-	"number")
-HeroTable.addHandler("Mana", "Mana", "MP","Derived",
-	function(cell, heroInstance){
+	sorter: "number"
+});
+
+HeroTable.addEvaluator({
+	ID: "Mana", 
+	name: "Mana", 
+	header: "MP",
+	type: "Derived",
+	description: "Displays hero mana",
+	eval: function(cell, heroInstance){
 		cell.textContent = heroInstance.Total.Mana;
 	},
-	"number")
-HeroTable.addHandler("Armor", "Armor", "⛨","Derived", //unicode shenanigans
-	function(cell, heroInstance){
+	sorter: "number"
+});
+
+HeroTable.addEvaluator({
+	ID: "Armor", 
+	name: "Armor", 
+	header: "⛨",
+	type: "Derived", //unicode shenanigans
+	description: "Displays hero armor",
+	eval: function(cell, heroInstance){
 		//cell.textContent = Math.round(heroInstance.Total.Armor * 10)/10;
 		cell.textContent = heroInstance.Total.Armor;
 	},			
-	"number")
-HeroTable.addHandler("Portrait", "Portrait", "","General",
-	function(cell, heroInstance){
+	sorter: "number"
+});
+
+HeroTable.addEvaluator({
+	ID: "Portrait",
+	name: "Portrait", 
+	type: "General",
+	description: "Displays hero strength portrait",
+	init: function(cell, heroInstance){
 		var el = document.createElement("div");
 		el.className = "mheroicon " + heroInstance.Meta.ID;
 		cell.appendChild(el);
-	cell.sorterText = heroInstance.Raw.Name;
+		cell.sortertingProperty = heroInstance.Raw.Name;
 	},
-	"propertyText",
-	true)
-HeroTable.addHandler("Label", "Label", "Label","General",
-	function(cell, heroInstance){
+	sorter: "propertyText"
+});
+
+HeroTable.addEvaluator({
+	ID: "Label", 
+	name: "Label", 
+	header: "Label",
+	type: "General",
+	description: "Displays and editable label",
+	init: function(cell, heroInstance){
 		var label = document.createElement("input");
 		label.value = heroInstance.Meta.Label;
 		label.className = "hero-label";
@@ -334,10 +404,15 @@ HeroTable.addHandler("Label", "Label", "Label","General",
 		}).bind(this), heroInstance;
 		cell.appendChild(label);
 	},
-	"firstChildText",
-	true)
-HeroTable.addHandler("Delete", "Delete", "","General",
-	function(cell, heroInstance){
+	sorter: "firstChildText"
+});
+
+HeroTable.addEvaluator({
+	ID: "Delete",
+	name: "Delete",
+	type: "General",
+	description: "Adds a way to remove hero",
+	init: function(cell, heroInstance){
 		var button = document.createElement("button");
 		button.className = "delete-button";
 		cell.appendChild(button);
@@ -347,17 +422,31 @@ HeroTable.addHandler("Delete", "Delete", "","General",
 			this.TableInstanceRef.removeHero(this.HeroInstanceRef);
 		};
 	},
-	false,
-	true);
-HeroTable.addHandler("Damage", "Damage", "Dmg", "Derived",
-	function(cell, hero){
+	sorter: false
+});
+
+HeroTable.addEvaluator({
+	ID: "Damage",
+	name: "Damage",
+	header: "Dmg",
+	type: "Derived",
+	description: "Displays hero attack damage",
+	eval: function(cell, hero){
 	var bonus = hero.Total.DamageBonus;
 		cell.textContent = hero.Total.DamageBase + (bonus === 0 ? "" : "+" + bonus);
 	},
-	"number");
-HeroTable.addHandler("Items", "Items", "Items", "General",
-	function(cell, hero) {
+	sorter: "number"
+});
+
+HeroTable.addEvaluator({
+	ID: "Items", 
+	name: "Items", 
+	header: "Items", 
+	type: "General",
+	description: "Displays hero items",
+	init: function(cell, hero) {
 		cell.innerHTML = '<div class="item-container"></div>';
 	},
-	false,
-	false);
+	sorter: false
+});
+

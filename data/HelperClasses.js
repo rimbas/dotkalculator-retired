@@ -20,6 +20,18 @@ ItemInstance.prototype.toString = function () {
 	return "[ItemInstance "+this.ID+":"+this.Charges+"]";
 }
 
+ItemInstance.prototype.createImageElement = function () {
+	var img = document.createElement("img");
+	img.className = "item-image";
+	img.width = 33;
+	img.height = 24;
+	img.src = "images/items/" + this.ID + ".png";
+	img.ItemInstanceReference = this;
+	Object.defineProperty(this, "DisplayElement", {value: img} );
+	return img;
+}
+
+
 function SkillInstance(skillId) {
 	var skill = DotaData.getSkillProperties(skillId);
 	this.ID = skillId;
@@ -40,15 +52,3 @@ function SkillInstance(skillId) {
 SkillInstance.prototype.toString = function () {
 	return "[ItemInstance "+this.ID+":"+this.Charges+"]";
 }
-
-SkillInstance.prototype.createImageElement = function () {
-	var img = document.createElement("img");
-	img.className = "item-image";
-	img.width = 33;
-	img.height = 24;
-	img.src = "images/items png/" + this.ID + ".png";
-	img.ItemInstanceReference = this;
-	Object.defineProperty(this, "DisplayElement", {value: img} );
-	return img;
-}
-

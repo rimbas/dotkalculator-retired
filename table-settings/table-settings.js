@@ -23,21 +23,21 @@ $(function(){
 		allListItems = {},
 		activeItems = [];
 	
-	for (var group in HeroTable.evaluatorGroups) 
+	for (var groupName in HeroTable.evaluatorGroups) 
 	{
-		var array = HeroTable.evaluatorGroups[group];
-		groupLists[group] = createEmptyList(group);
+		var evaluatorGroup = HeroTable.evaluatorGroups[groupName];
+		groupLists[groupName] = createEmptyList(groupName);
 		
-		for (var i in array) 
+		for (var i in evaluatorGroup) 
 		{
-			var object = array[i],
+			var evaluator = evaluatorGroup[i],
 				li = document.createElement("li");
-			li.textContent = object.fullName;
-			li.evaluatorId = object.nameId;
+			li.textContent = evaluator.name;
+			li.evaluatorID = evaluator.ID;
 			li.className = "ui-state-default";
-			li.homeList = groupLists[group];
-			allListItems[object.nameId] = li;
-			groupLists[group].appendChild(li);
+			li.homeList = groupLists[groupName];
+			allListItems[evaluator.ID] = li;
+			groupLists[groupName].appendChild(li);
 		}
 	}
 	
@@ -60,10 +60,10 @@ $(function(){
 		var selector = document.getElementById("table-settings-table-selector"),
 			tableRef = HeroTable.tableList[selector.value],
 			activeListElement = document.getElementById("table-settings-items-active"),
-			activeEvaluators = tableRef.getEvaluators();
-		for (i = 0; i < activeEvaluators.length; i++){
-			var evaluator = activeEvaluators[i],
-				element = allListItems[evaluator];
+			activeEvaluators = tableRef.getActiveEvaluators();
+		for (i = 0; i < activeEvaluators.length; i++) {
+			var evaluatorId = activeEvaluators[i],
+				element = allListItems[evaluatorId];
 			element.parentElement.removeChild(element);
 			activeListElement.appendChild(element);
 			activeItems.push(element);
@@ -117,7 +117,7 @@ $(function(){
 			listItems = list.childNodes,
 			columns = [];
 		for (var i = 0; i < listItems.length; i++) {
-			columns.push(listItems[i].evaluatorId);
+			columns.push(listItems[i].evaluatorID);
 		}
 		tableRef.setColumnList(columns);
 	});
