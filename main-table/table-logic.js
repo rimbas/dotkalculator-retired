@@ -14,7 +14,7 @@ function HeroTable(tableName, tableId, wrapperId) {
 	this._tableName = tableName;
 	this._tableId = tableId;
 	this.heroList = [];
-	this.columnList = ["Delete", "Name", "Portrait", "Level", "Strength", "Agility", "Intelligence", "Damage" ];
+	this.columnList = ["Delete", "Name", "Portrait", "Level", "Strength", "Agility", "Intelligence", "Damage", "Items" ];
 	this._tableSorterCreated = false;
 	
 	this.createTable();
