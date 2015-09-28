@@ -14,7 +14,7 @@ function HeroTable(tableName, tableId, wrapperId) {
 	this._tableName = tableName;
 	this._tableId = tableId;
 	this.heroList = [];
-	this.columnList = ["Delete", "Name", "Portrait", "Level", "Strength", "Agility", "Intelligence", "Damage", "Items" ];
+	this.columnList = ["Delete", "Name", "Version", "Portrait", "Level", "Strength", "Agility", "Intelligence", "Damage", "Items" ];
 	this._tableSorterCreated = false;
 	
 	this.createTable();
@@ -135,15 +135,12 @@ HeroTable.prototype.sorterSettings = function () {
 
 // Adds a hero to the table and evaluates it
 // heroInstance (HeroInstance) - valid HeroInstance object
-// heroInstance (string)	   - a heroId string
 HeroTable.prototype.addHero = function (heroInstance) {
-	if (heroInstance in DotaData.getCurrentHeroList()) {
-		heroInstance = new HeroInstance(heroInstance);
-	}
-	else if (!heroInstance instanceof HeroInstance) {
+	if (!heroInstance instanceof HeroInstance) {
 		throw "Invalid parameter:" + heroInstance;
 	}
 	this.heroList.push(heroInstance);
+	heroInstance.updateTable = this.refreshHero.bind(this, heroInstance);
 	this.createHeroRow(heroInstance)
 }
 
@@ -401,7 +398,7 @@ HeroTable.addEvaluator({
 		label.onchange = (function(hero){
 			hero.Meta.Label = this.value;
 			this.updateSorting();
-		}).bind(this), heroInstance;
+		}).bind(this, heroInstance);
 		cell.appendChild(label);
 	},
 	sorter: "firstChildText"
@@ -445,8 +442,30 @@ HeroTable.addEvaluator({
 	type: "General",
 	description: "Displays hero items",
 	init: function(cell, hero) {
-		cell.innerHTML = '<div class="item-container"></div>';
+		var container = document.createElement("div");
+		container.className = "item-container";
+		cell.appendChild(container);
+	},
+	eval: function(cell, hero) {
+		cell = cell.firstChild;
+		while (cell.firstChild) {
+			cell.removeChild(cell.firstChild);	
+		}
+		for (var i = 0; i < hero.Items.length; i++) {
+			var itemInstance = hero.Items[i];
+			cell.appendChild(itemInstance.createImageElement());
+		}
 	},
 	sorter: false
 });
 
+HeroTable.addEvaluator({
+	ID: "Version", 
+	name: "Version", 
+	header: "Ver.", 
+	type: "General",
+	description: "Displays hero balance patch version",
+	eval: function(cell, hero) {
+		cell.textContent = hero.Raw.Version;
+	},
+});

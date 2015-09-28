@@ -91,8 +91,13 @@ th.noHeader {
 button {
 	outline: none;
 }
-.table-selector-wrapper {
-	padding: 3px;
+.settings-wrapper {
+	padding: 4px;
+	padding-left: 8px;
+}
+.settings-wrapper label {
+	display: inline-block;
+	width: 200px;
 }
 label {
 	color: gold;	

@@ -1,6 +1,7 @@
 
-function ItemInstance(itemId) {
-	var item = DotaData.getItemProperties(itemId);
+function ItemInstance(itemId, init) {
+	init = init || {};
+	var item = DotaData.getItemProperties(itemId, init.Version);
 	this.ID = itemId;
 	for (var prop in item) {
 		var value = item[prop];
@@ -26,8 +27,8 @@ ItemInstance.prototype.createImageElement = function () {
 	img.width = 33;
 	img.height = 24;
 	img.src = "images/items/" + this.ID + ".png";
-	img.ItemInstanceReference = this;
-	Object.defineProperty(this, "DisplayElement", {value: img} );
+	//img.ItemInstanceReference = this;
+	//Object.defineProperty(this, "DisplayElement", {value: img} );
 	return img;
 }
 

@@ -18,6 +18,7 @@
 	<script src="custom-elements.js"></script>
 	<script src="data/dota-data.js"></script>
 	<script src="data/dota-data-684c.js"></script>
+	<script src="data/dota-data-685.js"></script>
 	<script src="data/HeroInstance.js"></script>
 	<script src="data/HelperClasses.js"></script>
 	<script src="main-table/table-logic.js"></script>
@@ -41,10 +42,13 @@
 	
 	<div class="window" id="hero-picker"><!-- hero picker container -->
 		<div class="drag-bar">Hero picker<div class="drag-bar-close" id="hero-picker-close"></div></div>
-		<div id="hero-picker-table-selector-wrapper" class="table-selector-wrapper">
+		<div id="hero-picker-table-selector-wrapper" class="settings-wrapper">
 			<label for="hero-picker-table-selector">Target table: </label>
 			<select id="hero-picker-table-selector" class="table-selector">
 				<option value="main-table">Comparison table</option>
+			</select><br>
+			<label for="hero-picker-version-selector">Dota 2 version: </label>
+			<select id="hero-picker-version-selector" class="table-selector">
 			</select>
 		</div>
 		<table id="hero-picker-table">
@@ -72,7 +76,7 @@
 	
 	<div class="window" id="table-settings">
 		<div class="drag-bar">Table settings<div class="drag-bar-close" id="table-settings-close"></div></div>
-		<div id="table-settings-table-selector-wrapper" class="table-selector-wrapper">
+		<div id="table-settings-table-selector-wrapper" class="settings-wrapper">
 			<label for="table-settings-table-selector">Target table: </label>
 			<select id="table-settings-table-selector" class="table-selector">
 				<option value="main-table">Comparison table</option>

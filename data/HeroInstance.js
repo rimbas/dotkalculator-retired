@@ -8,7 +8,7 @@
 // init    (object)	- settings
 function HeroInstance(heroId, init) {
 	if (!init) init = {};
-	this.Raw = DotaData.getHeroProperties(heroId);
+	this.Raw = DotaData.getHeroProperties(heroId, init.Version);
 	this.Meta = { "ID": heroId, 
 				  "Level": Math.min(Math.max(init.Level, 1), 25) || this.Raw.Level, 
 				  "Label": init.Label || this.Raw.Name, 
@@ -92,6 +92,9 @@ HeroInstance.prototype.removeItem = function (item) {
 	}
 	this.ItemChange();
 }
+
+// Placeholder. Used when instance is inserted to a table
+HeroInstance.prototype.updateTable = function () {}
 
 HeroInstance.addHandler({
 	Name: "LevelChange",
@@ -221,6 +224,7 @@ HeroInstance.addHandler({
 		a.VisionNight = this.Raw.VisionNighttime + this.Skill.VisionNight + this.Item.VisionNight;
 
 		this.Total = a;
+		this.updateTable();
 	}
 });
 	
