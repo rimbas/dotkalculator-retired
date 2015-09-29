@@ -1,7 +1,5 @@
 /* Main page initialisation */
 
-var MainTable;
-
 //document.addEventListener("load", 
 $(function(e){
 	$(".window").draggable({

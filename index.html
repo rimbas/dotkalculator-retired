@@ -27,6 +27,8 @@
 	<link href="hero-picker/hero-picker.css" rel="stylesheet" type="text/css" />
 	<script src="table-settings/table-settings.js"></script>
 	<link href="table-settings/table-settings.css" rel="stylesheet" type="text/css" />	
+	<script src="item-picker/item-picker.js"></script>
+	<link href="item-picker/item-picker.css" rel="stylesheet" type="text/css" />
 	<script src="onLoad.js"></script>
 </head>
 <body>
@@ -34,6 +36,7 @@
 		<a href="/">Dotkalculator</a>
 		<button id="hero-picker-header-button">Add Hero</button>
 		<button id="table-settings-header-button">Table settings</button>
+		<button id="item-picker-header-button">Item list</button>
 	</header>
 	
 	<div id="main-table-wrapper">
@@ -42,7 +45,7 @@
 	
 	<div class="window" id="hero-picker"><!-- hero picker container -->
 		<div class="drag-bar">Hero picker<div class="drag-bar-close" id="hero-picker-close"></div></div>
-		<div id="hero-picker-table-selector-wrapper" class="settings-wrapper">
+		<div class="settings-wrapper">
 			<label for="hero-picker-table-selector">Target table: </label>
 			<select id="hero-picker-table-selector" class="table-selector">
 				<option value="main-table">Comparison table</option>
@@ -76,7 +79,7 @@
 	
 	<div class="window" id="table-settings">
 		<div class="drag-bar">Table settings<div class="drag-bar-close" id="table-settings-close"></div></div>
-		<div id="table-settings-table-selector-wrapper" class="settings-wrapper">
+		<div class="settings-wrapper">
 			<label for="table-settings-table-selector">Target table: </label>
 			<select id="table-settings-table-selector" class="table-selector">
 				<option value="main-table">Comparison table</option>
@@ -89,6 +92,24 @@
 				<ul id="table-settings-items-active"></ul>
 				<span>Remove item</span>
 				<ul id="table-settings-items-bin"></ul></div></div>
+	</div>
+	
+	<div class="window" id="item-picker">
+		<div class="drag-bar">Item picker <div class="drag-bar-close" id="item-picker-close"></div></div>
+		<div class="settings-wrapper">
+			<label for="item-picker-version-selector">Dota 2 version: </label>
+			<select id="item-picker-version-selector" class="table-selector">
+				
+			</select>
+		</div>
+		<table id="item-picker-table">
+			<thead>
+				
+			</thead>
+			<tbody>
+			
+			</tbody>
+		</table>
 	</div>
 	<!--
 	<div style="padding:10px">
