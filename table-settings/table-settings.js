@@ -58,7 +58,7 @@ $(function(){
 		}
 		
 		var selector = document.getElementById("table-settings-table-selector"),
-			tableRef = HeroTable.tableList[selector.value],
+			tableRef = HeroTable.getTableById(selector.value),
 			activeListElement = document.getElementById("table-settings-items-active"),
 			activeEvaluators = tableRef.getActiveEvaluators();
 		for (i = 0; i < activeEvaluators.length; i++) {
@@ -112,7 +112,7 @@ $(function(){
 	$("#table-settings-submit").button();
 	$("#table-settings-submit").on("click", function(){
 		var selector = document.getElementById("table-settings-table-selector"),
-			tableRef = HeroTable.tableList[selector.value],
+			tableRef = HeroTable.getTableById(selector.value),
 			list = document.getElementById("table-settings-items-active"),
 			listItems = list.childNodes,
 			columns = [];

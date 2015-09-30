@@ -103,8 +103,8 @@ label {
 	color: gold;	
 	vertical-align: super;
 }
-.table-selector {
-	width: 300px;
+.selector-table, .selector-version {
+	/*width: 300px;*/
 }
 .ui-selectmenu-menu .ui-menu {
 	background: #003045;
@@ -123,8 +123,8 @@ input.ui-button{
 	padding: 4px;
 	vertical-align: text-bottom;
 }
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
+input[type=number].spinner::-webkit-inner-spin-button, 
+input[type=number].spinner::-webkit-outer-spin-button { 
   -webkit-appearance: none; 
   margin: 0; 
 }

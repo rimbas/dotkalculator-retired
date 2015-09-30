@@ -5,16 +5,23 @@
 // 		Hero instance constructor
 //
 // heroId  (string) - hero to retrieve from hero data
-// init    (object)	- settings
-function HeroInstance(heroId, init) {
-	if (!init) init = {};
-	this.Raw = DotaData.getHeroProperties(heroId, init.Version);
+// options (object)
+// Optional properties:
+// version (string)  - Dota 2 version override
+// level   (integer) - Hero level override
+// label   (string)  - Label override
+// team    (string)  - team definition
+// dead    (boolean) - deadness override
+// gold    (integer) - gold override
+function HeroInstance(heroId, options) {
+	if (!options) options = {};
+	this.Raw = DotaData.getHeroProperties(heroId, options.version);
 	this.Meta = { "ID": heroId, 
-				  "Level": Math.min(Math.max(init.Level, 1), 25) || this.Raw.Level, 
-				  "Label": init.Label || this.Raw.Name, 
-				  "Team": init.Team || "None", 
-				  "Dead": init.Dead || false,
-				  "Gold": Number.isInteger(init.Gold) || 625 };
+				  "Level": Math.min(Math.max(options.level, 1), 25) || this.Raw.Level, 
+				  "Label": options.label || this.Raw.Name, 
+				  "Team": options.team || undefined, 
+				  "Dead": options.dead || false,
+				  "Gold": Number.isInteger(options.gold) || 625 };
 	this.Base = {};
 	this.Item = {};
 	this.Items = [];
@@ -93,7 +100,7 @@ HeroInstance.prototype.removeItem = function (item) {
 	this.ItemChange();
 }
 
-// Placeholder. Used when instance is inserted to a table
+// Placeholder. Overritten when instance is inserted into a table
 HeroInstance.prototype.updateTable = function () {}
 
 HeroInstance.addHandler({
@@ -111,9 +118,9 @@ HeroInstance.addHandler({
 		this.Base.Intelligence = Math.floor(this.Base.IntelligenceFloat);
 		this.Base.Armor = this.Raw.Armor + this.Base.Agility * 0.14;
 		this.Base.Health = this.Raw.Health + this.Base.Strength * 19;
-		this.Base.HealthRegen = this.Raw.HealthRegeneration + this.Base.Strength * 0.03;
+		this.Base.HealthRegeneration = this.Raw.HealthRegeneration + this.Base.Strength * 0.03;
 		this.Base.Mana = this.Raw.Mana + this.Base.Intelligence * 13;
-		this.Base.ManaRegen = this.Raw.ManaRegeneration + this.Base.Intelligence * 0.04;
+		this.Base.ManaRegeneration = this.Raw.ManaRegeneration + this.Base.Intelligence * 0.04;
 		var primaryStat = 0;
 		if ( this.Raw.Type == "Strength" )
 			primaryStat = this.Base.Strength;

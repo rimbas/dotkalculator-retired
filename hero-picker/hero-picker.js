@@ -1,13 +1,5 @@
 $(function(){
-	(function(){
-		var versionSelector = document.getElementById("hero-picker-version-selector");
-		for (var versionId in DotaData.Versions) {
-			var option = document.createElement("option");
-			option.value = versionId;
-			option.textContent = versionId;
-			versionSelector.add(option);
-		}
-		
+	(function(){		
 		var list = DotaData.getCurrentHeroList();
 		for ( name in list ) {
 			var hero = list[name];
@@ -47,7 +39,7 @@ $(function(){
 			var heroId = this.getAttribute("data-hero"),
 				selector = document.getElementById("hero-picker-table-selector"),
 				versionSelector = document.getElementById("hero-picker-version-selector"),
-				heroInstance = new HeroInstance(heroId, {Version: versionSelector.value});
-			HeroTable.tableList[selector.value].addHero(heroInstance);
+				heroInstance = new HeroInstance(heroId, {version: versionSelector.value});
+			HeroTable.getTableById(selector.value).addHero(heroInstance);
 		});
 })

@@ -3,21 +3,35 @@
 */
 
 // HeroTable handler constructor
-// tableId - table Id
+// tableID - table Id
 // wrapperId - element to insert the table into
-HeroTable.tableList = {}
+HeroTable.tableList = []
+HeroTable.tables = {};
 
-function HeroTable(tableName, tableId, wrapperId) {
-	HeroTable.tableList[tableId] = this;
+function HeroTable(tableName, tableID, wrapperId) {
+	this.index = HeroTable.tableList.push(this);
+	HeroTable.tables[tableID] = this;
 	
 	this._wrapperElement = document.getElementById(wrapperId);
-	this._tableName = tableName;
-	this._tableId = tableId;
+	this.name = tableName;
+	this.ID = tableID;
 	this.heroList = [];
-	this.columnList = ["Delete", "Name", "Version", "Portrait", "Level", "Strength", "Agility", "Intelligence", "Damage", "Items" ];
+	this.columnList = ["Delete", "Name", "Portrait", "Level", "Strength", "Agility", "Intelligence", "Damage", "Items", "Armor" ];
 	this._tableSorterCreated = false;
 	
 	this.createTable();
+}
+
+HeroTable.getTables = function() {
+	var tables = [];
+	for (var heroTableInstance of HeroTable.tableList) {
+		tables.push({ID: heroTableInstance.ID, name: heroTableInstance.name })
+	}
+	return tables;
+}
+
+HeroTable.getTableById = function (id) {
+	return HeroTable.tables[id];
 }
 
 HeroTable.prototype.evaluator = {};
@@ -26,6 +40,7 @@ HeroTable.evaluatorGroups = {};
 // 
 //   Evaluator implementation registering for HeroInstance handling
 // 
+// Evaluator object properties:
 // ID			(string)    - ID for the handler
 // name			(string)    - Readable name
 // header		(undefined) - Nothing to display in header cell
@@ -129,7 +144,6 @@ HeroTable.prototype.sorterSettings = function () {
 			sorterSetup.headers[i].sorter = evaluator.sorter;
 		}
 	}
-	this.SortingSetup = sorterSetup;
 	return sorterSetup;
 }
 
@@ -274,7 +288,7 @@ HeroTable.addEvaluator({
 HeroTable.addEvaluator({
 	ID: "Level",
 	name: "Level",
-	header: "Level",
+	header: "Lvl",
 	type: "Base",
 	description: "Displays hero level",
 	init: function(cell, heroInstance) {
@@ -366,7 +380,7 @@ HeroTable.addEvaluator({
 	description: "Displays hero armor",
 	eval: function(cell, heroInstance){
 		//cell.textContent = Math.round(heroInstance.Total.Armor * 10)/10;
-		cell.textContent = heroInstance.Total.Armor;
+		cell.textContent = heroInstance.Total.Armor.toFixed(2);
 	},			
 	sorter: "number"
 });
@@ -462,7 +476,7 @@ HeroTable.addEvaluator({
 HeroTable.addEvaluator({
 	ID: "Version", 
 	name: "Version", 
-	header: "Ver.", 
+	header: "V.", 
 	type: "General",
 	description: "Displays hero balance patch version",
 	eval: function(cell, hero) {

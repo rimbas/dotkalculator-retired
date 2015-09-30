@@ -1,7 +1,9 @@
 
-function ItemInstance(itemId, init) {
-	init = init || {};
-	var item = DotaData.getItemProperties(itemId, init.Version);
+// ItemInstance
+// Helper object for HeroInstance
+function ItemInstance(itemId, properties) {
+	properties = properties || {};
+	var item = DotaData.getItemProperties(itemId, properties.Version);
 	this.ID = itemId;
 	for (var prop in item) {
 		var value = item[prop];
@@ -32,9 +34,10 @@ ItemInstance.prototype.createImageElement = function () {
 	return img;
 }
 
-
-function SkillInstance(skillId) {
-	var skill = DotaData.getSkillProperties(skillId);
+//
+function SkillInstance(skillId, properties) {
+	properties = properties || {};
+	var skill = DotaData.getSkillProperties(skillId, properties.version);
 	this.ID = skillId;
 	for (var prop in skill) {
 		var value = skill[prop];

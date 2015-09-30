@@ -52,9 +52,9 @@ Hero stats, after calculating with level
 	Intelligence					-
 	Armor							-
 	Health							- 
-	HealthRegen						- 
+	HealthRegeneration				- 
 	Mana							-
-	ManaRegen						- 
+	ManaRegeneration				- 
 	DamageMin						-
 	DamageMax						-
 
@@ -72,11 +72,10 @@ Item stats
 	Evasion							- Talisman of Evasion
 	MagicalResistance				- Cloak
 	Health							- 
-	HealthRegen						- 
+	HealthRegeneration				- 
 	Mana							- 
-	ManaRegen						- (FROM INT)
-	ManaRegenFlat					- Bloodstone
-	ManaRegenPercentage				- 
+	ManaRegenerationFlat			- Bloodstone
+	ManaRegenerationPercentage		- Sage's mask
 	Damage							- 
 	AttackSpeed						- Hyperstone
 	Range							- 
@@ -97,22 +96,24 @@ Skill stats
 	Evasion							- Blur
 	MagicalResistance				- Pudge
 	Health							- Troll warlord
+	HealthRegeneration				- (slark?)
 	Mana							- Outsourced Developer
-	ManaRegen						- 
-	ManaRegenFlat					- Crystal Maiden
-	ManaRegenPercentage				-
+	ManaRegenerationFlat			- Crystal Maiden
+	ManaRegenerationPercentage		- 
 	Damage							- 
 	DamageBase						- Tiny grow
 	AttackSpeed						- 
 	Range							- Sniper
 	VisionDay						-
-	VisionNight						- 
+	VisionNight						- Luna
 	TrueSight						- (necro creep)
 	Aura							- CM, Luna, Venge
 	
 Aura/Buff stats
 	Name							- 
 	Level							- 
+	Class							- Basilius/Aquaila/Vlads,  Headress/Mek
+	ClassLevel						- 
 	Stacking						- Huskar, Meepo
 	Strength						- Undy Q, Pudge E, 
 	Agility							- Slark E
@@ -124,10 +125,10 @@ Aura/Buff stats
 	Blind							- Solar crest, Blinding light
 	MagicalResistance				- Pipe
 	Health							- Ancient Granite Golem aura
+	HealthRegeneration				- Headress?
 	Mana							- 
-	ManaRegen						-
-	ManaRegenFlat					- CM aura
-	ManaRegenPercentage				- 
+	ManaRegenerationFlat			- CM aura
+	ManaRegenerationPercentage		- 
 	Damage							- LC Duel
 	DamagePercentage				- Vlads, Empower
 	DamageReduction					- Enfeeble
@@ -145,6 +146,7 @@ Total
 	Blind							- 
 	MagicalResistance				- Diminishing calculation
 	Health							- (Raw.Health + Total.Strength*19 + Items/Skills/Aura.Health)*(1+Item/Skill/Aura.HealthPercentage)
+	HealthRegeneration
 	Mana							- Raw.Mana + Total.Intelligence*13+ Items/Skills/Aura.Mana
 	ManaRegenerationBase			- Raw.ManaRegeneration + Total.Intelligence * 0.04
 	ManaRegenerationFlat			- Item/Skill/Aura.ManaRegenerationFlat
