@@ -60,6 +60,10 @@ DotaData.getCurrentHeroList = function() {
 	return DotaData.Versions[DotaData.NewestVersion].Heroes;
 }
 
+DotaData.getCurrentItemList = function() {
+	return DotaData.Versions[DotaData.NewestVersion].Items;
+}
+
 DotaData.addVersion = function (version, data) {
 	DotaData.Versions[version] = data;
 }

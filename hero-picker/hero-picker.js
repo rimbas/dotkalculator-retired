@@ -12,6 +12,7 @@ $(function(){
 			document.getElementById("hero-picker-"+hero.Side+"-"+ hero.Type).appendChild(a);
 		}
 	})();
+	
 	$("#hero-picker").toggle(false);
 	
 	$("#hero-picker-header-button").on("click", 

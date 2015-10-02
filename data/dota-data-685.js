@@ -3077,7 +3077,6 @@ DotaData.addVersion( "6.85",
 			"Version": "6.85",
 			"Cost": 0,
 			"Components": 0,
-			"Section": "None",
 			"Strength": 0,
 			"Agility": 0,
 			"Intelligence": 0,
@@ -3104,6 +3103,7 @@ DotaData.addVersion( "6.85",
 		"branches": {
 			"Name": "Iron branches",
 			"Cost": 50,
+			"Section": "Attributes",
 			"Strength": 1,
 			"Agility": 1,
 			"Intelligence": 1
@@ -3111,46 +3111,54 @@ DotaData.addVersion( "6.85",
 		"boots": {
 			"Name": "Boots of speed",
 			"Cost": 450,
+			"Section": "Arcane",
 			"MovementSpeed": 50,
 			"IsBoot": true
 		},
 		"ring_of_regen": {
 			"Name": "Ring of Regen",
 			"Cost": 350,
+			"Section": "Arcane",
 			"HealthRegeneration": 3,
 		},
 		"sobi_mask": {
 			"Name": "Sage's mask",
 			"Cost": 325,
+			"Section": "Arcane",
 			"ManaRegenerationPercentage": 0.5
 		},
 		"soul_ring": {
 			"Name": "Soul ring",
 			"Cost": 800,
 			"Components": ["ring_of_regen", "sobi_mask", 125],
+			"Section": "Common",
 			"HealthRegeneration": 3,
 			"ManaRegenerationPercentage": 0.5
 		},
 		"point_booster": {
 			"Name": "Point booster",
 			"Cost": 1200,
+			"Section": "Secret",
 			"Health": 200,
 			"Mana": 150
 		},
 		"vitality_booster": {
 			"Name": "Vitality booster",
 			"Cost": 1100,
+			"Section": "Secret",
 			"Health": 250
 		},
 		"energy_booster": {
 			"Name": "Energy booster",
 			"Cost": 900,
+			"Section": "Secret",
 			"Mana": 250
 		},
 		"soul_booster": {
 			"Name": "Soul booster",
 			"Cost": 3200,
 			"Components": ["point_booster", "vitality_booster", "energy_booster"],
+			"Section": "Armor",
 			"Health": 450,
 			"HealthRegeneration": 4,
 			"Mana": 400,
@@ -3160,6 +3168,7 @@ DotaData.addVersion( "6.85",
 			"Name": "Bloodstone",
 			"Cost": 4900,
 			"Components": ["soul_booster", "soul_ring", 900],
+			"Section": "Armor",
 			"Health": 500,
 			"HealthRegeneration": 9,
 			"Mana": 400,
@@ -3170,6 +3179,8 @@ DotaData.addVersion( "6.85",
 		"circlet": {
 			"Name": "Circlet",
 			"Cost": 165,
+			"Section": "Attributes",
+			"SectionIndex": 0,
 			"Strength": 2,
 			"Agility": 2,
 			"Intelligence": 2
@@ -3177,22 +3188,26 @@ DotaData.addVersion( "6.85",
 		"gauntlets": {
 			"Name": "Gauntlets of Strength",
 			"Cost": 150,
+			"Section": "Attributes",
 			"Strength": 3
 		},
 		"slippers": {
 			"Name": "Slippers of Agility",
 			"Cost": 150,
+			"Section": "Attributes",
 			"Agility": 3
 		},
 		"mantle": {
 			"Name": "Mantle of Intelligence",
 			"Cost": 150,
+			"Section": "Attributes",
 			"Intelligence": 3
 		},
 		"bracer": {
 			"Name": "Bracer",
 			"Cost": 525,
 			"Components": ["circlet", "gauntlets", 210],
+			"Section": "Common",
 			"Strength": 6,
 			"Agility": 3,
 			"Intelligence": 3,
@@ -3202,6 +3217,7 @@ DotaData.addVersion( "6.85",
 			"Name": "Wraith band",
 			"Cost": 485,
 			"Components": ["circlet", "slippers", 170],
+			"Section": "Common",
 			"Strength": 3,
 			"Agility": 6,
 			"Intelligence": 3,
@@ -3211,16 +3227,11 @@ DotaData.addVersion( "6.85",
 			"Name": "Null talisman", //con fuckign gratis you can buy null talis
 			"Cost": 470,
 			"Components": ["circlet", "slippers", 155],
+			"Section": "Common",
 			"Strength": 3,
 			"Agility": 3,
 			"Intelligence": 6,
 			"Damage": 3	
-		},
-		"boots": {
-			"Name": "Boots of speed",
-			"Cost": 450,
-			"MovementSpeedFlat": 50,
-			"IsBoot": true
 		}
 		
 	},

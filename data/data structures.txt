@@ -1,6 +1,7 @@
 
 Hero (unit) stat property structure
 
+
 Raw stat definition
 	Name 							- Dota 2 name of the hero
 	LoreName						- Alternate name
@@ -63,6 +64,7 @@ Item stats
 	Cost							- 
 	Components						- (items + numerical recipe value)
 	Section							- (shop sections)
+	SectionIndex					- Override for shop display, (to recreate Dota 2 shop order)
 	Strength						- 
 	Agility							- 
 	Intelligence					- 
