@@ -3098,7 +3098,113 @@ DotaData.addVersion( "6.85",
 			"ManaRegenerationFlat": 0,
 			"ManaRegenerationPercentage": 0,
 			"Charges": 0,
+			"ChargesStack": false,
 			"Consumable": false
+		},
+		"clarity": {
+			"Name": "Clarity",
+			"Cost": 50,
+			"Section": "Consumables",
+			"SectionIndex": 0,
+			"Charges": 1,
+			"ChargesStack": true,
+			"Consumable": true
+		},
+		"enchanted_mango": {
+			"Name": "Enchanted Mango",
+			"Cost": 125,
+			"Section": "Consumables",
+			"SectionIndex": 1,
+			"Charges": 1,
+			"Consumable": true,
+			"HealthRegeneration": 1
+		},
+		"tango": {
+			"Name": "Tango",
+			"Cost": 125,
+			"Section": "Consumables",
+			"SectionIndex": 2,
+			"Charges": 4,
+			"ChargesStack": true,
+			"Consumable": true // only on trees and wards tho
+		},
+		"salve": {
+			"Name": "Salve",
+			"Cost": 110,
+			"Section": "Consumables",
+			"SectionIndex": 3,
+			"Charges": 1,
+			"ChargesStack": true,
+			"Consumable": true
+		},
+		"smoke_of_deceit": {
+			"Name": "Smoke of Deceit",
+			"Cost": 100,
+			"Section": "Consumables",
+			"SectionIndex": 4,
+			"Charges": 1,
+			"ChargesStack": true,
+			"Consumable": true
+		},
+		"tpscroll": {
+			"Name": "Town Portal Scroll",
+			"Cost": 75,
+			"Section": "Consumables",
+			"SectionIndex": 5,
+			"Charges": 1,
+			"ChargesStack": true,
+			"Consumable": true
+		},
+		"dust": {
+			"Name": "Dust of Appearance",
+			"Cost": 180,
+			"Section": "Consumables",
+			"SectionIndex": 6,
+			"Charges": 2,
+			"ChargesStack": true,
+			"Consumable": true
+		},
+		"courier": {
+			"Name": "Animal Courier",
+			"Cost": 120,
+			"Section": "Consumables",
+			"SectionIndex": 7,
+			"Charges": 1,
+			"Consumable": true
+		},
+		"flying_courier": {
+			"Name": "Flying Courier",
+			"Cost": 220,
+			"Section": "Consumables",
+			"SectionIndex": 8,
+			"Charges": 1,
+			"ChargesStack": false,
+			"Consumable": true
+		},
+		"ward_observer": {
+			"Name": "Observer Ward",
+			"Cost": 75,
+			"Section": "Consumables",
+			"SectionIndex": 9,
+			"Charges": 1,
+			"ChargesStack": true,
+			"Consumable": true
+		},
+		"ward_sentry": {
+			"Name": "Sentry Ward",
+			"Cost": 200,
+			"Section": "Consumables",
+			"SectionIndex": 10,
+			"Charges": 2,
+			"ChargesStack": true,
+			"Consumable": true
+		},
+		"bottle": {
+			"Name": "Bottle",
+			"Cost": 700,
+			"Section": "Consumables",
+			"SectionIndex": 11,
+			"Charges": 3,
 		},
 		"branches": {
 			"Name": "Iron branches",

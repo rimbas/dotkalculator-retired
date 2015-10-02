@@ -65,6 +65,10 @@ Item stats
 	Components						- (items + numerical recipe value)
 	Section							- (shop sections)
 	SectionIndex					- Override for shop display, (to recreate Dota 2 shop order)
+	Charges							- Default item charge count (0 for normal  items, at least 1 for consumables)
+	ChargesStack					- Multiples of same item stack (tangos, salves, clarities)
+	Consumable						- Charge reduction to zero removes the item
+	Cooldown						- Item use cooldown
 	Strength						- 
 	Agility							- 
 	Intelligence					- 

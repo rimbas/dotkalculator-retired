@@ -94,7 +94,7 @@ HeroTable.prototype.createTable = function () {
 	this._tableElement.HeroTableController = this;
 	
 	var caption = document.createElement("caption");
-	caption.textContent = this._tableName;
+	caption.textContent = this.name;
 	this._tableElement.appendChild(caption);
 	
 	var thead = document.createElement("thead");
@@ -457,7 +457,11 @@ HeroTable.addEvaluator({
 	description: "Displays hero items",
 	init: function(cell, hero) {
 		var container = document.createElement("div");
+		container.ondrop = function(e) { 
+			hero.addItem(new ItemInstance(e.dataTransfer.getData("text/item-id")));
+		}
 		container.className = "item-container";
+		container.ondragover = function(e){if (e.dataTransfer.types.indexOf("text/item-id") > -1 ) { e.preventDefault()}};
 		cell.appendChild(container);
 	},
 	eval: function(cell, hero) {

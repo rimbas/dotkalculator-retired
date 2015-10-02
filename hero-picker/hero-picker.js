@@ -1,7 +1,7 @@
 $(function(){
 	(function(){		
 		var list = DotaData.getCurrentHeroList();
-		for ( name in list ) {
+		for ( var name in list ) {
 			var hero = list[name];
 			if ( hero.Enabled <= 0 ) continue;
 			var a = document.createElement("button");

@@ -80,7 +80,7 @@ HeroInstance.prototype.propagateChange = function (properties) {
 // returns index if success
 HeroInstance.prototype.addItem = function (item, forceInsert) {
 	if (this.Items.length >= 6 && !forceInsert) {
-		return false;
+		return -1;
 	}
 	var index = this.Items.push(item);
 	this.ItemChange();

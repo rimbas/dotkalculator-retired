@@ -1,14 +1,11 @@
 $(function(){
 	
-	var baseWrapper = document.getElementById("item-picker-base");
-	
-	var itemTable = document.createElement("table"),
+	var itemTable = document.getElementById("item-picker-base"),
 		itemTableHead = document.createElement("thead"),
 		itemTableBody = document.createElement("tbody"),
 		itemRow = itemTableBody.insertRow();
 	itemTable.appendChild(itemTableHead);
 	itemTable.appendChild(itemTableBody);
-	baseWrapper.appendChild(itemTable);
 	
 	var shopSections = [
 		"Consumables", "Attributes", "Armaments", "Arcane", "Common", 
@@ -21,12 +18,44 @@ $(function(){
 		itemTableHead.appendChild(th);
 		var img = document.createElement("img");
 		img.src = "images/shop/shop_"+section.toLowerCase()+".png";
+		img.width = 48;
+		img.height = 48;
+		img.alt = section;
+		img.title = section;
 		th.appendChild(img);
 		var td = document.createElement("td");
 		td.id = "item-selector-section-"+section;
 		td.style.verticalAlign = "top";
 		shopSectionElements[section] = td;
 		itemRow.appendChild(td);
+	}
+	
+	function itemDragStart(e) {
+		this.style.opacity = "0.4";
+		e.dataTransfer.setData("text/item-id", this.itemId);
+		e.dataTransfer.effectAllowed = "copy";
+	}
+	
+	function itemDragEnd(e) {
+		this.style.opacity = "1";	
+	}
+	
+	function itemDragOver(e) {
+		if (e.preventDefault) {
+			e.preventDefault();	
+		}
+		e.dataTransfer.effectAllowed = "copy";
+		return false;
+	}
+	
+	function itemDragDrop(e) {
+		if (e.stopPropagation) {
+			e.stopPropagation();	
+		}
+		var itemId = e.dataTransfer.getData("text/item-id");
+		console.log("Dropped", this, e, itemId);
+		event.target.addItem(itemId);
+		return false;
 	}
 	
 	function populateItemTable () {
@@ -46,8 +75,18 @@ $(function(){
 					img.itemIndex = item.SectionIndex;
 				}
 				img.src = "images/items/"+itemKey+".png";
+				img.itemId = itemKey;
+				img.setAttribute("item-key", itemKey);
+				img.draggable = true;
 				img.width = 48;
 				img.style.display = "block";
+				img.alt = item.Name;
+				img.title = item.Name;
+				
+				img.ondragstart = itemDragStart;
+				img.ondragend = itemDragEnd;
+				//img.ondrop = itemDragDrop;
+				
 				
 				if (Number.isInteger(img.itemIndex) && !section[img.itemIndex]) {
 					section[img.itemIndex] = img;
@@ -62,7 +101,6 @@ $(function(){
 				}
 			}
 		}
-		
 		for (var section in sectionPools) {
 			var marginSum = 0;
 			for (var img of sectionPools[section]) {

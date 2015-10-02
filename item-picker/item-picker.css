@@ -1,3 +1,15 @@
 #item-picker {
 	
 }
+
+#item-picker-base {
+	border-bottom: none;
+	border-left: none;
+	border-right: none;
+}
+
+#item-picker-base td, #item-picker-base th {
+	margin: 0px;
+	padding: 0px;
+	border: none;
+}
