@@ -120,7 +120,7 @@ $(function(){
 	populateItemTable();
 	
 	
-	//$("#item-picker").toggle(false);
+	$("#item-picker").toggle(false);
 	$("#item-picker")[0].style.top = "52px";
 	$("#item-picker")[0].style.left = "11px";
 	

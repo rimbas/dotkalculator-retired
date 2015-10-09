@@ -119,6 +119,7 @@ $(function(){
 		for (var i = 0; i < listItems.length; i++) {
 			columns.push(listItems[i].evaluatorID);
 		}
+		localStorage.setItem("tableColumns-"+selector.value, columns.join(";"));
 		tableRef.setColumnList(columns);
 	});
 });

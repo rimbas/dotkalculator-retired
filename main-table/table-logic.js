@@ -16,7 +16,13 @@ function HeroTable(tableName, tableID, wrapperId) {
 	this.name = tableName;
 	this.ID = tableID;
 	this.heroList = [];
-	this.columnList = ["Delete", "Name", "Portrait", "Level", "Strength", "Agility", "Intelligence", "Damage", "Items", "Armor" ];
+	var localStorageColumns = localStorage.getItem("tableColumns-" + tableID);
+	if (localStorageColumns) {
+		this.columnList = localStorageColumns.split(";");	
+	}
+	else {
+		this.columnList = ["Delete", "Name", "Portrait", "Level", "Strength", "Agility", "Intelligence", "Damage", "Items", "Armor" ];
+	}
 	this._tableSorterCreated = false;
 	
 	this.createTable();
