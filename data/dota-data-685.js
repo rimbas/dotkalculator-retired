@@ -3084,7 +3084,6 @@ DotaData.addVersion( "6.85",
 			"Evasion": 0,
 			"MagicResistance": 0,
 			"MovementSpeedFlat": 0,
-			"IsBoot": 0,
 			"MovementSpeedPercentage": 0,
 			"Range": 0,
 			"Damage": 0,
@@ -3101,6 +3100,7 @@ DotaData.addVersion( "6.85",
 			"ChargesStack": false,
 			"Consumable": false
 		},
+		/* Consumables */
 		"clarity": {
 			"Name": "Clarity",
 			"Cost": 50,
@@ -3206,75 +3206,980 @@ DotaData.addVersion( "6.85",
 			"SectionIndex": 11,
 			"Charges": 3,
 		},
+		/* Attributes */
 		"branches": {
 			"Name": "Iron branches",
 			"Cost": 50,
 			"Section": "Attributes",
+			"SectionIndex": 0,
 			"Strength": 1,
 			"Agility": 1,
 			"Intelligence": 1
 		},
-		"boots": {
-			"Name": "Boots of speed",
-			"Cost": 450,
-			"Section": "Arcane",
-			"MovementSpeed": 50,
-			"IsBoot": true
+		"gauntlets": {
+			"Name": "Gauntlets of Strength",
+			"Cost": 150,
+			"Section": "Attributes",
+			"SectionIndex": 1,
+			"Strength": 3
 		},
-		"ring_of_regen": {
-			"Name": "Ring of Regen",
-			"Cost": 350,
+		"slippers": {
+			"Name": "Slippers of Agility",
+			"Cost": 150,
+			"Section": "Attributes",
+			"SectionIndex": 2,
+			"Agility": 3
+		},
+		"mantle": {
+			"Name": "Mantle of Intelligence",
+			"Cost": 150,
+			"Section": "Attributes",
+			"SectionIndex": 3,
+			"Intelligence": 3
+		},
+		"circlet": {
+			"Name": "Circlet",
+			"Cost": 165,
+			"Section": "Attributes",
+			"SectionIndex": 4,
+			"Strength": 2,
+			"Agility": 2,
+			"Intelligence": 2
+		},
+		"belt_of_strength": {
+			"Name": "Belt of Strength",
+			"Cost": 450,
+			"Section": "Attributes",
+			"SectionIndex": 5,
+			"Strength": 6
+		},
+		"band_of_elvenskin": {
+			"Name": "Band of Elvenskin",
+			"Cost": 450,
+			"Section": "Attributes",
+			"SectionIndex": 6,
+			"Agility": 6
+		},
+		"robe": {
+			"Name": "Robe of the Magi",
+			"Cost": 450,
+			"Section": "Attributes",
+			"SectionIndex": 7,
+			"Intelligence": 6
+		},
+		"ogre_axe": {
+			"Name": "Ogre Club",
+			"Cost": 1000,
+			"Section": "Attributes",
+			"SectionIndex": 8,
+			"Strength": 10
+		},
+		"blade_of_alacrity": {
+			"Name": "Blade of Alacrity",
+			"Cost": 1000,
+			"Section": "Attributes",
+			"SectionIndex": 9,
+			"Agility": 10
+		},
+		"staff_of_wizardry": {
+			"Name": "Staff of Wizardry",
+			"Cost": 1000,
+			"Section": "Attributes",
+			"SectionIndex": 10,
+			"Intelligence": 10
+		},
+		/* Armamaments */
+		"ring_of_protection": {
+			"Name": "Ring of Protection",
+			"Cost": 200,
+			"Section": "Armaments",
+			"SectionIndex": 0,
+			"Armor": 3
+		},
+		"stout_shield": {
+			"Name": "Stout Shield",
+			"Cost": 200,
+			"Section": "Armaments",
+			"SectionIndex": 1
+		},
+		"quelling_blade": {
+			"Name": "Ring of Protection",
+			"Cost": 225,
+			"Section": "Armaments",
+			"SectionIndex": 2,
+			"QuellDamageMelee": 1.4,
+			"QuellDamageRanged": 1.15
+		},
+		"orb_of_venom": {
+			"Name": "Orb of Venom",
+			"Cost": 275,
+			"Section": "Armaments",
+			"SectionIndex": 3
+			// "UniqueAttackModifier": "poison_attack"
+		},
+		"blades_of_attack": {
+			"Name": "Blades of Attack",
+			"Cost": 420,
+			"Section": "Armaments",
+			"SectionIndex": 4,
+			"Damage": 9
+		},
+		"chainmail": {
+			"Name": "Ring of Protection",
+			"Cost": 550,
+			"Section": "Armaments",
+			"SectionIndex": 5,
+			"Armor": 5
+		},
+		"quarterstaff": {
+			"Name": "Quarterstaff",
+			"Cost": 875,
+			"Section": "Armaments",
+			"SectionIndex": 6,
+			"Damage": 10,
+			"AttackSpeed": 10
+		},
+		"helm_of_iron_will": {
+			"Name": "Helm of Iron Will",
+			"Cost": 900,
+			"Section": "Armaments",
+			"SectionIndex": 7,
+			"Armor": 5,
+			"HealthRegeneration": 3
+		},
+		"broadsword": {
+			"Name": "Broadsword",
+			"Cost": 1200,
+			"Section": "Armaments",
+			"SectionIndex": 8,
+			"Damage": 18
+		},
+		"claymore": {
+			"Name": "Claymore",
+			"Cost": 1400,
+			"Section": "Armaments",
+			"SectionIndex": 9,
+			"Damage": 21
+		},
+		"javelin": {
+			"Name": "Javelin",
+			"Cost": 1500,
+			"Section": "Armaments",
+			"SectionIndex": 10,
+			"Damage": 21
+			//"AttackModifier": "pierce"
+		},
+		"mithril_hammer": {
+			"Name": "Mithril Hammer",
+			"Cost": 1600,
+			"Section": "Armaments",
+			"SectionIndex": 11,
+			"Damage": 24
+		},
+		/* Arcane */
+		"magic_stick": {
+			"Name": "Magic Stick",
+			"Cost": 200,
 			"Section": "Arcane",
-			"HealthRegeneration": 3,
+			"SectionIndex": 0,
+			"ChargesMax": 10
 		},
 		"sobi_mask": {
 			"Name": "Sage's mask",
 			"Cost": 325,
 			"Section": "Arcane",
+			"SectionIndex": 1,
 			"ManaRegenerationPercentage": 0.5
 		},
+		"ring_of_regen": {
+			"Name": "Ring of Regen",
+			"Cost": 350,
+			"Section": "Arcane",
+			"SectionIndex": 2,
+			"HealthRegeneration": 3,
+		},
+		"boots": {
+			"Name": "Boots of speed",
+			"Cost": 450,
+			"Section": "Arcane",
+			"SectionIndex": 3,
+			"MovementSpeed": 50,
+			"IsBoot": true
+		},
+		"gloves_of_haste": {
+			"Name": "Gloves of Haste",
+			"Cost": 500,
+			"Section": "Arcane",
+			"SectionIndex": 4,
+			"AttackSpeed": 20
+		},
+		"cloak": {
+			"Name": "Cloak",
+			"Cost": 550,
+			"Section": "Arcane",
+			"SectionIndex": 5,
+			"MagicalResistance": 0.2
+		},
+		"ring_of_health": {
+			"Name": "Ring of Health",
+			"Cost": 850,
+			"Section": "Arcane",
+			"SectionIndex": 6,
+			"HealthRegeneration": 5
+		},
+		"void_stone": {
+			"Name": "Void Stone",
+			"Cost": 850,
+			"Section": "Arcane",
+			"SectionIndex": 7,
+		},
+		"gem": {
+			"Name": "Gem of True Sight",
+			"Cost": 900,
+			"Section": "Arcane",
+			"SectionIndex": 8
+			//"Aura": "true_sight"
+		},
+		"lifesteal": {
+			"Name": "Morbid Mask",
+			"Cost": 900,
+			"Section": "Arcane",
+			"SectionIndex": 9
+			//"UniqueAttackModifier": "lifesteal_15"
+		},
+		"shadow_amulet": {
+			"Name": "Shadow Amulet",
+			"Cost": 1400,
+			"Section": "Arcane",
+			"SectionIndex": 10,
+			"AttackSpeed": 20,
+			"Cooldown": 10
+		},
+		"ghost": {
+			"Name": "Ghost Scepter",
+			"Cost": 1500,
+			"Section": "Arcane",
+			"SectionIndex": 11,
+			"Strength": 5,
+			"Agility": 5,
+			"Intelligence": 5,
+			"Cooldown": 30
+		},
+		"blink": {
+			"Name": "Blink Dagger",
+			"Cost": 2250,
+			"Section": "Arcane",
+			"SectionIndex": 12,
+			"Cooldown": 12
+		},
+		/* Common */
+		"magic_wand": {
+			"Name": "Magic Wand",
+			"Cost": 465,
+			"Components": ["magic_stick", "branches", "branches", "circlet"],
+			"Section": "Common",
+			"SectionIndex": 0,
+			"Strength": 4,
+			"Agility": 4,
+			"Intelligence": 4,
+			"ChargesMax": 17
+		},
+		"null_talisman": {
+			"Name": "Null talisman", //con fuckign gratis you can buy null talis
+			"Cost": 470,
+			"Components": ["circlet", "mantle", 155],
+			"Section": "Common",
+			"SectionIndex": 1,
+			"Strength": 3,
+			"Agility": 3,
+			"Intelligence": 6,
+			"Damage": 3	
+		},
+		"wraith_band": {
+			"Name": "Wraith band",
+			"Cost": 485,
+			"Components": ["circlet", "slippers", 170],
+			"Section": "Common",
+			"SectionIndex": 2,
+			"Strength": 3,
+			"Agility": 6,
+			"Intelligence": 3,
+			"Damage": 3	
+		},
+		"poor_mans_shield": {
+			"Name": "Poor Man's Shield",
+			"Cost": 500,
+			"Components": ["stout_shield", "slippers", "slippers"],
+			"Section": "Common",
+			"SectionIndex": 3,
+			"Agility": 6
+		},
+		"bracer": {
+			"Name": "Bracer",
+			"Cost": 525,
+			"Components": ["circlet", "gauntlets", 210],
+			"Section": "Common",
+			"SectionIndex": 4,
+			"Strength": 6,
+			"Agility": 3,
+			"Intelligence": 3,
+			"Damage": 3
+		},	
 		"soul_ring": {
 			"Name": "Soul ring",
 			"Cost": 800,
 			"Components": ["ring_of_regen", "sobi_mask", 125],
 			"Section": "Common",
+			"SectionIndex": 5,
 			"HealthRegeneration": 3,
 			"ManaRegenerationPercentage": 0.5
 		},
-		"point_booster": {
-			"Name": "Point booster",
+		"phase_boots": {
+			"Name": "Phase Boots",
+			"Cost": 1290,
+			"Components": ["boots", "blades_of_attack", "blades_of_attack"],
+			"Section": "Common",
+			"SectionIndex": 6,
+			"IsBoot": true,
+			"MovementSpeed": 50,
+			"Damage": 24,
+			"Cooldown": 8
+		},
+		"power_treads_strength": {
+			"Name": "Power Treads (Strength)",
+			"Cost": 1400,
+			"Components": ["boots", "belt_of_strength", "gloves_of_haste"],
+			"Section": "Common",
+			"SectionIndex": 7,
+			"IsBoot": true,
+			"Strength": 9,
+			"AttackSpeed": 25
+		},
+		"power_treads_agility": {
+			"Name": "Power Treads (Agility)",
+			"Cost": 1400,
+			"Components": ["boots", "band_of_elvenskin", "gloves_of_haste"],
+			"IsBoot": true,
+			"Agility": 9,
+			"AttackSpeed": 25
+		},
+		"power_treads_intelligence": {
+			"Name": "Power Treads (Intelligence)",
+			"Cost": 1400,
+			"Components": ["boots", "mantle", "gloves_of_haste"],
+			"IsBoot": true,
+			"Intelligence": 9,
+			"AttackSpeed": 25
+		},
+		"oblivion_staff": {
+			"Name": "Oblivion Staff",
+			"Cost": 1650,
+			"Components": ["quarterstaff", "robe", "sobi_mask"],
+			"Section": "Common",
+			"SectionIndex": 8,
+			"Intelligence": 6,
+			"AttackSpeed": 10,
+			"Damage": 15,
+			"ManaRegenerationPercentage": 0.75
+		},
+		"pers": {
+			"Name": "Perseverance",
+			"Cost": 1700,
+			"Components": ["ring_of_health", "void_stone"],
+			"Section": "Common",
+			"SectionIndex": 9,
+			"HealthRegeneration": 5,
+			"ManaRegenerationPercentage": 1.25,
+			"Damage": 10
+		},
+		"hand_of_midas": {
+			"Name": "Hand of Midas",
+			"Cost": 2050,
+			"Components": ["gloves_of_haste", 1550],
+			"Section": "Common",
+			"SectionIndex": 10,
+			"AttackSpeed": 30,
+			"Cooldown": 100
+		},
+		"travel_boots": {
+			"Name": "Boots of Travel",
+			"Cost": 2450,
+			"Components": ["boots", 2000],
+			"Section": "Common",
+			"SectionIndex": 11,
+			"IsBoot": true,
+			"MovementSpeed": 100
+		},
+		"moon_shard": {
+			"Name": "Moon Shard",
+			"Cost": 4000,
+			"Components": ["hyperstone", "hyperstone"],
+			"Section": "Common",
+			"SectionIndex": 12,
+			"AttackSpeed": 120
+		},
+		/* Support */
+		"ring_of_basilius": {
+			"Name": "Ring of Basilius",
+			"Cost": 525,
+			"Components": ["ring_of_protection", "sobi_mask"],
+			"Section": "Support",
+			"SectionIndex": 0,
+			"Armor": 1,
+			"Damage": 6
+		},
+		"headdress": {
+			"Name": "Headress",
+			"Cost": 600,
+			"Components": ["ring_of_regen", "branches", 200],
+			"Section": "Support",
+			"SectionIndex": 1,
+			"Strength": 2,
+			"Agility": 2,
+			"Intelligence": 2
+		},
+		"buckler": {
+			"Name": "Buckler",
+			"Cost": 800,
+			"Components": ["chainmail", "branches", 200],
+			"Section": "Support",
+			"SectionIndex": 2,
+			"Strength": 2,
+			"Agility": 2,
+			"Intelligence": 2,
+			"Armor": 5,
+			"Cooldown": 25
+		},
+		"urn_of_shadows": {
+			"Name": "Urn of Shadows",
+			"Cost": 875,
+			"Components": ["sobi_mask", "gauntlets", "gauntlets", 250],
+			"Section": "Support",
+			"SectionIndex": 3,
+			"Strength": 6,
+			"ManaRegenerationPercentage": 0.5
+		},
+		"tranquil_boots": {
+			"Name": "Tranquil Boots",
+			"Cost": 1000,
+			"Components": ["boots", "ring_of_protection", "ring_of_regen"],
+			"Section": "Support",
+			"SectionIndex": 4,
+			"IsBoot": true,
+			"MovementSpeed": 90,
+			"Armor": 4,
+			"HealthRegeneration": 12
+		},
+		"tranquil_boots_active": { // broken is active???
+			"Name": "Tranquil Boots",
+			"Cost": 1000,
+			"Components": ["boots", "ring_of_protection", "ring_of_regen"],
+			"MovementSpeed": 60,
+			"Armor": 4
+		},
+		"ring_of_aquila": {
+			"Name": "Ring of Aquila",
+			"Cost": 1010,
+			"Components": ["wraith_band", "ring_of_basilius"],
+			"Section": "Support",
+			"SectionIndex": 5,
+			"Damage": 9,
+			"Strength": 3,
+			"Agility": 9,
+			"Intelligence": 3,
+			"Armor": 1
+		},
+		"medallion_of_courage": {
+			"Name": "Medallion of Courage",
 			"Cost": 1200,
-			"Section": "Secret",
+			"Components": ["chainmail", "sobi_mask", 325],
+			"Section": "Support",
+			"SectionIndex": 6,
+			"Armor": 7,
+			"ManaRegenerationPercentage": 0.5,
+			"Cooldown": 7,
+		},
+		"arcane_boots": {
+			"Name": "Arcane Boots",
+			"Cost": 1350,
+			"Components": ["boots", "energy_booster"],
+			"Section": "Support",
+			"SectionIndex": 7,
+			"IsBoot": true,
+			"MovementSpeed": 55,
+			"Mana": 250,
+			"Cooldown": 55
+		},
+		"ancient_janggo": {
+			"Name": "Drums of Endurance",
+			"Cost": 1850,
+			"Components": ["bracer", "robe", 825],
+			"Section": "Support",
+			"SectionIndex": 8,
+			"Strength": 9,
+			"Agility": 9,
+			"Intelligence": 9,
+			"Damage": 3,
+			"Cooldown": 30
+		},
+		"mekansm": {
+			"Name": "Mekansm",
+			"Cost": 2300,
+			"Components": ["headress", "buckler", 900],
+			"Section": "Support",
+			"SectionIndex": 9,
+			"Strength": 5,
+			"Agility": 5,
+			"Intelligence": 5,
+			"Armor": 5,
+			"Cooldown": 65
+		},
+		"vladmir": {
+			"Name": "Vladmir's Offering",
+			"Cost": 2325,
+			"Components": ["ring_of_basilius", "headdress", "lifesteal", 300],
+			"Section": "Support",
+			"SectionIndex": 10,
+			"Strength": 2,
+			"Agility": 2,
+			"Intelligence": 2
+		},
+		"pipe": {
+			"Name": "Pipe of Insight",
+			"Cost": 3500,
+			"Components": ["hood_of_defiance", "headdress", 800],
+			"Section": "Support",
+			"SectionIndex": 11,
+			"HealthRegeneration": 9,
+			"MagicalResistance": 0.3,
+			"Cooldown": 60
+		},
+		"guardian_greaves": {
+			"Name": "Guardian Greaves",
+			"Cost": 5300,
+			"Components": ["mekansm", "arcane_boots", 1650],
+			"Section": "Support",
+			"SectionIndex": 12,
+		},
+		/* Caster */
+		"glimmer_cape": {
+			"Name": "Glimmer Cape",
+			"Cost": 1950,
+			"Components": ["shadow_amulet", "hood"],
+			"Section": "Caster",
+			"SectionIndex": 0,
+			"AttackSpeed": 20,
+			"MagicalResistance": 0.2
+		},
+		"force_staff": {
+			"Name": "Force Staff",
+			"Cost": 2250,
+			"Components": ["staff_of_wizardry", "ring_of_regen", 900],
+			"Section": "Caster",
+			"SectionIndex": 1,
+			"Intelligence": 10,
+			"HealthRegeneration": 4,
+			"Cooldown": 25
+		},
+		"veil_of_discord": {
+			"Name": "Veil of Discord",
+			"Cost": 2270,
+			"Components": ["helm_of_iron_will", "null_talisman", 900],
+			"Section": "Caster",
+			"SectionIndex": 2,
+			"HealthRegeneration": 6,
+			"Armor": 6,
+			"Strength": 6,
+			"Agility": 6,
+			"Intelligence": 6,
+			"Damage": 6,
+			"Cooldown": 20
+		},
+		"necronomicon": {
+			"Name": "Necronomicon",
+			"Cost": 2700,
+			"Components": ["staff_of_wizardry", "belt_of_strength", 1250],
+			"Section": "Caster",
+			"SectionIndex": 3,
+			"Strength": 8,
+			"Intelligence": 15,
+			"Cooldown": 95
+		},
+		"necronomicon_2": {
+			"Name": "Necronomicon II",
+			"Cost": 3950,
+			"Components": ["necronomicon", 1250],
+			"Strength": 12,
+			"Intelligence": 21,
+			"Cooldown": 95
+		},
+		"necronomicon_3": {
+			"Name": "Necronomicon III",
+			"Cost": 5200,
+			"Components": ["necronomicon_2", 1250],
+			"Strength": 16,
+			"Intelligence": 24,
+			"Cooldown": 95
+		},
+		"dagon": {
+			"Name": "Dagon",
+			"Cost": 2720,
+			"Components": ["staff_of_wizardry", "null_talisman", 1250],
+			"Section": "Caster",
+			"SectionIndex": 4,
+			"Strength": 3,
+			"Agility": 3,
+			"Intelligence": 16,
+			"Damage": 9,
+			"Cooldown": 35
+		},
+		"dagon_2": {
+			"Name": "Dagon II",
+			"Cost": 3970,
+			"Components": ["dagon", 1250],
+			"Agility": 3,
+			"Intelligence": 19,
+			"Damage": 9,
+			"Cooldown": 30
+		},
+		"dagon_3": {
+			"Name": "Dagon III",
+			"Cost": 5220,
+			"Components": ["dagon_2", 1250],
+			"Strength": 3,
+			"Agility": 3,
+			"Intelligence": 22,
+			"Damage": 9,
+			"Cooldown": 25
+		},
+		"dagon_4": {
+			"Name": "Dagon IV",
+			"Cost": 6470,
+			"Components": ["dagon_3", 1250],
+			"Strength": 3,
+			"Agility": 3,
+			"Intelligence": 25,
+			"Damage": 9,
+			"Cooldown": 20
+		},
+		"dagon_5": {
+			"Name": "Dagon V",
+			"Cost": 7720,
+			"Components": ["dagon_4", 1250],
+			"Strength": 3,
+			"Agility": 3,
+			"Intelligence": 28,
+			"Damage": 9,
+			"Cooldown": 15
+		},
+		"cyclone": {
+			"Name": "Eul's Scepter of Divinity",
+			"Cost": 2825,
+			"Components": ["staff_of_wizardry", "sobi_mask", "void_stone", 650],
+			"Section": "Caster",
+			"SectionIndex": 5,
+			"Intelligence": 10,
+			"ManaRegenerationPercentage": 1.5,
+			"MovementSpeed": 40
+		},
+		"solar_crest": {
+			"Name": "Solar Crest",
+			"Cost": 3000,
+			"Components": ["medallion_of_courage", "talisman_of_evasion"],
+			"Section": "Caster",
+			"SectionIndex": 6,
+			"Armor": 10,
+			"ManaRegenerationPercentage": 0.75,
+			"Evasion": 0.25,
+			"Cooldown": 7
+		},
+		"rod_of_atos": {
+			"Name": "Rod of Atos",
+			"Cost": 3100,
+			"Components": ["staff_of_wizardry", "staff_of_wizardry", 1100],
+			"Section": "Caster",
+			"SectionIndex": 7,
+			"Intelligence": 30,
+			"Health": 350,
+			"Cooldown": 10
+		},
+		"orchid": {
+			"Name": "Orchid Malevolence",
+			"Cost": 4075,
+			"Components": ["oblivion_staff", "oblivion_staff", 775],
+			"Section": "Caster",
+			"SectionIndex": 8,
+			"Intelligence": 25,
+			"ManaRegeneration": 1.5,
+			"Damage": 30,
+			"AttackSpeed": 30,
+			"Cooldown": 18
+		},
+		"ultimate_scepter": {
+			"Name": "Ultimate Scepter",
+			"Cost": 4200,
+			"Components": ["point_booster", "ogre_club", "blade_of_alacrity", "staff_of_wizardry"],
+			"Section": "Caster",
+			"SectionIndex": 9,
+			"Strength": 10,
+			"Agility": 10,
+			"Intelligence": 10,
 			"Health": 200,
 			"Mana": 150
 		},
-		"vitality_booster": {
-			"Name": "Vitality booster",
-			"Cost": 1100,
-			"Section": "Secret",
-			"Health": 250
+		"refresher": {
+			"Name": "Refresher Orb",
+			"Cost": 5200,
+			"Components": ["pers", "pers", 1800],
+			"Section": "Caster",
+			"SectionIndex": 10,
+			"Damage": 20,
+			"HealthRegeneration": 10,
+			"ManaRegenerationPercentage": 2.5,
+			"Cooldown": 195
 		},
-		"energy_booster": {
-			"Name": "Energy booster",
-			"Cost": 900,
-			"Section": "Secret",
-			"Mana": 250
+		"sheepstick": {
+			"Name": "Scythe of Vyse",
+			"Cost": 5650,
+			"Components": ["mystic_staff", "ultimate_orb", "void_stone"],
+			"Section": "Caster",
+			"SectionIndex": 11,
+			"Strength": 10,
+			"Agility": 10,
+			"Intelligence": 35,
+			"ManaRegenerationPercentage": 1.5,
+			"Cooldown": 30
+		},
+		"octarine_core": {
+			"Name": "Octarine Core",
+			"Cost": 5900,
+			"Components": ["mystic_staff", "soul_booster"],
+			"Section": "Caster",
+			"SectionIndex": 12,
+		},
+		/* Weapons */
+		"lesser_crit": {
+			"Name": "Crystalys",
+			"Cost": 2120,
+			"Components": ["broadsword", "blades_of_attack", 500],
+			"Section": "Weapons",
+			"SectionIndex": 0,
+			"Damage": 30
+		},
+		"armlet": {
+			"Name": "Armlet of Mordiggian",
+			"Cost": 2320,
+			"Components": ["helm_of_iron_will", "gloves_of_haste", "blades_of_attack", 500],
+			"Section": "Weapons",
+			"SectionIndex": 1,
+			"HealthRegeneration": 7,
+			"Damage": 9,
+			"Armor": 5,
+			"AttackSpeed": 25,
+		},
+		"armlet_active": {
+			"Name": "Armlet of Mordiggian",
+			"Cost": 2320,
+			"Components": ["helm_of_iron_will", "gloves_of_haste", "blades_of_attack", 500],
+			"Strength": 25,
+			"HealthRegeneration": -33,
+			"Damage": 40,
+			"Armor": 5,
+			"AttackSpeed": 25,
+		},
+		"invis_sword": {
+			"Name": "Shadow Blade",
+			"Cost": 2800,
+			"Components": ["shadow_amulet", "claymore"],
+			"Section": "Weapons",
+			"SectionIndex": 2,
+			"Damage": 22,
+			"AttackSpeed": 30,
+			"Cooldown": 28
+		},
+		"basher": {
+			"Name": "Skull Basher",
+			"Cost": 2950,
+			"Components": ["javelin", "belt_of_strength", 1000],
+			"Section": "Weapons",
+			"SectionIndex": 3,
+			"Strength": 8,
+			"Damage": 25
+		},
+		"bfury": {
+			"Name": "Battlefury",
+			"Cost": 4525,
+			"Components": ["claymore", "broadsword", "pers", "quelling_blade"],
+			"Section": "Weapons",
+			"SectionIndex": 4,
+			"HealthRegeneration": 6,
+			"ManaRegenerationPercentage": 1.5,
+			"Damage": 55,
+			"Cooldown": 4
+		},
+		"ethereal_blade": {
+			"Name": "Ethereal Blade",
+			"Cost": 4700,
+			"Components": ["ghost", "eagle"],
+			"Section": "Weapons",
+			"SectionIndex": 5,
+			"Strength": 10,
+			"Agility": 40,
+			"Intelligence": 10,
+			"Cooldown": 20
+		},
+		"silver_edge": {
+			"Name": "Silver Edge",
+			"Cost": 5450,
+			"Components": ["invis_sword", "sange", 600],
+			"Section": "Weapons",
+			"SectionIndex": 6,
+			"Strength": 16,
+			"Damage": 32,
+			"AttackSpeed": 30,
+			"Cooldown": 24
+		},
+		"radiance": {
+			"Name": "Radiance",
+			"Cost": 5150,
+			"Components": ["sacred_relic", 1350],
+			"Section": "Weapons",
+			"SectionIndex": 7,
+			"Damage": 65
+		},
+		"radiance_inactive": {
+			"Name": "Radiance",
+			"Cost": 5150,
+			"Components": ["sacred_relic", 1350],
+			"Damage": 65
+		},
+		"greater_crit": {
+			"Name": "Daedalus",
+			"Cost": 5520,
+			"Components": ["lesser_crit", "demon_edge", 1000],
+			"Section": "Weapons",
+			"SectionIndex": 8,
+			"Damage": 81
+		},
+		"butterfly": {
+			"Name": "Butterfly",
+			"Cost": 5875,
+			"Components": ["eagle", "talisman_of_evasion", "quarterstaff"],
+			"Section": "Weapons",
+			"SectionIndex": 9,
+			"Agility": 30,
+			"Damage": 30,
+			"AttackSpeed": 30,
+			"Evasion": 0.35,
+			"Cooldown": 35
+		},
+		"rapier": {
+			"Name": "Divine Rapier",
+			"Cost": 6200,
+			"Components": ["sacred_relic", "demon_edge"],
+			"Section": "Weapons",
+			"SectionIndex": 10,
+			"Damage": 330
+		},
+		"abyssal_blade": {
+			"Name": "Abyssal Blade",
+			"Cost": 6750,
+			"Components": ["sacred_relic", "basher"],
+			"Section": "Weapons",
+			"SectionIndex": 11,
+			"Strength": 10,
+			"Damage": 85,
+			"Cooldown": 60
+		},
+		/* Armor */
+		"hood_of_defiance": {
+			"Name": "Hood of Defiance",
+			"Cost": 2100,
+			"Components": ["ring_of_health", "cloak", "ring_of_regen", "rign_of_regen"],
+			"Section": "Armor",
+			"SectionIndex": 0,
+			"HealthRegeneration": 9,
+			"MagicalResistance": 0.3
+		},
+		"vanguard": {
+			"Name": "Vanguard",
+			"Cost": 2150,
+			"Components": ["ring_of_health", "vitality_booster", "stout_shield"],
+			"Section": "Armor",
+			"SectionIndex": 1,
+			"Health": 250,
+			"HealthRegeneration": 6
+		},
+		"blade_mail": {
+			"Name": "Blade Mail",
+			"Cost": 2200,
+			"Components": ["broadsword", "chainmail", "robe"],
+			"Section": "Armor",
+			"SectionIndex": 2,
+			"Intelligence": 10,
+			"Damage": 22,
+			"Armor": 6
 		},
 		"soul_booster": {
 			"Name": "Soul booster",
 			"Cost": 3200,
 			"Components": ["point_booster", "vitality_booster", "energy_booster"],
 			"Section": "Armor",
+			"SectionIndex": 3,
 			"Health": 450,
 			"HealthRegeneration": 4,
 			"Mana": 400,
 			"ManaRegenerationPercentage": 1
+		},
+		"crimson_guard": {
+			"Name": "Crimson Guard",
+			"Cost": 3550,
+			"Components": ["vanguard", "buckler", 600],
+			"Section": "Armor",
+			"SectionIndex": 4,
+			"Strength": 2,
+			"Agility": 2,
+			"Intelligence": 2,
+			"Health": 250,
+			"HealthRegeneration": 6,
+			"Armor": 5,
+			"Cooldown": 70
+		},
+		"black_king_bar": {
+			"Name": "Black King Bar",
+			"Cost": 3975,
+			"Components": ["ogre_club", "mythril_hammer", 1375],
+			"Section": "Armor",
+			"SectionIndex": 5,
+			"Strength": 10,
+			"Damage": 24
+		},
+		"lotus_orb": {
+			"Name": "Lotus Orb",
+			"Cost": 4000,
+			"Components": ["pers", "platemail", 900],
+			"Section": "Armor",
+			"SectionIndex": 6,
+			"HealthRegeneration": 5,
+			"ManaRegenerationPercentage": 1.25,
+			"Damage": 10,
+			"Armor": 10
+		},
+		"shivas_guard": {
+			"Name": "Shiva's Guard",
+			"Cost": 4700,
+			"Components": ["mystic_staff", "platemail", 600],
+			"Section": "Armor",
+			"SectionIndex": 7,
+			"Intelligence": 30,
+			"Armor": 15
 		},
 		"bloodstone": {
 			"Name": "Bloodstone",
 			"Cost": 4900,
 			"Components": ["soul_booster", "soul_ring", 900],
 			"Section": "Armor",
+			"SectionIndex": 8,
 			"Health": 500,
 			"HealthRegeneration": 9,
 			"Mana": 400,
@@ -3282,63 +4187,268 @@ DotaData.addVersion( "6.85",
 			"ManaRegenerationFlat": function() { return this.Charges },
 			"Charges": 8
 		},
-		"circlet": {
-			"Name": "Circlet",
-			"Cost": 165,
-			"Section": "Attributes",
-			"SectionIndex": 0,
-			"Strength": 2,
-			"Agility": 2,
-			"Intelligence": 2
+		"manta": {
+			"Name": "Manta Style",
+			"Cost": 4950,
+			"Components": ["ultimate_orb", "yasha", 800],
+			"Section": "Armor",
+			"SectionIndex": 9,
+			"Family": {"yasha": 1},
+			"Strength": 10,
+			"Agility": 26,
+			"Intelligence": 10,
+			"AttackSpeed": 15,
+			"MovementSpeedPercentage": 0.1
 		},
-		"gauntlets": {
-			"Name": "Gauntlets of Strength",
-			"Cost": 150,
-			"Section": "Attributes",
-			"Strength": 3
+		"sphere": {
+			"Name": "Linken's Sphere",
+			"Cost": 5125,
+			"Components": ["pers", "ultimate_orb", 1325],
+			"Section": "Armor",
+			"SectionIndex": 10,
+			"Strength": 15,
+			"Agility": 15,
+			"Intelligence": 15,
+			"HealthRegeneration": 6,
+			"ManaRegenerationPercentage": 1.5,
+			"Damage": 10
 		},
-		"slippers": {
-			"Name": "Slippers of Agility",
-			"Cost": 150,
-			"Section": "Attributes",
-			"Agility": 3
+		"assault": {
+			"Name": "Assault Cuirass",
+			"Cost": 5250,
+			"Components": ["platemail", "hyperstone", "chainmail", 1300],
+			"Section": "Armor",
+			"SectionIndex": 11,
+			"Armor": 10,
+			"AttackSpeed": 35
 		},
-		"mantle": {
-			"Name": "Mantle of Intelligence",
-			"Cost": 150,
-			"Section": "Attributes",
-			"Intelligence": 3
+		"heart": {
+			"Name": "Heart of Tarrasque",
+			"Cost": 5500,
+			"Components": ["reaver", "vitality_booster", 1400],
+			"Section": "Armor",
+			"SectionIndex": 12,
+			"Strength": 40,
+			"Health": 300
 		},
-		"bracer": {
-			"Name": "Bracer",
-			"Cost": 525,
-			"Components": ["circlet", "gauntlets", 210],
-			"Section": "Common",
-			"Strength": 6,
-			"Agility": 3,
-			"Intelligence": 3,
-			"Damage": 3
+		/* Artifacts */
+		"mask_of_madness": {
+			"Name": "Mask of Madness",
+			"Cost": 1800,
+			"Components": ["lifesteal", 900],
+			"Section": "Artifacts",
+			"SectionIndex": 0
+			// lol shit item gives no stats
 		},
-		"wraith_band": {
-			"Name": "Wraith band",
-			"Cost": 485,
-			"Components": ["circlet", "slippers", 170],
-			"Section": "Common",
-			"Strength": 3,
-			"Agility": 6,
-			"Intelligence": 3,
-			"Damage": 3	
+		"helm_of_the_dominator": {
+			"Name": "Helm of the Dominator",
+			"Cost": 1800,
+			"Components": ["helm_of_iron_will", "lifesteal"],
+			"Section": "Artifacts",
+			"SectionIndex": 1,
+			"HealthRegeneration": 3,
+			"Damage": 20,
+			"Armor": 5
 		},
-		"null_talisman": {
-			"Name": "Null talisman", //con fuckign gratis you can buy null talis
-			"Cost": 470,
-			"Components": ["circlet", "slippers", 155],
-			"Section": "Common",
-			"Strength": 3,
-			"Agility": 3,
+		"sange": {
+			"Name": "Sange",
+			"Cost": 2050,
+			"Components": ["ogre_club", "belt_of_strength", 600],
+			"Section": "Artifacts",
+			"SectionIndex": 2,
+			"Strength": 16,
+			"Damage": 10
+		},
+		"yasha": {
+			"Name": "Yasha",
+			"Cost": 2050,
+			"Components": ["blade_of_alacrity", "band_of_elvenskin", 600],
+			"Section": "Artifacts",
+			"SectionIndex": 3,
+			"Family": {"yasha": 1},
+			"Agility": 16,
+			"AttackSpeed": 15,
+			"MovementSpeedPercentage": 0.1
+		},
+		"maelstrom": {
+			"Name": "Maelstrom",
+			"Cost": 2800,
+			"Components": ["mithril_hammer", "gloves_of_haste", 700],
+			"Section": "Artifacts",
+			"SectionIndex": 4,
+			"Damage": 24,
+			"AttackSpeed": 25
+		},
+		"diffusal_blade": {
+			"Name": "Diffusal Blade",
+			"Cost": 3150,
+			"Components": ["blade_of_alacrity", "blade_of_alacrity", "robe", 700],
+			"Section": "Artifacts",
+			"SectionIndex": 5,
+			"Agility": 20,
 			"Intelligence": 6,
-			"Damage": 3	
+			"Charges": 8
+		},
+		"diffusal_blade_2": {
+			"Name": "Diffusal Blade II",
+			"Cost": 3850,
+			"Components": ["diffusal_blade", 700],
+			"Agility": 35,
+			"Intelligence": 10,
+			"Charges": 8
+		},
+		"desolator": {
+			"Name": "Desolator",
+			"Cost": 3500,
+			"Components": ["mithril_hammer", "mithril_hammer", 300],
+			"Section": "Artifacts",
+			"SectionIndex": 6,
+			"Damage": 50
+		},
+		"heavens_halberd": {
+			"Name": "Heaven's Halberd",
+			"Cost": 3850,
+			"Components": ["sange", "talisman_of_evasion"],
+			"Section": "Artifacts",
+			"SectionIndex": 7,
+			"Strength": 20,
+			"Damage": 25,
+			"Evasion": 0.25
+		},
+		"sange_and_yasha": {
+			"Name": "Sange and Yasha",
+			"Cost": 4100,
+			"Components": ["sange", "yasha"],
+			"Section": "Artifacts",
+			"SectionIndex": 8,
+			"Family": { "yasha": 2 },
+			"Strength": 16,
+			"Agility": 16,
+			"Damage": 16,
+			"AttackSpeed": 16,
+			"MovementSpeedPercentage": 0.16
+		},
+		"skadi": {
+			"Name": "Eye of Skadi",
+			"Cost": 5675,
+			"Components": ["ultimate_orb", "ultimate_orb", "point_booster", "orb_of_venom"],
+			"Section": "Artifacts",
+			"SectionIndex": 9,
+			"Strength": 25,
+			"Agility": 25,
+			"Intelligence": 25,
+			"Health": 250,
+			"Mana": 250
+		},
+		"mjollnir": {
+			"Name": "Mjollnir",
+			"Cost": 5700,
+			"Components": ["hyperstone", "maelstrom", 900],
+			"Section": "Artifacts",
+			"SectionIndex": 10,
+			"Damage": 24,
+			"AttackSpeed": 80
+		},
+		"satanic": {
+			"Name": "Satanic",
+			"Cost": 5900,
+			"Components": ["reaver", "helm_of_the_dominator", 1100],
+			"Section": "Artifacts",
+			"SectionIndex": 11,
+			"Strength": 25,
+			"Damage": 20,
+			"Armor": 5
+		},
+		
+		
+		/* Secret */
+		"energy_booster": {
+			"Name": "Energy Booster",
+			"Cost": 900,
+			"Section": "Secret",
+			"SectionIndex": 0,
+			"Mana": 250
+		},
+		"point_booster": {
+			"Name": "Point Booster",
+			"Cost": 1200,
+			"Section": "Secret",
+			"SectionIndex": 1,
+			"Health": 200,
+			"Mana": 150
+		},
+		"vitality_booster": {
+			"Name": "Vitality Booster",
+			"Cost": 1100,
+			"Section": "Secret",
+			"SectionIndex": 2,
+			"Health": 250
+		},
+		"platemail": {
+			"Name": "Platemail",
+			"Cost": 1400,
+			"Section": "Secret",
+			"SectionIndex": 3,
+			"Armor": 10
+		},
+		"talisman_of_evasion": {
+			"Name": "Talisman of Evasion",
+			"Cost": 1800,
+			"Section": "Secret",
+			"SectionIndex": 4,
+			"Evasion": 0.25
+		},
+		"hyperstone": {
+			"Name": "Hyperstone",
+			"Cost": 2000,
+			"Section": "Secret",
+			"SectionIndex": 5,
+			"AttackSpeed": 55
+		},
+		"ultimate_orb": {
+			"Name": "Ultimate Orb",
+			"Cost": 2100,
+			"Section": "Secret",
+			"SectionIndex": 6,
+			"Strength": 10,
+			"Agility": 10,
+			"Intelligence": 10
+		},
+		"demon_edge": {
+			"Name": "Demon Edge",
+			"Cost": 2400,
+			"Section": "Secret",
+			"SectionIndex": 7,
+			"Damage": 46
+		},
+		"mystic_staff": {
+			"Name": "Mystic Staff",
+			"Cost": 2700,
+			"Section": "Secret",
+			"SectionIndex": 8,
+			"Intelligence": 25
+		},
+		"reaver": {
+			"Name": "Reaver",
+			"Cost": 3000,
+			"Section": "Secret",
+			"SectionIndex": 9,
+			"Strength": 25
+		},
+		"eagle": {
+			"Name": "Eaglesong",
+			"Cost": 3200,
+			"Section": "Secret",
+			"SectionIndex": 10,
+		},
+		"relic": {
+			"Name": "Sacred Relic",
+			"Cost": 3800,
+			"Section": "Secret",
+			"SectionIndex": 11,
+			"Damage": 60
 		}
+		
 		
 	},
 	"Skills": {

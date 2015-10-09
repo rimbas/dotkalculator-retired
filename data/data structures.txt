@@ -67,12 +67,12 @@ Item stats
 	SectionIndex					- Override for shop display, (to recreate Dota 2 shop order)
 	Charges							- Default item charge count (0 for normal  items, at least 1 for consumables)
 	ChargesStack					- Multiples of same item stack (tangos, salves, clarities)
+	ChargesMax						- Magic stick/wand
 	Consumable						- Charge reduction to zero removes the item
-	Cooldown						- Item use cooldown
 	Strength						- 
 	Agility							- 
 	Intelligence					- 
-	MovementSpeedFlat	  			- Boots, Euls
+	MovementSpeed		  			- Boots, Euls
 	MovementSpeedPercentage			- Sange
 	Armor							- 
 	Evasion							- Talisman of Evasion
@@ -87,7 +87,11 @@ Item stats
 	Range							- 
 	VisionDay						- 
 	VisionNight						- Moon shard
-	Aura							-
+	Family							- object with family name as key and level as value
+	AttackModifier					- 
+	AttackUniqueModifier			-
+	Ability							-
+	
 
 Skill stats
 	Name							-
