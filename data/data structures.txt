@@ -64,7 +64,7 @@ Item stats
 	Components						- (items + numerical recipe value)
 	Section							- (shop sections)
 	SectionIndex					- Override for shop display, (to recreate Dota 2 shop order)
-	Charges							- Default item charge count (0 for normal  items, at least 1 for consumables)
+	Charges							- Default item charge count (undefined for normal items, at least 1 for consumables)
 	ChargesStack					- Multiples of same item stack (tangos, salves, clarities)
 	ChargesMax						- Magic stick/wand
 	Consumable						- Charge reduction to zero removes the item

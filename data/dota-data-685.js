@@ -3095,10 +3095,7 @@ DotaData.addVersion( "6.85",
 			"Mana": 0,
 			"ManaRegeneration": 0,
 			"ManaRegenerationFlat": 0,
-			"ManaRegenerationPercentage": 0,
-			"Charges": 0,
-			"ChargesStack": false,
-			"Consumable": false
+			"ManaRegenerationPercentage": 0
 		},
 		/* Consumables */
 		"clarity": {
@@ -3205,6 +3202,7 @@ DotaData.addVersion( "6.85",
 			"Section": "Consumables",
 			"SectionIndex": 11,
 			"Charges": 3,
+			"ChargesMax": 3
 		},
 		/* Attributes */
 		"branches": {
@@ -3382,6 +3380,7 @@ DotaData.addVersion( "6.85",
 			"Cost": 200,
 			"Section": "Arcane",
 			"SectionIndex": 0,
+			"Charges": 0,
 			"ChargesMax": 10
 		},
 		"sobi_mask": {
@@ -3482,6 +3481,7 @@ DotaData.addVersion( "6.85",
 			"Strength": 4,
 			"Agility": 4,
 			"Intelligence": 4,
+			"Charges": 0,
 			"ChargesMax": 17
 		},
 		"null_talisman": {

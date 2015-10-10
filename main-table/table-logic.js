@@ -506,7 +506,7 @@ HeroTable.addEvaluator({
 		}
 		for (var i = 0; i < hero.Items.length; i++) {
 			var itemInstance = hero.Items[i];
-			cell.appendChild(itemInstance.createImageElement());
+			cell.appendChild(itemInstance.createDisplayElement());
 		}
 	},
 	sorter: false
@@ -559,6 +559,19 @@ HeroTable.addEvaluator({
 		var attackTime = (hero.Total.AttackSpeed / 100) / hero.Raw.AttackRate;
 		cell.textContent = attackTime.toFixed(2);
 		cell.sortertingProperty = attackTime;
+	},
+	sorter: "propertyNumber"
+});
+
+HeroTable.addEvaluator({
+	ID: "MagicResist",
+	name: "Magical Resistance",
+	header: "MR",
+	type: "Base",
+	description: "Magical damage resistance that hero has",
+	eval: function(cell, hero) {
+		cell.textContent = (hero.Total.MagicalResistance * 100).toFixed(0) + "%";
+		cell.sortingProperty = hero.Total.MagicalResistance;
 	},
 	sorter: "propertyNumber"
 });

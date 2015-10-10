@@ -60,10 +60,19 @@
 .hero-table .item-container {
 	display: block;
 	border: 1px solid gold;
-	min-width: 33px;
-	height: 24px;
+	min-width: 39px;
+	height: 28px;
 }
-.hero-table .item-container .item-image {
-	width: 33px;
-	height: 24px;
+.hero-table .item-container > div.item-display {
+	display: inline-block;
+	width: 39px;
+	height: 28px;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	text-align: right;
+	vertical-align: middle;
+	font-size: 80%;
 }
+
+

@@ -8,9 +8,10 @@ $(function(e){
 		containment: "document"
 	}) 
 	var MainTable = new HeroTable("Comparison table", "main-table", "main-table-wrapper");
-	for (var i = 1; i < 12; i++) {
-		MainTable.addHero(new HeroInstance("obsidian_destroyer", { level: i }));
-	}
+	MainTable.addHero(new HeroInstance("ogre_magi", { level: 6, items: [new ItemInstance("bloodstone")] }));
+	MainTable.addHero(new HeroInstance("ogre_magi", { level: 6, items: [new ItemInstance("bloodstone"), new ItemInstance("magic_wand")] }));
+	MainTable.addHero(new HeroInstance("ogre_magi", { level: 6, items: [new ItemInstance("basher"), new ItemInstance("magic_wand")] }));
+	
 	
 	document.createVersionSelectors = function (init) {
 		optionCollection = [];

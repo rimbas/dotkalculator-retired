@@ -24,7 +24,12 @@ function HeroInstance(heroId, options) {
 				  "Gold": Number.isInteger(options.gold) || 625 };
 	this.Base = {};
 	this.Item = {};
-	this.Items = [];
+	if (options.items && ItemInstance.isValidArray(options.items)) {
+		this.Items = options.items;
+	}
+	else {
+		this.Items = [];
+	}
 	this.Skill = {}
 	this.Skills = [];
 	this.Aura = {};
@@ -208,7 +213,7 @@ HeroInstance.addHandler({
 		a.ArmorBase = this.Raw.Armor + Math.round(a.AgilityFloat * 0.14 * 100) / 100;
 		a.Armor = a.ArmorBase + a.ArmorBonus;
 		a.Evasion = this.Item.Evasion + (1-this.Item.Evasion) * this.Skill.Evasion;
-		a.MagicalResistance = this.Raw.MagicalResistance + (1-this.Raw.MagicalResistance) * this.Skill.MagicalResistance;
+		a.MagicalResistance = this.Raw.MagicalResistance + (1-this.Raw.MagicalResistance) * this.Item.MagicalResistance;
 		a.HealthBase = this.Raw.Health + a.Strength * 19;
 		a.Health = a.HealthBase + this.Item.Health + this.Skill.Health
 		a.HealthRegenerationBase = this.Raw.HealthRegeneration + a.Strength * 0.03;

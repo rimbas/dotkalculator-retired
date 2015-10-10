@@ -17,22 +17,47 @@ function ItemInstance(itemId, properties) {
 			this[prop] = value;	
 		}
 	}
-	Object.defineProperty(this, "DisplayElement", {});
+	if (properties.charges) {
+		this.Charges = properties.Charges;	
+	}
+	Object.defineProperty(this, "DisplayElement", {writable: true});
+	//Object.defineProperty(this, "HeroInstance", {writable: true});
+}
+
+// Checks if all elements of array are valid ItemInstance objects
+ItemInstance.isValidArray = function( itemInstanceArray ) {
+	if (!Array.isArray(itemInstanceArray)) {
+		throw itemInstanceArray+" is not a valid array";
+	}
+	for (var item of itemInstanceArray) {
+		if (!item instanceof ItemInstance) {
+			throw "Object "+item+" is not an ItemInstance object";
+		}
+	}
+	return itemInstanceArray;
 }
 
 ItemInstance.prototype.toString = function () {
 	return "[ItemInstance "+this.ID+":"+this.Charges+"]";
 }
 
-ItemInstance.prototype.createImageElement = function () {
-	var img = document.createElement("img");
-	img.className = "item-image";
-	img.width = 33;
-	img.height = 24;
-	img.src = "images/items/" + this.ID + ".png";
-	this.DisplayElement = img;
+ItemInstance.prototype.clone = function () {
+	var props = { version: this.Version };
+	if (this.Charges) props.charges = this.Charges;
+	return new ItemInstance(this.ID, props );
+}
+
+ItemInstance.prototype.createDisplayElement = function() {
+	var div = document.createElement("div");
+	div.className = "item-display";
+	div.style.backgroundImage = "url(images/items/" + this.ID + ".png)";
 	
-	return img;
+	if (typeof this.Charges === "number") {
+		div.textContent = this.Charges;	
+	}
+	
+	this.DisplayElement = div;
+	return div
 }
 
 //
