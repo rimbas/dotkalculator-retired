@@ -16,13 +16,8 @@ function HeroTable(tableName, tableID, wrapperId) {
 	this.name = tableName;
 	this.ID = tableID;
 	this.heroList = [];
-	var localStorageColumns = localStorage.getItem("tableColumns-" + tableID);
-	if (localStorageColumns) {
-		this.columnList = localStorageColumns.split(";");	
-	}
-	else {
-		this.columnList = ["Delete", "Name", "Portrait", "Level", "Strength", "Agility", "Intelligence", "Damage", "Items", "Armor" ];
-	}
+	this.columnList = this.getValidColumnList();
+	
 	this._tableSorterCreated = false;
 	
 	this.createTable();
@@ -36,8 +31,30 @@ HeroTable.getTables = function() {
 	return tables;
 }
 
-HeroTable.getTableById = function (id) {
+HeroTable.getTableById = function(id) {
 	return HeroTable.tables[id];
+}
+
+HeroTable.prototype.getValidColumnList = function() {
+	var localStorageColumns = localStorage.getItem("tableColumns-" + this.ID);
+	if (localStorageColumns) {
+		var columns = localStorageColumns.split(";"),
+			validatedColumns = [];
+		for (var col of columns) {
+			if (col in this.evaluator) {
+				validatedColumns.push(col);
+			}
+			else {
+				console.warn("Dropping invalid column evaluator with ID \""+col+"\" for table \""+this.ID+"\"");
+			}
+		}
+		if (validatedColumns.length > 0) {
+			localStorage.setItem("tableColumns-" + this.ID, validatedColumns.join(";"));
+			return validatedColumns;	
+		}
+	}
+	localStorage.setItem("tableColumns-" + this.ID, "Delete;Name;Portrait;Level;Strength;Agility;Intelligence;Damage;Items");
+	return ["Delete", "Name", "Portrait", "Level", "Strength", "Agility", "Intelligence", "Damage", "Items" ];
 }
 
 HeroTable.prototype.evaluator = {};
@@ -367,6 +384,18 @@ HeroTable.addEvaluator({
 });
 
 HeroTable.addEvaluator({
+	ID: "BAT",
+	name: "Base Attack Time",
+	header: "BAT",
+	type: "Base",
+	description: "Displays hero base attack time value",
+	eval: function(cell, hero) {
+		cell.textContent = hero.Raw.AttackRate;
+	},
+	sorter: "number"
+});
+
+HeroTable.addEvaluator({
 	ID: "Mana", 
 	name: "Mana", 
 	header: "MP",
@@ -491,5 +520,50 @@ HeroTable.addEvaluator({
 	description: "Displays hero balance patch version",
 	eval: function(cell, hero) {
 		cell.textContent = hero.Raw.Version;
-	},
+	}
 });
+
+HeroTable.addEvaluator({
+	ID: "AttackSpeed",
+	name: "Attack Speed",
+	header: "AS",
+	type: "Derived",
+	description: "Displays attack speed",
+	eval: function(cell, hero) {
+		cell.textContent = hero.Total.AttackSpeed;
+	},
+	sorter: "number"
+});
+
+HeroTable.addEvaluator({
+	ID: "AttackTime",
+	name: "Attack time",
+	header: "AT",
+	type: "Derived",
+	description: "Time that hero takes to finish one attack",
+	eval: function(cell, hero) {
+		var attackTime = hero.Raw.AttackRate / (hero.Total.AttackSpeed / 100);
+		cell.textContent = attackTime.toFixed(2)+"s";
+		cell.sortertingProperty = attackTime;
+	},
+	sorter: "propertyNumber"
+});
+
+HeroTable.addEvaluator({
+	ID: "APS",
+	name: "Attacks per Second",
+	header: "APS",
+	type: "Derived",
+	description: "Attacks per second that hero makes",
+	eval: function(cell, hero) {
+		var attackTime = (hero.Total.AttackSpeed / 100) / hero.Raw.AttackRate;
+		cell.textContent = attackTime.toFixed(2);
+		cell.sortertingProperty = attackTime;
+	},
+	sorter: "propertyNumber"
+});
+
+
+
+
+

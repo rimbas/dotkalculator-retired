@@ -17,6 +17,7 @@ function ItemInstance(itemId, properties) {
 			this[prop] = value;	
 		}
 	}
+	Object.defineProperty(this, "DisplayElement", {});
 }
 
 ItemInstance.prototype.toString = function () {
@@ -29,8 +30,8 @@ ItemInstance.prototype.createImageElement = function () {
 	img.width = 33;
 	img.height = 24;
 	img.src = "images/items/" + this.ID + ".png";
-	//img.ItemInstanceReference = this;
-	//Object.defineProperty(this, "DisplayElement", {value: img} );
+	this.DisplayElement = img;
+	
 	return img;
 }
 

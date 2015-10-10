@@ -139,15 +139,15 @@ HeroInstance.addHandler({
 	Handler: function() {
 		var a = { "Strength": 0, "Agility":0, "Intelligence":0, 
 			"MovementSpeedFlat":0, "MovementSpeedPercentage":0,
-			"Armor":0, "MagicResistance": 0, "Evasion":0,
+			"Armor":0, "MagicalResistance": 0, "Evasion":0,
 			"Health":0, "HealthRegeneration":0, "Mana":0, "ManaRegenerationFlat": 0,
 			"ManaRegenerationPercentage": 0, "Damage": 0, "AttackSpeed": 0,
 			"Range":0, "VisionDay": 0, "VisionNight": 0 };
-		for (var i = 0; i < this.Items.length; i++) {
+		for (var item of this.Items) {
 			for (var prop in a) {
-				var value = this.Items[i][prop];
-				if (prop == "Evasion" || prop == "MagicResistance") {
-					a[prop] += (1-a[prop]) * value;
+				var value = item[prop];
+				if (prop == "Evasion" || prop == "MagicalResistance") {
+					a[prop] += (1 - a[prop]) * value;
 				}
 				else {
 					a[prop] += value;
@@ -164,20 +164,20 @@ HeroInstance.addHandler({
 	Handler: function() {
 		var a = { "Strength": 0, "Agility":0, "Intelligence":0, 
 			"MovementSpeedFlat":0, "MovementSpeedPercentage":0,
-			"Armor":0, "MagicResistance": 0, "Evasion":0,
+			"Armor":0, "MagicalResistance": 0, "Evasion":0,
 			"Health":0, "HealthRegeneration":0, "Mana":0, "ManaRegenerationFlat": 0,
 			"ManaRegenerationPercentage": 0, "Damage": 0, "DamageBase": 0, "AttackSpeed": 0,
 			"Range":0, "VisionDay": 0, "VisionNight": 0 },
 			bootSpeed = 0;
 		
-		for (var i = 0; i < this.Skills.length; i++) {
+		for (var item of this.Skills) {
 			for (var prop in a) {
-				var value = this.Skills[i][prop];
+				var value = item[prop];
 				if (prop.IsBoot && prop.MovementSpeedFlat > bootSpeed) {
 					bootSpeed = prop.MovementSpeedFlat;
 				}
-				else if (prop == "Evasion" || prop == "MagicResistance") {
-					a[prop] += (1-a[prop]) * value;
+				else if (prop == "Evasion" || prop == "MagicalResistance") {
+					a[prop] += (1 - a[prop]) * value;
 				}
 				else {
 					a[prop] += value;
@@ -225,7 +225,7 @@ HeroInstance.addHandler({
 		a.DamageBaseMax = this.Raw.DamageMax + a[this.Raw.Type] + this.Skill.DamageBase;
 		a.DamageBase = Math.floor((a.DamageBaseMin +a.DamageBaseMax)/2);
 		a.DamageBonus = this.Item.Damage + this.Skill.Damage;
-		a.AttackSpeed = 100;
+		a.AttackSpeed = 100 + this.Item.AttackSpeed + a.Agility;
 		a.Range = this.Raw.Range + this.Skill.Range;
 		a.VisionDay = this.Raw.VisionDaytime;
 		a.VisionNight = this.Raw.VisionNighttime + this.Skill.VisionNight + this.Item.VisionNight;

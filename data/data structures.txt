@@ -40,7 +40,6 @@ Raw stat definition
 	TrueSight						- True sight range (wards, towers and fountain)
 
 Meta
-	ID								- Internal ID of the unit
 	Level							- current level of the unit
 	Experience						- current experience
 	Team							- Used to differentiate for auras
