@@ -576,6 +576,18 @@ HeroTable.addEvaluator({
 	sorter: "propertyNumber"
 });
 
+HeroTable.addEvaluator({
+	ID: "MovementSpeed",
+	name: "Movement Speed",
+	header: "MS",
+	type: "Base",
+	description: "Displays hero movespeed",
+	eval: function(cell, hero) {
+		cell.textContent = hero.Total.MovementSpeed;
+	},
+	sorter: "number"
+});
+
 
 
 

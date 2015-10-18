@@ -3075,27 +3075,7 @@ DotaData.addVersion( "6.85",
 		"_base": {
 			"Name": "NO-DISPLAY-NAME",
 			"Version": "6.85",
-			"Cost": 0,
-			"Components": 0,
-			"Strength": 0,
-			"Agility": 0,
-			"Intelligence": 0,
-			"Armor": 0,
-			"Evasion": 0,
-			"MagicResistance": 0,
-			"MovementSpeedFlat": 0,
-			"MovementSpeedPercentage": 0,
-			"Range": 0,
-			"Damage": 0,
-			"AttackSpeed": 0,
-			"VisionDay": 0,
-			"VisionNight": 0,
-			"Health": 0,
-			"HealthRegeneration": 0,
-			"Mana": 0,
-			"ManaRegeneration": 0,
-			"ManaRegenerationFlat": 0,
-			"ManaRegenerationPercentage": 0
+			"Cost": 0
 		},
 		/* Consumables */
 		"clarity": {
@@ -3398,12 +3378,13 @@ DotaData.addVersion( "6.85",
 			"HealthRegeneration": 3,
 		},
 		"boots": {
-			"Name": "Boots of speed",
+			"Name": "Boots of Speed",
 			"Cost": 450,
 			"Section": "Arcane",
 			"SectionIndex": 3,
-			"MovementSpeed": 50,
-			"IsBoot": true
+			/*"MovementSpeed": 50,
+			"IsBoot": true,*/
+			"Family": { "Name": "Boots", "Level": 50, "Stats": { "MovementSpeed": 50 } },
 		},
 		"gloves_of_haste": {
 			"Name": "Gloves of Haste",
@@ -3540,10 +3521,8 @@ DotaData.addVersion( "6.85",
 			"Components": ["boots", "blades_of_attack", "blades_of_attack"],
 			"Section": "Common",
 			"SectionIndex": 6,
-			"IsBoot": true,
-			"MovementSpeed": 50,
-			"Damage": 24,
-			"Cooldown": 8
+			"Family": { "Name": "Boots", "Level": 50, "Stats": { "MovementSpeed": 50 } },
+			"Damage": 24
 		},
 		"power_treads_strength": {
 			"Name": "Power Treads (Strength)",
@@ -3551,7 +3530,7 @@ DotaData.addVersion( "6.85",
 			"Components": ["boots", "belt_of_strength", "gloves_of_haste"],
 			"Section": "Common",
 			"SectionIndex": 7,
-			"IsBoot": true,
+			"Family": { "Name": "Boots", "Level": 50, "Stats": { "MovementSpeed": 50 } },
 			"Strength": 9,
 			"AttackSpeed": 25
 		},
@@ -3559,7 +3538,7 @@ DotaData.addVersion( "6.85",
 			"Name": "Power Treads (Agility)",
 			"Cost": 1400,
 			"Components": ["boots", "band_of_elvenskin", "gloves_of_haste"],
-			"IsBoot": true,
+			"Family": { "Name": "Boots", "Level": 50, "Stats": { "MovementSpeed": 50 } },
 			"Agility": 9,
 			"AttackSpeed": 25
 		},
@@ -3567,7 +3546,7 @@ DotaData.addVersion( "6.85",
 			"Name": "Power Treads (Intelligence)",
 			"Cost": 1400,
 			"Components": ["boots", "mantle", "gloves_of_haste"],
-			"IsBoot": true,
+			"Family": { "Name": "Boots", "Level": 50, "Stats": { "MovementSpeed": 50 } },
 			"Intelligence": 9,
 			"AttackSpeed": 25
 		},
@@ -3598,8 +3577,7 @@ DotaData.addVersion( "6.85",
 			"Components": ["gloves_of_haste", 1550],
 			"Section": "Common",
 			"SectionIndex": 10,
-			"AttackSpeed": 30,
-			"Cooldown": 100
+			"AttackSpeed": 30
 		},
 		"travel_boots": {
 			"Name": "Boots of Travel",
@@ -3607,8 +3585,7 @@ DotaData.addVersion( "6.85",
 			"Components": ["boots", 2000],
 			"Section": "Common",
 			"SectionIndex": 11,
-			"IsBoot": true,
-			"MovementSpeed": 100
+			"Family": { "Name": "Boots", "Level": 100, "Stats": { "MovementSpeed": 100 } }
 		},
 		"moon_shard": {
 			"Name": "Moon Shard",
@@ -3647,8 +3624,7 @@ DotaData.addVersion( "6.85",
 			"Strength": 2,
 			"Agility": 2,
 			"Intelligence": 2,
-			"Armor": 5,
-			"Cooldown": 25
+			"Armor": 5
 		},
 		"urn_of_shadows": {
 			"Name": "Urn of Shadows",
@@ -3665,8 +3641,7 @@ DotaData.addVersion( "6.85",
 			"Components": ["boots", "ring_of_protection", "ring_of_regen"],
 			"Section": "Support",
 			"SectionIndex": 4,
-			"IsBoot": true,
-			"MovementSpeed": 90,
+			"Family": { "Name": "Boots", "Level": 90, "Stats": { "MovementSpeed": 90 } },
 			"Armor": 4,
 			"HealthRegeneration": 12
 		},
@@ -3674,7 +3649,7 @@ DotaData.addVersion( "6.85",
 			"Name": "Tranquil Boots",
 			"Cost": 1000,
 			"Components": ["boots", "ring_of_protection", "ring_of_regen"],
-			"MovementSpeed": 60,
+			"Family": { "Name": "Boots", "Level": 60, "Stats": { "MovementSpeed": 60 } },
 			"Armor": 4
 		},
 		"ring_of_aquila": {
@@ -3696,8 +3671,7 @@ DotaData.addVersion( "6.85",
 			"Section": "Support",
 			"SectionIndex": 6,
 			"Armor": 7,
-			"ManaRegenerationPercentage": 0.5,
-			"Cooldown": 7,
+			"ManaRegenerationPercentage": 0.5
 		},
 		"arcane_boots": {
 			"Name": "Arcane Boots",
@@ -3705,10 +3679,8 @@ DotaData.addVersion( "6.85",
 			"Components": ["boots", "energy_booster"],
 			"Section": "Support",
 			"SectionIndex": 7,
-			"IsBoot": true,
-			"MovementSpeed": 55,
-			"Mana": 250,
-			"Cooldown": 55
+			"Family": { "Name": "Boots", "Level": 55, "Stats": { "MovementSpeed": 55 } },
+			"Mana": 250
 		},
 		"ancient_janggo": {
 			"Name": "Drums of Endurance",
@@ -3719,8 +3691,7 @@ DotaData.addVersion( "6.85",
 			"Strength": 9,
 			"Agility": 9,
 			"Intelligence": 9,
-			"Damage": 3,
-			"Cooldown": 30
+			"Damage": 3
 		},
 		"mekansm": {
 			"Name": "Mekansm",
@@ -3760,6 +3731,13 @@ DotaData.addVersion( "6.85",
 			"Components": ["mekansm", "arcane_boots", 1650],
 			"Section": "Support",
 			"SectionIndex": 12,
+			"MovementSpeed": 55,
+			"Mana": 250,
+			"Strength": 5,
+			"Agility": 5,
+			"Intelligence": 5,
+			"Armor": 5,
+			"IsBoot": true
 		},
 		/* Caster */
 		"glimmer_cape": {
@@ -3778,8 +3756,7 @@ DotaData.addVersion( "6.85",
 			"Section": "Caster",
 			"SectionIndex": 1,
 			"Intelligence": 10,
-			"HealthRegeneration": 4,
-			"Cooldown": 25
+			"HealthRegeneration": 4
 		},
 		"veil_of_discord": {
 			"Name": "Veil of Discord",
@@ -3792,8 +3769,7 @@ DotaData.addVersion( "6.85",
 			"Strength": 6,
 			"Agility": 6,
 			"Intelligence": 6,
-			"Damage": 6,
-			"Cooldown": 20
+			"Damage": 6
 		},
 		"necronomicon": {
 			"Name": "Necronomicon",
@@ -3802,24 +3778,21 @@ DotaData.addVersion( "6.85",
 			"Section": "Caster",
 			"SectionIndex": 3,
 			"Strength": 8,
-			"Intelligence": 15,
-			"Cooldown": 95
+			"Intelligence": 15
 		},
 		"necronomicon_2": {
 			"Name": "Necronomicon II",
 			"Cost": 3950,
 			"Components": ["necronomicon", 1250],
 			"Strength": 12,
-			"Intelligence": 21,
-			"Cooldown": 95
+			"Intelligence": 21
 		},
 		"necronomicon_3": {
 			"Name": "Necronomicon III",
 			"Cost": 5200,
 			"Components": ["necronomicon_2", 1250],
 			"Strength": 16,
-			"Intelligence": 24,
-			"Cooldown": 95
+			"Intelligence": 24
 		},
 		"dagon": {
 			"Name": "Dagon",
@@ -3830,8 +3803,7 @@ DotaData.addVersion( "6.85",
 			"Strength": 3,
 			"Agility": 3,
 			"Intelligence": 16,
-			"Damage": 9,
-			"Cooldown": 35
+			"Damage": 9
 		},
 		"dagon_2": {
 			"Name": "Dagon II",
@@ -3839,8 +3811,7 @@ DotaData.addVersion( "6.85",
 			"Components": ["dagon", 1250],
 			"Agility": 3,
 			"Intelligence": 19,
-			"Damage": 9,
-			"Cooldown": 30
+			"Damage": 9
 		},
 		"dagon_3": {
 			"Name": "Dagon III",
@@ -3849,8 +3820,7 @@ DotaData.addVersion( "6.85",
 			"Strength": 3,
 			"Agility": 3,
 			"Intelligence": 22,
-			"Damage": 9,
-			"Cooldown": 25
+			"Damage": 9
 		},
 		"dagon_4": {
 			"Name": "Dagon IV",
@@ -3859,8 +3829,7 @@ DotaData.addVersion( "6.85",
 			"Strength": 3,
 			"Agility": 3,
 			"Intelligence": 25,
-			"Damage": 9,
-			"Cooldown": 20
+			"Damage": 9
 		},
 		"dagon_5": {
 			"Name": "Dagon V",
@@ -3869,8 +3838,7 @@ DotaData.addVersion( "6.85",
 			"Strength": 3,
 			"Agility": 3,
 			"Intelligence": 28,
-			"Damage": 9,
-			"Cooldown": 15
+			"Damage": 9
 		},
 		"cyclone": {
 			"Name": "Eul's Scepter of Divinity",
@@ -3890,8 +3858,7 @@ DotaData.addVersion( "6.85",
 			"SectionIndex": 6,
 			"Armor": 10,
 			"ManaRegenerationPercentage": 0.75,
-			"Evasion": 0.25,
-			"Cooldown": 7
+			"Evasion": 0.25
 		},
 		"rod_of_atos": {
 			"Name": "Rod of Atos",
@@ -3900,8 +3867,7 @@ DotaData.addVersion( "6.85",
 			"Section": "Caster",
 			"SectionIndex": 7,
 			"Intelligence": 30,
-			"Health": 350,
-			"Cooldown": 10
+			"Health": 350
 		},
 		"orchid": {
 			"Name": "Orchid Malevolence",
@@ -3912,8 +3878,7 @@ DotaData.addVersion( "6.85",
 			"Intelligence": 25,
 			"ManaRegeneration": 1.5,
 			"Damage": 30,
-			"AttackSpeed": 30,
-			"Cooldown": 18
+			"AttackSpeed": 30
 		},
 		"ultimate_scepter": {
 			"Name": "Ultimate Scepter",
@@ -3935,8 +3900,7 @@ DotaData.addVersion( "6.85",
 			"SectionIndex": 10,
 			"Damage": 20,
 			"HealthRegeneration": 10,
-			"ManaRegenerationPercentage": 2.5,
-			"Cooldown": 195
+			"ManaRegenerationPercentage": 2.5
 		},
 		"sheepstick": {
 			"Name": "Scythe of Vyse",
@@ -3947,8 +3911,7 @@ DotaData.addVersion( "6.85",
 			"Strength": 10,
 			"Agility": 10,
 			"Intelligence": 35,
-			"ManaRegenerationPercentage": 1.5,
-			"Cooldown": 30
+			"ManaRegenerationPercentage": 1.5
 		},
 		"octarine_core": {
 			"Name": "Octarine Core",
@@ -3956,6 +3919,11 @@ DotaData.addVersion( "6.85",
 			"Components": ["mystic_staff", "soul_booster"],
 			"Section": "Caster",
 			"SectionIndex": 12,
+			"Intelligence": 25,
+			"Health": 450,
+			"Mana": 400,
+			"HealthRegeneration": 4,
+			"ManaRegenerationPercentage": 1
 		},
 		/* Weapons */
 		"lesser_crit": {
@@ -3975,7 +3943,7 @@ DotaData.addVersion( "6.85",
 			"HealthRegeneration": 7,
 			"Damage": 9,
 			"Armor": 5,
-			"AttackSpeed": 25,
+			"AttackSpeed": 25
 		},
 		"armlet_active": {
 			"Name": "Armlet of Mordiggian",
@@ -3985,7 +3953,7 @@ DotaData.addVersion( "6.85",
 			"HealthRegeneration": -33,
 			"Damage": 40,
 			"Armor": 5,
-			"AttackSpeed": 25,
+			"AttackSpeed": 25
 		},
 		"invis_sword": {
 			"Name": "Shadow Blade",
@@ -3994,8 +3962,7 @@ DotaData.addVersion( "6.85",
 			"Section": "Weapons",
 			"SectionIndex": 2,
 			"Damage": 22,
-			"AttackSpeed": 30,
-			"Cooldown": 28
+			"AttackSpeed": 30
 		},
 		"basher": {
 			"Name": "Skull Basher",
@@ -4014,8 +3981,7 @@ DotaData.addVersion( "6.85",
 			"SectionIndex": 4,
 			"HealthRegeneration": 6,
 			"ManaRegenerationPercentage": 1.5,
-			"Damage": 55,
-			"Cooldown": 4
+			"Damage": 55
 		},
 		"ethereal_blade": {
 			"Name": "Ethereal Blade",
@@ -4025,8 +3991,7 @@ DotaData.addVersion( "6.85",
 			"SectionIndex": 5,
 			"Strength": 10,
 			"Agility": 40,
-			"Intelligence": 10,
-			"Cooldown": 20
+			"Intelligence": 10
 		},
 		"silver_edge": {
 			"Name": "Silver Edge",
@@ -4036,8 +4001,7 @@ DotaData.addVersion( "6.85",
 			"SectionIndex": 6,
 			"Strength": 16,
 			"Damage": 32,
-			"AttackSpeed": 30,
-			"Cooldown": 24
+			"AttackSpeed": 30
 		},
 		"radiance": {
 			"Name": "Radiance",
@@ -4079,8 +4043,7 @@ DotaData.addVersion( "6.85",
 			"Agility": 30,
 			"Damage": 30,
 			"AttackSpeed": 30,
-			"Evasion": 0.35,
-			"Cooldown": 35
+			"Evasion": 0.35
 		},
 		"rapier": {
 			"Name": "Divine Rapier",
@@ -4097,8 +4060,7 @@ DotaData.addVersion( "6.85",
 			"Section": "Weapons",
 			"SectionIndex": 12,
 			"Strength": 10,
-			"Damage": 85,
-			"Cooldown": 60
+			"Damage": 85
 		},
 		/* Armor */
 		"hood_of_defiance": {
@@ -4151,8 +4113,7 @@ DotaData.addVersion( "6.85",
 			"Intelligence": 2,
 			"Health": 250,
 			"HealthRegeneration": 6,
-			"Armor": 5,
-			"Cooldown": 70
+			"Armor": 5
 		},
 		"black_king_bar": {
 			"Name": "Black King Bar",
@@ -4202,7 +4163,7 @@ DotaData.addVersion( "6.85",
 			"Components": ["ultimate_orb", "yasha", 800],
 			"Section": "Armor",
 			"SectionIndex": 9,
-			"Family": {"yasha": 1},
+			"Family": { "Name": "Yasha", "Level": 0.1, "Stats": {"MovementSpeedPercentage": 0.1 } },
 			"Strength": 10,
 			"Agility": 26,
 			"Intelligence": 10,
@@ -4274,10 +4235,9 @@ DotaData.addVersion( "6.85",
 			"Components": ["blade_of_alacrity", "band_of_elvenskin", 600],
 			"Section": "Artifacts",
 			"SectionIndex": 3,
-			"Family": {"yasha": 1},
+			"Family": { "Name": "Yasha", "Level": 0.1, "Stats": {"MovementSpeedPercentage": 0.1 } },
 			"Agility": 16,
-			"AttackSpeed": 15,
-			"MovementSpeedPercentage": 0.1
+			"AttackSpeed": 15
 		},
 		"maelstrom": {
 			"Name": "Maelstrom",
@@ -4327,15 +4287,14 @@ DotaData.addVersion( "6.85",
 		"sange_and_yasha": {
 			"Name": "Sange and Yasha",
 			"Cost": 4100,
-			"Components": ["sange", "yasha"],
+			"Components": ["yasha", "sange"],
 			"Section": "Artifacts",
 			"SectionIndex": 8,
-			"Family": { "yasha": 2 },
+			"Family": { "Name": "Yasha", "Level": 0.16, "Stats": {"MovementSpeedPercentage": 0.16 } },
 			"Strength": 16,
 			"Agility": 16,
 			"Damage": 16,
 			"AttackSpeed": 16,
-			"MovementSpeedPercentage": 0.16
 		},
 		"skadi": {
 			"Name": "Eye of Skadi",
@@ -4457,8 +4416,6 @@ DotaData.addVersion( "6.85",
 			"SectionIndex": 11,
 			"Damage": 60
 		}
-		
-		
 	},
 	"Skills": {
 		"_base": {

@@ -24,13 +24,12 @@ function HeroInstance(heroId, options) {
 				  "Gold": Number.isInteger(options.gold) || 625 };
 	this.Base = {};
 	this.Item = {};
+	this.Items = [];
 	if (options.items && ItemInstance.isValidArray(options.items)) {
-		this.Items = options.items;
+		for (var item of options.items)
+			this.addItem(item, undefined, true);
 	}
-	else {
-		this.Items = [];
-	}
-	this.Skill = {}
+	this.Skill = {};
 	this.Skills = [];
 	this.Aura = {};
 	this.Auras = [];
@@ -83,12 +82,14 @@ HeroInstance.prototype.propagateChange = function (properties) {
 // forceInsert - circumvents max item limit
 // returns -1 if failed
 // returns index if success
-HeroInstance.prototype.addItem = function (item, forceInsert) {
+HeroInstance.prototype.addItem = function (item, forceInsert, silent) {
 	if (this.Items.length >= 6 && !forceInsert) {
 		return -1;
 	}
 	var index = this.Items.push(item);
-	this.ItemChange();
+	item.boundDelete = this.removeItem.bind(this, item);
+	if (!silent)
+		this.ItemChange();
 	return index;
 }
 
@@ -143,14 +144,40 @@ HeroInstance.addHandler({
 	Binds: [],
 	Handler: function() {
 		var a = { "Strength": 0, "Agility":0, "Intelligence":0, 
-			"MovementSpeedFlat":0, "MovementSpeedPercentage":0,
+			"MovementSpeed":0, "MovementSpeedPercentage":0,
 			"Armor":0, "MagicalResistance": 0, "Evasion":0,
 			"Health":0, "HealthRegeneration":0, "Mana":0, "ManaRegenerationFlat": 0,
 			"ManaRegenerationPercentage": 0, "Damage": 0, "AttackSpeed": 0,
-			"Range":0, "VisionDay": 0, "VisionNight": 0 };
+			"Range":0, "VisionDay": 0, "VisionNight": 0 },
+			f = {};
 		for (var item of this.Items) {
+			if (item.Family) {
+				if (!f[item.Family.Name]) {
+					f[item.Family.Name] = item.Family;
+				}
+				else if (f[item.Family.Name].Level < item.Family.Level) {
+					f[item.Family.Name] = item.Family;
+				}
+			}
+			
 			for (var prop in a) {
 				var value = item[prop];
+				if (!value)
+					continue;
+				
+				else if (prop == "Evasion" || prop == "MagicalResistance") {
+					a[prop] += (1 - a[prop]) * value;
+				}
+				else {
+					a[prop] += value;
+				}
+			}
+		}
+		
+		for (var familyName in f) {
+			var family = f[familyName];
+			for (var prop in family.Stats) {
+				var value = family.Stats[prop];
 				if (prop == "Evasion" || prop == "MagicalResistance") {
 					a[prop] += (1 - a[prop]) * value;
 				}
@@ -168,19 +195,27 @@ HeroInstance.addHandler({
 	Binds: ["LevelChange"],
 	Handler: function() {
 		var a = { "Strength": 0, "Agility":0, "Intelligence":0, 
-			"MovementSpeedFlat":0, "MovementSpeedPercentage":0,
+			"MovementSpeed":0, "MovementSpeedPercentage":0,
 			"Armor":0, "MagicalResistance": 0, "Evasion":0,
 			"Health":0, "HealthRegeneration":0, "Mana":0, "ManaRegenerationFlat": 0,
-			"ManaRegenerationPercentage": 0, "Damage": 0, "DamageBase": 0, "AttackSpeed": 0,
-			"Range":0, "VisionDay": 0, "VisionNight": 0 },
-			bootSpeed = 0;
-		
+			"ManaRegenerationPercentage": 0, "Damage": 0, "DamageBase": 0,
+			"AttackSpeed": 0, "Range":0, "VisionDay": 0, "VisionNight": 0 },
+			f = {};
 		for (var item of this.Skills) {
+			if (item.Family) {
+				if (!f[item.Family.Name]) {
+					f[item.Family.Name] = item.Family;
+				}
+				else if (f[item.Family.Name].Level < item.Family.Level) {
+					f[item.Family.Name] = item.Family;
+				}
+			}
+			
 			for (var prop in a) {
 				var value = item[prop];
-				if (prop.IsBoot && prop.MovementSpeedFlat > bootSpeed) {
-					bootSpeed = prop.MovementSpeedFlat;
-				}
+				if (!value)
+					continue;
+				
 				else if (prop == "Evasion" || prop == "MagicalResistance") {
 					a[prop] += (1 - a[prop]) * value;
 				}
@@ -189,7 +224,19 @@ HeroInstance.addHandler({
 				}
 			}
 		}
-		a.MovementSpeedFlat += bootSpeed;
+		
+		for (var familyName in f) {
+			var family = f[familyName];
+			for (var prop in family.Stats) {
+				var value = family.Stats[prop];
+				if (prop == "Evasion" || prop == "MagicalResistance") {
+					a[prop] += (1 - a[prop]) * value;
+				}
+				else {
+					a[prop] += value;
+				}
+			}
+		}
 		this.Skill = a;
 	}
 });
@@ -206,14 +253,14 @@ HeroInstance.addHandler({
 		a.Agility = this.Base.Agility + a.AgilityBonus;
 		a.IntelligenceBonus = this.Item.Intelligence + this.Skill.Intelligence;
 		a.Intelligence = this.Base.Intelligence + a.IntelligenceBonus;
-		a.MovementSpeedBase = this.Raw.MovementSpeed + this.Item.MovementSpeedFlat + this.Skill.MovementSpeedFlat;
+		a.MovementSpeedBase = this.Raw.MovementSpeed + this.Item.MovementSpeed + this.Skill.MovementSpeed;
 		a.MovementSpeedPercentage = this.Item.MovementSpeedPercentage + this.Skill.MovementSpeedPercentage;
-		a.MovementSpeed = Math.max(a.MovementSpeedBase * (1+ a.MovementSpeedPercentage), 100);
+		a.MovementSpeed = Math.max(a.MovementSpeedBase * (1 + a.MovementSpeedPercentage), 100);
 		a.ArmorBonus = this.Item.Armor + this.Skill.Armor;
 		a.ArmorBase = this.Raw.Armor + Math.round(a.AgilityFloat * 0.14 * 100) / 100;
 		a.Armor = a.ArmorBase + a.ArmorBonus;
 		a.Evasion = this.Item.Evasion + (1-this.Item.Evasion) * this.Skill.Evasion;
-		a.MagicalResistance = this.Raw.MagicalResistance + (1-this.Raw.MagicalResistance) * this.Item.MagicalResistance;
+		a.MagicalResistance = this.Raw.MagicalResistance + (1 - this.Raw.MagicalResistance) * this.Item.MagicalResistance;
 		a.HealthBase = this.Raw.Health + a.Strength * 19;
 		a.Health = a.HealthBase + this.Item.Health + this.Skill.Health
 		a.HealthRegenerationBase = this.Raw.HealthRegeneration + a.Strength * 0.03;

@@ -64,42 +64,43 @@ $(function(){
 		
 		for (var itemKey in items) {
 			var item = items[itemKey];
-			// because V8 doesn't support continue in for..in loops
-			if (item.Section in shopSectionElements) {
-				if (!sectionPools[item.Section]) {
-					sectionPools[item.Section] = [];	
-				}
-				var img = document.createElement("img"),
-					section = sectionPools[item.Section];
-				if (Number.isInteger(item.SectionIndex)) {
-					img.itemIndex = item.SectionIndex;
-				}
-				img.src = "images/items/"+itemKey+".png";
-				img.itemId = itemKey;
-				img.setAttribute("item-key", itemKey);
-				img.draggable = true;
-				img.width = 48;
-				img.style.display = "block";
-				img.alt = item.Name;
-				img.title = item.Name;
+			if (!shopSectionElements[item.Section])
+				continue;
 				
-				img.ondragstart = itemDragStart;
-				img.ondragend = itemDragEnd;
-				//img.ondrop = itemDragDrop;
-				
-				
-				if (Number.isInteger(img.itemIndex) && !section[img.itemIndex]) {
-					section[img.itemIndex] = img;
-				}
-				else if (Number.isInteger(img.itemIndex) && section[img.itemIndex]) {
-					var swap = section[img.itemIndex];
-					section[img.itemIndex] = img;
-					section.push(swap);
-				}
-				else {
-					section.push(img);
-				}
+			if (!sectionPools[item.Section]) {
+				sectionPools[item.Section] = [];	
 			}
+			var img = document.createElement("img"),
+				section = sectionPools[item.Section];
+			if (Number.isInteger(item.SectionIndex)) {
+				img.itemIndex = item.SectionIndex;
+			}
+			img.src = "images/items/"+itemKey+".png";
+			img.itemId = itemKey;
+			img.setAttribute("item-key", itemKey);
+			img.draggable = true;
+			img.width = 48;
+			img.style.display = "block";
+			img.alt = item.Name;
+			img.title = item.Name;
+
+			img.ondragstart = itemDragStart;
+			img.ondragend = itemDragEnd;
+			//img.ondrop = itemDragDrop;
+
+
+			if (Number.isInteger(img.itemIndex) && !section[img.itemIndex]) {
+				section[img.itemIndex] = img;
+			}
+			else if (Number.isInteger(img.itemIndex) && section[img.itemIndex]) {
+				var swap = section[img.itemIndex];
+				section[img.itemIndex] = img;
+				section.push(swap);
+			}
+			else {
+				section.push(img);
+			}
+			
 		}
 		for (var section in sectionPools) {
 			var marginSum = 0;

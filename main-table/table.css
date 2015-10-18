@@ -65,6 +65,7 @@
 }
 .hero-table .item-container > div.item-display {
 	display: inline-block;
+	position:relative;
 	width: 39px;
 	height: 28px;
 	background-size: contain;
@@ -74,5 +75,51 @@
 	vertical-align: middle;
 	font-size: 80%;
 }
-
+div.item-display > .item-display-options {
+	display: none;
+	position: absolute;
+	top:28px;
+	left: -1px;
+	background: #003045;
+	border: 1px solid gold;
+	padding: 3px;
+	overflow: visible;
+	width: 200px;
+	z-index: 1;
+}
+div.item-display:hover > .item-display-options {
+	display: inline-block;
+}
+div.item-display > .item-display-options:hover {
+	display: block;
+}
+.item-display > .item-display-charges {
+	position: absolute;
+	bottom: 0px;
+	right: 2px;
+	text-align: right;
+	text-shadow: -1px -1px 1px rgba(0, 0, 0, 1), 1px 1px 1px rgba(0, 0, 0, 1);
+}
+.item-display > .item-display-delete {
+	position: absolute;
+	display: none;
+	top: 0px;
+	right: 0px;
+	width: 12px;
+	height: 12px;
+	border: none;
+	background: url(delete-icon16.png);
+	background-repeat: no-repeat;
+	background-size: cover;
+	cursor: pointer;
+}
+.item-display:hover > .item-display-delete { 
+	display: block;
+}
+.item-display-options > h1 {
+	margin: 0px;
+	padding: 0px;
+	font-size: 1em;
+	text-align: left;
+}
 

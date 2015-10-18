@@ -8,9 +8,10 @@ $(function(e){
 		containment: "document"
 	}) 
 	var MainTable = new HeroTable("Comparison table", "main-table", "main-table-wrapper");
-	MainTable.addHero(new HeroInstance("ogre_magi", { level: 6, items: [new ItemInstance("bloodstone")] }));
-	MainTable.addHero(new HeroInstance("ogre_magi", { level: 6, items: [new ItemInstance("bloodstone"), new ItemInstance("magic_wand")] }));
-	MainTable.addHero(new HeroInstance("ogre_magi", { level: 6, items: [new ItemInstance("basher"), new ItemInstance("magic_wand")] }));
+	MainTable.addHero(new HeroInstance("ogre_magi", { level: 6, items: [new ItemInstance("boots"), new ItemInstance("ultimate_orb")] }));
+	MainTable.addHero(new HeroInstance("ogre_magi", { level: 6, items: [new ItemInstance("travel_boots")] }));
+	MainTable.addHero(new HeroInstance("ogre_magi", { level: 6, items: [new ItemInstance("travel_boots"),new ItemInstance("boots")] }));
+	MainTable.addHero(new HeroInstance("ogre_magi", { level: 6, items: [new ItemInstance("bloodstone", {charges: 16})] }));
 	
 	
 	document.createVersionSelectors = function (init) {

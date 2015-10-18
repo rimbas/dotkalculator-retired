@@ -1,8 +1,11 @@
 
 Hero (unit) stat property structure
 
+Notes: 
+a) Float type in "*Percentage" properties is derived as 100% = 1.0
 
-Raw stat definition
+
+Raw stat definition in DotaData lists
 	Name 							- Dota 2 name of the hero
 	LoreName						- Alternate name
 	Type							- Primary attribute of the hero
@@ -39,7 +42,8 @@ Raw stat definition
 	VisionNighttime					- Vision during nighttime
 	TrueSight						- True sight range (wards, towers and fountain)
 
-Meta
+HeroInstance object structure
+Meta (object):
 	Level							- current level of the unit
 	Experience						- current experience
 	Team							- Used to differentiate for auras
@@ -47,6 +51,7 @@ Meta
 	Dead							- Used to differentiate for auras and skills
 	
 Hero stats, after calculating with level
+Base:
 	Strength						- 
 	Agility							-
 	Intelligence					-
@@ -57,40 +62,6 @@ Hero stats, after calculating with level
 	ManaRegeneration				- 
 	DamageMin						-
 	DamageMax						-
-
-Item stats
-	Name							-
-	Cost							- 
-	Components						- (items + numerical recipe value)
-	Section							- (shop sections)
-	SectionIndex					- Override for shop display, (to recreate Dota 2 shop order)
-	Charges							- Default item charge count (undefined for normal items, at least 1 for consumables)
-	ChargesStack					- Multiples of same item stack (tangos, salves, clarities)
-	ChargesMax						- Magic stick/wand
-	Consumable						- Charge reduction to zero removes the item
-	Strength						- 
-	Agility							- 
-	Intelligence					- 
-	MovementSpeed		  			- Boots, Euls
-	MovementSpeedPercentage			- Sange
-	Armor							- 
-	Evasion							- Talisman of Evasion
-	MagicalResistance				- Cloak
-	Health							- 
-	HealthRegeneration				- 
-	Mana							- 
-	ManaRegenerationFlat			- Bloodstone
-	ManaRegenerationPercentage		- Sage's mask
-	Damage							- 
-	AttackSpeed						- Hyperstone
-	Range							- 
-	VisionDay						- 
-	VisionNight						- Moon shard
-	Family							- object with family name as key and level as value
-	AttackModifier					- 
-	AttackUniqueModifier			-
-	Ability							-
-	
 
 Skill stats
 	Name							-
@@ -167,4 +138,37 @@ Total
 	DamageBonus						- Total.DamageBase * Aura.DamagePercentage + Item/Skill/Aura.Damage
 	Damage							- (Total.DamageBase + Total.DamageBonus) * (1 + Aura.DamageReductionPercentage
 	
+
 	
+Item properties in DotaData item lists
+	Name						(string)	-
+	Cost						(integer)	- 
+	Components					(array)		- (other ited IDs [+ numerical recipe value])
+	Section						(string)	- (shop sections)
+	SectionIndex				(integer)	- Override for shop display, (to recreate Dota 2 shop order), starts at 0
+	Charges						(integer)	- Default item charge count (undefined for normal items, at least 1 for consumables)
+	ChargesStack				(boolean)	- Multiples of same item stack (tangos, salves, clarities)
+	ChargesMax					(integer)	- Magic stick/wand
+	Consumable					(boolean)	- Charge reduction to zero removes the item
+	Strength					(integer)	- 
+	Agility						(integer)	- 
+	Intelligence				(integer)	- 
+	MovementSpeed		  		(integer)	- Boots, Euls
+	MovementSpeedPercentage		(float)		- Sange
+	Armor						(float)		- 
+	Evasion						(float)		- Talisman of Evasion
+	MagicalResistance			(float)		- Cloak
+	Health						(integer)	- 
+	HealthRegeneration			(float)		- 
+	Mana						(integer)	- 
+	ManaRegenerationFlat		(integer)	- Bloodstone
+	ManaRegenerationPercentage	(float)		- Sage's mask
+	Damage						(integer)	- 
+	AttackSpeed					(integer)	- Hyperstone
+	Range						(integer)	- 
+	VisionDay					(integer)	- 
+	VisionNight					(integer)	- Moon shard
+	Family						(object)	- Object that inherits Item defintion with addition of Level and Stats properties
+	AttackModifier				(string)	- 
+	AttackUniqueModifier		(string)	- 
+	Ability						(string)	- Attached skill
