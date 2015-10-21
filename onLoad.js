@@ -8,11 +8,10 @@ $(function(e){
 		containment: "document"
 	}) 
 	var MainTable = new HeroTable("Comparison table", "main-table", "main-table-wrapper");
-	MainTable.addHero(new HeroInstance("ogre_magi", { level: 6, items: [new ItemInstance("boots"), new ItemInstance("ultimate_orb")] }));
-	MainTable.addHero(new HeroInstance("ogre_magi", { level: 6, items: [new ItemInstance("travel_boots")] }));
-	MainTable.addHero(new HeroInstance("ogre_magi", { level: 6, items: [new ItemInstance("travel_boots"),new ItemInstance("boots")] }));
-	MainTable.addHero(new HeroInstance("ogre_magi", { level: 6, items: [new ItemInstance("bloodstone", {charges: 16})] }));
-	
+	MainTable.addHero(new HeroInstance("pudge", { level: 7, items: [new ItemInstance("tranquil_boots"), new ItemInstance("urn_of_shadows"), new ItemInstance("blink")] }));
+	MainTable.addHero(new HeroInstance("pudge", { level: 7, items: [new ItemInstance("arcane_boots"), new ItemInstance("force_staff"), new ItemInstance("urn_of_shadows"), new ItemInstance("ghost")] }));
+	MainTable.addHero(new HeroInstance("pudge", { level: 7, items: [new ItemInstance("travel_boots"), new ItemInstance("urn_of_shadows"), new ItemInstance("blink")] }));
+	MainTable.addHero(new HeroInstance("pudge", { level: 7, items: [new ItemInstance("tranquil_boots"), new ItemInstance("urn_of_shadows"), new ItemInstance("force_staff"), new ItemInstance("blade_mail")] }));
 	
 	document.createVersionSelectors = function (init) {
 		optionCollection = [];

@@ -148,7 +148,7 @@ HeroInstance.addHandler({
 			"Armor":0, "MagicalResistance": 0, "Evasion":0,
 			"Health":0, "HealthRegeneration":0, "Mana":0, "ManaRegenerationFlat": 0,
 			"ManaRegenerationPercentage": 0, "Damage": 0, "AttackSpeed": 0,
-			"Range":0, "VisionDay": 0, "VisionNight": 0 },
+			"Range":0, "VisionDay": 0, "VisionNight": 0, "Cost": 0 },
 			f = {};
 		for (var item of this.Items) {
 			if (item.Family) {
@@ -281,7 +281,8 @@ HeroInstance.addHandler({
 		a.Range = this.Raw.Range + this.Skill.Range;
 		a.VisionDay = this.Raw.VisionDaytime;
 		a.VisionNight = this.Raw.VisionNighttime + this.Skill.VisionNight + this.Item.VisionNight;
-
+		a.Cost = this.Item.Cost;
+		
 		this.Total = a;
 		this.updateTable();
 	}

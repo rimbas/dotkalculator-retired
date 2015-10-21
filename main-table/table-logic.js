@@ -544,7 +544,7 @@ HeroTable.addEvaluator({
 	eval: function(cell, hero) {
 		var attackTime = hero.Raw.AttackRate / (hero.Total.AttackSpeed / 100);
 		cell.textContent = attackTime.toFixed(2)+"s";
-		cell.sortertingProperty = attackTime;
+		cell.sortingProperty = attackTime;
 	},
 	sorter: "propertyNumber"
 });
@@ -558,7 +558,7 @@ HeroTable.addEvaluator({
 	eval: function(cell, hero) {
 		var attackTime = (hero.Total.AttackSpeed / 100) / hero.Raw.AttackRate;
 		cell.textContent = attackTime.toFixed(2);
-		cell.sortertingProperty = attackTime;
+		cell.sortingProperty = attackTime;
 	},
 	sorter: "propertyNumber"
 });
@@ -577,6 +577,19 @@ HeroTable.addEvaluator({
 });
 
 HeroTable.addEvaluator({
+	ID: "Evasion",
+	name: "Evasion",
+	header: "Ev.",
+	type: "Base",
+	description: "Evasion percentage the hero has",
+	eval: function(cell, hero) {
+		cell.textContent = (hero.Total.Evasion * 100).toFixed(0) + "%";
+		cell.sortingProperty = hero.Total.Evasion;
+	},
+	sorter: "propertyNumber"
+});
+
+HeroTable.addEvaluator({
 	ID: "MovementSpeed",
 	name: "Movement Speed",
 	header: "MS",
@@ -588,7 +601,16 @@ HeroTable.addEvaluator({
 	sorter: "number"
 });
 
-
+HeroTable.addEvaluator({
+	ID: "NetWorth",
+	name: "Net Worth",
+	header: "NW",
+	type: "Base",
+	description: "Displays hero net worth",
+	eval: function(cell, hero) {
+		cell.textContent = hero.Total.Cost;
+	}
+});
 
 
 
