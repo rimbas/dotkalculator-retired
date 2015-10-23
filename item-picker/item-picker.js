@@ -9,7 +9,7 @@ $(function(){
 	
 	var shopSections = [
 		"Consumables", "Attributes", "Armaments", "Arcane", "Common", 
-		"Support", "Caster", "Weapons", "Armor", "Artifacts", "Secret" ],
+		"Support", "Caster", "Weapons", "Armor", "Artifacts", "Secret", "Unlisted" ],
 		shopSectionElements = {};
 	
 	
