@@ -5,7 +5,7 @@
 // HeroTable handler constructor
 // tableID - table Id
 // wrapperId - element to insert the table into
-HeroTable.tableList = []
+HeroTable.tableList = [];
 HeroTable.tables = {};
 
 function HeroTable(tableName, tableID, wrapperId) {

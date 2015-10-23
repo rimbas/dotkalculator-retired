@@ -89,6 +89,8 @@ div.item-display > .item-display-options {
 }
 div.item-display:hover > .item-display-options {
 	display: inline-block;
+	text-align: left;
+	box-shadow: 1px 1px 5px black;
 }
 div.item-display > .item-display-options:hover {
 	display: block;
@@ -118,8 +120,22 @@ div.item-display > .item-display-options:hover {
 }
 .item-display-options > h1 {
 	margin: 0px;
-	padding: 0px;
+	padding: 2px;
 	font-size: 1em;
-	text-align: left;
 }
-
+span.item-display-options {
+	
+}
+.item-display-options.label {
+	margin-left: 0.5ch;
+}
+.item-display-options.value {
+	font-weight: bold;
+	color: limegreen;
+}
+.value.negative {
+	color: red;
+}
+.label.dynamic {
+	color: orange;
+}

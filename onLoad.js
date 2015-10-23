@@ -8,10 +8,11 @@ $(function(e){
 		containment: "document"
 	}) 
 	var MainTable = new HeroTable("Comparison table", "main-table", "main-table-wrapper");
-	MainTable.addHero(new HeroInstance("pudge", { level: 7, items: [new ItemInstance("tranquil_boots"), new ItemInstance("urn_of_shadows"), new ItemInstance("blink")] }));
+	MainTable.addHero(new HeroInstance("pudge", { level: 7, items: [new ItemInstance("tranquil_boots"), new ItemInstance("urn_of_shadows"), new ItemInstance("blink"), new ItemInstance("point_booster")] }));
 	MainTable.addHero(new HeroInstance("pudge", { level: 7, items: [new ItemInstance("arcane_boots"), new ItemInstance("force_staff"), new ItemInstance("urn_of_shadows"), new ItemInstance("ghost")] }));
-	MainTable.addHero(new HeroInstance("pudge", { level: 7, items: [new ItemInstance("travel_boots"), new ItemInstance("urn_of_shadows"), new ItemInstance("blink")] }));
+	MainTable.addHero(new HeroInstance("pudge", { level: 7, items: [new ItemInstance("boots"), new ItemInstance("urn_of_shadows"), new ItemInstance("blink"), new ItemInstance("cyclone")] }));
 	MainTable.addHero(new HeroInstance("pudge", { level: 7, items: [new ItemInstance("tranquil_boots"), new ItemInstance("urn_of_shadows"), new ItemInstance("force_staff"), new ItemInstance("blade_mail")] }));
+	MainTable.addHero(new HeroInstance("pudge", { level: 7, items: [new ItemInstance("armlet_active"), new ItemInstance("talisman_of_evasion"), new ItemInstance("cloak"), new ItemInstance("bloodstone")] }));
 	
 	document.createVersionSelectors = function (init) {
 		optionCollection = [];

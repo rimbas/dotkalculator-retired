@@ -9,6 +9,7 @@ function ItemInstance(itemId, properties) {
 	Object.defineProperty(this, "ID", {value: itemId});
 	Object.defineProperty(this, "displayElement", {writable: true});
 	Object.defineProperty(this, "chargeElement", {writable: true});
+	Object.defineProperty(this, "dynamicElements", {writable: true, value: {}});
 	Object.defineProperty(this, "boundDelete", {writable: true});
 	
 	for (var prop in item) {
@@ -82,16 +83,51 @@ ItemInstance.prototype.createDisplayElement = function() {
 	
 	var hidden = document.createElement("div");
 		hidden.className = "item-display-options";
-	(function(div, item){
-		var h1 = document.createElement("h1");
-			h1.textContent = item.Name;
-		div.appendChild(h1);
-		
-	})(hidden, this);
+
+	this.populateOptionElement(hidden);
 	div.appendChild(hidden);
 	
 	this.displayElement = div;
 	return div;
+}
+
+ItemInstance.prototype.populateOptionElement = function(el) {
+	var h1 = document.createElement("h1");
+		h1.textContent = this.Name;
+	el.appendChild(h1);
+	var statOrder = ["Strength", "Agility", "Intelligence", "Health", "Mana",
+		"HealthRegeneration", "ManaRegenerationPercentage", "ManaRegeneration",
+		"Damage", "AttackSpeed", "MovementSpeed", "MovementSpeedPercentage",
+		"MagicalResistance", "Evasion", "Armor"], valuePool = {};
+		
+	for (var i = 0, stat; i <= statOrder.length; stat=statOrder[i++]) {
+		if (!this[stat] && (!this.Family || !this.Family.Stats[stat]))
+			continue;
+		
+		if (this.Family && this.Family.Stats[stat])
+			valuePool[stat] = this.Family.Stats[stat];
+		else
+			valuePool[stat] = this[stat];
+	}
+	
+	for (var stat in valuePool) {
+		var propDesc = Object.getOwnPropertyDescriptor(this, stat),
+			readable = DotaData.statToReadable(stat, valuePool[stat]),
+			valueLabel = document.createElement("span");
+			valueLabel.className = "item-display-options value";
+		if (valuePool[stat] < 0) valueLabel.classList.add("negative");
+			valueLabel.textContent = readable.value;
+		el.appendChild(valueLabel);
+		var spanLabel = document.createElement("span");
+			spanLabel.className = "item-display-options label";
+			spanLabel.textContent = readable.key;
+		if (propDesc && propDesc.get) {
+			spanLabel.classList.add("dynamic");
+			this.dynamicElements[stat] = valueLabel;
+		}
+		el.appendChild(spanLabel);
+		el.appendChild(document.createElement("br"));
+	}
 }
 
 ItemInstance.prototype.updateDisplayElement = function () {
@@ -99,27 +135,9 @@ ItemInstance.prototype.updateDisplayElement = function () {
 		return;
 	if (this.chargeElement)
 		this.chargeElement = this.Charges;	
-}
-
-//
-function SkillInstance(skillId, properties) {
-	properties = properties || {};
-	var skill = DotaData.getSkillProperties(skillId, properties.version);
-	this.ID = skillId;
-	for (var prop in skill) {
-		var value = skill[prop];
-		if (value instanceof Function) {
-			Object.defineProperty(this, prop, {
-				get: value,
-				enumerable: true
-			});
-		}
-		else {
-			this[prop] = value;	
-		}
+	for (var stat in this.dynamicElements) {
+		readable = DotaData.statToReadable(stat, this[stat]),
+		this.dynamicElements[stat].textContent = readable.value;
 	}
-}
-
-SkillInstance.prototype.toString = function () {
-	return "[ItemInstance "+this.ID+"]";
+		
 }

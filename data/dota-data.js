@@ -68,4 +68,22 @@ DotaData.addVersion = function (version, data) {
 	DotaData.Versions[version] = data;
 }
 
+DotaData.readableStatStrings = {
+	"HealthRegeneration": "HP regeneration",
+	"ManaRegeneration": "Mana regeneration",
+	"ManaRegenerationPercentage": "Mana regeneration",
+	"MovementSpeed": "Movement speed",
+	"MovementSpeedPercentage": "Movement speed",
+	"VisionDay": "Day vision",
+	"VisionNight": "Night vision",
+	"AttackSpeed": "Attack speed"
+}
+
+DotaData.statToReadable = function(stat, value) {
+	var key = DotaData.readableStatStrings[stat] ? DotaData.readableStatStrings[stat] : stat;
+	if (/Percentage$/.test(stat) || stat == "Evasion" || stat == "MagicalResistance")
+		value = (value > 0 ? "+" : "") + (value * 100).toFixed(0)+"%";
+	return { key: key, value: value > 0 ? "+" + value : value };
+}
+
 
