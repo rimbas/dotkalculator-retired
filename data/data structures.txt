@@ -67,6 +67,7 @@ Skill stats
 	Name							-
 	Class							- Ability, Ultimate
 	Level							-
+	Charges							- Flesh heap, Berserkers blood
 	Strength						- 
 	Agility							-
 	Intelligence					-

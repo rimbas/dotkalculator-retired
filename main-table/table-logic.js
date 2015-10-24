@@ -17,7 +17,6 @@ function HeroTable(tableName, tableID, wrapperId) {
 	this.ID = tableID;
 	this.heroList = [];
 	this.columnList = this.getValidColumnList();
-	
 	this._tableSorterCreated = false;
 	
 	this.createTable();
@@ -491,6 +490,7 @@ HeroTable.addEvaluator({
 	type: "General",
 	description: "Displays hero items",
 	init: function(cell, hero) {
+		cell.className = "box-content";
 		var container = document.createElement("div");
 		container.ondrop = function(e) { 
 			hero.addItem(new ItemInstance(e.dataTransfer.getData("text/item-id")));
@@ -501,13 +501,27 @@ HeroTable.addEvaluator({
 	},
 	eval: function(cell, hero) {
 		cell = cell.firstChild;
-		while (cell.firstChild) {
+		while (cell.firstChild)
 			cell.removeChild(cell.firstChild);	
-		}
-		for (var i = 0; i < hero.Items.length; i++) {
-			var itemInstance = hero.Items[i];
-			cell.appendChild(itemInstance.createDisplayElement());
-		}
+		for (var i = 0; i < hero.Items.length; i++)
+			cell.appendChild(hero.Items[i].createDisplayElement());
+	},
+	sorter: false
+});
+
+HeroTable.addEvaluator({
+	ID: "Abilities",
+	name: "Abilities",
+	header: "Abilities",
+	type: "General",
+	description: "Displays hero abilities",
+	init: function(cell, hero) {
+		cell.className = "box-content";
+		var container = document.createElement("div")
+		container.className = "ability-container"
+		cell.appendChild(container);
+		for (var i = 0; i < hero.Abilities.length; i++)
+			container.appendChild(hero.Abilities[i].createDisplayElement());
 	},
 	sorter: false
 });

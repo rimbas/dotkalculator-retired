@@ -41,14 +41,16 @@ DotaData.getItemProperties = function (itemId, versionOverride) {
 	return obj;
 }
 
-DotaData.getSkillProperties = function (skillId, versionOverride) {
+DotaData.getAbilityProperties = function (abilityId, versionOverride) {
 	if (versionOverride && !versionOverride in DotaData.Versions) throw "No such version \""+versionOverride+"\"";
 	var version = DotaData.Versions[versionOverride || DotaData.TargetVersion];
-	//if (!(skillId in version.Skills)) throw "No such id \"" + skillId + "\" in item list";
+	//if (!(abilityId in version.Abilities)) throw "No such id \"" + abilityId + "\" in item list";
 	// while not all skills are implemented
-	if (!(skillId in version.Skills)) Console.warn("No such id \"" + skillId + "\" in item list");
+	if (!(abilityId in version.Abilities)) 
+		return DotaData.getAbilityProperties("_base")
+		//console.warn("No such id \"" + abilityId + "\" in item list");
 	var obj = {}, i, prop,
-		skill = version.Skills[skillId];
+		skill = version.Abilities[abilityId];
 	
 	for (prop in skill) {
 		obj[prop] = skill[prop];
@@ -64,8 +66,20 @@ DotaData.getCurrentItemList = function() {
 	return DotaData.Versions[DotaData.NewestVersion].Items;
 }
 
-DotaData.addVersion = function (version, data) {
+DotaData.addVersion = function(version, data) {
+	DotaData.checkVersionData(data);
 	DotaData.Versions[version] = data;
+}
+
+DotaData.checkVersionData = function(data) {
+	for (var heroId in data.Heroes) {
+		var hero = data.Heroes[heroId];
+		if (typeof heroId != "string") {
+			console.error("Hero "+heroId+" with a non string identifier!");
+			delete data.Heroes[heroId];
+		}
+		if (!hero.Name) console.warn("Hero with ID "+heroId+"Has no name!")
+	}
 }
 
 DotaData.readableStatStrings = {
@@ -76,14 +90,19 @@ DotaData.readableStatStrings = {
 	"MovementSpeedPercentage": "Movement speed",
 	"VisionDay": "Day vision",
 	"VisionNight": "Night vision",
-	"AttackSpeed": "Attack speed"
+	"AttackSpeed": "Attack speed",
+	"MagicalResistance": "Magical resistance"
 }
 
-DotaData.statToReadable = function(stat, value) {
+DotaData.statToReadable = function(stat, val) {
 	var key = DotaData.readableStatStrings[stat] ? DotaData.readableStatStrings[stat] : stat;
 	if (/Percentage$/.test(stat) || stat == "Evasion" || stat == "MagicalResistance")
-		value = (value > 0 ? "+" : "") + (value * 100).toFixed(0)+"%";
-	return { key: key, value: value > 0 ? "+" + value : value };
+		val = (val > 0 ? "+" : "" ) + (val * 100).toFixed(0)+"%";
+	return { key: key, value: val > 0 ? "+" + val : val };
+}
+
+DotaData.numericToRoman = function(number) {
+	return ["-", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"][number];
 }
 
 

@@ -8,8 +8,12 @@ $(function(e){
 		containment: "document"
 	}) 
 	var MainTable = new HeroTable("Comparison table", "main-table", "main-table-wrapper");
-	MainTable.addHero(new HeroInstance("pudge", { level: 7, items: [new ItemInstance("tranquil_boots"), new ItemInstance("urn_of_shadows"), new ItemInstance("blink"), new ItemInstance("point_booster")] }));
-	MainTable.addHero(new HeroInstance("pudge", { level: 7, items: [new ItemInstance("arcane_boots"), new ItemInstance("force_staff"), new ItemInstance("urn_of_shadows"), new ItemInstance("ghost")] }));
+	MainTable.addHero(new HeroInstance("pudge", { level: 7, items: [new ItemInstance("tranquil_boots"), new ItemInstance("urn_of_shadows"), new ItemInstance("blink"), new ItemInstance("point_booster")],
+												abilities: { "attribute_bonus": {level: 2} }
+												}));
+	MainTable.addHero(new HeroInstance("pudge", { level: 7, items: [new ItemInstance("arcane_boots"), new ItemInstance("force_staff"), new ItemInstance("urn_of_shadows"), new ItemInstance("ghost")],
+												abilities: { "attribute_bonus": {level: 3}, "pudge_flesh_heap": {level: 4, charges: 10}}
+												}));
 	MainTable.addHero(new HeroInstance("pudge", { level: 7, items: [new ItemInstance("boots"), new ItemInstance("urn_of_shadows"), new ItemInstance("blink"), new ItemInstance("cyclone")] }));
 	MainTable.addHero(new HeroInstance("pudge", { level: 7, items: [new ItemInstance("tranquil_boots"), new ItemInstance("urn_of_shadows"), new ItemInstance("force_staff"), new ItemInstance("blade_mail")] }));
 	MainTable.addHero(new HeroInstance("pudge", { level: 7, items: [new ItemInstance("armlet_active"), new ItemInstance("talisman_of_evasion"), new ItemInstance("cloak"), new ItemInstance("bloodstone")] }));

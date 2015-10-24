@@ -4435,9 +4435,9 @@ DotaData.addVersion( "6.85",
 			"Damage": 60
 		}
 	},
-	"Skills": {
+	"Abilities": {
 		"_base": {
-			"Name": "Dummy skill",
+			"Name": "Dummy ability",
 			"Version": "6.85",
 			"Level": 0,
 			"LevelMax": "4",
@@ -4448,13 +4448,21 @@ DotaData.addVersion( "6.85",
 			"Name": "Attribute bonus",
 			"Level": 0,
 			"LevelMax": 10,
+			"Restrictions": [1, 3, 5, 7, 9, 11, 13, 15, 17, 19],
 			"Strength": function() { return this.Level * 2 },
 			"Agility": function() { return this.Level * 2 },
 			"Intelligence": function() { return this.Level * 2 },
-			"Restrictions": [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
+		},
+		"pudge_flesh_heap": {
+			"Name": "Flesh Heap",
+			"Level": 0,
+			"LevelMax": 4,
+			"Charges": 0,
+			"Restrictions": [1, 3, 5, 7],
+			"Strength": function() { return Math.floor(this.Level > 0 ? (0.5 + this.Level * 0.5) * this.Charges : 0) },
+			"MagicalResistance": function() { return this.Level > 0 ? 0.04 + this.Level * 0.02 : 0 }
 		}
-			
 	}
 	
-}
-);
+});
+
