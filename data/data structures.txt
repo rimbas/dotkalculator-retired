@@ -145,6 +145,7 @@ Item properties in DotaData item lists
 	Name						(string)	-
 	Cost						(integer)	- 
 	Components					(array)		- (other ited IDs [+ numerical recipe value])
+	Disassemble					(boolean)	- Can the item be disassembled at any time
 	Section						(string)	- (shop sections)
 	SectionIndex				(integer)	- Override for shop display, (to recreate Dota 2 shop order), starts at 0
 	Charges						(integer)	- Default item charge count (undefined for normal items, at least 1 for consumables)

@@ -111,7 +111,7 @@ HeroTable.prototype.createTable = function () {
 	}
 	this._tableElement = document.createElement("table");
 	this._wrapperElement.appendChild(this._tableElement);
-	this._tableElement.id = this._tableId;
+	this._tableElement.id = this.ID;
 	this._tableElement.className = "hero-table";
 	this._tableElement.HeroTableController = this;
 	

@@ -45,11 +45,8 @@ AbilityInstance.prototype.createDisplayElement = function() {
 	var div = document.createElement("div");
 	this.displayElement = div;
 	div.className = "ability-display";
-	if (this.ID == "attribute_bonus")
-		div.style.backgroundImage = "url(images/abilities/" + this.ID + ".png)";
-	else
-		div.style.backgroundImage = "url(images/abilities/no_icon.png)";
-	
+	div.style.backgroundImage = "url(images/abilities/" + this.ID + ".png)";
+
 	if (typeof this.Charges === "number") {
 		var chargeElement = document.createElement("span");
 		chargeElement.textContent = this.Charges;
@@ -74,13 +71,8 @@ AbilityInstance.prototype.createDisplayElement = function() {
 
 AbilityInstance.prototype.populateOptionElement = function(el) {
 	var h1 = document.createElement("h1");
-		h1.textContent = this.Name;
+		h1.textContent = this.ID;
 	el.appendChild(h1);
-	var tempId = document.createElement("span");
-		tempId.textContent = this.ID;
-		tempId.className = "label";
-	el.appendChild(tempId);
-	el.appendChild(document.createElement("br"));
 	
 	// why did it have to turn out like this
 	if ("Charges" in this) {

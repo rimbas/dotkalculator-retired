@@ -163,7 +163,7 @@ HeroInstance.addHandler({
 		var a = { "Strength": 0, "Agility":0, "Intelligence":0, 
 			"MovementSpeed":0, "MovementSpeedPercentage":0,
 			"Armor":0, "MagicalResistance": 0, "Evasion":0,
-			"Health":0, "HealthRegeneration":0, "Mana":0, "ManaRegenerationFlat": 0,
+			"Health":0, "HealthRegeneration":0, "Mana":0, "ManaRegeneration": 0,
 			"ManaRegenerationPercentage": 0, "Damage": 0, "AttackSpeed": 0,
 			"Range":0, "VisionDay": 0, "VisionNight": 0, "Cost": 0 },
 			f = {};
@@ -214,7 +214,7 @@ HeroInstance.addHandler({
 		var a = { "Strength": 0, "Agility":0, "Intelligence":0, 
 			"MovementSpeed":0, "MovementSpeedPercentage":0,
 			"Armor":0, "MagicalResistance": 0, "Evasion":0,
-			"Health":0, "HealthRegeneration":0, "Mana":0, "ManaRegenerationFlat": 0,
+			"Health":0, "HealthRegeneration":0, "Mana":0, "ManaRegeneration": 0,
 			"ManaRegenerationPercentage": 0, "Damage": 0, "DamageBase": 0,
 			"AttackSpeed": 0, "Range":0, "VisionDay": 0, "VisionNight": 0 };
 		for (var ability of this.Abilities) {
@@ -255,6 +255,7 @@ HeroInstance.addHandler({
 		a.Armor = a.ArmorBase + a.ArmorBonus;
 		a.Evasion = this.Item.Evasion + (1-this.Item.Evasion) * this.Ability.Evasion;
 		a.MagicalResistance = this.Raw.MagicalResistance + (1 - this.Raw.MagicalResistance) * this.Item.MagicalResistance;
+		a.MagicalResistance = a.MagicalResistance + (1 - a.MagicalResistance) * this.Ability.MagicalResistance;
 		a.HealthBase = this.Raw.Health + a.Strength * 19;
 		a.Health = a.HealthBase + this.Item.Health + this.Ability.Health
 		a.HealthRegenerationBase = this.Raw.HealthRegeneration + a.Strength * 0.03;
@@ -264,14 +265,14 @@ HeroInstance.addHandler({
 		a.ManaBonus = this.Item.Mana + this.Ability.Mana;
 		a.Mana = a.ManaBase + a.ManaBonus;
 		a.ManaRegenerationBase = this.Raw.ManaRegeneration + a.Intelligence * 0.04;
-		a.ManaRegenerationFlat = this.Ability.ManaRegenerationFlat;
+		a.ManaRegenerationFlat = this.Item.ManaRegeneration + this.Ability.ManaRegenerationFlat;
 		a.ManaRegenerationPercentage = this.Item.ManaRegenerationPercentage + this.Ability.ManaRegenerationPercentage;
 		a.ManaRegeneration = a.ManaRegenerationBase * (1 + a.ManaRegenerationPercentage) + a.ManaRegenerationFlat;
 		a.DamageBaseMin = this.Raw.DamageMin + a[this.Raw.Type] + this.Ability.DamageBase;
 		a.DamageBaseMax = this.Raw.DamageMax + a[this.Raw.Type] + this.Ability.DamageBase;
-		a.DamageBase = Math.floor((a.DamageBaseMin +a.DamageBaseMax)/2);
+		a.DamageBase = Math.floor((a.DamageBaseMin + a.DamageBaseMax) / 2);
 		a.DamageBonus = this.Item.Damage + this.Ability.Damage;
-		a.AttackSpeed = 100 + this.Item.AttackSpeed + a.Agility;
+		a.AttackSpeed = 100 + this.Item.AttackSpeed + a.Agility + this.Ability.AttackSpeed;
 		a.Range = this.Raw.Range + this.Ability.Range;
 		a.VisionDay = this.Raw.VisionDaytime;
 		a.VisionNight = this.Raw.VisionNighttime + this.Ability.VisionNight + this.Item.VisionNight;
