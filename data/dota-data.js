@@ -46,9 +46,10 @@ DotaData.getAbilityProperties = function (abilityId, versionOverride) {
 	var version = DotaData.Versions[versionOverride || DotaData.TargetVersion];
 	//if (!(abilityId in version.Abilities)) throw "No such id \"" + abilityId + "\" in item list";
 	// while not all skills are implemented
-	if (!(abilityId in version.Abilities)) 
+	if (!(abilityId in version.Abilities)) {
+		//console.warn("No such ability with id \"" + abilityId + "\" defined in version "+version+".");
 		return DotaData.getAbilityProperties("_base")
-		//console.warn("No such id \"" + abilityId + "\" in item list");
+	}
 	var obj = {}, i, prop,
 		skill = version.Abilities[abilityId];
 	
@@ -95,10 +96,14 @@ DotaData.readableStatStrings = {
 }
 
 DotaData.statToReadable = function(stat, val) {
-	var key = DotaData.readableStatStrings[stat] ? DotaData.readableStatStrings[stat] : stat;
-	if (/Percentage$/.test(stat) || stat == "Evasion" || stat == "MagicalResistance")
+	var key = DotaData.readableStatStrings[stat] ? DotaData.readableStatStrings[stat] : stat,
+		isPercentage = false, //calculatable percentage (from a base value)
+		test = /^(\w+)Percentage$/.exec(stat);
+	if (test || stat == "Evasion" || stat == "MagicalResistance")
 		val = (val > 0 ? "+" : "" ) + (val * 100).toFixed(0)+"%";
-	return { key: key, value: val > 0 ? "+" + val : val };
+	if (test && test[1])
+		isPercentage = true;
+	return { key: key, value: val > 0 ? "+" + val : val, isPercentage: isPercentage, baseName: test ? test[1] : undefined };
 }
 
 DotaData.numericToRoman = function(number) {

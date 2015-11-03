@@ -12,10 +12,11 @@ $(function(){
 		"Support", "Caster", "Weapons", "Armor", "Artifacts", "Secret", "Unlisted" ],
 		shopSectionElements = {};
 	
-	
+	var thRow = document.createElement("tr");
+	itemTableHead.appendChild(thRow);
 	for (var section of shopSections) {
 		var th = document.createElement("th");
-		itemTableHead.appendChild(th);
+		thRow.appendChild(th);
 		var img = document.createElement("img");
 		img.src = "images/shop/shop_"+section.toLowerCase()+".png";
 		img.width = 48;

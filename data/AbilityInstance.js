@@ -11,6 +11,7 @@ function AbilityInstance(skillId, properties) {
 	Object.defineProperty(this, "levelElement", {writable: true});
 	Object.defineProperty(this, "dynamicElements", {writable: true, value: {}});
 	Object.defineProperty(this, "boundUpdate", {writable: true});
+	Object.defineProperty(this, "heroRef", {writable: true});
 	
 	for (var prop in ability) {
 		var value = ability[prop];
@@ -139,6 +140,8 @@ AbilityInstance.prototype.populateOptionElement = function(el) {
 			valueLabel = document.createElement("span");
 			valueLabel.className = "item-display-options value";
 			this.dynamicElements[stat] = valueLabel;
+		if (readable.isPercentage)
+			valueLabel.title = (valuePool[stat] * this.heroRef.Total[readable.baseName]).toFixed(0);
 		if (valuePool[stat] < 0) valueLabel.classList.add("negative");
 			valueLabel.textContent = readable.value;
 		el.appendChild(valueLabel);

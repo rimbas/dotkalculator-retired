@@ -4447,6 +4447,11 @@ DotaData.addVersion( "6.85",
 			"Section": "Secret",
 			"SectionIndex": 11,
 			"Damage": 60
+		},
+		"aegis": {
+			"Name": "Aegis",
+			"Cost": 0,
+			"Section": "Unlisted"
 		}
 	},
 	"Abilities": {
@@ -4475,6 +4480,19 @@ DotaData.addVersion( "6.85",
 			"Restrictions": [1, 3, 5, 7],
 			"Strength": function() { return Math.floor(this.Level > 0 ? (0.5 + this.Level * 0.5) * this.Charges : 0) },
 			"MagicalResistance": function() { return this.Level > 0 ? 0.04 + this.Level * 0.02 : 0 }
+		},
+		"drow_ranger_trueshot": {
+			"Name": "Precision aura",
+			"Level": 0,
+			"LevelMax": 4,
+			"Damage": function() { return this.Level > 0 ? Math.floor(this.heroRef.Total.Agility * (0.14 + this.Level * 0.06)) : 0 }
+		},
+		"drow_ranger_marksmanship": {
+			"Name": "Marksmanship",
+			"Level": 0,
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16],
+			"Agility": function() { return this.Level > 0 ? 20 + this.Level * 20 : 0 }
 		}
 	}
 	

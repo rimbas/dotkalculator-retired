@@ -11,6 +11,7 @@ function ItemInstance(itemId, properties) {
 	Object.defineProperty(this, "dynamicElements", {writable: true, value: {}});
 	Object.defineProperty(this, "boundDelete", {writable: true});
 	Object.defineProperty(this, "boundUpdate", {writable: true});
+	Object.defineProperty(this, "heroRef", {writable: true});
 	
 	for (var prop in item) {
 		var value = item[prop];
@@ -45,14 +46,11 @@ ItemInstance.prototype.delete = function () {
 
 // Checks if all elements of array are valid ItemInstance objects
 ItemInstance.isValidArray = function( itemInstanceArray ) {
-	if (!Array.isArray(itemInstanceArray)) {
+	if (!Array.isArray(itemInstanceArray))
 		throw itemInstanceArray+" is not a valid array";
-	}
-	for (var item of itemInstanceArray) {
-		if (!item instanceof ItemInstance) {
+	for (var item of itemInstanceArray) 
+		if (!item instanceof ItemInstance) 
 			throw "Object " + item + " is not an ItemInstance object";
-		}
-	}
 	return itemInstanceArray;
 }
 
@@ -142,6 +140,8 @@ ItemInstance.prototype.populateOptionElement = function(el) {
 			readable = DotaData.statToReadable(stat, valuePool[stat]),
 			valueLabel = document.createElement("span");
 			valueLabel.className = "item-display-options value";
+		if (readable.isPercentage)
+			valueLabel.title = (valuePool[stat] * this.heroRef.Total[readable.baseName+"Base"]).toFixed(2);
 		if (valuePool[stat] < 0) valueLabel.classList.add("negative");
 			valueLabel.textContent = readable.value;
 		el.appendChild(valueLabel);
@@ -165,5 +165,7 @@ ItemInstance.prototype.updateDisplayElement = function () {
 	for (var stat in this.dynamicElements) {
 		var readable = DotaData.statToReadable(stat, this[stat]);
 		this.dynamicElements[stat].textContent = readable.value;
+		if (readable.isPercentage)
+			this.dynamicElements[stat].title = (this[stat] * this.heroRef.Total[readable.baseName+"Base"]).toFixed(2);
 	}	
 }
