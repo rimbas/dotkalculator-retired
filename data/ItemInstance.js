@@ -64,7 +64,7 @@ ItemInstance.prototype.createDisplayElement = function() {
 		return this.displayElement;
 	
 	var div = document.createElement("div");
-	div.className = "item-display";
+	div.className = "item-display item";
 	div.style.backgroundImage = "url(images/items/" + this.ID + ".png)";
 	
 	if (typeof this.Charges === "number") {
@@ -79,82 +79,10 @@ ItemInstance.prototype.createDisplayElement = function() {
 		deleteButton.onclick = this.delete.bind(this);
 		div.appendChild(deleteButton);
 	
-	var hidden = document.createElement("div");
-		hidden.className = "item-display-options";
-
-	this.populateOptionElement(hidden);
-	div.appendChild(hidden);
+	div.appendChild(ElementHelper.createDetailedTooltip(this));
 	
 	this.displayElement = div;
 	return div;
-}
-
-ItemInstance.prototype.populateOptionElement = function(el) {
-	var h1 = document.createElement("h1");
-		h1.textContent = this.Name;
-	el.appendChild(h1);
-	
-	// why did it have to turn out like this
-	if ("Charges" in this) {
-		var chargeLabel = document.createElement("span");
-		chargeLabel.textContent = "Charges:";
-		chargeLabel.style.textAlign = "right";
-		chargeLabel.style.padding = "3px";
-		chargeLabel.style.width = "50px";
-		el.appendChild(chargeLabel);
-		
-		var chargeInput = document.createElement("input");
-		chargeInput.style.width = "3em";
-		chargeInput.value = this.Charges;
-		chargeInput.min = 0;
-		chargeInput.max = this.ChargesMax || 1000;
-		chargeInput.type = "number";
-		chargeInput.className = "mini-spinner";
-		chargeInput.onchange = (function(e,u){
-			this.Charges = e.target.value;
-			this.updateDisplayElement();
-			this.boundUpdate();
-		}).bind(this);
-		el.appendChild(chargeInput);
-		
-		el.appendChild(document.createElement("br"));
-	}
-	
-	var statOrder = ["Strength", "Agility", "Intelligence", "Health", "Mana",
-		"HealthRegeneration", "ManaRegenerationPercentage", "ManaRegeneration",
-		"Damage", "AttackSpeed", "MovementSpeed", "MovementSpeedPercentage",
-		"MagicalResistance", "Evasion", "Armor"], valuePool = {};
-		
-	for (var i = 0, stat; i <= statOrder.length; stat=statOrder[i++]) {
-		if (!this[stat] && (!this.Family || !this.Family.Stats[stat]))
-			continue;
-		
-		if (this.Family && this.Family.Stats[stat])
-			valuePool[stat] = this.Family.Stats[stat];
-		else
-			valuePool[stat] = this[stat];
-	}
-	
-	for (var stat in valuePool) {
-		var propDesc = Object.getOwnPropertyDescriptor(this, stat),
-			readable = DotaData.statToReadable(stat, valuePool[stat]),
-			valueLabel = document.createElement("span");
-			valueLabel.className = "item-display-options value";
-		if (readable.isPercentage)
-			valueLabel.title = (valuePool[stat] * this.heroRef.Total[readable.baseName+"Base"]).toFixed(2);
-		if (valuePool[stat] < 0) valueLabel.classList.add("negative");
-			valueLabel.textContent = readable.value;
-		el.appendChild(valueLabel);
-		var spanLabel = document.createElement("span");
-			spanLabel.className = "item-display-options label";
-			spanLabel.textContent = readable.key;
-		if (propDesc && propDesc.get) {
-			spanLabel.classList.add("dynamic");
-			this.dynamicElements[stat] = valueLabel;
-		}
-		el.appendChild(spanLabel);
-		el.appendChild(document.createElement("br"));
-	}
 }
 
 ItemInstance.prototype.updateDisplayElement = function () {

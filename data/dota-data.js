@@ -1,3 +1,5 @@
+// Main Dota data object
+
 DotaData = {};
 DotaData.Versions = {}
 DotaData.NewestVersion = "6.85";  //working in valve time so badly, this was started in 6.84b

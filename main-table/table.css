@@ -1,3 +1,4 @@
+/* Hero table styles */
 .hero-table {
 	margin: 10px;
 	font-size: 12pt;
@@ -9,6 +10,7 @@
 	font-size: 16pt;
 }
 .hero-table td {
+	white-space: nowrap;
 	padding-left: 4px;
 	padding-right: 4px;
 }
@@ -26,12 +28,13 @@ td.box-content + td.box-content {
 	border-bottom: 3px solid #9A1E00;
 }
 
-.ui-widget {
+/* shitty overrides for jquery-ui widgets */
+.hero-table .ui-widget {
 	font-family: sans-serif;
 	background: none;
 	border-width: 1px;
 }
-.ui-spinner-input {
+.hero-table .ui-spinner-input {
 	margin: 0px;
 	text-indent: 2px;
 	color: gold;
@@ -50,9 +53,6 @@ td.box-content + td.box-content {
 	border: 1px solid gold;
 	width: 9em;
 }
-.vertical-separators td:not(:first-child), .vertical-separators th:not(:first-child) {
-	border-left: 2px solid #9A1E00;
-}
 .hero-table .delete-button {
 	width: 16px;
 	height: 16px;
@@ -61,16 +61,24 @@ td.box-content + td.box-content {
 	vertical-align: middle;
 	cursor: pointer;
 }
+
+/* Classes for  item, ability and buff containers */
 .hero-table .item-container {
 	display: block;
 	border: 1px solid gold;
-	min-width: 39px;
 	height: 28px;
+	white-space: nowrap;
+}
+.hero-table .item-container.items {
+	min-width: 39px;
+}
+.hero-table .item-container.abilities {
+	min-width: 28px;
+	background: black;
 }
 .hero-table .item-container > div.item-display {
 	display: inline-block;
 	position:relative;
-	width: 39px;
 	height: 28px;
 	background-size: contain;
 	background-repeat: no-repeat;
@@ -79,7 +87,13 @@ td.box-content + td.box-content {
 	vertical-align: middle;
 	font-size: 80%;
 }
-div.item-display > .item-display-options {
+.hero-table .item-display.item {
+	width: 39px;
+}
+.hero-table .item-display.ability {
+	width: 28px;
+}
+.item-tooltip {
 	display: none;
 	position: absolute;
 	top:28px;
@@ -92,12 +106,9 @@ div.item-display > .item-display-options {
 	z-index: 1;
 	text-align: left;
 }
-div.item-display:hover > .item-display-options {
+.item-display:hover > .item-tooltip {
 	display: inline-block;
 	box-shadow: 1px 1px 5px black;
-}
-div.item-display > .item-display-options:hover {
-	display: block;
 }
 .item-display-charges {
 	position: absolute;
@@ -106,6 +117,15 @@ div.item-display > .item-display-options:hover {
 	right: 2px;
 	text-align: right;
 	text-shadow: -1px -1px 1px rgba(0, 0, 0, 1), 1px 1px 1px rgba(0, 0, 0, 1);
+}
+.item-display-levels {
+	position: absolute;
+	cursor: default;
+	top: 0px;
+	left: 2px;
+	text-align: right;
+	text-shadow: -1px -1px 1px rgba(0, 0, 0, 1), 1px 1px 1px rgba(0, 0, 0, 1);
+	font-family: serif;
 }
 .item-display-delete {
 	position: absolute;
@@ -123,7 +143,7 @@ div.item-display > .item-display-options:hover {
 .item-display:hover > .item-display-delete { 
 	display: block;
 }
-.item-display-options > h1, .ability-display-options > h1 {
+.item-tooltip > h1 {
 	margin: 0px;
 	padding: 2px;
 	font-size: 1em;
@@ -143,54 +163,6 @@ span.item-display-options {
 }
 .label.dynamic {
 	color: orange;
-}
-.hero-table .ability-container {
-	display: block;
-	border: 1px solid gold;
-	min-width: 28px;
-	height: 28px;
-	background: black;
-}
-.ability-container > .ability-display {
-	display: inline-block;
-	position:relative;
-	width: 28px;
-	height: 28px;
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: center;
-	text-align: right;
-	vertical-align: middle;
-	font-size: 80%;
-}
-div.ability-display > .ability-display-options {
-	display: none;
-	position: absolute;
-	top:28px;
-	left: -1px;
-	background: #003045;
-	border: 1px solid gold;
-	padding: 3px;
-	overflow: visible;
-	width: 200px;
-	z-index: 1;
-	text-align: left;
-}
-div.ability-display:hover > .ability-display-options {
-	display: inline-block;
-	box-shadow: 1px 1px 5px black;
-}
-div.ability-display > .ability-display-options:hover {
-	display: block;
-}
-.ability-display-levels {
-	position: absolute;
-	cursor: default;
-	top: 0px;
-	left: 2px;
-	text-align: right;
-	text-shadow: -1px -1px 1px rgba(0, 0, 0, 1), 1px 1px 1px rgba(0, 0, 0, 1);
-	font-family: serif;
 }
 .mini-spinner {
 	border: 1px solid gold;

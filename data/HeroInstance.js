@@ -46,26 +46,31 @@ HeroInstance.prototype.toString = function() {
 	return "[HeroInstance "+this.HeroId+"]";
 }
 
+// Adds a handler for hero data
+// handler - object with properties
+// name (string) 			- name
+// binds (array of strings) - other handlers that influence
+// handler (function)		- the handling function
 HeroInstance.addHandler = function (handler) {
-	if (handler.Name in HeroInstance.prototype) 
-		throw "Handler \"" + handler.Name + "\"already exists!";
-	if (typeof handler.Name !== "string") 
+	if (handler.name in HeroInstance.prototype) 
+		throw "Handler \"" + handler.name + "\"already exists!";
+	if (typeof handler.name !== "string") 
 		throw "No handler name set!";
-	if (typeof handler.Handler !== "function" ) 
+	if (typeof handler.handler !== "function" ) 
 		throw "No handler passed!";
 	
 	var wrapper = (function(value) 
 		{
-			handler.Handler.call(this, value);
-			this.propagateChange(this[handler.Name].binds);
+			handler.handler.call(this, value);
+			
+			this.propagateChange(this[handler.name].binds);
 		})
-	HeroInstance.prototype[handler.Name] = wrapper;
-	HeroInstance.prototype[handler.Name].binds = [];
+	HeroInstance.prototype[handler.name] = wrapper;
+	HeroInstance.prototype[handler.name].binds = [];
 	
-	for ( var i in handler.Binds ) {
-		var bind = handler.Binds[i];
-		this.prototype[bind].binds.push(handler.Name);
-	}
+	for ( var bindID of handler.binds )
+		this.prototype[bindID].binds.push(handler.name);
+	
 }
 
 HeroInstance.prototype.propagateChange = function (properties) {
@@ -86,15 +91,17 @@ HeroInstance.prototype.addAbilities = function(abilityOptions) {
 	for (var prop in this.Raw)
 		if (test = /Ability(\d+)/.exec(prop)) {
 			var abilityInstance = new AbilityInstance(this.Raw[prop]);
-			abilityInstance.boundUpdate = this.AbilityChange.bind(this);
+			abilityInstance.boundUpdate = this.PreAbilityChange.bind(this);
 			abilityInstance.heroRef = this;
 			this.Abilities[parseInt(test[1])-1] = abilityInstance;
 			this.AbilityIds[this.Raw[prop]] = abilityInstance;
 		}
 	if (abilityOptions)
 		for (var abilityId in abilityOptions) {
-			if (!abilityId in this.AbilityIds)
-				throw "Invalid ability ID "+abilityId+"!"
+			if (!(abilityId in this.AbilityIds)) {
+				console.warn("Invalid ability ID "+abilityId+"!");
+				continue;
+			}
 			var abilityData = abilityOptions[abilityId];
 			if (abilityData.level)
 				this.AbilityIds[abilityId].Level = abilityData.level;
@@ -139,18 +146,18 @@ HeroInstance.prototype.removeItem = function (item) {
 HeroInstance.prototype.updateTable = function () {}
 
 HeroInstance.addHandler({
-	Name: "LevelChange",
-	Binds: [],
-	Handler: function(lvl){
+	name: "LevelChange",
+	binds: [],
+	handler: function(lvl){
 		if (lvl) {
 			this.Meta.Level = lvl;
 		}
 		this.Base.StrengthFloat = this.Raw.StrengthBase + this.Raw.StrengthGain * (this.Meta.Level-1);
-		this.Base.Strength = Math.floor(this.Base.StrengthFloat);
+		this.Base.Strength = Math.round(this.Base.StrengthFloat);
 		this.Base.AgilityFloat = this.Raw.AgilityBase + this.Raw.AgilityGain * (this.Meta.Level-1);
-		this.Base.Agility = Math.floor(this.Base.AgilityFloat);
+		this.Base.Agility = Math.round(this.Base.AgilityFloat);
 		this.Base.IntelligenceFloat = this.Raw.IntelligenceBase + this.Raw.IntelligenceGain * (this.Meta.Level-1);
-		this.Base.Intelligence = Math.floor(this.Base.IntelligenceFloat);
+		this.Base.Intelligence = Math.round(this.Base.IntelligenceFloat);
 		this.Base.Armor = this.Raw.Armor + this.Base.Agility * 0.14;
 		this.Base.Health = this.Raw.Health + this.Base.Strength * 19;
 		this.Base.HealthRegeneration = this.Raw.HealthRegeneration + this.Base.Strength * 0.03;
@@ -169,9 +176,9 @@ HeroInstance.addHandler({
 });
 
 HeroInstance.addHandler({
-	Name: "ItemChange",
-	Binds: [],
-	Handler: function() {
+	name: "ItemChange",
+	binds: [],
+	handler: function() {
 		var a = { "Strength": 0, "Agility":0, "Intelligence":0, 
 			"MovementSpeed":0, "MovementSpeedPercentage":0,
 			"Armor":0, "MagicalResistance": 0, "Evasion":0,
@@ -219,10 +226,11 @@ HeroInstance.addHandler({
 	}
 });
 
+// AbilityChange is split to allow Drow aura calculation work correctly
 HeroInstance.addHandler({
-	Name: "AbilityChange",
-	Binds: ["LevelChange"],
-	Handler: function() {
+	name: "PreAbilityChange",
+	binds: ["LevelChange"],
+	handler: function() {
 		var a = { "Strength": 0, "Agility":0, "Intelligence":0, 
 			"MovementSpeed":0, "MovementSpeedPercentage":0,
 			"Armor":0, "MagicalResistance": 0, "Evasion":0,
@@ -248,9 +256,9 @@ HeroInstance.addHandler({
 });
 
 HeroInstance.addHandler({
-	Name: "PreTotalChange",
-	Binds: ["LevelChange", "ItemChange", "AbilityChange"],
-	Handler: function() {
+	name: "PreTotalChange",
+	binds: ["LevelChange", "ItemChange", "PreAbilityChange"],
+	handler: function() {
 		var a = {};
 		a.StrengthBonus = this.Item.Strength + this.Ability.Strength;
 		a.Strength = this.Base.Strength + a.StrengthBonus;
@@ -268,9 +276,35 @@ HeroInstance.addHandler({
 })
 
 HeroInstance.addHandler({
-	Name: "TotalChange",
-	Binds: ["PreTotalChange"],
-	Handler: function() {
+	name: "AbilityChange",
+	binds: ["PreTotalChange"],
+	handler: function() {
+		var a = { "Strength": 0, "Agility":0, "Intelligence":0, 
+			"MovementSpeed":0, "MovementSpeedPercentage":0,
+			"Armor":0, "MagicalResistance": 0, "Evasion":0,
+			"Health":0, "HealthRegeneration":0, "Mana":0, "ManaRegeneration": 0,
+			"ManaRegenerationPercentage": 0, "Damage": 0, "DamageBase": 0,
+			"AttackSpeed": 0, "Range":0, "VisionDay": 0, "VisionNight": 0 };
+		for (var ability of this.Abilities) {
+			ability.updateDisplayElement();
+			for (var prop in a) {
+				var value = ability[prop];
+				if (!value)
+					continue;
+				else if (prop == "Evasion" || prop == "MagicalResistance")
+					a[prop] += (1 - a[prop]) * value;
+				else
+					a[prop] += value;
+			}
+		}
+		this.Ability = a;
+	}
+});
+
+HeroInstance.addHandler({
+	name: "TotalChange",
+	binds: ["AbilityChange"],
+	handler: function() {
 		var a = this.Total;
 		a.MovementSpeedPercentage = this.Item.MovementSpeedPercentage + this.Ability.MovementSpeedPercentage;
 		a.MovementSpeed = Math.max(a.MovementSpeedBase * (1 + a.MovementSpeedPercentage), 100);

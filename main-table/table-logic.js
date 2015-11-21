@@ -495,16 +495,18 @@ HeroTable.addEvaluator({
 		container.ondrop = function(e) { 
 			hero.addItem(new ItemInstance(e.dataTransfer.getData("text/item-id")));
 		}
-		container.className = "item-container";
-		container.ondragover = function(e){if (e.dataTransfer.types.indexOf("text/item-id") > -1 ) { e.preventDefault()}};
+		container.className = "item-container items";
+		container.ondragover = function(e){if (e.dataTransfer.types.indexOf("text/item-id") > -1 ) {e.preventDefault()}};
 		cell.appendChild(container);
 	},
 	eval: function(cell, hero) {
 		cell = cell.firstChild;
 		while (cell.firstChild)
 			cell.removeChild(cell.firstChild);	
-		for (var i = 0; i < hero.Items.length; i++)
-			cell.appendChild(hero.Items[i].createDisplayElement());
+		//for (var i = 0; i < hero.Items.length; i++)
+			//cell.appendChild(hero.Items[i].createDisplayElement());
+		for (var item of hero.Items)
+			cell.appendChild(item.createDisplayElement());
 	},
 	sorter: false
 });
@@ -518,10 +520,11 @@ HeroTable.addEvaluator({
 	init: function(cell, hero) {
 		cell.className = "box-content";
 		var container = document.createElement("div")
-		container.className = "ability-container"
+		container.className = "item-container abilities"
 		cell.appendChild(container);
-		for (var i = 0; i < hero.Abilities.length; i++)
-			container.appendChild(hero.Abilities[i].createDisplayElement());
+		//for (var i = 0; i < hero.Abilities.length; i++)
+		for (var ability of hero.Abilities)
+			container.appendChild(ability.createDisplayElement());
 	},
 	sorter: false
 });
@@ -610,7 +613,7 @@ HeroTable.addEvaluator({
 	type: "Base",
 	description: "Displays hero movespeed",
 	eval: function(cell, hero) {
-		cell.textContent = hero.Total.MovementSpeed;
+		cell.textContent = Math.floor(hero.Total.MovementSpeed);
 	},
 	sorter: "number"
 });
