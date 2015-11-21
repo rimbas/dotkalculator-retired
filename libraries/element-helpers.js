@@ -14,7 +14,7 @@ ElementHelper.createDetailedTooltip = function ( object ) {
 		var chargeLabel = document.createElement("span");
 		chargeLabel.textContent = "Charges:";
 		chargeLabel.style.textAlign = "right";
-		chargeLabel.style.padding = "3px";
+		//chargeLabel.style.padding = "3px";
 		chargeLabel.style.width = "50px";
 		el.appendChild(chargeLabel);
 		
@@ -39,7 +39,7 @@ ElementHelper.createDetailedTooltip = function ( object ) {
 		var levelLabel = document.createElement("span");
 		levelLabel.textContent = "Level:";
 		levelLabel.style.textAlign = "right";
-		levelLabel.style.padding = "3px";
+		//levelLabel.style.padding = "3px";
 		levelLabel.style.width = "50px";
 		el.appendChild(levelLabel);
 
@@ -52,7 +52,7 @@ ElementHelper.createDetailedTooltip = function ( object ) {
 		levelInput.className = "mini-spinner";
 		levelInput.onchange = (function(e,u){
 			object.Level = e.target.value;
-			object.updateDisplayElement();
+			//object.updateDisplayElement();
 			object.boundUpdate();
 		}).bind(object);
 		el.appendChild(levelInput);
@@ -70,6 +70,11 @@ ElementHelper.createDetailedTooltip = function ( object ) {
 	for (var i = 0, stat; i <= statOrder.length; stat = statOrder[i++])
 		if (typeof object[stat] !== "undefined")
 			statValues[stat] = object[stat];
+	
+	// handler for ItemInstance special stats
+	if (object.Family)
+		for (var stat in object.Family.Stats)
+			statValues[stat] = object.Family.Stats[stat]
 	
 	for (var stat in statValues) {
 		var readable = DotaData.statToReadable(stat, statValues[stat]),
@@ -91,6 +96,21 @@ ElementHelper.createDetailedTooltip = function ( object ) {
 	return el;
 }
 
+ElementHelper.updateDisplayElements = function ( object ) {
+	if (!object.displayElement)
+		return;
+	if (object.chargeElement)
+		object.chargeElement.textContent = object.Charges;
+	if (this.levelElement)
+		this.levelElement.textContent = DotaData.numericToRoman(this.Level);
+	for (var stat in object.dynamicElements) {
+		var statValue = stat in object ? object[stat] : object.Family.Stats[stat];
+		var readable = DotaData.statToReadable(stat, statValue);
+		object.dynamicElements[stat].textContent = readable.value;
+		if (readable.isPercentage)
+			object.dynamicElements[stat].title = (statValue * object.heroRef.Total[readable.baseName+"Base"]).toFixed(2);
+	}
+}
 
 
 

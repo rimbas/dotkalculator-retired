@@ -91,7 +91,7 @@ HeroInstance.prototype.addAbilities = function(abilityOptions) {
 	for (var prop in this.Raw)
 		if (test = /Ability(\d+)/.exec(prop)) {
 			var abilityInstance = new AbilityInstance(this.Raw[prop]);
-			abilityInstance.boundUpdate = this.PreAbilityChange.bind(this);
+			abilityInstance.boundUpdate = this.AbilityChange.bind(this);
 			abilityInstance.heroRef = this;
 			this.Abilities[parseInt(test[1])-1] = abilityInstance;
 			this.AbilityIds[this.Raw[prop]] = abilityInstance;
@@ -187,26 +187,20 @@ HeroInstance.addHandler({
 			"Range":0, "VisionDay": 0, "VisionNight": 0, "Cost": 0 },
 			f = {};
 		for (var item of this.Items) {
-			if (item.Family) {
-				if (!f[item.Family.Name]) {
+			if (item.Family)
+				if (!f[item.Family.Name])
 					f[item.Family.Name] = item.Family;
-				}
-				else if (f[item.Family.Name].Level < item.Family.Level) {
+				else if (f[item.Family.Name].Level < item.Family.Level) 
 					f[item.Family.Name] = item.Family;
-				}
-			}
 			
 			for (var prop in a) {
 				var value = item[prop];
 				if (!value)
 					continue;
-				
-				else if (prop == "Evasion" || prop == "MagicalResistance") {
+				else if (prop == "Evasion" || prop == "MagicalResistance")
 					a[prop] += (1 - a[prop]) * value;
-				}
-				else {
+				else
 					a[prop] += value;
-				}
 			}
 		}
 		
@@ -214,12 +208,10 @@ HeroInstance.addHandler({
 			var family = f[familyName];
 			for (var prop in family.Stats) {
 				var value = family.Stats[prop];
-				if (prop == "Evasion" || prop == "MagicalResistance") {
+				if (prop == "Evasion" || prop == "MagicalResistance")
 					a[prop] += (1 - a[prop]) * value;
-				}
-				else {
+				else
 					a[prop] += value;
-				}
 			}
 		}
 		this.Item = a;
@@ -228,27 +220,19 @@ HeroInstance.addHandler({
 
 // AbilityChange is split to allow Drow aura calculation work correctly
 HeroInstance.addHandler({
-	name: "PreAbilityChange",
+	name: "AbilityChange",
 	binds: ["LevelChange"],
 	handler: function() {
-		var a = { "Strength": 0, "Agility":0, "Intelligence":0, 
-			"MovementSpeed":0, "MovementSpeedPercentage":0,
-			"Armor":0, "MagicalResistance": 0, "Evasion":0,
-			"Health":0, "HealthRegeneration":0, "Mana":0, "ManaRegeneration": 0,
-			"ManaRegenerationPercentage": 0, "Damage": 0, "DamageBase": 0,
-			"AttackSpeed": 0, "Range":0, "VisionDay": 0, "VisionNight": 0 };
+		var a = { "Strength": 0, "Agility":0, "Intelligence":0, "MovementSpeed": 0 };
 		for (var ability of this.Abilities) {
 			for (var prop in a) {
 				var value = ability[prop];
 				if (!value)
 					continue;
-				
-				else if (prop == "Evasion" || prop == "MagicalResistance") {
+				else if (prop == "Evasion" || prop == "MagicalResistance")
 					a[prop] += (1 - a[prop]) * value;
-				}
-				else {
+				else
 					a[prop] += value;
-				}
 			}
 		}
 		this.Ability = a;
@@ -257,7 +241,7 @@ HeroInstance.addHandler({
 
 HeroInstance.addHandler({
 	name: "PreTotalChange",
-	binds: ["LevelChange", "ItemChange", "PreAbilityChange"],
+	binds: ["LevelChange", "ItemChange", "AbilityChange"],
 	handler: function() {
 		var a = {};
 		a.StrengthBonus = this.Item.Strength + this.Ability.Strength;
@@ -276,7 +260,7 @@ HeroInstance.addHandler({
 })
 
 HeroInstance.addHandler({
-	name: "AbilityChange",
+	name: "PostAbilityChange",
 	binds: ["PreTotalChange"],
 	handler: function() {
 		var a = { "Strength": 0, "Agility":0, "Intelligence":0, 
@@ -286,7 +270,6 @@ HeroInstance.addHandler({
 			"ManaRegenerationPercentage": 0, "Damage": 0, "DamageBase": 0,
 			"AttackSpeed": 0, "Range":0, "VisionDay": 0, "VisionNight": 0 };
 		for (var ability of this.Abilities) {
-			ability.updateDisplayElement();
 			for (var prop in a) {
 				var value = ability[prop];
 				if (!value)
@@ -303,7 +286,7 @@ HeroInstance.addHandler({
 
 HeroInstance.addHandler({
 	name: "TotalChange",
-	binds: ["AbilityChange"],
+	binds: ["PostAbilityChange", "LevelChange"],
 	handler: function() {
 		var a = this.Total;
 		a.MovementSpeedPercentage = this.Item.MovementSpeedPercentage + this.Ability.MovementSpeedPercentage;
@@ -336,6 +319,10 @@ HeroInstance.addHandler({
 		
 		this.Total = a;
 		this.updateTable();
+		for (var item of this.Items)
+			item.updateDisplayElement()
+		for (var ability of this.Abilities)
+			ability.updateDisplayElement()
 	}
 });
 	

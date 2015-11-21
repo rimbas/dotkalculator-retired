@@ -97,6 +97,17 @@ DotaData.readableStatStrings = {
 	"MagicalResistance": "Magical resistance"
 }
 
+/*DotaData.statToReadable = function(stat, val) {
+	var key = DotaData.readableStatStrings[stat] ? DotaData.readableStatStrings[stat] : stat,
+		isPercentage = false, //calculatable percentage (from a base value)
+		test = /^(\w+)Percentage$/.exec(stat);
+	if (test || stat == "Evasion" || stat == "MagicalResistance")
+		val = (val > 0 ? "+" : "" ) + (val * 100).toFixed(0)+"%";
+	if (test && test[1])
+		isPercentage = true;
+	return { key: key, value: val > 0 ? "+" + val : val, isPercentage: isPercentage, baseName: test ? test[1] : undefined };
+}*/
+
 DotaData.statToReadable = function(stat, val) {
 	var key = DotaData.readableStatStrings[stat] ? DotaData.readableStatStrings[stat] : stat,
 		isPercentage = false, //calculatable percentage (from a base value)
@@ -108,8 +119,8 @@ DotaData.statToReadable = function(stat, val) {
 	return { key: key, value: val > 0 ? "+" + val : val, isPercentage: isPercentage, baseName: test ? test[1] : undefined };
 }
 
-DotaData.numericToRoman = function(number) {
-	return ["-", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"][number];
+DotaData.numericToRoman = function(num) {
+	return  0 <= num && num <= 10 ? ["-", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"][Math.floor(num)] : num;
 }
 
 

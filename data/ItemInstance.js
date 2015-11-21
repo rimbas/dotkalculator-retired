@@ -82,18 +82,10 @@ ItemInstance.prototype.createDisplayElement = function() {
 	div.appendChild(ElementHelper.createDetailedTooltip(this));
 	
 	this.displayElement = div;
+	this.updateDisplayElement()
 	return div;
 }
 
 ItemInstance.prototype.updateDisplayElement = function () {
-	if (!this.displayElement)
-		return;
-	if (this.chargeElement)
-		this.chargeElement.textContent = this.Charges;	
-	for (var stat in this.dynamicElements) {
-		var readable = DotaData.statToReadable(stat, this[stat]);
-		this.dynamicElements[stat].textContent = readable.value;
-		if (readable.isPercentage)
-			this.dynamicElements[stat].title = (this[stat] * this.heroRef.Total[readable.baseName+"Base"]).toFixed(2);
-	}	
+	ElementHelper.updateDisplayElements(this)
 }

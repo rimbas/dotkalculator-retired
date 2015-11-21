@@ -68,16 +68,6 @@ AbilityInstance.prototype.createDisplayElement = function() {
 }
 
 AbilityInstance.prototype.updateDisplayElement = function () {
-	if (!this.displayElement)
-		return;
-	if (this.chargeElement)
-		this.chargeElement.textContent = this.Charges;
-	if (this.levelElement)
-		this.levelElement.textContent = DotaData.numericToRoman(this.Level);
-	for (var stat in this.dynamicElements) {
-		var readable = DotaData.statToReadable(stat, this[stat]);
-		this.dynamicElements[stat].textContent = readable.value;
-	}
-		
+	ElementHelper.updateDisplayElements(this)
 }
 
