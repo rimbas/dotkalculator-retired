@@ -61,6 +61,24 @@ DotaData.getAbilityProperties = function (abilityId, versionOverride) {
 	return obj;
 }
 
+DotaData.getBuffProperties = function(buffId, versionOverride) {
+	if (versionOverride && !versionOverride in DotaData.Versions) throw "No such version \""+versionOverride+"\"";
+	var version = DotaData.Versions[versionOverride || DotaData.TargetVersion];
+	//if (!(buffId in version.Buffs)) throw "No such id \"" + buffId + "\" in item list";
+	// while not all buffs are implemented
+	if (!(buffId in version.Buffs)) {
+		//console.warn("No such buff with id \"" + buffId + "\" defined in version "+version+".");
+		return DotaData.getBuffProperties("_base")
+	}
+	var obj = {}, i, prop,
+		buff = version.Buffs[buffId];
+	
+	for (prop in buff) {
+		obj[prop] = buff[prop];
+	}
+	return obj;
+}
+
 DotaData.getCurrentHeroList = function() {
 	return DotaData.Versions[DotaData.NewestVersion].Heroes;
 }

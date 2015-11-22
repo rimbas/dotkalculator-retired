@@ -15,19 +15,13 @@ function ItemInstance(itemId, properties) {
 	
 	for (var prop in item) {
 		var value = item[prop];
-		if (value instanceof Function) {
-			Object.defineProperty(this, prop, {
-				get: value,
-				enumerable: true
-			});
-		}
-		else {
+		if (value instanceof Function)
+			Object.defineProperty(this, prop, { get: value, enumerable: true });
+		else
 			this[prop] = value;	
-		}
 	}
-	if (properties.charges && this.Charges) {
-		this.Charges = properties.charges;	
-	}
+	if (properties.charges && this.Charges)
+		this.Charges = properties.charges;
 }
 
 // Cloning method

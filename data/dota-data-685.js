@@ -4493,6 +4493,37 @@ DotaData.addVersion( "6.85",
 			"Restrictions": [6, 11, 16],
 			"Agility": function() { return this.Level > 0 ? 20 + this.Level * 20 : 0 }
 		}
+	},
+	"Buffs": {
+		"_base": {
+			"Name": "Dummy buff",
+			"Version": "6.85",
+			"Class": "Buff"
+		},
+		"drow_ranger_trueshot_aura": {
+			"Name": "Precision aura",
+			"Class": "Aura",
+			"Damage": 0
+		},
+		"test_buff": {
+			"Name": "Test buff",
+			"Class": "Buff",
+			"Strength": 1,
+			"Agility": 1,
+			"Intelligence": 1,
+			"Damage": 1,
+			"Health": 1,
+			"Mana": 1
+		},
+		"alchemist_aghanims_scepter": {
+			"Name": "Aghanim's Scepter",
+			"Class": "Permanent",
+			"Strength": 10,
+			"Agility": 10,
+			"Intelligence": 10,
+			"Health": 200,
+			"Mana": 150
+		}
 	}
 	
 });

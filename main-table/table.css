@@ -74,7 +74,6 @@ td.box-content + td.box-content {
 }
 .hero-table .item-container.abilities {
 	min-width: 28px;
-	background: black;
 }
 .hero-table .item-container > div.item-display {
 	display: inline-block;

@@ -1,11 +1,11 @@
 
 // AbilityInstance
 // Helper object for HeroInstance
-function AbilityInstance(skillId, properties) {
+function BuffInstance(buffId, properties) {
 	properties = properties || {};
-	var ability = DotaData.getAbilityProperties(skillId, properties.version);
+	var buff = DotaData.getBuffProperties(buffId, properties.version);
 	
-	Object.defineProperty(this, "ID", {value: skillId});
+	Object.defineProperty(this, "ID", {value: buffId});
 	Object.defineProperty(this, "displayElement", {writable: true});
 	Object.defineProperty(this, "chargeElement", {writable: true});
 	Object.defineProperty(this, "levelElement", {writable: true});
@@ -13,38 +13,38 @@ function AbilityInstance(skillId, properties) {
 	Object.defineProperty(this, "boundUpdate", {writable: true});
 	Object.defineProperty(this, "heroRef", {writable: true});
 	
-	for (var prop in ability) {
-		var value = ability[prop];
+	for (var prop in buff) {
+		var value = buff[prop];
 		if (value instanceof Function)
 			Object.defineProperty(this, prop, { get: value, enumerable: true });
 		else
 			this[prop] = value;	
 	}
-	if (typeof properties.level === "number")
+	if (typeof properties.level === "number" && this.Level)
 		this.Level = properties.level;
-	if (typeof properties.charges === "number")
+	if (typeof properties.charges === "number" && this.Charges)
 		this.Charges = properties.charges;
 }
 
-AbilityInstance.prototype.clone = function() {
+BuffInstance.prototype.clone = function() {
 	props = { version: this.Version };
 	props.level = this.Level;
 	props.charges = this.Charges;
-	return new AbilityInstance(this.ID, props);
+	return new BuffInstance(this.ID, props);
 }
 
-AbilityInstance.prototype.toString = function () {
-	return "[AbilityInstance "+this.ID+"]";
+BuffInstance.prototype.toString = function () {
+	return "[BuffInstance "+this.ID+"]";
 }
 
-AbilityInstance.prototype.createDisplayElement = function() {
+BuffInstance.prototype.createDisplayElement = function() {
 	if (this.displayElement)
 		return this.displayElement;
 	
 	var div = document.createElement("div");
 	this.displayElement = div;
 	div.className = "item-display ability";
-	div.style.backgroundImage = "url(images/abilities/" + this.ID + ".png)";
+	div.style.backgroundImage = "url(images/buffs/" + this.ID + ".png)";
 
 	if (typeof this.Charges === "number") {
 		var chargeElement = document.createElement("span");
@@ -65,7 +65,7 @@ AbilityInstance.prototype.createDisplayElement = function() {
 	return div;
 }
 
-AbilityInstance.prototype.updateDisplayElement = function () {
+BuffInstance.prototype.updateDisplayElement = function () {
 	ElementHelper.updateDisplayElements(this)
 }
 

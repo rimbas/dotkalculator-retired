@@ -90,7 +90,7 @@ Skill stats
 	TrueSight						- (necro creep)
 	Aura							- CM, Luna, Venge
 	
-Aura/Buff stats
+Buff stats
 	Name							- 
 	Level							- 
 	Class							- Basilius/Aquaila/Vlads,  Headress/Mek

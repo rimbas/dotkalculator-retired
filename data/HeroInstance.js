@@ -33,13 +33,14 @@ function HeroInstance(heroId, options) {
 	this.Abilities = [];
 	this.AbilityIds = {};
 	this.addAbilities(options.abilities);
-	this.Aura = {};
-	this.Auras = [];
+	this.Buff = {};
+	this.Buffs = [];
 	this.Total = {Strength: 0, Agility: 0, Intelligence: 0, HealthBase: 0, ManaRegenerationBase: 0,
 				  MovementSpeedBase: 0, ManaBase: 0 }
 	this.LevelChange();
 	this.ItemChange();
 	this.AbilityChange();
+	this.BuffChange();
 }
 
 HeroInstance.prototype.toString = function() {
@@ -142,6 +143,45 @@ HeroInstance.prototype.removeItem = function (item) {
 	this.ItemChange();
 }
 
+// adds a buff to hero
+// override flag removes
+HeroInstance.prototype.addBuff = function (buff, override) {
+	if (!(buff instanceof BuffInstance))
+		throw "Attempting to add invalid buff "+buff;
+	if (override) 
+		this.removeBuff(buff.ID)
+	
+	this.Buffs.push(buff)
+	buff.boundDelete = this.removeBuff.bind(this, buff)
+	buff.boundUpdate = this.updateTable;
+	buff.heroRef = this;
+	
+	this.BuffChange();
+}
+
+HeroInstance.prototype.removeBuff = function(buff) {
+	if (Array.isArray(buff)) 
+		for (var b of buff)
+			this.Buffs.splice(this.Buffs.indexOf(b), 1)
+	else if (typeof buff == "string")
+		this.removeBuffsWithID(buff)
+	else if (buff instanceof BuffInstance)
+		this.Buffs.splice(this.Buffs.indexOf(buff), 1)
+	this.BuffChange()
+}
+
+HeroInstance.prototype.removeBuffsWithID = function (buffID) {
+	this.removeBuff(this.getBuffs(buffID))
+}
+
+HeroInstance.prototype.getBuffs = function(buffId) {
+	var list = [];
+	for (var buff of this.Buffs)
+		if (buff.ID == buffId)
+			list.push(buff);
+	return list;
+}
+
 // Placeholder. Overritten when instance is inserted into a table
 HeroInstance.prototype.updateTable = function () {}
 
@@ -240,20 +280,44 @@ HeroInstance.addHandler({
 });
 
 HeroInstance.addHandler({
+	name: "BuffChange",
+	binds: [],
+	handler: function() {
+		var a = { "Strength": 0, "Agility": 0, "Intelligence": 0, "MovementSpeed": 0,
+				"MovementSpeedPercentage": 0, "Armor": 0, "Evasion": 0, "Blind": 0,
+				"MagicalResistance": 0, "Health": 0, "HealthPercentage": 0, "HealthRegeneration": 0, 
+				"Mana": 0, "ManaRegenerationFlat": 0, "Damage": 0, "DamagePercentage": 0,
+				"AttackSpeed": 0 }
+		for (var buff of this.Buffs) {
+			for (var prop in a) {
+				var value = buff[prop];
+				if (!value)
+					continue;
+				else if (prop == "Evasion" || prop == "MagicalResistance")
+					a[prop] += (1 - a[prop]) * value;
+				else
+					a[prop] += value;
+			}
+		}
+		this.Buff = a;
+	}
+})
+
+HeroInstance.addHandler({
 	name: "PreTotalChange",
-	binds: ["LevelChange", "ItemChange", "AbilityChange"],
+	binds: ["LevelChange", "ItemChange", "AbilityChange", "BuffChange"],
 	handler: function() {
 		var a = {};
-		a.StrengthBonus = this.Item.Strength + this.Ability.Strength;
+		a.StrengthBonus = this.Item.Strength + this.Ability.Strength + this.Buff.Strength;
 		a.Strength = this.Base.Strength + a.StrengthBonus;
-		a.AgilityBonus = this.Item.Agility + this.Ability.Agility;
+		a.AgilityBonus = this.Item.Agility + this.Ability.Agility + this.Buff.Agility;
 		a.AgilityFloat = this.Base.AgilityFloat + a.AgilityBonus;
 		a.Agility = this.Base.Agility + a.AgilityBonus;
-		a.IntelligenceBonus = this.Item.Intelligence + this.Ability.Intelligence;
+		a.IntelligenceBonus = this.Item.Intelligence + this.Ability.Intelligence + this.Buff.Intelligence;
 		a.Intelligence = this.Base.Intelligence + a.IntelligenceBonus;
-		a.MovementSpeedBase = this.Raw.MovementSpeed + this.Item.MovementSpeed + this.Ability.MovementSpeed;
+		a.MovementSpeedBase = this.Raw.MovementSpeed + this.Item.MovementSpeed + this.Ability.MovementSpeed + this.Buff.MovementSpeed;
 		a.HealthBase = this.Raw.Health + a.Strength * 19;
-		a.ManaBonus = this.Raw.Mana + this.Item.Mana + this.Ability.Mana;
+		a.ManaBonus = this.Raw.Mana + this.Item.Mana + this.Ability.Mana + this.Buff.Mana;
 		a.ManaRegenerationBase = this.Raw.ManaRegeneration + a.Intelligence * 0.04;
 		this.Total = a;
 	}
@@ -263,12 +327,12 @@ HeroInstance.addHandler({
 	name: "PostAbilityChange",
 	binds: ["PreTotalChange"],
 	handler: function() {
-		var a = { "Strength": 0, "Agility":0, "Intelligence":0, 
-			"MovementSpeed":0, "MovementSpeedPercentage":0,
-			"Armor":0, "MagicalResistance": 0, "Evasion":0,
-			"Health":0, "HealthRegeneration":0, "Mana":0, "ManaRegeneration": 0,
+		var a = { "Strength": 0, "Agility": 0, "Intelligence": 0, 
+			"MovementSpeed": 0, "MovementSpeedPercentage": 0,
+			"Armor": 0, "MagicalResistance": 0, "Evasion": 0,
+			"Health": 0, "HealthRegeneration": 0, "Mana": 0, "ManaRegeneration": 0,
 			"ManaRegenerationPercentage": 0, "Damage": 0, "DamageBase": 0,
-			"AttackSpeed": 0, "Range":0, "VisionDay": 0, "VisionNight": 0 };
+			"AttackSpeed": 0, "Range": 0, "VisionDay": 0, "VisionNight": 0 };
 		for (var ability of this.Abilities) {
 			for (var prop in a) {
 				var value = ability[prop];
@@ -289,29 +353,33 @@ HeroInstance.addHandler({
 	binds: ["PostAbilityChange", "LevelChange"],
 	handler: function() {
 		var a = this.Total;
-		a.MovementSpeedPercentage = this.Item.MovementSpeedPercentage + this.Ability.MovementSpeedPercentage;
+		a.MovementSpeedPercentage = this.Item.MovementSpeedPercentage + this.Ability.MovementSpeedPercentage + this.Buff.MovementSpeedPercentage;
 		a.MovementSpeed = Math.max(a.MovementSpeedBase * (1 + a.MovementSpeedPercentage), 100);
-		a.ArmorBonus = this.Item.Armor + this.Ability.Armor;
+		a.ArmorBonus = this.Item.Armor + this.Ability.Armor + this.Buff.Armor;
 		a.ArmorBase = this.Raw.Armor + Math.round(a.AgilityFloat * 0.14 * 100) / 100;
 		a.Armor = a.ArmorBase + a.ArmorBonus;
 		a.Evasion = this.Item.Evasion + (1-this.Item.Evasion) * this.Ability.Evasion;
+		a.Evasion = a.Evasion + (1-a.Evasion) * this.Buff.Evasion;
 		a.MagicalResistance = this.Raw.MagicalResistance + (1 - this.Raw.MagicalResistance) * this.Item.MagicalResistance;
 		a.MagicalResistance = a.MagicalResistance + (1 - a.MagicalResistance) * this.Ability.MagicalResistance;
-		a.Health = a.HealthBase + this.Item.Health + this.Ability.Health
+		a.MagicalResistance = a.MagicalResistance + (1 - a.MagicalResistance) * this.Buff.MagicalResistance;
+		a.HealthBase = a.HealthBase + this.Item.Health + this.Ability.Health + this.Buff.Health;
+		a.Health = a.HealthBase * (1 + this.Buff.HealthPercentage);
 		a.HealthRegenerationBase = this.Raw.HealthRegeneration + a.Strength * 0.03;
-		a.HealthRegenerationBonus = this.Item.HealthRegeneration + this.Ability.HealthRegeneration;
+		a.HealthRegenerationBonus = this.Item.HealthRegeneration + this.Ability.HealthRegeneration + this.Buff.HealthRegeneration;
 		a.HealthRegeneration = a.HealthRegenerationBase + a.HealthRegenerationBonus;
 		a.ManaBase = this.Raw.Mana + a.Intelligence * 13;
+		a.ManaBonus = this.Ability.Mana + this.Buff.Mana;
 		a.Mana = a.ManaBase + a.ManaBonus;
 		a.ManaRegenerationBase = this.Raw.ManaRegeneration + a.Intelligence * 0.04;
-		a.ManaRegenerationFlat = this.Item.ManaRegeneration + this.Ability.ManaRegenerationFlat;
-		a.ManaRegenerationPercentage = this.Item.ManaRegenerationPercentage + this.Ability.ManaRegenerationPercentage;
+		a.ManaRegenerationFlat = this.Item.ManaRegeneration + this.Ability.ManaRegenerationFlat + this.Buff.ManaRegenerationFlat;
+		a.ManaRegenerationPercentage = this.Item.ManaRegenerationPercentage + this.Ability.ManaRegenerationPercentage + this.Buff.ManaRegenerationPercentage;
 		a.ManaRegeneration = a.ManaRegenerationBase * (1 + a.ManaRegenerationPercentage) + a.ManaRegenerationFlat;
 		a.DamageBaseMin = this.Raw.DamageMin + a[this.Raw.Type] + this.Ability.DamageBase;
 		a.DamageBaseMax = this.Raw.DamageMax + a[this.Raw.Type] + this.Ability.DamageBase;
 		a.DamageBase = Math.floor((a.DamageBaseMin + a.DamageBaseMax) / 2);
-		a.DamageBonus = this.Item.Damage + this.Ability.Damage;
-		a.AttackSpeed = 100 + this.Item.AttackSpeed + a.Agility + this.Ability.AttackSpeed;
+		a.DamageBonus = this.Item.Damage + this.Ability.Damage + Math.floor(a.DamageBase * this.Buff.DamagePercentage);
+		a.AttackSpeed = 100 + this.Item.AttackSpeed + a.Agility + this.Ability.AttackSpeed + this.Buff.AttackSpeed;
 		a.Range = this.Raw.Range + this.Ability.Range;
 		a.VisionDay = this.Raw.VisionDaytime;
 		a.VisionNight = this.Raw.VisionNighttime + this.Ability.VisionNight + this.Item.VisionNight;

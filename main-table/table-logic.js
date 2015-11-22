@@ -530,6 +530,34 @@ HeroTable.addEvaluator({
 });
 
 HeroTable.addEvaluator({
+	ID: "Buffs",
+	name: "Buffs",
+	header: "Buffs",
+	type: "General",
+	description: "Displays hero buffs",
+	init: function(cell, hero) {
+		cell.className = "box-content";
+		var container = document.createElement("div");
+		container.ondrop = function(e) { 
+			hero.addBuff(new BuffInstance(e.dataTransfer.getData("text/buff-id")));
+		}
+		container.className = "item-container abilities";
+		container.ondragover = function(e){if (e.dataTransfer.types.indexOf("text/buff-id") > -1 ) {e.preventDefault()}};
+		cell.appendChild(container);
+	},
+	eval: function(cell, hero) {
+		cell = cell.firstChild;
+		while (cell.firstChild)
+			cell.removeChild(cell.firstChild);	
+		//for (var i = 0; i < hero.Items.length; i++)
+			//cell.appendChild(hero.Items[i].createDisplayElement());
+		for (var buff of hero.Buffs)
+			cell.appendChild(buff.createDisplayElement());
+	},
+	sorter: false
+})
+
+HeroTable.addEvaluator({
 	ID: "Version", 
 	name: "Version", 
 	header: "V.", 
@@ -629,5 +657,23 @@ HeroTable.addEvaluator({
 	}
 });
 
+HeroTable.addEvaluator({
+	ID: "Team",
+	name: "Team",
+	header: "Team",
+	type: "General",
+	description: "Controls hero team",
+	init: function(cell, heroInstance){
+		var label = document.createElement("input");
+		label.value = heroInstance.Meta.Label;
+		label.className = "hero-label";
+		label.onchange = (function(hero){
+			hero.Meta.Label = this.value;
+			this.updateSorting();
+		}).bind(this, heroInstance);
+		cell.appendChild(label);
+	},
+	sorter: "firstChildText"
+})
 
 
