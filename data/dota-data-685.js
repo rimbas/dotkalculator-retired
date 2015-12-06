@@ -3673,7 +3673,8 @@ DotaData.addVersion( "6.85",
 			"Strength": 3,
 			"Agility": 9,
 			"Intelligence": 3,
-			"Armor": 1
+			"Armor": 1,
+			"Aura": "ring_of_aquila_aura"
 		},
 		"medallion_of_courage": {
 			"Name": "Medallion of Courage",
@@ -4473,25 +4474,38 @@ DotaData.addVersion( "6.85",
 		},
 		"pudge_flesh_heap": {
 			"Name": "Flesh Heap",
+			"Class": "Passive",
 			"Level": 0,
 			"LevelMax": 4,
 			"Charges": 0,
-			"Restrictions": [1, 3, 5, 7],
 			"Strength": function() { return Math.floor(this.Level > 0 ? (0.5 + this.Level * 0.5) * this.Charges : 0) },
 			"MagicalResistance": function() { return this.Level > 0 ? 0.04 + this.Level * 0.02 : 0 }
 		},
 		"drow_ranger_trueshot": {
 			"Name": "Precision aura",
+			"Class": "Aura",
 			"Level": 0,
 			"LevelMax": 4,
-			"Damage": function() { return this.Level > 0 ? Math.floor(this.heroRef.Total.Agility * (0.14 + this.Level * 0.06)) : 0 }
+			"Damage": function() { return this.Level > 0 ? Math.floor(this.heroRef.Total.Agility * (0.14 + this.Level * 0.06)) : 0 },
+			"MetaDamage": function() { return this.Level > 0 ? Math.floor(this.heroRef.Total.Agility * (0.14 + this.Level * 0.06)) : 0 }
 		},
 		"drow_ranger_marksmanship": {
 			"Name": "Marksmanship",
+			"Class": "Passive",
 			"Level": 0,
 			"LevelMax": 3,
 			"Restrictions": [6, 11, 16],
 			"Agility": function() { return this.Level > 0 ? 20 + this.Level * 20 : 0 }
+		},
+		"viper_corrosive_skin": {
+			"Name": "Corrosive skin",
+			"Class": "Passive",
+			"MagicalResistance": function() { return this.Level > 0 ? 0.05 + this.Level * 0.05 : 0 }
+		},
+		"antimage_spell_shield": {
+			"Name": "Spell shield",
+			"Class": "Passive",
+			"MagicalResistance": function() { return this.Level > 0 ? 0.18 + this.Level * 0.08 : 0 }
 		}
 	},
 	"Buffs": {
@@ -4503,7 +4517,8 @@ DotaData.addVersion( "6.85",
 		"drow_ranger_trueshot_aura": {
 			"Name": "Precision aura",
 			"Class": "Aura",
-			"Damage": 0
+			"Image": true,
+			"Damage": function() { return this.skillRef ? this.skillRef.MetaDamage : 0 }
 		},
 		"test_buff": {
 			"Name": "Test buff",
@@ -4518,11 +4533,17 @@ DotaData.addVersion( "6.85",
 		"alchemist_aghanims_scepter": {
 			"Name": "Aghanim's Scepter",
 			"Class": "Permanent",
+			"Image": "ultimate_sceptre",
 			"Strength": 10,
 			"Agility": 10,
 			"Intelligence": 10,
 			"Health": 200,
 			"Mana": 150
+		},
+		"ring_of_aquila_aura": {
+			"Name": "Aquila aura",
+			"Class": "Aura",
+			"Family": { "Name": "Basilius", "Level": 0.6, "Stats": { "ManaRegenerationFlat": 0.65, "Armor": 2 } },
 		}
 	}
 	

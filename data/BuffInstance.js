@@ -11,14 +11,16 @@ function BuffInstance(buffId, properties) {
 	Object.defineProperty(this, "levelElement", {writable: true});
 	Object.defineProperty(this, "dynamicElements", {writable: true, value: {}});
 	Object.defineProperty(this, "boundUpdate", {writable: true});
+	Object.defineProperty(this, "boundDelete", {writable: true});
 	Object.defineProperty(this, "heroRef", {writable: true});
+	Object.defineProperty(this, "ownerRef", {writable: true});
 	
 	for (var prop in buff) {
 		var value = buff[prop];
 		if (value instanceof Function)
 			Object.defineProperty(this, prop, { get: value, enumerable: true });
 		else
-			this[prop] = value;	
+			Object.defineProperty(this, prop, { value: value, enumerable: true });
 	}
 	if (typeof properties.level === "number" && this.Level)
 		this.Level = properties.level;
@@ -37,6 +39,13 @@ BuffInstance.prototype.toString = function () {
 	return "[BuffInstance "+this.ID+"]";
 }
 
+BuffInstance.prototype.delete = function () {
+	if (this.displayElement)
+		this.displayElement.parentElement.removeChild(this.displayElement);
+	if (this.boundDelete)
+		this.boundDelete();
+}
+
 BuffInstance.prototype.createDisplayElement = function() {
 	if (this.displayElement)
 		return this.displayElement;
@@ -44,7 +53,10 @@ BuffInstance.prototype.createDisplayElement = function() {
 	var div = document.createElement("div");
 	this.displayElement = div;
 	div.className = "item-display ability";
-	div.style.backgroundImage = "url(images/buffs/" + this.ID + ".png)";
+	if (this.Image)
+		div.style.backgroundImage = "url(images/abilities/" + this.Image + ".png)";
+	else
+		div.style.backgroundImage = "url(images/abilities/" + this.ID + ".png)";
 
 	if (typeof this.Charges === "number") {
 		var chargeElement = document.createElement("span");

@@ -7,12 +7,13 @@
 // heroId  (string) - hero to retrieve from hero data
 // options (object)
 // Optional properties:
-// version (string)  - Dota 2 version override
-// level   (integer) - Hero level override
-// label   (string)  - Label override
-// team    (string)  - team definition
-// dead    (boolean) - deadness override
-// gold    (integer) - gold override
+// version		(string)  - Dota 2 version override
+// level		(integer) - Hero level override
+// label		(string)  - Label override
+// team			(string)  - team definition
+// dead			(boolean) - deadness override
+// gold			(integer) - gold override
+// abilities	(object)  - ability settings
 function HeroInstance(heroId, options) {
 	if (!options) options = {};
 	
@@ -26,15 +27,12 @@ function HeroInstance(heroId, options) {
 	this.Base = {};
 	this.Item = {};
 	this.Items = [];
+	this.Buff = {};
+	this.Buffs = [];
 	if (options.items && ItemInstance.isValidArray(options.items))
 		for (var item of options.items)
 			this.addItem(item, undefined, true);
-	this.Ability = {};
-	this.Abilities = [];
-	this.AbilityIds = {};
 	this.addAbilities(options.abilities);
-	this.Buff = {};
-	this.Buffs = [];
 	this.Total = {Strength: 0, Agility: 0, Intelligence: 0, HealthBase: 0, ManaRegenerationBase: 0,
 				  MovementSpeedBase: 0, ManaBase: 0 }
 	this.LevelChange();
@@ -63,7 +61,6 @@ HeroInstance.addHandler = function (handler) {
 	var wrapper = (function(value) 
 		{
 			handler.handler.call(this, value);
-			
 			this.propagateChange(this[handler.name].binds);
 		})
 	HeroInstance.prototype[handler.name] = wrapper;
@@ -71,7 +68,6 @@ HeroInstance.addHandler = function (handler) {
 	
 	for ( var bindID of handler.binds )
 		this.prototype[bindID].binds.push(handler.name);
-	
 }
 
 HeroInstance.prototype.propagateChange = function (properties) {
@@ -88,7 +84,12 @@ HeroInstance.prototype.propagateChange = function (properties) {
 	this.propagateChange(propagation);
 }
 
+// Convenience function for constructor
 HeroInstance.prototype.addAbilities = function(abilityOptions) {
+	this.Ability = {};
+	this.Abilities = [];
+	this.AbilityIds = {};
+	// Ability definition in heroes not final, but this will do for now
 	for (var prop in this.Raw)
 		if (test = /Ability(\d+)/.exec(prop)) {
 			var abilityInstance = new AbilityInstance(this.Raw[prop]);
@@ -104,6 +105,10 @@ HeroInstance.prototype.addAbilities = function(abilityOptions) {
 				continue;
 			}
 			var abilityData = abilityOptions[abilityId];
+			if (Number.isInteger(abilityData) && abilityData >= 0) {
+				this.AbilityIds[abilityId].Level = abilityData;
+				continue;
+			}
 			if (abilityData.level)
 				this.AbilityIds[abilityId].Level = abilityData.level;
 			if (typeof this.AbilityIds[abilityId].Charges == "number" && typeof abilityData.charges == "number")
@@ -124,6 +129,7 @@ HeroInstance.prototype.addItem = function (item, forceInsert, silent) {
 	item.boundDelete = this.removeItem.bind(this, item);
 	item.boundUpdate = this.updateTable;
 	item.heroRef = this;
+	item.addOwner(this);
 	if (!silent)
 		this.ItemChange();
 	return index;
@@ -144,19 +150,19 @@ HeroInstance.prototype.removeItem = function (item) {
 }
 
 // adds a buff to hero
-// override flag removes
-HeroInstance.prototype.addBuff = function (buff, override) {
+// override flag removes existing buff with same ID
+HeroInstance.prototype.addBuff = function (buff, override, silent) {
 	if (!(buff instanceof BuffInstance))
 		throw "Attempting to add invalid buff "+buff;
-	if (override) 
+	if (override)
 		this.removeBuff(buff.ID)
 	
 	this.Buffs.push(buff)
 	buff.boundDelete = this.removeBuff.bind(this, buff)
 	buff.boundUpdate = this.updateTable;
 	buff.heroRef = this;
-	
-	this.BuffChange();
+	if (!silent)
+		this.BuffChange();
 }
 
 HeroInstance.prototype.removeBuff = function(buff) {
@@ -182,7 +188,18 @@ HeroInstance.prototype.getBuffs = function(buffId) {
 	return list;
 }
 
-// Placeholder. Overritten when instance is inserted into a table
+// Handles team changes in hero table
+HeroInstance.prototype.teamChange = function(newTeammates, removedTeammates) {
+	for (var newTeammate of newTeammates)
+		for (var item of this.Items)
+			item.addTeammate(newTeammate)
+	
+	for (var removedTeammate of removedTeammates)
+		for (var item of this.Items)
+			item.removeTeammate(removedTeammate)
+}
+
+// Overwritten when hero instance is inserted into a table
 HeroInstance.prototype.updateTable = function () {}
 
 HeroInstance.addHandler({
@@ -222,7 +239,7 @@ HeroInstance.addHandler({
 		var a = { "Strength": 0, "Agility":0, "Intelligence":0, 
 			"MovementSpeed":0, "MovementSpeedPercentage":0,
 			"Armor":0, "MagicalResistance": 0, "Evasion":0,
-			"Health":0, "HealthRegeneration":0, "Mana":0, "ManaRegeneration": 0,
+			"Health":0, "HealthRegeneration":0, "Mana":0, "ManaRegenerationFlat": 0,
 			"ManaRegenerationPercentage": 0, "Damage": 0, "AttackSpeed": 0,
 			"Range":0, "VisionDay": 0, "VisionNight": 0, "Cost": 0 },
 			f = {};
@@ -287,8 +304,15 @@ HeroInstance.addHandler({
 				"MovementSpeedPercentage": 0, "Armor": 0, "Evasion": 0, "Blind": 0,
 				"MagicalResistance": 0, "Health": 0, "HealthPercentage": 0, "HealthRegeneration": 0, 
 				"Mana": 0, "ManaRegenerationFlat": 0, "Damage": 0, "DamagePercentage": 0,
-				"AttackSpeed": 0 }
+				"AttackSpeed": 0, "ManaRegenerationPercentage": 0 },
+			f = {};
 		for (var buff of this.Buffs) {
+			if (buff.Family)
+				if (!f[buff.Family.Name])
+					f[buff.Family.Name] = buff.Family;
+				else if (f[buff.Family.Name].Level < buff.Family.Level) 
+					f[buff.Family.Name] = buff.Family;
+			
 			for (var prop in a) {
 				var value = buff[prop];
 				if (!value)
@@ -299,6 +323,18 @@ HeroInstance.addHandler({
 					a[prop] += value;
 			}
 		}
+		
+		for (var familyName in f) {
+			var family = f[familyName];
+			for (var prop in family.Stats) {
+				var value = family.Stats[prop];
+				if (prop == "Evasion" || prop == "MagicalResistance")
+					a[prop] += (1 - a[prop]) * value;
+				else
+					a[prop] += value;
+			}
+		}
+		
 		this.Buff = a;
 	}
 })
@@ -317,6 +353,7 @@ HeroInstance.addHandler({
 		a.Intelligence = this.Base.Intelligence + a.IntelligenceBonus;
 		a.MovementSpeedBase = this.Raw.MovementSpeed + this.Item.MovementSpeed + this.Ability.MovementSpeed + this.Buff.MovementSpeed;
 		a.HealthBase = this.Raw.Health + a.Strength * 19;
+		a.HealthRegenerationBase = this.Raw.HealthRegeneration + a.Strength * 0.03;
 		a.ManaBonus = this.Raw.Mana + this.Item.Mana + this.Ability.Mana + this.Buff.Mana;
 		a.ManaRegenerationBase = this.Raw.ManaRegeneration + a.Intelligence * 0.04;
 		this.Total = a;
@@ -330,7 +367,7 @@ HeroInstance.addHandler({
 		var a = { "Strength": 0, "Agility": 0, "Intelligence": 0, 
 			"MovementSpeed": 0, "MovementSpeedPercentage": 0,
 			"Armor": 0, "MagicalResistance": 0, "Evasion": 0,
-			"Health": 0, "HealthRegeneration": 0, "Mana": 0, "ManaRegeneration": 0,
+			"Health": 0, "HealthRegeneration": 0, "Mana": 0, "ManaRegenerationFlat": 0,
 			"ManaRegenerationPercentage": 0, "Damage": 0, "DamageBase": 0,
 			"AttackSpeed": 0, "Range": 0, "VisionDay": 0, "VisionNight": 0 };
 		for (var ability of this.Abilities) {
@@ -365,14 +402,12 @@ HeroInstance.addHandler({
 		a.MagicalResistance = a.MagicalResistance + (1 - a.MagicalResistance) * this.Buff.MagicalResistance;
 		a.HealthBase = a.HealthBase + this.Item.Health + this.Ability.Health + this.Buff.Health;
 		a.Health = a.HealthBase * (1 + this.Buff.HealthPercentage);
-		a.HealthRegenerationBase = this.Raw.HealthRegeneration + a.Strength * 0.03;
 		a.HealthRegenerationBonus = this.Item.HealthRegeneration + this.Ability.HealthRegeneration + this.Buff.HealthRegeneration;
 		a.HealthRegeneration = a.HealthRegenerationBase + a.HealthRegenerationBonus;
 		a.ManaBase = this.Raw.Mana + a.Intelligence * 13;
 		a.ManaBonus = this.Ability.Mana + this.Buff.Mana;
 		a.Mana = a.ManaBase + a.ManaBonus;
-		a.ManaRegenerationBase = this.Raw.ManaRegeneration + a.Intelligence * 0.04;
-		a.ManaRegenerationFlat = this.Item.ManaRegeneration + this.Ability.ManaRegenerationFlat + this.Buff.ManaRegenerationFlat;
+		a.ManaRegenerationFlat = this.Item.ManaRegenerationFlat + this.Ability.ManaRegenerationFlat + this.Buff.ManaRegenerationFlat;
 		a.ManaRegenerationPercentage = this.Item.ManaRegenerationPercentage + this.Ability.ManaRegenerationPercentage + this.Buff.ManaRegenerationPercentage;
 		a.ManaRegeneration = a.ManaRegenerationBase * (1 + a.ManaRegenerationPercentage) + a.ManaRegenerationFlat;
 		a.DamageBaseMin = this.Raw.DamageMin + a[this.Raw.Type] + this.Ability.DamageBase;

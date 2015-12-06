@@ -34,12 +34,10 @@ DotaData.getItemProperties = function (itemId, versionOverride) {
 		base = version.Items._base,
 		item = version.Items[itemId];
 	
-	for (prop in base) {
+	for (prop in base)
 		obj[prop] = base[prop];
-	}
-	for (prop in item) {
+	for (prop in item)
 		obj[prop] = item[prop];
-	}
 	return obj;
 }
 
@@ -53,11 +51,13 @@ DotaData.getAbilityProperties = function (abilityId, versionOverride) {
 		return DotaData.getAbilityProperties("_base")
 	}
 	var obj = {}, i, prop,
+		base = version.Abilities._base,
 		skill = version.Abilities[abilityId];
 	
-	for (prop in skill) {
+	for (prop in base)
+		obj[prop] = base[prop];
+	for (prop in skill)
 		obj[prop] = skill[prop];
-	}
 	return obj;
 }
 
@@ -71,11 +71,13 @@ DotaData.getBuffProperties = function(buffId, versionOverride) {
 		return DotaData.getBuffProperties("_base")
 	}
 	var obj = {}, i, prop,
+		base = version.Buffs._base,
 		buff = version.Buffs[buffId];
 	
-	for (prop in buff) {
+	for (prop in base)
+		obj[prop] = base[prop]
+	for (prop in buff) 
 		obj[prop] = buff[prop];
-	}
 	return obj;
 }
 
@@ -107,6 +109,7 @@ DotaData.readableStatStrings = {
 	"HealthRegeneration": "HP regeneration",
 	"ManaRegeneration": "Mana regeneration",
 	"ManaRegenerationPercentage": "Mana regeneration",
+	"ManaRegenerationFlat": "Mana regeneration",
 	"MovementSpeed": "Movement speed",
 	"MovementSpeedPercentage": "Movement speed",
 	"VisionDay": "Day vision",

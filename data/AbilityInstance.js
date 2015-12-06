@@ -12,6 +12,7 @@ function AbilityInstance(skillId, properties) {
 	Object.defineProperty(this, "dynamicElements", {writable: true, value: {}});
 	Object.defineProperty(this, "boundUpdate", {writable: true});
 	Object.defineProperty(this, "heroRef", {writable: true});
+	Object.defineProperty(this, "buffReferences", {value: {}, writable: true});
 	
 	for (var prop in ability) {
 		var value = ability[prop];

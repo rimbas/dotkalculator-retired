@@ -194,12 +194,10 @@ HeroTable.prototype.createHeroRow = function (heroInstance) {
 		var prop = this.columnList[i],
 			cell = document.createElement("td");
 		
-		if (this.evaluator[prop].init) {
+		if (this.evaluator[prop].init)
 			this.evaluator[prop].init.call(this, cell, heroInstance);
-		}
-		if (this.evaluator[prop].eval) {
+		if (this.evaluator[prop].eval)
 			this.evaluator[prop].eval.call(this, cell, heroInstance);
-		}
 		
 		cell.evaluatorId = prop;
 		row.appendChild(cell);
@@ -231,6 +229,14 @@ HeroTable.prototype.refreshHero = function (heroInstance) {
 
 HeroTable.prototype.updateSorting = function () {
 	$(this._tableElement).trigger("update");
+}
+
+HeroTable.prototype.getTeamHeroes = function (team) {
+	var list = []
+	for (var hero of this.heroList)
+		if (hero.Meta.Team == team)
+			list.push(hero);
+	return list;
 }
 
 /*--------------------------------------------------
@@ -413,9 +419,9 @@ HeroTable.addEvaluator({
 	type: "Derived", //unicode shenanigans
 	description: "Displays hero armor",
 	eval: function(cell, heroInstance){
-		//cell.textContent = Math.round(heroInstance.Total.Armor * 10)/10;
-		cell.textContent = heroInstance.Total.Armor.toFixed(2);
-	},			
+		var bonus = heroInstance.Total.ArmorBonus
+		cell.textContent = heroInstance.Total.ArmorBase.toFixed(2) + (bonus === 0 ? "" : "+" + heroInstance.Total.ArmorBonus);
+	},
 	sorter: "number"
 });
 
@@ -658,6 +664,18 @@ HeroTable.addEvaluator({
 });
 
 HeroTable.addEvaluator({
+	ID: "ManaRegen",
+	name: "Mana regeneration",
+	header: "MR",
+	type: "Derived",
+	description: "Displays hero mana regeneration",
+	eval: function(cell, heroInstance) {
+		cell.textContent = heroInstance.Total.ManaRegeneration.toFixed(2)
+	},
+	sorter: "number"
+})
+
+HeroTable.addEvaluator({
 	ID: "Team",
 	name: "Team",
 	header: "Team",
@@ -665,10 +683,11 @@ HeroTable.addEvaluator({
 	description: "Controls hero team",
 	init: function(cell, heroInstance){
 		var label = document.createElement("input");
-		label.value = heroInstance.Meta.Label;
+		label.value = heroInstance.Meta.Team || "";
 		label.className = "hero-label";
-		label.onchange = (function(hero){
-			hero.Meta.Label = this.value;
+		label.placeholder = "No team";
+		label.onchange = (function(hero) {
+			hero.Meta.Team = this.value;
 			this.updateSorting();
 		}).bind(this, heroInstance);
 		cell.appendChild(label);

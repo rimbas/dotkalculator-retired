@@ -4,44 +4,6 @@ Hero (unit) stat property structure
 Notes: 
 a) Float type in "*Percentage" properties is derived as 100% = 1.0
 
-
-Raw stat definition in DotaData lists
-	Name 							- Dota 2 name of the hero
-	LoreName						- Alternate name
-	Type							- Primary attribute of the hero
-	Side							- Dire/Radiant
-	Ability[\d]+					- Ability in associated slot
-	AbilityLayout					- Ability display type (most heroes/Puck,IO/Rubick, Doom)
-	AttackType						- Attack type (Ranged/Melee)
-	DamageMax						- Higher value of the damage
-	DamageMin						- Lower value of the damage
-	Range							- Attack range of the hero
-	AttackRate						- Base attack time
-	AttackPoint						- Attack point
-	StrengthGain					- Base Strength gain per level
-	StrengthBase					- Base Strength points
-	AgilityGain						- Base Agility gain per level
-	AgilityBase						- Base Agility points
-	IntelligenceGain				- Base Intelligence gain per level
-	IntelligenceBase				- Base Intelligence points
-	Enabled							- Meta information
-	HasInventory					- Does the unit have an inventory
-	Level							- Hardcoded base level of the unit
-	Armor							- Base Armor
-	MagicalResistance				- Base Magic resistance
-	MovementSpeed					- Base movement speed
-	TurnRate						- Base turn speed
-	ProjectileSpeed					- Base ranged projectile speed
-	Health							- Base health
-	HealthRegen						- Base health regen
-	Mana							- Base mana
-	ManaRegen						- Base mana regen
-	Version							- Version of the hero
-	Vision							- Ground or Flying
-	VisionDaytime					- Vision during daytime
-	VisionNighttime					- Vision during nighttime
-	TrueSight						- True sight range (wards, towers and fountain)
-
 HeroInstance object structure
 Meta (object):
 	Level							- current level of the unit
@@ -138,7 +100,47 @@ Total
 	DamageBase						- floor((DamageBaseMin + DamageBaseMax) / 2)
 	DamageBonus						- Total.DamageBase * Aura.DamagePercentage + Item/Skill/Aura.Damage
 	Damage							- (Total.DamageBase + Total.DamageBonus) * (1 + Aura.DamageReductionPercentage
+
 	
+Universal properties in DotaData definitions
+	Name							- Display name
+
+Raw stat (hero) definition in DotaData lists
+	Name 							- Dota 2 name of the hero
+	LoreName						- Alternate name
+	Type							- Primary attribute of the hero
+	Side							- Dire/Radiant
+	Ability[\d]+					- Ability in associated slot
+	AbilityLayout					- Ability display type (most heroes/Puck,IO/Rubick, Doom)
+	AttackType						- Attack type (Ranged/Melee)
+	DamageMax						- Higher value of the damage
+	DamageMin						- Lower value of the damage
+	Range							- Attack range of the hero
+	AttackRate						- Base attack time
+	AttackPoint						- Attack point
+	StrengthGain					- Base Strength gain per level
+	StrengthBase					- Base Strength points
+	AgilityGain						- Base Agility gain per level
+	AgilityBase						- Base Agility points
+	IntelligenceGain				- Base Intelligence gain per level
+	IntelligenceBase				- Base Intelligence points
+	Enabled							- Meta information
+	HasInventory					- Does the unit have an inventory
+	Level							- Hardcoded base level of the unit
+	Armor							- Base Armor
+	MagicalResistance				- Base Magic resistance
+	MovementSpeed					- Base movement speed
+	TurnRate						- Base turn speed
+	ProjectileSpeed					- Base ranged projectile speed
+	Health							- Base health
+	HealthRegen						- Base health regen
+	Mana							- Base mana
+	ManaRegen						- Base mana regen
+	Version							- Version of the hero
+	Vision							- Ground or Flying
+	VisionDaytime					- Vision during daytime
+	VisionNighttime					- Vision during nighttime
+	TrueSight						- True sight range (wards, towers and fountain)
 
 	
 Item properties in DotaData item lists
@@ -174,3 +176,4 @@ Item properties in DotaData item lists
 	AttackModifier				(string)	- 
 	AttackUniqueModifier		(string)	- 
 	Ability						(string)	- Attached skill
+	
