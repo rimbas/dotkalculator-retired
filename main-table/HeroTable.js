@@ -24,9 +24,8 @@ function HeroTable(tableName, tableID, wrapperId) {
 
 HeroTable.getTables = function() {
 	var tables = [];
-	for (var heroTableInstance of HeroTable.tableList) {
-		tables.push({ID: heroTableInstance.ID, name: heroTableInstance.name })
-	}
+	for (var heroTableInstance of HeroTable.tableList)
+		tables.push({ID: heroTableInstance.ID, name: heroTableInstance.name });
 	return tables;
 }
 
@@ -106,9 +105,8 @@ HeroTable.prototype.toString = function () {
 
 HeroTable.prototype.createTable = function () {
 	if (this._tableElement) 
-	{
 		this._tableElement.parentElement.removeChild(this._tableElement);
-	}
+	
 	this._tableElement = document.createElement("table");
 	this._wrapperElement.appendChild(this._tableElement);
 	this._tableElement.id = this.ID;
@@ -129,13 +127,11 @@ HeroTable.prototype.createTable = function () {
 	for ( var i in this.columnList ) {
 		var col = this.columnList[i];
 		var cell = document.createElement("th");
-		if (this.evaluator[col].header instanceof Function) {
+		if (this.evaluator[col].header instanceof Function)
 			this.evaluator[col].header(cell);
-			//cell.textContent = 
-		}
-		else if (typeof this.evaluator[col].header === "string") {
+		else if (typeof this.evaluator[col].header === "string")
 			cell.textContent = this.evaluator[col].header;
-		}
+
 		cell.evaluatorId = col;
 		thr.appendChild(cell);
 	}
@@ -172,12 +168,15 @@ HeroTable.prototype.sorterSettings = function () {
 // Adds a hero to the table and evaluates it
 // heroInstance (HeroInstance) - valid HeroInstance object
 HeroTable.prototype.addHero = function (heroInstance) {
-	if (!heroInstance instanceof HeroInstance) {
+	if (!heroInstance instanceof HeroInstance)
 		throw "Invalid parameter:" + heroInstance;
-	}
 	this.heroList.push(heroInstance);
 	heroInstance.updateTable = this.refreshHero.bind(this, heroInstance);
 	this.createHeroRow(heroInstance)
+	
+	heroInstance.teamChange(this.getTeammatesOfHero(heroInstance), [])
+	for (var hero of this.getTeammatesOfHero(heroInstance))
+		hero.teamChange([heroInstance], [])
 }
 
 // Creates a row in the table with the HeroInstance attached
@@ -202,16 +201,18 @@ HeroTable.prototype.createHeroRow = function (heroInstance) {
 		cell.evaluatorId = prop;
 		row.appendChild(cell);
 	}
-	//Object.defineProperty(heroInstance, "InstanceRow", { value: row });
+	
 	heroInstance.InstanceRow = row;
-	//Object.defineProperty(heroInstance, "InstanceTable", { value: this});
 	$(this._tableElement).trigger("update");
 }
 
 HeroTable.prototype.removeHero = function (heroInstance) {
+	for (var teammate of this.getTeamHeroes(heroInstance))
+		teammate.teamChange([], [heroInstance])
+	heroInstance.delete()
 	this.heroList.splice(this.heroList.indexOf(heroInstance),1)
 	heroInstance.InstanceRow.parentElement.removeChild(heroInstance.InstanceRow);
-	$(this._tableElement).trigger("update");
+	this.updateSorting()
 }
 
 // Update cells in the table
@@ -220,9 +221,7 @@ HeroTable.prototype.refreshHero = function (heroInstance) {
 		var cell = heroInstance.InstanceRow.childNodes[i],
 			evaluatorId = cell.evaluatorId;
 		if (this.evaluator[evaluatorId].eval )
-		{
 			this.evaluator[evaluatorId].eval.call(this, cell, heroInstance);
-		}
 	}
 	this.updateSorting();
 }
@@ -233,10 +232,35 @@ HeroTable.prototype.updateSorting = function () {
 
 HeroTable.prototype.getTeamHeroes = function (team) {
 	var list = []
+	if (!team || team === "")
+		return list;
 	for (var hero of this.heroList)
 		if (hero.Meta.Team == team)
 			list.push(hero);
 	return list;
+}
+
+HeroTable.prototype.getTeammatesOfHero = function(hero) {
+	if (!(hero instanceof HeroInstance))
+		throw "Invalid hero";
+	if (!hero.Meta.Team) 
+		return [];
+	
+	var list = this.getTeamHeroes(hero.Meta.Team);
+	list.splice(list.indexOf(hero), 1)
+	return list;
+}
+
+// changes the hero team
+HeroTable.prototype.setHeroTeam = function (heroInstance, team) {
+	for (var teammate of this.getTeammatesOfHero(heroInstance))
+		teammate.teamChange([], [heroInstance])
+	heroInstance.teamChange([], this.getTeammatesOfHero(heroInstance))
+	heroInstance.Meta.Team = team;
+	heroInstance.teamChange(this.getTeammatesOfHero(heroInstance), [])
+	for (var teammate of this.getTeammatesOfHero(heroInstance))
+		teammate.teamChange([heroInstance], [])
+	
 }
 
 /*--------------------------------------------------
@@ -449,10 +473,10 @@ HeroTable.addEvaluator({
 		var label = document.createElement("input");
 		label.value = heroInstance.Meta.Label;
 		label.className = "hero-label";
-		label.onchange = (function(hero){
-			hero.Meta.Label = this.value;
+		label.onchange = (function(hero, input){
+			hero.Meta.Label = input.value;
 			this.updateSorting();
-		}).bind(this, heroInstance);
+		}).bind(this, heroInstance, label);
 		cell.appendChild(label);
 	},
 	sorter: "firstChildText"
@@ -686,10 +710,10 @@ HeroTable.addEvaluator({
 		label.value = heroInstance.Meta.Team || "";
 		label.className = "hero-label";
 		label.placeholder = "No team";
-		label.onchange = (function(hero) {
-			hero.Meta.Team = this.value;
+		label.onchange = (function(hero, input) {
+			this.setHeroTeam(hero, input.value)
 			this.updateSorting();
-		}).bind(this, heroInstance);
+		}).bind(this, heroInstance, label);
 		cell.appendChild(label);
 	},
 	sorter: "firstChildText"

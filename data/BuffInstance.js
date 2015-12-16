@@ -11,9 +11,10 @@ function BuffInstance(buffId, properties) {
 	Object.defineProperty(this, "levelElement", {writable: true});
 	Object.defineProperty(this, "dynamicElements", {writable: true, value: {}});
 	Object.defineProperty(this, "boundUpdate", {writable: true});
-	Object.defineProperty(this, "boundDelete", {writable: true});
-	Object.defineProperty(this, "heroRef", {writable: true});
-	Object.defineProperty(this, "ownerRef", {writable: true});
+	Object.defineProperty(this, "boundDelete", {writable: true}); // removes the buff from hero
+	Object.defineProperty(this, "heroRef", {writable: true}); // hero that has this buff
+	Object.defineProperty(this, "ownerRef", {writable: true}); // hero that owns/emits this buff
+	Object.defineProperty(this, "boundUnlink", {writable: true}); // unlinks the buff from owner object
 	
 	for (var prop in buff) {
 		var value = buff[prop];
@@ -42,6 +43,8 @@ BuffInstance.prototype.toString = function () {
 BuffInstance.prototype.delete = function () {
 	if (this.displayElement)
 		this.displayElement.parentElement.removeChild(this.displayElement);
+	if (this.boundUnlink)
+		this.boundUnlink();
 	if (this.boundDelete)
 		this.boundDelete();
 }
@@ -64,6 +67,13 @@ BuffInstance.prototype.createDisplayElement = function() {
 		chargeElement.className = "item-display-charges";
 		this.chargeElement = chargeElement;
 		div.appendChild(chargeElement);
+	}
+	
+	if (this.Class != "Aura") {
+		var deleteButton = document.createElement("button");
+		deleteButton.className = "item-display-delete";
+		deleteButton.onclick = this.delete.bind(this);
+		div.appendChild(deleteButton);
 	}
 	
 	var levelElement = document.createElement("span");

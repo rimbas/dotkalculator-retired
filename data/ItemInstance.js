@@ -11,7 +11,7 @@ function ItemInstance(itemId, properties) {
 	Object.defineProperty(this, "dynamicElements", {writable: true, value: {}});
 	Object.defineProperty(this, "boundDelete", {writable: true});
 	Object.defineProperty(this, "boundUpdate", {writable: true});
-	Object.defineProperty(this, "buffReferences", {value: {}, writable: true});
+	Object.defineProperty(this, "buffReferences", {value: new Map(), writable: true});
 	
 	for (var prop in item) {
 		var value = item[prop];
@@ -34,10 +34,8 @@ ItemInstance.prototype.clone = function () {
 }
 
 ItemInstance.prototype.delete = function () {
-	for (var buff in this.buffReferences)
-		buff.delete()
-	if (this.ownerBuff)
-		this.ownerBuff.delete()
+	for (var buff of this.buffReferences)
+		buff[1].delete()
 	if (this.displayElement)
 		this.displayElement.parentElement.removeChild(this.displayElement);
 	if (this.boundDelete)
@@ -90,27 +88,36 @@ ItemInstance.prototype.updateDisplayElement = function () {
 	ElementHelper.updateDisplayElements(this)
 }
 
+// adds the owner of this item
 ItemInstance.prototype.addOwner = function(owner) {
 	if (!this.Aura) return;
 	var newBuff = new BuffInstance(this.Aura);
-	newBuff.ownerRef = this;
+	newBuff.boundUnlink = this.removeReferencedBuff.bind(this, owner);
 	this.ownerBuff = newBuff;
-	owner.addBuff(newBuff, undefined, true);
+	newBuff.ownerRef = owner;
+	owner.addBuff(newBuff, "override");
 }
 
 ItemInstance.prototype.addTeammate = function(newTeammate) {
 	if (newTeammate === this) return;
 	if (!this.Aura) return;
-	if (!this.buffReferences[newTeammate]) {
+	if (!this.buffReferences.has(newTeammate) ) {
 		var newBuff = new BuffInstance(this.Aura);
-		newBuff.ownerRef = this;
-		newTeammate.addBuff(newBuff);
-		this.buffReferences[newTeammate] = newBuff;
+		newBuff.ownerRef = this.heroRef;
+		newBuff.boundUnlink = this.removeReferencedBuff.bind(this, newTeammate);
+		newTeammate.addBuff(newBuff, "leave");
+		this.buffReferences.set(newTeammate, newBuff);
 	}
 }
 
 ItemInstance.prototype.removeTeammate = function(oldTeammate) {
 	if (!this.Aura) return;
-	if (this.buffReferences[oldTeammate])
-		this.buffReferences[oldTeammate].boundDelete()
+	if (this.buffReferences.has(oldTeammate)) {
+		this.buffReferences.get(oldTeammate).delete();
+		this.buffReferences.delete(oldTeammate);
+	}
+}
+
+ItemInstance.prototype.removeReferencedBuff = function(teammate) {
+	this.buffReferences.delete(teammate);
 }

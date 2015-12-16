@@ -4486,8 +4486,8 @@ DotaData.addVersion( "6.85",
 			"Class": "Aura",
 			"Level": 0,
 			"LevelMax": 4,
-			"Damage": function() { return this.Level > 0 ? Math.floor(this.heroRef.Total.Agility * (0.14 + this.Level * 0.06)) : 0 },
-			"MetaDamage": function() { return this.Level > 0 ? Math.floor(this.heroRef.Total.Agility * (0.14 + this.Level * 0.06)) : 0 }
+			//"Damage": function() { return this.Level > 0 ? Math.floor(this.heroRef.Total.Agility * (0.14 + this.Level * 0.06)) : 0 },
+			"Aura": "drow_ranger_trueshot_aura"
 		},
 		"drow_ranger_marksmanship": {
 			"Name": "Marksmanship",
@@ -4518,7 +4518,10 @@ DotaData.addVersion( "6.85",
 			"Name": "Precision aura",
 			"Class": "Aura",
 			"Image": true,
-			"Damage": function() { return this.skillRef ? this.skillRef.MetaDamage : 0 }
+			"Damage": function() { return 0; }
+						  //if (this.heroRef.AttackType != "Range") 
+							//  return 0;
+						 // return this.ownerRef.Total.Agility : 0 }
 		},
 		"test_buff": {
 			"Name": "Test buff",

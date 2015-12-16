@@ -12,7 +12,7 @@ function AbilityInstance(skillId, properties) {
 	Object.defineProperty(this, "dynamicElements", {writable: true, value: {}});
 	Object.defineProperty(this, "boundUpdate", {writable: true});
 	Object.defineProperty(this, "heroRef", {writable: true});
-	Object.defineProperty(this, "buffReferences", {value: {}, writable: true});
+	Object.defineProperty(this, "buffReferences", {value: new Map(), writable: true});
 	
 	for (var prop in ability) {
 		var value = ability[prop];
@@ -32,6 +32,11 @@ AbilityInstance.prototype.clone = function() {
 	props.level = this.Level;
 	props.charges = this.Charges;
 	return new AbilityInstance(this.ID, props);
+}
+
+AbilityInstance.prototype.delete = function () {
+	for (var buff of this.buffReferences)
+		buff[1].delete()
 }
 
 AbilityInstance.prototype.toString = function () {
@@ -69,4 +74,38 @@ AbilityInstance.prototype.createDisplayElement = function() {
 AbilityInstance.prototype.updateDisplayElement = function () {
 	ElementHelper.updateDisplayElements(this)
 }
+
+AbilityInstance.prototype.addOwner = function(owner) {
+	if (!this.Aura) return;
+	var newBuff = new BuffInstance(this.Aura);
+	newBuff.boundOwnerDelete = this;
+	this.ownerBuff = newBuff;
+	newBuff.ownerRef = owner;
+	owner.addBuff(newBuff, undefined, true);
+}
+
+AbilityInstance.prototype.addTeammate = function(newTeammate) {
+	if (newTeammate === this) return;
+	if (!this.Aura) return;
+	if (!this.buffReferences.has(newTeammate) ) {
+		var newBuff = new BuffInstance(this.Aura);
+		newBuff.boundOwnerDelete = this.removeReferencedBuff.bind(this, newTeammate);
+		newBuff.ownerRef = this.heroRef;
+		newTeammate.addBuff(newBuff, true);
+		this.buffReferences.set(newTeammate, newBuff);
+	}
+}
+
+AbilityInstance.prototype.removeTeammate = function(oldTeammate) {
+	if (!this.Aura) return;
+	if (this.buffReferences.has(oldTeammate)) {
+		this.buffReferences.get(oldTeammate).delete();
+		this.buffReferences.delete(oldTeammate);
+	}
+}
+
+AbilityInstance.prototype.removeReferencedBuff = function(teammate) {
+	this.buffReferences.delete(teammate);
+}
+
 

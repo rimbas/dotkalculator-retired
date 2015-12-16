@@ -33,8 +33,7 @@ function HeroInstance(heroId, options) {
 		for (var item of options.items)
 			this.addItem(item, undefined, true);
 	this.addAbilities(options.abilities);
-	this.Total = {Strength: 0, Agility: 0, Intelligence: 0, HealthBase: 0, ManaRegenerationBase: 0,
-				  MovementSpeedBase: 0, ManaBase: 0 }
+	//this.Total = {Strength: 0, Agility: 0, Intelligence: 0, HealthBase: 0, ManaRegenerationBase: 0, MovementSpeedBase: 0, ManaBase: 0 }
 	this.LevelChange();
 	this.ItemChange();
 	this.AbilityChange();
@@ -42,7 +41,7 @@ function HeroInstance(heroId, options) {
 }
 
 HeroInstance.prototype.toString = function() {
-	return "[HeroInstance "+this.HeroId+"]";
+	return "[HeroInstance "+this.Meta.ID+"]";
 }
 
 // Adds a handler for hero data
@@ -116,12 +115,21 @@ HeroInstance.prototype.addAbilities = function(abilityOptions) {
 		}
 }
 
+HeroInstance.prototype.delete = function() {
+	for (var buff of this.Buffs)
+		buff.delete()
+	for (var item of this.Items) 
+		item.delete()
+	for (var ability of this.Abilities) 
+		ability.delete()
+}
+
 // Adds an item to the hero
 // item        - (ItemInstance)
 // forceInsert - circumvents max item limit
 // returns -1 if failed
 // returns index if success
-HeroInstance.prototype.addItem = function (item, forceInsert, silent) {
+HeroInstance.prototype.addItem = function (item, forceInsert) {
 	if (this.Items.length >= 6 && !forceInsert) {
 		return -1;
 	}
@@ -130,7 +138,7 @@ HeroInstance.prototype.addItem = function (item, forceInsert, silent) {
 	item.boundUpdate = this.updateTable;
 	item.heroRef = this;
 	item.addOwner(this);
-	if (!silent)
+	if (this.Total)
 		this.ItemChange();
 	return index;
 }
@@ -151,28 +159,38 @@ HeroInstance.prototype.removeItem = function (item) {
 
 // adds a buff to hero
 // override flag removes existing buff with same ID
-HeroInstance.prototype.addBuff = function (buff, override, silent) {
+// method:
+// undefined 	- append the buff
+// "override"	- change the existing buff
+// "leave"		- leave if buff with same ID already exists
+HeroInstance.prototype.addBuff = function (buff, method) {
 	if (!(buff instanceof BuffInstance))
 		throw "Attempting to add invalid buff "+buff;
-	if (override)
+	if (method == "override" && this.Total)
 		this.removeBuff(buff.ID)
+	if (method == "leave")
+		if (this.getBuffs(buff.ID).length > 0)
+			return;
 	
 	this.Buffs.push(buff)
-	buff.boundDelete = this.removeBuff.bind(this, buff)
+	//buff.boundDelete = this.removeBuff.bind(this, buff)
+	buff.boundDelete = (function(buff) { this.Buffs.splice(this.Buffs.indexOf(buff), 1) }).bind(this, buff)
 	buff.boundUpdate = this.updateTable;
 	buff.heroRef = this;
-	if (!silent)
+	if (this.Total)
 		this.BuffChange();
 }
 
 HeroInstance.prototype.removeBuff = function(buff) {
 	if (Array.isArray(buff)) 
 		for (var b of buff)
-			this.Buffs.splice(this.Buffs.indexOf(b), 1)
+			b.delete()
+			//this.Buffs.splice(this.Buffs.indexOf(b), 1)
 	else if (typeof buff == "string")
 		this.removeBuffsWithID(buff)
 	else if (buff instanceof BuffInstance)
-		this.Buffs.splice(this.Buffs.indexOf(buff), 1)
+		buff.delete()
+		//this.Buffs.splice(this.Buffs.indexOf(buff), 1)
 	this.BuffChange()
 }
 
@@ -190,13 +208,14 @@ HeroInstance.prototype.getBuffs = function(buffId) {
 
 // Handles team changes in hero table
 HeroInstance.prototype.teamChange = function(newTeammates, removedTeammates) {
+	//debugger;
 	for (var newTeammate of newTeammates)
-		for (var item of this.Items)
-			item.addTeammate(newTeammate)
+		for (var item of newTeammate.Items)
+			item.addTeammate(this)
 	
 	for (var removedTeammate of removedTeammates)
-		for (var item of this.Items)
-			item.removeTeammate(removedTeammate)
+		for (var item of removedTeammate.Items)
+			item.removeTeammate(this)
 }
 
 // Overwritten when hero instance is inserted into a table
