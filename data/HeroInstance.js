@@ -26,14 +26,14 @@ function HeroInstance(heroId, options) {
 				  "Gold": Number.isInteger(options.gold) || 625 };
 	this.Base = {};
 	this.Item = {};
-	this.Items = [];
 	this.Buff = {};
+	this.Items = [];
 	this.Buffs = [];
 	if (options.items && ItemInstance.isValidArray(options.items))
 		for (var item of options.items)
 			this.addItem(item, undefined, true);
 	this.addAbilities(options.abilities);
-	//this.Total = {Strength: 0, Agility: 0, Intelligence: 0, HealthBase: 0, ManaRegenerationBase: 0, MovementSpeedBase: 0, ManaBase: 0 }
+	
 	this.LevelChange();
 	this.ItemChange();
 	this.AbilityChange();
@@ -69,16 +69,16 @@ HeroInstance.addHandler = function (handler) {
 		this.prototype[bindID].binds.push(handler.name);
 }
 
-HeroInstance.prototype.propagateChange = function (properties) {
-	if (!Array.isArray(properties)) 
+// Propagates data change
+HeroInstance.prototype.propagateChange = function (propagationIdList) {
+	if (!Array.isArray(propagationIdList)) 
 		return;
-	if (!properties.length) 
+	if (!propagationIdList.length) 
 		return;
 	var propagation = [];
-	for ( var propId in properties ) {
-		var prop = properties[propId];
-		propagation.concat(this[prop].binds);
-		this[prop]();
+	for ( var propagationId of propagationIdList ) {
+		propagation.concat(this[propagationId].binds);
+		this[propagationId]();
 	}
 	this.propagateChange(propagation);
 }
@@ -88,12 +88,13 @@ HeroInstance.prototype.addAbilities = function(abilityOptions) {
 	this.Ability = {};
 	this.Abilities = [];
 	this.AbilityIds = {};
-	// Ability definition in heroes not final, but this will do for now
+	// Ability definition in heroes not final, but this will do for now...
 	for (var prop in this.Raw)
 		if (test = /Ability(\d+)/.exec(prop)) {
 			var abilityInstance = new AbilityInstance(this.Raw[prop]);
 			abilityInstance.boundUpdate = this.AbilityChange.bind(this);
 			abilityInstance.heroRef = this;
+			abilityInstance.addOwner(this);
 			this.Abilities[parseInt(test[1])-1] = abilityInstance;
 			this.AbilityIds[this.Raw[prop]] = abilityInstance;
 		}
@@ -116,12 +117,13 @@ HeroInstance.prototype.addAbilities = function(abilityOptions) {
 }
 
 HeroInstance.prototype.delete = function() {
-	for (var buff of this.Buffs)
-		buff.delete()
+	// Items and abilities can emit buffs, so clean them up first
 	for (var item of this.Items) 
 		item.delete()
 	for (var ability of this.Abilities) 
 		ability.delete()
+	for (var buff of this.Buffs)
+		buff.delete()
 }
 
 // Adds an item to the hero
@@ -135,7 +137,7 @@ HeroInstance.prototype.addItem = function (item, forceInsert) {
 	}
 	var index = this.Items.push(item);
 	item.boundDelete = this.removeItem.bind(this, item);
-	item.boundUpdate = this.updateTable;
+	item.boundUpdate = this.ItemChange.bind(this);
 	item.heroRef = this;
 	item.addOwner(this);
 	if (this.Total)
@@ -175,7 +177,7 @@ HeroInstance.prototype.addBuff = function (buff, method) {
 	this.Buffs.push(buff)
 	//buff.boundDelete = this.removeBuff.bind(this, buff)
 	buff.boundDelete = (function(buff) { this.Buffs.splice(this.Buffs.indexOf(buff), 1) }).bind(this, buff)
-	buff.boundUpdate = this.updateTable;
+	buff.boundUpdate = this.BuffChange.bind(this);
 	buff.heroRef = this;
 	if (this.Total)
 		this.BuffChange();
@@ -208,18 +210,24 @@ HeroInstance.prototype.getBuffs = function(buffId) {
 
 // Handles team changes in hero table
 HeroInstance.prototype.teamChange = function(newTeammates, removedTeammates) {
-	//debugger;
-	for (var newTeammate of newTeammates)
+	for (var newTeammate of newTeammates) {
 		for (var item of newTeammate.Items)
 			item.addTeammate(this)
+		for (var ability of newTeammate.Abilities)
+			ability.addTeammate(this)
+	}
 	
-	for (var removedTeammate of removedTeammates)
+	for (var removedTeammate of removedTeammates) {
 		for (var item of removedTeammate.Items)
 			item.removeTeammate(this)
+		for (var ability of newTeammate.Abilities)
+			ability.removeTeammate(this)
+	}
 }
 
 // Overwritten when hero instance is inserted into a table
 HeroInstance.prototype.updateTable = function () {}
+HeroInstance.prototype.getTeammates = function () { return []; }
 
 HeroInstance.addHandler({
 	name: "LevelChange",
@@ -294,10 +302,10 @@ HeroInstance.addHandler({
 	}
 });
 
-// AbilityChange is split to allow Drow aura calculation work correctly
+// Calculation to sum up base stats
 HeroInstance.addHandler({
 	name: "AbilityChange",
-	binds: ["LevelChange"],
+	binds: [],
 	handler: function() {
 		var a = { "Strength": 0, "Agility":0, "Intelligence":0, "MovementSpeed": 0 };
 		for (var ability of this.Abilities) {
@@ -319,19 +327,8 @@ HeroInstance.addHandler({
 	name: "BuffChange",
 	binds: [],
 	handler: function() {
-		var a = { "Strength": 0, "Agility": 0, "Intelligence": 0, "MovementSpeed": 0,
-				"MovementSpeedPercentage": 0, "Armor": 0, "Evasion": 0, "Blind": 0,
-				"MagicalResistance": 0, "Health": 0, "HealthPercentage": 0, "HealthRegeneration": 0, 
-				"Mana": 0, "ManaRegenerationFlat": 0, "Damage": 0, "DamagePercentage": 0,
-				"AttackSpeed": 0, "ManaRegenerationPercentage": 0 },
-			f = {};
+		var a = { "Strength": 0, "Agility": 0, "Intelligence": 0, "MovementSpeed": 0 };
 		for (var buff of this.Buffs) {
-			if (buff.Family)
-				if (!f[buff.Family.Name])
-					f[buff.Family.Name] = buff.Family;
-				else if (f[buff.Family.Name].Level < buff.Family.Level) 
-					f[buff.Family.Name] = buff.Family;
-			
 			for (var prop in a) {
 				var value = buff[prop];
 				if (!value)
@@ -342,18 +339,6 @@ HeroInstance.addHandler({
 					a[prop] += value;
 			}
 		}
-		
-		for (var familyName in f) {
-			var family = f[familyName];
-			for (var prop in family.Stats) {
-				var value = family.Stats[prop];
-				if (prop == "Evasion" || prop == "MagicalResistance")
-					a[prop] += (1 - a[prop]) * value;
-				else
-					a[prop] += value;
-			}
-		}
-		
 		this.Buff = a;
 	}
 })
@@ -404,9 +389,50 @@ HeroInstance.addHandler({
 	}
 });
 
+
+HeroInstance.addHandler({
+	name: "PostBuffChange",
+	binds: ["PreTotalChange"],
+	handler: function() {
+		var a = { "Strength": 0, "Agility": 0, "Intelligence": 0, "MovementSpeed": 0,
+				"MovementSpeedPercentage": 0, "Armor": 0, "Evasion": 0, "Blind": 0,
+				"MagicalResistance": 0, "Health": 0, "HealthPercentage": 0, "HealthRegeneration": 0, 
+				"Mana": 0, "ManaRegenerationFlat": 0, "Damage": 0, "DamagePercentage": 0,
+				"AttackSpeed": 0, "ManaRegenerationPercentage": 0 },
+			f = {};
+		for (var buff of this.Buffs) {
+			if (buff.Family)
+				if (!f[buff.Family.Name])
+					f[buff.Family.Name] = buff.Family;
+				else if (f[buff.Family.Name].Level < buff.Family.Level) 
+					f[buff.Family.Name] = buff.Family;
+			for (var prop in a) {
+				var value = buff[prop];
+				if (!value)
+					continue;
+				else if (prop == "Evasion" || prop == "MagicalResistance")
+					a[prop] += (1 - a[prop]) * value;
+				else
+					a[prop] += value;
+			}
+		}
+		for (var familyName in f) {
+			var family = f[familyName];
+			for (var prop in family.Stats) {
+				var value = family.Stats[prop];
+				if (prop == "Evasion" || prop == "MagicalResistance")
+					a[prop] += (1 - a[prop]) * value;
+				else
+					a[prop] += value;
+			}
+		}
+		this.Buff = a;
+	}
+})
+
 HeroInstance.addHandler({
 	name: "TotalChange",
-	binds: ["PostAbilityChange", "LevelChange"],
+	binds: ["LevelChange", "PostAbilityChange", "PostBuffChange"],
 	handler: function() {
 		var a = this.Total;
 		a.MovementSpeedPercentage = this.Item.MovementSpeedPercentage + this.Ability.MovementSpeedPercentage + this.Buff.MovementSpeedPercentage;
@@ -432,7 +458,7 @@ HeroInstance.addHandler({
 		a.DamageBaseMin = this.Raw.DamageMin + a[this.Raw.Type] + this.Ability.DamageBase;
 		a.DamageBaseMax = this.Raw.DamageMax + a[this.Raw.Type] + this.Ability.DamageBase;
 		a.DamageBase = Math.floor((a.DamageBaseMin + a.DamageBaseMax) / 2);
-		a.DamageBonus = this.Item.Damage + this.Ability.Damage + Math.floor(a.DamageBase * this.Buff.DamagePercentage);
+		a.DamageBonus = this.Item.Damage + this.Ability.Damage + this.Buff.Damage + Math.floor(a.DamageBase * this.Buff.DamagePercentage);
 		a.AttackSpeed = 100 + this.Item.AttackSpeed + a.Agility + this.Ability.AttackSpeed + this.Buff.AttackSpeed;
 		a.Range = this.Raw.Range + this.Ability.Range;
 		a.VisionDay = this.Raw.VisionDaytime;
@@ -445,6 +471,8 @@ HeroInstance.addHandler({
 			item.updateDisplayElement()
 		for (var ability of this.Abilities)
 			ability.updateDisplayElement()
+		for (var buff of this.Buffs)
+			buff.updateDisplayElement()
 	}
 });
 	

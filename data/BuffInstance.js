@@ -14,7 +14,8 @@ function BuffInstance(buffId, properties) {
 	Object.defineProperty(this, "boundDelete", {writable: true}); // removes the buff from hero
 	Object.defineProperty(this, "heroRef", {writable: true}); // hero that has this buff
 	Object.defineProperty(this, "ownerRef", {writable: true}); // hero that owns/emits this buff
-	Object.defineProperty(this, "boundUnlink", {writable: true}); // unlinks the buff from owner object
+	Object.defineProperty(this, "boundUnlink", {writable: true}); // unlinks the buff from owner object (the emitting ability/item)
+	Object.defineProperty(this, "emitterRef", {writable: true}); // ability/item that emits this buff
 	
 	for (var prop in buff) {
 		var value = buff[prop];
@@ -29,6 +30,10 @@ function BuffInstance(buffId, properties) {
 		this.Charges = properties.charges;
 }
 
+BuffInstance.prototype.toString = function () {
+	return "[BuffInstance "+this.ID+"]";
+}
+
 BuffInstance.prototype.clone = function() {
 	props = { version: this.Version };
 	props.level = this.Level;
@@ -36,16 +41,19 @@ BuffInstance.prototype.clone = function() {
 	return new BuffInstance(this.ID, props);
 }
 
-BuffInstance.prototype.toString = function () {
-	return "[BuffInstance "+this.ID+"]";
+BuffInstance.prototype.update = function () {
+	if (this.boundUpdate)
+		this.boundUpdate()
+	this.updateDisplayElement()
 }
 
+// the order of deletions is important
 BuffInstance.prototype.delete = function () {
-	if (this.displayElement)
+	if (this.displayElement) // terminates HTML display
 		this.displayElement.parentElement.removeChild(this.displayElement);
-	if (this.boundUnlink)
+	if (this.boundUnlink) // removes reference from the emmiting item/ability
 		this.boundUnlink();
-	if (this.boundDelete)
+	if (this.boundDelete) // removes reference from the hero
 		this.boundDelete();
 }
 

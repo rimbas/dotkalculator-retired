@@ -24,9 +24,9 @@ DotaData.addVersion( "6.85",
 			"Type": "Strength",
 			"StrengthGain": 0,
 			"Enabled": -1,
-			"HasInventory": 1,
+			"HasInventory": true,
 			"Level": 1,
-			"Armor": -1,
+			"Armor": -1.0,
 			"MagicalResistance": 0.25,
 			"MovementSpeed": 300,
 			"TurnRate": 0.5,
@@ -3612,7 +3612,8 @@ DotaData.addVersion( "6.85",
 			"Section": "Support",
 			"SectionIndex": 0,
 			"Armor": 1,
-			"Damage": 6
+			"Damage": 6,
+			"Aura": "ring_of_basilius_aura"
 		},
 		"headdress": {
 			"Name": "Headress",
@@ -3622,7 +3623,8 @@ DotaData.addVersion( "6.85",
 			"SectionIndex": 1,
 			"Strength": 2,
 			"Agility": 2,
-			"Intelligence": 2
+			"Intelligence": 2,
+			"Aura": "headdress_aura"
 		},
 		"buckler": {
 			"Name": "Buckler",
@@ -3704,7 +3706,8 @@ DotaData.addVersion( "6.85",
 			"Strength": 9,
 			"Agility": 9,
 			"Intelligence": 9,
-			"Damage": 3
+			"Damage": 3,
+			"Aura": "ancient_janggo_aura"
 		},
 		"mekansm": {
 			"Name": "Mekansm",
@@ -3716,7 +3719,7 @@ DotaData.addVersion( "6.85",
 			"Agility": 5,
 			"Intelligence": 5,
 			"Armor": 5,
-			"Cooldown": 65
+			"Aura": "mekansm_aura"
 		},
 		"vladmir": {
 			"Name": "Vladmir's Offering",
@@ -3726,7 +3729,8 @@ DotaData.addVersion( "6.85",
 			"SectionIndex": 10,
 			"Strength": 2,
 			"Agility": 2,
-			"Intelligence": 2
+			"Intelligence": 2,
+			"Aura": "vladmirs_aura"
 		},
 		"pipe": {
 			"Name": "Pipe of Insight",
@@ -4216,7 +4220,8 @@ DotaData.addVersion( "6.85",
 			"Section": "Armor",
 			"SectionIndex": 11,
 			"Armor": 10,
-			"AttackSpeed": 35
+			"AttackSpeed": 35,
+			"Aura": "assault_aura"
 		},
 		"heart": {
 			"Name": "Heart of Tarrasque",
@@ -4517,11 +4522,21 @@ DotaData.addVersion( "6.85",
 		"drow_ranger_trueshot_aura": {
 			"Name": "Precision aura",
 			"Class": "Aura",
-			"Image": true,
-			"Damage": function() { return 0; }
-						  //if (this.heroRef.AttackType != "Range") 
-							//  return 0;
-						 // return this.ownerRef.Total.Agility : 0 }
+			"Image": "drow_ranger_trueshot",
+			"Level": function() {
+				return this.emitterRef ? this.emitterRef.Level : -1;
+			},
+			"Damage": 
+				function() {
+					if (!this.emitterRef) { 
+						console.warn("Buff without required emitter!");
+						return 0; }
+					if (this.heroRef.Raw.AttackType != "Ranged") 
+						return 0;
+					if (this.emitterRef.Level > 0)
+						return Math.floor(this.ownerRef.Total.Agility * (0.14 + this.emitterRef.Level * 0.06))
+					return	0;
+				}
 		},
 		"test_buff": {
 			"Name": "Test buff",
@@ -4543,10 +4558,109 @@ DotaData.addVersion( "6.85",
 			"Health": 200,
 			"Mana": 150
 		},
+		"ring_of_basilius_aura": {
+			"Name": "Basilius aura",
+			"Image": "ring_of_basilius",
+			"Class": "Aura",
+			"Family": { 
+				"Name": "Basilius", 
+				"Level": 0.65, 
+				"Stats": { 
+					"ManaRegenerationFlat": 0.65, 
+					"Armor": 2 
+				}
+			}
+		},
 		"ring_of_aquila_aura": {
 			"Name": "Aquila aura",
+			"Image": "ring_of_aquila",
 			"Class": "Aura",
-			"Family": { "Name": "Basilius", "Level": 0.6, "Stats": { "ManaRegenerationFlat": 0.65, "Armor": 2 } },
+			"Family": { 
+				"Name": "Basilius", 
+				"Level": 0.65, 
+				"Stats": { 
+					"ManaRegenerationFlat": 0.65, 
+					"Armor": 2 
+				} 
+			}
+		},
+		"vladmirs_aura": {
+			"Name": "Vladmir's aura",
+			"Image": "vladmir",
+			"Class": "Aura",
+			"Family": { 
+				"Name": "Basilius", 
+				"Level": 0.8, 
+				"Stats": { 
+					"DamagePercentage": 0.15, 
+					"ManaRegenerationFlat": 0.8, 
+					"Armor": 5, 
+					"HealthRegeneration": 3 
+				}
+			}
+		},
+		"ancient_janggo_aura": {
+			"Name": "Swiftness aura",
+			"Image": "ancient_janggo",
+			"Class": "Aura",
+			"Family": { 
+				"Name": "Drums", 
+				"Level": 1, 
+				"Stats": { 
+					"MovementSpeedPercentage": 0.05, 
+					"AttackSpeed": 5 
+				}
+			}
+		},
+		"headdress_aura": {
+			"Name": "Regeneration aura",
+			"Image": "headdress",
+			"Class": "Aura",
+			"Family": {
+				"Name": "Headdress",
+				"Level": 1,
+				"Stats": {
+					"HealthRegeneration": 3
+				}
+			}
+		},
+		"mekansm_aura": {
+			"Name": "Mekansm aura",
+			"Image": "mekansm",
+			"Class": "Aura",
+			"Family": {
+				"Name": "Mekansm",
+				"Level": 1,
+				"Stats": {
+					"HealthRegeneration": 4
+				}
+			}
+		},
+		"assault_aura": {
+			"Name": "Assault aura",
+			"Image": "assault",
+			"Class": "Aura",
+			"Family": {
+				"Name": "Assault",
+				"Level": 1,
+				"Stats": {
+					"AttackSpeed": 20,
+					"Armor": 5
+				}
+			}
+		},
+		"pipe_aura": {
+			"Name": "Insight aura",
+			"Image": "pipe",
+			"Class": "Aura",
+			"Family": {
+				"Name": "Pipe",
+				"Level": 1,
+				"Stats": {
+					"HealthRegeneration": 4,
+					"MagicalResistance": 0.1
+				}
+			}
 		}
 	}
 	

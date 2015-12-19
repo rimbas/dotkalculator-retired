@@ -2,7 +2,7 @@
 
 DotaData = {};
 DotaData.Versions = {}
-DotaData.NewestVersion = "6.85";  //working in valve time so badly, this was started in 6.84b
+DotaData.NewestVersion = "6.85";  //working in valve time so badly, this was started in 6.84b // where's the 6.86 data?
 DotaData.TargetVersion = DotaData.NewestVersion;
 
 // Returns a new instance of complete hero propery data
@@ -115,19 +115,8 @@ DotaData.readableStatStrings = {
 	"VisionDay": "Day vision",
 	"VisionNight": "Night vision",
 	"AttackSpeed": "Attack speed",
-	"MagicalResistance": "Magical resistance"
+	"MagicalResistance": "Magical resistance",
 }
-
-/*DotaData.statToReadable = function(stat, val) {
-	var key = DotaData.readableStatStrings[stat] ? DotaData.readableStatStrings[stat] : stat,
-		isPercentage = false, //calculatable percentage (from a base value)
-		test = /^(\w+)Percentage$/.exec(stat);
-	if (test || stat == "Evasion" || stat == "MagicalResistance")
-		val = (val > 0 ? "+" : "" ) + (val * 100).toFixed(0)+"%";
-	if (test && test[1])
-		isPercentage = true;
-	return { key: key, value: val > 0 ? "+" + val : val, isPercentage: isPercentage, baseName: test ? test[1] : undefined };
-}*/
 
 DotaData.statToReadable = function(stat, val) {
 	var key = DotaData.readableStatStrings[stat] ? DotaData.readableStatStrings[stat] : stat,

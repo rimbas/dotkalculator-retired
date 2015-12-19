@@ -172,6 +172,7 @@ HeroTable.prototype.addHero = function (heroInstance) {
 		throw "Invalid parameter:" + heroInstance;
 	this.heroList.push(heroInstance);
 	heroInstance.updateTable = this.refreshHero.bind(this, heroInstance);
+	heroInstance.getTeammates = this.getTeammatesOfHero.bind(this, heroInstance);
 	this.createHeroRow(heroInstance)
 	
 	heroInstance.teamChange(this.getTeammatesOfHero(heroInstance), [])
@@ -447,6 +448,21 @@ HeroTable.addEvaluator({
 		cell.textContent = heroInstance.Total.ArmorBase.toFixed(2) + (bonus === 0 ? "" : "+" + heroInstance.Total.ArmorBonus);
 	},
 	sorter: "number"
+});
+
+HeroTable.addEvaluator({
+	ID: "PhycalReduction", 
+	name: "Physical dmg percentage", 
+	header: "DR",
+	type: "Derived",
+	description: "Shows physical damage percentage received",
+	eval: function(cell, heroInstance) {
+		var armor = heroInstance.Total.Armor,
+			reduction = (0.06 * armor) / (1 + 0.06 * armor)
+		cell.textContent = (reduction * 100).toFixed(0) + "%"
+		cell.sortingProperty = reduction;
+	},
+	sorter: "propertyNumber"
 });
 
 HeroTable.addEvaluator({

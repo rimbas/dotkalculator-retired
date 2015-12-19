@@ -35,7 +35,7 @@ ElementHelper.createDetailedTooltip = function ( object ) {
 		el.appendChild(document.createElement("br"));
 	}
 	
-	if ("Level" in object) {
+	if ("Level" in object && !object.emitterRef) {
 		var levelLabel = document.createElement("span");
 		levelLabel.textContent = "Level:";
 		levelLabel.style.textAlign = "right";
@@ -51,9 +51,8 @@ ElementHelper.createDetailedTooltip = function ( object ) {
 		levelInput.type = "number";
 		levelInput.className = "mini-spinner";
 		levelInput.onchange = (function(e,u){
-			object.Level = e.target.value;
-			//object.updateDisplayElement();
-			object.boundUpdate();
+			this.Level = e.target.value;
+			this.update();
 		}).bind(object);
 		el.appendChild(levelInput);
 
@@ -101,8 +100,8 @@ ElementHelper.updateDisplayElements = function ( object ) {
 		return;
 	if (object.chargeElement)
 		object.chargeElement.textContent = object.Charges;
-	if (this.levelElement)
-		this.levelElement.textContent = DotaData.numericToRoman(this.Level);
+	if (object.levelElement)
+		object.levelElement.textContent = DotaData.numericToRoman(object.Level);
 	for (var stat in object.dynamicElements) {
 		var statValue = stat in object ? object[stat] : object.Family.Stats[stat];
 		var readable = DotaData.statToReadable(stat, statValue);

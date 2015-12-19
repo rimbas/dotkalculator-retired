@@ -11,19 +11,6 @@ Meta (object):
 	Team							- Used to differentiate for auras
 	Label							- User defined value
 	Dead							- Used to differentiate for auras and skills
-	
-Hero stats, after calculating with level
-Base:
-	Strength						- 
-	Agility							-
-	Intelligence					-
-	Armor							-
-	Health							- 
-	HealthRegeneration				- 
-	Mana							-
-	ManaRegeneration				- 
-	DamageMin						-
-	DamageMax						-
 
 Skill stats
 	Name							-
@@ -55,9 +42,7 @@ Skill stats
 Buff stats
 	Name							- 
 	Level							- 
-	Class							- Basilius/Aquaila/Vlads,  Headress/Mek
-	ClassLevel						- 
-	Stacking						- Huskar, Meepo
+	Class							- Aura/Buff/Debuff
 	Strength						- Undy Q, Pudge E, 
 	Agility							- Slark E
 	Intelligence					- Silencer
@@ -106,41 +91,41 @@ Universal properties in DotaData definitions
 	Name							- Display name
 
 Raw stat (hero) definition in DotaData lists
-	Name 							- Dota 2 name of the hero
-	LoreName						- Alternate name
-	Type							- Primary attribute of the hero
-	Side							- Dire/Radiant
-	Ability[\d]+					- Ability in associated slot
-	AbilityLayout					- Ability display type (most heroes/Puck,IO/Rubick, Doom)
-	AttackType						- Attack type (Ranged/Melee)
-	DamageMax						- Higher value of the damage
-	DamageMin						- Lower value of the damage
-	Range							- Attack range of the hero
-	AttackRate						- Base attack time
-	AttackPoint						- Attack point
-	StrengthGain					- Base Strength gain per level
-	StrengthBase					- Base Strength points
-	AgilityGain						- Base Agility gain per level
-	AgilityBase						- Base Agility points
-	IntelligenceGain				- Base Intelligence gain per level
-	IntelligenceBase				- Base Intelligence points
-	Enabled							- Meta information
-	HasInventory					- Does the unit have an inventory
-	Level							- Hardcoded base level of the unit
-	Armor							- Base Armor
-	MagicalResistance				- Base Magic resistance
-	MovementSpeed					- Base movement speed
-	TurnRate						- Base turn speed
-	ProjectileSpeed					- Base ranged projectile speed
-	Health							- Base health
-	HealthRegen						- Base health regen
-	Mana							- Base mana
-	ManaRegen						- Base mana regen
-	Version							- Version of the hero
-	Vision							- Ground or Flying
-	VisionDaytime					- Vision during daytime
-	VisionNighttime					- Vision during nighttime
-	TrueSight						- True sight range (wards, towers and fountain)
+	Name 						(string)	- Dota 2 name of the hero
+	LoreName					(string)	- Alternate name
+	Type						(string)	- Primary attribute of the hero
+	Side						(string)	- Dire/Radiant
+	Ability[\d]+				(string)	- Ability in associated slot (will be replaced)
+	AbilityLayout				(integer)	- Ability display type (most heroes/Puck,IO/Rubick, Doom)
+	AttackType					(string)	- Attack type (Ranged/Melee)
+	DamageMax					(integer)	- Higher value of the damage
+	DamageMin					(integer)	- Lower value of the damage
+	Range						(integer)	- Attack range of the hero
+	AttackRate					(float)		- Base attack time
+	AttackPoint					(float)		- Attack point
+	StrengthGain				(float)		- Base Strength gain per level
+	StrengthBase				(integer)	- Base Strength points
+	AgilityGain					(float)		- Base Agility gain per level
+	AgilityBase					(integer)	- Base Agility points
+	IntelligenceGain			(float)		- Base Intelligence gain per level
+	IntelligenceBase			(integer)	- Base Intelligence points
+	Enabled						(integer)	- Meta information (-1 and 0: not, 1 yes)
+	HasInventory				(boolean)	- Does the unit have an inventory
+	Level						(integer)	- Hardcoded base level of the unit
+	Armor						(float)		- Base Armor
+	MagicalResistance			(float)		- Base Magic resistance
+	MovementSpeed				(integer)	- Base movement speed
+	TurnRate					(float)		- Base turn speed
+	ProjectileSpeed				(integer)	- Base ranged projectile speed
+	Health						(integer)	- Base health
+	HealthRegen					(integer)	- Base health regen
+	Mana						(integer)	- Base mana
+	ManaRegen					(float)		- Base mana regen
+	Version						(string)	- Version of the hero
+	Vision						(string)	- Ground or Flying
+	VisionDaytime				(integer)	- Vision during daytime
+	VisionNighttime				(integer)	- Vision during nighttime
+	TrueSight					(integer)	- True sight range (wards, towers and fountain)
 
 	
 Item properties in DotaData item lists
@@ -176,4 +161,11 @@ Item properties in DotaData item lists
 	AttackModifier				(string)	- 
 	AttackUniqueModifier		(string)	- 
 	Ability						(string)	- Attached skill
+	
+	
+Family object definition:
+	Name						(string)	- Family name (Boots, Basilius)
+	Level						(float)		- Significance level of the stats
+	Stats						(object)	- Stat definition in usual format
+	
 	

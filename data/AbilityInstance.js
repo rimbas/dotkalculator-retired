@@ -34,6 +34,16 @@ AbilityInstance.prototype.clone = function() {
 	return new AbilityInstance(this.ID, props);
 }
 
+AbilityInstance.prototype.update = function () {
+	if (this.boundUpdate)
+		this.boundUpdate()
+	if (this.ownerBuff)
+		this.ownerBuff.update()
+	for (var buff of this.buffReferences)
+		buff[1].update()
+	this.updateDisplayElement()
+}
+
 AbilityInstance.prototype.delete = function () {
 	for (var buff of this.buffReferences)
 		buff[1].delete()
@@ -75,13 +85,15 @@ AbilityInstance.prototype.updateDisplayElement = function () {
 	ElementHelper.updateDisplayElements(this)
 }
 
+// adds the owner of this item
 AbilityInstance.prototype.addOwner = function(owner) {
 	if (!this.Aura) return;
 	var newBuff = new BuffInstance(this.Aura);
-	newBuff.boundOwnerDelete = this;
+	newBuff.boundUnlink = this.removeReferencedBuff.bind(this, owner);
 	this.ownerBuff = newBuff;
 	newBuff.ownerRef = owner;
-	owner.addBuff(newBuff, undefined, true);
+	newBuff.emitterRef = this;
+	owner.addBuff(newBuff, "override");
 }
 
 AbilityInstance.prototype.addTeammate = function(newTeammate) {
@@ -89,9 +101,10 @@ AbilityInstance.prototype.addTeammate = function(newTeammate) {
 	if (!this.Aura) return;
 	if (!this.buffReferences.has(newTeammate) ) {
 		var newBuff = new BuffInstance(this.Aura);
-		newBuff.boundOwnerDelete = this.removeReferencedBuff.bind(this, newTeammate);
 		newBuff.ownerRef = this.heroRef;
-		newTeammate.addBuff(newBuff, true);
+		newBuff.emitterRef = this;
+		newBuff.boundUnlink = this.removeReferencedBuff.bind(this, newTeammate);
+		newTeammate.addBuff(newBuff, "leave");
 		this.buffReferences.set(newTeammate, newBuff);
 	}
 }
@@ -107,5 +120,4 @@ AbilityInstance.prototype.removeTeammate = function(oldTeammate) {
 AbilityInstance.prototype.removeReferencedBuff = function(teammate) {
 	this.buffReferences.delete(teammate);
 }
-
 

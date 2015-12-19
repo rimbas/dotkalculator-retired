@@ -33,11 +33,21 @@ ItemInstance.prototype.clone = function () {
 	return new ItemInstance(this.ID, props);
 }
 
+ItemInstance.prototype.update = function () {
+	if (this.boundUpdate)
+		this.boundUpdate()
+	for (var buff of this.buffReferences)
+		buff[1].update()
+	this.updateDisplayElement()
+}
+
 ItemInstance.prototype.delete = function () {
 	for (var buff of this.buffReferences)
 		buff[1].delete()
 	if (this.displayElement)
 		this.displayElement.parentElement.removeChild(this.displayElement);
+	if (this.ownerBuff)
+		this.ownerBuff.delete()
 	if (this.boundDelete)
 		this.boundDelete();
 }
@@ -86,6 +96,8 @@ ItemInstance.prototype.createDisplayElement = function() {
 
 ItemInstance.prototype.updateDisplayElement = function () {
 	ElementHelper.updateDisplayElements(this)
+	if (this.ownerBuff)
+		this.ownerBuff.updateDisplayElement()
 }
 
 // adds the owner of this item
@@ -95,6 +107,7 @@ ItemInstance.prototype.addOwner = function(owner) {
 	newBuff.boundUnlink = this.removeReferencedBuff.bind(this, owner);
 	this.ownerBuff = newBuff;
 	newBuff.ownerRef = owner;
+	newBuff.emitterRef = this;
 	owner.addBuff(newBuff, "override");
 }
 
@@ -104,6 +117,7 @@ ItemInstance.prototype.addTeammate = function(newTeammate) {
 	if (!this.buffReferences.has(newTeammate) ) {
 		var newBuff = new BuffInstance(this.Aura);
 		newBuff.ownerRef = this.heroRef;
+		newBuff.emitterRef = this;
 		newBuff.boundUnlink = this.removeReferencedBuff.bind(this, newTeammate);
 		newTeammate.addBuff(newBuff, "leave");
 		this.buffReferences.set(newTeammate, newBuff);
