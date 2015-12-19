@@ -37,11 +37,11 @@ AbilityInstance.prototype.clone = function() {
 AbilityInstance.prototype.update = function () {
 	if (this.boundUpdate)
 		this.boundUpdate()
+	this.updateDisplayElement()
 	if (this.ownerBuff)
 		this.ownerBuff.update()
 	for (var buff of this.buffReferences)
 		buff[1].update()
-	this.updateDisplayElement()
 }
 
 AbilityInstance.prototype.delete = function () {

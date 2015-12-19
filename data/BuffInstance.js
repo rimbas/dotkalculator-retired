@@ -22,7 +22,7 @@ function BuffInstance(buffId, properties) {
 		if (value instanceof Function)
 			Object.defineProperty(this, prop, { get: value, enumerable: true });
 		else
-			Object.defineProperty(this, prop, { value: value, enumerable: true });
+			Object.defineProperty(this, prop, { value: value, enumerable: true, writable: true });
 	}
 	if (typeof properties.level === "number" && this.Level)
 		this.Level = properties.level;

@@ -31,8 +31,11 @@ function HeroInstance(heroId, options) {
 	this.Buffs = [];
 	if (options.items && ItemInstance.isValidArray(options.items))
 		for (var item of options.items)
-			this.addItem(item, undefined, true);
+			this.addItem(item);
 	this.addAbilities(options.abilities);
+	if (Array.isArray(options.buffs))
+		for (var buff of options.buffs)
+			this.addBuff(buff)
 	
 	this.LevelChange();
 	this.ItemChange();
@@ -264,7 +267,7 @@ HeroInstance.addHandler({
 	binds: [],
 	handler: function() {
 		var a = { "Strength": 0, "Agility":0, "Intelligence":0, 
-			"MovementSpeed":0, "MovementSpeedPercentage":0,
+			"MovementSpeed":0, "MovementSpeedPercentage":0, "Range": 0,
 			"Armor":0, "MagicalResistance": 0, "Evasion":0,
 			"Health":0, "HealthRegeneration":0, "Mana":0, "ManaRegenerationFlat": 0,
 			"ManaRegenerationPercentage": 0, "Damage": 0, "AttackSpeed": 0,
@@ -460,7 +463,7 @@ HeroInstance.addHandler({
 		a.DamageBase = Math.floor((a.DamageBaseMin + a.DamageBaseMax) / 2);
 		a.DamageBonus = this.Item.Damage + this.Ability.Damage + this.Buff.Damage + Math.floor(a.DamageBase * this.Buff.DamagePercentage);
 		a.AttackSpeed = 100 + this.Item.AttackSpeed + a.Agility + this.Ability.AttackSpeed + this.Buff.AttackSpeed;
-		a.Range = this.Raw.Range + this.Ability.Range;
+		a.Range = this.Raw.Range + this.Ability.Range + this.Item.Range;
 		a.VisionDay = this.Raw.VisionDaytime;
 		a.VisionNight = this.Raw.VisionNighttime + this.Ability.VisionNight + this.Item.VisionNight;
 		a.Cost = this.Item.Cost;

@@ -11,6 +11,7 @@ function ItemInstance(itemId, properties) {
 	Object.defineProperty(this, "dynamicElements", {writable: true, value: {}});
 	Object.defineProperty(this, "boundDelete", {writable: true});
 	Object.defineProperty(this, "boundUpdate", {writable: true});
+	Object.defineProperty(this, "heroRef", {writable: true});
 	Object.defineProperty(this, "buffReferences", {value: new Map(), writable: true});
 	
 	for (var prop in item) {

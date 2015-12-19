@@ -154,7 +154,8 @@ Item properties in DotaData item lists
 	ManaRegenerationPercentage	(float)		- Sage's mask
 	Damage						(integer)	- 
 	AttackSpeed					(integer)	- Hyperstone
-	Range						(integer)	- 
+	Range						(integer)	- Dragon lance
+	RangeSpell					(integer)	- Aether lens
 	VisionDay					(integer)	- 
 	VisionNight					(integer)	- Moon shard
 	Family						(object)	- Object that inherits Item defintion with addition of Level and Stats properties

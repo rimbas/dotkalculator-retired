@@ -4513,6 +4513,84 @@ DotaData.addVersion( "6.86",
 			"Agility": function() { return this.Level * 2 },
 			"Intelligence": function() { return this.Level * 2 },
 		},
+		"abaddon_death_coil": {
+			"Name": "Death coil",
+		},
+		"abaddon_aphotic_shield": {
+			"Name": "Aphotic shield"
+		},
+		"abaddon_frostmourne": {
+			"Name": "Curse of Avernus"
+		},
+		"abaddon_borrowed_time": {
+			"Name": "Borrowed time",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"alchemist_acid_spray": {
+			"Name": "Acid spray"
+		},
+		"alchemist_unstable_concoction": {
+			"Name": "Unstable concoction"
+		},
+		"alchemist_goblins_greed": {
+			"Name": "Greevil's greed",
+			"Class": "Passive"
+		},
+		"alchemist_chemical_rage": {
+			"Name": "Chemical rage",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16],
+		},
+		"ancient_apparition_cold_feet": {
+			"Name": "Cold feet"
+		},
+		"ancient_apparition_ice_vortex": {
+			"Name": "Ice vortex"
+		},
+		"ancient_apparition_chilling_touch": {
+			"Name": "Chilling touch"
+		},
+		"ancient_apparition_ice_blast": {
+			"Name": "Ice blast",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"antimage_mana_break": {
+			"Name": "Mana break"
+		},
+		"anitmage_blink": {
+			"Name": "Blink"
+		},
+		"antimage_spell_shield": {
+			"Name": "Spell shield",
+			"Class": "Passive",
+			"MagicalResistance": function() { return this.Level > 0 ? 0.18 + this.Level * 0.08 : 0 }
+		},
+		"antimage_mana_void": {
+			"Name": "Mana void",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"axe_berserkers_call": {
+			"Name": "Berserker's call"
+		},
+		"axe_battle_hunger": {
+			"Name": "Battle hunger"
+		},
+		"axe_counter_helix": {
+			"Name": "Counter helix"
+		},
+		"axe_culling_blade": {
+			"Name": "Culling blade",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
 		"pudge_flesh_heap": {
 			"Name": "Flesh Heap",
 			"Class": "Passive",
@@ -4527,7 +4605,6 @@ DotaData.addVersion( "6.86",
 			"Class": "Aura",
 			"Level": 0,
 			"LevelMax": 4,
-			//"Damage": function() { return this.Level > 0 ? Math.floor(this.heroRef.Total.Agility * (0.14 + this.Level * 0.06)) : 0 },
 			"Aura": "drow_ranger_trueshot_aura"
 		},
 		"drow_ranger_marksmanship": {
@@ -4543,11 +4620,7 @@ DotaData.addVersion( "6.86",
 			"Class": "Passive",
 			"MagicalResistance": function() { return this.Level > 0 ? 0.05 + this.Level * 0.05 : 0 }
 		},
-		"antimage_spell_shield": {
-			"Name": "Spell shield",
-			"Class": "Passive",
-			"MagicalResistance": function() { return this.Level > 0 ? 0.18 + this.Level * 0.08 : 0 }
-		}
+
 	},
 	"Buffs": {
 		"_base": {
@@ -4577,12 +4650,14 @@ DotaData.addVersion( "6.86",
 		"test_buff": {
 			"Name": "Test buff",
 			"Class": "Buff",
-			"Strength": 1,
-			"Agility": 1,
-			"Intelligence": 1,
-			"Damage": 1,
-			"Health": 1,
-			"Mana": 1
+			"Image": "empty",
+			"Level": 0,
+			"LevelMax": 10,
+			"Charges": 0,
+			"Strength": function() { return this.Charges + this.Level },
+			"Agility": function() { return this.Level },
+			"Intelligence": function() { return this.Charges },
+			"Damage": 100
 		},
 		"alchemist_aghanims_scepter": {
 			"Name": "Aghanim's Scepter",

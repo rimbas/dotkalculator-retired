@@ -9,7 +9,7 @@ $(function(e){
 	}) 
 	MainTable = new HeroTable("Comparison table", "main-table", "main-table-wrapper");
 	MainTable.addHero(new HeroInstance("drow_ranger", {items: [new ItemInstance("ring_of_aquila")], team: "Test", abilities: {"drow_ranger_trueshot": 1}}));
-	MainTable.addHero(new HeroInstance("drow_ranger", {abilities: {"drow_ranger_trueshot": 1}}));
+	MainTable.addHero(new HeroInstance("drow_ranger", {abilities: {"drow_ranger_trueshot": 1}, buffs: [ new BuffInstance("test_buff") ] }));
 	MainTable.addHero(new HeroInstance("bloodseeker", {team: "Test"}))
 	MainTable.addHero(new HeroInstance("viper", {team: "Test"}))
 	

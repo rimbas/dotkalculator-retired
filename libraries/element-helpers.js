@@ -3,6 +3,13 @@
 ElementHelper = {};
 
 // object - ItemInstance, AbilityInstance, BuffInstance
+ElementHelper.createDisplayElement = function(object) {
+	
+	
+	
+}
+
+// object - ItemInstance, AbilityInstance, BuffInstance
 ElementHelper.createDetailedTooltip = function ( object ) {
 	var el = document.createElement("div"),
 		h1 = document.createElement("h1");
@@ -26,10 +33,10 @@ ElementHelper.createDetailedTooltip = function ( object ) {
 		chargeInput.type = "number";
 		chargeInput.className = "mini-spinner";
 		chargeInput.onchange = (function(e,u){
-			object.Charges = e.target.value;
-			object.updateDisplayElement();
-			object.boundUpdate();
-		}).bind(object);
+			debugger;
+			object.Charges = Number.parseInt(e.target.value);
+			object.update()
+		})//.bind(object);
 		el.appendChild(chargeInput);
 		
 		el.appendChild(document.createElement("br"));
@@ -51,9 +58,9 @@ ElementHelper.createDetailedTooltip = function ( object ) {
 		levelInput.type = "number";
 		levelInput.className = "mini-spinner";
 		levelInput.onchange = (function(e,u){
-			this.Level = e.target.value;
-			this.update();
-		}).bind(object);
+			object.Level = Number.parseInt(e.target.value);
+			object.update()
+		})//.bind(object);
 		el.appendChild(levelInput);
 
 		el.appendChild(document.createElement("br"));
@@ -66,7 +73,8 @@ ElementHelper.createDetailedTooltip = function ( object ) {
 		statValues = {};
 	
 	// for..in doesn't guarantee order
-	for (var i = 0, stat; i <= statOrder.length; stat = statOrder[i++])
+	//for (var i = 0, stat; i <= statOrder.length; stat = statOrder[i++])
+	for (var stat of statOrder)
 		if (typeof object[stat] !== "undefined")
 			statValues[stat] = object[stat];
 	
