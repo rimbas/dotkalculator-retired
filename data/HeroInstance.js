@@ -88,6 +88,7 @@ HeroInstance.prototype.propagateChange = function (propagationIdList) {
 
 // Convenience function for constructor
 HeroInstance.prototype.addAbilities = function(abilityOptions) {
+	var team = this.getTeammates();
 	this.Ability = {};
 	this.Abilities = [];
 	this.AbilityIds = {};
@@ -100,6 +101,8 @@ HeroInstance.prototype.addAbilities = function(abilityOptions) {
 			abilityInstance.addOwner(this);
 			this.Abilities[parseInt(test[1])-1] = abilityInstance;
 			this.AbilityIds[this.Raw[prop]] = abilityInstance;
+			for (var teammate of team)
+				abilityInstance.addTeammate(teammate);
 		}
 	if (abilityOptions)
 		for (var abilityId in abilityOptions) {
@@ -145,6 +148,8 @@ HeroInstance.prototype.addItem = function (item, forceInsert) {
 	item.addOwner(this);
 	if (this.Total)
 		this.ItemChange();
+	for (var teammate of this.getTeammates())
+		item.addTeammate(teammate)
 	return index;
 }
 
@@ -178,8 +183,7 @@ HeroInstance.prototype.addBuff = function (buff, method) {
 			return;
 	
 	this.Buffs.push(buff)
-	//buff.boundDelete = this.removeBuff.bind(this, buff)
-	buff.boundDelete = (function(buff) { this.Buffs.splice(this.Buffs.indexOf(buff), 1) }).bind(this, buff)
+	buff.boundDelete = this.removeBuff.bind(this, buff)
 	buff.boundUpdate = this.BuffChange.bind(this);
 	buff.heroRef = this;
 	if (this.Total)
@@ -189,13 +193,11 @@ HeroInstance.prototype.addBuff = function (buff, method) {
 HeroInstance.prototype.removeBuff = function(buff) {
 	if (Array.isArray(buff)) 
 		for (var b of buff)
-			b.delete()
-			//this.Buffs.splice(this.Buffs.indexOf(b), 1)
+			this.Buffs.splice(this.Buffs.indexOf(b), 1)
 	else if (typeof buff == "string")
 		this.removeBuffsWithID(buff)
 	else if (buff instanceof BuffInstance)
-		buff.delete()
-		//this.Buffs.splice(this.Buffs.indexOf(buff), 1)
+		this.Buffs.splice(this.Buffs.indexOf(buff), 1)
 	this.BuffChange()
 }
 
@@ -223,7 +225,7 @@ HeroInstance.prototype.teamChange = function(newTeammates, removedTeammates) {
 	for (var removedTeammate of removedTeammates) {
 		for (var item of removedTeammate.Items)
 			item.removeTeammate(this)
-		for (var ability of newTeammate.Abilities)
+		for (var ability of removedTeammate.Abilities)
 			ability.removeTeammate(this)
 	}
 }

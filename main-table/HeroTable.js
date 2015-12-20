@@ -124,14 +124,14 @@ HeroTable.prototype.createTable = function () {
 	this._tableElement.body = tbody;
 	
 	var thr = document.createElement("tr");
-	for ( var i in this.columnList ) {
-		var col = this.columnList[i];
+	for ( var col of this.columnList ) {
 		var cell = document.createElement("th");
 		if (this.evaluator[col].header instanceof Function)
 			this.evaluator[col].header(cell);
 		else if (typeof this.evaluator[col].header === "string")
 			cell.textContent = this.evaluator[col].header;
 
+		cell.title = this.evaluator[col].name
 		cell.evaluatorId = col;
 		thr.appendChild(cell);
 	}
@@ -474,7 +474,7 @@ HeroTable.addEvaluator({
 		var el = document.createElement("div");
 		el.className = "mheroicon " + heroInstance.Meta.ID;
 		cell.appendChild(el);
-		cell.sortertingProperty = heroInstance.Raw.Name;
+		cell.sortingProperty = heroInstance.Raw.Name;
 	},
 	sorter: "propertyText"
 });
@@ -711,6 +711,18 @@ HeroTable.addEvaluator({
 	description: "Displays hero mana regeneration",
 	eval: function(cell, heroInstance) {
 		cell.textContent = heroInstance.Total.ManaRegeneration.toFixed(2)
+	},
+	sorter: "number"
+})
+
+HeroTable.addEvaluator({
+	ID: "HealthRegen",
+	name: "Health regeneration",
+	header: "HpR",
+	type: "Derived",
+	description: "Displays hero health regeneration",
+	eval: function(cell, heroInstance) {
+		cell.textContent = heroInstance.Total.HealthRegeneration.toFixed(2)
 	},
 	sorter: "number"
 })

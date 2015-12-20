@@ -53,6 +53,16 @@ ItemInstance.prototype.delete = function () {
 		this.boundDelete();
 }
 
+ItemInstance.prototype.activate = function() {
+	if (!this.Buff)
+		return;
+	if (this.Target["No target"] && this.Target["Self"]) 
+		this.heroRef.addBuff(new BuffInstance(this.Buff, {level: this.Level, charges: this.Charges}), this.Target.Refresh ? "leave" : undefined)
+	if (this.Target["No target"] && this.Target["Teammates"])
+		for (var teammate of this.heroRef.getTeammates())
+			teammate.addBuff(new BuffInstance(this.Buff, {level: this.Level, charges: this.Charges}), this.Target.Refresh ? "leave" : undefined)
+}
+
 // Checks if all elements of array are valid ItemInstance objects
 ItemInstance.isValidArray = function( itemInstanceArray ) {
 	if (!Array.isArray(itemInstanceArray))
@@ -83,6 +93,14 @@ ItemInstance.prototype.createDisplayElement = function() {
 		this.chargeElement = chargeElement;
 		div.appendChild(chargeElement);
 	}
+	
+	if (typeof this.Buff === "string") {
+		var activateButton = document.createElement("button");
+		activateButton.className = "item-display-activate";
+		activateButton.onclick = this.activate.bind(this);
+		div.appendChild(activateButton);
+	}
+	
 	var deleteButton = document.createElement("button");
 		deleteButton.className = "item-display-delete";
 		deleteButton.onclick = this.delete.bind(this);

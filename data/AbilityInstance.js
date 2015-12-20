@@ -44,6 +44,13 @@ AbilityInstance.prototype.update = function () {
 		buff[1].update()
 }
 
+AbilityInstance.prototype.activate = function() {
+	if (!this.Buff)
+		return;
+	if (this.Target["No target"] && this.Target["Self"]) 
+		this.heroRef.addBuff(new BuffInstance(this.Buff, {level: this.Level, charges: this.Charges}), this.Target.Refresh ? "leave" : undefined)
+}
+
 AbilityInstance.prototype.delete = function () {
 	for (var buff of this.buffReferences)
 		buff[1].delete()
@@ -68,6 +75,13 @@ AbilityInstance.prototype.createDisplayElement = function() {
 		chargeElement.className = "item-display-charges";
 		this.chargeElement = chargeElement;
 		div.appendChild(chargeElement);
+	}
+	
+	if (typeof this.Buff === "string") {
+		var activateButton = document.createElement("button");
+		activateButton.className = "item-display-activate";
+		activateButton.onclick = this.activate.bind(this);
+		div.appendChild(activateButton);
 	}
 	
 	var levelElement = document.createElement("span");

@@ -3648,7 +3648,9 @@ DotaData.addVersion( "6.86",
 			"Strength": 2,
 			"Agility": 2,
 			"Intelligence": 2,
-			"Armor": 5
+			"Armor": 5,
+			"Buff": "buckler_buff",
+			"Target": { "No target": 1, "Self": 1, "Teammates": 1, "Refresh": 1 }
 		},
 		"urn_of_shadows": {
 			"Name": "Urn of Shadows",
@@ -3732,7 +3734,9 @@ DotaData.addVersion( "6.86",
 			"Agility": 5,
 			"Intelligence": 5,
 			"Armor": 5,
-			"Aura": "mekansm_aura"
+			"Aura": "mekansm_aura",
+			"Buff": "mekansm_buff",
+			"Target": { "No target": 1, "Self": 1, "Teammates": 1, "Refresh": 1 }
 		},
 		"vladmir": {
 			"Name": "Vladmir's Offering",
@@ -4167,7 +4171,9 @@ DotaData.addVersion( "6.86",
 			"Intelligence": 2,
 			"Health": 250,
 			"HealthRegeneration": 6,
-			"Armor": 5
+			"Armor": 5,
+			"Buff": "crimson_guard_buff",
+			"Target": { "No target": 1, "Self": 1, "Teammates": 1, "Refresh": 1 }
 		},
 		"black_king_bar": {
 			"Name": "Black King Bar",
@@ -4577,7 +4583,9 @@ DotaData.addVersion( "6.86",
 			"Restrictions": [6, 11, 16]
 		},
 		"axe_berserkers_call": {
-			"Name": "Berserker's call"
+			"Name": "Berserker's call",
+			"Buff": "axe_berserkers_call_buff" ,
+			"Target": { "No target": 1, "Self": 1, "Refresh": 1 }
 		},
 		"axe_battle_hunger": {
 			"Name": "Battle hunger"
@@ -4740,7 +4748,7 @@ DotaData.addVersion( "6.86",
 			"Image": "mekansm",
 			"Class": "Aura",
 			"Family": {
-				"Name": "Mekansm",
+				"Name": "Mekansm_regen",
 				"Level": 1,
 				"Stats": {
 					"HealthRegeneration": 4
@@ -4772,6 +4780,48 @@ DotaData.addVersion( "6.86",
 					"MagicalResistance": 0.1
 				}
 			}
+		},
+		"buckler_buff": {
+			"Name": "Armor bonus",
+			"Image": "buckler",
+			"Class": "Buff",
+			"Family": {
+				"Name": "Buckler",
+				"Level": 1,
+				"Stats": {
+					"Armor": 2
+				}
+			}
+		},
+		"mekansm_buff": {
+			"Name": "Restore",
+			"Image": "mekansm",
+			"Class": "Buff",
+			"Family": {
+				"Name": "Buckler",
+				"Level": 1,
+				"Stats": {
+					"Armor": 2
+				}
+			}
+		},
+		"crimson_guard_buff": {
+			"Name": "Guard",
+			"Image": "crimson_guard",
+			"Class": "Buff",
+			"Family": {
+				"Name": "Buckler",
+				"Level": 1,
+				"Stats": {
+					"Armor": 2
+				}
+			}
+		},
+		"axe_berserkers_call_buff": {
+			"Name": "Berserker's call armor",
+			"Image": "axe_berserkers_call",
+			"Class": "Buff",
+			"Armor": 40
 		}
 	}
 	

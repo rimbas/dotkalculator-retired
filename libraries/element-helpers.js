@@ -3,13 +3,6 @@
 ElementHelper = {};
 
 // object - ItemInstance, AbilityInstance, BuffInstance
-ElementHelper.createDisplayElement = function(object) {
-	
-	
-	
-}
-
-// object - ItemInstance, AbilityInstance, BuffInstance
 ElementHelper.createDetailedTooltip = function ( object ) {
 	var el = document.createElement("div"),
 		h1 = document.createElement("h1");
@@ -103,6 +96,7 @@ ElementHelper.createDetailedTooltip = function ( object ) {
 	return el;
 }
 
+// Updates the HTML elements
 ElementHelper.updateDisplayElements = function ( object ) {
 	if (!object.displayElement)
 		return;
