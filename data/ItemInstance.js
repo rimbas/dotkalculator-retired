@@ -21,10 +21,14 @@ function ItemInstance(itemId, properties) {
 		else
 			this[prop] = value;	
 	}
-	if (properties.charges && this.Charges)
+	if (typeof properties.charges === "number" && typeof this.Charges === "number")
 		this.Charges = properties.charges;
-	if (this.Aura)
-		this.AuraProperties = DotaData.getBuffProperties(this.Aura, properties.version)
+	if (typeof properties.chargesMax === "number" && typeof this.ChargesMax === "number")
+		this.ChargesMax = properties.chargesMax;
+	if (this.Flags) {
+		this.lockedLevel = this.Flags.lockedLevel;
+		this.lockedCharges = this.Flags.lockedCharges;
+	}
 }
 
 // Cloning method
@@ -54,14 +58,22 @@ ItemInstance.prototype.delete = function () {
 }
 
 ItemInstance.prototype.activate = function() {
-	if (!this.Buff)
+	if (!this.Buff || this.Level < 1)
 		return;
-	if (this.Target["No target"] && this.Target["Self"]) 
-		this.heroRef.addBuff(new BuffInstance(this.Buff, {level: this.Level, charges: this.Charges}), this.Target.Refresh ? "leave" : undefined)
-	if (this.Target["No target"] && this.Target["Teammates"])
+	//if (this.Target["No target"] && this.Target["Self"]) 
+	if (this.Flags.NoTarget && this.Flags.Self) 
+		this.heroRef.addBuff(
+			new BuffInstance(this.Buff, {
+				level: this.Level, levelMax: this.LevelMax,	charges: this.Charges, chargesMax: this.ChargesMax
+			}), this.Flags.Refresh )
+	if (this.Flags.NoTarget && this.Flags.Teammates)
 		for (var teammate of this.heroRef.getTeammates())
-			teammate.addBuff(new BuffInstance(this.Buff, {level: this.Level, charges: this.Charges}), this.Target.Refresh ? "leave" : undefined)
+			teammate.addBuff(
+				new BuffInstance(this.Buff, {
+					level: this.Level, levelMax: this.LevelMax,	charges: this.Charges, chargesMax: this.ChargesMax
+			}), this.Flags.Refresh )
 }
+
 
 // Checks if all elements of array are valid ItemInstance objects
 ItemInstance.isValidArray = function( itemInstanceArray ) {

@@ -12,7 +12,7 @@ $(function(e){
 	MainTable.addHero(new HeroInstance("drow_ranger", {abilities: {"drow_ranger_trueshot": 1}, buffs: [ new BuffInstance("test_buff") ] }));
 	MainTable.addHero(new HeroInstance("bloodseeker", {team: "Test"}))
 	MainTable.addHero(new HeroInstance("viper", {team: "Test"}))
-	MainTable.addHero(new HeroInstance("axe", {team: "Test", items: [new ItemInstance("buckler")]}))
+	MainTable.addHero(new HeroInstance("bounty_hunter", {team: "Test", abilities: {"bounty_hunter_wind_walk": 2}, items: [new ItemInstance("buckler")]}))
 	
 	document.createVersionSelectors = function (init) {
 		optionCollection = [];

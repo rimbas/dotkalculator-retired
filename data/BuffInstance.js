@@ -3,7 +3,8 @@
 // Helper object for HeroInstance
 function BuffInstance(buffId, properties) {
 	properties = properties || {};
-	var buff = DotaData.getBuffProperties(buffId, properties.version);
+	var buff = DotaData.getBuffProperties(buffId, properties.version),
+		flags = {};
 	
 	Object.defineProperty(this, "ID", {value: buffId});
 	Object.defineProperty(this, "displayElement", {writable: true});
@@ -24,10 +25,19 @@ function BuffInstance(buffId, properties) {
 		else
 			Object.defineProperty(this, prop, { value: value, enumerable: true, writable: true });
 	}
-	if (typeof properties.level === "number" && this.Level)
+	if (typeof properties.level === "number" && typeof this.Level === "number")
 		this.Level = properties.level;
-	if (typeof properties.charges === "number" && this.Charges)
+	this.LevelMax = properties.levelMax;
+	if (typeof properties.charges === "number" && typeof this.Charges === "number")
 		this.Charges = properties.charges;
+	if (typeof properties.chargesMax === "number" && typeof this.ChargesMax === "number")
+		this.ChargesMax = properties.chargesMax;
+	this.lockedLevel = flags.lockedLevel;
+	this.lockedCharges = flags.lockedCharges;
+	if (this.Flags) {
+		this.lockedLevel = this.Flags.lockedLevel;
+		this.lockedCharges = this.Flags.lockedCharges;
+	}
 }
 
 BuffInstance.prototype.toString = function () {

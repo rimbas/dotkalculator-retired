@@ -10,7 +10,7 @@ ElementHelper.createDetailedTooltip = function ( object ) {
 	h1.textContent = object.Name || object.ID;
 	el.appendChild(h1);
 	
-	if ("Charges" in object) {
+	if ("Charges" in object && !object.lockedCharges) {
 		var chargeLabel = document.createElement("span");
 		chargeLabel.textContent = "Charges:";
 		chargeLabel.style.textAlign = "right";
@@ -25,8 +25,7 @@ ElementHelper.createDetailedTooltip = function ( object ) {
 		chargeInput.max = object.ChargesMax || 1000;
 		chargeInput.type = "number";
 		chargeInput.className = "mini-spinner";
-		chargeInput.onchange = (function(e,u){
-			debugger;
+		chargeInput.onchange = (function(e,u) {
 			object.Charges = Number.parseInt(e.target.value);
 			object.update()
 		})//.bind(object);
@@ -35,7 +34,7 @@ ElementHelper.createDetailedTooltip = function ( object ) {
 		el.appendChild(document.createElement("br"));
 	}
 	
-	if ("Level" in object && !object.emitterRef) {
+	if ("Level" in object && !object.emitterRef && !object.lockedLevel) {
 		var levelLabel = document.createElement("span");
 		levelLabel.textContent = "Level:";
 		levelLabel.style.textAlign = "right";
@@ -60,7 +59,7 @@ ElementHelper.createDetailedTooltip = function ( object ) {
 	}
 	
 	var statOrder = ["Strength", "Agility", "Intelligence", "Health", "Mana",
-		"HealthRegeneration", "ManaRegenerationPercentage", "ManaRegeneration",
+		"HealthRegeneration", "ManaRegenerationPercentage", "ManaRegenerationFlat",
 		"Damage", "AttackSpeed", "MovementSpeed", "MovementSpeedPercentage",
 		"MagicalResistance", "Evasion", "Armor"], 
 		statValues = {};

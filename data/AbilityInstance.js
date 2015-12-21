@@ -3,7 +3,8 @@
 // Helper object for HeroInstance
 function AbilityInstance(skillId, properties) {
 	properties = properties || {};
-	var ability = DotaData.getAbilityProperties(skillId, properties.version);
+	var ability = DotaData.getAbilityProperties(skillId, properties.version),
+		flags = {};
 	
 	Object.defineProperty(this, "ID", {value: skillId});
 	Object.defineProperty(this, "displayElement", {writable: true});
@@ -23,8 +24,16 @@ function AbilityInstance(skillId, properties) {
 	}
 	if (typeof properties.level === "number")
 		this.Level = properties.level;
+	if (typeof properties.levelMax === "number")
+		this.LevelMax = properties.levelMax;
 	if (typeof properties.charges === "number")
 		this.Charges = properties.charges;
+	if (typeof properties.chargesMax === "number")
+		this.ChargesMax = properties.chargesMax
+	if (this.Flags) {
+		this.lockedLevel = this.Flags.lockedLevel;
+		this.lockedCharges = this.Flags.lockedCharges;
+	}
 }
 
 AbilityInstance.prototype.clone = function() {
@@ -45,10 +54,20 @@ AbilityInstance.prototype.update = function () {
 }
 
 AbilityInstance.prototype.activate = function() {
-	if (!this.Buff)
+	if (!this.Buff || this.Level < 1)
 		return;
-	if (this.Target["No target"] && this.Target["Self"]) 
-		this.heroRef.addBuff(new BuffInstance(this.Buff, {level: this.Level, charges: this.Charges}), this.Target.Refresh ? "leave" : undefined)
+	//if (this.Target["No target"] && this.Target["Self"]) 
+	if (this.Flags.NoTarget && this.Flags.Self) 
+		this.heroRef.addBuff(
+			new BuffInstance(this.Buff, {
+				level: this.Level, levelMax: this.LevelMax,	charges: this.Charges, chargesMax: this.ChargesMax
+			}), this.Flags.Refresh )
+	if (this.Flags.NoTarget && this.Flags.Teammates)
+		for (var teammate of this.heroRef.getTeammates())
+			teammate.addBuff(
+				new BuffInstance(this.Buff, {
+					level: this.Level, levelMax: this.LevelMax,	charges: this.Charges, chargesMax: this.ChargesMax
+			}), this.Flags.Refresh )
 }
 
 AbilityInstance.prototype.delete = function () {

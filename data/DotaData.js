@@ -67,7 +67,7 @@ DotaData.getBuffProperties = function(buffId, versionOverride) {
 	//if (!(buffId in version.Buffs)) throw "No such id \"" + buffId + "\" in item list";
 	// while not all buffs are implemented
 	if (!(buffId in version.Buffs)) {
-		//console.warn("No such buff with id \"" + buffId + "\" defined in version "+version+".");
+		console.warn("No such buff with id \"" + buffId + "\" defined in version "+(versionOverride || DotaData.TargetVersion)+".");
 		return DotaData.getBuffProperties("_base")
 	}
 	var obj = {}, i, prop,
