@@ -88,7 +88,10 @@ Total
 
 	
 Universal properties in DotaData definitions
-	Name							- Display name
+	Name						(string)	- Display name
+	LockedLevel					(truthy)	- stops from creating level input element (disallows change)
+	LockedCharges				(truthy)	- stops from creating charge input element (disallows change)
+	ChargesSemantic		
 
 Raw stat (hero) definition in DotaData lists
 	Name 						(string)	- Dota 2 name of the hero
@@ -158,10 +161,11 @@ Item properties in DotaData item lists
 	RangeSpell					(integer)	- Aether lens
 	VisionDay					(integer)	- 
 	VisionNight					(integer)	- Moon shard
-	Family						(object)	- Object that inherits Item defintion with addition of Level and Stats properties
-	AttackModifier				(string)	- 
-	AttackUniqueModifier		(string)	- 
-	Ability						(string)	- Attached skill
+	Family						(object)	- Object that restricts multiple stat application 
+		Name					(string)	- family indetifier
+		Level					(float)		- higer level overrides lower ones
+		Stats					(object)	- Stat definitions that are the same in the root
+	Aura						(string)	- Aura that item emits
 	
 	
 Family object definition:

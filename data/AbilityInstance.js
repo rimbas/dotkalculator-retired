@@ -3,8 +3,7 @@
 // Helper object for HeroInstance
 function AbilityInstance(skillId, properties) {
 	properties = properties || {};
-	var ability = DotaData.getAbilityProperties(skillId, properties.version),
-		flags = {};
+	var ability = DotaData.getAbilityProperties(skillId, properties.version);
 	
 	Object.defineProperty(this, "ID", {value: skillId});
 	Object.defineProperty(this, "displayElement", {writable: true});
@@ -30,10 +29,6 @@ function AbilityInstance(skillId, properties) {
 		this.Charges = properties.charges;
 	if (typeof properties.chargesMax === "number")
 		this.ChargesMax = properties.chargesMax
-	if (this.Flags) {
-		this.lockedLevel = this.Flags.lockedLevel;
-		this.lockedCharges = this.Flags.lockedCharges;
-	}
 }
 
 AbilityInstance.prototype.clone = function() {
@@ -56,18 +51,17 @@ AbilityInstance.prototype.update = function () {
 AbilityInstance.prototype.activate = function() {
 	if (!this.Buff || this.Level < 1)
 		return;
-	//if (this.Target["No target"] && this.Target["Self"]) 
-	if (this.Flags.NoTarget && this.Flags.Self) 
+	if (this.Buff.NoTarget && this.Buff.Self) 
 		this.heroRef.addBuff(
-			new BuffInstance(this.Buff, {
+			new BuffInstance(this.Buff.Name, {
 				level: this.Level, levelMax: this.LevelMax,	charges: this.Charges, chargesMax: this.ChargesMax
-			}), this.Flags.Refresh )
-	if (this.Flags.NoTarget && this.Flags.Teammates)
+			}), this.Buff.Refresh )
+	if (this.Buff.NoTarget && this.Buff.Teammates)
 		for (var teammate of this.heroRef.getTeammates())
 			teammate.addBuff(
-				new BuffInstance(this.Buff, {
+				new BuffInstance(this.Buff.Name, {
 					level: this.Level, levelMax: this.LevelMax,	charges: this.Charges, chargesMax: this.ChargesMax
-			}), this.Flags.Refresh )
+			}), this.Buff.Refresh )
 }
 
 AbilityInstance.prototype.delete = function () {
@@ -96,7 +90,7 @@ AbilityInstance.prototype.createDisplayElement = function() {
 		div.appendChild(chargeElement);
 	}
 	
-	if (typeof this.Buff === "string") {
+	if (this.Buff) {
 		var activateButton = document.createElement("button");
 		activateButton.className = "item-display-activate";
 		activateButton.onclick = this.activate.bind(this);

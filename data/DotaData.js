@@ -116,6 +116,7 @@ DotaData.readableStatStrings = {
 	"VisionNight": "Night vision",
 	"AttackSpeed": "Attack speed",
 	"MagicalResistance": "Magical resistance",
+	"AttackRate": "Base attack time"
 }
 
 DotaData.statToReadable = function(stat, val) {

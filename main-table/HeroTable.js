@@ -633,7 +633,7 @@ HeroTable.addEvaluator({
 	type: "Derived",
 	description: "Time that hero takes to finish one attack",
 	eval: function(cell, hero) {
-		var attackTime = hero.Raw.AttackRate / (hero.Total.AttackSpeed / 100);
+		var attackTime = hero.Total.AttackRate / (hero.Total.AttackSpeed / 100);
 		cell.textContent = attackTime.toFixed(2)+"s";
 		cell.sortingProperty = attackTime;
 	},

@@ -310,7 +310,7 @@ HeroInstance.addHandler({
 // Calculation to sum up base stats
 HeroInstance.addHandler({
 	name: "AbilityChange",
-	binds: [],
+	binds: ["LevelChange"],
 	handler: function() {
 		var a = { "Strength": 0, "Agility":0, "Intelligence":0, "MovementSpeed": 0 };
 		for (var ability of this.Abilities) {
@@ -361,10 +361,6 @@ HeroInstance.addHandler({
 		a.IntelligenceBonus = this.Item.Intelligence + this.Ability.Intelligence + this.Buff.Intelligence;
 		a.Intelligence = this.Base.Intelligence + a.IntelligenceBonus;
 		a.MovementSpeedBase = this.Raw.MovementSpeed + this.Item.MovementSpeed + this.Ability.MovementSpeed + this.Buff.MovementSpeed;
-		a.HealthBase = this.Raw.Health + a.Strength * 19;
-		a.HealthRegenerationBase = this.Raw.HealthRegeneration + a.Strength * 0.03;
-		a.ManaBonus = this.Raw.Mana + this.Item.Mana + this.Ability.Mana + this.Buff.Mana;
-		a.ManaRegenerationBase = this.Raw.ManaRegeneration + a.Intelligence * 0.04;
 		this.Total = a;
 	}
 })
@@ -377,8 +373,9 @@ HeroInstance.addHandler({
 			"MovementSpeed": 0, "MovementSpeedPercentage": 0,
 			"Armor": 0, "MagicalResistance": 0, "Evasion": 0,
 			"Health": 0, "HealthRegeneration": 0, "Mana": 0, "ManaRegenerationFlat": 0,
-			"ManaRegenerationPercentage": 0, "Damage": 0, "DamageBase": 0,
-			"AttackSpeed": 0, "Range": 0, "VisionDay": 0, "VisionNight": 0 };
+			"ManaRegenerationPercentage": 0, "Damage": 0, "DamageBase": 0, "AttackRate": 0,
+			"AttackSpeed": 0, "Range": 0, "VisionDay": 0, "VisionNight": 0,
+			"ManaRegenerationBase": 0 };
 		for (var ability of this.Abilities) {
 			for (var prop in a) {
 				var value = ability[prop];
@@ -403,7 +400,8 @@ HeroInstance.addHandler({
 				"MovementSpeedPercentage": 0, "Armor": 0, "Evasion": 0, "Blind": 0,
 				"MagicalResistance": 0, "Health": 0, "HealthPercentage": 0, "HealthRegeneration": 0, 
 				"Mana": 0, "ManaRegenerationFlat": 0, "Damage": 0, "DamagePercentage": 0,
-				"AttackSpeed": 0, "ManaRegenerationPercentage": 0 },
+				"AttackSpeed": 0, "ManaRegenerationPercentage": 0, "AttackRate": 0,
+				"ManaRegenerationBase": 0 },
 			f = {};
 		for (var buff of this.Buffs) {
 			if (buff.Family)
@@ -450,13 +448,15 @@ HeroInstance.addHandler({
 		a.MagicalResistance = this.Raw.MagicalResistance + (1 - this.Raw.MagicalResistance) * this.Item.MagicalResistance;
 		a.MagicalResistance = a.MagicalResistance + (1 - a.MagicalResistance) * this.Ability.MagicalResistance;
 		a.MagicalResistance = a.MagicalResistance + (1 - a.MagicalResistance) * this.Buff.MagicalResistance;
-		a.HealthBase = a.HealthBase + this.Item.Health + this.Ability.Health + this.Buff.Health;
+		a.HealthBase = this.Raw.Health + a.Strength * 19 + this.Item.Health + this.Ability.Health + this.Buff.Health;
 		a.Health = a.HealthBase * (1 + this.Buff.HealthPercentage);
+		a.HealthRegenerationBase = this.Raw.HealthRegeneration + a.Strength * 0.03;
 		a.HealthRegenerationBonus = this.Item.HealthRegeneration + this.Ability.HealthRegeneration + this.Buff.HealthRegeneration;
 		a.HealthRegeneration = a.HealthRegenerationBase + a.HealthRegenerationBonus;
 		a.ManaBase = this.Raw.Mana + a.Intelligence * 13;
-		a.ManaBonus = this.Ability.Mana + this.Buff.Mana;
+		a.ManaBonus = this.Ability.Mana + this.Buff.Mana + this.Item.Mana;
 		a.Mana = a.ManaBase + a.ManaBonus;
+		a.ManaRegenerationBase = this.Raw.ManaRegeneration + a.Intelligence * 0.04 + this.Ability.ManaRegenerationBase + this.Buff.ManaRegenerationBase;
 		a.ManaRegenerationFlat = this.Item.ManaRegenerationFlat + this.Ability.ManaRegenerationFlat + this.Buff.ManaRegenerationFlat;
 		a.ManaRegenerationPercentage = this.Item.ManaRegenerationPercentage + this.Ability.ManaRegenerationPercentage + this.Buff.ManaRegenerationPercentage;
 		a.ManaRegeneration = a.ManaRegenerationBase * (1 + a.ManaRegenerationPercentage) + a.ManaRegenerationFlat;
@@ -464,6 +464,7 @@ HeroInstance.addHandler({
 		a.DamageBaseMax = this.Raw.DamageMax + a[this.Raw.Type] + this.Ability.DamageBase;
 		a.DamageBase = Math.floor((a.DamageBaseMin + a.DamageBaseMax) / 2);
 		a.DamageBonus = this.Item.Damage + this.Ability.Damage + this.Buff.Damage + Math.floor(a.DamageBase * this.Buff.DamagePercentage);
+		a.AttackRate = this.Raw.AttackRate + this.Ability.AttackRate + this.Buff.AttackRate;
 		a.AttackSpeed = 100 + this.Item.AttackSpeed + a.Agility + this.Ability.AttackSpeed + this.Buff.AttackSpeed;
 		a.Range = this.Raw.Range + this.Ability.Range + this.Item.Range;
 		a.VisionDay = this.Raw.VisionDaytime;

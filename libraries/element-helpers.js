@@ -10,31 +10,7 @@ ElementHelper.createDetailedTooltip = function ( object ) {
 	h1.textContent = object.Name || object.ID;
 	el.appendChild(h1);
 	
-	if ("Charges" in object && !object.lockedCharges) {
-		var chargeLabel = document.createElement("span");
-		chargeLabel.textContent = "Charges:";
-		chargeLabel.style.textAlign = "right";
-		//chargeLabel.style.padding = "3px";
-		chargeLabel.style.width = "50px";
-		el.appendChild(chargeLabel);
-		
-		var chargeInput = document.createElement("input");
-		chargeInput.style.width = "3em";
-		chargeInput.value = object.Charges;
-		chargeInput.min = 0;
-		chargeInput.max = object.ChargesMax || 1000;
-		chargeInput.type = "number";
-		chargeInput.className = "mini-spinner";
-		chargeInput.onchange = (function(e,u) {
-			object.Charges = Number.parseInt(e.target.value);
-			object.update()
-		})//.bind(object);
-		el.appendChild(chargeInput);
-		
-		el.appendChild(document.createElement("br"));
-	}
-	
-	if ("Level" in object && !object.emitterRef && !object.lockedLevel) {
+	if ("Level" in object && !object.emitterRef && !object.LockedLevel) {
 		var levelLabel = document.createElement("span");
 		levelLabel.textContent = "Level:";
 		levelLabel.style.textAlign = "right";
@@ -52,20 +28,46 @@ ElementHelper.createDetailedTooltip = function ( object ) {
 		levelInput.onchange = (function(e,u){
 			object.Level = Number.parseInt(e.target.value);
 			object.update()
-		})//.bind(object);
+		})
 		el.appendChild(levelInput);
 
+		el.appendChild(document.createElement("br"));
+	}
+	
+	if ("Charges" in object && !object.LockedCharges) {
+		var chargeLabel = document.createElement("span");
+		if (object.ChargesSemantic)
+			chargeLabel.textContent = object.ChargesSemantic.toString() + ":";
+		else if (object instanceof AbilityInstance || object instanceof BuffInstance)
+			chargeLabel.textContent = "Stacks:";
+		else
+			chargeLabel.textContent = "Charges:";
+		chargeLabel.style.textAlign = "right";
+		chargeLabel.style.width = "50px";
+		el.appendChild(chargeLabel);
+		
+		var chargeInput = document.createElement("input");
+		chargeInput.style.width = "3em";
+		chargeInput.value = object.Charges;
+		chargeInput.min = 0;
+		chargeInput.max = object.ChargesMax || 1000;
+		chargeInput.type = "number";
+		chargeInput.className = "mini-spinner";
+		chargeInput.onchange = (function(e,u) {
+			object.Charges = Number.parseInt(e.target.value);
+			object.update()
+		})
+		el.appendChild(chargeInput);
+		
 		el.appendChild(document.createElement("br"));
 	}
 	
 	var statOrder = ["Strength", "Agility", "Intelligence", "Health", "Mana",
 		"HealthRegeneration", "ManaRegenerationPercentage", "ManaRegenerationFlat",
 		"Damage", "AttackSpeed", "MovementSpeed", "MovementSpeedPercentage",
-		"MagicalResistance", "Evasion", "Armor"], 
+		"MagicalResistance", "Evasion", "Armor", "AttackRate"], 
 		statValues = {};
 	
-	// for..in doesn't guarantee order
-	//for (var i = 0, stat; i <= statOrder.length; stat = statOrder[i++])
 	for (var stat of statOrder)
 		if (typeof object[stat] !== "undefined")
 			statValues[stat] = object[stat];
@@ -89,6 +91,22 @@ ElementHelper.createDetailedTooltip = function ( object ) {
 			spanLabel.className = "item-display-options label";
 			spanLabel.textContent = readable.key;
 		el.appendChild(spanLabel);
+		el.appendChild(document.createElement("br"));
+	}
+	
+	if ( object.Warning ) {
+		var warning = document.createElement("span")
+		warning.className = "item-display-options warning"
+		warning.textContent = object.Warning;
+		el.appendChild(warning)
+		el.appendChild(document.createElement("br"));
+	}
+	
+	if ( object.Lore ) {
+		var lore = document.createElement("span")
+		lore.className = "item-display-options lore"
+		lore.textContent = object.Lore
+		el.appendChild(lore)
 		el.appendChild(document.createElement("br"));
 	}
 	

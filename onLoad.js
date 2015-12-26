@@ -10,9 +10,7 @@ $(function(e){
 	MainTable = new HeroTable("Comparison table", "main-table", "main-table-wrapper");
 	MainTable.addHero(new HeroInstance("drow_ranger", {items: [new ItemInstance("ring_of_aquila")], team: "Test", abilities: {"drow_ranger_trueshot": 1}}));
 	MainTable.addHero(new HeroInstance("drow_ranger", {abilities: {"drow_ranger_trueshot": 1}, buffs: [ new BuffInstance("test_buff") ] }));
-	MainTable.addHero(new HeroInstance("bloodseeker", {team: "Test"}))
-	MainTable.addHero(new HeroInstance("viper", {team: "Test"}))
-	MainTable.addHero(new HeroInstance("bounty_hunter", {team: "Test", abilities: {"bounty_hunter_wind_walk": 2}, items: [new ItemInstance("buckler")]}))
+	MainTable.addHero(new HeroInstance("invoker", {team: "Test"}))
 	
 	document.createVersionSelectors = function (init) {
 		optionCollection = [];

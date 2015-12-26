@@ -104,6 +104,7 @@ td.box-content + td.box-content {
 	width: 200px;
 	z-index: 1;
 	text-align: left;
+	white-space: normal;
 }
 .item-display:hover > .item-tooltip {
 	display: inline-block;
@@ -172,6 +173,13 @@ span.item-display-options {
 .item-display-options.value {
 	font-weight: bold;
 	color: limegreen;
+}
+.item-display-options.warning {
+	color: darkorange;
+}
+.item-display-options.lore {
+	color: #ffe86d;
+	font-style: italic;
 }
 .value.negative {
 	color: red;

@@ -34,7 +34,7 @@ DotaData.addVersion( "6.86",
 			"HealthRegeneration": 0.25,
 			"Mana": 0,
 			"ManaRegeneration": 0.01,
-			"Version": "6.85",
+			"Version": "6.86",
 			"VisionDaytime": 1800,
 			"VisionNighttime": 800
 		},
@@ -794,7 +794,7 @@ DotaData.addVersion( "6.86",
 			"Ability2": "elder_titan_ancestral_spirit",
 			"Ability3": "elder_titan_natural_order",
 			"Ability4": "elder_titan_earth_splitter",
-			"Ability5": "elder_titan_return_spirit",
+			//"Ability5": "elder_titan_return_spirit",
 			"Armor": 1.0,
 			"AttackPoint": 0.35,
 			"AttackType": "Melee",
@@ -1004,19 +1004,22 @@ DotaData.addVersion( "6.86",
 			"Ability1": "invoker_quas",
 			"Ability2": "invoker_wex",
 			"Ability3": "invoker_exort",
-			"Ability4": "invoker_empty1",
-			"Ability5": "invoker_empty2",
-			"Ability6": "invoker_invoke",
-			"Ability7": "invoker_cold_snap",
-			"Ability8": "invoker_ghost_walk",
-			"Ability9": "invoker_tornado",
-			"Ability10": "invoker_emp",
-			"Ability11": "invoker_alacrity",
-			"Ability12": "invoker_chaos_meteor",
-			"Ability13": "invoker_sun_strike",
-			"Ability14": "invoker_forge_spirit",
-			"Ability15": "invoker_ice_wall",
-			"Ability16": "invoker_deafening_blast",
+			"Ability4": "invoker_invoke",
+			"Ability5": "invoker_ghost_walk",
+			"Ability6": "invoker_alacrity",
+			//"Ability4": "invoker_empty1",
+			//"Ability5": "invoker_empty2",
+			//"Ability6": "invoker_invoke",
+			//"Ability7": "invoker_cold_snap",
+			//"Ability8": "invoker_ghost_walk",
+			//"Ability9": "invoker_tornado",
+			//"Ability10": "invoker_emp",
+			//"Ability11": "invoker_alacrity",
+			//"Ability12": "invoker_chaos_meteor",
+			//"Ability13": "invoker_sun_strike",
+			//"Ability14": "invoker_forge_spirit",
+			//"Ability15": "invoker_ice_wall",
+			//"Ability16": "invoker_deafening_blast",
 			"AbilityLayout": 6,
 			"Armor": -1,
 			"AttackPoint": 0.4,
@@ -1094,15 +1097,15 @@ DotaData.addVersion( "6.86",
 		"keeper_of_the_light": {
 			"Name": "Keeper of the Light",
 			"Ability1": "keeper_of_the_light_illuminate",
-			"Ability10": "attribute_bonus",
 			"Ability2": "keeper_of_the_light_mana_leak",
 			"Ability3": "keeper_of_the_light_chakra_magic",
-			"Ability4": "keeper_of_the_light_recall",
-			"Ability5": "keeper_of_the_light_blinding_light",
-			"Ability6": "keeper_of_the_light_spirit_form",
-			"Ability7": "keeper_of_the_light_illuminate_end",
-			"Ability8": "keeper_of_the_light_spirit_form_illuminate",
-			"Ability9": "keeper_of_the_light_spirit_form_illuminate_end",
+			"Ability4": "keeper_of_the_light_spirit_form",
+			"Ability5": "attribute_bonus",
+			"Ability6": "keeper_of_the_light_blinding_light",
+			"Ability7": "keeper_of_the_light_recall",
+			//"Ability7": "keeper_of_the_light_illuminate_end",
+			//"Ability8": "keeper_of_the_light_spirit_form_illuminate",
+			//"Ability9": "keeper_of_the_light_spirit_form_illuminate_end",
 			"AbilityLayout": 6,
 			"Armor": -1.0,
 			"AttackPoint": 0.3,
@@ -1233,12 +1236,12 @@ DotaData.addVersion( "6.86",
 			"Ability1": "life_stealer_rage",
 			"Ability2": "life_stealer_feast",
 			"Ability3": "life_stealer_open_wounds",
-			"Ability4": "life_stealer_assimilate",
-			"Ability5": "life_stealer_assimilate_eject",
-			"Ability6": "life_stealer_infest",
-			"Ability7": "life_stealer_control",
-			"Ability8": "life_stealer_consume",
-			"Ability9": "attribute_bonus",
+			//"Ability4": "life_stealer_assimilate",
+			//"Ability5": "life_stealer_assimilate_eject",
+			"Ability4": "life_stealer_infest",
+			//"Ability7": "life_stealer_control",
+			//"Ability8": "life_stealer_consume",
+			//"Ability9": "attribute_bonus",
 			"Armor": -1,
 			"AttackPoint": 0.39,
 			"AttackType": "Melee",
@@ -1314,11 +1317,11 @@ DotaData.addVersion( "6.86",
 			"Name": "Lone Druid",
 			"Ability1": "lone_druid_spirit_bear",
 			"Ability2": "lone_druid_rabid",
-			"Ability3": "lone_druid_synergy",
-			"Ability4": "lone_druid_true_form_battle_cry",
-			"Ability5": "lone_druid_true_form",
-			"Ability6": "lone_druid_true_form_druid",
-			"Ability7": "attribute_bonus",
+			"Ability3": "lone_druid_savage_roar",
+			"Ability4": "lone_druid_true_form",
+			"Ability5": "attribute_bonus",			
+			//"Ability6": "lone_druid_true_form_druid",
+			"Ability6": "lone_druid_true_form_battle_cry",
 			"AbilityLayout": 5,
 			"Armor": 0,
 			"AttackPoint": 0.33,
@@ -3070,7 +3073,7 @@ DotaData.addVersion( "6.86",
 	"Items": {
 		"_base": {
 			"Name": "NO-DISPLAY-NAME",
-			"Version": "6.85",
+			"Version": "6.86",
 			"Cost": 0
 		},
 		/* Consumables */
@@ -4508,7 +4511,7 @@ DotaData.addVersion( "6.86",
 	"Abilities": {
 		"_base": {
 			"Name": "Dummy ability",
-			"Version": "6.85",
+			"Version": "6.86",
 			"Level": 0,
 			"LevelMax": "4",
 			"Class": "Ability",
@@ -4531,8 +4534,13 @@ DotaData.addVersion( "6.86",
 		},
 		"abaddon_frostmourne": {
 			"Name": "Curse of Avernus",
-			"Buff": "abaddon_frostmourne_buff",
-			"Flags": { NoTarget : 1, Self : 1, Teammates : 1, Refresh : "override" }
+			"Buff": { 
+				Name: "abaddon_frostmourne_buff", 
+				NoTarget : 1, 
+				Self : 1,
+				Teammates : 1,
+				Refresh : "override" 
+			}
 		},
 		"abaddon_borrowed_time": {
 			"Name": "Borrowed time",
@@ -4555,6 +4563,12 @@ DotaData.addVersion( "6.86",
 			"Class": "Ultimate",
 			"LevelMax": 3,
 			"Restrictions": [6, 11, 16],
+			"Buff": {
+				"Name": "alchemist_chemical_rage_buff",
+				"NoTarget": true,
+				"Self": true,
+				"Refresh": "override"	
+			}
 		},
 		"ancient_apparition_cold_feet": {
 			"Name": "Cold feet"
@@ -4590,8 +4604,12 @@ DotaData.addVersion( "6.86",
 		},
 		"axe_berserkers_call": {
 			"Name": "Berserker's call",
-			"Buff": "axe_berserkers_call_buff" ,
-			"Flags": { "NoTarget": 1, "Self": 1, "Refresh": "leave" }
+			"Buff": {
+				"Name": "axe_berserkers_call_buff" , 
+				"NoTarget": true, 
+				"Self": true, 
+				"Refresh": "leave" 
+			}
 		},
 		"axe_battle_hunger": {
 			"Name": "Battle hunger"
@@ -4617,6 +4635,7 @@ DotaData.addVersion( "6.86",
 		"bane_fiends_grip": {
 			"Name": "Fiend's grip",
 			"Class": "Ultimate",
+			"LevelMax": 3,
 			"Restrictions": [6, 11, 16]
 		},
 		"batrider_sticky_napalm": {
@@ -4631,6 +4650,7 @@ DotaData.addVersion( "6.86",
 		"batrider_flaming_lasso": {
 			"Name": "Flaming lasso",
 			"Class": "Ultimate",
+			"LevelMax": 3,
 			"Restrictions": [6, 11, 16]
 		},
 		"beastmaster_wild_axes": {
@@ -4649,6 +4669,7 @@ DotaData.addVersion( "6.86",
 		"beastmaster_primal_roar": {
 			"Name": "Primal roar",
 			"Class": "Ultimate",
+			"LevelMax": 3,
 			"Restrictions": [6, 11, 16]
 		},
 		"bloodseeker_bloodrage": {
@@ -4663,6 +4684,7 @@ DotaData.addVersion( "6.86",
 		"bloodseeker_rupture": {
 			"Name": "Rupture",
 			"Class": "Ultimate",
+			"LevelMax": 3,
 			"Restrictions": [6, 11, 16]
 		},
 		"bounty_hunter_shuriken_toss": {
@@ -4673,15 +4695,25 @@ DotaData.addVersion( "6.86",
 		},
 		"bounty_hunter_wind_walk": {
 			"Name": "Wind walk",
-			"Buff": "bounty_hunter_wind_walk_buff",
-			"Flags": { "NoTarget": 1, "Self": 1, "Refresh": "override" }
+			"Buff": {
+				"Name": "bounty_hunter_wind_walk_buff",
+				"NoTarget": true,
+				"Self": true,
+				"Refresh": "override"
+			}
 		},
 		"bounty_hunter_track": {
 			"Name": "Track",
 			"Class": "Ultimate",
+			"LevelMax": 3,
 			"Restrictions": [6, 11, 16],
-			"Buff": "bounty_hunter_track_buff",
-			"Flags": { "NoTarget": 1, "Self": 1, "Teammates": 1, "Refresh": "leave" }
+			"Buff": {
+				"Name": "bounty_hunter_track_buff",
+				"NoTarget": true,
+				"Self": true,
+				"Teammates": true,
+				"Refresh": "leave"
+			}
 		},
 		"brewmaster_thunder_clap": {
 			"Name": "Thunder clap"
@@ -4696,6 +4728,7 @@ DotaData.addVersion( "6.86",
 		"brewmaster_primal_split": {
 			"Name": "Primal split",
 			"Class": "Ultimate",
+			"LevelMax": 3,
 			"Restrictions": [6, 11, 16]
 		},
 		"bristleback_viscous_nasal_goo": {
@@ -4710,6 +4743,7 @@ DotaData.addVersion( "6.86",
 		"bristleback_warpath": {
 			"Name": "Warpath",
 			"Class": "Ultimate",
+			"LevelMax": 3,
 			"Restrictions": [6, 11, 16],
 			"Charges": 0,
 			"ChargesMax": 7,
@@ -4736,9 +4770,14 @@ DotaData.addVersion( "6.86",
 		"broodmother_insatiable_hunger": {
 			"Name": "Insatiable hunger",
 			"Class": "Ultimate",
+			"LevelMax": 3,
 			"Restrictions": [6, 11, 16],
-			"Buff": "broodmother_insatiable_hunger_buff",
-			"Flags": {"Self": 1, "NoTarget": 1, "Refresh": "override"}
+			"Buff": {
+				"Name": "broodmother_insatiable_hunger_buff",
+				"Self": true,
+				"NoTarget": true,
+				"Refresh": "override"
+			}
 		},
 		"centaur_hoof_stomp": {
 			"Name": "Hoof stomp"
@@ -4787,7 +4826,12 @@ DotaData.addVersion( "6.86",
 		},
 		"clinkz_strafe": {
 			"Name": "Strafe",
-			"Buff": "clinkz_strafe_buff"
+			"Buff": {
+				"Name": "clinkz_strafe_buff",
+				"NoTarget": true,
+				"Self": true,
+				"Refresh": "override"
+			}
 		},
 		"clinkz_searing_arrows": {
 			"Name": "Searing arrows",
@@ -4799,6 +4843,7 @@ DotaData.addVersion( "6.86",
 		"clinkz_death_pact": {
 			"Name": "Death pact",
 			"Class": "Ultimate",
+			"LevelMax": 3,
 			"Restrictions": [6, 11, 16]
 		},
 		"crystal_maiden_crystal_nova": {
@@ -4814,6 +4859,7 @@ DotaData.addVersion( "6.86",
 		"crystal_maiden_freezing_field": {
 			"Name": "Freezing field",
 			"Class": "Ultimate",
+			"LevelMax": 3,
 			"Restrictions": [6, 11, 16]
 		},
 		"dark_seer_vacuum": {
@@ -4828,6 +4874,7 @@ DotaData.addVersion( "6.86",
 		"dark_seer_wall_of_replica": {
 			"Name": "Wall of replica",
 			"Class": "Ultimate",
+			"LevelMax": 3,
 			"Restrictions": [6, 11, 16]
 		},
 		"dazzle_poison_touch": {
@@ -4842,9 +4889,15 @@ DotaData.addVersion( "6.86",
 		"dazzle_weave": {
 			"Name": "Weave",
 			"Class": "Ultimate",
+			"LevelMax": 3,
 			"Restrictions": [6, 11, 16],
-			"Buff": "dazzle_weave_buff",
-			"Flags": { NoTarget:1, Self:1, Teammates:1, Refresh:"override"}
+			"Buff": { 
+				"Name": "dazzle_weave_buff",
+				"NoTarget": true, 
+				"Self": true,
+				"Teammates": true,
+				"Refresh": "override"
+			}
 		},
 		"death_prophet_carrion_swarm": {
 			"Name": "Crypt swarm"
@@ -4858,6 +4911,7 @@ DotaData.addVersion( "6.86",
 		"death_prophet_exorcism": {
 			"Name": "Exorcism",
 			"Class": "Ultimate",
+			"LevelMax": 3,
 			"Restrictions": [6, 11, 16]
 		},
 		"disruptor_thunder_strike": {
@@ -4872,6 +4926,7 @@ DotaData.addVersion( "6.86",
 		"disruptor_static_storm": {
 			"Name": "Static storm",
 			"Class": "Ultimate",
+			"LevelMax": 3,
 			"Restrictions": [6, 11, 16]
 		},
 		"doom_bringer_devour": {
@@ -4879,8 +4934,12 @@ DotaData.addVersion( "6.86",
 		},
 		"doom_bringer_scorched_earth": {
 			"Name": "Scorched earth",
-			"Buff": "doom_bringer_scorched_earth_buff",
-			"Flags": { NoTarget:1, Self:1, Refresh:"override"}
+			"Buff": {
+				"Name": "doom_bringer_scorched_earth_buff",
+				"NoTarget": true,
+				"Self": true,
+				"Refresh": "override"
+			}
 		},
 		"doom_bringer_infernal_blade": {
 			"Name": "Infernal blade"
@@ -4888,6 +4947,7 @@ DotaData.addVersion( "6.86",
 		"doom_bringer_doom": {
 			"Name": "Doom",
 			"Class": "Ultimate",
+			"LevelMax": 3,
 			"Restrictions": [6, 11, 16]
 		},
 		"dragon_knight_breathe_fire": {
@@ -4904,6 +4964,7 @@ DotaData.addVersion( "6.86",
 		"dragon_knight_elder_dragon_form": {
 			"Name": "Elder dragon form",
 			"Class": "Ultimate",
+			"LevelMax": 3,
 			"Restrictions": [6, 11, 16]
 		},
 		"drow_ranger_frost_arrows": {
@@ -4915,8 +4976,6 @@ DotaData.addVersion( "6.86",
 		"drow_ranger_trueshot": {
 			"Name": "Precision aura",
 			"Class": "Aura",
-			"Level": 0,
-			"LevelMax": 4,
 			"Aura": "drow_ranger_trueshot_aura"
 		},
 		"drow_ranger_marksmanship": {
@@ -4940,17 +4999,18 @@ DotaData.addVersion( "6.86",
 			"Name": "Stone remnant",
 			"Level": 1,
 			"LevelMax": 1,
-			"Flags": { lockedLevel: true }
+			"LockedLevel": true
 		},
 		"earth_spirit_petrify": {
 			"Name": "Enchant remnant",
 			"Level": 1,
 			"LevelMax": 1,
-			"Flags": { lockedLevel: true }
+			"LockedLevel": true
 		},
 		"earth_spirit_magnetize": {
 			"Name": "Magnetize",
 			"Class": "Ultimate",
+			"LevelMax": 3,
 			"Restrictions": [6, 11, 16]
 		},
 		"earthshaker_fissure": {
@@ -4958,8 +5018,12 @@ DotaData.addVersion( "6.86",
 		},
 		"earthshaker_enchant_totem": {
 			"Name": "Enchant totem",
-			"Buff": "earthshaker_enchant_totem_buff",
-			"Flags": { NoTarget: 1, Self: 1, Refresh: "override" }
+			"Buff": {
+				"Name": "earthshaker_enchant_totem_buff",
+				"NoTarget": true,
+				"Self": true,
+				"Refresh": "override"
+			}
 		},
 		"earthshaker_aftershock": {
 			"Name": "Aftershock"
@@ -4967,6 +5031,7 @@ DotaData.addVersion( "6.86",
 		"earthshaker_echo_slam": {
 			"Name": "Echo slam",
 			"Class": "Ultimate",
+			"LevelMax": 3,
 			"Restrictions": [6, 11, 16]
 		},
 		"elder_titan_echo_stomp": {
@@ -4981,6 +5046,7 @@ DotaData.addVersion( "6.86",
 		"elder_titan_earth_splitter": {
 			"Name": "Earth splitter",
 			"Class": "Ultimate",
+			"LevelMax": 3,
 			"Restrictions": [6, 11, 16]
 		},
 		"elder_titan_return_spirit": {
@@ -4998,6 +5064,7 @@ DotaData.addVersion( "6.86",
 		"ember_spirit_fire_remnant": {
 			"Name": "Fire remnant",
 			"Class": "Ultimate",
+			"LevelMax": 3,
 			"Restrictions": [6, 11, 16]
 		},
 		"ember_spirit_activate_fire_remnant": {
@@ -5006,7 +5073,7 @@ DotaData.addVersion( "6.86",
 			"Restrictions": [6],
 			"Level": 1,
 			"LevelMax": 1,
-			"Flags": { lockedLevel: true }
+			"LockedLevel": true
 		},
 		"enchantress_untouchable": {
 			"Name": "Untouchable"
@@ -5020,6 +5087,7 @@ DotaData.addVersion( "6.86",
 		"enchantress_impetus": {
 			"Name": "Impetus",
 			"Class": "Ultimate",
+			"LevelMax": 3,
 			"Restrictions": [6, 11, 16]
 		},
 		"enigma_malefice": {
@@ -5034,6 +5102,7 @@ DotaData.addVersion( "6.86",
 		"enigma_black_hole": {
 			"Name": "Black hole",
 			"Class": "Ultimate",
+			"LevelMax": 3,
 			"Restrictions": [6, 11, 16]
 		},
 		"faceless_void_time_walk": {
@@ -5048,6 +5117,7 @@ DotaData.addVersion( "6.86",
 		"faceless_void_chronosphere": {
 			"Name": "Chronosphere",
 			"Class": "Ultimate",
+			"LevelMax": 3,
 			"Restrictions": [6, 11, 16]
 		},
 		"furion_sprout": {
@@ -5062,6 +5132,7 @@ DotaData.addVersion( "6.86",
 		"furion_wrath_of_nature": {
 			"Name": "Wrath of nature",
 			"Class": "Ultimate",
+			"LevelMax": 3,
 			"Restrictions": [6, 11, 16]
 		},
 		"gyrocopter_rocket_barrage": {
@@ -5076,7 +5147,329 @@ DotaData.addVersion( "6.86",
 		"gyrocopter_call_down": {
 			"Name": "Call down",
 			"Class": "Ultimate",
+			"LevelMax": 3,
 			"Restrictions": [6, 11, 16]
+		},
+		"huskar_inner_vitality":{
+			"Name": "Inner vitality"
+		},
+		"huskar_burning_spear":{
+			"Name": "Burning spear"
+		},
+		"huskar_berserkers_blood":{
+			"Name": "Berserker's blood",
+			"Charges": 0,
+			"ChargesMax": 90,
+			"AttackSpeed": function(){ return this.Level > 0 ? Math.floor(this.Charges / this.ChargesMax * (168 + this.Level * 28) ) : 0 },
+			"MagicalResistance": function() { return this.Level > 0 ? Math.floor(this.Charges / this.ChargesMax * (0.1 + this.Level * 0.1) *100 ) / 100 : 0 },
+			"ChargesSemantic": "HP% lost"
+		},
+		"huskar_life_break":{
+			"Name": "Life break",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"invoker_quas": {
+			"Name": "Quas",
+			"Strength": function() { return this.Level * 2 },
+			"LevelMax": 7,
+			"Restrictions": [1, 3, 5, 7, 9, 11, 13]
+		},
+		"invoker_wex": {
+			"Name": "Wex",
+			"Agility": function() { return this.Level * 2 },
+			"LevelMax": 7,
+			"Restrictions": [1, 3, 5, 7, 9, 11, 13]
+		},
+		"invoker_exort": {
+			"Name": "Exort",
+			"Intelligence": function() { return this.Level * 2 },
+			"LevelMax": 7,
+			"Restrictions": [1, 3, 5, 7, 9, 11, 13]
+		},
+		"invoker_invoke": {
+			"Name": "Invoke",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16],
+			"Strength": function() {
+				if (this.heroRef)
+					return this.heroRef.Meta.Level >= 25 ? 6 : 0;
+				return 0
+			},
+			"Agility": function() {
+				if (this.heroRef)
+					return this.heroRef.Meta.Level >= 25 ? 6 : 0;
+				return 0
+			},
+			"Intelligence": function() {
+				if (this.heroRef)
+					return this.heroRef.Meta.Level >= 25 ? 6 : 0;
+				return 0
+			},
+			"Warning": "At hero level 25, this skill gives +6 to all stats",
+			"Lore": "So begins a new age of knowledge"
+		},
+		"invoker_cold_snap": {
+			"Name": "Cold snap"
+		},
+		"invoker_ghost_walk": {
+			"Name": "Ghost walk",
+			"LevelMax": 8,
+			"Buff": {
+				"Name": "invoker_ghost_walk_buff",
+				"NoTarget": true,
+				"Self": true,
+				"Refresh": "override"
+			}
+		},
+		"invoker_tornado": {
+			"Name": "Tornado"
+		},
+		"invoker_emp": {
+			"Name": "EMP"
+		},
+		"invoker_alacrity": {
+			"Name": "Alacrity",
+			"LevelMax": 8,
+			"Buff": {
+				"Name": "invoker_alacrity_buff",
+				"NoTarget": true,
+				"Self": true,
+				"Teammates": true,
+				"Refresh": "override"
+			},
+			"Warning": "While no proper implementation exists, assumes equal levels of wex and exort"
+		},
+		"invoker_chaos_meteor": {
+			"Name": "Chaos meteor"
+		},
+		"invoker_sun_strike": {
+			"Name": "Sun strike"
+		},
+		"invoker_forge_spirit": {
+			"Name": "Forge spirit"
+		},
+		"invoker_ice_wall": {
+			"Name": "Ice wall"
+		},
+		"invoker_deafening_blast": {
+			"Name": "Deafening blast"
+		},
+		"jakiro_dual_breath": {
+			"Name": "Dual breath"
+		},
+		"jakiro_ice_path": {
+			"Name": "Ice path"
+		},
+		"jakiro_liquid_fire": {
+			"Name": "Liquid fire"
+		},
+		"jakiro_macropyre": {
+			"Name": "Macropyre",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"juggernaut_blade_fury": {
+			"Name": "Blade fury"
+		},
+		"juggernaut_healing_ward": {
+			"Name": "Healing ward"
+		},
+		"juggernaut_blade_dance": {
+			"Name": "Blade dance"
+		},
+		"juggernaut_omni_slash": {
+			"Name": "Omnislash",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"keeper_of_the_light_illuminate": {
+			"Name": "Illuminate"
+		},
+		"keeper_of_the_light_mana_leak": {
+			"Name": "Mana leak"
+		},
+		"keeper_of_the_light_chakra_magic": {
+			"Name": "Chakra magic"
+		},
+		"keeper_of_the_light_blinding_light": {
+			"Name": "Blinding light"
+		},
+		"keeper_of_the_light_recall": {
+			"Name": "Recall"
+		},
+		"keeper_of_the_light_spirit_form": {
+			"Name": "Spirit form",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"kunkka_torrent": {
+			"Name": "Torrent"
+		},
+		"kunkka_tidebringer": {
+			"Name": "Tidebringer"
+		},
+		"kunkka_x_marks_the_spot": {
+			"Name": "X marks the spot"
+		},
+		"kunkka_ghostship": {
+			"Name": "Ghostship",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"legion_commander_overwhelming_odds": {
+			"Name": "Overwhelming odds",
+			"Buff": {
+				"Name": "legion_commander_overwhelming_odds_buff",
+				"NoTarget": true,
+				"Self": true,
+				"Refresh": "override"
+			}
+		},
+		"legion_commander_press_the_attack": {
+			"Name": "Press the attack",
+			"Buff": {
+				"Name": "legion_commander_press_the_attack_buff",
+				"NoTarget": true,
+				"Self": true,
+				"Teammates": true,
+				"Refresh": "override"
+			}
+		},
+		"legion_commander_moment_of_courage": {
+			"Name": "Moment of courage"
+		},
+		"legion_commander_duel": {
+			"Name": "Duel",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"leshrac_split_earth": {
+			"Name": "Split earth"
+		},
+		"leshrac_diabolic_edict": {
+			"Name": "Diabolic edict"
+		},
+		"leshrac_lightning_storm": {
+			"Name": "Lightning storm"
+		},
+		"leshrac_pulse_nova": {
+			"Name": "Pulse nova",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"lich_frost_nova": {
+			"Name": "Frost nova"
+		},
+		"lich_frost_armor": {
+			"Name": "Frost armor",
+			"Buff": { 
+				"Name": "lich_frost_armor_buff",
+				"NoTarget": true,
+				"Self": true,
+				"Teammates": true,
+				"Refresh": "override"
+			}
+		},
+		"lich_dark_ritual": {
+			"Name": "Sacrifice"
+		},
+		"lich_chain_frost": {
+			"Name": "Chain frost",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"life_stealer_rage": {
+			"Name": "Rage",
+			"Buff": {
+				"Name": "life_stealer_rage_buff",
+				"NoTarget": true,
+				"Self": true,
+				"Refresh": "Override"	
+			}
+		},
+		"life_stealer_feast": {
+			"Name": "Feast"	
+		},
+		"life_stealer_open_wounds": {
+			"Name": "Open wounds"	
+		},
+		"life_stealer_infest": {
+			"Name": "Infest",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]	
+		},
+		"lina_dragon_slave": {
+			"Name": "Dragon slave"	
+		},
+		"lina_light_strike_array": {
+			"Name": "Light strike array"	
+		},
+		"lina_fiery_soul": {
+			"Name": "Fiery soul",
+			"Charges": 0,
+			"ChargesMax": 3,
+			"ChargesSemantic": "Stacks",
+			"AttackSpeed": function() { return (25 + this.Level * 15) * this.Stacks },
+			"MovementSpeedPercentage": function() { return (0.04 + this.Level * 0.01) * this.Stacks }, 	
+		},
+		"lina_laguna_blade": {
+			"Name": "Laguna blade",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]	
+		},
+		"lion_impale": {
+			"Name": "Earth spike"	
+		},
+		"lion_voodoo": {
+			"Name": "Hex"
+		},
+		"lion_mana_drain": {
+			"Name": "Mana drain"
+		},
+		"lion_finger_of_death": {
+			"Name": "Finger of death",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]	
+		},
+		"lone_druid_spirit_bear": {
+			"Name": "Spirit bear"
+		},
+		"lone_druid_rabid": {
+			"Name": "Rabid",
+			"Buff": {
+				"Name": "lone_druid_rabid_buff",
+				"NoTarget": true,
+				"Self": true,
+				"Refresh": "override"	
+			}	
+		},
+		"lone_druid_savage_roar": {
+			"Name": "Savage roar"
+		},
+		"lone_druid_true_form": {
+			"Name": "True form",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16],
+			"Buff": {
+				"Name": "lone_druid_true_form_buff",
+				"NoTarget": true,
+				"Self": true,
+				"Refresh": "override"
+			} 	
 		},
 		"pudge_flesh_heap": {
 			"Name": "Flesh Heap",
@@ -5098,17 +5491,39 @@ DotaData.addVersion( "6.86",
 		"_base": {
 			"Name": "Dummy buff",
 			"Image": "empty",
-			"Version": "6.85",
+			"Version": "6.86",
 			"Class": "Buff"
+		},
+		"test_buff": {
+			"Name": "Test buff",
+			"Class": "Buff",
+			"Image": "empty",
+			"Level": 0,
+			"LevelMax": 10,
+			"Charges": 0,
+			"Strength": function() { return this.Charges + this.Level },
+			"Agility": function() { return this.Level },
+			"Intelligence": function() { return this.Charges },
+			"Damage": 100
 		},
 		"abaddon_frostmourne_buff": {
 			"Name": "Curse of avernus",
 			"Image": "abaddon_frostmourne",
 			"Class": "Buff",
 			"Level": 0,
-			"Flags": { lockedLevel: true },
+			"LockedLevel": true,
 			"AttackSpeed": function() { return this.Level * 10 },
 			"MovementSpeedPercentage": 0.15
+		},
+		"alchemist_chemical_rage_buff": {
+			"Name": "Chemical rage",
+			"Image": "alchemist_chemical_rage",
+			"Level": 0,
+			"LockedLevel": true,
+			"AttackRate": function(){ return -0.1 - this.Level * 0.2 },
+			"HealthRegeneration": function(){ return 25 + this.Level * 25 },
+			"MovementSpeed": function(){ return this.Level < 4 ? [0, 30, 40, 60][this.Level] : 0 },
+			"ManaRegenerationBase": function(){ return this.Level < 4 ? [0, 3, 7.5, 12][this.Level] : 0 }	
 		},
 		"beastmaster_inner_beast_aura": {
 			"Name": "Inner beast",
@@ -5132,14 +5547,14 @@ DotaData.addVersion( "6.86",
 			"Class": "Buff",
 			"Image": "bounty_hunter_wind_walk",
 			"Level": 0,
-			"Flags": { lockedLevel: true },
+			"LockedLevel": true,
 			"Damage": function() { return this.Level * 30 }
 		},
 		"bounty_hunter_track_buff": {
 			"Name": "Track movespeed",
 			"Class": "Buff",
 			"Image": "bounty_hunter_track",
-			"Flags": { lockedLevel: true },
+			"LockedLevel": true,
 			"MovementSpeedPercentage": 0.2
 		},
 		"broodmother_insatiable_hunger_buff": {
@@ -5147,7 +5562,7 @@ DotaData.addVersion( "6.86",
 			"Image": "broodmother_insatiable_hunger",
 			"Class": "Buff",
 			"Level": 0,
-			"Flags": { lockedLevel: true },
+			"LockedLevel": true,
 			"Damage": function() { return this.Level > 0 ? 30 + this.Level * 30 : 0 }
 		},
 		"clinkz_strafe_buff": {
@@ -5155,6 +5570,14 @@ DotaData.addVersion( "6.86",
 			"Image": "clinkz_strafe",
 			"Class": "Buff",
 			"AttackSpeed": 130
+		},
+		"clinkz_skeleton_walk_buff": {
+			"Name": "Skeleton walk",
+			"Image": "clinkz_skeleton_walk",
+			"Class": "Buff",
+			"Level": 0,
+			"LockedLevel": true,
+			"MovementSpeedPercentage": function() { return this.Level * 0.11 }
 		},
 		"crystal_maiden_brilliance_aura_aura": {
 			"Name": "Arcane aura",
@@ -5176,7 +5599,7 @@ DotaData.addVersion( "6.86",
 			"Name": "Weave",
 			"Class": "Buff",
 			"Image": "dazzle_weave",
-			"Flags": { lockedLevel: true },
+			"LockedLevel": true,
 			"Level": 0,
 			"Charges": 0,
 			"ChargesMax": 24,
@@ -5187,7 +5610,7 @@ DotaData.addVersion( "6.86",
 			"Class": "Buff",
 			"Image": "doom_bringer_scorched_earth",
 			"Level": 0,
-			"Flags": { lockedLevel: true },
+			"LockedLevel": true,
 			"MovementSpeedPercentage": 0.14,
 			"HealthRegeneration": function() { return this.Level > 0 ? this.Level * 10 : 0 }
 		},
@@ -5214,20 +5637,76 @@ DotaData.addVersion( "6.86",
 			"Name": "Enchant totem",
 			"Image": "earthshaker_enchant_totem",
 			"Level": 0,
-			"Flags": { lockedLevel: 1 },
+			"LockedLevel": true,
 			"DamagePercentage": function() { return this.Level }
 		},
-		"test_buff": {
-			"Name": "Test buff",
+		"invoker_ghost_walk_buff": {
+			"Name": "Ghost walk",
+			"Image": "invoker_ghost_walk",
 			"Class": "Buff",
-			"Image": "empty",
 			"Level": 0,
-			"LevelMax": 10,
+			"LockedLevel": true,
+			"MovementSpeedPercentage": function() { return (this.Level - 4) * 0.1 }
+		},
+		"invoker_alacrity_buff": {
+			"Name": "Alacrity",
+			"Image": "invoker_alacrity",
+			"Class": "Buff",
+			"Level": 0,
+			"LockedLevel": true,
+			"AttackSpeed": function() { return (this.Level + 2) * 10 },
+			"Damage": function() { return (this.Level + 2) * 10 }
+		},
+		"legion_commander_overwhelming_odds_buff": {
+			"Name": "Overwhelming odds",
+			"Image": "legion_commander_overwhelming_odds",
+			"Class": "Buff",
 			"Charges": 0,
-			"Strength": function() { return this.Charges + this.Level },
-			"Agility": function() { return this.Level },
-			"Intelligence": function() { return this.Charges },
-			"Damage": 100
+			"ChargesMax": 70,
+			"LockedLevel": true,
+			"MovementSpeedPercentage": function(){ return this.Charges * 0.01 }
+		},
+		"legion_commander_press_the_attack_buff": {
+			"Name": "Press the attack"	,
+			"Image": "legion_commander_press_the_attack",
+			"Class": "Buff",
+			"Level": 0,
+			"LockedLevel": true,
+			"HealthRegeneration": function() { return 20 + this.Level * 10 },
+			"AttackSpeed": function() { return 40 + this.Level * 20 }
+		},
+		"lich_frost_armor_buff": {
+			"Name": "Frost armor",
+			"Image": "lich_frost_armor",
+			"Level": 0,
+			"LockedLevel": true,
+			"Armor": function() { return 2 + this.Level }
+		},
+		"life_stealer_rage_buff": {
+			"Name": "Rage",
+			"Image": "life_stealer_rage",
+			"Level": 0,
+			"LockedLevel": 0,
+			"AttackSpeed": function() { return this.Level > 0 ? 40 + this.Level * 10 : 0 }	
+		},
+		"lone_druid_rabid_buff": {
+			"Name": "Rabid",
+			"Image": "lone_druid_rabid",
+			"Class": "Buff",
+			"Level": 0,
+			"LockedLevel": true,
+			"MovementSpeedPercentage": function(){ return 0.05 + 0.05 * this.Level },
+			"AttackSpeed": function() { return this.Level * 10 }
+		},
+		"lone_druid_true_form_buff": {
+			"Name": "True form",
+			"Image": "lone_druid_true_form",
+			"Class": "Buff",
+			"Level": 0,
+			"LockedLevel": true,
+			"AttackRate": -0.2,
+			"Armor": function(){ return this.Level ? 2 + 2 * this.Level : 0 },
+			"Health": function(){ return this.Level * 300 }
 		},
 		
 		/* Item origin buffs */
