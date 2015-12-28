@@ -52,13 +52,13 @@ DotaData.addVersion( "6.86",
 			"DamageMin": 32,
 			"Range": 128,
 			"AttackRate": 1.7,
-			"AgilityGain": 1.5,
-			"AgilityBase": 17,
-			"IntelligenceBase": 21,
 			"StrengthBase": 23,
+			"StrengthGain": 2.7,
+			"AgilityBase": 17,
+			"AgilityGain": 1.5,
+			"IntelligenceBase": 21,
 			"IntelligenceGain": 2.0,
 			"Type": "Strength",
-			"StrengthGain": 2.7,
 			"Enabled": 1,
 			"MovementSpeed": 310,
 			"TurnRate": 0.5,
@@ -1508,11 +1508,11 @@ DotaData.addVersion( "6.86",
 			"Ability2": "morphling_adaptive_strike",
 			"Ability3": "morphling_morph_agi",
 			"Ability4": "morphling_morph_str",
-			"Ability5": "morphling_hybrid",
-			"Ability6": "morphling_replicate",
-			"Ability7": "morphling_morph",
-			"Ability8": "morphling_morph_replicate",
-			"Ability9": "attribute_bonus",
+			"Ability5": "morphling_replicate",
+			"Ability6": "attribute_bonus",
+			"Ability7": "morphling_hybrid",
+			//"Ability7": "morphling_morph",
+			//"Ability8": "morphling_morph_replicate",
 			"AbilityLayout": 5,
 			"Armor": -2,
 			"AttackPoint": 0.5,
@@ -1540,8 +1540,8 @@ DotaData.addVersion( "6.86",
 			"Ability2": "naga_siren_ensnare",
 			"Ability3": "naga_siren_rip_tide",
 			"Ability4": "naga_siren_song_of_the_siren",
-			"Ability5": "naga_siren_song_of_the_siren_cancel",
-			"Ability6": "attribute_bonus",
+			"Ability5": "attribute_bonus",
+			//"Ability6": "naga_siren_song_of_the_siren_cancel",
 			"Armor": 3,
 			"AttackPoint": 0.5,
 			"AttackType": "Melee",
@@ -1590,13 +1590,13 @@ DotaData.addVersion( "6.86",
 		},
 		"nevermore": {
 			"Name": "Shadow Fiend",
-			"Ability1": "nevermore_shadowraze1",
-			"Ability2": "nevermore_shadowraze2",
-			"Ability3": "nevermore_shadowraze3",
-			"Ability4": "nevermore_necromastery",
-			"Ability5": "nevermore_dark_lord",
-			"Ability6": "nevermore_requiem",
-			"Ability7": "attribute_bonus",
+			//"Ability1": "nevermore_shadowraze1",
+			"Ability1": "nevermore_shadowraze2",
+			//"Ability3": "nevermore_shadowraze3",
+			"Ability2": "nevermore_necromastery",
+			"Ability3": "nevermore_dark_lord",
+			"Ability4": "nevermore_requiem",
+			"Ability5": "attribute_bonus",
 			"AbilityLayout": 6,
 			"Armor": -2,
 			"AttackPoint": 0.5,
@@ -5174,24 +5174,35 @@ DotaData.addVersion( "6.86",
 			"Name": "Quas",
 			"Strength": function() { return this.Level * 2 },
 			"LevelMax": 7,
-			"Restrictions": [1, 3, 5, 7, 9, 11, 13]
+			"Restrictions": [1, 3, 5, 7, 9, 11, 13],
+			"Charges": 0,
+			"ChargesMax": 3,
+			"HealthRegeneration": function() { return this.Charges * this.Level }
 		},
 		"invoker_wex": {
 			"Name": "Wex",
 			"Agility": function() { return this.Level * 2 },
 			"LevelMax": 7,
-			"Restrictions": [1, 3, 5, 7, 9, 11, 13]
+			"Restrictions": [1, 3, 5, 7, 9, 11, 13],
+			"Charges": 0,
+			"ChargesMax": 3,
+			"AttackSpeed": function() { return this.Charges * this.Level * 2 },
+			"MovementSpeedPercentage": function() { return this.Charges * this.Level * 0.01 }
 		},
 		"invoker_exort": {
 			"Name": "Exort",
 			"Intelligence": function() { return this.Level * 2 },
 			"LevelMax": 7,
-			"Restrictions": [1, 3, 5, 7, 9, 11, 13]
+			"Restrictions": [1, 3, 5, 7, 9, 11, 13],
+			"Charges": 0,
+			"ChargesMax": 3,
+			"Damage": function() { return this.Charges * this.Level * 3 }
 		},
 		"invoker_invoke": {
 			"Name": "Invoke",
 			"Class": "Ultimate",
-			"LevelMax": 3,
+			"Level": 1,
+			"LevelMax": 4,
 			"Restrictions": [6, 11, 16],
 			"Strength": function() {
 				if (this.heroRef)
@@ -5469,7 +5480,180 @@ DotaData.addVersion( "6.86",
 				"NoTarget": true,
 				"Self": true,
 				"Refresh": "override"
-			} 	
+			}
+		},
+		"luna_lucent_beam": {
+			"Name": "Lucent beam"
+		},
+		"luna_moon_glaive": {
+			"Name": "Moon glaive"
+		},
+		"luna_lunar_blessing": {
+			"Name": "Lunar blessing",
+			"Aura": "luna_lunar_blessing_aura",
+			"NightVision": 1000
+		},
+		"luna_eclipse": {
+			"Name": "Eclipse",
+			"LevelMax": 3,
+			"Class": "Ultimate",
+			"Restrictions": [6, 11, 16]
+		},
+		"lycan_summon_wolves": {
+			"Name": "Summon wolves"
+		},
+		"lycan_howl": {
+			"Name": "Howl",
+			"Buff": {
+				"Name": "lycan_howl_buff",
+				"NoTarget": true,
+				"Self": true,
+				"Teammates": true,
+				"Refresh": "override"
+			}
+		},
+		"lycan_feral_impulse": {
+			"Name": "Feral impulse",
+			"AttackSpeed": function(){ return this.Level > 0 ? 10 + 5 * this.Level : 0 },
+			"DamagePercentage": function(){ return this.Level > 0 ? 0.1 + 0.05 * this.Level : 0 }
+		},
+		"lycan_shapeshift": {
+			"Name": "",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"magnataur_shockwave": {
+			"Name": "Shockwave"
+		},
+		"magnataur_empower": {
+			"Name": "Empower",
+			"Buff": {
+				"Name": "magnataur_empower_buff",
+				"NoTarget": true,
+				"Teammates": true,
+				"Self": true,
+				"Refresh": "override"
+			}
+		},
+		"magnataur_skewer": {
+			"Name": "Skewer"
+		},
+		"magnataur_reverse_polarity": {
+			"Name": "Reverse polarity",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"medusa_split_shot": {
+			"Name": "Split shot"
+		},
+		"medusa_mystic_snake": {
+			"Name": "Mystic snake"
+		},
+		"medusa_mana_shield": {
+			"Name": "Mana shield"
+		},
+		"medusa_stone_gaze": {
+			"Name": "Stone gaze",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"mirana_starfall": {
+			"Name": "Starstorm"
+		},
+		"mirana_arrow": {
+			"Name": "Sacred arrow"
+		},
+		"mirana_leap": {
+			"Name": "Leap"
+		},
+		"mirana_invis": {
+			"Name": "Moonlight shadow",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"morphling_waveform": {
+			"Name": "Waveform"
+		},
+		"morphling_adaptive_strike": {
+			"Name": "Adaptive strike"
+		},
+		"morphling_morph_agi": {
+			"Name": "Morph (Agility)",
+			"Agility": function(){ return this.Level > 0 ? 2 + this.Level : 0 }
+		},
+		"morphling_morph_str": {
+			"Name": "Morph (Strength)",
+			"Strength": function(){ return this.Level > 0 ? 2 + this.Level : 0 }
+		},
+		"morphling_replicate": {
+			"Name": "Replicate",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"morphling_hybrid": {
+			"Name": "Hybrid"	
+		},
+		"naga_siren_mirror_image": {
+			"Name": "Mirror image"
+		},
+		"naga_siren_ensnare": {
+			"Name": "Ensnare"
+		},
+		"naga_siren_rip_tide": {
+			"Name": "Rip Tide"
+		},
+		"naga_siren_song_of_the_siren": {
+			"Name": "Song of the Siren",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"necrolyte_death_pulse": {
+			"Name": "Death pulse"
+		},
+		"necrolyte_heartstopper_aura": {
+			"Name": "Heartstopper aura"
+		},
+		"necrolyte_sadist": {
+			"Name": "Sadist",
+			"Charges": 0,
+			"HealthRegeneration": function(){ return this.Charges * [0, 1, 2, 3, 6][this.Level] || 0 },
+			"ManaRegenerationFlat": function(){ return this.Charges * [0, 2, 4, 6, 12][this.Level] || 0 },
+		},
+		"necrolyte_reapers_scythe": {
+			"Name": "",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"nevermore_shadowraze1": {
+			"Name": "Shadowraze (near)"
+		},
+		"nevermore_shadowraze2": {
+			"Name": "Shadowraze(medium)"
+		},
+		"nevermore_shadowraze3": {
+			"Name": "Shadowraze (far)"
+		},
+		"nevermore_necromastery": {
+			"Name": "Necromastery",
+			"Charges": 0,
+			"ChargesMax": 36,
+			"Damage": function(){ return Math.min(this.Charges, 8 + 7 * this.Level) * 2 }
+		},
+		"nevermore_dark_lord": {
+			"Name": "Presence of the Dark Lord"
+		},
+		"nevermore_requiem": {
+			"Name": "Requiem of Souls",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
 		},
 		"pudge_flesh_heap": {
 			"Name": "Flesh Heap",
@@ -5707,6 +5891,35 @@ DotaData.addVersion( "6.86",
 			"AttackRate": -0.2,
 			"Armor": function(){ return this.Level ? 2 + 2 * this.Level : 0 },
 			"Health": function(){ return this.Level * 300 }
+		},
+		"luna_lunar_blessing_aura": {
+			"Name": "Lunar blessing",
+			"Class": "Aura",
+			"Image": "luna_lunar_blessing",
+			"Level": function() {
+				return this.emitterRef ? this.emitterRef.Level : -1;
+			},
+			"Damage": function () {
+				if (!this.emitterRef) {
+					console.warn("Buff without required emitter!");
+					return 0;
+				}
+				if (this.emitterRef.Level > 0)
+					return 6 + this.emitterRef.Level * 8;
+				return 0;
+			}
+		},
+		"lycan_howl_buff": {
+			"Name": "Howl",
+			"Image": "lycan_howl",
+			"Level": 0,
+			"LockedLevel": true,
+			"Damage": function() { return this.Level > 0 ? 2 + 12 * this.Level : 0 }	
+		},
+		"magnataur_empower_buff": {
+			"Name": "Empower",
+			"Image": "magnataur_empower",
+			"DamagePercentage": function(){ return this.Level > 0 ? 0.1 + 0.1 * this.Level : 0 }	
 		},
 		
 		/* Item origin buffs */

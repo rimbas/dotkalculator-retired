@@ -24,13 +24,20 @@ function BuffInstance(buffId, properties) {
 		else
 			Object.defineProperty(this, prop, { value: value, enumerable: true, writable: true });
 	}
-	if (typeof properties.level === "number" && typeof this.Level === "number")
-		this.Level = properties.level;
-	this.LevelMax = properties.levelMax;
-	if (typeof properties.charges === "number" && typeof this.Charges === "number")
-		this.Charges = properties.charges;
-	if (typeof properties.chargesMax === "number" && typeof this.ChargesMax === "number")
-		this.ChargesMax = properties.chargesMax;
+	if (typeof properties.level === "number")
+		if (buff.LevelMin && properties.level >= buff.LevelMin)
+			this.Level = properties.level;
+		else if ( buff.LevelMin === undefined )
+			this.Level = properties.level;
+	if (typeof properties.levelMax === "number")
+		this.LevelMax = properties.levelMax;
+	if (typeof properties.charges === "number")
+		if (buff.ChargesMin && properties.level >= buff.ChargesMin)
+			this.Charges = properties.level;
+		else if ( buff.ChargesMin === undefined )
+			this.Charges = properties.level;
+	if (typeof properties.chargesMax === "number")
+		this.ChargesMax = properties.chargesMax
 }
 
 BuffInstance.prototype.toString = function () {

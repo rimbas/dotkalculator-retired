@@ -21,10 +21,13 @@ function ItemInstance(itemId, properties) {
 		else
 			this[prop] = value;	
 	}
-	if (typeof properties.charges === "number" && typeof this.Charges === "number")
-		this.Charges = properties.charges;
-	if (typeof properties.chargesMax === "number" && typeof this.ChargesMax === "number")
-		this.ChargesMax = properties.chargesMax;
+	if (typeof properties.charges === "number")
+		if (item.ChargesMin && properties.level >= item.ChargesMin)
+			this.Charges = properties.level;
+		else if ( item.ChargesMin === undefined )
+			this.Charges = properties.level;
+	if (typeof properties.chargesMax === "number")
+		this.ChargesMax = properties.chargesMax
 }
 
 // Cloning method

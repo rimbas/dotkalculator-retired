@@ -21,7 +21,7 @@ ElementHelper.createDetailedTooltip = function ( object ) {
 		var levelInput = document.createElement("input");
 		levelInput.style.width = "3em";
 		levelInput.value = object.Level;
-		levelInput.min = 0;
+		levelInput.min = typeof object.LevelMin === "number" ? object.LevelMin : 0;
 		levelInput.max = object.LevelMax;
 		levelInput.type = "number";
 		levelInput.className = "mini-spinner";
@@ -49,7 +49,7 @@ ElementHelper.createDetailedTooltip = function ( object ) {
 		var chargeInput = document.createElement("input");
 		chargeInput.style.width = "3em";
 		chargeInput.value = object.Charges;
-		chargeInput.min = 0;
+		chargeInput.min = typeof object.ChargesMin == "number" ? object.ChargesMin : 0;
 		chargeInput.max = object.ChargesMax || 1000;
 		chargeInput.type = "number";
 		chargeInput.className = "mini-spinner";
