@@ -36,7 +36,8 @@ DotaData.addVersion( "6.86",
 			"ManaRegeneration": 0.01,
 			"Version": "6.86",
 			"VisionDaytime": 1800,
-			"VisionNighttime": 800
+			"VisionNighttime": 800,
+			"Side": "Radiant"
 		},
 		"abaddon": {
 			"Name": "Abaddon",
@@ -3068,6 +3069,32 @@ DotaData.addVersion( "6.86",
 			"TurnRate": 0.6,
 			"ProjectileSpeed": 1100,
 			"Side": "Radiant"
+		},
+		"arc_warden": {
+			"Name": "Arc Warden",
+			"Ability1": "arc_warden_flux",
+			"Ability2": "arc_warden_magnetic_field",
+			"Ability3": "arc_warden_spark_wraith",
+			"Ability4": "arc_warden_tempest_double",
+			"AttackPoint": 0.3,
+			"AttackType": "Ranged",
+			"DamageMax": 20,
+			"DamageMin": 10,
+			"Range": 625,
+			"ProjectileSpeed": 800,
+			"AttackRate": 1.7,
+			"AgilityBase": 15,
+			"AgilityGain": 1.8,
+			"StrengthBase": 24,
+			"StrengthGain": 1.9,
+			"IntelligenceBase": 24,
+			"IntelligenceGain": 2.1,
+			"Type": "Agility",
+			"Enabled": 1,
+			"Armor": -2,
+			"MovementSpeed": 295,
+			"TurnRate": 0.4,
+			"Side": "Dire"
 		}
 	}, // end of hero definition
 	"Items": {
