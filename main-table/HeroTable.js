@@ -51,8 +51,8 @@ HeroTable.prototype.getValidColumnList = function() {
 			return validatedColumns;	
 		}
 	}
-	localStorage.setItem("tableColumns-" + this.ID, "Delete;Name;Portrait;Level;Strength;Agility;Intelligence;Damage;Items");
-	return ["Delete", "Name", "Portrait", "Level", "Strength", "Agility", "Intelligence", "Damage", "Items" ];
+	localStorage.setItem("tableColumns-" + this.ID, "Delete;Name;Portrait;Level;Strength;Agility;Intelligence;Health;Mana;Armor;Damage;AttackTime;Items;Abilities;Buffs");
+	return ["Delete", "Name", "Portrait", "Level", "Strength", "Agility", "Intelligence", "Health", "Mana", "Armor", "Damage", "AttackTime", "Items", "Abilities", "Buffs" ];
 }
 
 HeroTable.prototype.evaluator = {};

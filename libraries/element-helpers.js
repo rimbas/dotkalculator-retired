@@ -65,7 +65,7 @@ ElementHelper.createDetailedTooltip = function ( object ) {
 	var statOrder = ["Strength", "Agility", "Intelligence", "Health", "Mana",
 		"HealthRegeneration", "ManaRegenerationPercentage", "ManaRegenerationFlat",
 		"Damage", "AttackSpeed", "MovementSpeed", "MovementSpeedPercentage",
-		"MagicalResistance", "Evasion", "Armor", "AttackRate"], 
+		"MagicalResistance", "Evasion", "Armor", "AttackRate", "Range"], 
 		statValues = {};
 	
 	for (var stat of statOrder)

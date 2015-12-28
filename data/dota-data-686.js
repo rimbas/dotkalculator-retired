@@ -1652,10 +1652,10 @@ DotaData.addVersion( "6.86",
 			"Ability1": "nyx_assassin_impale",
 			"Ability2": "nyx_assassin_mana_burn",
 			"Ability3": "nyx_assassin_spiked_carapace",
-			"Ability4": "nyx_assassin_burrow",
-			"Ability5": "nyx_assassin_unburrow",
-			"Ability6": "nyx_assassin_vendetta",
-			"Ability7": "attribute_bonus",
+			"Ability4": "nyx_assassin_vendetta",
+			"Ability5": "attribute_bonus",
+			"Ability6": "nyx_assassin_burrow",
+			//"Ability5": "nyx_assassin_unburrow",
 			"Armor": 1.0,
 			"AttackPoint": 0.46,
 			"AttackType": "Melee",
@@ -4277,7 +4277,14 @@ DotaData.addVersion( "6.86",
 			"Cost": 1800,
 			"Components": ["lifesteal", 900],
 			"Section": "Artifacts",
-			"SectionIndex": 0
+			"SectionIndex": 0,
+			"Lore": "Once this mask is worn, its bearer becomes an uncontrollable aggressive force.",
+			"Buff": {
+				"Name": "mask_of_madness_buff",
+				"NoTarget": true,
+				"Self": true,
+				"Refresh": "leave"	
+			}
 		},
 		"helm_of_the_dominator": {
 			"Name": "Helm of the Dominator",
@@ -5518,7 +5525,7 @@ DotaData.addVersion( "6.86",
 			"DamagePercentage": function(){ return this.Level > 0 ? 0.1 + 0.05 * this.Level : 0 }
 		},
 		"lycan_shapeshift": {
-			"Name": "",
+			"Name": "Shapeshift",
 			"Class": "Ultimate",
 			"LevelMax": 3,
 			"Restrictions": [6, 11, 16]
@@ -5626,7 +5633,7 @@ DotaData.addVersion( "6.86",
 			"ManaRegenerationFlat": function(){ return this.Charges * [0, 2, 4, 6, 12][this.Level] || 0 },
 		},
 		"necrolyte_reapers_scythe": {
-			"Name": "",
+			"Name": "Reaper's scythe",
 			"Class": "Ultimate",
 			"LevelMax": 3,
 			"Restrictions": [6, 11, 16]
@@ -5651,6 +5658,50 @@ DotaData.addVersion( "6.86",
 		},
 		"nevermore_requiem": {
 			"Name": "Requiem of Souls",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"night_stalker_void": {
+			"Name": "Void"
+		},
+		"night_stalker_crippling_fear": {
+			"Name": "Crippling fear"
+		},
+		"night_stalker_hunter_in_the_night": {
+			"Name": "Hunter in the night",
+			"Charges": 0,
+			"ChargesMax": 1,
+			"ChargesSemantic": "Night",
+			"AttackSpeed": function(){ return this.Level > 0 ? (30 + 15 * this.Level) * this.Charges : 0 },
+			"MovementSpeedPercentage": function(){ return this.Level > 0 ? (0.15 + 0.05 * this.Level) * this.Charges : 0 }
+		},
+		"night_stalker_darkness": {
+			"Name": "Darkness",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"nyx_assassin_impale": {
+			"Name": "Impale"
+		},
+		"nyx_assassin_mana_burn": {
+			"Name": "Mana burn"
+		},
+		"nyx_assassin_spiked_carapace": {
+			"Name": "Spiked carapace"
+		},
+		"nyx_assassin_burrow": {
+			"Name": "Burrow"
+		},
+		"nyx_assassin_vendetta": {
+			"Name": "Vendetta",
+			"Buff": {
+				"Name": "nyx_assassin_vendetta_buff",
+				"NoTarget": true,
+				"Self": true,
+				"Refresh": "override"	
+			},
 			"Class": "Ultimate",
 			"LevelMax": 3,
 			"Restrictions": [6, 11, 16]
@@ -5708,6 +5759,12 @@ DotaData.addVersion( "6.86",
 			"HealthRegeneration": function(){ return 25 + this.Level * 25 },
 			"MovementSpeed": function(){ return this.Level < 4 ? [0, 30, 40, 60][this.Level] : 0 },
 			"ManaRegenerationBase": function(){ return this.Level < 4 ? [0, 3, 7.5, 12][this.Level] : 0 }	
+		},
+		"axe_berserkers_call_buff": {
+			"Name": "Berserker's call armor",
+			"Image": "axe_berserkers_call",
+			"Class": "Buff",
+			"Armor": 40
 		},
 		"beastmaster_inner_beast_aura": {
 			"Name": "Inner beast",
@@ -5919,7 +5976,16 @@ DotaData.addVersion( "6.86",
 		"magnataur_empower_buff": {
 			"Name": "Empower",
 			"Image": "magnataur_empower",
+			"Level": 0,
+			"LockedLevel": true,
 			"DamagePercentage": function(){ return this.Level > 0 ? 0.1 + 0.1 * this.Level : 0 }	
+		},
+		"nyx_assassin_vendetta_buff": {
+			"Name": "Vendetta",
+			"Level": 0,
+			"LockedLevel": true,
+			"MovementSpeedPercentage": function(){ return 0.14 + 0.02 * this.Level },
+			"Damage": function(){ return 100 + 150 * this.Level } 	
 		},
 		
 		/* Item origin buffs */
@@ -6073,7 +6139,7 @@ DotaData.addVersion( "6.86",
 			"Image": "moon_shard",
 			"AttackSpeed": 60
 		},
-		"crimson_guard_buff": {
+	 	"crimson_guard_buff": {
 			"Name": "Guard",
 			"Image": "crimson_guard",
 			"Class": "Buff",
@@ -6085,11 +6151,11 @@ DotaData.addVersion( "6.86",
 				}
 			}
 		},
-		"axe_berserkers_call_buff": {
-			"Name": "Berserker's call armor",
-			"Image": "axe_berserkers_call",
-			"Class": "Buff",
-			"Armor": 40
+		"mask_of_madness_buff": {
+			"Name": "Berserk",
+			"Image": "mask_of_madness",
+			"AttackSpeed": 100,
+			"MovementSpeedPercentage": 0.17	
 		}
 	}
 	

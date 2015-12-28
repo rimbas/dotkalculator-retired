@@ -8,9 +8,43 @@ $(function(e){
 		containment: "document"
 	}) 
 	MainTable = new HeroTable("Comparison table", "main-table", "main-table-wrapper");
-	MainTable.addHero(new HeroInstance("drow_ranger", {items: [new ItemInstance("ring_of_aquila")], team: "Test", abilities: {"drow_ranger_trueshot": 1}}));
-	MainTable.addHero(new HeroInstance("drow_ranger", {abilities: {"drow_ranger_trueshot": 1}}));
-	MainTable.addHero(new HeroInstance("invoker", {team: "Test"}))
+	MainTable.addHero(new HeroInstance("drow_ranger", {
+		level: 16, 
+		items: [
+			new ItemInstance("ring_of_aquila"), 
+			new ItemInstance("butterfly"), 
+			new ItemInstance("power_treads_agility"),
+			new ItemInstance("sange_and_yasha"),
+			new ItemInstance("mask_of_madness")
+		], 
+		abilities: {
+			"drow_ranger_frost_arrows": 4,
+			"drow_ranger_trueshot": 4, 
+			"drow_ranger_marksmanship": 3, 
+			"attribute_bonus": 1
+		}
+	}));
+	MainTable.addHero(new HeroInstance("drow_ranger", {
+		abilities: {"drow_ranger_trueshot": 1},
+		items: [
+			new ItemInstance("wraith_band"),
+			new ItemInstance("tango")
+		]
+	}));
+	MainTable.addHero(new HeroInstance("sniper", {
+		level: 11,
+		items: [
+			new ItemInstance("ring_of_aquila"),
+			new ItemInstance("dragon_lance"),
+			new ItemInstance("phase_boots"),
+		],
+		abilities: {
+			"sniper_headshot": 4,
+			"sniper_take_aim": 4,
+			"sniper_assassinate": 2,
+			"attribute_bonus": 1
+		}
+	}))
 	
 	document.createVersionSelectors = function (init) {
 		optionCollection = [];
