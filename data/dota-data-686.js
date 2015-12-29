@@ -7,6 +7,10 @@ DotaData.addVersion( "6.86",
 		"_base": // Special base entry
 		{
 			"Name": "NO-DISPLAY-NAME",
+			"Ability1": "attribute_bonus",
+			"Ability2": "attribute_bonus",
+			"Ability3": "attribute_bonus",
+			"Ability4": "attribute_bonus",
 			"Ability5": "attribute_bonus",
 			"AbilityLayout": 4,
 			"AttackPoint": 0.75,
