@@ -319,7 +319,7 @@ $.tablesorter.addParser({
 });
 // Uses element's property "sortingProperty" to sort as text
 $.tablesorter.addParser({
-	id: "propertyNumeric",
+	id: "propertyNumber",
 	is: function(s){ return false; },
 	format: function(s, table, cell) {
 		return cell.sortingProperty;
@@ -383,8 +383,9 @@ HeroTable.addEvaluator({
 	eval: function(cell, heroInstance){
 	var bonus = Math.floor(heroInstance.Total.StrengthBonus)
 		cell.textContent = Math.floor(heroInstance.Base.Strength) + (bonus === 0 ? "" : "+" + bonus);
+		cell.sortingProperty = heroInstance.Base.Strength + bonus;
 	},
-	sorter: "number"
+	sorter: "propertyNumber"
 });
 
 HeroTable.addEvaluator({
@@ -396,8 +397,9 @@ HeroTable.addEvaluator({
 	eval: function(cell, heroInstance){
 	var bonus = Math.floor(heroInstance.Total.AgilityBonus)
 		cell.textContent = Math.floor(heroInstance.Base.Agility) + (bonus === 0 ? "" : "+" + bonus);
+		cell.sortingProperty = heroInstance.Base.Agility + bonus
 	},
-	sorter: "number"
+	sorter: "propertyNumber"
 });
 
 HeroTable.addEvaluator({
@@ -409,8 +411,9 @@ HeroTable.addEvaluator({
 	eval: function(cell, heroInstance){
 	var bonus = Math.floor(heroInstance.Total.IntelligenceBonus)
 		cell.textContent = Math.floor(heroInstance.Base.Intelligence) + (bonus === 0 ? "" : "+" + bonus);
+		cell.sortingProperty = heroInstance.Base.Intelligence + bonus
 	},
-	sorter: "number"
+	sorter: "propertyNumber"
 });
 
 HeroTable.addEvaluator({
@@ -446,16 +449,17 @@ HeroTable.addEvaluator({
 	eval: function(cell, heroInstance){
 		var bonus = heroInstance.Total.ArmorBonus
 		cell.textContent = heroInstance.Total.ArmorBase.toFixed(2) + (bonus === 0 ? "" : "+" + heroInstance.Total.ArmorBonus);
+		cell.sortingProperty = heroInstance.Total.ArmorBase + bonus
 	},
-	sorter: "number"
+	sorter: "propertyNumber"
 });
 
 HeroTable.addEvaluator({
-	ID: "PhycalReduction", 
-	name: "Physical dmg percentage", 
-	header: "DR",
+	ID: "PhysicalReduction", 
+	name: "Physical resistance", 
+	header: "PR",
 	type: "Derived",
-	description: "Shows physical damage percentage received",
+	description: "Shows physical damage reduction",
 	eval: function(cell, heroInstance) {
 		var armor = heroInstance.Total.Armor,
 			reduction = (0.06 * armor) / (1 + 0.06 * armor)
@@ -525,8 +529,9 @@ HeroTable.addEvaluator({
 	eval: function(cell, hero){
 	var bonus = hero.Total.DamageBonus;
 		cell.textContent = hero.Total.DamageBase + (bonus === 0 ? "" : "+" + bonus);
+		cell.sortingProperty = hero.Total.DamageBase + bonus
 	},
-	sorter: "number"
+	sorter: "propertyNumber"
 });
 
 HeroTable.addEvaluator({
@@ -659,7 +664,7 @@ HeroTable.addEvaluator({
 	name: "Magical Resistance",
 	header: "MR",
 	type: "Base",
-	description: "Magical damage resistance that hero has",
+	description: "Magical damage resistance",
 	eval: function(cell, hero) {
 		cell.textContent = (hero.Total.MagicalResistance * 100).toFixed(0) + "%";
 		cell.sortingProperty = hero.Total.MagicalResistance;
