@@ -22,7 +22,8 @@ $(function(e){
 			"drow_ranger_trueshot": 4, 
 			"drow_ranger_marksmanship": 3, 
 			"attribute_bonus": 1
-		}
+		},
+		team: "Magic"
 	}));
 	MainTable.addHero(new HeroInstance("drow_ranger", {
 		abilities: {"drow_ranger_trueshot": 1},
@@ -45,6 +46,22 @@ $(function(e){
 			"attribute_bonus": 1
 		}
 	}))
+	MainTable.addHero(new HeroInstance("rubick", {
+		abilities: {"rubick_null_field": 3},
+		team: "Magic"
+	}));
+	MainTable.addHero(new HeroInstance("sven", {
+		abilities: {"sven_gods_strength": 3},
+		team: "Magic"
+	}));
+	MainTable.addHero(new HeroInstance("terrorblade", {
+		abilities: {"terrorblade_metamorphosis": 3},
+		team: "Magic"
+	}));
+	MainTable.addHero(new HeroInstance("terrorblade", {
+		abilities: {"terrorblade_metamorphosis": 3},
+		team: "Magic"
+	}));
 	
 	document.createVersionSelectors = function (init) {
 		optionCollection = [];

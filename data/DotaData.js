@@ -116,9 +116,16 @@ DotaData.readableStatStrings = {
 	"VisionNight": "Night vision",
 	"AttackSpeed": "Attack speed",
 	"MagicalResistance": "Magical resistance",
-	"AttackRate": "Base attack time"
+	"AttackRate": "Base attack time",
+	"DamagePercentage": "Damage",
+	"DamageBase": "Base damage"
 }
 
+DotaData.positiveNegativeStats = {
+	"AttackRate": true
+}
+
+// it just "works"
 DotaData.statToReadable = function(stat, val) {
 	var key = DotaData.readableStatStrings[stat] ? DotaData.readableStatStrings[stat] : stat,
 		isPercentage = false, //calculatable percentage (from a base value)
@@ -127,7 +134,12 @@ DotaData.statToReadable = function(stat, val) {
 		val = (val > 0 ? "+" : "" ) + (val * 100).toFixed(0)+"%";
 	if (test && test[1])
 		isPercentage = true;
-	return { key: key, value: val > 0 ? "+" + val : val, isPercentage: isPercentage, baseName: test ? test[1] : undefined };
+	return { 
+		key: key, 
+		value: val > 0 ? "+" + val : val,
+		isPercentage: isPercentage, 
+		baseName: test ? test[1] : undefined, 
+		negativeOverride: DotaData.positiveNegativeStats[stat] };
 }
 
 DotaData.numericToRoman = function(num) {

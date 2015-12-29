@@ -215,18 +215,18 @@ HeroInstance.prototype.getBuffs = function(buffId) {
 
 // Handles team changes in hero table
 HeroInstance.prototype.teamChange = function(newTeammates, removedTeammates) {
-	for (var newTeammate of newTeammates) {
-		for (var item of newTeammate.Items)
-			item.addTeammate(this)
-		for (var ability of newTeammate.Abilities)
-			ability.addTeammate(this)
-	}
-	
 	for (var removedTeammate of removedTeammates) {
 		for (var item of removedTeammate.Items)
 			item.removeTeammate(this)
 		for (var ability of removedTeammate.Abilities)
 			ability.removeTeammate(this)
+	}
+	
+	for (var newTeammate of newTeammates) {
+		for (var item of newTeammate.Items)
+			item.addTeammate(this)
+		for (var ability of newTeammate.Abilities)
+			ability.addTeammate(this)
 	}
 }
 
@@ -312,7 +312,8 @@ HeroInstance.addHandler({
 	name: "AbilityChange",
 	binds: ["LevelChange"],
 	handler: function() {
-		var a = { "Strength": 0, "Agility":0, "Intelligence":0, "MovementSpeed": 0 };
+		var a = { "Strength": 0, "Agility":0, "Intelligence":0, "MovementSpeed": 0,
+				"AttackType": undefined, "ProjectileSpeed": undefined };
 		for (var ability of this.Abilities) {
 			for (var prop in a) {
 				var value = ability[prop];
@@ -320,6 +321,8 @@ HeroInstance.addHandler({
 					continue;
 				else if (prop == "Evasion" || prop == "MagicalResistance")
 					a[prop] += (1 - a[prop]) * value;
+				else if (prop == "ProjectileSpeed" || prop == "AttackType")
+					a[prop] = value;
 				else
 					a[prop] += value;
 			}
@@ -332,7 +335,8 @@ HeroInstance.addHandler({
 	name: "BuffChange",
 	binds: [],
 	handler: function() {
-		var a = { "Strength": 0, "Agility": 0, "Intelligence": 0, "MovementSpeed": 0 };
+		var a = { "Strength": 0, "Agility": 0, "Intelligence": 0, "MovementSpeed": 0,
+				"AttackType": undefined, "ProjectileSpeed": undefined };
 		for (var buff of this.Buffs) {
 			for (var prop in a) {
 				var value = buff[prop];
@@ -340,6 +344,8 @@ HeroInstance.addHandler({
 					continue;
 				else if (prop == "Evasion" || prop == "MagicalResistance")
 					a[prop] += (1 - a[prop]) * value;
+				else if (prop == "ProjectileSpeed" || prop == "AttackType")
+					a[prop] = value;
 				else
 					a[prop] += value;
 			}
@@ -400,8 +406,8 @@ HeroInstance.addHandler({
 				"MovementSpeedPercentage": 0, "Armor": 0, "Evasion": 0, "Blind": 0,
 				"MagicalResistance": 0, "Health": 0, "HealthPercentage": 0, "HealthRegeneration": 0, 
 				"Mana": 0, "ManaRegenerationFlat": 0, "Damage": 0, "DamagePercentage": 0,
-				"AttackSpeed": 0, "ManaRegenerationPercentage": 0, "AttackRate": 0,
-				"ManaRegenerationBase": 0 },
+				"AttackSpeed": 0, "ManaRegenerationPercentage": 0, "AttackRate": 0, "Range": 0,
+				"ManaRegenerationBase": 0, "DamageBase": 0, "ProjectileSpeed": 0, "AttackType": undefined },
 			f = {};
 		for (var buff of this.Buffs) {
 			if (buff.Family)
@@ -415,6 +421,8 @@ HeroInstance.addHandler({
 					continue;
 				else if (prop == "Evasion" || prop == "MagicalResistance")
 					a[prop] += (1 - a[prop]) * value;
+				else if (prop == "ProjectileSpeed" || prop == "AttackType")
+					a[prop] = value;
 				else
 					a[prop] += value;
 			}
@@ -460,16 +468,18 @@ HeroInstance.addHandler({
 		a.ManaRegenerationFlat = this.Item.ManaRegenerationFlat + this.Ability.ManaRegenerationFlat + this.Buff.ManaRegenerationFlat;
 		a.ManaRegenerationPercentage = this.Item.ManaRegenerationPercentage + this.Ability.ManaRegenerationPercentage + this.Buff.ManaRegenerationPercentage;
 		a.ManaRegeneration = a.ManaRegenerationBase * (1 + a.ManaRegenerationPercentage) + a.ManaRegenerationFlat;
-		a.DamageBaseMin = this.Raw.DamageMin + a[this.Raw.Type] + this.Ability.DamageBase;
-		a.DamageBaseMax = this.Raw.DamageMax + a[this.Raw.Type] + this.Ability.DamageBase;
+		a.DamageBaseMin = this.Raw.DamageMin + a[this.Raw.Type] + this.Ability.DamageBase + this.Buff.DamageBase;
+		a.DamageBaseMax = this.Raw.DamageMax + a[this.Raw.Type] + this.Ability.DamageBase + this.Buff.DamageBase;
 		a.DamageBase = Math.floor((a.DamageBaseMin + a.DamageBaseMax) / 2);
 		a.DamageBonus = this.Item.Damage + this.Ability.Damage + this.Buff.Damage + Math.floor(a.DamageBase * this.Buff.DamagePercentage);
 		a.AttackRate = this.Raw.AttackRate + this.Ability.AttackRate + this.Buff.AttackRate;
-		a.AttackSpeed = 100 + this.Item.AttackSpeed + a.Agility + this.Ability.AttackSpeed + this.Buff.AttackSpeed;
-		a.Range = this.Raw.Range + this.Ability.Range + this.Item.Range;
+		a.AttackSpeed = Math.max(Math.min(100 + a.Agility + this.Item.AttackSpeed + this.Ability.AttackSpeed + this.Buff.AttackSpeed, 600), 20);
+		a.Range = this.Raw.Range + this.Ability.Range + this.Item.Range + this.Buff.Range;
 		a.VisionDay = this.Raw.VisionDaytime;
 		a.VisionNight = this.Raw.VisionNighttime + this.Ability.VisionNight + this.Item.VisionNight;
 		a.Cost = this.Item.Cost;
+		a.AttackType = this.Buff.AttackType || this.Raw.AttackType;
+		a.ProjectileSpeed = this.Buff.ProjectileSpeed || this.Raw.ProjectileSpeed;
 		
 		this.Total = a;
 		this.updateTable();

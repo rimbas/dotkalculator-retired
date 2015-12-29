@@ -51,8 +51,9 @@ HeroTable.prototype.getValidColumnList = function() {
 			return validatedColumns;	
 		}
 	}
-	localStorage.setItem("tableColumns-" + this.ID, "Delete;Name;Portrait;Level;Strength;Agility;Intelligence;Health;Mana;Armor;Damage;AttackTime;Items;Abilities;Buffs");
-	return ["Delete", "Name", "Portrait", "Level", "Strength", "Agility", "Intelligence", "Health", "Mana", "Armor", "Damage", "AttackTime", "Items", "Abilities", "Buffs" ];
+	var defaultColumns = "Delete;Name;Team;Portrait;Level;Strength;Agility;Intelligence;Health;Mana;Armor;Damage;AttackTime;Items;Abilities;Buffs"
+	localStorage.setItem("tableColumns-" + this.ID, defaultColumns);
+	return defaultColumns.split(";");
 }
 
 HeroTable.prototype.evaluator = {};
@@ -750,6 +751,29 @@ HeroTable.addEvaluator({
 		cell.appendChild(label);
 	},
 	sorter: "firstChildText"
+})
+
+HeroTable.addEvaluator({
+	ID: "Range",
+	name: "Range",
+	header: "R",
+	type: "Base",
+	description: "Hero attack range",
+	eval: function(cell, heroInstance) {
+		cell.textContent = heroInstance.Total.Range
+	},
+	sorter: "number"
+})
+
+HeroTable.addEvaluator({
+	ID: "AttackType",
+	name: "Attack type",
+	header: "Type",
+	type: "Base",
+	description: "Hero attack type",
+	eval: function(cell, heroInstance) {
+		cell.textContent = heroInstance.Total.AttackType
+	}
 })
 
 

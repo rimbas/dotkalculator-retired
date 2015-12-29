@@ -59,19 +59,22 @@ ItemInstance.prototype.delete = function () {
 ItemInstance.prototype.activate = function() {
 	if (!this.Buff || this.Level < 1)
 		return;
-	if (this.Buff.NoTarget && this.Buff.Self) 
+	if (this.Buff.NoTarget && this.Buff.Self) {
+		var buffName = typeof this.Buff.Self === "string" ? this.Buff.Self : this.Buff.Name
 		this.heroRef.addBuff(
-			new BuffInstance(this.Buff.Name, {
+			new BuffInstance(buffName, {
 				level: this.Level, levelMax: this.LevelMax,	charges: this.Charges, chargesMax: this.ChargesMax
 			}), this.Buff.Refresh )
-	if (this.Buff.NoTarget && this.Buff.Teammates)
+	}
+	if (this.Buff.NoTarget && this.Buff.Teammates) {
+		var buffName = typeof this.Buff.Teammates === "string" ? this.Buff.Teammates : this.Buff.Name
 		for (var teammate of this.heroRef.getTeammates())
 			teammate.addBuff(
-				new BuffInstance(this.Buff.Name, {
+				new BuffInstance(buffName, {
 					level: this.Level, levelMax: this.LevelMax,	charges: this.Charges, chargesMax: this.ChargesMax
 			}), this.Buff.Refresh )
+	}
 }
-
 
 // Checks if all elements of array are valid ItemInstance objects
 ItemInstance.isValidArray = function( itemInstanceArray ) {

@@ -50,6 +50,10 @@ AbilityInstance.prototype.update = function () {
 	this.updateDisplayElement()
 	if (this.ownerBuff)
 		this.ownerBuff.update()
+	this.updateExternal();
+}
+
+AbilityInstance.prototype.updateExternal = function() {
 	for (var buff of this.buffReferences)
 		buff[1].update()
 }
@@ -57,17 +61,21 @@ AbilityInstance.prototype.update = function () {
 AbilityInstance.prototype.activate = function() {
 	if (!this.Buff || this.Level < 1)
 		return;
-	if (this.Buff.NoTarget && this.Buff.Self) 
+	if (this.Buff.NoTarget && this.Buff.Self) {
+		var buffName = typeof this.Buff.Self === "string" ? this.Buff.Self : this.Buff.Name
 		this.heroRef.addBuff(
-			new BuffInstance(this.Buff.Name, {
+			new BuffInstance(buffName, {
 				level: this.Level, levelMax: this.LevelMax,	charges: this.Charges, chargesMax: this.ChargesMax
 			}), this.Buff.Refresh )
-	if (this.Buff.NoTarget && this.Buff.Teammates)
+	}
+	if (this.Buff.NoTarget && this.Buff.Teammates) {
+		var buffName = typeof this.Buff.Teammates === "string" ? this.Buff.Teammates : this.Buff.Name
 		for (var teammate of this.heroRef.getTeammates())
 			teammate.addBuff(
-				new BuffInstance(this.Buff.Name, {
+				new BuffInstance(buffName, {
 					level: this.Level, levelMax: this.LevelMax,	charges: this.Charges, chargesMax: this.ChargesMax
 			}), this.Buff.Refresh )
+	}
 }
 
 AbilityInstance.prototype.delete = function () {
@@ -86,7 +94,10 @@ AbilityInstance.prototype.createDisplayElement = function() {
 	var div = document.createElement("div");
 	this.displayElement = div;
 	div.className = "item-display ability";
-	div.style.backgroundImage = "url(images/abilities/" + this.ID + ".png)";
+	if (this.Image)
+		div.style.backgroundImage = "url(images/abilities/" + this.Image + ".png)";
+	else
+		div.style.backgroundImage = "url(images/abilities/" + this.ID + ".png)";
 
 	if (typeof this.Charges === "number") {
 		var chargeElement = document.createElement("span");

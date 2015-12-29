@@ -34,7 +34,7 @@ ElementHelper.createDetailedTooltip = function ( object ) {
 		el.appendChild(document.createElement("br"));
 	}
 	
-	if ("Charges" in object && !object.LockedCharges) {
+	if ("Charges" in object && !object.emitterRef && !object.LockedCharges) {
 		var chargeLabel = document.createElement("span");
 		if (object.ChargesSemantic)
 			chargeLabel.textContent = object.ChargesSemantic.toString() + ":";
@@ -64,8 +64,8 @@ ElementHelper.createDetailedTooltip = function ( object ) {
 	
 	var statOrder = ["Strength", "Agility", "Intelligence", "Health", "Mana",
 		"HealthRegeneration", "ManaRegenerationPercentage", "ManaRegenerationFlat",
-		"Damage", "AttackSpeed", "MovementSpeed", "MovementSpeedPercentage",
-		"MagicalResistance", "Evasion", "Armor", "AttackRate", "Range"], 
+		"Damage", "DamageBase", "DamagePercentage", "AttackSpeed", "MovementSpeed", "MovementSpeedPercentage",
+		"MagicalResistance", "Evasion", "Armor", "AttackRate", "Range" ], 
 		statValues = {};
 	
 	for (var stat of statOrder)
@@ -84,8 +84,11 @@ ElementHelper.createDetailedTooltip = function ( object ) {
 			object.dynamicElements[stat] = valueLabel;
 		if (readable.isPercentage)
 			valueLabel.title = (statValues[stat] * object.heroRef.Total[readable.baseName]).toFixed(0);
-		if (statValues[stat] < 0) valueLabel.classList.add("negative");
-			valueLabel.textContent = readable.value;
+		if (readable.negativeOverride === undefined && statValues[stat] < 0)
+			valueLabel.classList.add("negative");
+		else if (readable.negativeOverride && statValues[stat] > 0) 
+			valueLabel.classList.add("negative");
+		valueLabel.textContent = readable.value;
 		el.appendChild(valueLabel);
 		var spanLabel = document.createElement("span");
 			spanLabel.className = "item-display-options label";
@@ -117,6 +120,8 @@ ElementHelper.createDetailedTooltip = function ( object ) {
 ElementHelper.updateDisplayElements = function ( object ) {
 	if (!object.displayElement)
 		return;
+	if (object.Image)
+		object.displayElement.style.backgroundImage = "url(images/abilities/" + object.Image + ".png)";
 	if (object.chargeElement)
 		object.chargeElement.textContent = object.Charges;
 	if (object.levelElement)
@@ -124,9 +129,20 @@ ElementHelper.updateDisplayElements = function ( object ) {
 	for (var stat in object.dynamicElements) {
 		var statValue = stat in object ? object[stat] : object.Family.Stats[stat];
 		var readable = DotaData.statToReadable(stat, statValue);
-		object.dynamicElements[stat].textContent = readable.value;
+		var dynElement = object.dynamicElements[stat]
+		dynElement.textContent = readable.value;
 		if (readable.isPercentage)
-			object.dynamicElements[stat].title = (statValue * object.heroRef.Total[readable.baseName+"Base"]).toFixed(2);
+			dynElement.title = (statValue * object.heroRef.Total[readable.baseName+"Base"]).toFixed(2);
+		if (readable.negativeOverride === undefined)
+			if (statValue < 0)
+				dynElement.classList.add("negative");
+			else 
+				dynElement.classList.remove("negative");
+		else if (readable.negativeOverride) 
+			if (statValue > 0)
+				dynElement.classList.add("negative");
+			else 
+				dynElement.classList.remove("negative");
 	}
 }
 
