@@ -2,7 +2,7 @@
 
 DotaData = {};
 DotaData.Versions = {}
-DotaData.NewestVersion = "6.86";  //working in valve time so badly, this was started in 6.84b // where's the 6.86 data?
+DotaData.NewestVersion = "6.86c";  //working in valve time so badly, this was started in 6.84b // where's the 6.86 data?
 DotaData.TargetVersion = DotaData.NewestVersion;
 
 // Returns a new instance of complete hero propery data

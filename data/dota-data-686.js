@@ -1,7 +1,7 @@
 
-// Now we wait for 6.86b
+// Now we wait for 6.86c
 
-DotaData.addVersion( "6.86", 
+DotaData.addVersion( "6.86c", 
 {
 	"Heroes": {
 		"_base": // Special base entry
@@ -38,7 +38,7 @@ DotaData.addVersion( "6.86",
 			"HealthRegeneration": 0.25,
 			"Mana": 0,
 			"ManaRegeneration": 0.01,
-			"Version": "6.86",
+			"Version": "6.86c",
 			"VisionDaytime": 1800,
 			"VisionNighttime": 800,
 			"Side": "Radiant"
@@ -3104,7 +3104,7 @@ DotaData.addVersion( "6.86",
 	"Items": {
 		"_base": {
 			"Name": "NO-DISPLAY-NAME",
-			"Version": "6.86",
+			"Version": "6.86c",
 			"Cost": 0
 		},
 		/* Consumables */
@@ -4548,8 +4548,8 @@ DotaData.addVersion( "6.86",
 	},
 	"Abilities": {
 		"_base": {
-			"Name": "Dummy ability",
-			"Version": "6.86",
+			"Name": "Unimplemented ability",
+			"Version": "6.86c",
 			"Level": 0,
 			"LevelMax": "4",
 			"Class": "Ability",
@@ -5737,6 +5737,12 @@ DotaData.addVersion( "6.86",
 			"LevelMax": 3,
 			"Restrictions": [6, 11, 16]
 		},
+	
+		/* 
+				 DPC_WATCHDOG_VIOLATION
+			I claim your uncommitted changes 
+		*/ 
+	
 		"pudge_flesh_heap": {
 			"Name": "Flesh Heap",
 			"Class": "Passive",
@@ -5757,7 +5763,7 @@ DotaData.addVersion( "6.86",
 		"_base": {
 			"Name": "Dummy buff",
 			"Image": "empty",
-			"Version": "6.86",
+			"Version": "6.86c",
 			"Class": "Buff"
 		},
 		"test_buff": {
