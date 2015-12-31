@@ -8,8 +8,8 @@ A table based Dota 2 hero stat comparison engine
 
 ### Current state
 * Base hero stats defined
-* Base item stats
-* Some ability definitions
+* Base item stats defined
+* Abilities that grant stats or self and team buffs
 * Only Webkit-based browser support for now
 
 ### Roadmap

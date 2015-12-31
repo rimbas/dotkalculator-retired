@@ -15,6 +15,7 @@ $(function(e){
 			new ItemInstance("butterfly"), 
 			new ItemInstance("power_treads_agility"),
 			new ItemInstance("sange_and_yasha"),
+			new ItemInstance("dragon_lance"),
 			new ItemInstance("mask_of_madness")
 		], 
 		abilities: {
@@ -42,21 +43,6 @@ $(function(e){
 			new ItemInstance("branches")
 		]
 	}));
-	MainTable.addHero(new HeroInstance("sniper", {
-		level: 11,
-		items: [
-			new ItemInstance("ring_of_aquila"),
-			new ItemInstance("dragon_lance"),
-			new ItemInstance("phase_boots"),
-		],
-		abilities: {
-			"sniper_headshot": 4,
-			"sniper_take_aim": 4,
-			"sniper_assassinate": 2,
-			"attribute_bonus": 1
-		},
-		team: "Magic"
-	}))
 	MainTable.addHero(new HeroInstance("alchemist", {
 		level: 25,
 		abilities: { 
@@ -68,8 +54,7 @@ $(function(e){
 		},
 		buffs: [ 
 			new BuffInstance("alchemist_chemical_rage_buff", { level: 3 }),
-			new BuffInstance("moon_shard_buff"),
-			new BuffInstance("ultimate_scepter_buff")
+			new BuffInstance("moon_shard_buff")
 		],
 		items: [
 			new ItemInstance("assault"),
@@ -79,9 +64,31 @@ $(function(e){
 			new ItemInstance("heart"),
 			new ItemInstance("moon_shard")
 		],
-		team: "Magic"
+		team: "Ghost"
 	}))
-	MainTable.addHero(new HeroInstance("templar_assassin"))
+	MainTable.addHero(new HeroInstance("crystal_maiden", {
+		team: "Ghost",
+		level: 25,
+		abilities: {
+			crystal_maiden_brilliance_aura: 4,
+			crystal_maiden_crystal_nova: 4,
+			crystal_maiden_frostbite: 4,
+			crystal_maiden_freezing_field: 3,
+			attribute_bonus: 10
+		},
+		items: [
+			new ItemInstance("blink"),
+			new ItemInstance("guardian_greaves"),
+			new ItemInstance("sheepstick"),
+			new ItemInstance("glimmer_cape"),
+			new ItemInstance("force_staff"),
+			new ItemInstance("cyclone"),
+			new ItemInstance("ward_observer", { charges: 99 })
+		],
+		buffs: [
+			new BuffInstance("ultimate_scepter_buff")
+		]
+	}))
 	
 	document.createVersionSelectors = function (init) {
 		optionCollection = [];

@@ -67,7 +67,8 @@ ElementHelper.createDetailedTooltip = function ( object ) {
 	
 	var statOrder = ["Strength", "Agility", "Intelligence", "Health", "Mana",
 		"HealthRegeneration", "ManaRegenerationPercentage", "ManaRegenerationFlat",
-		"Damage", "DamageBase", "DamagePercentage", "AttackSpeed", "MovementSpeed", "MovementSpeedPercentage",
+		"Damage", "DamageBase", "DamagePercentage", "DamageReductionPercentage", "DamageReduction",
+		"AttackSpeed", "MovementSpeed", "MovementSpeedPercentage",
 		"MagicalResistance", "Evasion", "Armor", "AttackRate", "Range" ], 
 		statValues = {};
 	
@@ -80,7 +81,10 @@ ElementHelper.createDetailedTooltip = function ( object ) {
 		for (var stat in object.Family.Stats)
 			statValues[stat] = object.Family.Stats[stat]
 	
-	for (var stat in statValues) {
+	//for (var stat in statValues) {
+	for (var stat of statOrder) {
+		if (statValues[stat] === undefined) 
+			continue;
 		var readable = DotaData.statToReadable(stat, statValues[stat]),
 			valueLabel = document.createElement("span");
 			valueLabel.className = "item-display-options value";
