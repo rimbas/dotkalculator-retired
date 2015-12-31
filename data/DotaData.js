@@ -129,17 +129,23 @@ DotaData.positiveNegativeStats = {
 DotaData.statToReadable = function(stat, val) {
 	var key = DotaData.readableStatStrings[stat] ? DotaData.readableStatStrings[stat] : stat,
 		isPercentage = false, //calculatable percentage (from a base value)
-		test = /^(\w+)Percentage$/.exec(stat);
-	if (test || stat == "Evasion" || stat == "MagicalResistance")
-		val = (val > 0 ? "+" : "" ) + (val * 100).toFixed(0)+"%";
-	if (test && test[1])
+		percentageTest = /^(\w+)Percentage$/.exec(stat),
+		printableValue = val;
+	if (percentageTest || stat == "Evasion" || stat == "MagicalResistance")
+		printableValue = (val > 0 ? "+" : "" ) + (val * 100).toFixed(0)+"%";
+	else if ( val != Math.trunc(val))
+		printableValue = (printableValue > 0 ? "+" : "") + printableValue.toFixed(2)
+	else
+		printableValue = printableValue > 0 ? "+" + printableValue : printableValue
+	if (percentageTest && percentageTest[1])
 		isPercentage = true;
 	return { 
 		key: key, 
-		value: val > 0 ? "+" + val : val,
-		isPercentage: isPercentage, 
+		value: printableValue,
+		isPercentage: isPercentage,
 		baseName: test ? test[1] : undefined, 
-		negativeOverride: DotaData.positiveNegativeStats[stat] };
+		negativeOverride: DotaData.positiveNegativeStats[stat] 
+	};
 }
 
 DotaData.numericToRoman = function(num) {

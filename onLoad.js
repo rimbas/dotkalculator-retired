@@ -19,6 +19,7 @@ $(function(e){
 		], 
 		abilities: {
 			"drow_ranger_frost_arrows": 4,
+			"drow_ranger_wave_of_silence": 4,
 			"drow_ranger_trueshot": 4, 
 			"drow_ranger_marksmanship": 3, 
 			"attribute_bonus": 1
@@ -44,7 +45,32 @@ $(function(e){
 			"sniper_take_aim": 4,
 			"sniper_assassinate": 2,
 			"attribute_bonus": 1
-		}
+		},
+		team: "Magic"
+	}))
+	MainTable.addHero(new HeroInstance("alchemist", {
+		level: 25,
+		abilities: { 
+			"alchemist_acid_spray": 4, 
+			"alchemist_unstable_concoction": 4,
+			"alchemist_goblins_greed": 4,
+			"alchemist_chemical_rage": 3 ,
+			"attribute_bonus": 10
+		},
+		buffs: [ 
+			new BuffInstance("alchemist_chemical_rage_buff", { level: 3 }),
+			new BuffInstance("moon_shard_buff"),
+			new BuffInstance("ultimate_scepter_buff")
+		],
+		items: [
+			new ItemInstance("assault"),
+			new ItemInstance("travel_boots_2"),
+			new ItemInstance("abyssal_blade"),
+			new ItemInstance("mjollnir"),
+			new ItemInstance("heart"),
+			new ItemInstance("moon_shard")
+		],
+		team: "Magic"
 	}))
 	
 	document.createVersionSelectors = function (init) {

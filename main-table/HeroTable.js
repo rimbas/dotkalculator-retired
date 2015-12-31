@@ -367,7 +367,7 @@ HeroTable.addEvaluator({
 	ID: "Health", 
 	name: "Health",
 	header: "HP",
-	type: "Derived",
+	type: "Base",
 	description: "Displays hero health",
 	eval: function(cell, heroInstance){
 		cell.textContent = heroInstance.Total.Health;
@@ -433,7 +433,7 @@ HeroTable.addEvaluator({
 	ID: "Mana", 
 	name: "Mana", 
 	header: "MP",
-	type: "Derived",
+	type: "Base",
 	description: "Displays hero mana",
 	eval: function(cell, heroInstance){
 		cell.textContent = heroInstance.Total.Mana;
@@ -445,7 +445,7 @@ HeroTable.addEvaluator({
 	ID: "Armor", 
 	name: "Armor", 
 	header: "⛨",
-	type: "Derived", //unicode shenanigans
+	type: "Base", //unicode shenanigans
 	description: "Displays hero armor",
 	eval: function(cell, heroInstance){
 		var bonus = heroInstance.Total.ArmorBonus
@@ -459,7 +459,7 @@ HeroTable.addEvaluator({
 	ID: "PhysicalReduction", 
 	name: "Physical resistance", 
 	header: "PR",
-	type: "Derived",
+	type: "Base",
 	description: "Shows physical damage reduction",
 	eval: function(cell, heroInstance) {
 		var armor = heroInstance.Total.Armor,
@@ -525,7 +525,7 @@ HeroTable.addEvaluator({
 	ID: "Damage",
 	name: "Damage",
 	header: "Dmg",
-	type: "Derived",
+	type: "Base",
 	description: "Displays hero attack damage",
 	eval: function(cell, hero){
 	var bonus = hero.Total.DamageBonus;
@@ -624,7 +624,7 @@ HeroTable.addEvaluator({
 	ID: "AttackSpeed",
 	name: "Attack Speed",
 	header: "AS",
-	type: "Derived",
+	type: "Base",
 	description: "Displays attack speed",
 	eval: function(cell, hero) {
 		cell.textContent = hero.Total.AttackSpeed;
@@ -702,7 +702,7 @@ HeroTable.addEvaluator({
 	ID: "NetWorth",
 	name: "Net Worth",
 	header: "NW",
-	type: "Base",
+	type: "Derived",
 	description: "Displays hero net worth",
 	eval: function(cell, hero) {
 		cell.textContent = hero.Total.Cost;
@@ -713,7 +713,7 @@ HeroTable.addEvaluator({
 	ID: "ManaRegen",
 	name: "Mana regeneration",
 	header: "MR",
-	type: "Derived",
+	type: "Base",
 	description: "Displays hero mana regeneration",
 	eval: function(cell, heroInstance) {
 		cell.textContent = heroInstance.Total.ManaRegeneration.toFixed(2)
@@ -725,7 +725,7 @@ HeroTable.addEvaluator({
 	ID: "HealthRegen",
 	name: "Health regeneration",
 	header: "HpR",
-	type: "Derived",
+	type: "Base",
 	description: "Displays hero health regeneration",
 	eval: function(cell, heroInstance) {
 		cell.textContent = heroInstance.Total.HealthRegeneration.toFixed(2)

@@ -1845,13 +1845,13 @@ DotaData.addVersion( "6.86c",
 			"Ability1": "phoenix_icarus_dive",
 			"Ability2": "phoenix_fire_spirits",
 			"Ability3": "phoenix_sun_ray",
-			"Ability4": "phoenix_sun_ray_toggle_move_empty",
-			"Ability5": "phoenix_supernova",
-			"Ability6": "phoenix_launch_fire_spirit",
-			"Ability7": "phoenix_icarus_dive_stop",
-			"Ability8": "phoenix_sun_ray_stop",
-			"Ability9": "phoenix_sun_ray_toggle_move",
-			"Ability10": "attribute_bonus",
+			//"Ability4": "phoenix_sun_ray_toggle_move_empty",
+			"Ability4": "phoenix_supernova",
+			//"Ability6": "phoenix_launch_fire_spirit",
+			//"Ability7": "phoenix_icarus_dive_stop",
+			//"Ability8": "phoenix_sun_ray_stop",
+			//"Ability9": "phoenix_sun_ray_toggle_move",
+			"Ability5": "attribute_bonus",
 			"AbilityLayout": 5,
 			"Armor": -2,
 			"AttackPoint": 0.35,
@@ -3640,8 +3640,12 @@ DotaData.addVersion( "6.86c",
 			"Section": "Common",
 			"SectionIndex": 12,
 			"AttackSpeed": 120,
-			"Buff": "moon_shard_buff",
-			"Flags": { NoTarget: 1, Self: 1, Refresh: "leave" }
+			"Buff": {
+				"Name": "moon_shard_buff", 
+				"NoTarget": true,
+				"Self": true, 
+				"Refresh": "leave" 
+			}
 		},
 		/* Support */
 		"ring_of_basilius": {
@@ -3684,8 +3688,13 @@ DotaData.addVersion( "6.86c",
 			"Agility": 2,
 			"Intelligence": 2,
 			"Armor": 5,
-			"Buff": "buckler_buff",
-			"Flags": { "NoTarget": 1, "Self": 1, "Teammates": 1, "Refresh": "leave" }
+			"Buff": {
+				"Name": "buckler_buff",
+				"NoTarget": true,
+				"Self": true,
+				"Teammates": true,
+				"Refresh": "leave" 
+			}
 		},
 		"urn_of_shadows": {
 			"Name": "Urn of Shadows",
@@ -3770,8 +3779,13 @@ DotaData.addVersion( "6.86c",
 			"Intelligence": 5,
 			"Armor": 5,
 			"Aura": "mekansm_aura",
-			"Buff": "mekansm_buff",
-			"Flags": { "NoTarget": 1, "Self": 1, "Teammates": 1, "Refresh": "leave" }
+			"Buff": {
+				"Name": "mekansm_buff",
+				"NoTarget": true,
+				"Self": true,
+				"Teammates": true,
+				"Refresh": "leave" 
+			}
 		},
 		"vladmir": {
 			"Name": "Vladmir's Offering",
@@ -3818,8 +3832,13 @@ DotaData.addVersion( "6.86c",
 			"SectionIndex": 0,
 			"AttackSpeed": 20,
 			"MagicalResistance": 0.15,
-			"Buff": "glimmer_cape_buff",
-			"Flags": { "NoTarget": 1, "Self": 1, "Teammates": 1, "Refresh": "leave"}
+			"Buff": {
+				"Name": "glimmer_cape_buff",
+				"NoTarget": true, 
+				"Self": 1, 
+				"Teammates": 1, 
+				"Refresh": "leave"
+			}
 		},
 		"force_staff": {
 			"Name": "Force Staff",
@@ -3982,8 +4001,12 @@ DotaData.addVersion( "6.86c",
 			"Intelligence": 10,
 			"Health": 200,
 			"Mana": 150,
-			"Buff": "ultimate_scepter_buff",
-			"Flags": { "NoTarget": 1, "Self": 1, "Refresh": "leave" }
+			"Buff": {
+				"Name": "ultimate_scepter_buff",
+				"NoTarget": true,
+				"Self": 1, 
+				"Refresh": "leave"
+			}
 		},
 		"refresher": {
 			"Name": "Refresher Orb",
@@ -4210,8 +4233,13 @@ DotaData.addVersion( "6.86c",
 			"Health": 250,
 			"HealthRegeneration": 6,
 			"Armor": 5,
-			"Buff": "crimson_guard_buff",
-			"Flags": { "NoTarget": 1, "Self": 1, "Teammates": 1, "Refresh": "leave" }
+			"Buff": {
+				"Name": "crimson_guard_buff", 
+				"NoTarget": true,
+				"Self": true,
+				"Teammates": true,
+				"Refresh": "leave"
+			}
 		},
 		"black_king_bar": {
 			"Name": "Black King Bar",
@@ -5003,10 +5031,15 @@ DotaData.addVersion( "6.86c",
 			"Name": "Elder dragon form",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 11, 16],
+			"Buff": {
+				"NoTarget": true,
+				"Self": "dragon_knight_elder_dragon_form_buff",
+				"Refresh": "override"
+			}
 		},
 		"drow_ranger_frost_arrows": {
-			"Name": "Fros arrows"
+			"Name": "Frost arrows"
 		},
 		"drow_ranger_wave_of_silence": {
 			"Name": "Wave of silence"
@@ -5189,7 +5222,14 @@ DotaData.addVersion( "6.86c",
 			"Restrictions": [6, 11, 16]
 		},
 		"huskar_inner_vitality":{
-			"Name": "Inner vitality"
+			"Name": "Inner vitality",
+			"Buff": {
+				"Name": "huskar_inner_vitality_buff",
+				"NoTarget": true,
+				"Self": true,
+				"Teammates": true,
+				"Refresh": "override"
+			}
 		},
 		"huskar_burning_spear":{
 			"Name": "Burning spear"
@@ -5736,12 +5776,135 @@ DotaData.addVersion( "6.86c",
 			"Class": "Ultimate",
 			"LevelMax": 3,
 			"Restrictions": [6, 11, 16]
+		},		
+		"obsidian_destroyer_arcane_orb": {
+			"Name": "Arcane orb",
+			"Buff": {
+				"NoTarget": true,
+				"Self": "obsidian_destroyer_arcane_orb_buff",
+				"Refresh": "override"
+			}
 		},
-	
-		/* 
-				 DPC_WATCHDOG_VIOLATION
-			I claim your uncommitted changes 
-		*/ 
+		"obsidian_destroyer_astral_imprisonment": {
+			"Name": "Astral"
+		},
+		"obsidian_destroyer_essence_aura": {
+			"Name": "Essence aura",
+			"Mana": function(){ return 75 * this.Level }
+		},
+		"obsidian_destroyer_sanity_eclipse": {
+			"Name": "Sanity's eclipse",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"ogre_magi_fireblast": {
+			"Name": "Fireblast"
+		},
+		"ogre_magi_ignite": {
+			"Name": "Ignite"
+		},
+		"ogre_magi_bloodlust": {
+			"Name": "Bloodlust",
+			"Buff": {
+				"Name": "ogre_magi_bloodlust_buff",
+				"Self": true,
+				"Teammates": true,
+				"NoTarget": true,
+				"Refresh": "override"	
+			}
+		},
+		"ogre_magi_unrefined_fireblast": {
+			"Name": "Unrefined fireblast"
+		},
+		"ogre_magi_multicast": {
+			"Name": "Multicast",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"omniknight_purification": {
+			"Name": "Purification"
+		},
+		"omniknight_repel": {
+			"Name": "Repel"
+		},
+		"omniknight_degen_aura": {
+			"Name": "Degen aura"
+		},
+		"omniknight_guardian_angel": {
+			"Name": "Guardian angel",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"oracle_fortunes_end": {
+			"Name": "Fortune's end"
+		},
+		"oracle_fates_edict": {
+			"Name": "Fate's edict"
+		},
+		"oracle_purifying_flames": {
+			"Name": "Purifying flames"
+		},
+		"oracle_false_promise": {
+			"Name": "False promise",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"phantom_assassin_stifling_dagger": {
+			"Name": "Stifling dagger"
+		},
+		"phantom_assassin_phantom_strike": {
+			"Name": "Phantom strike",
+			"Buff": {
+				"NoTarget": true,
+				"Self": "phantom_assassin_phantom_strike_buff",
+				"Refresh": "leave"
+			}
+		},
+		"phantom_assassin_blur": {
+			"Name": "Blur",
+			"Evasion": function(){ return this.Level > 0 ? 0.1 + 0.1 * this.Level : 0 } 
+		},
+		"phantom_assassin_coup_de_grace": {
+			"Name": "Coup de Grace",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"phantom_lancer_spirit_lance": {
+			"Name": "Spirit lance"
+		},
+		"phantom_lancer_doppelwalk": {
+			"Name": "Doppelganger"
+		},
+		"phantom_lancer_phantom_edge": {
+			"Name": "Phantom rush"
+		},
+		"phantom_lancer_juxtapose": {
+			"Name": "Juxtapose",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"phoenix_icarus_dive": {
+			"Name": "Icarus dive"
+		},
+		"phoenix_fire_spirits": {
+			"Name": "Fire spirits"
+		},
+		"phoenix_sun_ray": {
+			"Name": "Sun ray"
+		},
+		"phoenix_supernova": {
+			"Name": "Supernova",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+
 	
 		"pudge_flesh_heap": {
 			"Name": "Flesh Heap",
@@ -5892,6 +6055,15 @@ DotaData.addVersion( "6.86c",
 			"MovementSpeedPercentage": 0.14,
 			"HealthRegeneration": function() { return this.Level > 0 ? this.Level * 10 : 0 }
 		},
+		"dragon_knight_elder_dragon_form_buff": {
+			"Name": "Elder Dragon form",
+			"Image": "dragon_knight_elder_dragon_form",
+			"Level": 0,
+			"LockedLevel": true,
+			"MovementSpeed": 25,
+			"Range": 372,
+			"AttackType": "Ranged"
+		},
 		"drow_ranger_trueshot_aura": {
 			"Name": "Precision aura",
 			"Class": "Aura",
@@ -5917,6 +6089,19 @@ DotaData.addVersion( "6.86c",
 			"Level": 0,
 			"LockedLevel": true,
 			"DamagePercentage": function() { return this.Level }
+		},
+		"huskar_inner_vitality_buff": {
+			"Name": "Inner vitality",
+			"Image": "huskar_inner_vitality",
+			"Level": 0,
+			"LockedLevel": true,
+			"Charges": 0,
+			"ChargesMax": 1,
+			"ChargesSemantic": "Treshold",
+			"HealthRegeneration": function() {
+				var primaryAtt = this.heroRef ? this.heroRef.Total[this.heroRef.Raw.Type] : 0;
+				return primaryAtt * this.Level * 0.05 * (this.Charges ? 4 : 1)
+			}
 		},
 		"invoker_ghost_walk_buff": {
 			"Name": "Ghost walk",
@@ -6023,6 +6208,28 @@ DotaData.addVersion( "6.86c",
 			"LockedLevel": true,
 			"MovementSpeedPercentage": function(){ return 0.14 + 0.02 * this.Level },
 			"Damage": function(){ return 100 + 150 * this.Level } 	
+		},
+		"obsidian_destroyer_arcane_orb_buff": {
+			"Name": "Arcane orb",
+			"Image": "obsidian_destroyer_arcane_orb",
+			"Level": 0,
+			"LockedLevel": true,
+			"Charges": 0,
+			"ChargesSemantic": "Stolen int",
+			"Intelligence": function(){ return (1+this.Level)*this.Charges }	
+		},
+		"ogre_magi_bloodlust_buff": {
+			"Name": "Bloodlust",
+			"Image": "ogre_magi_bloodlust",
+			"Level": 0,
+			"LockedLevel": true,
+			"MovementSpeed": function(){ return 0.08 + 0.02 * this.Level },
+			"AttackSpeed": function(){ return 20 + 10 * this.Level }
+		},
+		"phantom_assassin_phantom_strike_buff":{
+			"Name": "Phantom strike",
+			"Image": "phantom_assassin_phantom_strike",
+			"AttackSpeed": 130
 		},
 		
 		/* Item origin buffs */
