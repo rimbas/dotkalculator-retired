@@ -6933,6 +6933,8 @@ DotaData.addVersion( "6.86c",
 		"clinkz_strafe_buff": {
 			"Name": "Strafe",
 			"Image": "clinkz_strafe",
+			"Level": 0,
+			"LockedLevel": true,
 			"Class": "Buff",
 			"AttackSpeed": 130
 		},
@@ -7171,11 +7173,15 @@ DotaData.addVersion( "6.86c",
 		"phantom_assassin_phantom_strike_buff":{
 			"Name": "Phantom strike",
 			"Image": "phantom_assassin_phantom_strike",
+			"Level": 0,
+			"LockedLevel": true,
 			"AttackSpeed": 130
 		},
 		"pugna_decrepify_buff": {
 			"Name": "Decrepify",
 			"Image": "pugna_decrepify",
+			"Level": 0,
+			"LockedLevel": true,
 			"MagicalResistance": -0.25	
 		},
 		"razor_static_link_buff": {
@@ -7215,6 +7221,8 @@ DotaData.addVersion( "6.86c",
 		"spectre_spectral_dagger_buff": {
 			"Name": "Spectral dagger",
 			"Image": "spectre_spectral_dagger",
+			"Level": 0,
+			"LockedLevel": true,
 			"MovementSpeedPercentage": function(){ return 0.04 + 0.04 * this.Level }	
 		},
 		"spirit_breaker_empowering_haste_aura": {
@@ -7241,6 +7249,8 @@ DotaData.addVersion( "6.86c",
 		"storm_spirit_electric_vortex_self": {
 			"Name": "Electric vortex",
 			"Image": "storm_spirit_electric_vortex",
+			"Level": 0,
+			"LockedLevel": true,
 			"MovementSpeedPercentage": -0.5	
 		},
 		"sven_warcry_buff": {
@@ -7298,6 +7308,8 @@ DotaData.addVersion( "6.86c",
 		},
 		"ursa_overpower_buff": {
 			"Name": "Overpower",
+			"Level": 0,
+			"LockedLevel": true,
 			"Image": "ursa_overpower",
 			"AttackSpeed": 400	
 		},
@@ -7325,6 +7337,8 @@ DotaData.addVersion( "6.86c",
 		"windrunner_windrun_buff": {
 			"Name": "Windrun",
 			"Image": "windrunner_windrun",
+			"Level": 0,
+			"LockedLevel": true,
 			"Evasion": 1,
 			"MovementSpeedPercentage": 0.5	
 		},
