@@ -72,6 +72,7 @@ $(function(e){
 		],
 		team: "Magic"
 	}))
+	MainTable.addHero(new HeroInstance("shredder", { abilities: {"shredder_reactive_armor": 0} }))
 	
 	document.createVersionSelectors = function (init) {
 		optionCollection = [];

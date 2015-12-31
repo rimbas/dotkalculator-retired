@@ -27,6 +27,8 @@ ElementHelper.createDetailedTooltip = function ( object ) {
 		levelInput.className = "mini-spinner";
 		levelInput.onchange = (function(e,u){
 			object.Level = Number.parseInt(e.target.value);
+			if ("Charges" in object && "ChargesMax" in object)
+				object.Charges = Math.min(object.Charges, object.ChargesMax);
 			object.update()
 		})
 		el.appendChild(levelInput);
@@ -49,8 +51,8 @@ ElementHelper.createDetailedTooltip = function ( object ) {
 		var chargeInput = document.createElement("input");
 		chargeInput.style.width = "3em";
 		chargeInput.value = object.Charges;
-		chargeInput.min = typeof object.ChargesMin == "number" ? object.ChargesMin : 0;
-		chargeInput.max = object.ChargesMax || 1000;
+		chargeInput.min = (typeof object.ChargesMin == "number") ? object.ChargesMin : 0;
+		chargeInput.max = (typeof object.ChargesMax == "number") ? object.ChargesMax : 1000;
 		chargeInput.type = "number";
 		chargeInput.className = "mini-spinner";
 		chargeInput.onchange = (function(e,u) {
@@ -58,6 +60,7 @@ ElementHelper.createDetailedTooltip = function ( object ) {
 			object.update()
 		})
 		el.appendChild(chargeInput);
+		object.chargeInput = chargeInput
 		
 		el.appendChild(document.createElement("br"));
 	}
@@ -124,6 +127,14 @@ ElementHelper.updateDisplayElements = function ( object ) {
 		object.displayElement.style.backgroundImage = "url(images/abilities/" + object.Image + ".png)";
 	if (object.chargeElement)
 		object.chargeElement.textContent = object.Charges;
+	if (object.chargeInput) {
+		object.chargeInput.value = object.Charges;
+		if (typeof object.ChargesMin == "number")
+			object.chargeInput.min = object.ChargesMin;
+		if (typeof object.ChargesMax == "number")
+			object.chargeInput.max = object.ChargesMax;
+	}
+		
 	if (object.levelElement)
 		object.levelElement.textContent = DotaData.numericToRoman(object.Level);
 	for (var stat in object.dynamicElements) {

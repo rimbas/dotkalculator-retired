@@ -2036,8 +2036,8 @@ DotaData.addVersion( "6.86c",
 		"riki": {
 			"Name": "Riki",
 			"Ability1": "riki_smoke_screen",
-			"Ability2": "riki_permanent_invisibility",
-			"Ability3": "riki_blink_strike",
+			"Ability2": "riki_blink_strike",
+			"Ability3": "riki_permanent_invisibility",
 			"Ability4": "riki_tricks_of_the_trade",
 			"Armor": 0,
 			"AttackPoint": 0.3,
@@ -2062,16 +2062,16 @@ DotaData.addVersion( "6.86c",
 		"rubick": {
 			"Name": "Rubick",
 			"Ability1": "rubick_telekinesis",
-			"Ability10": "rubick_hidden2",
-			"Ability11": "rubick_hidden3",
-			"Ability2": "rubick_telekinesis_land",
-			"Ability3": "rubick_fade_bolt",
-			"Ability4": "rubick_null_field",
-			"Ability5": "rubick_empty1",
-			"Ability6": "rubick_empty2",
-			"Ability7": "rubick_spell_steal",
-			"Ability8": "attribute_bonus",
-			"Ability9": "rubick_hidden1",
+			//"Ability2": "rubick_telekinesis_land",
+			"Ability2": "rubick_fade_bolt",
+			"Ability3": "rubick_null_field",
+			//"Ability5": "rubick_empty1",
+			//"Ability6": "rubick_empty2",
+			"Ability4": "rubick_spell_steal",
+			"Ability5": "attribute_bonus",
+			//"Ability9": "rubick_hidden1",
+			//"Ability10": "rubick_hidden2",
+			//"Ability11": "rubick_hidden3",
 			"AbilityLayout": 6,
 			"Armor": -1.0,
 			"AttackPoint": 0.4,
@@ -2178,11 +2178,11 @@ DotaData.addVersion( "6.86c",
 			"Ability1": "shredder_whirling_death",
 			"Ability2": "shredder_timber_chain",
 			"Ability3": "shredder_reactive_armor",
-			"Ability4": "shredder_chakram_2",
-			"Ability5": "shredder_return_chakram_2",
-			"Ability6": "shredder_chakram",
-			"Ability7": "shredder_return_chakram",
-			"Ability8": "attribute_bonus",
+			//"Ability4": "shredder_chakram_2",
+			//"Ability5": "shredder_return_chakram_2",
+			"Ability4": "shredder_chakram",
+			//"Ability7": "shredder_return_chakram",
+			"Ability5": "attribute_bonus",
 			"AbilityLayout": 4,
 			"Armor": -2,
 			"AttackPoint": 0.36,
@@ -5904,8 +5904,30 @@ DotaData.addVersion( "6.86c",
 			"LevelMax": 3,
 			"Restrictions": [6, 11, 16]
 		},
-
-	
+		"puck_illusory_orb": {
+			"Name": "Illusory orb"
+		},
+		"puck_waning_rift": {
+			"Name": "Waning rift"
+		},
+		"puck_phase_shift": {
+			"Name": "Phase shift"
+		},
+		"puck_ethereal_jaunt": {
+			"Name": "Ethereal jaunt"
+		},
+		"puck_dream_coil": {
+			"Name": "Dream coil",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"pudge_meat_hook": {
+			"Name": "Meat hook"
+		},
+		"pudge_rot": {
+			"Name": "Rot"
+		},
 		"pudge_flesh_heap": {
 			"Name": "Flesh Heap",
 			"Class": "Passive",
@@ -5915,6 +5937,185 @@ DotaData.addVersion( "6.86c",
 			"Strength": function() { return Math.floor(this.Level > 0 ? (0.5 + this.Level * 0.5) * this.Charges : 0) },
 			"MagicalResistance": function() { return this.Level > 0 ? 0.04 + this.Level * 0.02 : 0 }
 		},
+		"pudge_dismember": {
+			"Name": "Dismember",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"pugna_nether_blast": {
+			"Name": "Nether blast"
+		},
+		"pugna_decrepify": {
+			"Name": "Decrepify",
+			"Buff": {
+				"Name": "pugna_decrepify_buff",
+				"NoTarget": true,
+				"Self": true,
+				"Teammates": true,
+				"Refresh": "override"	
+			}
+		},
+		"pugna_nether_ward": {
+			"Name": "Nether ward"
+		},
+		"pugna_life_drain": {
+			"Name": "Life drain",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"queenofpain_shadow_strike": {
+			"Name": "Shadow strike"
+		},
+		"queenofpain_blink": {
+			"Name": "Blink"
+		},
+		"queenofpain_scream_of_pain": {
+			"Name": "Scream of pain"
+		},
+		"queenofpain_sonic_wave": {
+			"Name": "Sonic wave",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"rattletrap_battery_assault": {
+			"Name": "Battery assault"
+		},
+		"rattletrap_power_cogs": {
+			"Name": "Power cogs"
+		},
+		"rattletrap_rocket_flare": {
+			"Name": "Rocket flare"
+		},
+		"rattletrap_hookshot": {
+			"Name": "Hookshot",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"razor_plasma_field": {
+			"Name": "Plasma field"
+		},
+		"razor_static_link": {
+			"Name": "Static link",
+			"Buff": {
+				"NoTarget": true,
+				"Self": "razor_static_link_buff",
+				"Refresh": "override"	
+			}
+		},
+		"razor_unstable_current": {
+			"Name": "Unstable current"
+		},
+		"razor_eye_of_the_storm": {
+			"Name": "Eye of the storm",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"riki_smoke_screen": {
+			"Name": "Smoke screen"
+		},
+		"riki_permanent_invisibility": {
+			"Name": "Cloak and dagger"
+		},
+		"riki_blink_strike": {
+			"Name": "Blink strike"
+		},
+		"riki_tricks_of_the_trade": {
+			"Name": "Tricks of the trade",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"rubick_telekinesis": {
+			"Name": "Telekinesis"
+		},
+		"rubick_fade_bolt": {
+			"Name": "Fade bolt"
+		},
+		"rubick_null_field": {
+			"Name": "Null field",
+			"Aura": "rubick_null_field_aura"
+		},
+		"rubick_spell_steal": {
+			"Name": "Spell steal",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"sand_king_burrowstrike": {
+			"Name": "Burrowstrike"
+		},
+		"sand_king_sand_storm": {
+			"Name": "Sand storm"
+		},
+		"sand_king_caustic_finale": {
+			"Name": "Caustic finale"
+		},
+		"sand_king_epicenter": {
+			"Name": "Epicenter",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"shadow_demon_disruption": {
+			"Name": "Disruption"
+		},
+		"shadow_demon_soul_catcher": {
+			"Name": "Soul catcher"
+		},
+		"shadow_demon_shadow_poison": {
+			"Name": "Shadow poison"
+		},
+		"shadow_demon_shadow_poison_release": {
+			"Name": "Shadow poison release"
+		},
+		"shadow_demon_demonic_purge": {
+			"Name": "Demonic purge",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"shadow_shaman_ether_shock": {
+			"Name": "Ether shock"
+		},
+		"shadow_shaman_voodoo": {
+			"Name": "Hex"
+		},
+		"shadow_shaman_shackles": {
+			"Name": "Shackles"
+		},
+		"shadow_shaman_mass_serpent_ward": {
+			"Name": "Mass serpent ward",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"shredder_whirling_death": {
+			"Name": "Whirling death"
+		},
+		"shredder_timber_chain": {
+			"Name": "Timber chain"
+		},
+		"shredder_reactive_armor": {
+			"Name": "Reactive armor",
+			"Charges": 1,
+			"ChargesMax": function() { return this.Level * 5 },
+			"ChargesSemantic": "Stacks",
+			"Armor": function(){ return this.Charges },
+			"HealthRegeneration": function(){ return this.Charges }
+		},
+		"shredder_chakram": {
+			"Name": "Chakram",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+
+	
 		"viper_corrosive_skin": {
 			"Name": "Corrosive skin",
 			"Class": "Passive",
@@ -6230,6 +6431,40 @@ DotaData.addVersion( "6.86c",
 			"Name": "Phantom strike",
 			"Image": "phantom_assassin_phantom_strike",
 			"AttackSpeed": 130
+		},
+		"pugna_decrepify_buff": {
+			"Name": "Decrepify",
+			"Image": "pugna_decrepify",
+			"MagicalResistance": -0.25	
+		},
+		"razor_static_link_buff": {
+			"Name": "Static link",
+			"Image": "razor_static_link",
+			"Level": 0,
+			"LockedLevel": true,
+			"Charges": 1,
+			"ChargesMin": 1,
+			"ChargesMax": 33,
+			"ChargesSemantic": "Steal instances",
+			"Warning": "Full duration (8 seconds) is 33 steal instances",
+			"Damage": function(){
+				return Math.floor(this.Level / 4 * 7 * this.Charges);	
+			}
+		},
+		"rubick_null_field_aura": {
+			"Name": "Null field",
+			"Class": "Aura",
+			"Image": "rubick_null_field",
+			"Level": function() {
+				return this.emitterRef ? this.emitterRef.Level : -1;
+			},
+			"MagicalResistance": function () {
+				if (!this.emitterRef) {
+					console.warn("Buff without required emitter!");
+					return 0;
+				}
+				return this.Level * 0.05
+			}
 		},
 		
 		/* Item origin buffs */
