@@ -2668,10 +2668,10 @@ DotaData.addVersion( "6.86c",
 			"Name": "Troll Warlord",
 			"Ability1": "troll_warlord_berserkers_rage",
 			"Ability2": "troll_warlord_whirling_axes_ranged",
-			"Ability3": "troll_warlord_whirling_axes_melee",
-			"Ability4": "troll_warlord_fervor",
-			"Ability5": "troll_warlord_battle_trance",
-			"Ability6": "attribute_bonus",
+			//"Ability3": "troll_warlord_whirling_axes_melee",
+			"Ability3": "troll_warlord_fervor",
+			"Ability4": "troll_warlord_battle_trance",
+			"Ability5": "attribute_bonus",
 			"Armor": -1,
 			"AttackPoint": 0.3,
 			"AttackType": "Ranged",
@@ -2697,10 +2697,10 @@ DotaData.addVersion( "6.86c",
 			"Ability1": "tusk_ice_shards",
 			"Ability2": "tusk_snowball",
 			"Ability3": "tusk_frozen_sigil",
-			"Ability4": "tusk_launch_snowball",
+			//"Ability4": "tusk_launch_snowball",
+			"Ability4": "tusk_walrus_punch",
 			"Ability5": "tusk_walrus_kick",
-			"Ability6": "tusk_walrus_punch",
-			"Ability7": "attribute_bonus",
+			"Ability6": "attribute_bonus",
 			"AbilityLayout": 5,
 			"Armor": 0.0,
 			"AttackPoint": 0.36,
@@ -4812,17 +4812,10 @@ DotaData.addVersion( "6.86c",
 			"LevelMax": 3,
 			"Restrictions": [6, 11, 16],
 			"Charges": 0,
-			"ChargesMax": 7,
-			"MovementSpeedPercentage":
-				function() { 
-					if ( this.Charges < 1 || this.Level < 1 ) return 0;
-					return (0.02 + 0.01 * this.Level) * Math.min(this.Charges, 4 + this.Level)
-				},
-			"AttackSpeed": 
-				function() { 
-					if ( this.Charges < 1 || this.Level < 1 ) return 0;
-					return (15 + 5 * this.Level) * Math.min(this.Charges, 4 + this.Level)
-				},
+			"ChargesMax": function(){ return this.Level > 0 ? 4 + this.Level : 0 },
+			"ChargesSemantic": "Stacks",
+			"MovementSpeedPercentage": function() { return (0.02 + 0.01 * this.Level) * this.Charges },
+			"Damage": function() { return (15 + 5 * this.Level) * this.Charges  }
 		},
 		"broodmother_spawn_spiderlings": {
 			"Name": "Spawn spiderlings"
@@ -5722,7 +5715,8 @@ DotaData.addVersion( "6.86c",
 		"nevermore_necromastery": {
 			"Name": "Necromastery",
 			"Charges": 0,
-			"ChargesMax": 36,
+			"ChargesMax": function(){ return [0, 15, 22, 29, 36][this.Level] || 0 },
+			"ChargesSemantic": "Souls",
 			"Damage": function(){ return Math.min(this.Charges, 8 + 7 * this.Level) * 2 }
 		},
 		"nevermore_dark_lord": {
@@ -5935,6 +5929,7 @@ DotaData.addVersion( "6.86c",
 			"Level": 0,
 			"LevelMax": 4,
 			"Charges": 0,
+			"ChargesSemantic": "Stacks",
 			"Strength": function() { return Math.floor(this.Level > 0 ? (0.5 + this.Level * 0.5) * this.Charges : 0) },
 			"MagicalResistance": function() { return this.Level > 0 ? 0.04 + this.Level * 0.02 : 0 }
 		},
@@ -6245,7 +6240,7 @@ DotaData.addVersion( "6.86c",
 		},
 		"spirit_breaker_empowering_haste": {
 			"Name": "Empowering haste",
-			"Aura": "spirit_breaker_empowering_haste",
+			"Aura": "spirit_breaker_empowering_haste_aura",
 			"Charges": 0,
 			"ChargesMax": 2,
 			"ChargesSemantic": "Active status",
@@ -6387,12 +6382,254 @@ DotaData.addVersion( "6.86c",
 			"LevelMax": 3,
 			"Restrictions": [6, 11, 16]
 		},
-		
+		"tidehunter_gush": {
+			"Name": "Gush"
+		},
+		"tidehunter_kraken_shell": {
+			"Name": "Kraken shell"
+		},
+		"tidehunter_anchor_smash": {
+			"Name": "Anchor smash"
+		},
+		"tidehunter_ravage": {
+			"Name": "Ravage",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"tinker_laser": {
+			"Name": "Laser"
+		},
+		"tinker_heat_seeking_missile": {
+			"Name": "Heat seeking missile"
+		},
+		"tinker_march_of_the_machines": {
+			"Name": "March of the machines"
+		},
+		"tinker_rearm": {
+			"Name": "Rearm",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"tiny_avalanche": {
+			"Name": "Avalance"
+		},
+		"tiny_toss": {
+			"Name": "Toss"
+		},
+		"tiny_craggy_exterior": {
+			"Name": "Craggy exterior",
+			"Armor": function(){ return this.Level > 0 ? 1 + this.Level : 0 }
+		},
+		"tiny_grow": {
+			"Name": "Grow",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16],
+			"DamageBase": function(){ return 50 * this.Level },
+			"MovementSpeed": function(){ return this.Level > 0 ? 30 + 1 * this.Level : 0 },
+			"AttackSpeed": function(){ return this.Level > 0 ? -5 - 15 * this.Level : 0 }
+		},
+		"treant_natures_guise": {
+			"Name": "Nature's guise"
+		},
+		"treant_leech_seed": {
+			"Name": "Leech seed"
+		},
+		"treant_living_armor": {
+			"Name": "Living armor"
+		},
+		"treant_eyes_in_the_forest": {
+			"Name": "Eyes in the forest"
+		},
+		"treant_overgrowth": {
+			"Name": "Overgrowth",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"troll_warlord_berserkers_rage": {
+			"Name": "Berserker's rage",
+			"Charges": 0,
+			"ChargesMax": 1,
+			"ChargesSemantic": "Active",
+			"MovementSpeed": function(){ return this.Charges ? 10 * this.Level : 0},
+			"AttackRate": function(){ return this.Charges ? -0.15 : 0},
+			"Armor": function(){ return this.Charges ? 3 : 0 },
+			"Health": function(){ return this.Charges ? 100 : 0 }
+		},
+		"troll_warlord_whirling_axes_ranged": {
+			"Name": "Whirling axes (ranged)"
+		},
+		"troll_warlord_whirling_axes_melee": {
+			"Name": "Whirling axe (melee)"
+		},
+		"troll_warlord_fervor": {
+			"Name": "Fervor",
+			"Charges": 0,
+			"ChargesMax": 6,
+			"ChargesSemantic": "Stacks",
+			"AttackSpeed": function(){ return this.Level > 0 ? (10 + 5 * this.Level) * this.Charges : 0 }
+		},
+		"troll_warlord_battle_trance": {
+			"Name": "Battle trance",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16],
+			"Buff": {
+				"Name": "troll_warlord_battle_trance_buff",
+				"NoTarget": true,
+				"Self": true,
+				"Teammates": true,
+				"Refresh": "override"	
+			}
+		},
+		"tusk_ice_shards": {
+			"Name": "Ice shards"
+		},
+		"tusk_snowball": {
+			"Name": "Snowball"
+		},
+		"tusk_frozen_sigil": {
+			"Name": "Frozen sigil"
+		},
+		"tusk_walrus_punch": {
+			"Name": "",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"tusk_walrus_kick": {
+			"Name": "Walrus kick",
+			"LevelMax": 1 
+		},
+		"undying_decay": {
+			"Name": "Decay",
+			"Charges": 0,
+			"ChargesSemantic": "Stolen str",
+			"Strength": function(){ return 4 * this.Charges }
+		},
+		"undying_soul_rip": {
+			"Name": "Soul rip"
+		},
+		"undying_tombstone": {
+			"Name": "Tombstone"
+		},
+		"undying_flesh_golem": {
+			"Name": "Flesh golem",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"ursa_earthshock": {
+			"Name": "Earthshock"
+		},
+		"ursa_overpower": {
+			"Name": "Overpower",
+			"Buff": {
+				"NoTarget": true,
+				"Self": "ursa_overpower_buff",
+				"Refresh": "override"	
+			}
+		},
+		"ursa_fury_swipes": {
+			"Name": "Fury swipes",
+			"Charges": 0,
+			"ChargesSemantic": "Stacks",
+			"Damage": function() { return this.Level > 0 ? (10 + 5 * this.Level) * this.Charges : 0 }
+		},
+		"ursa_enrage": {
+			"Name": "Enrage",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"vengefulspirit_magic_missile": {
+			"Name": "Magic missile"
+		},
+		"vengefulspirit_wave_of_terror": {
+			"Name": "Wave of terror"
+		},
+		"vengefulspirit_command_aura": {
+			"Name": "Vengeance aura",
+			"Aura": "vegefulspirit_command_aura_aura"
+		},
+		"vengefulspirit_nether_swap": {
+			"Name": "Nether swap",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"venomancer_venomous_gale": {
+			"Name": "Venomous gale"
+		},
+		"venomancer_poison_sting": {
+			"Name": "Poison sting"
+		},
+		"venomancer_plague_ward": {
+			"Name": "Plague ward"
+		},
+		"venomancer_poison_nova": {
+			"Name": "Poison nova",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"viper_poison_attack": {
+			"Name": "Poison attack"
+		},
+		"viper_nethertoxin": {
+			"Name": "Nethertoxin"
+		},
 		"viper_corrosive_skin": {
 			"Name": "Corrosive skin",
 			"Class": "Passive",
 			"MagicalResistance": function() { return this.Level > 0 ? 0.05 + this.Level * 0.05 : 0 }
 		},
+		"viper_viper_strike": {
+			"Name": "Viper strike",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"visage_grave_chill": {
+			"Name": "Grave chill"
+		},
+		"visage_soul_assumption": {
+			"Name": "Soul assumption"
+		},
+		"visage_gravekeepers_cloak": {
+			"Name": "Gravekeeper's cloak",
+			"Charges": 4,
+			"ChargesMax": 4,
+			"ChargesSemantic": "Layers",
+			"Armor": function(){ return ([0, 1, 2, 4, 5][this.Level] || 0) * this.Charges },
+			"MagicalResistance": function(){ return 0.03 * this.Level * this.Charges }
+		},
+		"visage_summon_familiars": {
+			"Name": "Summon familiars",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"warlock_fatal_bonds": {
+			"Name": "Fatal bonds"
+		},
+		"warlock_shadow_word": {
+			"Name": "Shadow word"
+		},
+		"warlock_upheaval": {
+			"Name": "Upheaval"
+		},
+		"warlock_rain_of_chaos": {
+			"Name": "Chaotic offering",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		
+		
 
 	},
 	"Buffs": {
@@ -6444,11 +6681,10 @@ DotaData.addVersion( "6.86c",
 			"Class": "Aura",
 			"Image": "beastmaster_inner_beast",
 			"Level": function() {
-				return this.emitterRef ? this.emitterRef.Level : -1;
+				return this.emitterRef ? this.emitterRef.Level : 0;
 			},
 			"AttackSpeed": function () {
 				if (!this.emitterRef) {
-					console.warn("Buff without required emitter!");
 					return 0;
 				}
 				if (this.emitterRef.Level > 0)
@@ -6497,11 +6733,10 @@ DotaData.addVersion( "6.86c",
 			"Name": "Arcane aura",
 			"Class": "Aura",
 			"Image": "crystal_maiden_brilliance_aura",
-			"Level": function() { return this.emitterRef ? this.emitterRef.Level : -1 },
+			"Level": function() { return this.emitterRef ? this.emitterRef.Level : 0 },
 			"ManaRegenerationFlat": function() {
-					if (!this.emitterRef) { 
-						console.warn("Buff without required emitter!");
-						return 0; }
+					if (!this.emitterRef) 
+						return 0;
 					if (this.Level < 1)
 						return 0;
 					if (this.heroRef.AbilityIds.crystal_maiden_brilliance_aura) 
@@ -6542,13 +6777,12 @@ DotaData.addVersion( "6.86c",
 			"Class": "Aura",
 			"Image": "drow_ranger_trueshot",
 			"Level": function() {
-				return this.emitterRef ? this.emitterRef.Level : -1;
+				return this.emitterRef ? this.emitterRef.Level : 0;
 			},
 			"Damage": 
 				function() {
-					if (!this.emitterRef) { 
-						console.warn("Buff without required emitter!");
-						return 0; }
+					if (!this.emitterRef)
+						return 0;
 					if (this.heroRef.Total.AttackType != "Ranged") 
 						return 0;
 					if (this.emitterRef.Level > 0)
@@ -6649,13 +6883,11 @@ DotaData.addVersion( "6.86c",
 			"Class": "Aura",
 			"Image": "luna_lunar_blessing",
 			"Level": function() {
-				return this.emitterRef ? this.emitterRef.Level : -1;
+				return this.emitterRef ? this.emitterRef.Level : 0;
 			},
 			"Damage": function () {
-				if (!this.emitterRef) {
-					console.warn("Buff without required emitter!");
+				if (!this.emitterRef)
 					return 0;
-				}
 				if (this.emitterRef.Level > 0)
 					return 6 + this.emitterRef.Level * 8;
 				return 0;
@@ -6728,13 +6960,11 @@ DotaData.addVersion( "6.86c",
 			"Class": "Aura",
 			"Image": "rubick_null_field",
 			"Level": function() {
-				return this.emitterRef ? this.emitterRef.Level : -1;
+				return this.emitterRef ? this.emitterRef.Level : 0;
 			},
 			"MagicalResistance": function () {
-				if (!this.emitterRef) {
-					console.warn("Buff without required emitter!");
+				if (!this.emitterRef)
 					return 0;
-				}
 				return this.Level * 0.05
 			}
 		},
@@ -6749,6 +6979,27 @@ DotaData.addVersion( "6.86c",
 			"Name": "Spectral dagger",
 			"Image": "spectre_spectral_dagger",
 			"MovementSpeedPercentage": function(){ return 0.04 + 0.04 * this.Level }	
+		},
+		"spirit_breaker_empowering_haste_aura": {
+			"Name": "Empowering haste",
+			"Class": "Aura",
+			"Image": "spirit_breaker_empowering_haste",
+			"Level": function() {
+				return this.emitterRef ? this.emitterRef.Level : 0;
+			},
+			"Charges": function() {
+				return this.emitterRef ? this.emitterRef.Charges : 0;
+			},
+			"MovementSpeedPercentage": function () {
+				if (!this.emitterRef)
+					return 0;
+				var speed = this.Level > 0 ? 0.02 + 0.04 * this.Level : 0
+				if (this.Charges == 1)
+					speed = speed * 1.5
+				if (this.Charges == 2)
+					speed = speed / 2
+				return speed
+			}
 		},
 		"storm_spirit_electric_vortex_self": {
 			"Name": "Electric vortex",
@@ -6800,6 +7051,32 @@ DotaData.addVersion( "6.86c",
 			"MovementSpeed": -25,
 			"Range": 422,
 			"AttackType": "Ranged"
+		},
+		"troll_warlord_battle_trance_buff": {
+			"Name": "Battle trance",
+			"Image": "troll_warlord_battle_trance",
+			"Level": 0,
+			"LockedLevel": true,
+			"AttackSpeed": function(){ return 60 * this.Level }	
+		},
+		"ursa_overpower_buff": {
+			"Name": "Overpower",
+			"Image": "ursa_overpower",
+			"AttackSpeed": 400	
+		},
+		"vegefulspirit_command_aura_aura": {
+			"Name": "Vengeance aura",
+			"Class": "Aura",
+			"Image": "vegefulspirit_command_aura",
+			"Level": function() {
+				return this.emitterRef ? this.emitterRef.Level : 0;
+			},
+			"DamagePercentage": function () {
+				if (!this.emitterRef) {
+					return 0;
+				}
+				return this.Level > 0 ? 0.04 + 0.08 * this.Level : 0
+			}
 		},
 		
 		/* Item origin buffs */
