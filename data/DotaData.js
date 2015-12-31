@@ -143,7 +143,7 @@ DotaData.statToReadable = function(stat, val) {
 		key: key, 
 		value: printableValue,
 		isPercentage: isPercentage,
-		baseName: test ? test[1] : undefined, 
+		baseName: percentageTest ? percentageTest[1] : undefined, 
 		negativeOverride: DotaData.positiveNegativeStats[stat] 
 	};
 }

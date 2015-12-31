@@ -825,8 +825,8 @@ DotaData.addVersion( "6.86c",
 			"Ability2": "ember_spirit_sleight_of_fist",
 			"Ability3": "ember_spirit_flame_guard",
 			"Ability4": "ember_spirit_fire_remnant",
-			"Ability5": "attribute_bonus",
-			"Ability6": "ember_spirit_activate_fire_remnant",
+			"Ability5": "ember_spirit_activate_fire_remnant",
+			"Ability6": "attribute_bonus",
 			"AbilityLayout": 5,
 			"Armor": -2.0,
 			"AttackPoint": 0.4,
@@ -2205,7 +2205,7 @@ DotaData.addVersion( "6.86c",
 		},
 		"silencer": {
 			"Name": "Silencer",
-			"Ability1": "silencer_arcane_curse",
+			"Ability1": "silencer_curse_of_the_silent",
 			"Ability2": "silencer_glaives_of_wisdom",
 			"Ability3": "silencer_last_word",
 			"Ability4": "silencer_global_silence",
@@ -2476,10 +2476,10 @@ DotaData.addVersion( "6.86c",
 			"Ability1": "techies_land_mines",
 			"Ability2": "techies_stasis_trap",
 			"Ability3": "techies_suicide",
-			"Ability4": "techies_focused_detonate",
-			"Ability5": "techies_minefield_sign",
-			"Ability6": "techies_remote_mines",
-			"Ability7": "attribute_bonus",
+			//"Ability4": "techies_focused_detonate",
+			//"Ability5": "techies_minefield_sign",
+			"Ability4": "techies_remote_mines",
+			"Ability5": "attribute_bonus",
 			"AbilityLayout": 6,
 			"Armor": 5,
 			"AttackPoint": 0.5,
@@ -2510,8 +2510,8 @@ DotaData.addVersion( "6.86c",
 			"Ability1": "templar_assassin_refraction",
 			"Ability2": "templar_assassin_meld",
 			"Ability3": "templar_assassin_psi_blades",
-			"Ability4": "templar_assassin_trap",
-			"Ability5": "templar_assassin_psionic_trap",
+			"Ability4": "templar_assassin_psionic_trap",
+			"Ability5": "templar_assassin_trap",
 			"Ability6": "attribute_bonus",
 			"AbilityLayout": 5,
 			"Armor": 1,
@@ -5140,10 +5140,11 @@ DotaData.addVersion( "6.86c",
 		},
 		"ember_spirit_activate_fire_remnant": {
 			"Name": "Activate fire remnant",
-			"Class": "Ultimate",
-			"Restrictions": [6],
-			"Level": 1,
-			"LevelMax": 1,
+			"Level": function() {
+				if (this.heroRef && this.heroRef.AbilityIds["ember_spirit_fire_remnant"])
+					return this.heroRef.AbilityIds["ember_spirit_fire_remnant"].Level > 0 ? 1 : 0
+				return 0
+			},
 			"LockedLevel": true
 		},
 		"enchantress_untouchable": {
@@ -6114,8 +6115,279 @@ DotaData.addVersion( "6.86c",
 			"LevelMax": 3,
 			"Restrictions": [6, 11, 16]
 		},
-
-	
+		"silencer_curse_of_the_silent": {
+			"Name": "Arcane curse"
+		},
+		"silencer_glaives_of_wisdom": {
+			"Name": "Glaives of wisdom",
+			"Charges": 0,
+			"ChargesSemantic": "Stolen int",
+			"Intelligence": function(){ return this.Charges }
+		},
+		"silencer_lasst_word": {
+			"Name": "Last word"
+		},
+		"silencer_global_silence": {
+			"Name": "Global silence",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"skeleton_king_hellfire_blast": {
+			"Name": "Hellfire blast"
+		},
+		"skeleton_king_vampiric_aura": {
+			"Name": "Vampiric aura"
+		},
+		"skeleton_king_mortal_strike": {
+			"Name": "Mortal strike"
+		},
+		"skeleton_king_reincarnation": {
+			"Name": "Reincarnation",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"skywrath_mage_arcane_bolt": {
+			"Name": "Arcane bolt"
+		},
+		"skywrath_mage_concussive_shot": {
+			"Name": "Concussive shot"
+		},
+		"skywrath_mage_ancient_seal": {
+			"Name": "Ancient seal"
+		},
+		"skywrath_mage_mystic_flare": {
+			"Name": "Mystic flare",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"slardar_sprint": {
+			"Name": "Sprint",
+			"Buff": {
+				"NoTarget": true,
+				"Self": "slardar_sprint_buff",
+				"Refresh": "override"	
+			}
+		},
+		"slardar_slithereen_crush": {
+			"Name": "Slithereen crush"
+		},
+		"slardar_bash": {
+			"Name": "Bash"
+		},
+		"slardar_amplify_damage": {
+			"Name": "Amplify damage",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"slark_dark_pact": {
+			"Name": "Dark pact"
+		},
+		"slark_pounce": {
+			"Name": "Pounce"
+		},
+		"slark_essence_shift": {
+			"Name": "Essence shift",
+			"Charges": 0,
+			"ChargesSemantic": "Stolen stats",
+			"Agility": function(){ return this.Charges * 3 }
+		},
+		"slark_shadow_dance": {
+			"Name": "Shadow dance",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"sniper_shrapnel": {
+			"Name": "Shrapnel"
+		},
+		"sniper_headshot": {
+			"Name": "Headshot"
+		},
+		"sniper_take_aim": {
+			"Name": "Take aim",
+			"Range": function() { return this.Level * 100 }
+		},
+		"sniper_assassinate": {
+			"Name": "Assassinate",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"spectre_spectral_dagger": {
+			"Name": "Spectral dagger",
+			"Buff": {
+				"NoTarget": true,
+				"Self": "spectre_spectral_dagger_buff",
+				"Refresh": "override"
+			}
+		},
+		"spectre_desolate": {
+			"Name": "Desolate"
+		},
+		"spectre_dispersion": {
+			"Name": "Dispersion"
+		},
+		"spectre_reality": {
+			"Name": "Reality"
+		},
+		"spectre_haunt": {
+			"Name": "Haunt",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"spirit_breaker_charge_of_darkness": {
+			"Name": "Charge of darkness"
+		},
+		"spirit_breaker_empowering_haste": {
+			"Name": "Empowering haste",
+			"Aura": "spirit_breaker_empowering_haste",
+			"Charges": 0,
+			"ChargesMax": 2,
+			"ChargesSemantic": "Active status",
+			"Warning": "Status represents state: 0 - default, 1 - used, 2 - cooldown"
+		},
+		"spirit_breaker_greater_bash": {
+			"Name": "Greater bash"
+		},
+		"spirit_breaker_nether_strike": {
+			"Name": "Nether strike",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"storm_spirit_static_remnant": {
+			"Name": "Static remnant"
+		},
+		"storm_spirit_electric_vortex": {
+			"Name": "Electric vortex",
+			"Buff": {
+				"NoTarget": true,
+				"Self": "storm_spirit_electric_vortex_self",
+				"Refresh": "leave"	
+			}
+		},
+		"storm_spirit_overload": {
+			"Name": "Overload"
+		},
+		"storm_spirit_ball_lightning": {
+			"Name": "Ball lightning",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"sven_storm_bolt": {
+			"Name": "Storm bolt"
+		},
+		"sven_great_cleave": {
+			"Name": "Great cleave"
+		},
+		"sven_warcry": {
+			"Name": "Warcry",
+			"Buff": {
+				"Name": "sven_warcry_buff",
+				"Self": true,
+				"NoTarget": true,
+				"Teammates": true,
+				"Refresh": "override"
+			}
+		},
+		"sven_gods_strength": {
+			"Name": "God's strength",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16],
+			"Buff": {
+				"NoTarget": true,
+				"Self": "sven_gods_strength_buff",
+				"Teammates": "sven_gods_strength_buff_aghanims",
+				"Refresh": "override"
+			}
+		},
+		"techies_land_mines": {
+			"Name": "Land mines"
+		},
+		"techies_stasis_trap": {
+			"Name": "Stasis trap"
+		},
+		"techies_suicide": {
+			"Name": "Suicide squad, attack!"
+		},
+		"techies_focused_detonate": {
+			"Name": "Focused detonate"
+		},
+		"techies_minefield_sign": {
+			"Name": "Minefield sign"
+		},
+		"techies_remote_mines": {
+			"Name": "Remote mines",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"templar_assassin_refraction": {
+			"Name": "Refraction",
+			"Buff": {
+				"NoTarget": true,
+				"Refresh": "override",
+				"Self": [
+					"templar_assassin_refraction_buff_damage",
+					"templar_assassin_refraction_buff_absorb"
+				]
+			}
+		},
+		"templar_assassin_meld": {
+			"Name": "Meld",
+			"Buff": {
+				"NoTarget": true,
+				"Self": "templar_assassin_meld_buff",
+				"Refresh": "override"	
+			}
+		},
+		"templar_assassin_psi_blades": {
+			"Name": "Psi blades",
+			"Range": function(){ return 60 * this.Level }
+		},
+		"templar_assassin_psionic_trap": {
+			"Name": "Psionic trap",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		"templar_assassin_trap": {
+			"Name": "Trap",
+			"Level": function() {
+				if (this.heroRef && this.heroRef.AbilityIds["templar_assassin_psionic_trap"])
+					return this.heroRef.AbilityIds["templar_assassin_psionic_trap"].Level > 0 ? 1 : 0
+				return 0
+			},
+			"LockedLevel": true
+		},
+		"terrorblade_reflection": {
+			"Name": "Reflection"
+		},
+		"terrorblade_conjure_image": {
+			"Name": "Conjure image"
+		},
+		"terrorblade_metamorphosis": {
+			"Name": "Metamorphosis",
+			"Buff": {
+				"NoTarget": true,
+				"Self": "terrorblade_metamorphosis_buff",
+				"Refresh": "override"	
+			}
+		},
+		"terrorblade_sunder": {
+			"Name": "Sunder",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16]
+		},
+		
 		"viper_corrosive_skin": {
 			"Name": "Corrosive skin",
 			"Class": "Passive",
@@ -6277,7 +6549,7 @@ DotaData.addVersion( "6.86c",
 					if (!this.emitterRef) { 
 						console.warn("Buff without required emitter!");
 						return 0; }
-					if (this.heroRef.Raw.AttackType != "Ranged") 
+					if (this.heroRef.Total.AttackType != "Ranged") 
 						return 0;
 					if (this.emitterRef.Level > 0)
 						return Math.floor(this.ownerRef.Total.Agility * (0.14 + this.emitterRef.Level * 0.06))
@@ -6465,6 +6737,69 @@ DotaData.addVersion( "6.86c",
 				}
 				return this.Level * 0.05
 			}
+		},
+		"slardar_sprint_buff": {
+			"Name": "Sprint",
+			"Image": "slardar_sprint",
+			"Level": 0,
+			"LockedLevel": true,
+			"MovementSpeedPercentage": function(){ return 0.12 + 0.08 * this.Level } 	
+		},
+		"spectre_spectral_dagger_buff": {
+			"Name": "Spectral dagger",
+			"Image": "spectre_spectral_dagger",
+			"MovementSpeedPercentage": function(){ return 0.04 + 0.04 * this.Level }	
+		},
+		"storm_spirit_electric_vortex_self": {
+			"Name": "Electric vortex",
+			"Image": "storm_spirit_electric_vortex",
+			"MovementSpeedPercentage": -0.5	
+		},
+		"sven_warcry_buff": {
+			"Name": "Warcry",
+			"Image": "sven_warcry",
+			"MovementSpeedPercentage": 0.12,
+			"Level": 0,
+			"LockedLevel": true,
+			"Armor": function(){ return 5 * this.Level }
+		},
+		"sven_gods_strength_buff": {
+			"Name": "God's strength",
+			"Image": "sven_gods_strength",
+			"Level": 0,
+			"LockedLevel": true,
+			"DamagePercentage": function(){ return 0.5 + 0.5 * this.Level }	
+		},
+		"sven_gods_strength_buff_aghanims": {
+			"Name": "God's strength",
+			"Image": "sven_gods_strength",
+			"Level": 0,
+			"LockedLevel": true,
+			"DamagePercentage": function(){ return 0.25 + 0.25 * this.Level }	
+		},
+		"templar_assassin_refraction_buff_damage": {
+			"Name": "Refraction (damage)",
+			"Image": "templar_assassin_refraction_damage",
+			"Level": 0,
+			"LockedLevel": true,
+			"Damage": function(){ return 20 * this.Level }
+		},
+		"templar_assassin_refraction_buff_absorb": {
+			"Name": "Refraction (absorb)",
+			"Image": "templar_assassin_refraction",
+			"Level": 0,
+			"LockedLevel": true
+		},
+		"terrorblade_metamorphosis_buff": {
+			"Name": "Metamorphosis",
+			"Image": "terrorblade_metamorphosis",
+			"Level": 0,
+			"LockedLevel": true,
+			"DamageBase": function(){ return 20 * this.Level },
+			"AttackRate": 0.1,
+			"MovementSpeed": -25,
+			"Range": 422,
+			"AttackType": "Ranged"
 		},
 		
 		/* Item origin buffs */

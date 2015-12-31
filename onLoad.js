@@ -26,11 +26,20 @@ $(function(e){
 		},
 		team: "Magic"
 	}));
-	MainTable.addHero(new HeroInstance("drow_ranger", {
-		abilities: {"drow_ranger_trueshot": 1},
+	MainTable.addHero(new HeroInstance("ursa", {
+		level: 13,
+		team: "Magic",
+		abilities: {
+			"ursa_overpower": 4,
+			"ursa_fury_swipes": 4,
+			"ursa_enrage": 2
+		},
 		items: [
-			new ItemInstance("wraith_band"),
-			new ItemInstance("tango")
+			new ItemInstance("vladmir"),
+			new ItemInstance("phase_boots"),
+			new ItemInstance("skadi"),
+			new ItemInstance("basher"),
+			new ItemInstance("branches")
 		]
 	}));
 	MainTable.addHero(new HeroInstance("sniper", {
@@ -72,7 +81,7 @@ $(function(e){
 		],
 		team: "Magic"
 	}))
-	MainTable.addHero(new HeroInstance("shredder", { abilities: {"shredder_reactive_armor": 0} }))
+	MainTable.addHero(new HeroInstance("templar_assassin"))
 	
 	document.createVersionSelectors = function (init) {
 		optionCollection = [];

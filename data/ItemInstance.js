@@ -59,21 +59,24 @@ ItemInstance.prototype.delete = function () {
 ItemInstance.prototype.activate = function() {
 	if (!this.Buff || this.Level < 1)
 		return;
-	if (this.Buff.NoTarget && this.Buff.Self) {
-		var buffName = typeof this.Buff.Self === "string" ? this.Buff.Self : this.Buff.Name
-		this.heroRef.addBuff(
-			new BuffInstance(buffName, {
-				level: this.Level, levelMax: this.LevelMax,	charges: this.Charges, chargesMax: this.ChargesMax
-			}), this.Buff.Refresh )
-	}
-	if (this.Buff.NoTarget && this.Buff.Teammates) {
-		var buffName = typeof this.Buff.Teammates === "string" ? this.Buff.Teammates : this.Buff.Name
-		for (var teammate of this.heroRef.getTeammates())
-			teammate.addBuff(
-				new BuffInstance(buffName, {
-					level: this.Level, levelMax: this.LevelMax,	charges: this.Charges, chargesMax: this.ChargesMax
-			}), this.Buff.Refresh )
-	}
+	if (this.Buff.NoTarget && this.Buff.Self)
+		if (typeof this.Buff.Self === "string")
+			this.heroRef.addBuff(new BuffInstance(this.Buff.Self, {level: this.Level, levelMax: this.LevelMax, charges: this.Charges, chargesMax: this.ChargesMax }), this.Buff.Refresh )	
+		else if (this.Buff.Self === true)
+			this.heroRef.addBuff(new BuffInstance(this.Buff.Name, {level: this.Level, levelMax: this.LevelMax, charges: this.Charges, chargesMax: this.ChargesMax }), this.Buff.Refresh )
+		else if (Array.isArray(this.Buff.Self))
+			for (var buffId of this.Buff.Self)
+				this.heroRef.addBuff(new BuffInstance(buffId, {level: this.Level, levelMax: this.LevelMax, charges: this.Charges, chargesMax: this.ChargesMax }), this.Buff.Refresh )
+		
+	if (this.Buff.NoTarget && this.Buff.Teammates)
+        for (var teammate of this.heroRef.getTeammates())
+			if (typeof this.Buff.Teammates === "string")
+				teammate.addBuff(new BuffInstance(this.Buff.Teammates, {level: this.Level, levelMax: this.LevelMax, charges: this.Charges, chargesMax: this.ChargesMax }), this.Buff.Refresh )	
+			else if (this.Buff.Teammates === true)
+				teammate.addBuff(new BuffInstance(this.Buff.Name, {level: this.Level, levelMax: this.LevelMax, charges: this.Charges, chargesMax: this.ChargesMax }), this.Buff.Refresh )
+			else if (Array.isArray(this.Buff.Teammates))
+				for (var buffId of this.Buff.Teammate)
+					teammate.addBuff(new BuffInstance(buffId, {level: this.Level, levelMax: this.LevelMax, charges: this.Charges, chargesMax: this.ChargesMax }), this.Buff.Refresh )	
 }
 
 // Checks if all elements of array are valid ItemInstance objects
