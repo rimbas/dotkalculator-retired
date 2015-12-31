@@ -47,9 +47,9 @@ AbilityInstance.prototype.clone = function() {
 AbilityInstance.prototype.update = function () {
 	if (this.boundUpdate)
 		this.boundUpdate()
-	this.updateDisplayElement()
 	if (this.ownerBuff)
 		this.ownerBuff.update()
+	this.updateDisplayElement()
 	this.updateExternal();
 }
 

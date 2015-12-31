@@ -44,12 +44,8 @@ DotaData.getItemProperties = function (itemId, versionOverride) {
 DotaData.getAbilityProperties = function (abilityId, versionOverride) {
 	if (versionOverride && !versionOverride in DotaData.Versions) throw "No such version \""+versionOverride+"\"";
 	var version = DotaData.Versions[versionOverride || DotaData.TargetVersion];
-	//if (!(abilityId in version.Abilities)) throw "No such id \"" + abilityId + "\" in item list";
-	// while not all skills are implemented
-	if (!(abilityId in version.Abilities)) {
-		//console.warn("No such ability with id \"" + abilityId + "\" defined in version "+version+".");
-		return DotaData.getAbilityProperties("_base")
-	}
+	if (!(abilityId in version.Abilities)) 
+		throw "No such id \"" + abilityId + "\" in ability list";
 	var obj = {}, i, prop,
 		base = version.Abilities._base,
 		skill = version.Abilities[abilityId];
@@ -64,12 +60,8 @@ DotaData.getAbilityProperties = function (abilityId, versionOverride) {
 DotaData.getBuffProperties = function(buffId, versionOverride) {
 	if (versionOverride && !versionOverride in DotaData.Versions) throw "No such version \""+versionOverride+"\"";
 	var version = DotaData.Versions[versionOverride || DotaData.TargetVersion];
-	//if (!(buffId in version.Buffs)) throw "No such id \"" + buffId + "\" in item list";
-	// while not all buffs are implemented
-	if (!(buffId in version.Buffs)) {
-		console.warn("No such buff with id \"" + buffId + "\" defined in version "+(versionOverride || DotaData.TargetVersion)+".");
-		return DotaData.getBuffProperties("_base")
-	}
+	if (!(buffId in version.Buffs))
+		throw "No such id \"" + buffId + "\" in buff list";
 	var obj = {}, i, prop,
 		base = version.Buffs._base,
 		buff = version.Buffs[buffId];
@@ -118,7 +110,8 @@ DotaData.readableStatStrings = {
 	"MagicalResistance": "Magical resistance",
 	"AttackRate": "Base attack time",
 	"DamagePercentage": "Damage",
-	"DamageBase": "Base damage"
+	"DamageBase": "Base damage",
+	"DamageReductionPercentage": "Damage"
 }
 
 DotaData.positiveNegativeStats = {

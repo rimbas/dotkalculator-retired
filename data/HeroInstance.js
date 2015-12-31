@@ -183,7 +183,7 @@ HeroInstance.prototype.addBuff = function (buff, method) {
 			return;
 	
 	this.Buffs.push(buff)
-	buff.boundDelete = this.removeBuff.bind(this, buff)
+	buff.boundDelete = (function(b){ this.Buffs.splice(this.Buffs.indexOf(b), 1); this.BuffChange() }).bind(this, buff)
 	buff.boundUpdate = this.BuffChange.bind(this);
 	buff.heroRef = this;
 	if (this.Total)
@@ -193,11 +193,11 @@ HeroInstance.prototype.addBuff = function (buff, method) {
 HeroInstance.prototype.removeBuff = function(buff) {
 	if (Array.isArray(buff)) 
 		for (var b of buff)
-			this.Buffs.splice(this.Buffs.indexOf(b), 1)
+			b.delete()
 	else if (typeof buff == "string")
 		this.removeBuffsWithID(buff)
 	else if (buff instanceof BuffInstance)
-		this.Buffs.splice(this.Buffs.indexOf(buff), 1)
+		buff.delete()
 	this.BuffChange()
 }
 
@@ -273,7 +273,7 @@ HeroInstance.addHandler({
 			"Armor":0, "MagicalResistance": 0, "Evasion":0,
 			"Health":0, "HealthRegeneration":0, "Mana":0, "ManaRegenerationFlat": 0,
 			"ManaRegenerationPercentage": 0, "Damage": 0, "AttackSpeed": 0,
-			"Range":0, "VisionDay": 0, "VisionNight": 0, "Cost": 0 },
+			"Range":0, "VisionDay": 0, "VisionNight": 0, "Cost": 0, "HasAghanims": undefined },
 			f = {};
 		for (var item of this.Items) {
 			if (item.Family)
@@ -288,6 +288,8 @@ HeroInstance.addHandler({
 					continue;
 				else if (prop == "Evasion" || prop == "MagicalResistance")
 					a[prop] += (1 - a[prop]) * value;
+				else if (prop == "HasAghanims")
+					a[prop] = value;
 				else
 					a[prop] += value;
 			}
@@ -336,7 +338,7 @@ HeroInstance.addHandler({
 	binds: [],
 	handler: function() {
 		var a = { "Strength": 0, "Agility": 0, "Intelligence": 0, "MovementSpeed": 0,
-				"AttackType": undefined, "ProjectileSpeed": undefined };
+				"AttackType": undefined, "ProjectileSpeed": undefined, HasAghanims: undefined };
 		for (var buff of this.Buffs) {
 			for (var prop in a) {
 				var value = buff[prop];
@@ -344,7 +346,7 @@ HeroInstance.addHandler({
 					continue;
 				else if (prop == "Evasion" || prop == "MagicalResistance")
 					a[prop] += (1 - a[prop]) * value;
-				else if (prop == "ProjectileSpeed" || prop == "AttackType")
+				else if (prop == "ProjectileSpeed" || prop == "AttackType" || prop == "HasAghanims")
 					a[prop] = value;
 				else
 					a[prop] += value;
@@ -367,6 +369,7 @@ HeroInstance.addHandler({
 		a.IntelligenceBonus = this.Item.Intelligence + this.Ability.Intelligence + this.Buff.Intelligence;
 		a.Intelligence = this.Base.Intelligence + a.IntelligenceBonus;
 		a.MovementSpeedBase = this.Raw.MovementSpeed + this.Item.MovementSpeed + this.Ability.MovementSpeed + this.Buff.MovementSpeed;
+		a.HasAghanims = this.Buff.HasAghanims || this.Item.HasAghanims || false
 		this.Total = a;
 	}
 })
@@ -405,7 +408,7 @@ HeroInstance.addHandler({
 		var a = { "Strength": 0, "Agility": 0, "Intelligence": 0, "MovementSpeed": 0,
 				"MovementSpeedPercentage": 0, "Armor": 0, "Evasion": 0, "Blind": 0,
 				"MagicalResistance": 0, "Health": 0, "HealthPercentage": 0, "HealthRegeneration": 0, 
-				"Mana": 0, "ManaRegenerationFlat": 0, "Damage": 0, "DamagePercentage": 0,
+				"Mana": 0, "ManaRegenerationFlat": 0, "Damage": 0, "DamagePercentage": 0, "DamageReductionPercentage": 0,
 				"AttackSpeed": 0, "ManaRegenerationPercentage": 0, "AttackRate": 0, "Range": 0,
 				"ManaRegenerationBase": 0, "DamageBase": 0, "ProjectileSpeed": 0, "AttackType": undefined },
 			f = {};
@@ -471,7 +474,10 @@ HeroInstance.addHandler({
 		a.DamageBaseMin = this.Raw.DamageMin + a[this.Raw.Type] + this.Ability.DamageBase + this.Buff.DamageBase;
 		a.DamageBaseMax = this.Raw.DamageMax + a[this.Raw.Type] + this.Ability.DamageBase + this.Buff.DamageBase;
 		a.DamageBase = Math.floor((a.DamageBaseMin + a.DamageBaseMax) / 2);
-		a.DamageBonus = this.Item.Damage + this.Ability.Damage + this.Buff.Damage + Math.floor(a.DamageBase * this.Buff.DamagePercentage);
+		a.DamageBonus = this.Item.Damage + this.Ability.Damage + this.Buff.Damage + Math.trunc(a.DamageBase * this.Buff.DamagePercentage);
+		a.DamageTotal = a.DamageBase + a.DamageBonus;
+		a.DamageBonus = Math.trunc(a.DamageBonus + this.Buff.DamageReductionPercentage * a.DamageTotal);
+		a.DamageTotal = a.DamageBase + a.DamageBonus;
 		a.AttackRate = this.Raw.AttackRate + this.Ability.AttackRate + this.Buff.AttackRate;
 		a.AttackSpeed = Math.max(Math.min(100 + a.Agility + this.Item.AttackSpeed + this.Ability.AttackSpeed + this.Buff.AttackSpeed, 600), 20);
 		a.Range = this.Raw.Range + this.Ability.Range + this.Item.Range + this.Buff.Range;
@@ -485,8 +491,11 @@ HeroInstance.addHandler({
 		this.updateTable();
 		for (var item of this.Items)
 			item.updateDisplayElement()
-		for (var ability of this.Abilities)
-			ability.updateDisplayElement()
+		for (var ability of this.Abilities) {
+			if (ability.TriggerChangeUpdate)
+				ability.updateExternal()
+			ability.updateDisplayElement()	
+		}
 		for (var buff of this.Buffs)
 			buff.updateDisplayElement()
 	}
