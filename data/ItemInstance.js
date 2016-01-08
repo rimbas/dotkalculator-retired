@@ -95,38 +95,7 @@ ItemInstance.prototype.toString = function () {
 
 // creates and returns an element to display in the item container 
 ItemInstance.prototype.createDisplayElement = function() {
-	if (this.displayElement)
-		return this.displayElement;
-	
-	var div = document.createElement("div");
-	div.className = "item-display item";
-	div.style.backgroundImage = "url(images/items/" + this.ID + ".png)";
-	
-	if (typeof this.Charges === "number") {
-		var chargeElement = document.createElement("span");
-		chargeElement.textContent = this.Charges;
-		chargeElement.className = "item-display-charges";
-		this.chargeElement = chargeElement;
-		div.appendChild(chargeElement);
-	}
-	
-	if (this.Buff) {
-		var activateButton = document.createElement("button");
-		activateButton.className = "item-display-activate";
-		activateButton.onclick = this.activate.bind(this);
-		div.appendChild(activateButton);
-	}
-	
-	var deleteButton = document.createElement("button");
-		deleteButton.className = "item-display-delete";
-		deleteButton.onclick = this.delete.bind(this);
-		div.appendChild(deleteButton);
-	
-	div.appendChild(ElementHelper.createDetailedTooltip(this));
-	
-	this.displayElement = div;
-	this.updateDisplayElement()
-	return div;
+	return ElementHelper.createDisplayElement(this)
 }
 
 ItemInstance.prototype.updateDisplayElement = function () {

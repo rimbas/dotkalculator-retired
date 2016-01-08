@@ -181,6 +181,22 @@ span.item-display-options {
 	color: #ffe86d;
 	font-style: italic;
 }
+.item-display-options.cooldown, .item-display-options.manacost {
+	display: inline-block;
+	width: 82px;
+}
+.item-display-options.cooldown::before {
+	content: url("cooldown.png");
+	vertical-align: middle;
+    margin-right: 4px;
+    margin-left: 4px;
+}
+.item-display-options.manacost::before {
+	content: url("mana.png");
+	vertical-align: middle;
+    margin-right: 4px;
+    margin-left: 4px;
+}
 .value.negative {
 	color: red;
 }

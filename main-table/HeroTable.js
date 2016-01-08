@@ -444,8 +444,8 @@ HeroTable.addEvaluator({
 HeroTable.addEvaluator({
 	ID: "Armor", 
 	name: "Armor", 
-	header: "⛨",
-	type: "Base", //unicode shenanigans
+	header: "⛨", //unicode shenanigans
+	type: "Base",
 	description: "Displays hero armor",
 	eval: function(cell, heroInstance){
 		var bonus = heroInstance.Total.ArmorBonus
@@ -554,9 +554,7 @@ HeroTable.addEvaluator({
 	eval: function(cell, hero) {
 		cell = cell.firstChild;
 		while (cell.firstChild)
-			cell.removeChild(cell.firstChild);	
-		//for (var i = 0; i < hero.Items.length; i++)
-			//cell.appendChild(hero.Items[i].createDisplayElement());
+			cell.removeChild(cell.firstChild);
 		for (var item of hero.Items)
 			cell.appendChild(item.createDisplayElement());
 	},
@@ -574,7 +572,6 @@ HeroTable.addEvaluator({
 		var container = document.createElement("div")
 		container.className = "item-container abilities"
 		cell.appendChild(container);
-		//for (var i = 0; i < hero.Abilities.length; i++)
 		for (var ability of hero.Abilities)
 			container.appendChild(ability.createDisplayElement());
 	},
@@ -600,9 +597,7 @@ HeroTable.addEvaluator({
 	eval: function(cell, hero) {
 		cell = cell.firstChild;
 		while (cell.firstChild)
-			cell.removeChild(cell.firstChild);	
-		//for (var i = 0; i < hero.Items.length; i++)
-			//cell.appendChild(hero.Items[i].createDisplayElement());
+			cell.removeChild(cell.firstChild);
 		for (var buff of hero.Buffs)
 			cell.appendChild(buff.createDisplayElement());
 	},
@@ -647,7 +642,7 @@ HeroTable.addEvaluator({
 });
 
 HeroTable.addEvaluator({
-	ID: "APS",
+	ID: "AttacksPerSecond",
 	name: "Attacks per Second",
 	header: "APS",
 	type: "Derived",
@@ -776,4 +771,29 @@ HeroTable.addEvaluator({
 	}
 })
 
+HeroTable.addEvaluator({
+	ID: "PhysicalEHP", 
+	name: "Physical effective HP",
+	header: "PEHP",
+	type: "Derived",
+	description: "Effective HP against physical damage",
+	eval: function(cell, heroInstance){
+		var armor = heroInstance.Total.Armor,
+			reduction = 1 - (0.06 * armor) / (1 + 0.06 * armor);
+		cell.textContent = Math.floor(heroInstance.Total.Health / reduction)
+	},
+	sorter: "number"
+});
 
+HeroTable.addEvaluator({
+	ID: "MagicalEHP", 
+	name: "Magical effective HP",
+	header: "MEHP",
+	type: "Derived",
+	description: "Effective HP against magical damage",
+	eval: function(cell, heroInstance){
+		var reduction = 1 - heroInstance.Total.MagicalResistance;
+		cell.textContent = Math.floor(heroInstance.Total.Health / reduction)
+	},
+	sorter: "number"
+});

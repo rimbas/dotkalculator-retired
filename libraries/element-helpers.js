@@ -2,6 +2,60 @@
 
 ElementHelper = {};
 
+ElementHelper.createDisplayElement = function(object) {
+	if (object.displayElement)
+		return object.displayElement;
+	
+	var div = document.createElement("div");
+	object.displayElement = div;
+	div.classList.add("item-display");
+	if (object instanceof AbilityInstance || object instanceof BuffInstance)
+		div.classList.add("ability");
+	else if (object instanceof ItemInstance )
+		div.classList.add("item");
+	
+	if (typeof object.Image == "string")
+		div.style.backgroundImage = "url(images/abilities/" + object.Image + ".png)";
+	else if (object instanceof ItemInstance)
+		div.style.backgroundImage = "url(images/items/" + object.ID + ".png)";
+	else
+		div.style.backgroundImage = "url(images/abilities/" + object.ID + ".png)";
+
+	if (typeof object.Level === "number") {
+		var levelElement = document.createElement("span");
+		levelElement.className = "item-display-levels";
+		levelElement.textContent = DotaData.numericToRoman(object.Level);
+		div.appendChild(levelElement);
+		object.levelElement = levelElement;
+	}
+	
+	if (typeof object.Charges === "number") {
+		var chargeElement = document.createElement("span");
+		chargeElement.textContent = object.Charges;
+		chargeElement.className = "item-display-charges";
+		object.chargeElement = chargeElement;
+		div.appendChild(chargeElement);
+	}
+	
+	if (object.Buff) {
+		var activateButton = document.createElement("button");
+		activateButton.className = "item-display-activate";
+		activateButton.onclick = object.activate.bind(object);
+		div.appendChild(activateButton);
+	}
+	
+	if (object instanceof ItemInstance || object instanceof BuffInstance && object.Class != "Aura") {
+		var deleteButton = document.createElement("button");
+		deleteButton.className = "item-display-delete";
+		deleteButton.onclick = object.delete.bind(object);
+		div.appendChild(deleteButton);
+	}
+	
+	div.appendChild(ElementHelper.createDetailedTooltip(object));
+	
+	return div;
+}
+
 // object - ItemInstance, AbilityInstance, BuffInstance
 ElementHelper.createDetailedTooltip = function ( object ) {
 	var el = document.createElement("div"),
@@ -104,6 +158,25 @@ ElementHelper.createDetailedTooltip = function ( object ) {
 		el.appendChild(document.createElement("br"));
 	}
 	
+	if ( object.Cooldown ) {
+		var cooldown = document.createElement("span")
+		cooldown.className = "item-display-options cooldown";
+		cooldown.textContent = object.Cooldown;
+		el.appendChild(cooldown)
+		object.cooldownElement = cooldown;
+	}
+	
+	if ( object.ManaCost ) {
+		var manacost = document.createElement("span")
+		manacost.className = "item-display-options manacost";
+		manacost.textContent = object.Cooldown;
+		el.appendChild(manacost)
+		object.manacostElement = manacost;
+	}
+		
+	if ( object.ManaCost || object.Cooldown )
+		el.appendChild(document.createElement("br"))
+	
 	if ( object.Warning ) {
 		var warning = document.createElement("span")
 		warning.className = "item-display-options warning"
@@ -127,8 +200,15 @@ ElementHelper.createDetailedTooltip = function ( object ) {
 ElementHelper.updateDisplayElements = function ( object ) {
 	if (!object.displayElement)
 		return;
+	if (object.Hidden == true)
+		object.displayElement.style.display = "none"
+	else if (object.Hidden == false)
+		object.displayElement.style.display = "inline-block"
 	if (object.Image)
-		object.displayElement.style.backgroundImage = "url(images/abilities/" + object.Image + ".png)";
+		if (object instanceof ItemInstance)
+			object.displayElement.style.backgroundImage = "url(images/items/" + object.Image + ".png)";
+		else
+			object.displayElement.style.backgroundImage = "url(images/abilities/" + object.Image + ".png)";
 	if (object.chargeElement)
 		object.chargeElement.textContent = object.Charges;
 	if (object.chargeInput) {
@@ -159,6 +239,10 @@ ElementHelper.updateDisplayElements = function ( object ) {
 			else 
 				dynElement.classList.remove("negative");
 	}
+	if (object.cooldownElement)
+		object.cooldownElement.textContent = object.Cooldown
+	if (object.manacostElement)
+		object.manacostElement.textContent = object.ManaCost
 }
 
 

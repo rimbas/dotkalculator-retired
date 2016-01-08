@@ -68,41 +68,7 @@ BuffInstance.prototype.delete = function () {
 }
 
 BuffInstance.prototype.createDisplayElement = function() {
-	if (this.displayElement)
-		return this.displayElement;
-	
-	var div = document.createElement("div");
-	this.displayElement = div;
-	div.className = "item-display ability";
-	if (this.Image)
-		div.style.backgroundImage = "url(images/abilities/" + this.Image + ".png)";
-	else
-		div.style.backgroundImage = "url(images/abilities/" + this.ID + ".png)";
-
-	if (typeof this.Charges === "number") {
-		var chargeElement = document.createElement("span");
-		chargeElement.textContent = this.Charges;
-		chargeElement.className = "item-display-charges";
-		this.chargeElement = chargeElement;
-		div.appendChild(chargeElement);
-	}
-	
-	if (this.Class != "Aura") {
-		var deleteButton = document.createElement("button");
-		deleteButton.className = "item-display-delete";
-		deleteButton.onclick = this.delete.bind(this);
-		div.appendChild(deleteButton);
-	}
-	
-	var levelElement = document.createElement("span");
-	levelElement.className = "item-display-levels";
-	levelElement.textContent = DotaData.numericToRoman(this.Level);
-	div.appendChild(levelElement);
-	this.levelElement = levelElement;
-	
-	div.appendChild(ElementHelper.createDetailedTooltip(this));
-	
-	return div;
+	return ElementHelper.createDisplayElement(this)
 }
 
 BuffInstance.prototype.updateDisplayElement = function () {

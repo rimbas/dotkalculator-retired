@@ -40,7 +40,7 @@ $(function(e){
 			new ItemInstance("phase_boots"),
 			new ItemInstance("skadi"),
 			new ItemInstance("basher"),
-			new ItemInstance("branches")
+			new ItemInstance("black_king_bar")
 		]
 	}));
 	MainTable.addHero(new HeroInstance("alchemist", {
