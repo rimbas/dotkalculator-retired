@@ -3683,7 +3683,8 @@ DotaData.addVersion( "6.86c",
 				"Teammates": true,
 				"Refresh": "leave" 
 			},
-			"Cooldown": 25
+			"Cooldown": 25,
+			"ManaCost": 10
 		},
 		"urn_of_shadows": {
 			"Name": "Urn of Shadows",
@@ -4318,6 +4319,7 @@ DotaData.addVersion( "6.86c",
 			"Section": "Armor",
 			"SectionIndex": 5,
 			"Level": 1,
+			"LevelMin": 1,
 			"LevelMax": 6,
 			"Strength": 10,
 			"Damage": 24,

@@ -548,15 +548,17 @@ HeroTable.addEvaluator({
 			hero.addItem(new ItemInstance(e.dataTransfer.getData("text/item-id")));
 		}
 		container.className = "item-container items";
-		container.ondragover = function(e){if (e.dataTransfer.types.indexOf("text/item-id") > -1 ) {e.preventDefault()}};
+		container.ondragover = function(e){
+			if (e.dataTransfer.types.indexOf("text/item-id") > -1 )
+				e.preventDefault()
+		};
 		cell.appendChild(container);
 	},
 	eval: function(cell, hero) {
 		cell = cell.firstChild;
-		while (cell.firstChild)
-			cell.removeChild(cell.firstChild);
 		for (var item of hero.Items)
-			cell.appendChild(item.createDisplayElement());
+			if (!cell.contains(item.createDisplayElement()))
+				cell.appendChild(item.createDisplayElement())
 	},
 	sorter: false
 });
@@ -587,19 +589,21 @@ HeroTable.addEvaluator({
 	init: function(cell, hero) {
 		cell.className = "box-content";
 		var container = document.createElement("div");
-		container.ondrop = function(e) { 
+		container.ondrop = function(e) {
 			hero.addBuff(new BuffInstance(e.dataTransfer.getData("text/buff-id")));
 		}
 		container.className = "item-container abilities";
-		container.ondragover = function(e){if (e.dataTransfer.types.indexOf("text/buff-id") > -1 ) {e.preventDefault()}};
+		container.ondragover = function(e) {
+			if (e.dataTransfer.types.indexOf("text/buff-id") > -1 )
+				e.preventDefault()
+		};
 		cell.appendChild(container);
 	},
 	eval: function(cell, hero) {
 		cell = cell.firstChild;
-		while (cell.firstChild)
-			cell.removeChild(cell.firstChild);
 		for (var buff of hero.Buffs)
-			cell.appendChild(buff.createDisplayElement());
+			if (!cell.contains(buff.createDisplayElement()))
+				cell.appendChild(buff.createDisplayElement())
 	},
 	sorter: false
 })
