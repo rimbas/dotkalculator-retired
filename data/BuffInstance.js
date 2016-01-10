@@ -24,18 +24,26 @@ function BuffInstance(buffId, properties) {
 		else
 			Object.defineProperty(this, prop, { value: value, enumerable: true, writable: true });
 	}
+	
 	if (typeof properties.level === "number")
-		if (buff.LevelMin && properties.level >= buff.LevelMin)
+		if (buff.LevelMin != undefined && properties.level >= buff.LevelMin)
 			this.Level = properties.level;
-		else if ( buff.LevelMin === undefined )
+		else if ( buff.LevelMin != undefined )
+			this.Level = buff.LevelMin;
+		else 
 			this.Level = properties.level;
 	if (typeof properties.levelMax === "number")
 		this.LevelMax = properties.levelMax;
+	if (typeof properties.levelMin === "number")
+		this.LevelMin = properties.levelMin;
+	
 	if (typeof properties.charges === "number")
-		if (buff.ChargesMin && properties.level >= buff.ChargesMin)
-			this.Charges = properties.level;
-		else if ( buff.ChargesMin === undefined )
-			this.Charges = properties.level;
+		if (buff.ChargesMin != undefined && properties.charges >= buff.ChargesMin)
+			this.Charges = properties.charges;
+		else if ( buff.ChargesMin != undefined )
+			this.Charges = buff.ChargesMin;
+		else
+			this.Charges = properties.charges;
 	if (typeof properties.chargesMax === "number")
 		this.ChargesMax = properties.chargesMax
 }

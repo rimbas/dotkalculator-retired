@@ -21,11 +21,14 @@ function ItemInstance(itemId, properties) {
 		else
 			this[prop] = value;	
 	}
+	
 	if (typeof properties.charges === "number")
-		if (item.ChargesMin && properties.level >= item.ChargesMin)
-			this.Charges = properties.level;
-		else if ( item.ChargesMin === undefined )
-			this.Charges = properties.level;
+		if (item.ChargesMin != undefined && properties.charges >= item.ChargesMin)
+			this.Charges = properties.charges;
+		else if ( item.ChargesMin != undefined )
+			this.Charges = item.ChargesMin;
+		else
+			this.Charges = properties.charges;
 	if (typeof properties.chargesMax === "number")
 		this.ChargesMax = properties.chargesMax
 }

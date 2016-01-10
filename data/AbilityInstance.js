@@ -21,18 +21,26 @@ function AbilityInstance(skillId, properties) {
 		else
 			this[prop] = value;	
 	}
+	
 	if (typeof properties.level === "number")
-		if (ability.LevelMin && properties.level >= ability.LevelMin)
+		if (ability.LevelMin != undefined && properties.level >= ability.LevelMin)
 			this.Level = properties.level;
-		else if ( ability.LevelMin === undefined )
+		else if ( ability.LevelMin != undefined )
+			this.Level = ability.LevelMin;
+		else 
 			this.Level = properties.level;
 	if (typeof properties.levelMax === "number")
 		this.LevelMax = properties.levelMax;
+	if (typeof properties.levelMin === "number")
+		this.LevelMin = properties.levelMin;
+	
 	if (typeof properties.charges === "number")
-		if (ability.ChargesMin && properties.level >= ability.ChargesMin)
-			this.Charges = properties.level;
-		else if ( ability.ChargesMin === undefined )
-			this.Charges = properties.level;
+		if (ability.ChargesMin != undefined && properties.charges >= ability.ChargesMin)
+			this.Charges = properties.charges;
+		else if ( ability.ChargesMin != undefined )
+			this.Charges = ability.ChargesMin;
+		else
+			this.Charges = properties.charges;
 	if (typeof properties.chargesMax === "number")
 		this.ChargesMax = properties.chargesMax
 }

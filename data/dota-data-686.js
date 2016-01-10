@@ -7,6 +7,7 @@ DotaData.addVersion( "6.86c",
 		"_base": // Special base entry
 		{
 			"Name": "NO-DISPLAY-NAME",
+			"Class": "Hero",
 			"Ability1": "attribute_bonus",
 			"Ability2": "attribute_bonus",
 			"Ability3": "attribute_bonus",
@@ -15,10 +16,11 @@ DotaData.addVersion( "6.86c",
 			"AbilityLayout": 4,
 			"AttackPoint": 0.75,
 			"AttackType": "Ranged",
+			"AttackRate": 1.7,
 			"DamageMax": 1,
 			"DamageMin": 1,
+			"DamageType": "Hero",
 			"Range": 600,
-			"AttackRate": 1.7,
 			"AgilityGain": 0,
 			"AgilityBase": 0,
 			"IntelligenceBase": 0,
@@ -30,6 +32,7 @@ DotaData.addVersion( "6.86c",
 			"HasInventory": true,
 			"Level": 1,
 			"Armor": -1.0,
+			"ArmorType": "Hero",
 			"MagicalResistance": 0.25,
 			"MovementSpeed": 300,
 			"TurnRate": 0.5,
@@ -4010,7 +4013,7 @@ DotaData.addVersion( "6.86c",
 			"Evasion": 0.25,
 			"Buff": {
 				"NoTarget": true,
-				"Self": "solar_crest_debuff",
+				"Self": "solar_crest_debuff_self",
 				"Teammates": "solar_crest_buff",
 				"Refresh": "leave"
 			},
@@ -4777,7 +4780,7 @@ DotaData.addVersion( "6.86c",
 		"axe_berserkers_call": {
 			"Name": "Berserker's call",
 			"Buff": {
-				"Name": "axe_berserkers_call_buff" , 
+				"Name": "axe_berserkers_call_buff", 
 				"NoTarget": true, 
 				"Self": true, 
 				"Refresh": "leave" 
@@ -5073,12 +5076,22 @@ DotaData.addVersion( "6.86c",
 			"Class": "Ultimate",
 			"LevelMax": 3,
 			"Restrictions": [6, 11, 16],
-			"Buff": { 
-				"Name": "dazzle_weave_buff",
-				"NoTarget": true, 
-				"Self": true,
-				"Teammates": true,
-				"Refresh": "override"
+			"Buff": function() {
+				if (this.heroRef && this.heroRef.Total && this.heroRef.Total.HasAghanims)
+					return { 
+						"Name": "dazzle_weave_buff", 
+						"NoTarget": true, 
+						"Self": true, 
+						"Teammates": true, 
+						"Refresh": "override" 
+					};
+				return { 
+					"Name": "dazzle_weave_buff_aghs", 
+					"NoTarget": true, 
+					"Self": true, 
+					"Teammates": true, 
+					"Refresh": "override"
+				};
 			}
 		},
 		"death_prophet_carrion_swarm": {
@@ -5191,9 +5204,18 @@ DotaData.addVersion( "6.86c",
 		},
 		"earth_spirit_petrify": {
 			"Name": "Enchant remnant",
-			"Level": 1,
+			"Level": function() {
+				if (this.heroRef && this.heroRef.Total && this.heroRef.Total.HasAghanims)
+					return 1;
+				return 0;
+			},
 			"LevelMax": 1,
-			"LockedLevel": true
+			"LockedLevel": true,
+			"Hidden": function() {
+				if (this.heroRef && this.heroRef.Total && this.heroRef.Total.HasAghanims)
+					return false
+				return true
+			}
 		},
 		"earth_spirit_magnetize": {
 			"Name": "Magnetize",
@@ -5398,6 +5420,7 @@ DotaData.addVersion( "6.86c",
 			"Name": "Invoke",
 			"Class": "Ultimate",
 			"Level": 1,
+			"LevelMin": 1,
 			"LevelMax": 4,
 			"Restrictions": [6, 11, 16],
 			"Strength": function() {
@@ -5504,10 +5527,20 @@ DotaData.addVersion( "6.86c",
 			"Name": "Chakra magic"
 		},
 		"keeper_of_the_light_blinding_light": {
-			"Name": "Blinding light"
+			"Name": "Blinding light",
+			"Level": function() {
+				if (this.heroRef && this.heroRef.AbilityIds["keeper_of_the_light_spirit_form"])
+					return this.heroRef.AbilityIds["keeper_of_the_light_spirit_form"].Level
+				return 0
+			},
 		},
 		"keeper_of_the_light_recall": {
-			"Name": "Recall"
+			"Name": "Recall",
+			"Level": function() {
+				if (this.heroRef && this.heroRef.AbilityIds["keeper_of_the_light_spirit_form"])
+					return this.heroRef.AbilityIds["keeper_of_the_light_spirit_form"].Level
+				return 0
+			},
 		},
 		"keeper_of_the_light_spirit_form": {
 			"Name": "Spirit form",
@@ -5682,7 +5715,7 @@ DotaData.addVersion( "6.86c",
 			"Name": "Battle cry",
 			"Level": function() {
 				if (this.heroRef && this.heroRef.AbilityIds["lone_druid_true_form"])
-					return this.heroRef.AbilityIds["lone_druid_true_form"].Level > 0 ? 1 : 0
+					return this.heroRef.AbilityIds["lone_druid_true_form"].Level
 				return 0
 			},
 			"LockedLevel": true,
@@ -5821,7 +5854,17 @@ DotaData.addVersion( "6.86c",
 			"Restrictions": [6, 11, 16]
 		},
 		"morphling_hybrid": {
-			"Name": "Hybrid"	
+			"Name": "Hybrid",
+			"Level": function() {
+				if (this.heroRef && this.heroRef.Total && this.heroRef.Total.HasAghanims)
+					return 1
+				return 0
+			},
+			"Hidden": function() {
+				if (this.heroRef && this.heroRef.Total && this.heroRef.Total.HasAghanims)
+					return false
+				return true
+			},
 		},
 		"naga_siren_mirror_image": {
 			"Name": "Mirror image"
@@ -5911,7 +5954,17 @@ DotaData.addVersion( "6.86c",
 			"Name": "Spiked carapace"
 		},
 		"nyx_assassin_burrow": {
-			"Name": "Burrow"
+			"Name": "Burrow",
+			"Level": function() {
+				if (this.heroRef && this.heroRef.Total && this.heroRef.Total.HasAghanims)
+					return 1
+				return 0
+			},
+			"Hidden": function() {
+				if (this.heroRef && this.heroRef.Total && this.heroRef.Total.HasAghanims)
+					return false
+				return true
+			},
 		},
 		"nyx_assassin_vendetta": {
 			"Name": "Vendetta",
@@ -5963,7 +6016,17 @@ DotaData.addVersion( "6.86c",
 			}
 		},
 		"ogre_magi_unrefined_fireblast": {
-			"Name": "Unrefined fireblast"
+			"Name": "Unrefined fireblast",
+			"Level": function() {
+				if (this.heroRef && this.heroRef.Total && this.heroRef.Total.HasAghanims)
+					return 1
+				return 0
+			},
+			"Hidden": function() {
+				if (this.heroRef && this.heroRef.Total && this.heroRef.Total.HasAghanims)
+					return false
+				return true
+			},
 		},
 		"ogre_magi_multicast": {
 			"Name": "Multicast",
@@ -6062,7 +6125,12 @@ DotaData.addVersion( "6.86c",
 			"Name": "Phase shift"
 		},
 		"puck_ethereal_jaunt": {
-			"Name": "Ethereal jaunt"
+			"Name": "Ethereal jaunt",
+			"Level": function() {
+				if (this.heroRef && this.heroRef.AbilityIds["puck_illusory_orb"])
+					return this.heroRef.AbilityIds["puck_illusory_orb"].Level > 0 ? 1 : 0
+				return 0
+			},
 		},
 		"puck_dream_coil": {
 			"Name": "Dream coil",
@@ -6220,7 +6288,12 @@ DotaData.addVersion( "6.86c",
 			"Name": "Shadow poison"
 		},
 		"shadow_demon_shadow_poison_release": {
-			"Name": "Shadow poison release"
+			"Name": "Shadow poison release",
+			"Level": function() {
+				if (this.heroRef && this.heroRef.AbilityIds["shadow_demon_shadow_poison"])
+					return this.heroRef.AbilityIds["shadow_demon_shadow_poison"].Level > 0 ? 1 : 0
+				return 0
+			},
 		},
 		"shadow_demon_demonic_purge": {
 			"Name": "Demonic purge",
@@ -6254,8 +6327,8 @@ DotaData.addVersion( "6.86c",
 			"Charges": 1,
 			"ChargesMax": function() { return this.Level * 5 },
 			"ChargesSemantic": "Stacks",
-			"Armor": function(){ return this.Charges },
-			"HealthRegeneration": function(){ return this.Charges }
+			"Armor": function(){ return this.Level > 0 ? this.Charges : 0 },
+			"HealthRegeneration": function(){ return this.Level > 0 ? this.Charges : 0 }
 		},
 		"shredder_chakram": {
 			"Name": "Chakram",
@@ -6599,7 +6672,17 @@ DotaData.addVersion( "6.86c",
 			"Name": "Living armor"
 		},
 		"treant_eyes_in_the_forest": {
-			"Name": "Eyes in the forest"
+			"Name": "Eyes in the forest",
+			"Level": function() {
+				if (this.heroRef && this.heroRef.Total && this.heroRef.Total.HasAghanims)
+					return 1
+				return 0
+			},
+			"Hidden": function() {
+				if (this.heroRef && this.heroRef.Total && this.heroRef.Total.HasAghanims)
+					return false
+				return true
+			},
 		},
 		"treant_overgrowth": {
 			"Name": "Overgrowth",
@@ -6668,7 +6751,17 @@ DotaData.addVersion( "6.86c",
 		},
 		"tusk_walrus_kick": {
 			"Name": "Walrus kick",
-			"LevelMax": 1 
+			"LevelMax": 1,
+			"Level": function() {
+				if (this.heroRef && this.heroRef.Total && this.heroRef.Total.HasAghanims)
+					return 1
+				return 0
+			},
+			"Hidden": function() {
+				if (this.heroRef && this.heroRef.Total && this.heroRef.Total.HasAghanims)
+					return false
+				return true
+			},
 		},
 		"undying_decay": {
 			"Name": "Decay",
@@ -6992,6 +7085,7 @@ DotaData.addVersion( "6.86c",
 		"axe_berserkers_call_buff": {
 			"Name": "Berserker's call armor",
 			"Image": "axe_berserkers_call",
+			"LockedLevel": true,
 			"Class": "Buff",
 			"Armor": 40
 		},
@@ -7017,6 +7111,9 @@ DotaData.addVersion( "6.86c",
 				if (this.emitterRef.Level > 0)
 					return 5 + this.emitterRef.Level * 10
 				return 0;
+			},
+			"Hidden": function(){
+				return this.Level == 0 || this.AttackSpeed == 0
 			}
 		},
 		"bounty_hunter_wind_walk_buff": {
@@ -7063,11 +7160,11 @@ DotaData.addVersion( "6.86c",
 			"Image": "clinkz_death_pact",
 			"Level": 0,
 			"LockedLevel": true,
-			"Charges": 0,
+			"Charges": 240,
 			"ChargesMin": 240,
 			"ChargesMax": 1400,
 			"ChargesSemantic": "Creep HP",
-			"Damage": function(){ return Math.floor(this.Charges * (0.035 + 0.015 * this.Level)) },
+			"DamageBase": function(){ return Math.floor(this.Charges * (0.035 + 0.015 * this.Level)) },
 			"Health": function(){ return Math.floor(this.Charges * (0.35 + 0.15 * this.Level)) }
 		},
 		"crystal_maiden_brilliance_aura_aura": {
@@ -7083,7 +7180,10 @@ DotaData.addVersion( "6.86c",
 					if (this.heroRef && this.heroRef.AbilityIds.crystal_maiden_brilliance_aura) 
 						return [0, 2, 3, 4, 6][this.Level] || (1 + this.Level * 0.5) * 2;
 					return [0, 1, 1.5, 2, 3][this.Level] || (1 + this.Level * 0.5);
-				}
+			},
+			"Hidden": function(){
+				return this.Level == 0 || this.ManaRegenerationFlat == 0
+			}
 		},
 		"dazzle_weave_buff": {
 			"Name": "Weave",
@@ -7095,6 +7195,17 @@ DotaData.addVersion( "6.86c",
 			"ChargesMax": 24,
 			"ChargesSemantic": "Duration",
 			"Armor": function(){ return this.Level > 0 ? (0.5 + this.Level * 0.25) * this.Charges : 0 }
+		},
+		"dazzle_weave_buff_aghs": {
+			"Name": "Weave (upgraded)",
+			"Class": "Buff",
+			"Image": "dazzle_weave",
+			"LockedLevel": true,
+			"Level": 0,
+			"Charges": 0,
+			"ChargesMax": 24,
+			"ChargesSemantic": "Duration",
+			"Armor": function(){ return this.Level > 0 ? (1.0 + this.Level * 0.25) * this.Charges : 0 }
 		},
 		"doom_bringer_scorched_earth_buff": {
 			"Name": "Scorched earth",
@@ -7222,7 +7333,8 @@ DotaData.addVersion( "6.86c",
 			"AttackRate": -0.2,
 			"Range": -422,
 			"Armor": function(){ return this.Level ? 2 + 2 * this.Level : 0 },
-			"Health": function(){ return this.Level * 300 }
+			"Health": function(){ return this.Level * 300 },
+			"MovementSpeed": -45
 		},
 		"lone_druid_true_form_battle_cry_buff": {
 			"Name": "Battle cry",
@@ -7245,6 +7357,9 @@ DotaData.addVersion( "6.86c",
 				if (this.emitterRef.Level > 0)
 					return 6 + this.emitterRef.Level * 8;
 				return 0;
+			},
+			"Hidden": function(){
+				return this.Level == 0 || this.Damage == 0
 			}
 		},
 		"lycan_howl_buff": {
@@ -7324,6 +7439,9 @@ DotaData.addVersion( "6.86c",
 				if (!this.emitterRef)
 					return 0;
 				return this.Level * 0.05
+			},
+			"Hidden": function(){
+				return this.Level == 0 || this.MagicalResistance == 0
 			}
 		},
 		"slardar_sprint_buff": {
@@ -7359,6 +7477,9 @@ DotaData.addVersion( "6.86c",
 				if (this.Charges == 2)
 					speed = speed / 2
 				return speed
+			},
+			"Hidden": function(){
+				return this.Level == 0 || this.MovementSpeedPercentage == 0
 			}
 		},
 		"storm_spirit_electric_vortex_self": {
@@ -7384,7 +7505,7 @@ DotaData.addVersion( "6.86c",
 			"DamagePercentage": function(){ return 0.5 + 0.5 * this.Level }	
 		},
 		"sven_gods_strength_buff_aghanims": {
-			"Name": "God's strength",
+			"Name": "God's strength (upgraded)",
 			"Image": "sven_gods_strength",
 			"Level": 0,
 			"LockedLevel": true,
@@ -7440,6 +7561,9 @@ DotaData.addVersion( "6.86c",
 					return 0;
 				}
 				return this.Level > 0 ? 0.04 + 0.08 * this.Level : 0
+			},
+			"Hidden": function(){
+				return this.Level == 0 || this.DamagePercentage == 0
 			}
 		},
 		"warlock_shadow_word_buff": {
@@ -7724,10 +7848,11 @@ DotaData.addVersion( "6.86c",
 			"Image": "medallion_of_courage",
 			"Armor": 7	
 		},
-		"solar_crest_debuff": {
+		"solar_crest_debuff_self": {
 			"Name": "Valor",
 			"Image": "solar_crest",
-			"Armor": -10
+			"Armor": -10,
+			"Evasion": -0.3333333333333333333
 		},
 		"solar_crest_buff": {
 			"Name": "Valor",
@@ -7739,7 +7864,9 @@ DotaData.addVersion( "6.86c",
 			"Name": "Avatar",
 			"Image": "black_king_bar",
 			"Level": 0,
-			"LockedLevel": true
+			"LockedLevel": true,
+			"MagicalResistance": 1,
+			"MagicalImmunity": 1
 		},
 		"armlet_buff": {
 			"Name": "Unholy strength",
@@ -7751,7 +7878,8 @@ DotaData.addVersion( "6.86c",
 		"butterfly_buff": {
 			"Name": "Flutter",
 			"Image": "butterfly",
-			"MovementSpeedPercentage": 0.35
+			"MovementSpeedPercentage": 0.35,
+			"Evasion": -0.53846153846153846153846153846154
 		}
 	}
 	

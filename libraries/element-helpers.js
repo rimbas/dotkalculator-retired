@@ -53,6 +53,9 @@ ElementHelper.createDisplayElement = function(object) {
 	
 	div.appendChild(ElementHelper.createDetailedTooltip(object));
 	
+	if (object.Hidden == true)
+			object.displayElement.style.display = "none"
+	
 	return div;
 }
 
@@ -200,10 +203,13 @@ ElementHelper.createDetailedTooltip = function ( object ) {
 ElementHelper.updateDisplayElements = function ( object ) {
 	if (!object.displayElement)
 		return;
-	if (object.Hidden == true)
-		object.displayElement.style.display = "none"
-	else if (object.Hidden == false)
-		object.displayElement.style.display = "inline-block"
+	if ("Hidden" in object)
+		if (object.Hidden == true) {
+			object.displayElement.style.display = "none"
+			return;	
+		}
+		else
+			object.displayElement.style.display = ""
 	if (object.Image)
 		if (object instanceof ItemInstance)
 			object.displayElement.style.backgroundImage = "url(images/items/" + object.Image + ".png)";
