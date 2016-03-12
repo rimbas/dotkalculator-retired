@@ -408,9 +408,10 @@ HeroInstance.addHandler({
 		var a = { "Strength": 0, "Agility": 0, "Intelligence": 0, "MovementSpeed": 0,
 				"MovementSpeedPercentage": 0, "Armor": 0, "Evasion": 0, "Blind": 0,
 				"MagicalResistance": 0, "Health": 0, "HealthPercentage": 0, "HealthRegeneration": 0, 
-				"Mana": 0, "ManaRegenerationFlat": 0, "Damage": 0, "DamagePercentage": 0, "DamageReductionPercentage": 0,
-				"AttackSpeed": 0, "ManaRegenerationPercentage": 0, "AttackRate": 0, "Range": 0,
-				"ManaRegenerationBase": 0, "DamageBase": 0, "ProjectileSpeed": 0, "AttackType": undefined },
+				"Mana": 0, "ManaRegenerationFlat": 0, "Damage": 0, "DamagePercentage": 0,
+                "DamageReductionPercentage": 0,	"AttackSpeed": 0, "ManaRegenerationPercentage": 0,
+                "AttackRate": 0, "Range": 0, "ManaRegenerationBase": 0, "DamageBase": 0,
+                "ProjectileSpeed": 0, "AttackType": undefined },
 			f = {};
 		for (var buff of this.Buffs) {
 			if (buff.Family)
