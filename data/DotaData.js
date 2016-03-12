@@ -2,7 +2,7 @@
 
 DotaData = {};
 DotaData.Versions = {}
-DotaData.NewestVersion = "6.86c";  //working in valve time so badly, this was started in 6.84b // where's the 6.86 data?
+DotaData.NewestVersion = "6.86f";
 DotaData.TargetVersion = DotaData.NewestVersion;
 
 // Returns a new instance of complete hero propery data
@@ -15,14 +15,14 @@ DotaData.getHeroProperties = function (heroId, versionOverride) {
 		base = version.Heroes._base,
 		hero = version.Heroes[heroId],
 		AbilityIDs = [];
-	
+
 	for (prop in base) {
 		obj[prop] = base[prop];
 	}
 	for (prop in hero) {
 		obj[prop] = hero[prop];
-	}	
-	
+	}
+
 	return obj;
 }
 
@@ -33,7 +33,7 @@ DotaData.getItemProperties = function (itemId, versionOverride) {
 	var obj = {}, i, prop,
 		base = version.Items._base,
 		item = version.Items[itemId];
-	
+
 	for (prop in base)
 		obj[prop] = base[prop];
 	for (prop in item)
@@ -44,12 +44,12 @@ DotaData.getItemProperties = function (itemId, versionOverride) {
 DotaData.getAbilityProperties = function (abilityId, versionOverride) {
 	if (versionOverride && !versionOverride in DotaData.Versions) throw "No such version \""+versionOverride+"\"";
 	var version = DotaData.Versions[versionOverride || DotaData.TargetVersion];
-	if (!(abilityId in version.Abilities)) 
+	if (!(abilityId in version.Abilities))
 		throw "No such id \"" + abilityId + "\" in ability list";
 	var obj = {}, i, prop,
 		base = version.Abilities._base,
 		skill = version.Abilities[abilityId];
-	
+
 	for (prop in base)
 		obj[prop] = base[prop];
 	for (prop in skill)
@@ -65,10 +65,10 @@ DotaData.getBuffProperties = function(buffId, versionOverride) {
 	var obj = {}, i, prop,
 		base = version.Buffs._base,
 		buff = version.Buffs[buffId];
-	
+
 	for (prop in base)
 		obj[prop] = base[prop]
-	for (prop in buff) 
+	for (prop in buff)
 		obj[prop] = buff[prop];
 	return obj;
 }
@@ -132,12 +132,12 @@ DotaData.statToReadable = function(stat, val) {
 		printableValue = printableValue > 0 ? "+" + printableValue : printableValue
 	if (percentageTest && percentageTest[1])
 		isPercentage = true;
-	return { 
-		key: key, 
+	return {
+		key: key,
 		value: printableValue,
 		isPercentage: isPercentage,
-		baseName: percentageTest ? percentageTest[1] : undefined, 
-		negativeOverride: DotaData.positiveNegativeStats[stat] 
+		baseName: percentageTest ? percentageTest[1] : undefined,
+		negativeOverride: DotaData.positiveNegativeStats[stat]
 	};
 }
 
