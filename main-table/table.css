@@ -140,7 +140,7 @@ td.box-content + td.box-content {
 	background-size: cover;
 	cursor: pointer;
 }
-.item-display:hover > .item-display-delete { 
+.item-display:hover > .item-display-delete {
 	display: block;
 }
 .item-display-activate {
@@ -165,7 +165,7 @@ td.box-content + td.box-content {
 	font-size: 1em;
 }
 span.item-display-options {
-	
+
 }
 .item-display-options.label {
 	margin-left: 0.5ch;
@@ -184,7 +184,13 @@ span.item-display-options {
 .item-display-options.cooldown, .item-display-options.manacost {
 	display: inline-block;
 	width: 82px;
+	margin-top: 1px;
 }
+.item-display-options.cooldown[style*="display: none"] +
+.item-display-options.manacost[style*="display: none"] + br {
+	display: none;
+}
+
 .item-display-options.cooldown::before {
 	content: url("cooldown.png");
 	vertical-align: middle;

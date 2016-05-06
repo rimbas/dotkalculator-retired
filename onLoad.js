@@ -1,28 +1,28 @@
 /* Main page initialisation */
 
-//document.addEventListener("load", 
+//document.addEventListener("load",
 $(function(e){
 	$(".window").draggable({
 		handle: ".drag-bar",
 		cursor: "grabbed",
 		containment: "document"
-	}) 
+	})
 	MainTable = new HeroTable("Comparison table", "main-table", "main-table-wrapper");
 	MainTable.addHero(new HeroInstance("drow_ranger", {
-		level: 16, 
+		level: 16,
 		items: [
-			new ItemInstance("ring_of_aquila"), 
-			new ItemInstance("butterfly"), 
+			new ItemInstance("ring_of_aquila"),
+			new ItemInstance("butterfly"),
 			new ItemInstance("power_treads_agility"),
 			new ItemInstance("sange_and_yasha"),
 			new ItemInstance("dragon_lance"),
 			new ItemInstance("mask_of_madness")
-		], 
+		],
 		abilities: {
 			"drow_ranger_frost_arrows": 4,
 			"drow_ranger_wave_of_silence": 4,
-			"drow_ranger_trueshot": 4, 
-			"drow_ranger_marksmanship": 3, 
+			"drow_ranger_trueshot": 4,
+			"drow_ranger_marksmanship": 3,
 			"attribute_bonus": 1
 		},
 		team: "Magic"
@@ -45,14 +45,14 @@ $(function(e){
 	}));
 	MainTable.addHero(new HeroInstance("alchemist", {
 		level: 25,
-		abilities: { 
-			"alchemist_acid_spray": 4, 
+		abilities: {
+			"alchemist_acid_spray": 4,
 			"alchemist_unstable_concoction": 4,
 			"alchemist_goblins_greed": 4,
 			"alchemist_chemical_rage": 3 ,
 			"attribute_bonus": 10
 		},
-		buffs: [ 
+		buffs: [
 			new BuffInstance("alchemist_chemical_rage_buff", { level: 3 }),
 			new BuffInstance("moon_shard_buff")
 		],
@@ -89,7 +89,7 @@ $(function(e){
 			new BuffInstance("ultimate_scepter_buff")
 		]
 	}))
-	
+
 	document.createVersionSelectors = function (init) {
 		optionCollection = [];
 		var versionIDs = [];
@@ -101,9 +101,9 @@ $(function(e){
 			option.text = sortedID;
 			optionCollection.push(option);
 		}
-		for (var selector of $(".selector-version").toArray() ) { 
+		for (var selector of $(".selector-version").toArray() ) {
 			// purge the selector's children
-			while ( selector.firstChild ) 
+			while ( selector.firstChild )
 				selector.removeChild(selector.firstChild);
 			for (var opt of optionCollection)
 				selector.add(opt.cloneNode(true));
@@ -114,7 +114,7 @@ $(function(e){
 		}
 	}
 	document.createVersionSelectors(true);
-	
+
 	document.createTableSelectors = function (init) {
 		optionCollection = [];
 		for (var tableDef of HeroTable.getTables()) {
@@ -123,8 +123,8 @@ $(function(e){
 			option.value = tableDef.ID;
 			optionCollection.push(option);
 		}
-		
-		for (var selector of $(".selector-table").toArray() ) { 
+
+		for (var selector of $(".selector-table").toArray() ) {
 			// purge the selector's children
 			while ( selector.firstChild ) { selector.removeChild(selector.firstChild) }
 			for (var opt of optionCollection) {
@@ -136,7 +136,7 @@ $(function(e){
 		}
 	}
 	document.createTableSelectors(true);
-	
+
 	$(".selector-version").selectmenu({width: 300});
 	$(".selector-table").selectmenu({width: 300});
 })

@@ -91,7 +91,11 @@ Universal properties in DotaData definitions
 	Name						(string)	- Display name
 	LockedLevel					(truthy)	- stops from creating level input element (disallows change)
 	LockedCharges				(truthy)	- stops from creating charge input element (disallows change)
-	ChargesSemantic		
+	ChargesSemantic				(string)	- Overrides "Charge" label contents
+	
+Tooltip definitions
+	Lore
+	Warning
 
 Raw stat (hero) definition in DotaData lists
 	Name 						(string)	- Dota 2 name of the hero

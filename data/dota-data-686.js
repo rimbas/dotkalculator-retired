@@ -1,5 +1,7 @@
-
-DotaData.addVersion( "6.86f",
+"use strict";
+{
+const version = "6.86f"
+DotaData.addVersion( version,
 {
 
 	//
@@ -24,27 +26,30 @@ DotaData.addVersion( "6.86f",
 			"DamageMin": 1,
 			"DamageType": "Hero",
 			"Range": 600,
+			"StrengthBase": 0,
+			"StrengthGain": 0,
 			"AgilityGain": 0,
 			"AgilityBase": 0,
 			"IntelligenceBase": 0,
-			"StrengthBase": 0,
 			"IntelligenceGain": 0,
 			"Type": "Strength",
-			"StrengthGain": 0,
 			"Enabled": -1,
 			"HasInventory": true,
 			"Level": 1,
 			"Armor": -1.0,
 			"ArmorType": "Hero",
+			"ArmorPerAgility": 0.14,
 			"MagicalResistance": 0.25,
 			"MovementSpeed": 300,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 900,
 			"Health": 180,
 			"HealthRegeneration": 0.25,
+			"HealthPerStrength": 19,
 			"Mana": 0,
 			"ManaRegeneration": 0.01,
-			"Version": "6.86c",
+			"ManaPerIntelligence": 13,
+			"Version": version,
 			"VisionDaytime": 1800,
 			"VisionNighttime": 800,
 			"Side": "Radiant"
@@ -3077,7 +3082,7 @@ DotaData.addVersion( "6.86f",
 	"Items": {
 		"_base": {
 			"Name": "NO-DISPLAY-NAME",
-			"Version": "6.86c",
+			"Version": version,
 			"Cost": 0
 		},
 		/* Consumables */
@@ -4693,7 +4698,7 @@ DotaData.addVersion( "6.86f",
 	"Abilities": {
 		"_base": {
 			"Name": "Unimplemented ability",
-			"Version": "6.86c",
+			"Version": version,
 			"Level": 0,
 			"LevelMax": "4",
 			"Class": "Ability",
@@ -4706,13 +4711,23 @@ DotaData.addVersion( "6.86f",
 			"Restrictions": [1, 3, 5, 7, 9, 11, 13, 15, 17, 19],
 			"Strength": function() { return this.Level * 2 },
 			"Agility": function() { return this.Level * 2 },
-			"Intelligence": function() { return this.Level * 2 },
+			"Intelligence": function() { return this.Level * 2 }
 		},
 		"abaddon_death_coil": {
 			"Name": "Death coil",
+			"Cooldown": 4.5,
+			"ManaCost": function() {
+				return this.Level > 0 ? 40 + this.Level * 10 : 50
+			}
 		},
 		"abaddon_aphotic_shield": {
-			"Name": "Aphotic shield"
+			"Name": "Aphotic shield",
+			"Cooldown": function() {
+				return this.Level > 0 ? 14 - this.Level * 2 : 12
+			},
+			"ManaCost": function() {
+				return this.Level > 0 ? 95 + this.Level * 5 : 100
+			}
 		},
 		"abaddon_frostmourne": {
 			"Name": "Curse of Avernus",
@@ -5039,10 +5054,14 @@ DotaData.addVersion( "6.86f",
 			}
 		},
 		"crystal_maiden_crystal_nova": {
-			"Name": "Crystal nova"
+			"Name": "Crystal nova",
+			"Cooldown": 12,
+			"ManaCost": function(){return 80 + 20 * this.Level}
 		},
 		"crystal_maiden_frostbite": {
-			"Name": "Frostbite"
+			"Name": "Frostbite",
+			"Cooldown": function(){return 10 - this.Level},
+			"ManaCost": function(){return [105, 115, 125, 140, 150][this.Level]}
 		},
 		"crystal_maiden_brilliance_aura": {
 			"Name": "Arcane aura",
@@ -5052,7 +5071,9 @@ DotaData.addVersion( "6.86f",
 			"Name": "Freezing field",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 11, 16],
+			"Cooldown": 90,
+			"ManaCost": function(){return this.Level * 200}
 		},
 		"dark_seer_vacuum": {
 			"Name": "Vacuum"
@@ -7055,7 +7076,7 @@ DotaData.addVersion( "6.86f",
 		"_base": {
 			"Name": "Dummy buff",
 			"Image": "empty",
-			"Version": "6.86c",
+			"Version": version,
 			"Class": "Buff"
 		},
 		"test_buff": {
@@ -7598,16 +7619,6 @@ DotaData.addVersion( "6.86f",
 			},
 			"AttackSpeed": 500
 		},
-		"windrunner_focusfire_buff": {
-			"Name": "Windrun",
-			"Image": "windrunner_focusfire",
-			"Level": 0,
-			"LockedLevel": true,
-			"DamageReductionPercentage": function() {
-				return -0.45 + 0.15 * this.Level
-			},
-			"AttackSpeed": 500
-		},
 		"winter_wyvern_cold_embrace_buff_aghs": {
 			"Name": "Cold embrace",
 			"Image": "winter_wyvern_cold_embrace",
@@ -7891,4 +7902,5 @@ DotaData.addVersion( "6.86f",
 	}
 
 });
+}
 
