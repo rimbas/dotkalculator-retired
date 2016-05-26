@@ -172,6 +172,8 @@ ElementHelper.createDetailedTooltip = function ( object ) {
 		cooldown.textContent = object.Cooldown;
 		el.appendChild(cooldown)
 		object.cooldownElement = cooldown;
+		if (object.Level === 0)
+			object.cooldownElement.style.display = "none"
 	}
 
 	if ( object.ManaCost ) {
@@ -180,6 +182,8 @@ ElementHelper.createDetailedTooltip = function ( object ) {
 		manacost.textContent = object.Cooldown;
 		el.appendChild(manacost)
 		object.manacostElement = manacost;
+		if (object.Level === 0)
+			object.manacostElement.style.display = "none"
 	}
 
 	if ( object.ManaCost || object.Cooldown )

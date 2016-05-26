@@ -4,7 +4,7 @@
 function ItemInstance(itemId, properties) {
 	properties = properties || {};
 	var item = DotaData.getItemProperties(itemId, properties.version);
-	
+
 	Object.defineProperty(this, "ID", {value: itemId});
 	Object.defineProperty(this, "displayElement", {writable: true});
 	Object.defineProperty(this, "chargeElement", {writable: true});
@@ -13,15 +13,16 @@ function ItemInstance(itemId, properties) {
 	Object.defineProperty(this, "boundUpdate", {writable: true});
 	Object.defineProperty(this, "heroRef", {writable: true});
 	Object.defineProperty(this, "buffReferences", {value: new Map(), writable: true});
-	
+	//this.ownerBuff - the item owner's aura-buff from this item
+
 	for (var prop in item) {
 		var value = item[prop];
 		if (value instanceof Function)
 			Object.defineProperty(this, prop, { get: value, enumerable: true });
 		else
-			this[prop] = value;	
+			this[prop] = value;
 	}
-	
+
 	if (typeof properties.charges === "number")
 		if (item.ChargesMin != undefined && properties.charges >= item.ChargesMin)
 			this.Charges = properties.charges;
@@ -43,20 +44,22 @@ ItemInstance.prototype.clone = function () {
 ItemInstance.prototype.update = function () {
 	if (this.boundUpdate)
 		this.boundUpdate()
-	for (var buff of this.buffReferences)
-		buff[1].update()
+	for (let [key, buff] of this.buffReferences)
+		buff.update()
 	this.updateDisplayElement()
 }
 
 ItemInstance.prototype.delete = function () {
-	for (var buff of this.buffReferences)
-		buff[1].delete()
+	if (this.boundDelete)
+		this.boundDelete();
+	for (var [key, buff] of this.buffReferences)
+		buff.delete()
 	if (this.displayElement)
 		this.displayElement.parentElement.removeChild(this.displayElement);
 	if (this.ownerBuff)
 		this.ownerBuff.delete()
-	if (this.boundDelete)
-		this.boundDelete();
+	if (this.boundUpdate)
+		this.boundUpdate()
 }
 
 ItemInstance.prototype.activate = function() {
@@ -64,30 +67,30 @@ ItemInstance.prototype.activate = function() {
 		return;
 	if (this.Buff.NoTarget && this.Buff.Self)
 		if (typeof this.Buff.Self === "string")
-			this.heroRef.addBuff(new BuffInstance(this.Buff.Self, {level: this.Level, levelMax: this.LevelMax, charges: this.Charges, chargesMax: this.ChargesMax }), this.Buff.Refresh )	
+			this.heroRef.addBuff(new BuffInstance(this.Buff.Self, {level: this.Level, levelMax: this.LevelMax, charges: this.Charges, chargesMax: this.ChargesMax }), this.Buff.Refresh )
 		else if (this.Buff.Self === true)
 			this.heroRef.addBuff(new BuffInstance(this.Buff.Name, {level: this.Level, levelMax: this.LevelMax, charges: this.Charges, chargesMax: this.ChargesMax }), this.Buff.Refresh )
 		else if (Array.isArray(this.Buff.Self))
 			for (var buffId of this.Buff.Self)
 				this.heroRef.addBuff(new BuffInstance(buffId, {level: this.Level, levelMax: this.LevelMax, charges: this.Charges, chargesMax: this.ChargesMax }), this.Buff.Refresh )
-		
+
 	if (this.Buff.NoTarget && this.Buff.Teammates)
         for (var teammate of this.heroRef.getTeammates())
 			if (typeof this.Buff.Teammates === "string")
-				teammate.addBuff(new BuffInstance(this.Buff.Teammates, {level: this.Level, levelMax: this.LevelMax, charges: this.Charges, chargesMax: this.ChargesMax }), this.Buff.Refresh )	
+				teammate.addBuff(new BuffInstance(this.Buff.Teammates, {level: this.Level, levelMax: this.LevelMax, charges: this.Charges, chargesMax: this.ChargesMax }), this.Buff.Refresh )
 			else if (this.Buff.Teammates === true)
 				teammate.addBuff(new BuffInstance(this.Buff.Name, {level: this.Level, levelMax: this.LevelMax, charges: this.Charges, chargesMax: this.ChargesMax }), this.Buff.Refresh )
 			else if (Array.isArray(this.Buff.Teammates))
 				for (var buffId of this.Buff.Teammate)
-					teammate.addBuff(new BuffInstance(buffId, {level: this.Level, levelMax: this.LevelMax, charges: this.Charges, chargesMax: this.ChargesMax }), this.Buff.Refresh )	
+					teammate.addBuff(new BuffInstance(buffId, {level: this.Level, levelMax: this.LevelMax, charges: this.Charges, chargesMax: this.ChargesMax }), this.Buff.Refresh )
 }
 
 // Checks if all elements of array are valid ItemInstance objects
 ItemInstance.isValidArray = function( itemInstanceArray ) {
 	if (!Array.isArray(itemInstanceArray))
 		throw itemInstanceArray+" is not a valid array";
-	for (var item of itemInstanceArray) 
-		if (!item instanceof ItemInstance) 
+	for (var item of itemInstanceArray)
+		if (!(item instanceof ItemInstance))
 			throw "Object " + item + " is not an ItemInstance object";
 	return itemInstanceArray;
 }
@@ -96,7 +99,7 @@ ItemInstance.prototype.toString = function () {
 	return "[ItemInstance "+this.ID+"]";
 }
 
-// creates and returns an element to display in the item container 
+// creates and returns an element to display in the item container
 ItemInstance.prototype.createDisplayElement = function() {
 	return ElementHelper.createDisplayElement(this)
 }

@@ -4,15 +4,17 @@
 
 // HeroTable handler constructor
 // tableID - table Id
-// wrapperId - element to insert the table into
+// wrapper - element to insert the table into
 HeroTable.tableList = [];
 HeroTable.tables = {};
 
-function HeroTable(tableName, tableID, wrapperId) {
+function HeroTable(tableName, tableID, wrapper) {
 	this.index = HeroTable.tableList.push(this);
 	HeroTable.tables[tableID] = this;
 
-	this._wrapperElement = document.getElementById(wrapperId);
+	if (!(wrapper instanceof HTMLElement))
+		throw "Invalid wrapper element";
+	this._wrapperElement = wrapper;
 	this.name = tableName;
 	this.ID = tableID;
 	this.heroList = [];
@@ -176,8 +178,8 @@ HeroTable.prototype.addHero = function (heroInstance) {
 	heroInstance.getTeammates = this.getTeammatesOfHero.bind(this, heroInstance);
 	this.createHeroRow(heroInstance)
 
-	heroInstance.teamChange(this.getTeammatesOfHero(heroInstance), [])
-	for (var hero of this.getTeammatesOfHero(heroInstance))
+	heroInstance.teamChange(heroInstance.getTeammates(), [])
+	for (var hero of heroInstance.getTeammates())
 		hero.teamChange([heroInstance], [])
 }
 
@@ -215,6 +217,11 @@ HeroTable.prototype.removeHero = function (heroInstance) {
 	this.heroList.splice(this.heroList.indexOf(heroInstance),1)
 	heroInstance.InstanceRow.parentElement.removeChild(heroInstance.InstanceRow);
 	this.updateSorting()
+}
+
+HeroTable.prototype.removeAllHeroes = function() {
+	for (let i = this.heroList.length; i > 0; i--)
+		this.removeHero(this.heroList[i-1])
 }
 
 // Update cells in the table
@@ -800,4 +807,17 @@ HeroTable.addEvaluator({
 		cell.textContent = Math.floor(heroInstance.Total.Health / reduction)
 	},
 	sorter: "number"
+});
+
+HeroTable.addEvaluator({
+	ID: "MagicalAmp",
+	name: "Magical amplification",
+	header: "MA",
+	type: "Derived",
+	description: "Magical damage amplification",
+	eval: function(cell, hero) {
+		cell.textContent = (hero.Total.MagicalAmplification).toFixed(1) + "%";
+		cell.sortingProperty = hero.Total.MagicalAmplification;
+	},
+	sorter: "propertyNumber"
 });

@@ -109,7 +109,7 @@ HeroInstance.prototype.propagateChange = function (propagationIdList) {
 
 // Convenience function for constructor
 HeroInstance.prototype.addAbilities = function(abilityOptions) {
-	var team = this.getTeammates();
+	let team = this.getTeammates(), test;
 	this.Ability = {};
 	this.Abilities = [];
 	this.AbilityIds = {};
@@ -163,7 +163,7 @@ HeroInstance.prototype.addItem = function (item, forceInsert) {
 		return -1;
 	}
 	var index = this.Items.push(item);
-	item.boundDelete = this.removeItem.bind(this, item);
+	item.boundDelete = (function(b){this.Items.splice(this.Items.indexOf(b), 1);}).bind(this, item)
 	item.boundUpdate = this.ItemChange.bind(this);
 	item.heroRef = this;
 	item.addOwner(this);
@@ -204,7 +204,7 @@ HeroInstance.prototype.addBuff = function (buff, method) {
 			return;
 
 	this.Buffs.push(buff)
-	buff.boundDelete = (function(b){ this.Buffs.splice(this.Buffs.indexOf(b), 1); this.BuffChange() }).bind(this, buff)
+	buff.boundDelete = (function(b){ this.Buffs.splice(this.Buffs.indexOf(b), 1);}).bind(this, buff)
 	buff.boundUpdate = this.BuffChange.bind(this);
 	buff.heroRef = this;
 	if (this.Total)
@@ -294,7 +294,8 @@ HeroInstance.addHandler({
 			"Armor":0, "MagicalResistance": 0, "Evasion":0,
 			"Health":0, "HealthRegeneration":0, "Mana":0, "ManaRegenerationFlat": 0,
 			"ManaRegenerationPercentage": 0, "Damage": 0, "AttackSpeed": 0,
-			"VisionDay": 0, "VisionNight": 0, "Cost": 0, "HasAghanims": undefined },
+			"VisionDay": 0, "VisionNight": 0, "Cost": 0, "HasAghanims": undefined,
+			"MagicalAmplification": 0 },
 			f = {};
 		for (var item of this.Items) {
 			if (item.Family)
@@ -508,6 +509,7 @@ HeroInstance.addHandler({
 		a.Cost = this.Item.Cost;
 		a.AttackType = this.Buff.AttackType || this.Raw.AttackType;
 		a.ProjectileSpeed = this.Buff.ProjectileSpeed || this.Raw.ProjectileSpeed;
+		a.MagicalAmplification = this.Base.Intelligence * this.Raw.MagicalAmpPerIntelligence + this.Item.MagicalAmplification;
 
 		this.Total = a;
 		this.updateTable();

@@ -4,7 +4,7 @@
 function BuffInstance(buffId, properties) {
 	properties = properties || {};
 	var buff = DotaData.getBuffProperties(buffId, properties.version);
-	
+
 	Object.defineProperty(this, "ID", {value: buffId});
 	Object.defineProperty(this, "displayElement", {writable: true});
 	Object.defineProperty(this, "chargeElement", {writable: true});
@@ -16,7 +16,7 @@ function BuffInstance(buffId, properties) {
 	Object.defineProperty(this, "ownerRef", {writable: true}); // hero that owns/emits this buff
 	Object.defineProperty(this, "boundUnlink", {writable: true}); // unlinks the buff from owner object (the emitting ability/item)
 	Object.defineProperty(this, "emitterRef", {writable: true}); // ability/item that emits this buff
-	
+
 	for (var prop in buff) {
 		var value = buff[prop];
 		if (value instanceof Function)
@@ -24,19 +24,19 @@ function BuffInstance(buffId, properties) {
 		else
 			Object.defineProperty(this, prop, { value: value, enumerable: true, writable: true });
 	}
-	
+
 	if (typeof properties.level === "number")
 		if (buff.LevelMin != undefined && properties.level >= buff.LevelMin)
 			this.Level = properties.level;
 		else if ( buff.LevelMin != undefined )
 			this.Level = buff.LevelMin;
-		else 
+		else
 			this.Level = properties.level;
 	if (typeof properties.levelMax === "number")
 		this.LevelMax = properties.levelMax;
 	if (typeof properties.levelMin === "number")
 		this.LevelMin = properties.levelMin;
-	
+
 	if (typeof properties.charges === "number")
 		if (buff.ChargesMin != undefined && properties.charges >= buff.ChargesMin)
 			this.Charges = properties.charges;
@@ -61,18 +61,20 @@ BuffInstance.prototype.clone = function() {
 
 BuffInstance.prototype.update = function () {
 	if (this.boundUpdate)
-		this.boundUpdate()
-	this.updateDisplayElement()
+		this.boundUpdate();
+	this.updateDisplayElement();
 }
 
 // the order of deletions is important
 BuffInstance.prototype.delete = function () {
+	if (this.boundDelete) // removes reference from the hero
+		this.boundDelete();
 	if (this.displayElement) // terminates HTML display
 		this.displayElement.parentElement.removeChild(this.displayElement);
 	if (this.boundUnlink) // removes reference from the emmiting item/ability
 		this.boundUnlink();
-	if (this.boundDelete) // removes reference from the hero
-		this.boundDelete();
+	if (this.boundUpdate)
+		this.boundUpdate();
 }
 
 BuffInstance.prototype.createDisplayElement = function() {

@@ -7,7 +7,7 @@ $(function(e){
 		cursor: "grabbed",
 		containment: "document"
 	})
-	MainTable = new HeroTable("Comparison table", "main-table", "main-table-wrapper");
+	MainTable = new HeroTable("Comparison table", "main-table", document.getElementById("main-table-wrapper"));
 	MainTable.addHero(new HeroInstance("drow_ranger", {
 		level: 16,
 		items: [
@@ -82,8 +82,7 @@ $(function(e){
 			new ItemInstance("sheepstick"),
 			new ItemInstance("glimmer_cape"),
 			new ItemInstance("force_staff"),
-			new ItemInstance("cyclone"),
-			new ItemInstance("ward_observer", { charges: 99 })
+			new ItemInstance("cyclone")
 		],
 		buffs: [
 			new BuffInstance("ultimate_scepter_buff")
@@ -140,3 +139,14 @@ $(function(e){
 	$(".selector-version").selectmenu({width: 300});
 	$(".selector-table").selectmenu({width: 300});
 })
+
+window.createAllHeroes = function(team) {
+	MainTable.removeAllHeroes()
+	for (let heroId in DotaData.Versions["6.87"].Heroes) {
+		let settings = {};
+		if (team)
+			settings.team = team;
+		if (DotaData.Versions["6.87"].Heroes[heroId].Enabled > 0)
+			MainTable.addHero(new HeroInstance(heroId, settings));
+	}
+}
