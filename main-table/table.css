@@ -28,6 +28,10 @@ td.box-content + td.box-content {
 	border-bottom: 3px solid #9A1E00;
 }
 
+.hero-table tr.selected {
+	background-color: #9A1E00;
+}
+
 /* shitty overrides for jquery-ui widgets */
 .hero-table .ui-widget {
 	font-family: sans-serif;
@@ -79,7 +83,7 @@ td.box-content + td.box-content {
 	display: inline-block;
 	position:relative;
 	height: 28px;
-	background-size: contain;
+	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center;
 	text-align: right;
@@ -163,9 +167,6 @@ td.box-content + td.box-content {
 	margin: 0px;
 	padding: 2px;
 	font-size: 1em;
-}
-span.item-display-options {
-
 }
 .item-display-options.label {
 	margin-left: 0.5ch;

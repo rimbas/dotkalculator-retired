@@ -2,7 +2,7 @@
 
 DotaData = {};
 DotaData.Versions = {}
-DotaData.NewestVersion = "6.87d";
+DotaData.NewestVersion = "6.88";
 DotaData.TargetVersion = DotaData.NewestVersion;
 
 // Returns a new instance of complete hero propery data

@@ -821,3 +821,15 @@ HeroTable.addEvaluator({
 	},
 	sorter: "propertyNumber"
 });
+
+HeroTable.addEvaluator({
+	ID: "DamagePerSecond",
+	name: "Damage per Second",
+	header: "DPS",
+	type: "Derived",
+	description: "Damage per second inflicted",
+	eval: function(cell, hero) {
+		cell.textContent = Math.trunc(hero.Total.DamageTotal * (1 + hero.Total.AttackSpeed / 100 / hero.Total.AttackRate));
+	},
+	sorter: "number"
+});

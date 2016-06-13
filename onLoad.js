@@ -11,7 +11,7 @@ $(function(e){
 	MainTable.addHero(new HeroInstance("drow_ranger", {
 		level: 16,
 		items: [
-			new ItemInstance("ring_of_aquila"),
+			new ItemInstance("greater_crit"),
 			new ItemInstance("butterfly"),
 			new ItemInstance("power_treads_agility"),
 			new ItemInstance("sange_and_yasha"),
@@ -39,8 +39,9 @@ $(function(e){
 			new ItemInstance("vladmir"),
 			new ItemInstance("phase_boots"),
 			new ItemInstance("skadi"),
-			new ItemInstance("basher"),
-			new ItemInstance("black_king_bar")
+			new ItemInstance("blink"),
+			new ItemInstance("black_king_bar"),
+			new ItemInstance("monkey_king_bar")
 		]
 	}));
 	MainTable.addHero(new HeroInstance("alchemist", {
