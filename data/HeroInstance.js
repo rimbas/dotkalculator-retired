@@ -56,6 +56,7 @@ HeroInstance.prototype.toString = function() {
 
 HeroInstance.prototype.copy = function(teamless) {
 	let opts = {
+		version: this.Raw.Version,
 		level: this.Meta.Level,
 		label: this.Meta.Label,
 		team: teamless ? undefined : this.Meta.Team,
@@ -143,7 +144,9 @@ HeroInstance.prototype.addAbilities = function(abilityOptions) {
 	// Ability definition in heroes not final, but this will do for now...
 	for (var prop in this.Raw)
 		if (test = /Ability(\d+)/.exec(prop)) {
-			var abilityInstance = new AbilityInstance(this.Raw[prop]);
+			var abilityInstance = new AbilityInstance(this.Raw[prop], {
+				version: this.Raw.Version
+			});
 			abilityInstance.boundUpdate = this.AbilityChange.bind(this);
 			abilityInstance.heroRef = this;
 			abilityInstance.addOwner(this);
