@@ -4,7 +4,7 @@
 function AbilityInstance(skillId, properties) {
 	properties = properties || {};
 	var ability = DotaData.getAbilityProperties(skillId, properties.version);
-	
+
 	Object.defineProperty(this, "ID", {value: skillId});
 	Object.defineProperty(this, "displayElement", {writable: true});
 	Object.defineProperty(this, "chargeElement", {writable: true});
@@ -13,27 +13,27 @@ function AbilityInstance(skillId, properties) {
 	Object.defineProperty(this, "boundUpdate", {writable: true});
 	Object.defineProperty(this, "heroRef", {writable: true});
 	Object.defineProperty(this, "buffReferences", {value: new Map(), writable: true});
-	
+
 	for (var prop in ability) {
 		var value = ability[prop];
 		if (value instanceof Function)
 			Object.defineProperty(this, prop, { get: value, enumerable: true });
 		else
-			this[prop] = value;	
+			this[prop] = value;
 	}
-	
+
 	if (typeof properties.level === "number")
 		if (ability.LevelMin != undefined && properties.level >= ability.LevelMin)
 			this.Level = properties.level;
 		else if ( ability.LevelMin != undefined )
 			this.Level = ability.LevelMin;
-		else 
+		else
 			this.Level = properties.level;
 	if (typeof properties.levelMax === "number")
 		this.LevelMax = properties.levelMax;
 	if (typeof properties.levelMin === "number")
 		this.LevelMin = properties.levelMin;
-	
+
 	if (typeof properties.charges === "number")
 		if (ability.ChargesMin != undefined && properties.charges >= ability.ChargesMin)
 			this.Charges = properties.charges;
@@ -45,7 +45,7 @@ function AbilityInstance(skillId, properties) {
 		this.ChargesMax = properties.chargesMax
 }
 
-AbilityInstance.prototype.clone = function() {
+AbilityInstance.prototype.copy = function() {
 	props = { version: this.Version };
 	props.level = this.Level;
 	props.charges = this.Charges;
@@ -71,22 +71,22 @@ AbilityInstance.prototype.activate = function() {
 		return;
 	if (this.Buff.NoTarget && this.Buff.Self)
 		if (typeof this.Buff.Self === "string")
-			this.heroRef.addBuff(new BuffInstance(this.Buff.Self, {level: this.Level, levelMax: this.LevelMax, charges: this.Charges, chargesMax: this.ChargesMax }), this.Buff.Refresh )	
+			this.heroRef.addBuff(new BuffInstance(this.Buff.Self, {level: this.Level, levelMax: this.LevelMax, charges: this.Charges, chargesMax: this.ChargesMax }), this.Buff.Refresh )
 		else if (this.Buff.Self === true)
 			this.heroRef.addBuff(new BuffInstance(this.Buff.Name, {level: this.Level, levelMax: this.LevelMax, charges: this.Charges, chargesMax: this.ChargesMax }), this.Buff.Refresh )
 		else if (Array.isArray(this.Buff.Self))
 			for (var buffId of this.Buff.Self)
 				this.heroRef.addBuff(new BuffInstance(buffId, {level: this.Level, levelMax: this.LevelMax, charges: this.Charges, chargesMax: this.ChargesMax }), this.Buff.Refresh )
-		
+
 	if (this.Buff.NoTarget && this.Buff.Teammates)
         for (var teammate of this.heroRef.getTeammates())
 			if (typeof this.Buff.Teammates === "string")
-				teammate.addBuff(new BuffInstance(this.Buff.Teammates, {level: this.Level, levelMax: this.LevelMax, charges: this.Charges, chargesMax: this.ChargesMax }), this.Buff.Refresh )	
+				teammate.addBuff(new BuffInstance(this.Buff.Teammates, {level: this.Level, levelMax: this.LevelMax, charges: this.Charges, chargesMax: this.ChargesMax }), this.Buff.Refresh )
 			else if (this.Buff.Teammates === true)
 				teammate.addBuff(new BuffInstance(this.Buff.Name, {level: this.Level, levelMax: this.LevelMax, charges: this.Charges, chargesMax: this.ChargesMax }), this.Buff.Refresh )
 			else if (Array.isArray(this.Buff.Teammates))
 				for (var buffId of this.Buff.Teammate)
-					teammate.addBuff(new BuffInstance(buffId, {level: this.Level, levelMax: this.LevelMax, charges: this.Charges, chargesMax: this.ChargesMax }), this.Buff.Refresh )	
+					teammate.addBuff(new BuffInstance(buffId, {level: this.Level, levelMax: this.LevelMax, charges: this.Charges, chargesMax: this.ChargesMax }), this.Buff.Refresh )
 }
 
 AbilityInstance.prototype.delete = function () {

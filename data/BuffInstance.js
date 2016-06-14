@@ -52,7 +52,7 @@ BuffInstance.prototype.toString = function () {
 	return "[BuffInstance "+this.ID+"]";
 }
 
-BuffInstance.prototype.clone = function() {
+BuffInstance.prototype.copy = function() {
 	props = { version: this.Version };
 	props.level = this.Level;
 	props.charges = this.Charges;

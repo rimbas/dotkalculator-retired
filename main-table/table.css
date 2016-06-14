@@ -14,6 +14,9 @@
 	padding-left: 4px;
 	padding-right: 4px;
 }
+td.single-button + td.single-button {
+	padding-left: 0px;
+}
 td.box-content + td.box-content {
 	padding-left: 0px;
 }
@@ -62,6 +65,15 @@ td.box-content + td.box-content {
 	height: 16px;
 	border: none;
 	background: url(delete-icon16.png);
+	vertical-align: middle;
+	cursor: pointer;
+}
+
+.hero-table .copy-button {
+	width: 16px;
+	height: 16px;
+	border: none;
+	background: url(copy-icon16.png);
 	vertical-align: middle;
 	cursor: pointer;
 }
@@ -191,6 +203,10 @@ td.box-content + td.box-content {
 .item-display-options.manacost[style*="display: none"] + br {
 	display: none;
 }
+.item-display-options[style*="display: none"] + br.single-mode {
+	display: none;
+}
+
 
 .item-display-options.cooldown::before {
 	content: url("cooldown.png");

@@ -89,6 +89,25 @@ $(function(e){
 			new BuffInstance("ultimate_scepter_buff")
 		]
 	}))
+	MainTable.addHero(new HeroInstance("lina", {
+		team: "Money",
+		level: 16,
+		abilities: {
+			lina_dragon_slave: 4,
+			lina_light_strike_array: 4,
+			lina_fiery_soul: {level: 4, charges: 3},
+			lina_laguna_blade: 3,
+			attribute_bonus: 1
+		},
+		items: [
+			new ItemInstance("null_talisman"),
+			new ItemInstance("cyclone"),
+			new ItemInstance("blink"),
+			new ItemInstance("tpscroll", {charges: 2}),
+			new ItemInstance("arcane_boots"),
+			new ItemInstance("hand_of_midas"),
+		]
+	}))
 
 	document.createVersionSelectors = function (init) {
 		optionCollection = [];

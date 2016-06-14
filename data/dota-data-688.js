@@ -5042,7 +5042,7 @@ DotaData.addVersion( version,
 			"Cooldown": function(){ return 14 - this.Level * 2 }
 		},
 		"bounty_hunter_wind_walk": {
-			"Name": "Wind walk",
+			"Name": "Shadow walk",
 			"Buff": {
 				"Name": "bounty_hunter_wind_walk_buff",
 				"NoTarget": true,
@@ -7515,7 +7515,7 @@ DotaData.addVersion( version,
 		"broodmother_spin_web_buff": {
 			"Name": "Inside web",
 			"Image": "broodmother_spin_web",
-			"MovementSpeedPercentage": function(){return 15 + this.Level * 5},
+			"MovementSpeedPercentage": function(){return 0.15 + this.Level * 0.05},
 			"HealthRegeneration": function(){return this.Level * 2}
 		},
 		"broodmother_insatiable_hunger_buff": {

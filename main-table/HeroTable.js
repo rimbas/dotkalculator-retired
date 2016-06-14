@@ -516,6 +516,7 @@ HeroTable.addEvaluator({
 	type: "General",
 	description: "Adds a way to remove hero",
 	init: function(cell, heroInstance){
+		cell.classList.add("single-button")
 		var button = document.createElement("button");
 		button.className = "delete-button";
 		cell.appendChild(button);
@@ -832,4 +833,23 @@ HeroTable.addEvaluator({
 		cell.textContent = Math.trunc(hero.Total.DamageTotal * (1 + hero.Total.AttackSpeed / 100 / hero.Total.AttackRate));
 	},
 	sorter: "number"
+});
+
+HeroTable.addEvaluator({
+	ID: "Copy",
+	name: "Copy",
+	type: "General",
+	description: "Adds a way to clone a hero",
+	init: function(cell, heroInstance){
+		cell.classList.add("single-button")
+		var button = document.createElement("button");
+		button.className = "copy-button";
+		cell.appendChild(button);
+		button.HeroInstanceRef = heroInstance;
+		button.TableInstanceRef = this;
+		button.onclick = function(e){
+			this.TableInstanceRef.addHero(this.HeroInstanceRef.copy(e.shiftKey));
+		};
+	},
+	sorter: false
 });

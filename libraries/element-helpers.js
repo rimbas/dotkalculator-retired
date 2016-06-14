@@ -166,8 +166,8 @@ ElementHelper.createDetailedTooltip = function ( object ) {
 		el.appendChild(document.createElement("br"));
 	}
 
-	if ( object.Cooldown ) {
-		var cooldown = document.createElement("span")
+	if ( typeof object.Cooldown == "number" ) {
+		let cooldown = document.createElement("span")
 		cooldown.className = "item-display-options cooldown";
 		cooldown.textContent = object.Cooldown;
 		el.appendChild(cooldown)
@@ -176,8 +176,8 @@ ElementHelper.createDetailedTooltip = function ( object ) {
 			object.cooldownElement.style.display = "none"
 	}
 
-	if ( object.ManaCost ) {
-		var manacost = document.createElement("span")
+	if ( typeof object.ManaCost == "number" ) {
+		let manacost = document.createElement("span")
 		manacost.className = "item-display-options manacost";
 		manacost.textContent = object.Cooldown;
 		el.appendChild(manacost)
@@ -186,8 +186,12 @@ ElementHelper.createDetailedTooltip = function ( object ) {
 			object.manacostElement.style.display = "none"
 	}
 
-	if ( object.ManaCost || object.Cooldown )
-		el.appendChild(document.createElement("br"))
+	if ( object.manacostElement || object.cooldownElement ) {
+		let breaker = document.createElement("br");
+		el.appendChild(breaker);
+		if (object.manacostElement == undefined || object.cooldownElement == undefined)
+			breaker.classList.add("single-mode")
+	}
 
 	if ( object.Warning ) {
 		var warning = document.createElement("span")

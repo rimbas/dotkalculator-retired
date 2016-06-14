@@ -35,9 +35,10 @@ function ItemInstance(itemId, properties) {
 }
 
 // Cloning method
-ItemInstance.prototype.clone = function () {
+ItemInstance.prototype.copy = function () {
 	var props = { version: this.Version };
-	if (this.Charges) props.charges = this.Charges;
+	if (this.Charges != undefined)
+		props.charges = this.Charges;
 	return new ItemInstance(this.ID, props);
 }
 

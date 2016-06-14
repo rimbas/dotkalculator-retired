@@ -54,6 +54,33 @@ HeroInstance.prototype.toString = function() {
 	return "[HeroInstance "+this.Meta.ID+"]";
 }
 
+HeroInstance.prototype.copy = function(teamless) {
+	let opts = {
+		level: this.Meta.Level,
+		label: this.Meta.Label,
+		team: teamless ? undefined : this.Meta.Team,
+		dead: this.Meta.Dead,
+		gold: this.Meta.Gold,
+	}
+	let items = [], abilities = {}, buffs = [];
+	for (let i of this.Items)
+		items.push(i.copy())
+	for (let a in this.AbilityIds) {
+		abilities[a] = {level: this.AbilityIds[a].Level};
+		if (typeof this.AbilityIds[a].Charges == "number")
+			abilities[a].charges = this.AbilityIds[a].Charges;
+	}
+	for (let b of this.Buffs) {
+		if (b.Class != "Aura")
+			buffs.push(b.copy())
+	}
+	opts.items = items;
+	opts.abilities = abilities;
+	opts.buffs = buffs;
+	let clone = new HeroInstance(this.Meta.ID, opts);
+	return clone;
+}
+
 // Adds a handler for hero data
 // handler - object with properties
 // name (string) 			- name
