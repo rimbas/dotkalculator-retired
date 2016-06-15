@@ -4470,7 +4470,12 @@ DotaData.addVersion( version,
 			"Regeneration": 4,
 			"Agility": 20,
 			"Strength": 15,
-			"Range": 140
+			"Range": 140,
+			"Buff": {
+				"NoTarget": true,
+				"Self": "hurricane_pike_buff",
+				"Refresh": "override"
+			},
 		},
 		"assault": {
 			"Name": "Assault Cuirass",
@@ -8223,23 +8228,23 @@ DotaData.addVersion( version,
 			"MovementSpeedPercentage": 0.17
 		},
 		"medallion_of_courage_debuff": {
-			"Name": "Valor",
+			"Name": "Valor (debuff)",
 			"Image": "medallion_of_courage",
 			"Armor": -7
 		},
 		"medallion_of_courage_buff": {
-			"Name": "Valor",
+			"Name": "Valor (buff)",
 			"Image": "medallion_of_courage",
 			"Armor": 7
 		},
 		"solar_crest_debuff_self": {
-			"Name": "Valor",
+			"Name": "Shine (self)",
 			"Image": "solar_crest",
 			"Armor": -10,
 			"Evasion": -0.3333333333333333333
 		},
 		"solar_crest_buff": {
-			"Name": "Valor",
+			"Name": "Shine (teammate)",
 			"Image": "solar_crest",
 			"Armor": 10,
 			"Evasion": 0.25
@@ -8266,7 +8271,11 @@ DotaData.addVersion( version,
 			"MovementSpeedPercentage": 0.35,
 			// Evasion cancellation hurr
 			"Evasion": -0.53846153846153846153846153846154
-		}
+		},
+		"hurricane_pike_buff": {
+			"Name": "Hurricane Thrust",
+			"Image": "hurricane_pike",
+		},
 	}
 
 });

@@ -334,28 +334,14 @@ HeroInstance.addHandler({
 				else if (f[item.Family.Name].Level < item.Family.Level)
 					f[item.Family.Name] = item.Family;
 
-			for (var prop in a) {
-				var value = item[prop];
-				if (!value)
-					continue;
-				else if (prop == "Evasion" || prop == "MagicalResistance")
-					a[prop] += (1 - a[prop]) * value;
-				else if (prop == "HasAghanims")
-					a[prop] = value;
-				else
-					a[prop] += value;
-			}
+			for (var prop in a)
+				a[prop] = PropertyProcessor.calculate(prop, a[prop], item[prop]);
 		}
 
 		for (var familyName in f) {
 			var family = f[familyName];
-			for (var prop in family.Stats) {
-				var value = family.Stats[prop];
-				if (prop == "Evasion" || prop == "MagicalResistance")
-					a[prop] += (1 - a[prop]) * value;
-				else
-					a[prop] += value;
-			}
+			for (var prop in family.Stats)
+				a[prop] = PropertyProcessor.calculate(prop, a[prop], family.Stats[prop]);
 		}
 		this.Item = a;
 	}
@@ -368,19 +354,9 @@ HeroInstance.addHandler({
 	handler: function() {
 		var a = { "Strength": 0, "Agility":0, "Intelligence":0, "MovementSpeed": 0,
 				"AttackType": undefined, "ProjectileSpeed": undefined };
-		for (var ability of this.Abilities) {
-			for (var prop in a) {
-				var value = ability[prop];
-				if (!value)
-					continue;
-				else if (prop == "Evasion" || prop == "MagicalResistance")
-					a[prop] += (1 - a[prop]) * value;
-				else if (prop == "ProjectileSpeed" || prop == "AttackType")
-					a[prop] = value;
-				else
-					a[prop] += value;
-			}
-		}
+		for (var ability of this.Abilities)
+			for (var prop in a)
+				a[prop] = PropertyProcessor.calculate(prop, a[prop], ability[prop]);
 		this.Ability = a;
 	}
 });
@@ -391,19 +367,9 @@ HeroInstance.addHandler({
 	handler: function() {
 		var a = { "Strength": 0, "Agility": 0, "Intelligence": 0, "MovementSpeed": 0,
 				"AttackType": undefined, "ProjectileSpeed": undefined, HasAghanims: undefined };
-		for (var buff of this.Buffs) {
-			for (var prop in a) {
-				var value = buff[prop];
-				if (!value)
-					continue;
-				else if (prop == "Evasion" || prop == "MagicalResistance")
-					a[prop] += (1 - a[prop]) * value;
-				else if (prop == "ProjectileSpeed" || prop == "AttackType" || prop == "HasAghanims")
-					a[prop] = value;
-				else
-					a[prop] += value;
-			}
-		}
+		for (var buff of this.Buffs)
+			for (var prop in a)
+				a[prop] = PropertyProcessor.calculate(prop, a[prop], buff[prop]);
 		this.Buff = a;
 	}
 })
@@ -437,17 +403,9 @@ HeroInstance.addHandler({
 			"ManaRegenerationPercentage": 0, "Damage": 0, "DamageBase": 0, "AttackRate": 0,
 			"AttackSpeed": 0, "Range": 0, "VisionDay": 0, "VisionNight": 0,
 			"ManaRegenerationBase": 0 };
-		for (var ability of this.Abilities) {
-			for (var prop in a) {
-				var value = ability[prop];
-				if (!value)
-					continue;
-				else if (prop == "Evasion" || prop == "MagicalResistance")
-					a[prop] += (1 - a[prop]) * value;
-				else
-					a[prop] += value;
-			}
-		}
+		for (var ability of this.Abilities)
+			for (var prop in a)
+				a[prop] = PropertyProcessor.calculate(prop, a[prop], ability[prop]);
 		this.Ability = a;
 	}
 });
@@ -471,27 +429,13 @@ HeroInstance.addHandler({
 					f[buff.Family.Name] = buff.Family;
 				else if (f[buff.Family.Name].Level < buff.Family.Level)
 					f[buff.Family.Name] = buff.Family;
-			for (var prop in a) {
-				var value = buff[prop];
-				if (!value)
-					continue;
-				else if (prop == "Evasion" || prop == "MagicalResistance")
-					a[prop] += (1 - a[prop]) * value;
-				else if (prop == "ProjectileSpeed" || prop == "AttackType")
-					a[prop] = value;
-				else
-					a[prop] += value;
-			}
+			for (var prop in a)
+				a[prop] = PropertyProcessor.calculate(prop, a[prop], buff[prop]);
 		}
 		for (var familyName in f) {
 			var family = f[familyName];
-			for (var prop in family.Stats) {
-				var value = family.Stats[prop];
-				if (prop == "Evasion" || prop == "MagicalResistance")
-					a[prop] += (1 - a[prop]) * value;
-				else
-					a[prop] += value;
-			}
+			for (var prop in family.Stats)
+				a[prop] = PropertyProcessor.calculate(prop, a[prop], family.Stats[prop]);
 		}
 		this.Buff = a;
 	}
@@ -510,8 +454,8 @@ HeroInstance.addHandler({
 		a.Evasion = this.Item.Evasion + (1-this.Item.Evasion) * this.Ability.Evasion;
 		a.Evasion = a.Evasion + (1-a.Evasion) * this.Buff.Evasion;
 		a.MagicalResistance = this.Raw.MagicalResistance + (1 - this.Raw.MagicalResistance) * this.Item.MagicalResistance;
-		a.MagicalResistance = a.MagicalResistance + (1 - a.MagicalResistance) * this.Ability.MagicalResistance;
-		a.MagicalResistance = a.MagicalResistance + (1 - a.MagicalResistance) * this.Buff.MagicalResistance;
+		a.MagicalResistance += (1 - a.MagicalResistance) * this.Ability.MagicalResistance;
+		a.MagicalResistance += (1 - a.MagicalResistance) * this.Buff.MagicalResistance;
 		a.HealthBase = this.Raw.Health + a.Strength * this.Raw.HealthPerStrength + this.Item.Health + this.Ability.Health + this.Buff.Health;
 		a.Health = a.HealthBase * (1 + this.Buff.HealthPercentage);
 		a.HealthRegenerationBase = this.Raw.HealthRegeneration + a.Strength * 0.03;
