@@ -180,6 +180,12 @@ td.box-content + td.box-content {
 	padding: 2px;
 	font-size: 1em;
 }
+
+.item-tooltip > h1 .label-version {
+	float: right;
+	color: rgba(251, 216, 80, 0.33);
+}
+
 .item-display-options.label {
 	margin-left: 0.5ch;
 }
@@ -206,7 +212,6 @@ td.box-content + td.box-content {
 .item-display-options[style*="display: none"] + br.single-mode {
 	display: none;
 }
-
 
 .item-display-options.cooldown::before {
 	content: url("cooldown.png");

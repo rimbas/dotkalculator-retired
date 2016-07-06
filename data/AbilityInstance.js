@@ -99,11 +99,11 @@ AbilityInstance.prototype.toString = function () {
 }
 
 AbilityInstance.prototype.createDisplayElement = function() {
-	return ElementHelper.createDisplayElement(this)
+	return UIHelper.createDisplayElement(this)
 }
 
 AbilityInstance.prototype.updateDisplayElement = function () {
-	ElementHelper.updateDisplayElements(this)
+	UIHelper.updateDisplayElements(this)
 }
 
 // adds the owner of this item

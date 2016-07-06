@@ -78,10 +78,10 @@ BuffInstance.prototype.delete = function () {
 }
 
 BuffInstance.prototype.createDisplayElement = function() {
-	return ElementHelper.createDisplayElement(this)
+	return UIHelper.createDisplayElement(this)
 }
 
 BuffInstance.prototype.updateDisplayElement = function () {
-	ElementHelper.updateDisplayElements(this)
+	UIHelper.updateDisplayElements(this)
 }
 

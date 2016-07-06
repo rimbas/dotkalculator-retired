@@ -354,9 +354,12 @@ HeroInstance.addHandler({
 	handler: function() {
 		var a = { "Strength": 0, "Agility":0, "Intelligence":0, "MovementSpeed": 0,
 				"AttackType": undefined, "ProjectileSpeed": undefined };
-		for (var ability of this.Abilities)
+		for (var ability of this.Abilities) {
+			if (ability.Level < 1)
+				continue;
 			for (var prop in a)
 				a[prop] = PropertyProcessor.calculate(prop, a[prop], ability[prop]);
+		}
 		this.Ability = a;
 	}
 });
@@ -403,9 +406,12 @@ HeroInstance.addHandler({
 			"ManaRegenerationPercentage": 0, "Damage": 0, "DamageBase": 0, "AttackRate": 0,
 			"AttackSpeed": 0, "Range": 0, "VisionDay": 0, "VisionNight": 0,
 			"ManaRegenerationBase": 0 };
-		for (var ability of this.Abilities)
+		for (var ability of this.Abilities) {
+			if (ability.Level < 1)
+				continue;
 			for (var prop in a)
 				a[prop] = PropertyProcessor.calculate(prop, a[prop], ability[prop]);
+		}
 		this.Ability = a;
 	}
 });

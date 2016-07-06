@@ -11,7 +11,7 @@ header {
 	background-color: #003045;
 	border-bottom: 4px solid #9A1E00;
 	font-size: 14pt;
-	z-index: 9999;
+	z-index: 1000;
 	position: fixed;
 	box-shadow: 0px 2px 4px black;
 	top: 0px;
@@ -20,7 +20,6 @@ header {
 }
 header * {
 	display: inline-block;
-	float: left;
 	background: none;
 	box-sizing: border-box;
 	border: none;
@@ -43,19 +42,19 @@ table {
 	color: gold;
 	border-spacing: 0px;
 }
-th.header { 
+th.header {
 	cursor: pointer;
 	background-image: url(bg.png);
 	background-repeat: no-repeat;
 	background-position: center right;
 	padding-right: 20px;
-} 
-th.headerSortUp { 
+}
+th.headerSortUp {
 	background-image: url(asc.png);
 }
-th.headerSortDown { 
+th.headerSortDown {
 	background-image: url(desc.png);
-} 
+}
 th.noHeader {
 	background: none;
 	cursor: none;
@@ -90,7 +89,6 @@ th.noHeader {
 	background-color: gold;
 	border-left: solid 4px #9A1E00;
 	cursor: default;
-	pointer-events: 
 }
 button {
 	outline: none;
@@ -99,17 +97,23 @@ button {
 	padding: 4px;
 	padding-left: 8px;
 }
-.settings-wrapper label {
+
+.settings-label {
 	display: inline-block;
 	width: 200px;
 }
-label {
-	color: gold;	
-	vertical-align: super;
+.settings-base {
+	margin-bottom: 1px;
+    color: gold;
+    background-color: #003045;
+    border-color: gold;
+    font-size: 16px;
+    padding: 2px;
+    outline: orangered;
+	width: 300px;
 }
-.selector-table, .selector-version {
-	/*width: 300px;*/
-}
+
+/* JQuery UI overrides */
 .ui-selectmenu-menu .ui-menu {
 	background: #003045;
 }
@@ -127,10 +131,10 @@ input.ui-button{
 	padding: 4px;
 	vertical-align: text-bottom;
 }
-input[type=number].spinner.no-buttons::-webkit-inner-spin-button, 
-input[type=number].spinner.no-buttons::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+input[type=number].spinner.no-buttons::-webkit-inner-spin-button,
+input[type=number].spinner.no-buttons::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 input.spinner {
 	background: none;

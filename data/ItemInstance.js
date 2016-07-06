@@ -102,11 +102,11 @@ ItemInstance.prototype.toString = function () {
 
 // creates and returns an element to display in the item container
 ItemInstance.prototype.createDisplayElement = function() {
-	return ElementHelper.createDisplayElement(this)
+	return UIHelper.createDisplayElement(this)
 }
 
 ItemInstance.prototype.updateDisplayElement = function () {
-	ElementHelper.updateDisplayElements(this)
+	UIHelper.updateDisplayElements(this)
 	if (this.ownerBuff)
 		this.ownerBuff.updateDisplayElement()
 }

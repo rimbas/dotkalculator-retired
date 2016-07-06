@@ -22,6 +22,12 @@ function HeroTable(tableName, tableID, wrapper) {
 	this._tableSorterCreated = false;
 
 	this.createTable();
+	document.dispatchEvent(new CustomEvent("HeroTableCreated", {
+		"detail": {
+			"name": tableName,
+			"ID": tableID,
+		}
+	}));
 }
 
 HeroTable.getTables = function() {
@@ -32,6 +38,8 @@ HeroTable.getTables = function() {
 }
 
 HeroTable.getTableById = function(id) {
+	if (!(id in HeroTable.tables))
+		throw "No such table with ID "+id;
 	return HeroTable.tables[id];
 }
 
@@ -126,9 +134,9 @@ HeroTable.prototype.createTable = function () {
 	this._tableElement.appendChild(tbody);
 	this._tableElement.body = tbody;
 
-	var thr = document.createElement("tr");
-	for ( var col of this.columnList ) {
-		var cell = document.createElement("th");
+	let thr = thead.appendChild(document.createElement("tr"));
+	for ( let col of this.columnList ) {
+		let cell = thr.appendChild(document.createElement("th"));
 		if (this.evaluator[col].header instanceof Function)
 			this.evaluator[col].header(cell);
 		else if (typeof this.evaluator[col].header === "string")
@@ -136,15 +144,13 @@ HeroTable.prototype.createTable = function () {
 
 		cell.title = this.evaluator[col].name
 		cell.evaluatorId = col;
-		thr.appendChild(cell);
 	}
-	thead.appendChild(thr);
+
 	this._tableSorterCreated = false;
 
-	for (i in this.heroList) {
-		var hero = this.heroList[i];
+	for (let hero of this.heroList)
 		this.createHeroRow(hero);
-	}
+
 }
 
 HeroTable.prototype.setColumnList = function(columns) {

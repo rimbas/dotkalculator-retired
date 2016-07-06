@@ -11,13 +11,9 @@
 	<link href="libraries/jquery-ui.theme.css" rel="stylesheet" type="text/css" />
 	<link href="styles/global.css" rel="stylesheet" type="text/css" />
 	<link href="images/mini-heroes.css" rel="stylesheet" type="text/css" />
-	<script src="libraries/jquery-2.1.4.min.js"></script>
-	<script src="libraries/jquery-ui.min.js"></script>
-	<script src="libraries/jquery.tablesorter.min.js"></script>
-	<script src="libraries/element-helpers.js"></script>
-	<script src="libraries/PropertyProcessor.js"></script>
+	<!-- Dota 2 data processing -->
 	<script src="data/DotaData.js"></script>
-	<!--<script src="data/dota-data-684c.js"></script>-->
+	<script src="libraries/PropertyProcessor.js"></script>
 	<script src="data/dota-data-686.js"></script>
 	<script src="data/dota-data-687.js"></script>
 	<script src="data/dota-data-688.js"></script>
@@ -25,6 +21,12 @@
 	<script src="data/ItemInstance.js"></script>
 	<script src="data/AbilityInstance.js"></script>
 	<script src="data/BuffInstance.js"></script>
+	<!-- Libraries and helpers -->
+	<script src="libraries/jquery-2.1.4.min.js"></script>
+	<script src="libraries/jquery-ui.min.js"></script>
+	<script src="libraries/jquery.tablesorter.min.js"></script>
+	<script src="libraries/UIHelper.js"></script>
+	<!-- User Interface -->
 	<script src="main-table/HeroTable.js"></script>
 	<link href="main-table/table.css" rel="stylesheet" type="text/css" />
 	<script src="hero-picker/hero-picker.js"></script>
@@ -37,7 +39,7 @@
 	<script src="onLoad.js"></script>
 </head>
 <body>
-	<header>
+	<header id="page-header">
 		<a href="index.html">Dotkalculator</a>
 		<button id="hero-picker-header-button">Add Hero</button>
 		<button id="table-settings-header-button">Table settings</button>
@@ -49,77 +51,79 @@
 
 	</div>
 
-	<div class="window" id="hero-picker"><!-- hero picker container -->
-		<div class="drag-bar">Hero picker<div class="drag-bar-close" id="hero-picker-close"></div></div>
-		<div class="settings-wrapper">
-			<label for="hero-picker-table-selector">Target table: </label>
-			<select id="hero-picker-table-selector" class="selector-table">
-			</select><br>
-			<label for="hero-picker-version-selector">Dota 2 version: </label>
-			<select id="hero-picker-version-selector" class="selector-version">
-			</select>
+	<div id="window-list-container">
+		<div class="window" id="hero-picker"><!-- hero picker container -->
+			<div class="drag-bar">Hero picker<div class="drag-bar-close" id="hero-picker-close"></div></div>
+			<div class="settings-wrapper">
+				<label for="hero-picker-table-selector">Target table: </label>
+				<select id="hero-picker-table-selector" class="selector-table">
+				</select><br>
+				<label for="hero-picker-version-selector">Dota 2 version: </label>
+				<select id="hero-picker-version-selector" class="selector-version">
+				</select>
+			</div>
+			<table id="hero-picker-table">
+				<thead>
+					<tr>
+						<th><img src="images/icon_strength.png" /> Strength</th>
+						<th><img src="images/icon_agility.png" /> Agility</th>
+						<th><img src="images/icon_intelligence.png" /> Intelligence</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td id="hero-picker-Radiant-Strength"></td>
+						<td id="hero-picker-Radiant-Agility"></td>
+						<td id="hero-picker-Radiant-Intelligence"></td>
+					</tr>
+					<tr>
+						<td id="hero-picker-Dire-Strength"></td>
+						<td id="hero-picker-Dire-Agility"></td>
+						<td id="hero-picker-Dire-Intelligence"></td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
-		<table id="hero-picker-table">
-			<thead>
-				<tr>
-					<th><img src="images/icon_strength.png" /> Strength</th>
-					<th><img src="images/icon_agility.png" /> Agility</th>
-					<th><img src="images/icon_intelligence.png" /> Intelligence</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td id="hero-picker-Radiant-Strength"></td>
-					<td id="hero-picker-Radiant-Agility"></td>
-					<td id="hero-picker-Radiant-Intelligence"></td>
-				</tr>
-				<tr>
-					<td id="hero-picker-Dire-Strength"></td>
-					<td id="hero-picker-Dire-Agility"></td>
-					<td id="hero-picker-Dire-Intelligence"></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
 
-	<div class="window" id="table-settings">
-		<div class="drag-bar">Table settings<div class="drag-bar-close" id="table-settings-close"></div></div>
-		<div class="settings-wrapper">
-			<label for="table-settings-table-selector">Target table: </label>
-			<select id="table-settings-table-selector" class="selector-table">
-			</select>
-			<input id="table-settings-submit" type="button" value="Confirm" />
+		<div class="window" id="table-settings">
+			<div class="drag-bar">Table settings<div class="drag-bar-close" id="table-settings-close"></div></div>
+			<div class="settings-wrapper">
+				<label for="table-settings-table-selector">Target table: </label>
+				<select id="table-settings-table-selector" class="selector-table">
+				</select>
+				<input id="table-settings-submit" type="button" value="Confirm" />
+			</div>
+			<div class="table-settings-base-wrapper" id="table-settings-base-wrapper">
+				<div class="table-settings-list-container">
+					<span>Active items</span>
+					<ul id="table-settings-items-active"></ul>
+					<span>Remove item</span>
+					<ul id="table-settings-items-bin"></ul></div></div>
 		</div>
-		<div class="table-settings-base-wrapper" id="table-settings-base-wrapper">
-			<div class="table-settings-list-container">
-				<span>Active items</span>
-				<ul id="table-settings-items-active"></ul>
-				<span>Remove item</span>
-				<ul id="table-settings-items-bin"></ul></div></div>
-	</div>
 
-	<div class="window" id="item-picker">
-		<div class="drag-bar">Item picker <div class="drag-bar-close" id="item-picker-close"></div></div>
-		<div class="settings-wrapper">
-			<label for="item-picker-version-selector">Dota 2 version: </label>
-			<select id="item-picker-version-selector" class="selector-version">
+		<div class="window" id="item-picker">
+			<div class="drag-bar">Item picker <div class="drag-bar-close" id="item-picker-close"></div></div>
+			<div class="settings-wrapper">
+				<label for="item-picker-version-selector">Dota 2 version: </label>
+				<select id="item-picker-version-selector" class="selector-version">
 
-			</select>
+				</select>
+			</div>
+			<table id="item-picker-base">
+
+			</table>
 		</div>
-		<table id="item-picker-base">
 
-		</table>
-	</div>
-
-	<div class="window" id="info-window">
-		<div class="drag-bar">Information<div class="drag-bar-close" id="info-window-close"></div></div>
-		<div style="padding:10px">
-			<span style="font-style:bold;font-size:14pt">Dotkalculator - a table based Dota 2 hero stat comparison engine</span><br>
-			<br>
-			<a style="color:orange" href="https://github.com/rimbas4/dotkalculator">GitHub page</a><br>
-			<br>
-			<span>Dota 2 and Dota 2 images belong to Valve.</span>
-			<span style="float:right;font-size:10pt">Created by <a style="color:orange" href="https://github.com/rimbas4">Rimbas4</a></span><br>
+		<div class="window" id="info-window">
+			<div class="drag-bar">Information<div class="drag-bar-close" id="info-window-close"></div></div>
+			<div style="padding:10px">
+				<span style="font-style:bold;font-size:14pt">Dotkalculator - a table based Dota 2 hero stat comparison engine</span><br>
+				<br>
+				<a style="color:orange" href="https://github.com/rimbas4/dotkalculator">GitHub page</a><br>
+				<br>
+				<span>Dota 2 and Dota 2 images belong to Valve.</span>
+				<span style="float:right;font-size:10pt">Created by <a style="color:orange" href="https://github.com/rimbas4">Rimbas4</a></span><br>
+			</div>
 		</div>
 	</div>
 </body>

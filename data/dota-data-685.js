@@ -2,7 +2,7 @@
 // 6.85 added for VERSION testing purposes mainly until property definition formats are finalised
 
 // mostly auto generated and regexed-up data
-DotaData.addVersion( "6.85", 
+DotaData.addVersion( "6.85",
 {
 	"Heroes": {
 		"_base": // Special base entry
@@ -63,7 +63,7 @@ DotaData.addVersion( "6.85",
 			"Enabled": 1,
 			"MovementSpeed": 310,
 			"TurnRate": 0.5,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"abyssal_underlord": {
 			"Name": "Abyssal Underlord",
@@ -90,7 +90,7 @@ DotaData.addVersion( "6.85",
 			"Enabled": 0,
 			"MovementSpeed": 305,
 			"TurnRate": 0.6,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"alchemist": {
 			"Name": "Alchemist",
@@ -117,7 +117,7 @@ DotaData.addVersion( "6.85",
 			"Enabled": 1,
 			"MovementSpeed": 295,
 			"TurnRate": 0.6,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"ancient_apparition": {
 			"Name": "Ancient Apparition",
@@ -145,7 +145,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 295,
 			"TurnRate": 0.6,
 			"ProjectileSpeed": 1250,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"antimage": {
 			"Name": "Anti-Mage",
@@ -171,7 +171,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 315,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 0,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"axe": {
 			"Name": "Axe",
@@ -197,7 +197,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 290,
 			"TurnRate": 0.6,
 			"HealthRegeneration": 3.0,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"bane": {
 			"Name": "Bane",
@@ -225,7 +225,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 315,
 			"TurnRate": 0.6,
 			"ProjectileSpeed": 900,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"batrider": {
 			"Name": "Batrider",
@@ -251,7 +251,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 290,
 			"TurnRate": 1.0,
 			"ProjectileSpeed": 900,
-			"Side": "Dire",
+			"Team": "Dire",
 			"VisionDaytime": 1200
 		},
 		"beastmaster": {
@@ -281,7 +281,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 310,
 			"TurnRate": 0.4,
 			"ProjectileSpeed": 0,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"bloodseeker": {
 			"Name": "Bloodseeker",
@@ -306,7 +306,7 @@ DotaData.addVersion( "6.85",
 			"Enabled": 1,
 			"MovementSpeed": 290,
 			"TurnRate": 0.5,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"bounty_hunter": {
 			"Name": "Bounty Hunter",
@@ -332,7 +332,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 315,
 			"TurnRate": 0.6,
 			"HealthRegeneration": 0.75,
-			"Side": "Radiant",
+			"Team": "Radiant",
 			"VisionDaytime": 1800,
 			"VisionNighttime": 1000
 		},
@@ -361,7 +361,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 300,
 			"TurnRate": 0.6,
 			"HealthRegeneration": 0.75,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"bristleback": {
 			"Name": "Bristleback",
@@ -387,7 +387,7 @@ DotaData.addVersion( "6.85",
 			"Enabled": 1,
 			"MovementSpeed": 290,
 			"TurnRate": 1.0,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"broodmother": {
 			"Name": "Broodmother",
@@ -412,7 +412,7 @@ DotaData.addVersion( "6.85",
 			"Enabled": 1,
 			"MovementSpeed": 295,
 			"TurnRate": 0.5,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"centaur": {
 			"Name": "Centaur Warrunner",
@@ -438,7 +438,7 @@ DotaData.addVersion( "6.85",
 			"Enabled": 1,
 			"MovementSpeed": 300,
 			"TurnRate": 0.5,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"chaos_knight": {
 			"Name": "Chaos knight",
@@ -464,7 +464,7 @@ DotaData.addVersion( "6.85",
 			"Enabled": 1,
 			"MovementSpeed": 325,
 			"TurnRate": 0.5,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"chen": {
 			"Name": "Chen",
@@ -493,7 +493,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 300,
 			"TurnRate": 0.6,
 			"ProjectileSpeed": 1100,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"clinkz": {
 			"Name": "Clinkz",
@@ -519,7 +519,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 300,
 			"TurnRate": 0.4,
 			"ProjectileSpeed": 900,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"crystal_maiden": {
 			"Name": "Crystal Maiden",
@@ -545,7 +545,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 280,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 900,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"dark_seer": {
 			"Name": "Dark Seer",
@@ -570,7 +570,7 @@ DotaData.addVersion( "6.85",
 			"Enabled": 1,
 			"MovementSpeed": 300,
 			"TurnRate": 0.6,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"dazzle": {
 			"Name": "Dazzle",
@@ -596,7 +596,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 305,
 			"TurnRate": 0.6,
 			"ProjectileSpeed": 1200,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"death_prophet": {
 			"Name": "Death Prophet",
@@ -623,7 +623,7 @@ DotaData.addVersion( "6.85",
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 1000,
 			"HealthRegeneration": 0.75,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"disruptor": {
 			"Name": "Disruptor",
@@ -650,7 +650,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 300,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 1200,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"doom": {
 			"Name": "Doom",
@@ -679,7 +679,7 @@ DotaData.addVersion( "6.85",
 			"Enabled": 1,
 			"MovementSpeed": 290,
 			"TurnRate": 0.5,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"dragon_knight": {
 			"Name": "Dragon Knight",
@@ -705,7 +705,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 290,
 			"TurnRate": 0.6,
 			"ProjectileSpeed": 900,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"drow_ranger": {
 			"Name": "Drow Ranger",
@@ -731,7 +731,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 300,
 			"TurnRate": 0.6,
 			"ProjectileSpeed": 1250,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"earth_spirit": {
 			"Name": "Earth Spirit",
@@ -760,7 +760,7 @@ DotaData.addVersion( "6.85",
 			"Enabled": 1,
 			"MovementSpeed": 305,
 			"TurnRate": 0.6,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"earthshaker": {
 			"Name": "Earthshaker",
@@ -786,7 +786,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 310,
 			"TurnRate": 0.9,
 			"ProjectileSpeed": 0,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"elder_titan": {
 			"Name": "Elder Titan",
@@ -813,7 +813,7 @@ DotaData.addVersion( "6.85",
 			"Enabled": 1,
 			"MovementSpeed": 315,
 			"TurnRate": 0.4,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"ember_spirit": {
 			"Name": "Ember Spirit",
@@ -842,7 +842,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 310,
 			"TurnRate": 0.5,
 			"HealthRegeneration": 0.75,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"enchantress": {
 			"Name": "Enchantress",
@@ -868,7 +868,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 335,
 			"TurnRate": 0.4,
 			"ProjectileSpeed": 900,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"enigma": {
 			"Name": "Enigma",
@@ -894,7 +894,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 300,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 900,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"faceless_void": {
 			"Name": "Faceless Void",
@@ -920,7 +920,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 300,
 			"TurnRate": 1.0,
 			"HealthRegeneration": 0.75,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"furion": {
 			"Name": "Natures Prophet",
@@ -946,7 +946,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 295,
 			"TurnRate": 0.6,
 			"ProjectileSpeed": 1125,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"gyrocopter": {
 			"Name": "Gyrocopter",
@@ -972,7 +972,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 315,
 			"TurnRate": 0.6,
 			"ProjectileSpeed": 3000,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"huskar": {
 			"Name": "Huskar",
@@ -998,7 +998,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 300,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 1400,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"invoker": {
 			"Name": "Invoker",
@@ -1037,7 +1037,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 280,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 900,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"jakiro": {
 			"Name": "Jakiro",
@@ -1063,7 +1063,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 290,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 1100,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"juggernaut": {
 			"Name": "Juggernaut",
@@ -1090,7 +1090,7 @@ DotaData.addVersion( "6.85",
 			"TurnRate": 0.6,
 			"ProjectileSpeed": 0,
 			"HealthRegeneration": 0.75,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"keeper_of_the_light": {
 			"Name": "Keeper of the Light",
@@ -1123,7 +1123,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 315,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 900,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"kunkka": {
 			"Name": "Kunkka",
@@ -1149,7 +1149,7 @@ DotaData.addVersion( "6.85",
 			"Enabled": 1,
 			"MovementSpeed": 300,
 			"TurnRate": 0.6,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"legion_commander": {
 			"Name": "Legion Commander",
@@ -1175,7 +1175,7 @@ DotaData.addVersion( "6.85",
 			"Enabled": 1,
 			"MovementSpeed": 320,
 			"TurnRate": 0.5,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"leshrac": {
 			"Name": "Leshrac",
@@ -1201,7 +1201,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 320,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 900,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"lich": {
 			"Name": "Lich",
@@ -1227,7 +1227,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 315,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 900,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"life_stealer": {
 			"Name": "Lifestealer",
@@ -1257,7 +1257,7 @@ DotaData.addVersion( "6.85",
 			"Enabled": 1,
 			"MovementSpeed": 315,
 			"TurnRate": 1.0,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"lina": {
 			"Name": "Lina",
@@ -1283,7 +1283,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 295,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 1000,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"lion": {
 			"Name": "Lion",
@@ -1309,7 +1309,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 290,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 900,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"lone_druid": {
 			"Name": "Lone Druid",
@@ -1340,7 +1340,7 @@ DotaData.addVersion( "6.85",
 			"TurnRate": 0.4,
 			"ProjectileSpeed": 900,
 			"HealthRegeneration": 0.5,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"luna": {
 			"Name": "Luna",
@@ -1366,7 +1366,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 330,
 			"TurnRate": 0.4,
 			"ProjectileSpeed": 900,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"lycan": {
 			"Name": "Lycan",
@@ -1392,7 +1392,7 @@ DotaData.addVersion( "6.85",
 			"Enabled": 1,
 			"MovementSpeed": 305,
 			"TurnRate": 0.5,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"magnataur": {
 			"Name": "Magnus",
@@ -1418,7 +1418,7 @@ DotaData.addVersion( "6.85",
 			"Enabled": 1,
 			"MovementSpeed": 315,
 			"TurnRate": 0.8,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"medusa": {
 			"Name": "Medusa",
@@ -1445,7 +1445,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 290,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 1200,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"meepo": {
 			"Name": "Meepo",
@@ -1472,7 +1472,7 @@ DotaData.addVersion( "6.85",
 			"MagicalResistance": 0.35,
 			"MovementSpeed": 315,
 			"TurnRate": 0.65,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"mirana": {
 			"Name": "Mirana",
@@ -1498,7 +1498,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 300,
 			"TurnRate": 0.4,
 			"ProjectileSpeed": 900,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"morphling": {
 			"Name": "Morphling",
@@ -1530,7 +1530,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 285,
 			"TurnRate": 0.6,
 			"ProjectileSpeed": 1300,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"naga_siren": {
 			"Name": "Naga Siren",
@@ -1558,7 +1558,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 320,
 			"TurnRate": 0.5,
 			"HealthRegeneration": 0.75,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"necrolyte": {
 			"Name": "Necrophos",
@@ -1584,7 +1584,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 290,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 900,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"nevermore": {
 			"Name": "Shadow Fiend",
@@ -1615,7 +1615,7 @@ DotaData.addVersion( "6.85",
 			"TurnRate": 1.0,
 			"ProjectileSpeed": 1200,
 			"HealthRegeneration": 0.5,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"night_stalker": {
 			"Name": "Night Stalker",
@@ -1641,7 +1641,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 295,
 			"TurnRate": 0.5,
 			"HealthRegeneration": 2,
-			"Side": "Dire",
+			"Team": "Dire",
 			"VisionDaytime": 1200,
 			"VisionNighttime": 1800
 		},
@@ -1672,7 +1672,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 300,
 			"TurnRate": 0.5,
 			"HealthRegeneration": 2.5,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"obsidian_destroyer": {
 			"Name": "Outworld Devourer",
@@ -1699,7 +1699,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 315,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 900,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"ogre_magi": {
 			"Name": "Ogre Magi",
@@ -1727,7 +1727,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 295,
 			"TurnRate": 0.6,
 			"HealthRegeneration": 2.5,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"omniknight": {
 			"Name": "Omniknight",
@@ -1752,7 +1752,7 @@ DotaData.addVersion( "6.85",
 			"Enabled": 1,
 			"MovementSpeed": 305,
 			"TurnRate": 0.6,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"oracle": {
 			"Name": "Oracle",
@@ -1780,7 +1780,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 305,
 			"TurnRate": 0.4,
 			"ProjectileSpeed": 900,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"phantom_assassin": {
 			"Name": "Phantom Asssassin",
@@ -1805,7 +1805,7 @@ DotaData.addVersion( "6.85",
 			"Enabled": 1,
 			"MovementSpeed": 310,
 			"TurnRate": 0.4,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"phantom_lancer": {
 			"Name": "Phantom Lancer",
@@ -1831,7 +1831,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 290,
 			"TurnRate": 0.6,
 			"HealthRegeneration": 0.75,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"phoenix": {
 			"Name": "Phoenix",
@@ -1865,7 +1865,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 285,
 			"TurnRate": 1.0,
 			"ProjectileSpeed": 1100,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"puck": {
 			"Name": "Puck",
@@ -1894,7 +1894,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 295,
 			"TurnRate": 0.4,
 			"ProjectileSpeed": 900,
-			"Side": "Radiant",
+			"Team": "Radiant",
 			"VisionNighttime": 800
 		},
 		"pudge": {
@@ -1921,7 +1921,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 285,
 			"TurnRate": 0.7,
 			"ProjectileSpeed": 0,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"pugna": {
 			"Name": "Pugna",
@@ -1947,7 +1947,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 330,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 900,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"queenofpain": {
 			"Name": "Queen of Pain",
@@ -1973,7 +1973,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 295,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 1500,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"rattletrap": {
 			"Name": "Clockwerk",
@@ -1998,7 +1998,7 @@ DotaData.addVersion( "6.85",
 			"Enabled": 1,
 			"MovementSpeed": 315,
 			"TurnRate": 0.6,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"razor": {
 			"Name": "Razor",
@@ -2024,7 +2024,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 295,
 			"TurnRate": 0.4,
 			"ProjectileSpeed": 2000,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"riki": {
 			"Name": "Riki",
@@ -2050,7 +2050,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 290,
 			"TurnRate": 0.6,
 			"HealthRegeneration": 0.25,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"rubick": {
 			"Name": "Rubick",
@@ -2084,7 +2084,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 290,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 1125,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"sand_king": {
 			"Name": "Sand King",
@@ -2109,7 +2109,7 @@ DotaData.addVersion( "6.85",
 			"Enabled": 1,
 			"MovementSpeed": 300,
 			"TurnRate": 0.5,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"shadow_demon": {
 			"Name": "Shadow Demon",
@@ -2138,7 +2138,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 295,
 			"TurnRate": 0.6,
 			"ProjectileSpeed": 900,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"shadow_shaman": {
 			"Name": "Shadow Shaman",
@@ -2164,7 +2164,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 285,
 			"TurnRate": 0.4,
 			"ProjectileSpeed": 900,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"shredder": {
 			"Name": "Timbersaw",
@@ -2194,7 +2194,7 @@ DotaData.addVersion( "6.85",
 			"Enabled": 1,
 			"MovementSpeed": 290,
 			"TurnRate": 0.6,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"silencer": {
 			"Name": "Silencer",
@@ -2222,7 +2222,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 295,
 			"TurnRate": 0.6,
 			"ProjectileSpeed": 1000,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"skeleton_king": {
 			"Name": "Wraith King",
@@ -2248,7 +2248,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 300,
 			"TurnRate": 0.4,
 			"ProjectileSpeed": 0,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"skywrath_mage": {
 			"Name": "Skywrath Mage",
@@ -2274,7 +2274,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 325,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 1000,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"slardar": {
 			"Name": "Slardar",
@@ -2300,7 +2300,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 300,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 0,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"slark": {
 			"Name": "Slark",
@@ -2327,7 +2327,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 305,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 0,
-			"Side": "Dire",
+			"Team": "Dire",
 			"VisionDaytime": 1800,
 			"VisionNighttime": 1800
 		},
@@ -2355,7 +2355,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 290,
 			"TurnRate": 0.6,
 			"ProjectileSpeed": 3000,
-			"Side": "Radiant",
+			"Team": "Radiant",
 			"VisionNighttime": 1000
 		},
 		"spectre": {
@@ -2384,7 +2384,7 @@ DotaData.addVersion( "6.85",
 			"Enabled": 1,
 			"MovementSpeed": 290,
 			"TurnRate": 0.4,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"spirit_breaker": {
 			"Name": "Spirit Breaker",
@@ -2411,7 +2411,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 290,
 			"TurnRate": 0.4,
 			"HealthRegeneration": 0.75,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"storm_spirit": {
 			"Name": "Storm Spirit",
@@ -2437,7 +2437,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 285,
 			"TurnRate": 0.8,
 			"ProjectileSpeed": 1100,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"sven": {
 			"Name": "Sven",
@@ -2463,7 +2463,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 295,
 			"TurnRate": 0.6,
 			"ProjectileSpeed": 0,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"techies": {
 			"Name": "Techies",
@@ -2497,7 +2497,7 @@ DotaData.addVersion( "6.85",
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 900,
 			"ManaRegeneration": 0.02,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"templar_assassin": {
 			"Name": "Templar assassin",
@@ -2526,7 +2526,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 305,
 			"TurnRate": 0.7,
 			"ProjectileSpeed": 900,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"terrorblade": {
 			"Name": "Terrorblade",
@@ -2553,7 +2553,7 @@ DotaData.addVersion( "6.85",
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 900,
 			"HealthRegeneration": 2.0,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"tidehunter": {
 			"Name": "Tidehunter",
@@ -2578,7 +2578,7 @@ DotaData.addVersion( "6.85",
 			"Enabled": 1,
 			"MovementSpeed": 305,
 			"TurnRate": 0.4,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"tinker": {
 			"Name": "Tinker",
@@ -2604,7 +2604,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 305,
 			"TurnRate": 0.6,
 			"ProjectileSpeed": 900,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"tiny": {
 			"Name": "Tiny",
@@ -2629,7 +2629,7 @@ DotaData.addVersion( "6.85",
 			"Enabled": 1,
 			"MovementSpeed": 285,
 			"TurnRate": 0.5,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"treant": {
 			"Name": "Treant Protector",
@@ -2656,7 +2656,7 @@ DotaData.addVersion( "6.85",
 			"Enabled": 1,
 			"MovementSpeed": 300,
 			"TurnRate": 0.5,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"troll_warlord": {
 			"Name": "Troll Warlord",
@@ -2684,7 +2684,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 300,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 1200,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"tusk": {
 			"Name": "Tusk",
@@ -2713,7 +2713,7 @@ DotaData.addVersion( "6.85",
 			"Enabled": 1,
 			"MovementSpeed": 305,
 			"TurnRate": 0.5,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"undying": {
 			"Name": "Undying",
@@ -2739,7 +2739,7 @@ DotaData.addVersion( "6.85",
 			"Enabled": 1,
 			"MovementSpeed": 310,
 			"TurnRate": 0.6,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"ursa": {
 			"Name": "Ursa",
@@ -2764,7 +2764,7 @@ DotaData.addVersion( "6.85",
 			"Enabled": 1,
 			"MovementSpeed": 310,
 			"TurnRate": 0.5,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"vengefulspirit": {
 			"Name": "Vengeful Spirit",
@@ -2790,7 +2790,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 300,
 			"TurnRate": 0.6,
 			"ProjectileSpeed": 1500,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"venomancer": {
 			"Name": "Venomancer",
@@ -2817,7 +2817,7 @@ DotaData.addVersion( "6.85",
 			"TurnRate": 0.4,
 			"ProjectileSpeed": 900,
 			"HealthRegeneration": 0.25,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"viper": {
 			"Name": "Viper",
@@ -2843,7 +2843,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 285,
 			"TurnRate": 0.4,
 			"ProjectileSpeed": 1200,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"visage": {
 			"Name": "Visage",
@@ -2871,7 +2871,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 285,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 900,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"warlock": {
 			"Name": "Warlock",
@@ -2897,7 +2897,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 295,
 			"TurnRate": 0.4,
 			"ProjectileSpeed": 1200,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"weaver": {
 			"Name": "Weaver",
@@ -2923,7 +2923,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 290,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 900,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"windrunner": {
 			"Name": "Windranger",
@@ -2949,7 +2949,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 295,
 			"TurnRate": 0.6,
 			"ProjectileSpeed": 1250,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"winter_wyvern": {
 			"Name": "Winter Wyvern",
@@ -2979,7 +2979,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 285,
 			"TurnRate": 0.4,
 			"ProjectileSpeed": 700,
-			"Side": "Dire",
+			"Team": "Dire",
 			"VisionDaytime": 1800,
 			"VisionNighttime": 800
 		},
@@ -3014,7 +3014,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 295,
 			"TurnRate": 0.7,
 			"ProjectileSpeed": 1200,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		},
 		"witch_doctor": {
 			"Name": "Witch Doctor",
@@ -3040,7 +3040,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 305,
 			"TurnRate": 0.4,
 			"ProjectileSpeed": 1200,
-			"Side": "Dire"
+			"Team": "Dire"
 		},
 		"zuus": {
 			"Name": "Zeus",
@@ -3066,7 +3066,7 @@ DotaData.addVersion( "6.85",
 			"MovementSpeed": 295,
 			"TurnRate": 0.6,
 			"ProjectileSpeed": 1100,
-			"Side": "Radiant"
+			"Team": "Radiant"
 		}
 	}, // end of hero definition
 	"Items": {
@@ -3471,7 +3471,7 @@ DotaData.addVersion( "6.85",
 			"Strength": 3,
 			"Agility": 3,
 			"Intelligence": 6,
-			"Damage": 3	
+			"Damage": 3
 		},
 		"wraith_band": {
 			"Name": "Wraith band",
@@ -3482,7 +3482,7 @@ DotaData.addVersion( "6.85",
 			"Strength": 3,
 			"Agility": 6,
 			"Intelligence": 3,
-			"Damage": 3	
+			"Damage": 3
 		},
 		"poor_mans_shield": {
 			"Name": "Poor Man's Shield",
@@ -3502,7 +3502,7 @@ DotaData.addVersion( "6.85",
 			"Agility": 3,
 			"Intelligence": 3,
 			"Damage": 3
-		},	
+		},
 		"soul_ring": {
 			"Name": "Soul ring",
 			"Cost": 800,
@@ -4362,8 +4362,8 @@ DotaData.addVersion( "6.85",
 			"Damage": 20,
 			"Armor": 5
 		},
-		
-		
+
+
 		/* Secret */
 		"energy_booster": {
 			"Name": "Energy Booster",
@@ -4525,12 +4525,12 @@ DotaData.addVersion( "6.85",
 			"Level": function() {
 				return this.emitterRef ? this.emitterRef.Level : -1;
 			},
-			"Damage": 
+			"Damage":
 				function() {
-					if (!this.emitterRef) { 
+					if (!this.emitterRef) {
 						console.warn("Buff without required emitter!");
 						return 0; }
-					if (this.heroRef.Raw.AttackType != "Ranged") 
+					if (this.heroRef.Raw.AttackType != "Ranged")
 						return 0;
 					if (this.emitterRef.Level > 0)
 						return Math.floor(this.ownerRef.Total.Agility * (0.14 + this.emitterRef.Level * 0.06))
@@ -4561,12 +4561,12 @@ DotaData.addVersion( "6.85",
 			"Name": "Basilius aura",
 			"Image": "ring_of_basilius",
 			"Class": "Aura",
-			"Family": { 
-				"Name": "Basilius", 
-				"Level": 0.65, 
-				"Stats": { 
-					"ManaRegenerationFlat": 0.65, 
-					"Armor": 2 
+			"Family": {
+				"Name": "Basilius",
+				"Level": 0.65,
+				"Stats": {
+					"ManaRegenerationFlat": 0.65,
+					"Armor": 2
 				}
 			}
 		},
@@ -4574,27 +4574,27 @@ DotaData.addVersion( "6.85",
 			"Name": "Aquila aura",
 			"Image": "ring_of_aquila",
 			"Class": "Aura",
-			"Family": { 
-				"Name": "Basilius", 
-				"Level": 0.65, 
-				"Stats": { 
-					"ManaRegenerationFlat": 0.65, 
-					"Armor": 2 
-				} 
+			"Family": {
+				"Name": "Basilius",
+				"Level": 0.65,
+				"Stats": {
+					"ManaRegenerationFlat": 0.65,
+					"Armor": 2
+				}
 			}
 		},
 		"vladmirs_aura": {
 			"Name": "Vladmir's aura",
 			"Image": "vladmir",
 			"Class": "Aura",
-			"Family": { 
-				"Name": "Basilius", 
-				"Level": 0.8, 
-				"Stats": { 
-					"DamagePercentage": 0.15, 
-					"ManaRegenerationFlat": 0.8, 
-					"Armor": 5, 
-					"HealthRegeneration": 3 
+			"Family": {
+				"Name": "Basilius",
+				"Level": 0.8,
+				"Stats": {
+					"DamagePercentage": 0.15,
+					"ManaRegenerationFlat": 0.8,
+					"Armor": 5,
+					"HealthRegeneration": 3
 				}
 			}
 		},
@@ -4602,12 +4602,12 @@ DotaData.addVersion( "6.85",
 			"Name": "Swiftness aura",
 			"Image": "ancient_janggo",
 			"Class": "Aura",
-			"Family": { 
-				"Name": "Drums", 
-				"Level": 1, 
-				"Stats": { 
-					"MovementSpeedPercentage": 0.05, 
-					"AttackSpeed": 5 
+			"Family": {
+				"Name": "Drums",
+				"Level": 1,
+				"Stats": {
+					"MovementSpeedPercentage": 0.05,
+					"AttackSpeed": 5
 				}
 			}
 		},
@@ -4662,6 +4662,6 @@ DotaData.addVersion( "6.85",
 			}
 		}
 	}
-	
+
 });
 

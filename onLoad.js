@@ -1,11 +1,11 @@
 /* Main page initialisation */
 
 //document.addEventListener("load",
-$(function(e){
+window.addEventListener("DOMContentLoaded", function(e){
 	$(".window").draggable({
 		handle: ".drag-bar",
 		cursor: "grabbed",
-		containment: "document"
+		containment: "document",
 	})
 	MainTable = new HeroTable("Comparison table", "main-table", document.getElementById("main-table-wrapper"));
 	MainTable.addHero(new HeroInstance("drow_ranger", {
@@ -158,15 +158,17 @@ $(function(e){
 
 	$(".selector-version").selectmenu({width: 300});
 	$(".selector-table").selectmenu({width: 300});
+
 })
 
 window.createAllHeroes = function(team) {
 	MainTable.removeAllHeroes()
-	for (let heroId in DotaData.Versions["6.87"].Heroes) {
+	let list = DotaData.getCurrentHeroList()
+	for (let heroId in list) {
 		let settings = {};
 		if (team)
 			settings.team = team;
-		if (DotaData.Versions["6.87"].Heroes[heroId].Enabled > 0)
+		if (list[heroId].Enabled > 0)
 			MainTable.addHero(new HeroInstance(heroId, settings));
 	}
 }
