@@ -2,8 +2,7 @@
 
 DotaData = {};
 DotaData.Versions = {}
-DotaData.NewestVersion = "6.88";
-DotaData.TargetVersion = DotaData.NewestVersion;
+DotaData.NewestVersion = "";
 
 DotaData.Meta = {
 	TeamList: ["Radiant", "Dire"],
@@ -14,7 +13,7 @@ DotaData.Meta = {
 // heroId (string) - internal hero ID
 DotaData.getHeroProperties = function (heroId, versionOverride) {
 	if (versionOverride && !versionOverride in DotaData.Versions) throw "No such version \""+versionOverride+"\"";
-	var version = DotaData.Versions[versionOverride || DotaData.TargetVersion];
+	var version = DotaData.Versions[versionOverride || DotaData.NewestVersion];
 	if (!(heroId in version.Heroes)) throw "No such id \"" + heroId + "\" in hero list";
 	var obj = {},
 		base = version.Heroes._base,
@@ -33,7 +32,7 @@ DotaData.getHeroProperties = function (heroId, versionOverride) {
 
 DotaData.getItemProperties = function (itemId, versionOverride) {
 	if (versionOverride && !versionOverride in DotaData.Versions) throw "No such version \""+versionOverride+"\"";
-	var version = DotaData.Versions[versionOverride || DotaData.TargetVersion];
+	var version = DotaData.Versions[versionOverride || DotaData.NewestVersion];
 	if (!(itemId in version.Items)) throw "No such id \"" + itemId + "\" in item list";
 	var obj = {},
 		base = version.Items._base,
@@ -48,7 +47,7 @@ DotaData.getItemProperties = function (itemId, versionOverride) {
 
 DotaData.getAbilityProperties = function (abilityId, versionOverride) {
 	if (versionOverride && !versionOverride in DotaData.Versions) throw "No such version \""+versionOverride+"\"";
-	var version = DotaData.Versions[versionOverride || DotaData.TargetVersion];
+	var version = DotaData.Versions[versionOverride || DotaData.NewestVersion];
 	if (!(abilityId in version.Abilities))
 		throw "No such id \"" + abilityId + "\" in ability list";
 	var obj = {},
@@ -64,7 +63,7 @@ DotaData.getAbilityProperties = function (abilityId, versionOverride) {
 
 DotaData.getBuffProperties = function(buffId, versionOverride) {
 	if (versionOverride && !versionOverride in DotaData.Versions) throw "No such version \""+versionOverride+"\"";
-	var version = DotaData.Versions[versionOverride || DotaData.TargetVersion];
+	var version = DotaData.Versions[versionOverride || DotaData.NewestVersion];
 	if (!(buffId in version.Buffs))
 		throw "No such id \"" + buffId + "\" in buff list";
 	var obj = {},
@@ -87,6 +86,8 @@ DotaData.getCurrentItemList = function() {
 }
 
 DotaData.addVersion = function(version, data) {
+	if (version > DotaData.NewestVersion)
+		DotaData.NewestVersion = version;
 	DotaData.checkVersionData(data);
 	DotaData.Versions[version] = data;
 }

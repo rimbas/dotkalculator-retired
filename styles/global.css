@@ -36,6 +36,11 @@ header a:visited {
 	color: yellow;
 	text-decoration: none;
 }
+header .right {
+	float: right;
+	border: none;
+	border-left: 4px solid rgba(0, 0, 0, 0.22);
+}
 
 table {
 	border: 4px solid #9A1E00;
