@@ -72,7 +72,13 @@ window.addEventListener("DOMContentLoaded", function(e){
 			}
 
 			var heroDataObject = DotaData.getCurrentHeroList(),
-				heroList = Object.keys(heroDataObject).sort();
+				heroList = Object.keys(heroDataObject).sort(function heroNameSorter(a,b){
+					if (heroDataObject[a].Name < heroDataObject[b].Name)
+						return -1;
+					if (heroDataObject[a].Name > heroDataObject[b].Name)
+						return 1;
+					return 0
+				});
 			for (let heroId of heroList) {
 				var hero = heroDataObject[heroId];
 				if ( hero.Enabled <= 0 )

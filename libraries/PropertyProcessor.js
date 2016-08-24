@@ -20,6 +20,9 @@ PropertyProcessor.addType = function(handlerName, handlerCallback) {
 	}
 }
 
+/**
+ * Add a definition how to handle a property
+ */
 PropertyProcessor.addProperty = function(propertyName, handlerName) {
 	PropertyProcessor.properties[propertyName] = handlerName
 }
@@ -33,27 +36,35 @@ PropertyProcessor.calculate = function(propName, oldVal, newVal) {
 	return PropertyProcessor.types["number"](oldVal, newVal)
 }
 
-// calculating sums for almost everything
+/**
+ * Handler for summing things. Default handler.
+ */
 PropertyProcessor.addType("number",
 	function(oldVal, newVal) {
 		return oldVal + newVal
 });
 
-// evasion, magic resistance
+/**
+ * Diminishing return percentage calculation
+ */
 PropertyProcessor.addType("diminishing",
 	function(oldVal, newVal) {
 		return oldVal + (1 - oldVal) * newVal
 })
 
-// used for melee/range overrides
+/**
+ * Overriding values
+ */
 PropertyProcessor.addType("override",
 	function(oldVal, newVal) {
 		return newVal
 })
 
-// Used for Aghanim's check
+/**
+ * Single needed truth detection
+ */
 PropertyProcessor.addType("contains",
 	function(oldVal, newVal) {
-		return oldVal || newVal
+		return oldVal || !!newVal
 })
 

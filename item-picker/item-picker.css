@@ -1,6 +1,3 @@
-#item-picker {
-	
-}
 
 #item-picker-base {
 	border-bottom: none;
@@ -9,7 +6,8 @@
 }
 
 #item-picker-base th {
-	margin-bottom: -4px;
+/*	margin-bottom: -4px;*/
+	background-color: black;
 }
 
 #item-picker-base td, #item-picker-base th {

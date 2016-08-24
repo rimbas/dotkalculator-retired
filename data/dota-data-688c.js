@@ -3080,6 +3080,33 @@ DotaData.addVersion( version,
 			"MovementSpeed": 295,
 			"TurnRate": 0.4,
 			"Team": "Dire"
+		},
+		"abyssal_underlord": {
+			"Name": "Underlord",
+			"Enabled": 1,
+			"Ability1": "abyssal_underlord_firestorm",
+			"Ability2": "abyssal_underlord_pit_of_malice",
+			"Ability3": "abyssal_underlord_atrophy_aura",
+			"Ability4": "abyssal_underlord_dark_rift",
+			"Ability5": "attribute_bonus",
+			//"Ability5": "abyssal_underlord_cancel_dark_rift",
+			"AttackPoint": 0.45,
+			"AttackType": "Melee",
+			"DamageMax": 43,
+			"DamageMin": 37,
+			"Range": 150,
+			"AttackRate": 1.7,
+			"StrengthBase": 25,
+			"StrengthGain": 2.6,
+			"AgilityBase": 12,
+			"AgilityGain": 1.3,
+			"IntelligenceBase": 17,
+			"IntelligenceGain": 2.6,
+			"Type": "Strength",
+			"Armor": 2,
+			"MovementSpeed": 305,
+			"TurnRate": 0.6,
+			"Team": "Dire"
 		}
 	}, // end of hero definition
 	"Items": {
@@ -7424,9 +7451,26 @@ DotaData.addVersion( version,
 			"Class": "Ultimate",
 			"LevelMax": 3,
 			"Restrictions": [6, 11, 16],
-			"Cooldown": function(){ return 45 - this.Level * 5 }
+			"Cooldown": function(){ return 45 - this.Level * 5 },
 		},
-
+		"abyssal_underlord_firestorm": {
+			"Name": "Firestorm",
+			"Cooldown": 12,
+			"ManaCost": function(){ return 90 + this.Level * 10},
+		},
+		"abyssal_underlord_pit_of_malice": {
+			"Name": "Pit of Malice",
+			"Cooldown": function(){ return 24 - this.Level * 3},
+			"ManaCost": function(){ return 85 + this.Level * 15},
+		},
+		"abyssal_underlord_atrophy_aura": {
+			"Name": "Atrophy aura",
+		},
+		"abyssal_underlord_dark_rift": {
+			"Name": "Dark rift",
+			"Cooldown": function(){ return 140 - this.Level * 10},
+			"ManaCost": function(){ return this.Level * 75},
+		},
 
 
 	},
