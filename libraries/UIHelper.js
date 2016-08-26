@@ -25,6 +25,7 @@ UIHelper.zIndexFocus = function zIndexFocus(element) {
 UIHelper.versionSelectorTemplate = document.createElement("select")
 UIHelper.tableSelectorTemplate = document.createElement("select")
 UIHelper.tableSelectorList = document.getElementsByClassName("settings-table-selector")
+UIHelper.headerElements = []
 
 // Version selector template setup
 {
@@ -45,6 +46,12 @@ UIHelper.tableSelectorList = document.getElementsByClassName("settings-table-sel
 	tableTemplate.classList.add("settings-base", "settings-table-selector")
 }
 
+window.addEventListener("DOMContentLoaded", function UIElementInit(event) {
+	UIHelper.WindowContainer = document.getElementById("window-list-container");
+	UIHelper.pageHeader = document.getElementById("page-header-buttons");
+	UIHelper.rebuildWindowZIndex();
+});
+
 document.addEventListener("HeroTableCreated", function heroTableCreate(event) {
 	if (event.detail == null)
 		throw "No detail supplied!";
@@ -60,12 +67,6 @@ document.addEventListener("HeroTableCreated", function heroTableCreate(event) {
 		element.appendChild(option.cloneNode());
 });
 
-window.addEventListener("DOMContentLoaded", function(event) {
-	UIHelper.WindowContainer = document.getElementById("window-list-container");
-	UIHelper.pageHeader = document.getElementById("page-header");
-	UIHelper.rebuildWindowZIndex();
-});
-
 /**
  * @desc Recreates the css z-index for window elements
  */
@@ -76,6 +77,9 @@ UIHelper.rebuildWindowZIndex = function() {
 	UIHelper.topZ = UIHelper.defaultZ + windows.length - 1;
 }
 
+/**
+ * Creates an UI window with described options
+ */
 UIHelper.addWindow = function(options) {
 	let win = document.createElement("div");
 	win.classList.add("window");
@@ -97,9 +101,16 @@ UIHelper.addWindow = function(options) {
 	close.addEventListener("click", function(e){win.style.display="none"});
 	bar.appendChild(close)
 
-	if (options.headerButton) {
-		let button = document.createElement("button");
-		button.textContent = options.headerButton;
+	if (options.headerButton !== undefined || options.headerButtonText) {
+		let button, inPlace;
+		if (options.headerButton instanceof String)
+			button = document.getElementById(headerButton), inPlace = true;
+		else if (options.headerButton instanceof HTMLButtonElement)
+			button = options.headerButton, inPlace = true;
+		else
+			button = document.createElement("button");
+
+		button.textContent = options.headerButtonText;
 		button.onclick = function(){
 			UIHelper.zIndexFocus(win);
 			win.style.display = win.style.display == "none" ? null : "none";
@@ -110,7 +121,12 @@ UIHelper.addWindow = function(options) {
 			win.style.display = null;
 			UIHelper.zIndexFocus(win);
 		};
-		UIHelper.pageHeader.appendChild(button);
+
+		if (options.headerButton == true ) {
+			let header = UIHelper.pageHeader,
+				before = header.children[options.headerButtonPos];
+			UIHelper.pageHeader.insertBefore(button, before);
+		}
 	}
 
 	if (options.populationCallback)

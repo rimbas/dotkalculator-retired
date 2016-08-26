@@ -1,29 +1,3 @@
-#hero-picker {
-	min-width: 714px;
-}
-#hero-picker-table {
-	border: none;
-	border-top: 4px solid #9A1E00;
-}
-#hero-picker-table th{
-	text-align: center;
-	font-size: 16pt;
-	padding: 8px 0px;
-	border-bottom: solid 4px #9A1E00;
-	background-color: rgba( 0, 0, 0, 0.5);
-}
-#hero-picker-table td{
-	padding: 10px 5px 0px 5px;
-	vertical-align: top;
-}
-#hero-picker-table td:nth-child(2n-1){
-	background-color: rgba( 0, 0, 0, 0.5);
-}
-#hero-picker-table th img {
-	height: 1.5em;
-	vertical-align: middle;
-	padding-bottom: 2px;
-}
 
 .hero-picker-table {
 	border: none;
@@ -59,6 +33,14 @@
 	height: 32px;
 	border: none;
 	cursor: pointer;
+	transition: width 1s, padding 1s, transform 1s;
+}
+.hero-picker-button.hidden {
+	width: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	transition: width 1s, padding 1s, transform 1s;
+	transform: scaleX(0) translateX(-16px);
 }
 .hero-picker-button:nth-child(6n+7) {
 	clear: both;

@@ -1,16 +1,31 @@
 
-#item-picker-base {
+.item-picker-table {
 	border-bottom: none;
 	border-left: none;
 	border-right: none;
 }
 
-#item-picker-base th {
-/*	margin-bottom: -4px;*/
+.item-picker-table th {
 	background-color: black;
 }
 
-#item-picker-base td, #item-picker-base th {
+.item-picker-table td, .item-picker-table th {
 	padding: 0px;
 	border: none;
+}
+
+.item-picker-table .drag-item-list {
+	vertical-align: top;
+}
+
+.item-picker-table .drag-item-list .drag-item-image {
+	display: block;
+	width: 48px;
+	height: 35px;
+	transition: height 1s;
+}
+
+.item-picker-table .drag-item-list .drag-item-image.hidden {
+	height: 0px;
+	transition: height 1s;
 }

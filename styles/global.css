@@ -32,6 +32,10 @@ header * {
 	color: yellow;
 	cursor: pointer;
 }
+header #page-header-buttons {
+	border: none;
+	display: inline;
+}
 header a:visited {
 	color: yellow;
 	text-decoration: none;

@@ -1,149 +1,80 @@
-$(function(){
-	
-	var itemTable = document.getElementById("item-picker-base"),
-		itemTableHead = document.createElement("thead"),
-		itemTableBody = document.createElement("tbody"),
-		itemRow = itemTableBody.insertRow();
-	itemTable.appendChild(itemTableHead);
-	itemTable.appendChild(itemTableBody);
-	
-	var shopSections = [
-		"Consumables", "Attributes", "Armaments", "Arcane", "Common", 
-		"Support", "Caster", "Weapons", "Armor", "Artifacts", "Secret", "Unlisted" ],
-		shopSectionElements = {};
-	
-	var thRow = document.createElement("tr");
-	itemTableHead.appendChild(thRow);
-	for (var section of shopSections) {
-		var th = document.createElement("th");
-		thRow.appendChild(th);
-		var img = document.createElement("img");
-		img.src = "images/shop/shop_"+section.toLowerCase()+".png";
-		img.width = 48;
-		img.height = 48;
-		img.alt = section;
-		img.title = section;
-		th.appendChild(img);
-		var td = document.createElement("td");
-		td.id = "item-selector-section-"+section;
-		td.style.verticalAlign = "top";
-		shopSectionElements[section] = td;
-		itemRow.appendChild(td);
-	}
-	
-	function itemDragStart(e) {
-		this.style.opacity = "0.4";
-		e.dataTransfer.setData("text/item-id", this.itemId);
-		e.dataTransfer.effectAllowed = "copy";
-	}
-	
-	function itemDragEnd(e) {
-		this.style.opacity = "1";	
-	}
-	
-	function itemDragOver(e) {
-		if (e.preventDefault) {
-			e.preventDefault();	
-		}
-		e.dataTransfer.effectAllowed = "copy";
-		return false;
-	}
-	
-	function itemDragDrop(e) {
-		if (e.stopPropagation) {
-			e.stopPropagation();	
-		}
-		var itemId = e.dataTransfer.getData("text/item-id");
-		console.log("Dropped", this, e, itemId);
-		event.target.addItem(itemId);
-		return false;
-	}
-	
-	function populateItemTable () {
-		var items = DotaData.getCurrentItemList(),
-			sectionPools = {};
-		
-		for (var itemKey in items) {
-			var item = items[itemKey];
-			if (!shopSectionElements[item.Section])
-				continue;
-				
-			if (!sectionPools[item.Section]) {
-				sectionPools[item.Section] = [];	
-			}
-			var img = document.createElement("img"),
-				section = sectionPools[item.Section];
-			if (Number.isInteger(item.SectionIndex)) {
-				img.itemIndex = item.SectionIndex;
-			}
-			img.src = "images/items/"+itemKey+".png";
-			img.itemId = itemKey;
-			img.setAttribute("item-key", itemKey);
-			img.draggable = true;
-			img.width = 48;
-			img.style.display = "block";
-			img.alt = item.Name;
-			img.title = item.Name;
 
-			img.ondragstart = itemDragStart;
-			img.ondragend = itemDragEnd;
-			//img.ondrop = itemDragDrop;
+window.addEventListener("DOMContentLoaded", function itemPickerInitializer(e){
+	let ItemPickerItemElements = {};
+	let window = UIHelper.addWindow({
+		title: "Item picker",
+		headerButton: true,
+		headerButtonText: "Item picker",
+		headerButtonPos: 2,
+		populationCallback: function itemPickerPopulator(win) {
+			let settings = UIHelper.appendSettings(win, {version: true}),
+				itemTable = document.createElement("table");
+			itemTable.classList.add("item-picker-table");
 
+			let sectionElements = {};
+			let itemTableHead = itemTable.createTHead(),
+				itemTableBody = itemTable.createTBody(),
+				headRow = itemTableHead.insertRow(),
+				bodyRow = itemTableBody.insertRow();
 
-			if (Number.isInteger(img.itemIndex) && !section[img.itemIndex]) {
-				section[img.itemIndex] = img;
+			for (let section of DotaData.Meta.ShopSections) {
+				let th = headRow.appendChild(document.createElement("th")),
+					image = th.appendChild(document.createElement("img"));
+				image.src = "images/shop/shop_"+section.toLowerCase()+".png";
+				image.width = image.height = 48;
+				image.alt = image.title = section;
+				let td = bodyRow.appendChild(document.createElement("td"));
+					td.classList.add("drag-item-list")
+					sectionElements[section] = td;
 			}
-			else if (Number.isInteger(img.itemIndex) && section[img.itemIndex]) {
-				var swap = section[img.itemIndex];
-				section[img.itemIndex] = img;
-				section.push(swap);
+
+			function itemDragStart(e) {
+				this.style.opacity = "0.4";
+				e.dataTransfer.setData("text/item-id", this.itemId);
+				e.dataTransfer.setData("text/item-version", settings.version.value);
+				e.dataTransfer.effectAllowed = "copy";
 			}
-			else {
-				section.push(img);
+
+			function itemDragEnd(e) {
+				this.style.opacity = null;
 			}
-			
+
+			let items = DotaData.getCurrentItemList();
+			for (let itemKey in items) {
+				let item = items[itemKey],
+					section = sectionElements[item.Section];
+				if (section === undefined)
+					continue;
+
+				let img = document.createElement("img"),
+					before = section.children[item.SectionIndex];
+				img.classList.add("drag-item-image");
+				img.src = "images/items/"+itemKey+".png";
+				img.draggable = true;
+				//img.setAttribute("item-key", itemKey);
+				img.alt = img.title = item.Name;
+				img.itemId = itemKey;
+
+				img.ondragstart = itemDragStart;
+				img.ondragend = itemDragEnd;
+				ItemPickerItemElements[itemKey] = img;
+
+				section.insertBefore(img, before);
+			}
+
+			win.appendChild(itemTable);
+
+			settings.version.onchange = function itemVersionSelectorChange(e) {
+				let elements = ItemPickerItemElements,
+					itemlist = DotaData.getItemList(settings.version.value);
+
+				for (let itemkey in elements)
+					if (itemkey in itemlist)
+						elements[itemkey].classList.remove("hidden")
+					else
+						elements[itemkey].classList.add("hidden")
+			}
+
 		}
-		for (var section in sectionPools) {
-			var marginSum = 0;
-			for (var img of sectionPools[section]) {
-				if (img) {
-					if (marginSum) {
-						img.style.marginTop = marginSum+"px";
-						marginSum = 0;
-					}
-					shopSectionElements[section].appendChild(img);
-				}
-				else {
-					marginSum += 35;
-				}
-			}
-		}
-	}
-	populateItemTable();
-	
-	
-	$("#item-picker").toggle(false);
-	$("#item-picker")[0].style.top = "52px";
-	$("#item-picker")[0].style.left = "11px";
-	
-	$("#item-picker-header-button").on("click", 
-		function(){ 
-			$("#item-picker").toggle();
-		});
-	$("#item-picker-header-button").one("click",
-		function(){
-			var picker = document.getElementById("item-picker");
-			picker.style.left = "11px"
-			picker.style.top = "52px";
-		});
-	$("#item-picker-header-button").on("dblclick",
-		function(){
-			var picker = document.getElementById("item-picker");
-			picker.style.left = "11px"
-			picker.style.top = "52px";
-		});
-	$("#item-picker-close").on("click", 
-		function() {
-			$("#item-picker").toggle(false);
-		});
-})
+	});
+});

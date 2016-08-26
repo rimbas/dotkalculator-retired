@@ -7,6 +7,9 @@ DotaData.NewestVersion = "";
 DotaData.Meta = {
 	TeamList: ["Radiant", "Dire"],
 	TypeList: ["Strength", "Agility", "Intelligence"],
+	ShopSections: [
+		"Consumables", "Attributes", "Armaments", "Arcane", "Common", "Support",
+		"Caster", "Weapons", "Armor", "Artifacts", "Secret", "Unlisted" ],
 }
 
 // Returns a new instance of complete hero propery data
@@ -83,6 +86,14 @@ DotaData.getCurrentHeroList = function() {
 
 DotaData.getCurrentItemList = function() {
 	return DotaData.Versions[DotaData.NewestVersion].Items;
+}
+
+DotaData.getHeroList = function(version) {
+	return DotaData.Versions[version].Heroes
+}
+
+DotaData.getItemList = function(version) {
+	return DotaData.Versions[version].Items
 }
 
 DotaData.addVersion = function(version, data) {

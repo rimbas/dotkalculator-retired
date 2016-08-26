@@ -559,7 +559,9 @@ HeroTable.addEvaluator({
 		cell.className = "box-content";
 		var container = document.createElement("div");
 		container.ondrop = function(e) {
-			hero.addItem(new ItemInstance(e.dataTransfer.getData("text/item-id")));
+			hero.addItem(new ItemInstance(e.dataTransfer.getData("text/item-id"), {
+				version: e.dataTransfer.getData("text/item-version")
+			}));
 		}
 		container.className = "item-container items";
 		container.ondragover = function(e){
