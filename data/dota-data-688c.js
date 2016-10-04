@@ -13,10 +13,10 @@ DotaData.addVersion( version,
 		{
 			"Name": "NO-DISPLAY-NAME",
 			"Class": "Hero",
-			"Ability1": "attribute_bonus",
-			"Ability2": "attribute_bonus",
-			"Ability3": "attribute_bonus",
-			"Ability4": "attribute_bonus",
+			"Ability1": "empty",
+			"Ability2": "empty",
+			"Ability3": "empty",
+			"Ability4": "empty",
 			"Ability5": "attribute_bonus",
 			"AbilityLayout": 4,
 			"AttackPoint": 0.75,
@@ -4807,6 +4807,13 @@ DotaData.addVersion( version,
 			"Class": "Ability",
 			"Restrictions": [1, 3, 5, 7]
 		},
+		"empty": {
+			"Name": "Empty",
+			"Level": 0,
+			"LevelMax": 0,
+			"Class": "Ability",
+			"Restrictions": []
+		},
 		"attribute_bonus": {
 			"Name": "Attribute bonus",
 			"Level": 0,
@@ -4901,7 +4908,7 @@ DotaData.addVersion( version,
 		},
 		"antimage_blink": {
 			"Name": "Blink",
-			"Cooldown": function(){ return [0, 12, 9, 7, 5][this.Level] },
+			"Cooldown": [12, 9, 7, 5],
 			"ManaCost": 60
 		},
 		"antimage_spell_shield": {
@@ -5297,7 +5304,7 @@ DotaData.addVersion( version,
 		"crystal_maiden_frostbite": {
 			"Name": "Frostbite",
 			"Cooldown": function(){return 10 - this.Level},
-			"ManaCost": function(){return [0, 115, 125, 140, 150][this.Level]}
+			"ManaCost": [115, 125, 140, 150],
 		},
 		"crystal_maiden_brilliance_aura": {
 			"Name": "Arcane aura",
@@ -5336,8 +5343,8 @@ DotaData.addVersion( version,
 		},
 		"dazzle_poison_touch": {
 			"Name": "Poison touch",
-			"Cooldown": function(){ return [15, 13, 11, 7][this.Level + 1] },
-			"ManaCost": 70
+			"Cooldown": [15, 13, 11, 7],
+			"ManaCost": 70,
 		},
 		"dazzle_shallow_grave": {
 			"Name": "Shallow grave",
@@ -5377,34 +5384,47 @@ DotaData.addVersion( version,
 		"death_prophet_carrion_swarm": {
 			"Name": "Crypt swarm",
 			"Cooldown": function(){ return 9 - this.Level },
-			"ManaCost": function(){ return [105, 120, 140, 165][this.Level] }
+			"ManaCost": [105, 120, 140, 165],
 		},
 		"death_prophet_silence": {
-			"Name": "Silence"
+			"Name": "Silence",
+			"Cooldown": function(){ return 16 - this.Level },
+			"ManaCost": 80,
 		},
 		"death_prophet_spirit_siphon": {
-			"Name": "Spirit siphon"
+			"Name": "Spirit siphon",
+			"ManaCost": function(){ return 80 + this.Level * 5 },
 		},
 		"death_prophet_exorcism": {
 			"Name": "Exorcism",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 11, 16],
+			"Cooldown": 145,
+			"ManaCost": function(){ return 100 + this.Level * 100 },
 		},
 		"disruptor_thunder_strike": {
-			"Name": "Thunder strike"
+			"Name": "Thunder strike",
+			"Cooldown": function(){ return 13 - this.Level },
+			"ManaCost": 130,
 		},
 		"disruptor_glimpse": {
-			"Name": "Glimpse"
+			"Name": "Glimpse",
+			"Cooldown": function(){ return 74 - this.Level * 14 },
+			"ManaCost": 100,
 		},
 		"disruptor_kinetic_field": {
-			"Name": "Kinetic field"
+			"Name": "Kinetic field",
+			"Cooldown": function(){ return 14 - this.Level },
+			"ManaCost": 70,
 		},
 		"disruptor_static_storm": {
 			"Name": "Static storm",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 11, 16],
+			"Cooldown": function(){ return 100 - this.Level * 10 },
+			"ManaCost": function(){ return 75 + this.Level * 50 },
 		},
 		"doom_bringer_devour": {
 			"Name": "Devour",
@@ -5436,10 +5456,14 @@ DotaData.addVersion( version,
 			"ManaCost": function(){ return 100 + this.Level * 50 }
 		},
 		"dragon_knight_breathe_fire": {
-			"Name": "Breathe fire"
+			"Name": "Breathe fire",
+			"Cooldown": function(){ return 15 - this.Level },
+			"ManaCost": function(){ return 90 + this.Level * 10 },
 		},
 		"dragon_knight_dragon_tail": {
-			"Name": "Dragon tail"
+			"Name": "Dragon tail",
+			"Cooldown": function(){ return 13 - this.Level },
+			"ManaCost": 100,
 		},
 		"dragon_knight_dragon_blood": {
 			"Name": "Dragon_blood",
@@ -5455,7 +5479,9 @@ DotaData.addVersion( version,
 				"NoTarget": true,
 				"Self": "dragon_knight_elder_dragon_form_buff",
 				"Refresh": "override"
-			}
+			},
+			"Cooldown": 115,
+			"ManaCost": 50,
 		},
 		"drow_ranger_frost_arrows": {
 			"Name": "Frost arrows",
@@ -5479,7 +5505,7 @@ DotaData.addVersion( version,
 			"Level": 0,
 			"LevelMax": 3,
 			"Restrictions": [6, 11, 16],
-			"Agility": function() { return this.Level > 0 ? 20 + this.Level * 20 : 0 }
+			"Agility": function() { return 20 + this.Level * 20 },
 		},
 		"earth_spirit_boulder_smash": {
 			"Name": "Boulder smash",
@@ -5528,7 +5554,9 @@ DotaData.addVersion( version,
 			"ManaCost": 100
 		},
 		"earthshaker_fissure": {
-			"Name": "Fissure"
+			"Name": "Fissure",
+			"Cooldown": 15,
+			"ManaCost": function(){ return 110 + this.Level * 15 }
 		},
 		"earthshaker_enchant_totem": {
 			"Name": "Enchant totem",
@@ -5537,7 +5565,9 @@ DotaData.addVersion( version,
 				"NoTarget": true,
 				"Self": true,
 				"Refresh": "override"
-			}
+			},
+			"Cooldown": 5,
+			"ManaCost": function(){ return 10 + this.Level * 10 }
 		},
 		"earthshaker_aftershock": {
 			"Name": "Aftershock"
@@ -5546,13 +5576,19 @@ DotaData.addVersion( version,
 			"Name": "Echo slam",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 11, 16],
+			"Cooldown": function(){ return 170 - this.Level * 20 },
+			"ManaCost": function(){ return 85 + this.Level * 60 }
 		},
 		"elder_titan_echo_stomp": {
-			"Name": "Echo stomp"
+			"Name": "Echo stomp",
+			"Cooldown": function(){ return 15 - this.Level },
+			"ManaCost": 100,
 		},
 		"elder_titan_ancestral_spirit": {
-			"Name": "Astral spirit"
+			"Name": "Astral spirit",
+			"Cooldown": 16,
+			"ManaCost": function(){ return 70 + this.Level * 10 }
 		},
 		"elder_titan_natural_order": {
 			"Name": "Natural order"
@@ -5561,19 +5597,27 @@ DotaData.addVersion( version,
 			"Name": "Earth splitter",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 11, 16],
+			"Cooldown": 100,
+			"ManaCost": function(){ return 50 + this.Level * 100 }
 		},
 		"elder_titan_return_spirit": {
 			"Name": "Return Astral spirit"
 		},
 		"ember_spirit_searing_chains": {
-			"Name": "Searing chains"
+			"Name": "Searing chains",
+			"Cooldown": function(){ return 16 - this.Level * 2 },
+			"ManaCost": 110,
 		},
 		"ember_spirit_sleight_of_fist": {
-			"Name": "Sleight of fist"
+			"Name": "Sleight of fist",
+			"Cooldown": function(){ return 38 - this.Level * 8 },
+			"ManaCost": 50,
 		},
 		"ember_spirit_flame_guard": {
-			"Name": "Flame guard"
+			"Name": "Flame guard",
+			"Cooldown": 35,
+			"ManaCost": function(){ return 70 + this.Level * 10 }
 		},
 		"ember_spirit_fire_remnant": {
 			"Name": "Fire remnant",
@@ -5594,37 +5638,54 @@ DotaData.addVersion( version,
 			"Name": "Untouchable"
 		},
 		"enchantress_enchant": {
-			"Name": "Enchant"
+			"Name": "Enchant",
+			"Cooldown": function(){ return 36 - this.Level * 6 },
+			"ManaCost": 65,
 		},
 		"enchantress_natures_attendants": {
-			"Name": "Nature's attendants"
+			"Name": "Nature's attendants",
+			"Cooldown": 45,
+			"ManaCost": function(){ return 110 + this.Level * 15 }
 		},
 		"enchantress_impetus": {
 			"Name": "Impetus",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 11, 16],
+			"ManaCost": function(){ return 50 + this.Level * 5 }
 		},
 		"enigma_malefice": {
-			"Name": "Malefice"
+			"Name": "Malefice",
+			"Cooldown": 15,
+			"ManaCost": [110, 130, 150, 160],
 		},
 		"enigma_demonic_conversion": {
-			"Name": "Demonic conversion"
+			"Name": "Demonic conversion",
+			"Cooldown": 35,
+			"ManaCost": 170,
 		},
 		"enigma_midnight_pulse": {
-			"Name": "Midnight pulse"
+			"Name": "Midnight pulse",
+			"Cooldown": 35,
+			"ManaCost": function(){ return 80 + this.Level * 15 },
 		},
 		"enigma_black_hole": {
 			"Name": "Black hole",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 11, 16],
+			"Cooldown": function(){ return 220 - this.Level * 20 },
+			"ManaCost": function(){ return 225 + this.Level * 50 },
 		},
 		"faceless_void_time_walk": {
-			"Name": "Time walk"
+			"Name": "Time walk",
+			"Cooldown": function(){ return 30 - this.Level * 6 },
+			"ManaCost": 40,
 		},
 		"faceless_void_time_dilation": {
-			"Name": "Time dilation"
+			"Name": "Time dilation",
+			"Cooldown": function(){ return 46 - this.Level * 6 },
+			"ManaCost": 75,
 		},
 		"faceless_void_time_lock": {
 			"Name": "Time lock"
@@ -5633,39 +5694,57 @@ DotaData.addVersion( version,
 			"Name": "Chronosphere",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 11, 16],
+			"Cooldown": function(){ return 155 - this.Level * 15 },
+			"ManaCost": function(){ return 75 + this.Level * 75 }
 		},
 		"furion_sprout": {
-			"Name": "Sprout"
+			"Name": "Sprout",
+			"Cooldown": function(){ return 12 - this.Level },
+			"ManaCost": function(){ return 50 + this.Level * 20 },
 		},
 		"furion_teleportation": {
-			"Name": "Teleportation"
+			"Name": "Teleportation",
+			"Cooldown": function(){ return 60 - this.Level * 10 },
+			"ManaCost": 50,
 		},
 		"furion_force_of_nature": {
-			"Name": "Nature's call"
+			"Name": "Nature's call",
+			"Cooldown": 37,
+			"ManaCost": 160,
 		},
 		"furion_wrath_of_nature": {
 			"Name": "Wrath of nature",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 11, 16],
+			"Cooldown": function(){ return 105 - this.Level * 5 },
+			"ManaCost": function(){ return 125 + this.Level * 50 },
 		},
 		"gyrocopter_rocket_barrage": {
-			"Name": "Rocket barrage"
+			"Name": "Rocket barrage",
+			"Cooldown": function(){ return 7.5 - this.Level * 0.5 },
+			"ManaCost": 90,
 		},
 		"gyrocopter_homing_missile": {
-			"Name": "Homing missile"
+			"Name": "Homing missile",
+			"Cooldown": function(){ return 23 - this.Level * 3 },
+			"ManaCost": function(){ return 110 + this.Level * 10 },
 		},
 		"gyrocopter_flak_cannon": {
-			"Name": "Flak cannon"
+			"Name": "Flak cannon",
+			"Cooldown": 30,
+			"ManaCost": 50,
 		},
 		"gyrocopter_call_down": {
 			"Name": "Call down",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 11, 16],
+			"Cooldown": function(){ return 60 - this.Level * 5 },
+			"ManaCost": 125,
 		},
-		"huskar_inner_vitality":{
+		"huskar_inner_vitality": {
 			"Name": "Inner vitality",
 			"Buff": {
 				"Name": "huskar_inner_vitality_buff",
@@ -5673,12 +5752,15 @@ DotaData.addVersion( version,
 				"Self": true,
 				"Teammates": true,
 				"Refresh": "override"
-			}
+			},
+			"Cooldown": function(){ return 26 - this.Level * 4 },
+			"ManaCost": 170,
 		},
-		"huskar_burning_spear":{
-			"Name": "Burning spear"
+		"huskar_burning_spear": {
+			"Name": "Burning spear",
+			"HealthCost": 15,
 		},
-		"huskar_berserkers_blood":{
+		"huskar_berserkers_blood": {
 			"Name": "Berserker's blood",
 			"Charges": 0,
 			"ChargesMax": 90,
@@ -5686,11 +5768,12 @@ DotaData.addVersion( version,
 			"MagicalResistance": function() { return this.Level > 0 ? Math.floor(this.Charges / this.ChargesMax * (0.1 + this.Level * 0.1) *100 ) / 100 : 0 },
 			"ChargesSemantic": "HP% lost"
 		},
-		"huskar_life_break":{
+		"huskar_life_break": {
 			"Name": "Life break",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 11, 16],
+			"Cooldown": 12,
 		},
 		"invoker_quas": {
 			"Name": "Quas",
@@ -5743,10 +5826,22 @@ DotaData.addVersion( version,
 				return 0
 			},
 			"Warning": "At hero level 25, this skill gives +6 to all stats",
-			"Lore": "So begins a new age of knowledge"
+			"Lore": "So begins a new age of knowledge",
+			"Cooldown": function(){
+				if (this.heroRef && this.heroRef.Total && this.heroRef.Total.HasAghanims)
+					return 32 / this.Level;
+				return 14 - this.Level * 2
+			},
+			"ManaCost": function(){
+				if (this.heroRef && this.heroRef.Total && this.heroRef.Total.HasAghanims)
+					return 0
+				return 80 + this.Level * 10
+			},
 		},
 		"invoker_cold_snap": {
-			"Name": "Cold snap"
+			"Name": "Cold snap",
+			"Cooldown": 20,
+			"ManaCost": 100,
 		},
 		"invoker_ghost_walk": {
 			"Name": "Ghost walk",
@@ -5756,13 +5851,19 @@ DotaData.addVersion( version,
 				"NoTarget": true,
 				"Self": true,
 				"Refresh": "override"
-			}
+			},
+			"Cooldown": 45,
+			"ManaCost": 200,
 		},
 		"invoker_tornado": {
-			"Name": "Tornado"
+			"Name": "Tornado",
+			"Cooldown": 30,
+			"ManaCost": 150,
 		},
 		"invoker_emp": {
-			"Name": "EMP"
+			"Name": "EMP",
+			"Cooldown": 30,
+			"ManaCost": 125,
 		},
 		"invoker_alacrity": {
 			"Name": "Alacrity",
@@ -5774,43 +5875,66 @@ DotaData.addVersion( version,
 				"Teammates": true,
 				"Refresh": "override"
 			},
-			"Warning": "While no proper implementation exists, assumes equal levels of wex and exort"
+			"Warning": "While no proper implementation exists, assumes equal levels of wex and exort",
+			"Cooldown": 15,
+			"ManaCost": 45,
 		},
 		"invoker_chaos_meteor": {
-			"Name": "Chaos meteor"
+			"Name": "Chaos meteor", // Meatball!
+			"Cooldown": 55,
+			"ManaCost": 200,
 		},
 		"invoker_sun_strike": {
-			"Name": "Sun strike"
+			"Name": "Sun strike",
+			"Cooldown": 25,
+			"ManaCost": 175,
 		},
 		"invoker_forge_spirit": {
-			"Name": "Forge spirit"
+			"Name": "Forge spirit",
+			"Cooldown": 30,
+			"ManaCost": 75,
 		},
 		"invoker_ice_wall": {
-			"Name": "Ice wall"
+			"Name": "Ice wall",
+			"Cooldown": 25,
+			"ManaCost": 175,
 		},
 		"invoker_deafening_blast": {
-			"Name": "Deafening blast"
+			"Name": "Deafening blast",
+			"Cooldown": 40,
+			"ManaCost": 300,
 		},
 		"jakiro_dual_breath": {
-			"Name": "Dual breath"
+			"Name": "Dual breath",
+			"Cooldown": 10,
+			"ManaCost": [135, 140, 155, 170],
 		},
 		"jakiro_ice_path": {
-			"Name": "Ice path"
+			"Name": "Ice path",
+			"Cooldown": function(){ return 13 - this.Level },
+			"ManaCost": 90,
 		},
 		"jakiro_liquid_fire": {
-			"Name": "Liquid fire"
+			"Name": "Liquid fire",
+			"Cooldown": [20, 15, 10, 4],
 		},
 		"jakiro_macropyre": {
 			"Name": "Macropyre",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 11, 16],
+			"Cooldown": 60,
+			"ManaCost": function(){ return 110 + this.Level * 110 },
 		},
 		"juggernaut_blade_fury": {
-			"Name": "Blade fury"
+			"Name": "Blade fury",
+			"Cooldown": function(){ return 50 - this.Level * 8 },
+			"ManaCost": function(){ return 130 - this.Level * 10 },
 		},
 		"juggernaut_healing_ward": {
-			"Name": "Healing ward"
+			"Name": "Healing ward",
+			"Cooldown": 60,
+			"ManaCost": function(){ return 115 + this.Level * 5 },
 		},
 		"juggernaut_blade_dance": {
 			"Name": "Blade dance"
@@ -5819,16 +5943,24 @@ DotaData.addVersion( version,
 			"Name": "Omnislash",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 11, 16],
+			"Cooldown": function(){ return 140 - this.Level * 10 },
+			"ManaCost": function(){ return 125 + this.Level * 75 },
 		},
 		"keeper_of_the_light_illuminate": {
-			"Name": "Illuminate"
+			"Name": "Illuminate",
+			"Cooldown": 10,
+			"ManaCost": function(){ return 140 + this.Level * 10 },
 		},
 		"keeper_of_the_light_mana_leak": {
-			"Name": "Mana leak"
+			"Name": "Mana leak",
+			"Cooldown": function(){ return 18 - this.Level * 2 },
+			"ManaCost": 75,
 		},
 		"keeper_of_the_light_chakra_magic": {
-			"Name": "Chakra magic"
+			"Name": "Chakra magic",
+			"Cooldown": function(){ return 18 - this.Level },
+			"ManaCost": function(){ return 15 + this.Level * 10 },
 		},
 		"keeper_of_the_light_blinding_light": {
 			"Name": "Blinding light",
@@ -5838,6 +5970,8 @@ DotaData.addVersion( version,
 					return this.heroRef.AbilityIds["keeper_of_the_light_spirit_form"].Level
 				return 0
 			},
+			"Cooldown": function(){ return 24 - this.Level * 4 },
+			"ManaCost": 50,
 		},
 		"keeper_of_the_light_recall": {
 			"Name": "Recall",
@@ -5847,27 +5981,38 @@ DotaData.addVersion( version,
 					return this.heroRef.AbilityIds["keeper_of_the_light_spirit_form"].Level
 				return 0
 			},
+			"Cooldown": 15,
+			"ManaCost": 100,
 		},
 		"keeper_of_the_light_spirit_form": {
 			"Name": "Spirit form",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 11, 16],
+			"Cooldown": function(){ return 90 - this.Level * 10 },
+			"ManaCost": 100,
 		},
 		"kunkka_torrent": {
-			"Name": "Torrent"
+			"Name": "Torrent",
+			"Cooldown": 100,
+			"ManaCost": function(){ return 80 + this.Level * 10 },
 		},
 		"kunkka_tidebringer": {
-			"Name": "Tidebringer"
+			"Name": "Tidebringer",
+			"Cooldown": function(){ return 16 - this.Level * 3 },
 		},
 		"kunkka_x_marks_the_spot": {
-			"Name": "X marks the spot"
+			"Name": "X marks the spot",
+			"Cooldown": function(){ return 32 - this.Level * 6 },
+			"ManaCost": 50,
 		},
 		"kunkka_ghostship": {
 			"Name": "Ghostship",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 11, 16],
+			"Cooldown": function(){ return 70 - this.Level * 10 },
+			"ManaCost": function(){ return 50 + this.Level * 75 },
 		},
 		"legion_commander_overwhelming_odds": {
 			"Name": "Overwhelming odds",
@@ -5876,7 +6021,9 @@ DotaData.addVersion( version,
 				"NoTarget": true,
 				"Self": true,
 				"Refresh": "override"
-			}
+			},
+			"Cooldown": 15,
+			"ManaCost": 100,
 		},
 		"legion_commander_press_the_attack": {
 			"Name": "Press the attack",
@@ -5886,34 +6033,49 @@ DotaData.addVersion( version,
 				"Self": true,
 				"Teammates": true,
 				"Refresh": "override"
-			}
+			},
+			"Cooldown": function(){ return 17 - this.Level },
+			"ManaCost": 110,
 		},
 		"legion_commander_moment_of_courage": {
-			"Name": "Moment of courage"
+			"Name": "Moment of courage",
+			"Cooldown": function(){ return 2.8 - this.Level * 0.5 },
 		},
 		"legion_commander_duel": {
 			"Name": "Duel",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 11, 16],
+			"Cooldown": 50,
+			"ManaCost": 75,
 		},
 		"leshrac_split_earth": {
-			"Name": "Split earth"
+			"Name": "Split earth",
+			"Cooldown": 9,
+			"ManaCost": [100, 125, 140, 160],
 		},
 		"leshrac_diabolic_edict": {
-			"Name": "Diabolic edict"
+			"Name": "Diabolic edict",
+			"Cooldown": 22,
+			"ManaCost": [95, 120, 135, 155],
 		},
 		"leshrac_lightning_storm": {
-			"Name": "Lightning storm"
+			"Name": "Lightning storm",
+			"Cooldown": 4,
+			"ManaCost": function(){ return 80 + this.Level * 10 },
 		},
 		"leshrac_pulse_nova": {
 			"Name": "Pulse nova",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 11, 16],
+			"Cooldown": 1,
+			"ManaCost": function(){ return 50 + this.Level * 20 },
 		},
 		"lich_frost_nova": {
-			"Name": "Frost nova"
+			"Name": "Frost nova",
+			"Cooldown": 8,
+			"ManaCost": [125, 150, 170, 190],
 		},
 		"lich_frost_armor": {
 			"Name": "Frost armor",
@@ -5923,16 +6085,22 @@ DotaData.addVersion( version,
 				"Self": true,
 				"Teammates": true,
 				"Refresh": "override"
-			}
+			},
+			"Cooldown": 5,
+			"ManaCost": 50,
 		},
 		"lich_dark_ritual": {
-			"Name": "Sacrifice"
+			"Name": "Sacrifice",
+			"Cooldown": function(){ return 70 - this.Level * 10 },
+			"ManaCost": 25,
 		},
 		"lich_chain_frost": {
 			"Name": "Chain frost",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 11, 16],
+			"Cooldown": function(){ return 150 - this.Level * 30 },
+			"ManaCost": [200, 325, 500],
 		},
 		"life_stealer_rage": {
 			"Name": "Rage",
@@ -5941,19 +6109,25 @@ DotaData.addVersion( version,
 				"NoTarget": true,
 				"Self": true,
 				"Refresh": "Override"
-			}
+			},
+			"Cooldown": 16,
+			"ManaCost": 75,
 		},
 		"life_stealer_feast": {
 			"Name": "Feast"
 		},
 		"life_stealer_open_wounds": {
-			"Name": "Open wounds"
+			"Name": "Open wounds",
+			"Cooldown": function(){ return 28 - this.Level * 4 },
+			"ManaCost": 110,
 		},
 		"life_stealer_infest": {
 			"Name": "Infest",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 11, 16],
+			"Cooldown": function(){ return 125 - this.Level * 5 },
+			"ManaCost": 50,
 		},
 		"lina_dragon_slave": {
 			"Name": "Dragon slave",
@@ -5979,25 +6153,39 @@ DotaData.addVersion( version,
 			"LevelMax": 3,
 			"Restrictions": [6, 11, 16],
 			"Cooldown": function(){ return 80 - this.Level * 10 },
-			"ManaCost": function(){ return [0, 280, 420, 680][this.Level] }
+			"ManaCost": [280, 420, 680],
 		},
 		"lion_impale": {
-			"Name": "Earth spike"
+			"Name": "Earth spike",
+			"Cooldown": 12,
+			"ManaCost": function(){ return 80 + this.Level * 20 },
 		},
 		"lion_voodoo": {
-			"Name": "Hex"
+			"Name": "Hex",
+			"Cooldown": function(){ return 36 - this.Level * 6 },
+			"ManaCost": function(){ return 100 + this.Level * 25 },
 		},
 		"lion_mana_drain": {
-			"Name": "Mana drain"
+			"Name": "Mana drain",
+			"Cooldown": function(){ return 20 - this.Level * 4 },
+			"ManaCost": 10,
 		},
 		"lion_finger_of_death": {
 			"Name": "Finger of death",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 11, 16],
+			"Cooldown": function(){ return 220 - this.Level * 60 },
+			"ManaCost": function(){
+				if (this.heroRef && this.heroRef.Total && this.heroRef.Total.HasAghanims)
+					return [0, 200, 420, 625][this.Level] // Wow, 25 mana less, #worth
+				return [0, 200, 420, 650][this.Level]
+			},
 		},
 		"lone_druid_spirit_bear": {
-			"Name": "Spirit bear"
+			"Name": "Spirit bear",
+			"Cooldown": 120,
+			"ManaCost": 75,
 		},
 		"lone_druid_rabid": {
 			"Name": "Rabid",
@@ -6006,10 +6194,14 @@ DotaData.addVersion( version,
 				"NoTarget": true,
 				"Self": true,
 				"Refresh": "override"
-			}
+			},
+			"Cooldown": 30,
+			"ManaCost": 50,
 		},
 		"lone_druid_savage_roar": {
-			"Name": "Savage roar"
+			"Name": "Savage roar",
+			"Cooldown": function(){ return 44 - this.Level * 6 },
+			"ManaCost": 50,
 		},
 		"lone_druid_true_form": {
 			"Name": "True form",
@@ -6021,12 +6213,13 @@ DotaData.addVersion( version,
 				"NoTarget": true,
 				"Self": true,
 				"Refresh": "override"
-			}
+			},
+			"ManaCost": 25,
 		},
 		"lone_druid_true_form_battle_cry": {
 			"Name": "Battle cry",
 			"Level": function() {
-				if (this.heroRef && this.heroRef.AbilityIds["lone_druid_true_form"])
+				if (this.heroRef && this.heroRef.AbilityIds.lone_druid_true_form)
 					return this.heroRef.AbilityIds["lone_druid_true_form"].Level
 				return 0
 			},
@@ -6035,10 +6228,14 @@ DotaData.addVersion( version,
 				"NoTarget": true,
 				"Self": "lone_druid_true_form_battle_cry_buff",
 				"Refresh": "override"
-			}
+			},
+			"Cooldown": 60,
+			"ManaCost": 50,
 		},
 		"luna_lucent_beam": {
-			"Name": "Lucent beam"
+			"Name": "Lucent beam",
+			"Cooldown": 6,
+			"ManaCost": function(){ return 80 + this.Level * 10 },
 		},
 		"luna_moon_glaive": {
 			"Name": "Moon glaive"
@@ -6052,7 +6249,9 @@ DotaData.addVersion( version,
 			"Name": "Eclipse",
 			"LevelMax": 3,
 			"Class": "Ultimate",
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 11, 16],
+			"Cooldown": 140,
+			"ManaCost": function(){ return 100 + this.Level * 50 },
 		},
 		"lycan_summon_wolves": {
 			"Name": "Summon wolves"
@@ -6202,8 +6401,9 @@ DotaData.addVersion( version,
 		"necrolyte_sadist": {
 			"Name": "Sadist",
 			"Charges": 0,
-			"HealthRegeneration": function(){ return this.Charges * [0, 1, 2, 3, 6][this.Level] || 0 },
-			"ManaRegenerationFlat": function(){ return this.Charges * [0, 2, 4, 6, 12][this.Level] || 0 },
+			"HealthRegeneration": function(){ return this.Charges * this.SadistScale || 0 },
+			"ManaRegenerationFlat": function(){ return this.Charges * this.SadistScale * 2 || 0 },
+			"SadistScale": [1, 2, 3, 6],
 		},
 		"necrolyte_reapers_scythe": {
 			"Name": "Reaper's scythe",
@@ -6478,7 +6678,7 @@ DotaData.addVersion( version,
 			"LevelMax": 3,
 			"Restrictions": [6, 11, 16],
 			"Cooldown": function(){ return 35 - this.Level * 5 },
-			"ManaCost": function(){ return [0, 100, 130, 170][this.Level] }
+			"ManaCost": [100, 130, 170],
 		},
 		"pugna_nether_blast": {
 			"Name": "Nether blast",
@@ -7187,10 +7387,14 @@ DotaData.addVersion( version,
 			"ManaCost": 0,
 		},
 		"vengefulspirit_magic_missile": {
-			"Name": "Magic missile"
+			"Name": "Magic missile",
+			"Cooldown": function(){ return 14 - this.Level },
+			"ManaCost": function(){ return 100 + this.Level * 10 },
 		},
 		"vengefulspirit_wave_of_terror": {
-			"Name": "Wave of terror"
+			"Name": "Wave of terror",
+			"Cooldown": 20,
+			"ManaCost": 40,
 		},
 		"vengefulspirit_command_aura": {
 			"Name": "Vengeance aura",
@@ -7200,28 +7404,41 @@ DotaData.addVersion( version,
 			"Name": "Nether swap",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 11, 16],
+			"Cooldown": function(){
+				if (this.heroRef && this.heroRef.Total && this.heroRef.Total.HasAghanims)
+					return 10;
+				return 45;
+			},
+			"ManaCost": function(){ return 50 + this.Level * 50 },
 		},
 		"venomancer_venomous_gale": {
-			"Name": "Venomous gale"
+			"Name": "Venomous gale",
+			"Cooldown": function(){ return 22 - this.Level },
+			"ManaCost": 125,
 		},
 		"venomancer_poison_sting": {
-			"Name": "Poison sting"
+			"Name": "Poison sting",
 		},
 		"venomancer_plague_ward": {
-			"Name": "Plague ward"
+			"Name": "Plague ward",
+			"Cooldown": 50,
+			"ManaCost": 20,
 		},
 		"venomancer_poison_nova": {
 			"Name": "Poison nova",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 11, 16],
+			"Cooldown": function(){ return 160 - this.Level * 20 },
+			"ManaCost": function(){ return 100 + this.Level * 100 },
 		},
 		"viper_poison_attack": {
-			"Name": "Poison attack"
+			"Name": "Poison attack",
+			"ManaCost": 20,
 		},
 		"viper_nethertoxin": {
-			"Name": "Nethertoxin"
+			"Name": "Nethertoxin",
 		},
 		"viper_corrosive_skin": {
 			"Name": "Corrosive skin",
@@ -7234,7 +7451,7 @@ DotaData.addVersion( version,
 			"LevelMax": 3,
 			"Restrictions": [6, 11, 16],
 			"Cooldown": 10,
-			"ManaCost": function(){ return [0, 125, 175, 250][this.Level] },
+			"ManaCost": [125, 175, 250],
 		},
 		"visage_grave_chill": {
 			"Name": "Grave chill"
@@ -7422,7 +7639,7 @@ DotaData.addVersion( version,
 			"LevelMax": 3,
 			"Restrictions": [6, 11, 16],
 			"Cooldown": 90,
-			"ManaCost": function(){ return [0, 225, 325, 450][this.Level] },
+			"ManaCost": [225, 325, 450],
 		},
 		"arc_warden_flux": {
 			"Name": "Flux",
@@ -7509,8 +7726,8 @@ DotaData.addVersion( version,
 			"LockedLevel": true,
 			"AttackRate": function(){ return -0.1 - this.Level * 0.2 },
 			"HealthRegeneration": function(){ return 25 + this.Level * 25 },
-			"MovementSpeed": function(){ return this.Level < 4 ? [0, 30, 40, 60][this.Level] : 0 },
-			"ManaRegenerationBase": function(){ return this.Level < 4 ? [0, 3, 7.5, 12][this.Level] : 0 }
+			"MovementSpeed": [30, 40, 60],
+			"ManaRegenerationBase": function(){ return -1.5 + this.Level * 4.5 },
 		},
 		"axe_berserkers_call_buff": {
 			"Name": "Berserker's call armor",
@@ -7616,13 +7833,13 @@ DotaData.addVersion( version,
 			"Image": "crystal_maiden_brilliance_aura",
 			"Level": function() { return this.emitterRef ? this.emitterRef.Level : 0 },
 			"ManaRegenerationFlat": function() {
-					if (!this.emitterRef)
+				/*	if (!this.emitterRef)
 						return 0;
 					if (this.Level < 1)
-						return 0;
+						return 0;*/
 					if (this.heroRef && this.heroRef.AbilityIds.crystal_maiden_brilliance_aura)
-						return [0, 2, 3, 4, 8][this.Level] || (1 + this.Level * 0.5) * 2;
-					return [0, 1, 1.5, 2, 3][this.Level] || (1 + this.Level * 0.5);
+						return [0, 2, 3, 4, 8][this.Level]
+					return [0, 1, 1.5, 2, 3][this.Level]
 			},
 			"Hidden": function(){
 				return this.Level == 0 || this.ManaRegenerationFlat == 0
@@ -7637,7 +7854,7 @@ DotaData.addVersion( version,
 			"Charges": 0,
 			"ChargesMax": 24,
 			"ChargesSemantic": "Duration",
-			"Armor": function(){ return this.Level > 0 ? (0.5 + this.Level * 0.25) * this.Charges : 0 }
+			"Armor": function(){ return (0.5 + this.Level * 0.25) * this.Charges },
 		},
 		"dazzle_weave_buff_aghs": {
 			"Name": "Weave (upgraded)",

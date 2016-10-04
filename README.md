@@ -16,5 +16,5 @@ A table based Dota 2 hero stat comparison engine
 * All ability definition support
 * Right click modifier support (UAMs, hit effects)
 * Table setting support
-* More flexible ability handling
+* Flexible ability handling
 * In depth spell damage support (burst damage calculation)

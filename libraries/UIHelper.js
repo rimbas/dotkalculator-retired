@@ -222,7 +222,9 @@ UIHelper.createDisplayElement = function(object) {
 	div.appendChild(UIHelper.createDetailedTooltip(object));
 
 	if (object.Hidden == true)
-			object.displayElement.style.display = "none"
+			object.displayElement.style.display = "none";
+
+	div.ownerObject = object;
 
 	return div;
 }
@@ -347,7 +349,7 @@ UIHelper.createDetailedTooltip = function ( object ) {
 	if ( typeof object.ManaCost == "number" ) {
 		let manacost = document.createElement("span")
 		manacost.className = "item-display-options manacost";
-		manacost.textContent = object.Cooldown;
+		manacost.textContent = object.ManaCost;
 		el.appendChild(manacost)
 		object.manacostElement = manacost;
 		if (object.Level === 0)

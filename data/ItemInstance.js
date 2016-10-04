@@ -12,6 +12,11 @@ function ItemInstance(itemId, properties) {
 	Object.defineProperty(this, "boundDelete", {writable: true});
 	Object.defineProperty(this, "boundUpdate", {writable: true});
 	Object.defineProperty(this, "heroRef", {writable: true});
+	Object.defineProperty(this, "heroTotal", {get: function heroTotalGetter(){
+		if (this.heroRef && this.heroRef.Total)
+			return this.heroRef.Total;
+		return {};
+	}, enumerable: false})
 	Object.defineProperty(this, "buffReferences", {value: new Map(), writable: true});
 	//this.ownerBuff - the item owner's aura-buff from this item
 

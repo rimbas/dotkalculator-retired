@@ -102,6 +102,11 @@ td.box-content + td.box-content {
 	vertical-align: middle;
 	font-size: 80%;
 }
+.item-display:hover {
+	/*outline: 1px solid gold;*/
+	box-shadow: 0px 0px 1em black;
+	z-index: 1;
+}
 .hero-table .item-display.item {
 	width: 39px;
 }
@@ -112,7 +117,8 @@ td.box-content + td.box-content {
 	display: none;
 	position: absolute;
 	top:28px;
-	left: -1px;
+	/*left: -1px;*/ /* left-aligned tooltip*/
+	transform: translateX(-50%); /* centered tooltip */
 	background: #003045;
 	border: 1px solid gold;
 	padding: 3px;
@@ -122,6 +128,7 @@ td.box-content + td.box-content {
 	text-align: left;
 	white-space: normal;
 }
+
 .item-display:hover > .item-tooltip {
 	display: inline-block;
 	box-shadow: 1px 1px 5px black;

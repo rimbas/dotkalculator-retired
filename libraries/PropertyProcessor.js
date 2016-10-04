@@ -8,7 +8,7 @@ PropertyProcessor.properties = {
 	"MagicalResistance": "diminishing",
 	"ProjectileSpeed": "override",
 	"AttackType": "override",
-	"HasAghanim": "contains"
+	"HasAghanims": "contains"
 }
 
 /**

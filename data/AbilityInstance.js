@@ -12,6 +12,11 @@ function AbilityInstance(skillId, properties) {
 	Object.defineProperty(this, "dynamicElements", {writable: true, value: {}});
 	Object.defineProperty(this, "boundUpdate", {writable: true});
 	Object.defineProperty(this, "heroRef", {writable: true});
+	Object.defineProperty(this, "heroTotal", {get: function heroTotalGetter(){
+		if (this.heroRef && this.heroRef.Total)
+			return this.heroRef.Total;
+		return {};
+	}, enumerable: false})
 	Object.defineProperty(this, "buffReferences", {value: new Map(), writable: true});
 
 	PropertyProcessor.applyDataProperties(this, ability)
