@@ -1,4 +1,6 @@
 
+// Utility library for property calculation in hero stats
+
 PropertyProcessor = {};
 PropertyProcessor.types = {}
 PropertyProcessor.properties = {
@@ -7,6 +9,26 @@ PropertyProcessor.properties = {
 	"ProjectileSpeed": "override",
 	"AttackType": "override",
 	"HasAghanim": "contains"
+}
+
+/**
+ * Unified function to handle property application
+ */
+PropertyProcessor.applyDataProperties = function applyDataProps(newobj, dataobj) {
+	for (let prop in dataobj) {
+		let value = dataobj[prop];
+		if (value instanceof Function)
+			Object.defineProperty(newobj, prop, { get: value, enumerable: true });
+		else if (Array.isArray(value))
+			Object.defineProperty(newobj, prop, {
+				get: function propertyArrayWrapper() {
+					return value[this.Level - 1];
+				},
+				enumerable: true
+			});
+		else
+			Object.defineProperty(newobj, prop, { value: value, enumerable: true, writable: true });
+	}
 }
 
 /**

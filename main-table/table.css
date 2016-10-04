@@ -237,3 +237,16 @@ td.box-content + td.box-content {
 	padding: 0px;
 	background: #003045;
 }
+
+.info-damage.base {
+	color: gold;
+}
+.info-damage.bonus {
+	color: limegreen;
+}
+.info-damage.magic {
+	color: dodgerblue;
+}
+.info-damage.pure {
+	color: red;
+}

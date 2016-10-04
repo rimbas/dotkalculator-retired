@@ -164,4 +164,12 @@ DotaData.numericToRoman = function(num) {
 	return  0 <= num && num <= 10 ? ["-", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"][Math.floor(num)] : num;
 }
 
-
+// Formatter for <HTMLElement>.textContent
+// Display nothing when value is 0 or a sign prefixed value otherwise
+DotaData.formatStatTextContent = function formatStatTextContent(val) {
+	if (val > 0)
+		return "+" + val;
+	else if (val < 0)
+		return "" + val
+	return null
+}

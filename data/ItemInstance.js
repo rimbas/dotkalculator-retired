@@ -15,13 +15,7 @@ function ItemInstance(itemId, properties) {
 	Object.defineProperty(this, "buffReferences", {value: new Map(), writable: true});
 	//this.ownerBuff - the item owner's aura-buff from this item
 
-	for (var prop in item) {
-		var value = item[prop];
-		if (value instanceof Function)
-			Object.defineProperty(this, prop, { get: value, enumerable: true });
-		else
-			this[prop] = value;
-	}
+	PropertyProcessor.applyDataProperties(this, item)
 
 	if (typeof properties.charges === "number")
 		if (item.ChargesMin != undefined && properties.charges >= item.ChargesMin)

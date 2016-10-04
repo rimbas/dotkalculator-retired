@@ -457,7 +457,7 @@ HeroTable.addEvaluator({
 HeroTable.addEvaluator({
 	ID: "Armor",
 	name: "Armor",
-	header: "⛨", //unicode shenanigans
+	header: "⛨",
 	type: "Base",
 	description: "Displays hero armor",
 	eval: function(cell, heroInstance){
@@ -541,10 +541,30 @@ HeroTable.addEvaluator({
 	header: "Dmg",
 	type: "Base",
 	description: "Displays hero attack damage",
+	init: function(cell, heroinstance) {
+		let base = cell.appendChild(document.createElement("span")),
+			bonus = cell.appendChild(document.createElement("span")),
+			magic = cell.appendChild(document.createElement("span")),
+			pure = cell.appendChild(document.createElement("span"));
+		base.classList.add("info-damage", "base")
+		base.title = "Base damage"
+		bonus.classList.add("info-damage", "bonus")
+		bonus.title = "Bonus damage"
+		magic.classList.add("info-damage", "magic")
+		magic.title = "Magic damage"
+		pure.classList.add("info-damage", "pure")
+		pure.title = "Pure damage"
+		cell.infoBase = base
+		cell.infoBonus = bonus
+		cell.infoMagic = magic
+		cell.infoPure = pure
+	},
 	eval: function(cell, hero){
-	var bonus = hero.Total.DamageBonus;
-		cell.textContent = hero.Total.DamageBase + (bonus === 0 ? "" : "+" + bonus);
-		cell.sortingProperty = hero.Total.DamageBase + bonus
+	//var bonus = hero.Total.DamageBonus;
+		//cell.textContent = hero.Total.DamageBase// + (bonus === 0 ? "" : "+" + bonus);
+		cell.infoBase.textContent = hero.Total.DamageBase
+		cell.infoBonus.textContent = DotaData.formatStatTextContent(hero.Total.DamageBonus)
+		cell.sortingProperty = hero.Total.DamageTotal
 	},
 	sorter: "propertyNumber"
 });

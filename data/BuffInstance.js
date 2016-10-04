@@ -17,13 +17,7 @@ function BuffInstance(buffId, properties) {
 	Object.defineProperty(this, "boundUnlink", {writable: true}); // unlinks the buff from owner object (the emitting ability/item)
 	Object.defineProperty(this, "emitterRef", {writable: true}); // ability/item that emits this buff
 
-	for (var prop in buff) {
-		var value = buff[prop];
-		if (value instanceof Function)
-			Object.defineProperty(this, prop, { get: value, enumerable: true });
-		else
-			Object.defineProperty(this, prop, { value: value, enumerable: true, writable: true });
-	}
+	PropertyProcessor.applyDataProperties(this, buff)
 
 	if (typeof properties.level === "number")
 		if (buff.LevelMin != undefined && properties.level >= buff.LevelMin)

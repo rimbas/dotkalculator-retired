@@ -14,13 +14,7 @@ function AbilityInstance(skillId, properties) {
 	Object.defineProperty(this, "heroRef", {writable: true});
 	Object.defineProperty(this, "buffReferences", {value: new Map(), writable: true});
 
-	for (var prop in ability) {
-		var value = ability[prop];
-		if (value instanceof Function)
-			Object.defineProperty(this, prop, { get: value, enumerable: true });
-		else
-			this[prop] = value;
-	}
+	PropertyProcessor.applyDataProperties(this, ability)
 
 	if (typeof properties.level === "number")
 		if (ability.LevelMin != undefined && properties.level >= ability.LevelMin)
