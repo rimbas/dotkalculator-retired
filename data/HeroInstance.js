@@ -319,12 +319,12 @@ HeroInstance.addHandler({
 	name: "ItemChange",
 	binds: [],
 	handler: function() {
-		var a = { "Strength": 0, "Agility":0, "Intelligence":0,
-			"MovementSpeed":0, "MovementSpeedPercentage":0, "Range": 0,
-			"Armor":0, "MagicalResistance": 0, "Evasion":0,
-			"Health":0, "HealthRegeneration":0, "Mana":0, "ManaRegenerationFlat": 0,
+		var a = { "Strength": 0, "Agility": 0, "Intelligence": 0,
+			"MovementSpeed": 0, "MovementSpeedPercentage": 0,
+			"Armor": 0, "MagicalResistance": 0, "Evasion": 0,
+			"Health":0, "HealthRegeneration":0, "Mana": 0, "ManaRegenerationFlat": 0,
 			"ManaRegenerationPercentage": 0, "Damage": 0, "AttackSpeed": 0,
-			"VisionDay": 0, "VisionNight": 0, "Cost": 0, "HasAghanims": undefined,
+			"VisionDay": 0, "VisionNight": 0, "Cost": 0, "HasAghanims": null,
 			"MagicalAmplification": 0 },
 			f = {};
 		for (var item of this.Items) {
@@ -352,8 +352,8 @@ HeroInstance.addHandler({
 	name: "AbilityChange",
 	binds: ["LevelChange"],
 	handler: function() {
-		var a = { "Strength": 0, "Agility":0, "Intelligence":0, "MovementSpeed": 0,
-				"AttackType": undefined, "ProjectileSpeed": undefined };
+		var a = { "Strength": 0, "Agility": 0, "Intelligence": 0, "MovementSpeed": 0,
+				"AttackType": null, "ProjectileSpeed": null };
 		for (var ability of this.Abilities) {
 			if (ability.Level < 1)
 				continue;
@@ -369,7 +369,7 @@ HeroInstance.addHandler({
 	binds: [],
 	handler: function() {
 		var a = { "Strength": 0, "Agility": 0, "Intelligence": 0, "MovementSpeed": 0,
-				"AttackType": undefined, "ProjectileSpeed": undefined, HasAghanims: undefined };
+				"AttackType": null, "ProjectileSpeed": null, "HasAghanims": null };
 		for (var buff of this.Buffs)
 			for (var prop in a)
 				a[prop] = PropertyProcessor.calculate(prop, a[prop], buff[prop]);
@@ -390,10 +390,23 @@ HeroInstance.addHandler({
 		a.IntelligenceBonus = this.Item.Intelligence + this.Ability.Intelligence + this.Buff.Intelligence;
 		a.Intelligence = this.Base.Intelligence + a.IntelligenceBonus;
 		a.MovementSpeedBase = this.Raw.MovementSpeed + this.Item.MovementSpeed + this.Ability.MovementSpeed + this.Buff.MovementSpeed;
-		a.HasAghanims = this.Buff.HasAghanims || this.Item.HasAghanims || false
+		a.HasAghanims = this.Buff.HasAghanims || this.Item.HasAghanims || false;
+		a.AttackType = this.Ability.AttackType || this.Buff.AttackType || this.Raw.AttackType;
 		this.Total = a;
 	}
 })
+
+HeroInstance.addHandler({
+	name: "PostItemChange",
+	binds: ["PreTotalChange"],
+	handler: function() {
+		var a = { "Range": 0 };
+		for (var buff of this.Items)
+			for (var prop in a)
+				a[prop] = PropertyProcessor.calculate(prop, a[prop], buff[prop]);
+		this.Item.Range = a.Range;
+	}
+});
 
 HeroInstance.addHandler({
 	name: "PostAbilityChange",
@@ -404,8 +417,8 @@ HeroInstance.addHandler({
 			"Armor": 0, "MagicalResistance": 0, "Evasion": 0,
 			"Health": 0, "HealthRegeneration": 0, "Mana": 0, "ManaRegenerationFlat": 0,
 			"ManaRegenerationPercentage": 0, "Damage": 0, "DamageBase": 0, "AttackRate": 0,
-			"AttackSpeed": 0, "Range": 0, "VisionDay": 0, "VisionNight": 0,
-			"ManaRegenerationBase": 0 };
+			"AttackSpeed": 0, "Range": 0, "VisionDay": 0, "VisionNight": 0, "AttackType": null,
+			"ManaRegenerationBase": 0, "ProjectileSpeed": null };
 		for (var ability of this.Abilities) {
 			if (ability.Level < 1)
 				continue;
@@ -427,7 +440,7 @@ HeroInstance.addHandler({
 				"Mana": 0, "ManaRegenerationFlat": 0, "Damage": 0, "DamagePercentage": 0,
                 "DamageReductionPercentage": 0,	"AttackSpeed": 0, "ManaRegenerationPercentage": 0,
                 "AttackRate": 0, "Range": 0, "ManaRegenerationBase": 0, "DamageBase": 0,
-                "ProjectileSpeed": 0, "AttackType": undefined },
+                "ProjectileSpeed": null, "AttackType": null, "HasAghanims": null },
 			f = {};
 		for (var buff of this.Buffs) {
 			if (buff.Family)
@@ -449,7 +462,7 @@ HeroInstance.addHandler({
 
 HeroInstance.addHandler({
 	name: "TotalChange",
-	binds: ["LevelChange", "PostAbilityChange", "PostBuffChange"],
+	binds: ["LevelChange", "PostAbilityChange", "PostBuffChange", "PostItemChange"],
 	handler: function() {
 		var a = this.Total;
 		a.MovementSpeedPercentage = this.Item.MovementSpeedPercentage +	this.Ability.MovementSpeedPercentage + this.Buff.MovementSpeedPercentage;
@@ -487,7 +500,6 @@ HeroInstance.addHandler({
 		a.VisionDay = this.Raw.VisionDaytime;
 		a.VisionNight = this.Raw.VisionNighttime + this.Ability.VisionNight + this.Item.VisionNight;
 		a.Cost = this.Item.Cost;
-		a.AttackType = this.Buff.AttackType || this.Raw.AttackType;
 		a.ProjectileSpeed = this.Buff.ProjectileSpeed || this.Raw.ProjectileSpeed;
 		a.MagicalAmplification = this.Base.Intelligence * this.Raw.MagicalAmpPerIntelligence + this.Item.MagicalAmplification;
 

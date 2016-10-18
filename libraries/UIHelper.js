@@ -297,11 +297,7 @@ UIHelper.createDetailedTooltip = function ( object ) {
 		el.appendChild(document.createElement("br"));
 	}
 
-	var statOrder = ["Strength", "Agility", "Intelligence", "Health", "Mana",
-		"HealthRegeneration", "ManaRegenerationPercentage", "ManaRegenerationFlat",
-		"Damage", "DamageBase", "DamagePercentage", "DamageReductionPercentage", "DamageReduction",
-		"AttackSpeed", "MovementSpeed", "MovementSpeedPercentage",
-		"MagicalResistance", "Evasion", "Armor", "AttackRate", "Range" ],
+	var statOrder = DotaData.Meta.StatAutoProperties;
 		statValues = {};
 
 	for (var stat of statOrder)
@@ -318,7 +314,7 @@ UIHelper.createDetailedTooltip = function ( object ) {
 		if (statValues[stat] === undefined)
 			continue;
 		var readable = DotaData.statToReadable(stat, statValues[stat]),
-			valueLabel = document.createElement("span");
+			valueLabel = el.appendChild(document.createElement("span"));
 			valueLabel.className = "item-display-options value";
 			object.dynamicElements[stat] = valueLabel;
 		if (readable.isPercentage)
@@ -328,7 +324,6 @@ UIHelper.createDetailedTooltip = function ( object ) {
 		else if (readable.negativeOverride && statValues[stat] > 0)
 			valueLabel.classList.add("negative");
 		valueLabel.textContent = readable.value;
-		el.appendChild(valueLabel);
 		var spanLabel = document.createElement("span");
 			spanLabel.className = "item-display-options label";
 			spanLabel.textContent = readable.key;

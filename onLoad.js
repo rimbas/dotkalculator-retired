@@ -25,11 +25,11 @@ window.addEventListener("DOMContentLoaded", function(e){
 			"drow_ranger_marksmanship": 3,
 			"attribute_bonus": 1
 		},
-		team: "Magic"
+		team: "Radiant"
 	}));
 	MainTable.addHero(new HeroInstance("ursa", {
 		level: 13,
-		team: "Magic",
+		team: "Radiant",
 		abilities: {
 			"ursa_overpower": 4,
 			"ursa_fury_swipes": 4,
@@ -65,10 +65,10 @@ window.addEventListener("DOMContentLoaded", function(e){
 			new ItemInstance("heart"),
 			new ItemInstance("moon_shard")
 		],
-		team: "Ghost"
+		team: "Dire"
 	}))
 	MainTable.addHero(new HeroInstance("crystal_maiden", {
-		team: "Ghost",
+		team: "Dire",
 		level: 25,
 		abilities: {
 			crystal_maiden_brilliance_aura: 4,
@@ -90,7 +90,6 @@ window.addEventListener("DOMContentLoaded", function(e){
 		]
 	}))
 	MainTable.addHero(new HeroInstance("lina", {
-		team: "Money",
 		level: 16,
 		abilities: {
 			lina_dragon_slave: 4,

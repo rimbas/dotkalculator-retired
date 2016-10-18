@@ -10,12 +10,23 @@ DotaData.Meta = {
 	ShopSections: [
 		"Consumables", "Attributes", "Armaments", "Arcane", "Common", "Support",
 		"Caster", "Weapons", "Armor", "Artifacts", "Secret", "Unlisted" ],
+	// List of automatically set/wrapped property/value pairs when applied to
+	// items, abilities and buffs. Doubles as list of properties that can't
+	// be changed on an such object.
+	StatAutoProperties: [
+		"Strength", "Agility", "Intelligence", "Health", "Mana",
+		"HealthRegeneration", "ManaRegenerationPercentage", "ManaRegenerationFlat",
+		"MagicalResistance", "Evasion", "Armor", "MovementSpeed", "MovementSpeedPercentage",
+		"Damage", "DamageBase", "DamagePercentage", "DamageReductionPercentage", "DamageReduction",
+		"AttackSpeed", "AttackRate", "Range"
+	]
 }
 
 // Returns a new instance of complete hero propery data
 // heroId (string) - internal hero ID
 DotaData.getHeroProperties = function (heroId, versionOverride) {
-	if (versionOverride && !versionOverride in DotaData.Versions) throw "No such version \""+versionOverride+"\"";
+	if (versionOverride && !(versionOverride in DotaData.Versions))
+		throw "No such version \""+versionOverride+"\"";
 	var version = DotaData.Versions[versionOverride || DotaData.NewestVersion];
 	if (!(heroId in version.Heroes)) throw "No such id \"" + heroId + "\" in hero list";
 	var obj = {},
@@ -34,7 +45,8 @@ DotaData.getHeroProperties = function (heroId, versionOverride) {
 }
 
 DotaData.getItemProperties = function (itemId, versionOverride) {
-	if (versionOverride && !versionOverride in DotaData.Versions) throw "No such version \""+versionOverride+"\"";
+	if (versionOverride && !(versionOverride in DotaData.Versions))
+		throw "No such version \""+versionOverride+"\"";
 	var version = DotaData.Versions[versionOverride || DotaData.NewestVersion];
 	if (!(itemId in version.Items)) throw "No such id \"" + itemId + "\" in item list";
 	var obj = {},
@@ -49,7 +61,8 @@ DotaData.getItemProperties = function (itemId, versionOverride) {
 }
 
 DotaData.getAbilityProperties = function (abilityId, versionOverride) {
-	if (versionOverride && !versionOverride in DotaData.Versions) throw "No such version \""+versionOverride+"\"";
+	if (versionOverride && !(versionOverride in DotaData.Versions))
+		throw "No such version \""+versionOverride+"\"";
 	var version = DotaData.Versions[versionOverride || DotaData.NewestVersion];
 	if (!(abilityId in version.Abilities))
 		throw "No such id \"" + abilityId + "\" in ability list";
