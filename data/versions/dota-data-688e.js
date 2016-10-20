@@ -7784,6 +7784,9 @@ DotaData.addVersion({
 		},
 		"abyssal_underlord_dark_rift": {
 			"Name": "Dark rift",
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 11, 16],
 			"Cooldown": function(){ return 140 - this.Level * 10},
 			"ManaCost": function(){ return this.Level * 75},
 		},
