@@ -3,6 +3,7 @@
 DotaData = {};
 DotaData.Versions = {}
 DotaData.NewestVersion = "";
+DotaData.NewestMajor = "";
 
 DotaData.Meta = {
 	TeamList: ["Radiant", "Dire"],
@@ -10,121 +11,93 @@ DotaData.Meta = {
 	ShopSections: [
 		"Consumables", "Attributes", "Armaments", "Arcane", "Common", "Support",
 		"Caster", "Weapons", "Armor", "Artifacts", "Secret", "Unlisted" ],
-	// List of automatically set/wrapped property/value pairs when applied to
-	// items, abilities and buffs. Doubles as list of properties that can't
-	// be changed on an such object.
+	// List of properties that should be automatically handled.
+	// This list is also a reference list of stats that should be displayed in tooltips
 	StatAutoProperties: [
 		"Strength", "Agility", "Intelligence", "Health", "Mana",
 		"HealthRegeneration", "ManaRegenerationPercentage", "ManaRegenerationFlat",
 		"MagicalResistance", "Evasion", "Armor", "MovementSpeed", "MovementSpeedPercentage",
 		"Damage", "DamageBase", "DamagePercentage", "DamageReductionPercentage", "DamageReduction",
-		"AttackSpeed", "AttackRate", "Range"
+		"AttackSpeed", "AttackRate", "Range",
+	],
+	// Technical or hidden automatically handled properties
+	TechnicalAutoProperties: [
+		"LevelMin", "LevelMax", "ChargesMin", "ChargesMax", "Image",
+		"ManaCost", "Cooldown", "Hidden", "Buff", "HasAghanims", "Class",
 	]
 }
 
-// Returns a new instance of complete hero propery data
-// heroId (string) - internal hero ID
-DotaData.getHeroProperties = function (heroId, versionOverride) {
-	if (versionOverride && !(versionOverride in DotaData.Versions))
-		throw "No such version \""+versionOverride+"\"";
-	var version = DotaData.Versions[versionOverride || DotaData.NewestVersion];
-	if (!(heroId in version.Heroes)) throw "No such id \"" + heroId + "\" in hero list";
-	var obj = {},
-		base = version.Heroes._base,
-		hero = version.Heroes[heroId],
-		AbilityIDs = [];
-
-	for (let prop in base) {
-		obj[prop] = base[prop];
-	}
-	for (let prop in hero) {
-		obj[prop] = hero[prop];
-	}
-
-	return obj;
-}
-
-DotaData.getItemProperties = function (itemId, versionOverride) {
-	if (versionOverride && !(versionOverride in DotaData.Versions))
-		throw "No such version \""+versionOverride+"\"";
-	var version = DotaData.Versions[versionOverride || DotaData.NewestVersion];
-	if (!(itemId in version.Items)) throw "No such id \"" + itemId + "\" in item list";
-	var obj = {},
-		base = version.Items._base,
-		item = version.Items[itemId];
-
-	for (let prop in base)
-		obj[prop] = base[prop];
-	for (let prop in item)
-		obj[prop] = item[prop];
-	return obj;
-}
-
-DotaData.getAbilityProperties = function (abilityId, versionOverride) {
-	if (versionOverride && !(versionOverride in DotaData.Versions))
-		throw "No such version \""+versionOverride+"\"";
-	var version = DotaData.Versions[versionOverride || DotaData.NewestVersion];
-	if (!(abilityId in version.Abilities))
-		throw "No such id \"" + abilityId + "\" in ability list";
-	var obj = {},
-		base = version.Abilities._base,
-		skill = version.Abilities[abilityId];
-
-	for (let prop in base)
-		obj[prop] = base[prop];
-	for (let prop in skill)
-		obj[prop] = skill[prop];
-	return obj;
-}
-
-DotaData.getBuffProperties = function(buffId, versionOverride) {
-	if (versionOverride && !versionOverride in DotaData.Versions) throw "No such version \""+versionOverride+"\"";
-	var version = DotaData.Versions[versionOverride || DotaData.NewestVersion];
-	if (!(buffId in version.Buffs))
-		throw "No such id \"" + buffId + "\" in buff list";
-	var obj = {},
-		base = version.Buffs._base,
-		buff = version.Buffs[buffId];
-
-	for (let prop in base)
-		obj[prop] = base[prop]
-	for (let prop in buff)
-		obj[prop] = buff[prop];
-	return obj;
-}
-
 DotaData.getCurrentHeroList = function() {
-	return DotaData.Versions[DotaData.NewestVersion].Heroes;
+	return DotaData.Versions[DotaData.NewestMajor].Heroes;
 }
 
 DotaData.getCurrentItemList = function() {
-	return DotaData.Versions[DotaData.NewestVersion].Items;
+	return DotaData.Versions[DotaData.NewestMajor].Items;
 }
 
 DotaData.getHeroList = function(version) {
-	return DotaData.Versions[version].Heroes
+	return DotaData.Versions[DotaData.getMajorFromVersion(version)].Heroes
 }
 
 DotaData.getItemList = function(version) {
-	return DotaData.Versions[version].Items
+	return DotaData.Versions[DotaData.getMajorFromVersion(version)].Items
 }
 
-DotaData.addVersion = function(version, data) {
+DotaData.addVersion = function(data) {
+	let version = DotaData.checkVersionData(data)
 	if (version > DotaData.NewestVersion)
 		DotaData.NewestVersion = version;
-	DotaData.checkVersionData(data);
+	if (!data.Meta.Base && version > DotaData.NewestMajor)
+		 DotaData.NewestMajor = version;
 	DotaData.Versions[version] = data;
 }
 
-DotaData.checkVersionData = function(data) {
-	for (var heroId in data.Heroes) {
-		var hero = data.Heroes[heroId];
-		if (typeof heroId != "string")
-			console.error("Hero "+heroId+" with a non string identifier!");
+// Utility to check for worst errors in data definition files
+// Also returns the version of data
+DotaData.checkVersionData = function(data, extra) {
+	if (data.Meta == undefined)
+		throw "Metadata is not defined!"
+	let version = data.Meta.Version
+	if (version in DotaData.Versions)
+		throw `Version "${version}" already defined!`
 
-		if (hero.Name == undefined)
-			console.warn("Hero with ID "+heroId+" has no name!")
+	if (data.Meta == undefined || data.Meta.Base == undefined ) {
+		if (!data.Heroes && !data.Items && !data.Abilities && !data.Buffs)
+			throw `No usable data in version "${version}"!`
+
+		for (var heroId in data.Heroes) {
+			var hero = data.Heroes[heroId];
+			if (typeof heroId != "string")
+				console.error(`Hero "${heroId}" with a non string identifier!`);
+
+			if (hero.Name == undefined)
+				console.warn(`Hero "${heroId}" has no name! (Field "Name" is missing)`)
+
+			if (extra && hero.LoreName == undefined)
+				console.warn(`Hero "${heroId}" has no lore name! (Field "LoreName" is missing)`)
+		}
 	}
+	else {
+		// TODO: Checks for inconsistencies between major and minor versions
+
+		for (let typeId in data) {
+			let typeData = data[typeId];
+
+
+			for (let objId in typeData) {
+				let objData = typeData[objId];
+			}
+		}
+	}
+	return data.Meta.Version;
+}
+
+DotaData.getMajorFromVersion = function majorFromVersion(version) {
+	let majorVersion = version
+	while ("Base" in DotaData.Versions[majorVersion].Meta) {
+		majorVersion = DotaData.Versions[majorVersion].Meta.Base
+	}
+	return majorVersion
 }
 
 // Lookup list for readable property names
@@ -183,6 +156,47 @@ DotaData.formatStatTextContent = function formatStatTextContent(val) {
 	if (val > 0)
 		return "+" + val;
 	else if (val < 0)
-		return "" + val
+		return "" + val // derp
 	return null
+}
+
+// Unified data aggregator
+// type		- section in data definitions
+// id		- requested data identifier
+// version	- version selector
+DotaData.getTypeData = function getTypeData(type, id, version) {
+	if (version == undefined)
+		version = DotaData.NewestVersion;
+	if (!(version in DotaData.Versions))
+		throw `No such version "${version}" exists!`
+	let dotaVersion = DotaData.Versions[version];
+	if (dotaVersion.Meta.Base) {
+		let base = getTypeData(type, id, dotaVersion.Meta.Base);
+
+		if (dotaVersion[type]) {
+			let data = dotaVersion[type][id];
+			for (let prop in data)
+				base[prop] = data[prop];
+		}
+		base.Version = version;
+		return base
+	}
+	else {
+		let constructedData = {};
+		// Absolute base data
+		if (dotaVersion[type] == undefined) {
+			throw `Version "${version}" without "${type}" type!`
+		}
+		let base = dotaVersion[type]._base,
+			data = dotaVersion[type][id];
+		if (data === undefined)
+			throw `No such id "${id}" in type ${type} in version "${version}"!`
+		for (let prop in dotaVersion[type]._base)
+			constructedData[prop] = base[prop];
+		for (let prop in data)
+			constructedData[prop] = data[prop];
+
+		constructedData.Version = version;
+		return constructedData
+	}
 }

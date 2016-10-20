@@ -3,7 +3,7 @@
 // Helper object for HeroInstance
 function BuffInstance(buffId, properties) {
 	properties = properties || {};
-	var buff = DotaData.getBuffProperties(buffId, properties.version);
+	let buff = DotaData.getTypeData("Buffs", buffId, properties.version);
 
 	Object.defineProperty(this, "ID", {value: buffId});
 	Object.defineProperty(this, "displayElement", {writable: true});

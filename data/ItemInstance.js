@@ -3,7 +3,7 @@
 // Helper object for HeroInstance
 function ItemInstance(itemId, properties) {
 	properties = properties || {};
-	var item = DotaData.getItemProperties(itemId, properties.version);
+	let item = DotaData.getTypeData("Items", itemId, properties.version);
 
 	Object.defineProperty(this, "ID", {value: itemId});
 	Object.defineProperty(this, "displayElement", {writable: true});

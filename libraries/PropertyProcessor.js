@@ -15,20 +15,42 @@ PropertyProcessor.properties = {
  * Unified function to handle property application
  */
 PropertyProcessor.applyDataProperties = function applyDataProps(newobj, dataobj) {
+	let meta = dataobj.Meta || { "Wrap": [] }
 	for (let prop in dataobj) {
+		if (prop == "Meta")
+			continue;
+
 		let value = dataobj[prop];
-		if (value instanceof Function)
-			Object.defineProperty(newobj, prop, { get: value, enumerable: true });
-		else if (Array.isArray(value))
-			Object.defineProperty(newobj, prop, {
-				get: function propertyArrayWrapper() {
-					return value[this.Level - 1];
-				},
-				enumerable: true
-			});
-		else
+		if (PropertyProcessor.autoPropertyCheck(prop, value, dataobj)) {
+			if (value instanceof Function)
+				Object.defineProperty(newobj, prop, { get: value, enumerable: true });
+			else if (Array.isArray(value))
+				Object.defineProperty(newobj, prop, {
+					get: function propertyArrayWrapper() {
+						return value[this.Level - 1];
+					},
+					enumerable: true
+				});
+			else
+				Object.defineProperty(newobj, prop, { value: value, enumerable: true, writable: false });
+		}
+		else {
 			Object.defineProperty(newobj, prop, { value: value, enumerable: true, writable: true });
+		}
 	}
+}
+
+PropertyProcessor.autoPropertyCheck = function(prop, value, dataobj) {
+	if (DotaData.Meta.StatAutoProperties.includes(prop))
+		return true
+	if (DotaData.Meta.TechnicalAutoProperties.includes(prop))
+		return true
+	if (dataobj.Meta && Array.isArray(dataobj.Meta.Wrap) && dataobj.Meta.Wrap.includes(prop))
+		return true
+	// Mostly hacks after this line
+	if (prop == "Level" && value instanceof Function)
+		return true
+	return false
 }
 
 /**

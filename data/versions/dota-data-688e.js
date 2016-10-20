@@ -1,11 +1,20 @@
+
+// Major version
+
 "use strict"; // Collective nerfbat edition
 {
-const version = "6.88e"
-DotaData.addVersion( version,
-{
+DotaData.addVersion({
 
 	//
-	// Hero definition
+	//	Meta definition
+	//
+
+	"Meta": {
+		"Version": "6.88e"
+	},
+
+	//
+	//	Hero definition
 	//
 
 	"Heroes": {
@@ -50,7 +59,6 @@ DotaData.addVersion( version,
 			"Mana": 50,
 			"ManaRegeneration": 0.01,
 			"ManaPerIntelligence": 12,
-			"Version": version,
 			"VisionDaytime": 1800,
 			"VisionNighttime": 800,
 			"Team": "Radiant"
@@ -3111,13 +3119,12 @@ DotaData.addVersion( version,
 	},
 
 	//
-	// Item definition
+	//	Item definition
 	//
 
 	"Items": {
 		"_base": {
 			"Name": "NO-DISPLAY-NAME",
-			"Version": version,
 			"Cost": 0
 		},
 		/* Consumables */
@@ -3244,6 +3251,15 @@ DotaData.addVersion( version,
 		},
 		"bottle": {
 			"Name": "Bottle",
+			"Image": function(){
+				if (this.Charges == 0)
+					return "bottle_empty"
+				if (this.Charges == 1)
+					return "bottle_small"
+				if (this.Charges == 2)
+					return "bottle_medium"
+				return "bottle"
+			},
 			"Cost": 660,
 			"Section": "Consumables",
 			"SectionIndex": 13,
@@ -3835,6 +3851,7 @@ DotaData.addVersion( version,
 			"Cost": 1785,
 			"Components": ["bracer", "ring_of_regen", "wind_lace", 700],
 			"Charges": 6,
+			"ChargesMax": 6,
 			"Section": "Support",
 			"SectionIndex": 9,
 			"Strength": 6,
@@ -4108,7 +4125,7 @@ DotaData.addVersion( version,
 			"Section": "Caster",
 			"SectionIndex": 9,
 			"Intelligence": 25,
-			"ManaRegeneration": 1.5,
+			"ManaRegenerationPercentage": 1.5,
 			"Damage": 30,
 			"AttackSpeed": 30,
 			"Cooldown": 18,
@@ -4123,8 +4140,8 @@ DotaData.addVersion( version,
 			"Strength": 10,
 			"Agility": 10,
 			"Intelligence": 10,
-			"Health": 200,
-			"Mana": 150,
+			"Health": 175,
+			"Mana": 175,
 			"Buff": {
 				"Name": "ultimate_scepter_buff",
 				"NoTarget": true,
@@ -4801,13 +4818,12 @@ DotaData.addVersion( version,
 	},
 
 	//
-	// Ability definition
+	//	Ability definition
 	//
 
 	"Abilities": {
 		"_base": {
 			"Name": "Unimplemented ability",
-			"Version": version,
 			"Level": 0,
 			"LevelMax": "4",
 			"Class": "Ability",
@@ -6010,7 +6026,7 @@ DotaData.addVersion( version,
 		},
 		"kunkka_torrent": {
 			"Name": "Torrent",
-			"Cooldown": 100,
+			"Cooldown": 10,
 			"ManaCost": function(){ return 80 + this.Level * 10 },
 		},
 		"kunkka_tidebringer": {
@@ -6361,10 +6377,14 @@ DotaData.addVersion( version,
 			"Restrictions": [6, 11, 16]
 		},
 		"morphling_waveform": {
-			"Name": "Waveform"
+			"Name": "Waveform",
+			"Cooldown": 11,
+			"ManaCost": [140, 155, 160, 165],
 		},
 		"morphling_adaptive_strike": {
-			"Name": "Adaptive strike"
+			"Name": "Adaptive strike",
+			"Cooldown": 10,
+			"ManaCost": function(){ return 110 - this.Level * 10 },
 		},
 		"morphling_morph_agi": {
 			"Name": "Morph (Agility)",
@@ -6378,7 +6398,9 @@ DotaData.addVersion( version,
 			"Name": "Replicate",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 11, 16],
+			"Cooldown": 80,
+			"ManaCost": 25,
 		},
 		"morphling_hybrid": {
 			"Name": "Hybrid",
@@ -6387,11 +6409,15 @@ DotaData.addVersion( version,
 					return 1
 				return 0
 			},
+			"LevelMin": 1,
+			"LevelMax": 1,
 			"Hidden": function() {
 				if (this.heroTotal.HasAghanims)
 					return false
 				return true
 			},
+			"Cooldown": 60,
+			"ManaCost": 200,
 		},
 		"naga_siren_mirror_image": {
 			"Name": "Mirror image"
@@ -6409,13 +6435,16 @@ DotaData.addVersion( version,
 			"Restrictions": [6, 11, 16]
 		},
 		"necrolyte_death_pulse": {
-			"Name": "Death pulse"
+			"Name": "Death pulse",
+			"Cooldown": function(){ return 9 - this.Level },
+			"ManaCost": function(){ return 105 + this.Level * 20 },
 		},
 		"necrolyte_heartstopper_aura": {
 			"Name": "Heartstopper aura"
 		},
 		"necrolyte_sadist": {
 			"Name": "Sadist",
+			"Meta": { "Wrap": ["SadistScale"] },
 			"Charges": 0,
 			"HealthRegeneration": function(){ return this.Charges * this.SadistScale || 0 },
 			"ManaRegenerationFlat": function(){ return this.Charges * this.SadistScale * 2 || 0 },
@@ -6425,23 +6454,45 @@ DotaData.addVersion( version,
 			"Name": "Reaper's scythe",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 11, 16],
+			"Cooldown": function(){
+				if (this.heroTotal.HasAghanims)
+					return 70
+				return 115 - this.Level * 15
+			},
+			"ManaCost": function() {
+				if (this.heroTotal.HasAghanims)
+					return [0, 150, 340, 500][this.Level]
+				return [0, 175, 340, 500][this.Level]
+			},
 		},
 		"nevermore_shadowraze1": {
-			"Name": "Shadowraze (near)"
+			"Name": "Shadowraze (near)",
+			"Cooldown": 10,
+			"ManaCost": 90,
 		},
 		"nevermore_shadowraze2": {
-			"Name": "Shadowraze(medium)"
+			"Name": "Shadowraze(medium)",
+			"Cooldown": 10,
+			"ManaCost": 90,
 		},
 		"nevermore_shadowraze3": {
-			"Name": "Shadowraze (far)"
+			"Name": "Shadowraze (far)",
+			"Cooldown": 10,
+			"ManaCost": 90,
 		},
 		"nevermore_necromastery": {
 			"Name": "Necromastery",
 			"Charges": 0,
-			"ChargesMax": function(){ return 12 + this.Level * 6 },
+			"ChargesMax": function(){
+				if (this.Level < 1)
+					return 0;
+				if (this.heroTotal.HasAghanims)
+					return 14 + this.Level * 8
+				return 12 + this.Level * 6
+			},
 			"ChargesSemantic": "Souls",
-			"Damage": function(){ return Math.min(this.Charges, 8 + 7 * this.Level) * 2 }
+			"Damage": function(){ return this.Charges * 2 }
 		},
 		"nevermore_dark_lord": {
 			"Name": "Presence of the Dark Lord"
@@ -6450,7 +6501,9 @@ DotaData.addVersion( version,
 			"Name": "Requiem of Souls",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 11, 16],
+			"Cooldown": function(){ return 130 - this.Level * 10 },
+			"ManaCost": function(){ return 125 + this.Level * 25 },
 		},
 		"night_stalker_void": {
 			"Name": "Void"
@@ -6563,10 +6616,14 @@ DotaData.addVersion( version,
 			"Restrictions": [6, 11, 16]
 		},
 		"omniknight_purification": {
-			"Name": "Purification"
+			"Name": "Purification",
+			"Cooldown": 10,
+			"ManaCost": function(){ return 80 + this.Level * 20 },
 		},
 		"omniknight_repel": {
-			"Name": "Repel"
+			"Name": "Repel",
+			"Cooldown": 14,
+			"ManaCost": 50,
 		},
 		"omniknight_degen_aura": {
 			"Name": "Degen aura"
@@ -6575,7 +6632,9 @@ DotaData.addVersion( version,
 			"Name": "Guardian angel",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 11, 16],
+			"Cooldown": 150,
+			"ManaCost": [125, 175, 250],
 		},
 		"oracle_fortunes_end": {
 			"Name": "Fortune's end",
@@ -6590,7 +6649,7 @@ DotaData.addVersion( version,
 		"oracle_purifying_flames": {
 			"Name": "Purifying flames",
 			"Cooldown": function(){
-				return 2.25
+				return this.heroTotal.HasAghanims ? 2.25 : 1
 			},
 			"ManaCost": function(){ return 40 + this.Level * 10 },
 		},
@@ -6693,7 +6752,7 @@ DotaData.addVersion( version,
 			"LevelMax": 4,
 			"Charges": 0,
 			"ChargesSemantic": "Stacks",
-//			"Strength": function() { return Math.floor(this.Level > 0 ? (0.5 + this.Level * 0.5) * this.Charges : 0) },
+
 			"Strength": function() {
 				if (this.Level < 1 || this.Charges < 1)
 					return 0
@@ -6850,13 +6909,19 @@ DotaData.addVersion( version,
 			"ManaCost": function(){ return 75 + this.Level * 75 },
 		},
 		"shadow_demon_disruption": {
-			"Name": "Disruption"
+			"Name": "Disruption",
+			"Cooldown": function(){ return 30 - this.Level * 3 },
+			"ManaCost": 120,
 		},
 		"shadow_demon_soul_catcher": {
-			"Name": "Soul catcher"
+			"Name": "Soul catcher",
+			"Cooldown": function(){ return 14 - this.Level },
+			"ManaCost": function(){ return 40 + this.Level * 10 },
 		},
 		"shadow_demon_shadow_poison": {
-			"Name": "Shadow poison"
+			"Name": "Shadow poison",
+			"Cooldown": 2.5,
+			"ManaCost": 40,
 		},
 		"shadow_demon_shadow_poison_release": {
 			"Name": "Shadow poison release",
@@ -6870,7 +6935,13 @@ DotaData.addVersion( version,
 			"Name": "Demonic purge",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 11, 16],
+			"Cooldown": function(){
+				if (this.heroTotal.HasAghanims)
+					return 40
+				return 50
+			},
+			"ManaCost": 200,
 		},
 		"shadow_shaman_ether_shock": {
 			"Name": "Ether shock"
@@ -7719,14 +7790,13 @@ DotaData.addVersion( version,
 	},
 
 	//
-	// Buff definition
+	//	Buff definition
 	//
 
 	"Buffs": {
 		"_base": {
 			"Name": "Dummy buff",
 			"Image": "empty",
-			"Version": version,
 			"Class": "Buff"
 		},
 		"test_buff": {
@@ -7926,7 +7996,7 @@ DotaData.addVersion( version,
 			"Damage": function() {
 					if (!this.emitterRef)
 						return 0;
-					if (this.heroRef.Total.AttackType != "Ranged")
+					if (this.heroTotal.AttackType != "Ranged")
 						return 0;
 					if (this.emitterRef.Level > 0)
 						return Math.floor(this.ownerRef.Total.Agility * (0.14 + this.emitterRef.Level * 0.06))

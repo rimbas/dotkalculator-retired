@@ -3,7 +3,7 @@
 // Helper object for HeroInstance
 function AbilityInstance(skillId, properties) {
 	properties = properties || {};
-	var ability = DotaData.getAbilityProperties(skillId, properties.version);
+	let ability = DotaData.getTypeData("Abilities", skillId, properties.version);
 
 	Object.defineProperty(this, "ID", {value: skillId});
 	Object.defineProperty(this, "displayElement", {writable: true});

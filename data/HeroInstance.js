@@ -20,7 +20,7 @@
 function HeroInstance(heroId, options) {
 	if (!options) options = {};
 
-	this.Raw = DotaData.getHeroProperties(heroId, options.version);
+	this.Raw = DotaData.getTypeData("Heroes", heroId, options.version);
 	this.Meta = { "ID": heroId,
 				  "Level": Math.min(Math.max(options.level, 1), 25) || this.Raw.Level,
 				  "Label": options.label || this.Raw.Name,

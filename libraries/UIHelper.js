@@ -168,7 +168,7 @@ UIHelper.appendSettings = function(window, options) {
 }
 
 /**
- * @desc Creates a display element for
+ * @desc Creates a display element for Item/Ability/Buff
  */
 UIHelper.createDisplayElement = function(object) {
 	if (object.displayElement)
