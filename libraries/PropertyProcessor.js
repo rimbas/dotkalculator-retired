@@ -8,7 +8,13 @@ PropertyProcessor.properties = {
 	"MagicalResistance": "diminishing",
 	"ProjectileSpeed": "override",
 	"AttackType": "override",
-	"HasAghanims": "contains"
+	"HasAghanims": "contains",
+	"CooldownReduction": "diminishing",
+	"ManaCostReduction": "diminishing",
+	"Haste": "higher",
+	"Invisible": "contains",
+	"Revealed": "contains",
+	"MovementSpeedUncapped": "contains",
 }
 
 /**
@@ -112,3 +118,15 @@ PropertyProcessor.addType("contains",
 		return oldVal || !!newVal
 })
 
+/**
+ * Non-diminishing multiplication
+ */
+PropertyProcessor.addType("multiply",
+	function(oldVal, newVal) {
+		return oldVal / newVal
+})
+
+PropertyProcessor.addType("higher",
+	function(oldVal, newVal) {
+		return Math.max(oldVal, newVal)
+})

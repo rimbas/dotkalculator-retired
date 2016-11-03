@@ -18,12 +18,14 @@ DotaData.Meta = {
 		"HealthRegeneration", "ManaRegenerationPercentage", "ManaRegenerationFlat",
 		"MagicalResistance", "Evasion", "Armor", "MovementSpeed", "MovementSpeedPercentage",
 		"Damage", "DamageBase", "DamagePercentage", "DamageReductionPercentage", "DamageReduction",
-		"AttackSpeed", "AttackRate", "Range",
+		"AttackSpeed", "AttackRate", "Range", "Haste", "ManaCostReduction", "CooldownReduction",
+		"VisionNight",
 	],
 	// Technical or hidden automatically handled properties
 	TechnicalAutoProperties: [
 		"LevelMin", "LevelMax", "ChargesMin", "ChargesMax", "Image",
 		"ManaCost", "Cooldown", "Hidden", "Buff", "HasAghanims", "Class",
+		"Invisible", "Revealed", "MovementSpeedUncapped",
 	]
 }
 
@@ -100,6 +102,17 @@ DotaData.getMajorFromVersion = function majorFromVersion(version) {
 	return majorVersion
 }
 
+// Lookup list for percentage based values
+DotaData.percentageValues = [
+	"Evasion", "MagicalResistance", "CooldownReduction", "ManaCostReduction",
+]
+
+// Lookup list when stats are defined with positive values but should be
+// displayed as negative
+DotaData.negatedValues = [
+	"CooldownReduction", "ManaCostReduction",
+]
+
 // Lookup list for readable property names
 DotaData.readableStatStrings = {
 	"HealthRegeneration": "HP regeneration",
@@ -115,34 +128,45 @@ DotaData.readableStatStrings = {
 	"AttackRate": "Base attack time",
 	"DamagePercentage": "Damage",
 	"DamageBase": "Base damage",
-	"DamageReductionPercentage": "Damage"
+	"DamageReductionPercentage": "Damage",
+	"ManaCostReduction": "Mana cost reduction",
+	"CooldownReduction": "Cooldown reduction",
 }
 
 // Lookup list when positive stats are detrimental
-DotaData.positiveNegativeStats = {
-	"AttackRate": true
-}
+DotaData.positiveNegativeStats = [
+	"AttackRate",
+]
 
-// stat formatter
+// stat formatter, oh boy
 DotaData.statToReadable = function(stat, val) {
-	var key = DotaData.readableStatStrings[stat] ? DotaData.readableStatStrings[stat] : stat,
+	if (DotaData.negatedValues.includes(stat))
+		val = -val;
+	let key = DotaData.readableStatStrings[stat] || stat,
 		isPercentage = false, //calculatable percentage (from a base value)
 		percentageTest = /^(\w+)Percentage$/.exec(stat),
-		printableValue = val;
-	if (percentageTest || stat == "Evasion" || stat == "MagicalResistance")
-		printableValue = (val > 0 ? "+" : "" ) + (val * 100).toFixed(0)+"%";
+		printableValue = val,
+		signPrefix = val > 0 ? "+" : "";
+
+	// Format printable value depending if its a percentage or normal value
+	if (percentageTest || DotaData.percentageValues.includes(stat))
+		printableValue = signPrefix + (val * 100).toFixed(0)+"%";
 	else if ( val != Math.trunc(val))
-		printableValue = (printableValue > 0 ? "+" : "") + printableValue.toFixed(2)
+		printableValue = signPrefix + printableValue.toFixed(2)
 	else
-		printableValue = printableValue > 0 ? "+" + printableValue : printableValue
+		printableValue = signPrefix + printableValue
+
+	// Flag if it's possible to calculate a value for this property by replacing
+	// the suffix "Percentage" with "Base"
 	if (percentageTest && percentageTest[1])
 		isPercentage = true;
+
 	return {
 		key: key,
 		value: printableValue,
 		isPercentage: isPercentage,
 		baseName: percentageTest ? percentageTest[1] : undefined,
-		negativeOverride: DotaData.positiveNegativeStats[stat]
+		negativeOverride: DotaData.positiveNegativeStats.includes(stat),
 	};
 }
 

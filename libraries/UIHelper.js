@@ -24,6 +24,7 @@ UIHelper.zIndexFocus = function zIndexFocus(element) {
 
 UIHelper.versionSelectorTemplate = document.createElement("select")
 UIHelper.tableSelectorTemplate = document.createElement("select")
+UIHelper.searchInputTemplate = document.createElement("input")
 UIHelper.tableSelectorList = document.getElementsByClassName("settings-table-selector")
 UIHelper.headerElements = []
 
@@ -44,6 +45,11 @@ UIHelper.headerElements = []
 
 	let tableTemplate = UIHelper.tableSelectorTemplate;
 	tableTemplate.classList.add("settings-base", "settings-table-selector")
+
+	let searchInput = UIHelper.searchInputTemplate;
+	searchInput.type = "search"
+	searchInput.spellcheck = false
+	searchInput.classList.add("settings-base", "settings-search-input")
 }
 
 window.addEventListener("DOMContentLoaded", function UIElementInit(event) {
@@ -141,7 +147,7 @@ UIHelper.addWindow = function(options) {
 	return win
 }
 
-UIHelper.appendSettings = function(window, options) {
+UIHelper.appendSettings = function(win, options) {
 	if (!options) throw "No setting options supplied!";
 	let wrapper = document.createElement("div")
 	wrapper.classList.add("settings-wrapper")
@@ -155,16 +161,27 @@ UIHelper.appendSettings = function(window, options) {
 		wrapper.appendChild(document.createElement("br"))
 	}
 	if (options.table) {
-		let versionLabel = document.createElement("label")
-		versionLabel.textContent = "Target table: ";
-		versionLabel.classList.add("settings-label");
-		wrapper.appendChild(versionLabel);
+		let tableLabel = document.createElement("label")
+		tableLabel.textContent = "Target table: ";
+		tableLabel.classList.add("settings-label");
+		wrapper.appendChild(tableLabel);
 		var tableSelector = UIHelper.tableSelectorTemplate.cloneNode(true);
 		wrapper.appendChild(tableSelector);
 		wrapper.appendChild(document.createElement("br"))
 	}
-	window.appendChild(wrapper)
-	return {wrapper: wrapper, version: versionSelector, table: tableSelector};
+	if (options.search) {
+		let searchLabel = document.createElement("label")
+		searchLabel.textContent = "Search: ";
+		searchLabel.classList.add("settings-label");
+		wrapper.appendChild(searchLabel);
+		var searchInput = UIHelper.searchInputTemplate.cloneNode(true);
+		wrapper.appendChild(searchInput);
+		wrapper.appendChild(document.createElement("br"))
+	}
+	win.appendChild(wrapper)
+	return {wrapper: wrapper, version: versionSelector, table: tableSelector,
+		search: searchInput
+	};
 }
 
 /**
@@ -231,8 +248,9 @@ UIHelper.createDisplayElement = function(object) {
 
 // object - ItemInstance, AbilityInstance, BuffInstance
 UIHelper.createDetailedTooltip = function ( object ) {
-	var el = document.createElement("div"),
-		h1 = el.appendChild(document.createElement("h1"));
+	let el = document.createElement("div"),
+		h1 = el.appendChild(document.createElement("h1")),
+		heroTotal = object.heroTotal;
 	el.className = "item-tooltip"
 	h1.textContent = object.Name || object.ID;
 
@@ -317,12 +335,16 @@ UIHelper.createDetailedTooltip = function ( object ) {
 			valueLabel = el.appendChild(document.createElement("span"));
 			valueLabel.className = "item-display-options value";
 			object.dynamicElements[stat] = valueLabel;
+
+		// mouseover tooltip displaying
 		if (readable.isPercentage)
-			valueLabel.title = (statValues[stat] * object.heroRef.Total[readable.baseName]).toFixed(0);
+			valueLabel.title = (statValues[stat] * heroTotal[readable.baseName]).toFixed(0);
+
 		if (readable.negativeOverride === undefined && statValues[stat] < 0)
 			valueLabel.classList.add("negative");
 		else if (readable.negativeOverride && statValues[stat] > 0)
 			valueLabel.classList.add("negative");
+
 		valueLabel.textContent = readable.value;
 		var spanLabel = document.createElement("span");
 			spanLabel.className = "item-display-options label";
@@ -334,7 +356,8 @@ UIHelper.createDetailedTooltip = function ( object ) {
 	if ( typeof object.Cooldown == "number" ) {
 		let cooldown = document.createElement("span")
 		cooldown.className = "item-display-options cooldown";
-		cooldown.textContent = object.Cooldown;
+		let reduction = heroTotal.CooldownReduction || 1;
+		cooldown.textContent = Math.round(object.Cooldown * reduction * 100)/100
 		el.appendChild(cooldown)
 		object.cooldownElement = cooldown;
 		if (object.Level === 0)
@@ -344,7 +367,8 @@ UIHelper.createDetailedTooltip = function ( object ) {
 	if ( typeof object.ManaCost == "number" ) {
 		let manacost = document.createElement("span")
 		manacost.className = "item-display-options manacost";
-		manacost.textContent = object.ManaCost;
+		let reduction = heroTotal.ManaCostReduction || 1
+		manacost.textContent = Math.round(object.ManaCost * reduction*100)/100
 		el.appendChild(manacost)
 		object.manacostElement = manacost;
 		if (object.Level === 0)
@@ -381,6 +405,8 @@ UIHelper.createDetailedTooltip = function ( object ) {
 UIHelper.updateDisplayElements = function ( object ) {
 	if (!object.displayElement)
 		return;
+	let heroTotal = object.heroTotal; // alias for the hero total ref of the object
+
 	if ("Hidden" in object)
 		if (object.Hidden == true) {
 			object.displayElement.style.display = "none"
@@ -407,11 +433,14 @@ UIHelper.updateDisplayElements = function ( object ) {
 		object.levelElement.textContent = DotaData.numericToRoman(object.Level);
 	for (var stat in object.dynamicElements) {
 		var statValue = stat in object ? object[stat] : object.Family.Stats[stat];
+		if (object.Level === 0)
+			statValue = 0;
 		var readable = DotaData.statToReadable(stat, statValue);
 		var dynElement = object.dynamicElements[stat]
 		dynElement.textContent = readable.value;
 		if (readable.isPercentage)
-			dynElement.title = (statValue * object.heroRef.Total[readable.baseName+"Base"]).toFixed(2);
+			dynElement.title = (statValue * heroTotal[readable.baseName+"Base"]).toFixed(2);
+
 		if (readable.negativeOverride === undefined)
 			if (statValue < 0)
 				dynElement.classList.add("negative");
@@ -428,13 +457,15 @@ UIHelper.updateDisplayElements = function ( object ) {
 			object.cooldownElement.style.display = "none"
 		else {
 			object.cooldownElement.style.display = ""
-			object.cooldownElement.textContent = object.Cooldown
+			let reduction = heroTotal.CooldownReduction || 1
+			object.cooldownElement.textContent = Math.round(object.Cooldown * reduction * 100)/100
 		}
 	if (object.manacostElement)
 		if (object.Level === 0)
 			object.manacostElement.style.display = "none"
 		else {
 			object.manacostElement.style.display = ""
-			object.manacostElement.textContent = object.ManaCost
+			let reduction = heroTotal.ManaCostReduction || 1
+			object.manacostElement.textContent = Math.round(object.ManaCost * reduction*100)/100
 		}
 }

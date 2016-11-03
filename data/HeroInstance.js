@@ -303,7 +303,7 @@ HeroInstance.addHandler({
 		this.Base.HealthRegeneration = this.Raw.HealthRegeneration + this.Base.Strength * 0.03;
 		this.Base.Mana = this.Raw.Mana + this.Base.Intelligence * this.Raw.ManaPerIntelligence;
 		this.Base.ManaRegeneration = this.Raw.ManaRegeneration + this.Base.Intelligence * 0.04;
-		var primaryStat = 0;
+		let primaryStat = 0;
 		if ( this.Raw.Type == "Strength" )
 			primaryStat = this.Base.Strength;
 		else if ( this.Raw.Type == "Agility" )
@@ -319,28 +319,28 @@ HeroInstance.addHandler({
 	name: "ItemChange",
 	binds: [],
 	handler: function() {
-		var a = { "Strength": 0, "Agility": 0, "Intelligence": 0,
+		let a = { "Strength": 0, "Agility": 0, "Intelligence": 0,
 			"MovementSpeed": 0, "MovementSpeedPercentage": 0,
 			"Armor": 0, "MagicalResistance": 0, "Evasion": 0,
 			"Health":0, "HealthRegeneration":0, "Mana": 0, "ManaRegenerationFlat": 0,
 			"ManaRegenerationPercentage": 0, "Damage": 0, "AttackSpeed": 0,
 			"VisionDay": 0, "VisionNight": 0, "Cost": 0, "HasAghanims": null,
-			"MagicalAmplification": 0 },
+			"MagicalAmplification": 0, "CooldownReduction": 0 },
 			f = {};
-		for (var item of this.Items) {
+		for (let item of this.Items) {
 			if (item.Family)
 				if (!f[item.Family.Name])
 					f[item.Family.Name] = item.Family;
 				else if (f[item.Family.Name].Level < item.Family.Level)
 					f[item.Family.Name] = item.Family;
 
-			for (var prop in a)
+			for (let prop in a)
 				a[prop] = PropertyProcessor.calculate(prop, a[prop], item[prop]);
 		}
 
-		for (var familyName in f) {
-			var family = f[familyName];
-			for (var prop in family.Stats)
+		for (let familyName in f) {
+			let family = f[familyName];
+			for (let prop in family.Stats)
 				a[prop] = PropertyProcessor.calculate(prop, a[prop], family.Stats[prop]);
 		}
 		this.Item = a;
@@ -418,7 +418,8 @@ HeroInstance.addHandler({
 			"Health": 0, "HealthRegeneration": 0, "Mana": 0, "ManaRegenerationFlat": 0,
 			"ManaRegenerationPercentage": 0, "Damage": 0, "DamageBase": 0, "AttackRate": 0,
 			"AttackSpeed": 0, "Range": 0, "VisionDay": 0, "VisionNight": 0, "AttackType": null,
-			"ManaRegenerationBase": 0, "ProjectileSpeed": null };
+			"ManaRegenerationBase": 0, "ProjectileSpeed": null, "Invisible": false,
+			"MovementSpeedUncapped": false };
 		for (var ability of this.Abilities) {
 			if (ability.Level < 1)
 				continue;
@@ -440,7 +441,9 @@ HeroInstance.addHandler({
 				"Mana": 0, "ManaRegenerationFlat": 0, "Damage": 0, "DamagePercentage": 0,
                 "DamageReductionPercentage": 0,	"AttackSpeed": 0, "ManaRegenerationPercentage": 0,
                 "AttackRate": 0, "Range": 0, "ManaRegenerationBase": 0, "DamageBase": 0,
-                "ProjectileSpeed": null, "AttackType": null, "HasAghanims": null },
+                "ProjectileSpeed": null, "AttackType": null, "HasAghanims": null,
+				"CooldownReduction": 0, "Haste": 0, "Invisible": false, "Revealed": false,
+				"VisionNight": 0, "ManaCostReduction": 0 },
 			f = {};
 		for (var buff of this.Buffs) {
 			if (buff.Family)
@@ -466,15 +469,18 @@ HeroInstance.addHandler({
 	handler: function() {
 		var a = this.Total;
 		a.MovementSpeedPercentage = this.Item.MovementSpeedPercentage +	this.Ability.MovementSpeedPercentage + this.Buff.MovementSpeedPercentage;
-		a.MovementSpeed = Math.max(a.MovementSpeedBase * (1 + a.MovementSpeedPercentage), 100);
+		let movementSpeed = Math.max(a.MovementSpeedBase * (1 + a.MovementSpeedPercentage), 100);
+		movementSpeed = this.Ability.MovementSpeedUncapped ? movementSpeed : Math.min(movementSpeed, 522)
+		a.Haste = this.Buff.Haste;
+		a.MovementSpeed = Math.max(this.Buff.Haste, movementSpeed);
 		a.ArmorBonus = this.Item.Armor + this.Ability.Armor + this.Buff.Armor;
 		a.ArmorBase = this.Raw.Armor + Math.round(a.AgilityFloat * this.Raw.ArmorPerAgility * 100) / 100;
 		a.Armor = a.ArmorBase + a.ArmorBonus;
 		a.Evasion = this.Item.Evasion + (1-this.Item.Evasion) * this.Ability.Evasion;
 		a.Evasion = a.Evasion + (1-a.Evasion) * this.Buff.Evasion;
-		a.MagicalResistance = this.Raw.MagicalResistance + (1 - this.Raw.MagicalResistance) * this.Item.MagicalResistance;
-		a.MagicalResistance += (1 - a.MagicalResistance) * this.Ability.MagicalResistance;
-		a.MagicalResistance += (1 - a.MagicalResistance) * this.Buff.MagicalResistance;
+		let magicalResistance = this.Raw.MagicalResistance + (1 - this.Raw.MagicalResistance) * this.Item.MagicalResistance;
+		magicalResistance += (1 - magicalResistance) * this.Ability.MagicalResistance;
+		a.MagicalResistance += (1 - magicalResistance) * this.Buff.MagicalResistance;
 		a.HealthBase = this.Raw.Health + a.Strength * this.Raw.HealthPerStrength + this.Item.Health + this.Ability.Health + this.Buff.Health;
 		a.Health = a.HealthBase * (1 + this.Buff.HealthPercentage);
 		a.HealthRegenerationBase = this.Raw.HealthRegeneration + a.Strength * 0.03;
@@ -498,10 +504,15 @@ HeroInstance.addHandler({
 		a.AttackSpeed = Math.max(Math.min(100 + a.Agility + this.Item.AttackSpeed + this.Ability.AttackSpeed + this.Buff.AttackSpeed, 600), 20);
 		a.Range = this.Raw.Range + this.Ability.Range + this.Item.Range + this.Buff.Range;
 		a.VisionDay = this.Raw.VisionDaytime;
-		a.VisionNight = this.Raw.VisionNighttime + this.Ability.VisionNight + this.Item.VisionNight;
+		a.VisionNight = this.Raw.VisionNighttime + this.Ability.VisionNight + this.Item.VisionNight + this.Buff.VisionNight;
 		a.Cost = this.Item.Cost;
 		a.ProjectileSpeed = this.Buff.ProjectileSpeed || this.Raw.ProjectileSpeed;
 		a.MagicalAmplification = this.Base.Intelligence * this.Raw.MagicalAmpPerIntelligence + this.Item.MagicalAmplification;
+		let cooldownReduction = 1 - this.Buff.CooldownReduction
+		a.CooldownReduction = cooldownReduction - cooldownReduction * this.Item.CooldownReduction;
+		a.ManaCostReduction = this.Buff.ManaCostReduction;
+		a.Revealed = this.Buff.Revealed;
+		a.Invisible = this.Buff.Invisible || this.Ability.Invisible;
 
 		this.Total = a;
 		this.updateTable();

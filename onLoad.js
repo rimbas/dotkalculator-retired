@@ -99,14 +99,15 @@ window.addEventListener("DOMContentLoaded", function(e){
 			attribute_bonus: 1
 		},
 		items: [
-			new ItemInstance("null_talisman"),
+			new ItemInstance("octarine_core"),
 			new ItemInstance("cyclone"),
 			new ItemInstance("blink"),
-			new ItemInstance("tpscroll", {charges: 2}),
-			new ItemInstance("arcane_boots"),
+			new ItemInstance("smoke_of_deceit", {charges: 2}),
+			new ItemInstance("travel_boots"),
 			new ItemInstance("hand_of_midas"),
 		]
 	}))
+
 
 	document.createVersionSelectors = function (init) {
 		optionCollection = [];

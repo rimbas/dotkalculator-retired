@@ -5081,9 +5081,15 @@ DotaData.addVersion({
 			"Name": "Thirst",
 			"Charges": 0,
 			"ChargesMin": 0,
-			"ChargesMax": 100,
-			"MovementSpeed": function(){ return Math.round((this.Level + 1) * 8 * this.Charges / 100) },
-			"Damage": function(){ return Math.round((this.Level + 1) * 8 * this.Charges / 100) }
+			"ChargesMax": 500,
+			"MovementSpeedPercentage": function(){
+				return (this.Level + 1) * 0.08 * this.Charges / this.ChargesMax * 5
+			},
+			"MovementSpeedUncapped": true,
+			"Warning": "Each 100 of stacks is a range from 75% to 25%, 0 meaning all enemies are over 75% hp and 500 meaning 5 heroes below 25% hp",
+			"Damage": function(){
+				return Math.round((this.Level + 1) * 8 * this.Charges / this.ChargesMax * 5)
+			},
 		},
 		"bloodseeker_rupture": {
 			"Name": "Rupture",
@@ -6275,7 +6281,7 @@ DotaData.addVersion({
 		"luna_lunar_blessing": {
 			"Name": "Lunar blessing",
 			"Aura": "luna_lunar_blessing_aura",
-			"NightVision": 1000
+			"VisionNight": 1000
 		},
 		"luna_eclipse": {
 			"Name": "Eclipse",
@@ -6286,7 +6292,9 @@ DotaData.addVersion({
 			"ManaCost": function(){ return 100 + this.Level * 50 },
 		},
 		"lycan_summon_wolves": {
-			"Name": "Summon wolves"
+			"Name": "Summon wolves",
+			"Cooldown": 30,
+			"ManaCost": 145,
 		},
 		"lycan_howl": {
 			"Name": "Howl",
@@ -6296,21 +6304,33 @@ DotaData.addVersion({
 				"Self": true,
 				"Teammates": true,
 				"Refresh": "override"
-			}
+			},
+			"Cooldown": function(){ return 55 - this.Level * 5 },
+			"ManaCost": function(){ return 10 + this.Level * 5 },
 		},
 		"lycan_feral_impulse": {
 			"Name": "Feral impulse",
-			"AttackSpeed": function(){ return this.Level > 0 ? 10 + 5 * this.Level : 0 },
-			"DamagePercentage": function(){ return this.Level > 0 ? 0.1 + 0.05 * this.Level : 0 }
+			"AttackSpeed": function(){ return 10 + 5 * this.Level },
+			"DamagePercentage": function(){ return 0.1 + 0.05 * this.Level }
 		},
 		"lycan_shapeshift": {
 			"Name": "Shapeshift",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 11, 16],
+			"Cooldown": function(){ return 150 - this.Level * 30 },
+			"ManaCost": 100,
+			"Buff": {
+				"Name": "lycan_shapeshift_buff",
+				"NoTarget": true,
+				"Self": true,
+				"Refresh": "override",
+			}
 		},
 		"magnataur_shockwave": {
-			"Name": "Shockwave"
+			"Name": "Shockwave",
+			"Cooldown": function(){ return 11 - this.Level },
+			"ManaCost": 90,
 		},
 		"magnataur_empower": {
 			"Name": "Empower",
@@ -6320,22 +6340,30 @@ DotaData.addVersion({
 				"Teammates": true,
 				"Self": true,
 				"Refresh": "override"
-			}
+			},
+			"Cooldown": 8,
+			"ManaCost": function(){ return 20 + this.Level * 10 },
 		},
 		"magnataur_skewer": {
-			"Name": "Skewer"
+			"Name": "Skewer",
+			"Cooldown": 30,
+			"ManaCost": 80,
 		},
 		"magnataur_reverse_polarity": {
 			"Name": "Reverse polarity",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 11, 16],
+			"Cooldown": function(){ return 130 - this.Level * 10 },
+			"ManaCost": function(){ return 150 + this.Level * 50 },
 		},
 		"medusa_split_shot": {
 			"Name": "Split shot"
 		},
 		"medusa_mystic_snake": {
-			"Name": "Mystic snake"
+			"Name": "Mystic snake",
+			"Cooldown": 11,
+			"ManaCost": function(){ return 130 + this.Level * 10 },
 		},
 		"medusa_mana_shield": {
 			"Name": "Mana shield"
@@ -6344,13 +6372,19 @@ DotaData.addVersion({
 			"Name": "Stone gaze",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 11, 16],
+			"Cooldown": 90,
+			"ManaCost": 200,
 		},
 		"meepo_earthbind": {
-			"Name": "Earthbind"
+			"Name": "Earthbind",
+			"Cooldown": function(){ return 24 - this.Level * 4 },
+			"ManaCost": 100,
 		},
 		"meepo_poof": {
-			"Name": "Poof"
+			"Name": "Poof",
+			"Cooldown": function(){ return 14 - this.Level * 2 },
+			"ManaCost": 80,
 		},
 		"meepo_geostrike": {
 			"Name": "Geostrike"
@@ -6359,22 +6393,30 @@ DotaData.addVersion({
 			"Name": "Divided we stand",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [3, 10, 17]
 		},
 		"mirana_starfall": {
-			"Name": "Starstorm"
+			"Name": "Starstorm",
+			"Cooldown": 12,
+			"ManaCost": function(){ return 80 + this.Level * 20 },
 		},
 		"mirana_arrow": {
-			"Name": "Sacred arrow"
+			"Name": "Sacred arrow",
+			"Cooldown": 17,
+			"ManaCost": 100,
 		},
 		"mirana_leap": {
-			"Name": "Leap"
+			"Name": "Leap",
+			"Cooldown": function(){ return 34 - this.Level * 4 },
+			"ManaCost": function(){ return 45 + this.Level * 5 },
 		},
 		"mirana_invis": {
 			"Name": "Moonlight shadow",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 11, 16],
+			"Cooldown": function(){ return 160 - this.Level * 20 },
+			"ManaCost": 75,
 		},
 		"morphling_waveform": {
 			"Name": "Waveform",
@@ -6392,7 +6434,13 @@ DotaData.addVersion({
 		},
 		"morphling_morph_str": {
 			"Name": "Morph (Strength)",
-			"Strength": function(){ return this.Level > 0 ? 2 + this.Level : 0 }
+			"Strength": function(){ return this.Level > 0 ? 2 + this.Level : 0 },
+			"LockedLevel": true,
+			"Level": function() {
+				if (this.heroRef && this.heroRef.AbilityIds.morphling_morph_agi)
+					return this.heroRef.AbilityIds.morphling_morph_agi.Level
+				return 0
+			},
 		},
 		"morphling_replicate": {
 			"Name": "Replicate",
@@ -6420,19 +6468,27 @@ DotaData.addVersion({
 			"ManaCost": 200,
 		},
 		"naga_siren_mirror_image": {
-			"Name": "Mirror image"
+			"Name": "Mirror image",
+			"Cooldown": 40,
+			"ManaCost": function(){ return 60 + this.Level * 10 },
 		},
 		"naga_siren_ensnare": {
-			"Name": "Ensnare"
+			"Name": "Ensnare",
+			"Cooldown": 12,
+			"ManaCost": function(){ return 80 + this.Level * 10 },
 		},
 		"naga_siren_rip_tide": {
-			"Name": "Rip Tide"
+			"Name": "Rip Tide",
+			"Cooldown": 10,
+			"ManaCost": function(){ return 70 + this.Level * 10 },
 		},
 		"naga_siren_song_of_the_siren": {
 			"Name": "Song of the Siren",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 11, 16],
+			"Cooldown": function(){ return 240 - this.Level * 60 },
+			"ManaCost": 100,
 		},
 		"necrolyte_death_pulse": {
 			"Name": "Death pulse",
@@ -8133,6 +8189,14 @@ DotaData.addVersion({
 			"LockedLevel": true,
 			"Damage": function() { return this.Level > 0 ? 2 + 12 * this.Level : 0 }
 		},
+		"lycan_shapeshift_buff": {
+			"Name": "Shapeshift",
+			"Image": "lycan_shapeshift",
+			"Level": 0,
+			"LockedLevel": true,
+			"Haste": 650,
+			"VisionNight": 1000,
+		},
 		"magnataur_empower_buff": {
 			"Name": "Empower",
 			"Image": "magnataur_empower",
@@ -8640,6 +8704,34 @@ DotaData.addVersion({
 			"Name": "Hurricane Thrust",
 			"Image": "hurricane_pike",
 		},
+		"rune_regen_buff": {
+			"Name": "Regeneration",
+			"Image": "rune_regen",
+			"HealthRegeneration": 100,
+			"ManaRegenerationFlat": 67,
+		},
+		"rune_invis_buff": {
+			"Name": "Invisibility",
+			"Image": "rune_invis",
+			"Invisible": true,
+		},
+		"rune_doubledamage_buff": {
+			"Name": "Double Damage",
+			"Image": "rune_doubledamage",
+			"DamagePercentage": 1,
+		},
+		"rune_arcane_buff": {
+			"Name": "Arcane",
+			"Image": "rune_arcane",
+			"CooldownReduction": 0.3,
+			"ManaCostReduction": 0.4,
+		},
+		"rune_haste_buff": {
+			"Name": "Haste",
+			"Image": "rune_haste",
+			"Haste": 522,
+		},
+
 	}
 
 });
