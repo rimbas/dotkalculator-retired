@@ -125,6 +125,10 @@ button {
 	box-sizing: content-box;
 }
 
+.settings-base.error {
+	border-color: red;
+}
+
 /* JQuery UI overrides */
 .ui-selectmenu-menu .ui-menu {
 	background: #003045;

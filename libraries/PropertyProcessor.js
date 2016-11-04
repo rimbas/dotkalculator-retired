@@ -19,6 +19,8 @@ PropertyProcessor.properties = {
 
 /**
  * Unified function to handle property application
+ * @prop {Object} newobj New instance of Item/Ability/Buff
+ * @prop {Object} dataobj Data object with template values
  */
 PropertyProcessor.applyDataProperties = function applyDataProps(newobj, dataobj) {
 	let meta = dataobj.Meta || { "Wrap": [] }
@@ -119,13 +121,8 @@ PropertyProcessor.addType("contains",
 })
 
 /**
- * Non-diminishing multiplication
+ * Highest value selection
  */
-PropertyProcessor.addType("multiply",
-	function(oldVal, newVal) {
-		return oldVal / newVal
-})
-
 PropertyProcessor.addType("higher",
 	function(oldVal, newVal) {
 		return Math.max(oldVal, newVal)

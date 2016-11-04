@@ -65,6 +65,7 @@ DotaData.addVersion({
 		},
 		"abaddon": {
 			"Name": "Abaddon",
+			"LoreName": "Lord of Avernus",
 			"Ability1": "abaddon_death_coil",
 			"Ability2": "abaddon_aphotic_shield",
 			"Ability3": "abaddon_frostmourne",
@@ -91,6 +92,7 @@ DotaData.addVersion({
 		},
 		"alchemist": {
 			"Name": "Alchemist",
+			"LoreName": "Razzil Darkbrew",
 			"Ability1": "alchemist_acid_spray",
 			"Ability2": "alchemist_unstable_concoction",
 			"Ability3": "alchemist_goblins_greed",
@@ -118,6 +120,8 @@ DotaData.addVersion({
 		},
 		"ancient_apparition": {
 			"Name": "Ancient Apparition",
+			"LoreName": "Kaldr",
+			"Aliases": ["aa"],
 			"Ability1": "ancient_apparition_cold_feet",
 			"Ability2": "ancient_apparition_ice_vortex",
 			"Ability3": "ancient_apparition_chilling_touch",
@@ -146,6 +150,7 @@ DotaData.addVersion({
 		},
 		"antimage": {
 			"Name": "Anti-Mage",
+			"Aliases": ["Magina", "Antimage"],
 			"Ability1": "antimage_mana_break",
 			"Ability2": "antimage_blink",
 			"Ability3": "antimage_spell_shield",
@@ -172,6 +177,7 @@ DotaData.addVersion({
 		},
 		"axe": {
 			"Name": "Axe",
+			"LoreName": "Mogul Khan",
 			"Ability1": "axe_berserkers_call",
 			"Ability2": "axe_battle_hunger",
 			"Ability3": "axe_counter_helix",
@@ -198,6 +204,7 @@ DotaData.addVersion({
 		},
 		"bane": {
 			"Name": "Bane",
+			"LoreName": "Atropos",
 			"Ability1": "bane_enfeeble",
 			"Ability2": "bane_brain_sap",
 			"Ability3": "bane_nightmare",
@@ -254,6 +261,8 @@ DotaData.addVersion({
 		},
 		"beastmaster": {
 			"Name": "Beastmaster",
+			"LoreName": "Karroch",
+			"Aliases": ["bm"],
 			"Ability1": "beastmaster_wild_axes",
 			"Ability2": "beastmaster_call_of_the_wild",
 			"Ability3": "beastmaster_call_of_the_wild_boar",
@@ -283,6 +292,8 @@ DotaData.addVersion({
 		},
 		"bloodseeker": {
 			"Name": "Bloodseeker",
+			"LoreName": "Strygwyr",
+			"Aliases": ["bs"],
 			"Ability1": "bloodseeker_bloodrage",
 			"Ability2": "bloodseeker_blood_bath",
 			"Ability3": "bloodseeker_thirst",
@@ -308,6 +319,8 @@ DotaData.addVersion({
 		},
 		"bounty_hunter": {
 			"Name": "Bounty Hunter",
+			"LoreName": "Gondar",
+			"Aliases": ["bh"],
 			"Ability1": "bounty_hunter_shuriken_toss",
 			"Ability2": "bounty_hunter_jinada",
 			"Ability3": "bounty_hunter_wind_walk",
@@ -336,6 +349,7 @@ DotaData.addVersion({
 		},
 		"brewmaster": {
 			"Name": "Brewmaster",
+			"LoreName": "Mangix",
 			"Ability1": "brewmaster_thunder_clap",
 			"Ability2": "brewmaster_drunken_haze",
 			"Ability3": "brewmaster_drunken_brawler",
@@ -363,6 +377,8 @@ DotaData.addVersion({
 		},
 		"bristleback": {
 			"Name": "Bristleback",
+			"LoreName": "Rigwarl",
+			"Aliases": ["bb"],
 			"Ability1": "bristleback_viscous_nasal_goo",
 			"Ability2": "bristleback_quill_spray",
 			"Ability3": "bristleback_bristleback",
@@ -389,6 +405,8 @@ DotaData.addVersion({
 		},
 		"broodmother": {
 			"Name": "Broodmother",
+			"LoreName": "Black Arachnia",
+			"Aliases": ["bm"],
 			"Ability1": "broodmother_spawn_spiderlings",
 			"Ability2": "broodmother_spin_web",
 			"Ability3": "broodmother_incapacitating_bite",
@@ -414,6 +432,7 @@ DotaData.addVersion({
 		},
 		"centaur": {
 			"Name": "Centaur Warrunner",
+			"LoreName": "Bradwarden",
 			"Ability1": "centaur_hoof_stomp",
 			"Ability2": "centaur_double_edge",
 			"Ability3": "centaur_return",
@@ -440,6 +459,7 @@ DotaData.addVersion({
 		},
 		"chaos_knight": {
 			"Name": "Chaos knight",
+			"Aliases": ["ck"],
 			"Ability1": "chaos_knight_chaos_bolt",
 			"Ability2": "chaos_knight_reality_rift",
 			"Ability3": "chaos_knight_chaos_strike",
@@ -466,6 +486,7 @@ DotaData.addVersion({
 		},
 		"chen": {
 			"Name": "Chen",
+			"LoreName": "Holy Knight",
 			"Ability1": "chen_penitence",
 			"Ability2": "chen_test_of_faith",
 			"Ability3": "chen_test_of_faith_teleport",
@@ -495,6 +516,7 @@ DotaData.addVersion({
 		},
 		"clinkz": {
 			"Name": "Clinkz",
+			"LoreName": "Bone Fletcher",
 			"Ability1": "clinkz_strafe",
 			"Ability2": "clinkz_searing_arrows",
 			"Ability3": "clinkz_wind_walk",
@@ -521,6 +543,8 @@ DotaData.addVersion({
 		},
 		"crystal_maiden": {
 			"Name": "Crystal Maiden",
+			"LoreName": "Rylai",
+			"Aliases": ["cm"],
 			"Ability1": "crystal_maiden_crystal_nova",
 			"Ability2": "crystal_maiden_frostbite",
 			"Ability3": "crystal_maiden_brilliance_aura",
@@ -547,6 +571,8 @@ DotaData.addVersion({
 		},
 		"dark_seer": {
 			"Name": "Dark Seer",
+			"LoreName": "Ish'Kafel",
+			"Aliases": ["ds", "pinhead"],
 			"Ability1": "dark_seer_vacuum",
 			"Ability2": "dark_seer_ion_shell",
 			"Ability3": "dark_seer_surge",
@@ -572,6 +598,7 @@ DotaData.addVersion({
 		},
 		"dazzle": {
 			"Name": "Dazzle",
+			"LoreName": "Shadow Priest",
 			"Ability1": "dazzle_poison_touch",
 			"Ability2": "dazzle_shallow_grave",
 			"Ability3": "dazzle_shadow_wave",
@@ -598,6 +625,8 @@ DotaData.addVersion({
 		},
 		"death_prophet": {
 			"Name": "Death Prophet",
+			"LoreName": "Krobelus",
+			"Aliases": ["dp"],
 			"Ability1": "death_prophet_carrion_swarm",
 			"Ability2": "death_prophet_silence",
 			"Ability3": "death_prophet_spirit_siphon",
@@ -625,6 +654,7 @@ DotaData.addVersion({
 		},
 		"disruptor": {
 			"Name": "Disruptor",
+			"LoreName": "Stormcrafter",
 			"Ability1": "disruptor_thunder_strike",
 			"Ability2": "disruptor_glimpse",
 			"Ability3": "disruptor_kinetic_field",
@@ -652,6 +682,7 @@ DotaData.addVersion({
 		},
 		"doom": {
 			"Name": "Doom",
+			"LoreName": "Lucifer",
 			"Ability1": "doom_bringer_devour",
 			"Ability2": "doom_bringer_scorched_earth",
 			"Ability3": "doom_bringer_infernal_blade",
@@ -681,6 +712,8 @@ DotaData.addVersion({
 		},
 		"dragon_knight": {
 			"Name": "Dragon Knight",
+			"LoreName": "Davion",
+			"Aliases": ["dk"],
 			"Ability1": "dragon_knight_breathe_fire",
 			"Ability2": "dragon_knight_dragon_tail",
 			"Ability3": "dragon_knight_dragon_blood",
@@ -707,6 +740,8 @@ DotaData.addVersion({
 		},
 		"drow_ranger": {
 			"Name": "Drow Ranger",
+			"LoreName": "Traxex",
+			"Aliases": ["dr", "\u{77}\u{61}\u{69}\u{66}\u{75}"],
 			"Ability1": "drow_ranger_frost_arrows",
 			"Ability2": "drow_ranger_wave_of_silence",
 			"Ability3": "drow_ranger_trueshot",
@@ -733,6 +768,8 @@ DotaData.addVersion({
 		},
 		"earth_spirit": {
 			"Name": "Earth Spirit",
+			"LoreName": "Kaolin",
+			"Aliases": ["es", "ebolaspirit"],
 			"Ability1": "earth_spirit_boulder_smash",
 			"Ability2": "earth_spirit_rolling_boulder",
 			"Ability3": "earth_spirit_geomagnetic_grip",
@@ -762,6 +799,8 @@ DotaData.addVersion({
 		},
 		"earthshaker": {
 			"Name": "Earthshaker",
+			"LoreName": "Raigor Stonehoof",
+			"Aliases": ["es"],
 			"Ability1": "earthshaker_fissure",
 			"Ability2": "earthshaker_enchant_totem",
 			"Ability3": "earthshaker_aftershock",
@@ -788,6 +827,8 @@ DotaData.addVersion({
 		},
 		"elder_titan": {
 			"Name": "Elder Titan",
+			"LoreName": "Worldsmith",
+			"Aliases": ["et"],
 			"Ability1": "elder_titan_echo_stomp",
 			"Ability2": "elder_titan_ancestral_spirit",
 			"Ability3": "elder_titan_natural_order",
@@ -814,6 +855,8 @@ DotaData.addVersion({
 		},
 		"ember_spirit": {
 			"Name": "Ember Spirit",
+			"LoreName": "Xin",
+			"Aliases": ["es"],
 			"Ability1": "ember_spirit_searing_chains",
 			"Ability2": "ember_spirit_sleight_of_fist",
 			"Ability3": "ember_spirit_flame_guard",
@@ -843,6 +886,8 @@ DotaData.addVersion({
 		},
 		"enchantress": {
 			"Name": "Enchantress",
+			"LoreName": "Aiushtha",
+			"Aliases": ["bambi"],
 			"Ability1": "enchantress_untouchable",
 			"Ability2": "enchantress_enchant",
 			"Ability3": "enchantress_natures_attendants",
@@ -895,6 +940,8 @@ DotaData.addVersion({
 		},
 		"faceless_void": {
 			"Name": "Faceless Void",
+			"LoreName": "Darkterror",
+			"Aliases": ["fv"],
 			"Ability1": "faceless_void_time_walk",
 			"Ability2": "faceless_void_time_dilation",
 			"Ability3": "faceless_void_time_lock",
@@ -921,6 +968,8 @@ DotaData.addVersion({
 		},
 		"furion": {
 			"Name": "Natures Prophet",
+			"LoreName": "Furion",
+			"Aliases": ["np"],
 			"Ability1": "furion_sprout",
 			"Ability2": "furion_teleportation",
 			"Ability3": "furion_force_of_nature",
@@ -947,6 +996,7 @@ DotaData.addVersion({
 		},
 		"gyrocopter": {
 			"Name": "Gyrocopter",
+			"LoreName": "Aurel",
 			"Ability1": "gyrocopter_rocket_barrage",
 			"Ability2": "gyrocopter_homing_missile",
 			"Ability3": "gyrocopter_flak_cannon",
@@ -973,6 +1023,7 @@ DotaData.addVersion({
 		},
 		"huskar": {
 			"Name": "Huskar",
+			"LoreName": "Sacred Warrior",
 			"Ability1": "huskar_inner_vitality",
 			"Ability2": "huskar_burning_spear",
 			"Ability3": "huskar_berserkers_blood",
@@ -999,6 +1050,7 @@ DotaData.addVersion({
 		},
 		"invoker": {
 			"Name": "Invoker",
+			"Aliases": ["Kael", "Carl"],
 			"Ability1": "invoker_quas",
 			"Ability2": "invoker_wex",
 			"Ability3": "invoker_exort",
@@ -1041,6 +1093,7 @@ DotaData.addVersion({
 		},
 		"jakiro": {
 			"Name": "Jakiro",
+			"LoreName": "Twin Head Dragon",
 			"Ability1": "jakiro_dual_breath",
 			"Ability2": "jakiro_ice_path",
 			"Ability3": "jakiro_liquid_fire",
@@ -1067,6 +1120,7 @@ DotaData.addVersion({
 		},
 		"juggernaut": {
 			"Name": "Juggernaut",
+			"LoreName": "Yurnero",
 			"Ability1": "juggernaut_blade_fury",
 			"Ability2": "juggernaut_healing_ward",
 			"Ability3": "juggernaut_blade_dance",
@@ -1094,6 +1148,8 @@ DotaData.addVersion({
 		},
 		"keeper_of_the_light": {
 			"Name": "Keeper of the Light",
+			"LoreName": "Ezalor",
+			"Aliases": ["kotl", "old pervert"],
 			"Ability1": "keeper_of_the_light_illuminate",
 			"Ability2": "keeper_of_the_light_mana_leak",
 			"Ability3": "keeper_of_the_light_chakra_magic",
@@ -1127,6 +1183,7 @@ DotaData.addVersion({
 		},
 		"kunkka": {
 			"Name": "Kunkka",
+			"LoreName": "Admiral",
 			"Ability1": "kunkka_torrent",
 			"Ability2": "kunkka_tidebringer",
 			"Ability3": "kunkka_x_marks_the_spot",
@@ -1153,6 +1210,8 @@ DotaData.addVersion({
 		},
 		"legion_commander": {
 			"Name": "Legion Commander",
+			"LoreName": "Tresdin",
+			"Aliases": ["lc"],
 			"Ability1": "legion_commander_overwhelming_odds",
 			"Ability2": "legion_commander_press_the_attack",
 			"Ability3": "legion_commander_moment_of_courage",
@@ -1179,6 +1238,8 @@ DotaData.addVersion({
 		},
 		"leshrac": {
 			"Name": "Leshrac",
+			"LoreName": "Tormented Soul",
+			"Aliases": ["disco pony"],
 			"Ability1": "leshrac_split_earth",
 			"Ability2": "leshrac_diabolic_edict",
 			"Ability3": "leshrac_lightning_storm",
@@ -1205,6 +1266,7 @@ DotaData.addVersion({
 		},
 		"lich": {
 			"Name": "Lich",
+			"LoreName": "Ethreain",
 			"Ability1": "lich_frost_nova",
 			"Ability2": "lich_frost_armor",
 			"Ability3": "lich_dark_ritual",
@@ -1231,6 +1293,8 @@ DotaData.addVersion({
 		},
 		"life_stealer": {
 			"Name": "Lifestealer",
+			"LoreName": "N'aix",
+			"Aliases": ["ls", "naix"],
 			"Ability1": "life_stealer_rage",
 			"Ability2": "life_stealer_feast",
 			"Ability3": "life_stealer_open_wounds",
@@ -1261,6 +1325,7 @@ DotaData.addVersion({
 		},
 		"lina": {
 			"Name": "Lina",
+			"LoreName": "Slayer",
 			"Ability1": "lina_dragon_slave",
 			"Ability2": "lina_light_strike_array",
 			"Ability3": "lina_fiery_soul",
@@ -1287,6 +1352,7 @@ DotaData.addVersion({
 		},
 		"lion": {
 			"Name": "Lion",
+			"LoreName": "Demon Witch",
 			"Ability1": "lion_impale",
 			"Ability2": "lion_voodoo",
 			"Ability3": "lion_mana_drain",
@@ -1313,6 +1379,8 @@ DotaData.addVersion({
 		},
 		"lone_druid": {
 			"Name": "Lone Druid",
+			"LoreName": "Sylla",
+			"Aliases": ["ld", "Syllabear"],
 			"Ability1": "lone_druid_spirit_bear",
 			"Ability2": "lone_druid_rabid",
 			"Ability3": "lone_druid_savage_roar",
@@ -1344,6 +1412,7 @@ DotaData.addVersion({
 		},
 		"luna": {
 			"Name": "Luna",
+			"LoreName": "Moon Rider",
 			"Ability1": "luna_lucent_beam",
 			"Ability2": "luna_moon_glaive",
 			"Ability3": "luna_lunar_blessing",
@@ -1370,6 +1439,8 @@ DotaData.addVersion({
 		},
 		"lycan": {
 			"Name": "Lycan",
+			"LoreName": "Banehallow",
+			"Aliases": ["Lycanthrope"],
 			"Ability1": "lycan_summon_wolves",
 			"Ability2": "lycan_howl",
 			"Ability3": "lycan_feral_impulse",
@@ -1396,6 +1467,8 @@ DotaData.addVersion({
 		},
 		"magnataur": {
 			"Name": "Magnus",
+			"LoreName": "Magnoceros",
+			"Aliases": ["Magnataur"],
 			"Ability1": "magnataur_shockwave",
 			"Ability2": "magnataur_empower",
 			"Ability3": "magnataur_skewer",
@@ -1423,6 +1496,7 @@ DotaData.addVersion({
 		},
 		"medusa": {
 			"Name": "Medusa",
+			"LoreName": "Gorgon",
 			"Ability1": "medusa_split_shot",
 			"Ability2": "medusa_mystic_snake",
 			"Ability3": "medusa_mana_shield",
@@ -1450,6 +1524,7 @@ DotaData.addVersion({
 		},
 		"meepo": {
 			"Name": "Meepo",
+			"LoreName": "Geomancer",
 			"Ability1": "meepo_earthbind",
 			"Ability2": "meepo_poof",
 			"Ability3": "meepo_geostrike",
@@ -1477,6 +1552,8 @@ DotaData.addVersion({
 		},
 		"mirana": {
 			"Name": "Mirana",
+			"LoreName": "Princess of the Moon",
+			"Aliases": ["potm"],
 			"Ability1": "mirana_starfall",
 			"Ability2": "mirana_arrow",
 			"Ability3": "mirana_leap",
@@ -1503,6 +1580,7 @@ DotaData.addVersion({
 		},
 		"morphling": {
 			"Name": "Morphling",
+			"Aliases": ["OSfrog"],
 			"Ability1": "morphling_waveform",
 			"Ability2": "morphling_adaptive_strike",
 			"Ability3": "morphling_morph_agi",
@@ -1535,6 +1613,7 @@ DotaData.addVersion({
 		},
 		"naga_siren": {
 			"Name": "Naga Siren",
+			"LoreName": "Slithice",
 			"Ability1": "naga_siren_mirror_image",
 			"Ability2": "naga_siren_ensnare",
 			"Ability3": "naga_siren_rip_tide",
@@ -1563,6 +1642,8 @@ DotaData.addVersion({
 		},
 		"necrolyte": {
 			"Name": "Necrophos",
+			"LoreName": "Rotund'jere",
+			"Aliases": ["Necrolyte"],
 			"Ability1": "necrolyte_death_pulse",
 			"Ability2": "necrolyte_heartstopper_aura",
 			"Ability3": "necrolyte_sadist",
@@ -1589,6 +1670,8 @@ DotaData.addVersion({
 		},
 		"nevermore": {
 			"Name": "Shadow Fiend",
+			"LoreName": "Nevermore",
+			"Aliases": ["sf"],
 			//"Ability1": "nevermore_shadowraze1",
 			"Ability1": "nevermore_shadowraze2",
 			//"Ability3": "nevermore_shadowraze3",
@@ -1620,6 +1703,8 @@ DotaData.addVersion({
 		},
 		"night_stalker": {
 			"Name": "Night Stalker",
+			"LoreName": "Balanar",
+			"Aliases": ["ns"],
 			"Ability1": "night_stalker_void",
 			"Ability2": "night_stalker_crippling_fear",
 			"Ability3": "night_stalker_hunter_in_the_night",
@@ -1648,6 +1733,7 @@ DotaData.addVersion({
 		},
 		"nyx_assassin": {
 			"Name": "Nyx Assassin",
+			"Aliases": ["nerubian assassin"],
 			"Ability1": "nyx_assassin_impale",
 			"Ability2": "nyx_assassin_mana_burn",
 			"Ability3": "nyx_assassin_spiked_carapace",
@@ -1677,6 +1763,10 @@ DotaData.addVersion({
 		},
 		"obsidian_destroyer": {
 			"Name": "Outworld Devourer",
+			"LoreName": "Harbinger",
+			"Aliases": ["Obsidian Destroyer", "Outhouse Decorator",
+				"mr steal yo intel", "od"
+			],
 			"Ability1": "obsidian_destroyer_arcane_orb",
 			"Ability2": "obsidian_destroyer_astral_imprisonment",
 			"Ability3": "obsidian_destroyer_essence_aura",
@@ -1704,6 +1794,7 @@ DotaData.addVersion({
 		},
 		"ogre_magi": {
 			"Name": "Ogre Magi",
+			"LoreName": "Aggron Stonebreak",
 			"Ability1": "ogre_magi_fireblast",
 			"Ability2": "ogre_magi_ignite",
 			"Ability3": "ogre_magi_bloodlust",
@@ -1732,6 +1823,7 @@ DotaData.addVersion({
 		},
 		"omniknight": {
 			"Name": "Omniknight",
+			"LoreName": "Purist Thunderwrath",
 			"Ability1": "omniknight_purification",
 			"Ability2": "omniknight_repel",
 			"Ability3": "omniknight_degen_aura",
@@ -1757,6 +1849,7 @@ DotaData.addVersion({
 		},
 		"oracle": {
 			"Name": "Oracle",
+			"LoreName": "Nerif",
 			"Ability1": "oracle_fortunes_end",
 			"Ability2": "oracle_fates_edict",
 			"Ability3": "oracle_purifying_flames",
@@ -1784,6 +1877,8 @@ DotaData.addVersion({
 		},
 		"phantom_assassin": {
 			"Name": "Phantom Asssassin",
+			"LoreName": "Mortred",
+			"Aliases": ["pa"],
 			"Ability1": "phantom_assassin_stifling_dagger",
 			"Ability2": "phantom_assassin_phantom_strike",
 			"Ability3": "phantom_assassin_blur",
@@ -1809,6 +1904,8 @@ DotaData.addVersion({
 		},
 		"phantom_lancer": {
 			"Name": "Phantom Lancer",
+			"LoreName": "Azwraith",
+			"Aliases": ["pl", "ebolancer"],
 			"Ability1": "phantom_lancer_spirit_lance",
 			"Ability2": "phantom_lancer_doppelwalk",
 			"Ability3": "phantom_lancer_phantom_edge",
@@ -1835,6 +1932,7 @@ DotaData.addVersion({
 		},
 		"phoenix": {
 			"Name": "Phoenix",
+			"Aliases": ["firebird"],
 			"Ability1": "phoenix_icarus_dive",
 			"Ability2": "phoenix_fire_spirits",
 			"Ability3": "phoenix_sun_ray",
@@ -1868,6 +1966,7 @@ DotaData.addVersion({
 		},
 		"puck": {
 			"Name": "Puck",
+			"LoreName": "Faerie Dragon",
 			"Ability1": "puck_illusory_orb",
 			"Ability2": "puck_waning_rift",
 			"Ability3": "puck_phase_shift",
@@ -1898,6 +1997,8 @@ DotaData.addVersion({
 		},
 		"pudge": {
 			"Name": "Pudge",
+			"LoreName": "Butcher",
+			"Aliases": ["Pudga"],
 			"Ability1": "pudge_meat_hook",
 			"Ability2": "pudge_rot",
 			"Ability3": "pudge_flesh_heap",
@@ -1950,6 +2051,8 @@ DotaData.addVersion({
 		},
 		"queenofpain": {
 			"Name": "Queen of Pain",
+			"LoreName": "Akasha",
+			"Aliases": ["qop", "succubus"],
 			"Ability1": "queenofpain_shadow_strike",
 			"Ability2": "queenofpain_blink",
 			"Ability3": "queenofpain_scream_of_pain",
@@ -1976,6 +2079,7 @@ DotaData.addVersion({
 		},
 		"rattletrap": {
 			"Name": "Clockwerk",
+			"LoreName": "Rattletrap",
 			"Ability1": "rattletrap_battery_assault",
 			"Ability2": "rattletrap_power_cogs",
 			"Ability3": "rattletrap_rocket_flare",
@@ -2001,6 +2105,7 @@ DotaData.addVersion({
 		},
 		"razor": {
 			"Name": "Razor",
+			"LoreName": "Lightning Revenant",
 			"Ability1": "razor_plasma_field",
 			"Ability2": "razor_static_link",
 			"Ability3": "razor_unstable_current",
@@ -2027,6 +2132,8 @@ DotaData.addVersion({
 		},
 		"riki": {
 			"Name": "Riki",
+			"LoreName": "Stealth Assassin",
+			"Aliases": ["Rikimaru"],
 			"Ability1": "riki_smoke_screen",
 			"Ability2": "riki_blink_strike",
 			"Ability3": "riki_permanent_invisibility",
@@ -2053,6 +2160,7 @@ DotaData.addVersion({
 		},
 		"rubick": {
 			"Name": "Rubick",
+			"LoreName": "Grand Magus",
 			"Ability1": "rubick_telekinesis",
 			//"Ability2": "rubick_telekinesis_land",
 			"Ability2": "rubick_fade_bolt",
@@ -2087,6 +2195,8 @@ DotaData.addVersion({
 		},
 		"sand_king": {
 			"Name": "Sand King",
+			"LoreName": "Crixalis",
+			"Aliases": ["sk", "sentient sand"],
 			"Ability1": "sandking_burrowstrike",
 			"Ability2": "sandking_sand_storm",
 			"Ability3": "sandking_caustic_finale",
@@ -2112,6 +2222,7 @@ DotaData.addVersion({
 		},
 		"shadow_demon": {
 			"Name": "Shadow Demon",
+			"Aliases": ["sd"],
 			"Ability1": "shadow_demon_disruption",
 			"Ability2": "shadow_demon_soul_catcher",
 			"Ability3": "shadow_demon_shadow_poison",
@@ -2141,6 +2252,8 @@ DotaData.addVersion({
 		},
 		"shadow_shaman": {
 			"Name": "Shadow Shaman",
+			"LoreName": "Rhasta",
+			"Aliases": ["ss"],
 			"Ability1": "shadow_shaman_ether_shock",
 			"Ability2": "shadow_shaman_voodoo",
 			"Ability3": "shadow_shaman_shackles",
@@ -2167,6 +2280,8 @@ DotaData.addVersion({
 		},
 		"shredder": {
 			"Name": "Timbersaw",
+			"LoreName": "Rizzrack",
+			"Aliases": ["Shredder"],
 			"Ability1": "shredder_whirling_death",
 			"Ability2": "shredder_timber_chain",
 			"Ability3": "shredder_reactive_armor",
@@ -2197,6 +2312,7 @@ DotaData.addVersion({
 		},
 		"silencer": {
 			"Name": "Silencer",
+			"LoreName": "Nortrom",
 			"Ability1": "silencer_curse_of_the_silent",
 			"Ability2": "silencer_glaives_of_wisdom",
 			"Ability3": "silencer_last_word",
@@ -2224,6 +2340,8 @@ DotaData.addVersion({
 		},
 		"skeleton_king": {
 			"Name": "Wraith King",
+			"LoreName": "Ostarion",
+			"Aliases": ["wk", "Skeleton King"],
 			"Ability1": "skeleton_king_hellfire_blast",
 			"Ability2": "skeleton_king_vampiric_aura",
 			"Ability3": "skeleton_king_mortal_strike",
@@ -2250,6 +2368,7 @@ DotaData.addVersion({
 		},
 		"skywrath_mage": {
 			"Name": "Skywrath Mage",
+			"LoreName": "dragonus",
 			"Ability1": "skywrath_mage_arcane_bolt",
 			"Ability2": "skywrath_mage_concussive_shot",
 			"Ability3": "skywrath_mage_ancient_seal",
@@ -2276,6 +2395,8 @@ DotaData.addVersion({
 		},
 		"slardar": {
 			"Name": "Slardar",
+			"LoreName": "Slithereen Guard",
+			"Aliases": ["ugly"],
 			"Ability1": "slardar_sprint",
 			"Ability2": "slardar_slithereen_crush",
 			"Ability3": "slardar_bash",
@@ -2302,6 +2423,8 @@ DotaData.addVersion({
 		},
 		"slark": {
 			"Name": "Slark",
+			"LoreName": "Nightcrawler",
+			"Aliases": ["fish"],
 			"Ability1": "slark_dark_pact",
 			"Ability2": "slark_pounce",
 			"Ability3": "slark_essence_shift",
@@ -2331,6 +2454,8 @@ DotaData.addVersion({
 		},
 		"sniper": {
 			"Name": "Sniper",
+			"LoreName": "Kardel Sharpeye",
+			"Aliases": ["hoho haha"],
 			"Ability1": "sniper_shrapnel",
 			"Ability2": "sniper_headshot",
 			"Ability3": "sniper_take_aim",
@@ -2358,6 +2483,7 @@ DotaData.addVersion({
 		},
 		"spectre": {
 			"Name": "Spectre",
+			"LoreName": "Mercurial",
 			"Ability1": "spectre_spectral_dagger",
 			"Ability2": "spectre_desolate",
 			"Ability3": "spectre_dispersion",
@@ -2386,6 +2512,8 @@ DotaData.addVersion({
 		},
 		"spirit_breaker": {
 			"Name": "Spirit Breaker",
+			"LoreName": "Barathrum",
+			"Aliases": ["sb", "space cow"],
 			"Ability1": "spirit_breaker_charge_of_darkness",
 			"Ability2": "spirit_breaker_empowering_haste",
 			"Ability3": "spirit_breaker_greater_bash",
@@ -2413,6 +2541,8 @@ DotaData.addVersion({
 		},
 		"storm_spirit": {
 			"Name": "Storm Spirit",
+			"LoreName": "Raijin Thunderkeg",
+			"Aliases": ["ss"],
 			"Ability1": "storm_spirit_static_remnant",
 			"Ability2": "storm_spirit_electric_vortex",
 			"Ability3": "storm_spirit_overload",
@@ -2439,6 +2569,7 @@ DotaData.addVersion({
 		},
 		"sven": {
 			"Name": "Sven",
+			"LoreName": "Rogue Knight",
 			"Ability1": "sven_storm_bolt",
 			"Ability2": "sven_great_cleave",
 			"Ability3": "sven_warcry",
@@ -2465,6 +2596,8 @@ DotaData.addVersion({
 		},
 		"techies": {
 			"Name": "Techies",
+			"LoreName": "Squee, Spleen, Spoon",
+			"Aliases": ["tekiss"],
 			"Ability1": "techies_land_mines",
 			"Ability2": "techies_stasis_trap",
 			"Ability3": "techies_suicide",
@@ -2497,6 +2630,8 @@ DotaData.addVersion({
 		},
 		"templar_assassin": {
 			"Name": "Templar assassin",
+			"LoreName": "Lanaya",
+			"Aliases": ["ta", "futa", "trap"],
 			"Ability1": "templar_assassin_refraction",
 			"Ability2": "templar_assassin_meld",
 			"Ability3": "templar_assassin_psi_blades",
@@ -2526,6 +2661,8 @@ DotaData.addVersion({
 		},
 		"terrorblade": {
 			"Name": "Terrorblade",
+			"LoreName": "Demon Marauder",
+			"Aliases": ["tb"],
 			"Ability1": "terrorblade_reflection",
 			"Ability2": "terrorblade_conjure_image",
 			"Ability3": "terrorblade_metamorphosis",
@@ -2553,6 +2690,7 @@ DotaData.addVersion({
 		},
 		"tidehunter": {
 			"Name": "Tidehunter",
+			"LoreName": "Leviathan",
 			"Ability1": "tidehunter_gush",
 			"Ability2": "tidehunter_kraken_shell",
 			"Ability3": "tidehunter_anchor_smash",
@@ -2578,6 +2716,7 @@ DotaData.addVersion({
 		},
 		"tinker": {
 			"Name": "Tinker",
+			"LoreName": "Boush",
 			"Ability1": "tinker_laser",
 			"Ability2": "tinker_heat_seeking_missile",
 			"Ability3": "tinker_march_of_the_machines",
@@ -2629,6 +2768,8 @@ DotaData.addVersion({
 		},
 		"treant": {
 			"Name": "Treant Protector",
+			"LoreName": "Rooftrellen",
+			"Aliases": ["tree"],
 			"Ability1": "treant_natures_guise",
 			"Ability2": "treant_leech_seed",
 			"Ability3": "treant_living_armor",
@@ -2656,6 +2797,7 @@ DotaData.addVersion({
 		},
 		"troll_warlord": {
 			"Name": "Troll Warlord",
+			"LoreName": "Jah'rakal",
 			"Ability1": "troll_warlord_berserkers_rage",
 			"Ability2": "troll_warlord_whirling_axes_ranged",
 			//"Ability3": "troll_warlord_whirling_axes_melee",
@@ -2684,6 +2826,7 @@ DotaData.addVersion({
 		},
 		"tusk": {
 			"Name": "Tusk",
+			"LoreName": "Ymir",
 			"Ability1": "tusk_ice_shards",
 			"Ability2": "tusk_snowball",
 			"Ability3": "tusk_frozen_sigil",
@@ -2713,6 +2856,7 @@ DotaData.addVersion({
 		},
 		"undying": {
 			"Name": "Undying",
+			"LoreName": "Almighty Dirge",
 			"Ability1": "undying_decay",
 			"Ability2": "undying_soul_rip",
 			"Ability3": "undying_tombstone",
@@ -2739,6 +2883,7 @@ DotaData.addVersion({
 		},
 		"ursa": {
 			"Name": "Ursa",
+			"LoreName": "Ulfsaar",
 			"Ability1": "ursa_earthshock",
 			"Ability2": "ursa_overpower",
 			"Ability3": "ursa_fury_swipes",
@@ -2765,6 +2910,7 @@ DotaData.addVersion({
 		},
 		"vengefulspirit": {
 			"Name": "Vengeful Spirit",
+			"LoreName": "Shandelzare",
 			"Ability1": "vengefulspirit_magic_missile",
 			"Ability2": "vengefulspirit_wave_of_terror",
 			"Ability3": "vengefulspirit_command_aura",
@@ -2791,6 +2937,7 @@ DotaData.addVersion({
 		},
 		"venomancer": {
 			"Name": "Venomancer",
+			"LoreName": "Lesale Deathbringer",
 			"Ability1": "venomancer_venomous_gale",
 			"Ability2": "venomancer_poison_sting",
 			"Ability3": "venomancer_plague_ward",
@@ -2818,6 +2965,8 @@ DotaData.addVersion({
 		},
 		"viper": {
 			"Name": "Viper",
+			"LoreName": "Netherdrake",
+			"Aliases": ["boring"],
 			"Ability1": "viper_poison_attack",
 			"Ability2": "viper_nethertoxin",
 			"Ability3": "viper_corrosive_skin",
@@ -2844,6 +2993,7 @@ DotaData.addVersion({
 		},
 		"visage": {
 			"Name": "Visage",
+			"LoreName": "Necro'lic",
 			"Ability1": "visage_grave_chill",
 			"Ability2": "visage_soul_assumption",
 			"Ability3": "visage_gravekeepers_cloak",
@@ -2872,6 +3022,7 @@ DotaData.addVersion({
 		},
 		"warlock": {
 			"Name": "Warlock",
+			"LoreName": "Demnok Lannik",
 			"Ability1": "warlock_fatal_bonds",
 			"Ability2": "warlock_shadow_word",
 			"Ability3": "warlock_upheaval",
@@ -2898,6 +3049,8 @@ DotaData.addVersion({
 		},
 		"weaver": {
 			"Name": "Weaver",
+			"LoreName": "Skitskurr",
+			"Aliases": ["Nerubian Weaver"],
 			"Ability1": "weaver_the_swarm",
 			"Ability2": "weaver_shukuchi",
 			"Ability3": "weaver_geminate_attack",
@@ -2924,6 +3077,8 @@ DotaData.addVersion({
 		},
 		"windrunner": {
 			"Name": "Windranger",
+			"LoreName": "Lyralei",
+			"Aliases": ["Windrunner"],
 			"Ability1": "windrunner_shackleshot",
 			"Ability2": "windrunner_powershot",
 			"Ability3": "windrunner_windrun",
@@ -2950,6 +3105,8 @@ DotaData.addVersion({
 		},
 		"winter_wyvern": {
 			"Name": "Winter Wyvern",
+			"LoreName": "Auroth",
+			"Aliases": ["ww"],
 			"Ability1": "winter_wyvern_arctic_burn",
 			"Ability2": "winter_wyvern_splinter_blast",
 			"Ability3": "winter_wyvern_cold_embrace",
@@ -2980,6 +3137,8 @@ DotaData.addVersion({
 		},
 		"wisp": {
 			"Name": "IO",
+			"LoreName": "Wisp",
+			"Aliases": ["ball"],
 			"Ability1": "wisp_tether",
 			//"Ability2": "wisp_tether_break",
 			"Ability2": "wisp_spirits",
@@ -3013,6 +3172,8 @@ DotaData.addVersion({
 		},
 		"witch_doctor": {
 			"Name": "Witch Doctor",
+			"LoreName": "Zharvakko",
+			"Aliases": ["wd"],
 			"Ability1": "witch_doctor_paralyzing_cask",
 			"Ability2": "witch_doctor_voodoo_restoration",
 			"Ability3": "witch_doctor_maledict",
@@ -3039,6 +3200,7 @@ DotaData.addVersion({
 		},
 		"zuus": {
 			"Name": "Zeus",
+			"LoreName": "Lord of the Heaven",
 			"Ability1": "zuus_arc_lightning",
 			"Ability2": "zuus_lightning_bolt",
 			"Ability3": "zuus_static_field",
@@ -3065,6 +3227,7 @@ DotaData.addVersion({
 		},
 		"arc_warden": {
 			"Name": "Arc Warden",
+			"LoreName": "Zet",
 			"Ability1": "arc_warden_flux",
 			"Ability2": "arc_warden_magnetic_field",
 			"Ability3": "arc_warden_spark_wraith",
@@ -3091,6 +3254,8 @@ DotaData.addVersion({
 		},
 		"abyssal_underlord": {
 			"Name": "Underlord",
+			"LoreName": "Vrogros",
+			"Aliases": ["Abyssal Underlord"],
 			"Enabled": 1,
 			"Ability1": "abyssal_underlord_firestorm",
 			"Ability2": "abyssal_underlord_pit_of_malice",
@@ -3184,6 +3349,7 @@ DotaData.addVersion({
 		},
 		"tpscroll": {
 			"Name": "Town Portal Scroll",
+			"Aliases": ["tp"],
 			"Cost": 50,
 			"Section": "Consumables",
 			"SectionIndex": 6,
@@ -3205,6 +3371,7 @@ DotaData.addVersion({
 		},
 		"courier": {
 			"Name": "Animal Courier",
+			"Aliases": ["donkey", "chicken"],
 			"Cost": 100,
 			"Section": "Consumables",
 			"SectionIndex": 8,
@@ -3213,6 +3380,7 @@ DotaData.addVersion({
 		},
 		"flying_courier": {
 			"Name": "Flying Courier",
+			"Aliases": ["crow"],
 			"Cost": 150,
 			"Section": "Consumables",
 			"SectionIndex": 9,
@@ -3270,6 +3438,7 @@ DotaData.addVersion({
 		/* Attributes */
 		"branches": {
 			"Name": "Iron branches",
+			"Aliases": ["gg branch"],
 			"Cost": 50,
 			"Section": "Attributes",
 			"SectionIndex": 0,
@@ -3352,6 +3521,7 @@ DotaData.addVersion({
 		/* Armamaments */
 		"ring_of_protection": {
 			"Name": "Ring of Protection",
+			"Aliases": ["rop"],
 			"Cost": 175,
 			"Section": "Armaments",
 			"SectionIndex": 0,
@@ -3469,6 +3639,7 @@ DotaData.addVersion({
 		},
 		"sobi_mask": {
 			"Name": "Sage's mask",
+			"Aliases": ["sobi mask"],
 			"Cost": 325,
 			"Section": "Arcane",
 			"SectionIndex": 2,
@@ -3592,6 +3763,7 @@ DotaData.addVersion({
 		},
 		"poor_mans_shield": {
 			"Name": "Poor Man's Shield",
+			"Aliases": ["pms"],
 			"Cost": 500,
 			"Components": ["stout_shield", "slippers", "slippers"],
 			"Section": "Common",
@@ -3695,6 +3867,7 @@ DotaData.addVersion({
 		},
 		"travel_boots": {
 			"Name": "Boots of Travel",
+			"Aliases": ["bot"],
 			"Cost": 2400,
 			"Components": ["boots", 2000],
 			"Section": "Common",
@@ -3705,6 +3878,7 @@ DotaData.addVersion({
 		},
 		"travel_boots_2": {
 			"Name": "Boots of Travel",
+			"Aliases": ["bot"],
 			"Cost": 4400,
 			"Components": ["travel_boots", 2000],
 			"Section": "Unlisted",
@@ -3729,6 +3903,7 @@ DotaData.addVersion({
 		/* Support */
 		"ring_of_basilius": {
 			"Name": "Ring of Basilius",
+			"Aliases": ["rob"],
 			"Cost": 500,
 			"Components": ["ring_of_protection", "sobi_mask"],
 			"Disassemble": true,
@@ -3808,6 +3983,7 @@ DotaData.addVersion({
 		},
 		"ring_of_aquila": {
 			"Name": "Ring of Aquila",
+			"Aliases": ["roa"],
 			"Cost": 985,
 			"Components": ["wraith_band", "ring_of_basilius"],
 			"Disassemble": true,
@@ -3837,6 +4013,7 @@ DotaData.addVersion({
 		},
 		"arcane_boots": {
 			"Name": "Arcane Boots",
+			"Aliases": ["mana boots", "mb"],
 			"Cost": 1300,
 			"Components": ["boots", "energy_booster"],
 			"Disassemble": true,
@@ -3871,6 +4048,7 @@ DotaData.addVersion({
 		},
 		"mekansm": {
 			"Name": "Mekansm",
+			"Aliases": ["mechanism", "mekanism"],
 			"Cost": 2275,
 			"Components": ["headress", "buckler", 900],
 			"Section": "Support",
@@ -3892,6 +4070,7 @@ DotaData.addVersion({
 		},
 		"vladmir": {
 			"Name": "Vladmir's Offering",
+			"Aliases": ["vladmirs offering", "vladimirs"],
 			"Cost": 2275,
 			"Components": ["ring_of_basilius", "headdress", "lifesteal", 300],
 			"Section": "Support",
@@ -3951,6 +4130,7 @@ DotaData.addVersion({
 		},
 		"force_staff": {
 			"Name": "Force Staff",
+			"Aliases": ["fs"],
 			"Cost": 2225,
 			"Components": ["staff_of_wizardry", "ring_of_regen", 900],
 			"Section": "Caster",
@@ -3962,6 +4142,7 @@ DotaData.addVersion({
 		},
 		"veil_of_discord": {
 			"Name": "Veil of Discord",
+			"Aliases": ["vod"],
 			"Cost": 2240,
 			"Components": ["helm_of_iron_will", "null_talisman", "null_talisman", 400],
 			"Section": "Caster",
@@ -4079,6 +4260,7 @@ DotaData.addVersion({
 		},
 		"cyclone": {
 			"Name": "Eul's Scepter of Divinity",
+			"Aliases": ["cyclone", "euls"],
 			"Cost": 2735,
 			"Components": ["staff_of_wizardry", "wind_lace", "void_stone", 650],
 			"Section": "Caster",
@@ -4133,6 +4315,7 @@ DotaData.addVersion({
 		},
 		"ultimate_scepter": {
 			"Name": "Aghanim's Scepter",
+			"Aliases": ["ultimate"],
 			"Cost": 4200,
 			"Components": ["point_booster", "ogre_club", "blade_of_alacrity", "staff_of_wizardry"],
 			"Section": "Caster",
@@ -4164,6 +4347,7 @@ DotaData.addVersion({
 		},
 		"sheepstick": {
 			"Name": "Scythe of Vyse",
+			"Aliases": ["hex", "sheepstick"],
 			"Cost": 5650,
 			"Components": ["mystic_staff", "ultimate_orb", "void_stone"],
 			"Section": "Caster",
@@ -4214,6 +4398,7 @@ DotaData.addVersion({
 		},
 		"invis_sword": {
 			"Name": "Shadow Blade",
+			"Aliases": ["lothars edge", "lothar's edge", "invis", "sb"],
 			"Cost": 2700,
 			"Components": ["shadow_amulet", "claymore"],
 			"Section": "Weapons",
@@ -4235,6 +4420,7 @@ DotaData.addVersion({
 		},
 		"bfury": {
 			"Name": "Battlefury",
+			"Aliases": ["bfury"],
 			"Cost": 4500,
 			"Components": ["claymore", "broadsword", "pers", "quelling_blade"],
 			"Section": "Weapons",
@@ -4246,6 +4432,7 @@ DotaData.addVersion({
 		},
 		"ethereal_blade": {
 			"Name": "Ethereal Blade",
+			"Aliases": ["eb"],
 			"Cost": 4700,
 			"Components": ["ghost", "eagle"],
 			"Disassemble": true,
@@ -4259,6 +4446,7 @@ DotaData.addVersion({
 		},
 		"silver_edge": {
 			"Name": "Silver Edge",
+			"Aliases": ["invis", "sb", "shadow blade"],
 			"Cost": 4800,
 			"Components": ["invis_sword", "ultimate_orb", 300],
 			"Section": "Weapons",
@@ -4287,6 +4475,7 @@ DotaData.addVersion({
 		},
 		"monkey_king_bar": {
 			"Name": "Monkey King Bar",
+			"Aliases": ["mkb"],
 			"Cost": 5400,
 			"Components": ["javelin", "javelin", "demon_edge"],
 			"Section": "Weapons",
@@ -4304,6 +4493,7 @@ DotaData.addVersion({
 		},
 		"butterfly": {
 			"Name": "Butterfly",
+			"Aliases": ["bfly"],
 			"Cost": 5775,
 			"Components": ["eagle", "talisman_of_evasion", "quarterstaff"],
 			"Section": "Weapons",
@@ -4420,6 +4610,7 @@ DotaData.addVersion({
 		},
 		"black_king_bar": {
 			"Name": "Black King Bar",
+			"Aliases": ["bkb"],
 			"Cost": 3975,
 			"Components": ["ogre_club", "mythril_hammer", 1375],
 			"Section": "Armor",
@@ -4438,6 +4629,7 @@ DotaData.addVersion({
 		},
 		"lotus_orb": {
 			"Name": "Lotus Orb",
+			"Aliases": ["ls"],
 			"Cost": 4000,
 			"Components": ["pers", "platemail", "energy_booster"],
 			"Disassemble": true,
@@ -4465,6 +4657,7 @@ DotaData.addVersion({
 		},
 		"bloodstone": {
 			"Name": "Bloodstone",
+			"Aliases": ["bs"],
 			"Cost": 4875,
 			"Components": ["soul_booster", "soul_ring", 900],
 			"Section": "Armor",
@@ -4498,6 +4691,7 @@ DotaData.addVersion({
 		},
 		"sphere": {
 			"Name": "Linken's Sphere",
+			"Aliases": ["ls"],
 			"Cost": 4800,
 			"Components": ["pers", "ultimate_orb", 1000],
 			"Section": "Armor",
@@ -4512,6 +4706,7 @@ DotaData.addVersion({
 		},
 		"hurricane_pike": {
 			"Name": "Hurricane Pike",
+			"Aliases": ["fs", "force staff"],
 			"Cost": 4375,
 			"Components": ["force_staff", "dragon_lance", 250],
 			"Section": "Armor",
@@ -4529,6 +4724,7 @@ DotaData.addVersion({
 		},
 		"assault": {
 			"Name": "Assault Cuirass",
+			"Aliases": ["ac"],
 			"Cost": 5250,
 			"Components": ["platemail", "hyperstone", "chainmail", 1300],
 			"Section": "Armor",
@@ -4539,6 +4735,7 @@ DotaData.addVersion({
 		},
 		"heart": {
 			"Name": "Heart of Tarrasque",
+			"Aliases": ["hot"],
 			"Cost": 5500,
 			"Components": ["reaver", "vitality_booster", 1400],
 			"Section": "Armor",
@@ -4570,6 +4767,7 @@ DotaData.addVersion({
 		},
 		"helm_of_the_dominator": {
 			"Name": "Helm of the Dominator",
+			"Aliases": ["hotd"],
 			"Cost": 1800,
 			"Components": ["helm_of_iron_will", "lifesteal"],
 			"Disassemble": true,
@@ -4675,6 +4873,7 @@ DotaData.addVersion({
 		},
 		"sange_and_yasha": {
 			"Name": "Sange and Yasha",
+			"Aliases": ["sny", "s&y", "sy"],
 			"Cost": 4100,
 			"Components": ["yasha", "sange"],
 			"Disassemble": true,
@@ -4688,6 +4887,7 @@ DotaData.addVersion({
 		},
 		"skadi": {
 			"Name": "Eye of Skadi",
+			"Aliases": ["eos"],
 			"Cost": 5675,
 			"Components": ["ultimate_orb", "ultimate_orb", "point_booster", "orb_of_venom"],
 			"Section": "Artifacts",
@@ -8652,6 +8852,7 @@ DotaData.addVersion({
 		},
 		"mask_of_madness_buff": {
 			"Name": "Berserk",
+			"Aliases": ["mom"],
 			"Image": "mask_of_madness",
 			"AttackSpeed": 100,
 			"MovementSpeedPercentage": 0.17

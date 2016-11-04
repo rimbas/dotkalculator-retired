@@ -22,10 +22,13 @@
 	display: block;
 	width: 48px;
 	height: 35px;
-	transition: height 1s;
+	transition: height 1s, filter 0.33s;
 }
 
 .item-picker-table .drag-item-list .drag-item-image.hidden {
 	height: 0px;
-	transition: height 1s;
+}
+
+.item-picker-table .drag-item-image.filtered {
+	filter: grayscale(100%) brightness(40%);
 }

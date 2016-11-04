@@ -33,7 +33,7 @@
 	height: 32px;
 	border: none;
 	cursor: pointer;
-	transition: width 1s, padding 1s, transform 1s;
+	transition: width 1s, padding 1s, transform 1s, filter 0.33s;
 }
 .hero-picker-button.hidden {
 	width: 0px;
@@ -44,4 +44,7 @@
 }
 .hero-picker-button:nth-child(6n+7) {
 	clear: both;
+}
+.hero-picker-button.filtered {
+	filter: grayscale(100%) brightness(40%);
 }

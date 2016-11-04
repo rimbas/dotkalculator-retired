@@ -1,13 +1,15 @@
 
 window.addEventListener("DOMContentLoaded", function itemPickerInitializer(e){
-	let ItemPickerItemElements = {};
-	let window = UIHelper.addWindow({
+	let ItemPickerItemElements = {},
+		ItemPickerFilterAliases = {};
+
+	let uiWindow = UIHelper.addWindow({
 		title: "Item picker",
 		headerButton: true,
 		headerButtonText: "Item picker",
 		headerButtonPos: 2,
 		populationCallback: function itemPickerPopulator(win) {
-			let settings = UIHelper.appendSettings(win, {version: true}),
+			let settings = UIHelper.appendSettings(win, {version: true, search: true}),
 				itemTable = document.createElement("table");
 			itemTable.classList.add("item-picker-table");
 
@@ -39,6 +41,7 @@ window.addEventListener("DOMContentLoaded", function itemPickerInitializer(e){
 				this.style.opacity = null;
 			}
 
+			// populates the table with elements and filter lookup list
 			let items = DotaData.getCurrentItemList();
 			for (let itemKey in items) {
 				let item = items[itemKey],
@@ -58,21 +61,62 @@ window.addEventListener("DOMContentLoaded", function itemPickerInitializer(e){
 				img.ondragstart = itemDragStart;
 				img.ondragend = itemDragEnd;
 				ItemPickerItemElements[itemKey] = img;
-
 				section.insertBefore(img, before);
+
+				// lookup list for search filtering
+				ItemPickerFilterAliases[itemKey] = [item.Name]
+				if (item.Aliases)
+					for (let alias of item.Aliases)
+						ItemPickerFilterAliases[itemKey].push(alias)
 			}
 
 			win.appendChild(itemTable);
+
+			settings.search.title = "Case insensitive regular expression"
+			settings.search.oninput = function itemSearchFilter(e) {
+				let elements = ItemPickerItemElements,
+					aliases = ItemPickerFilterAliases,
+					name = this.value;
+				this.classList.remove("error")
+
+				if (name.length > 0) {
+					try {
+						let pattern = new RegExp(name, "i")
+						for (let itemKey in aliases) {
+							let aliasList = aliases[itemKey],
+								found = false;
+
+							for (let alias of aliasList)
+								if (alias.match(pattern))
+									found = true;
+
+							let element = elements[itemKey];
+							if (found)
+								element.classList.remove("filtered")
+							else
+								element.classList.add("filtered")
+						}
+					}
+					catch (e)
+					{
+						this.classList.add("error")
+					}
+				}
+				else
+					for (let itemKey in elements)
+						elements[itemKey].classList.remove("filtered")
+
+			}
 
 			settings.version.onchange = function itemVersionSelectorChange(e) {
 				let elements = ItemPickerItemElements,
 					itemlist = DotaData.getItemList(settings.version.value);
 
-				for (let itemkey in elements)
-					if (itemkey in itemlist)
-						elements[itemkey].classList.remove("hidden")
+				for (let itemKey in elements)
+					if (itemKey in itemlist)
+						elements[itemKey].classList.remove("hidden")
 					else
-						elements[itemkey].classList.add("hidden")
+						elements[itemKey].classList.add("hidden")
 			}
 
 		}

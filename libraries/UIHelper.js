@@ -179,7 +179,7 @@ UIHelper.appendSettings = function(win, options) {
 		wrapper.appendChild(document.createElement("br"))
 	}
 	win.appendChild(wrapper)
-	return {wrapper: wrapper, version: versionSelector, table: tableSelector,
+	return { wrapper: wrapper, version: versionSelector, table: tableSelector,
 		search: searchInput
 	};
 }
