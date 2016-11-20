@@ -245,6 +245,10 @@ td.box-content + td.box-content {
 	padding: 0px;
 	background: #003045;
 }
+.mini-spinner:disabled {
+	border: none;
+	margin: 1px;
+}
 
 .info-damage.base {
 	color: gold;

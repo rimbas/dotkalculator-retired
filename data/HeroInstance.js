@@ -82,12 +82,6 @@ HeroInstance.prototype.copy = function(teamless) {
 	return clone;
 }
 
-// Adds a handler for hero data
-// handler - object with properties
-// name (string) 			- name
-// binds (array of strings) - other handlers that influence
-// handler (function)		- the handling function
-
 /**
  * Adds a data handler
  * @param {object} handler Handler data
@@ -114,9 +108,6 @@ HeroInstance.addHandler = function (handler) {
 	for ( var bindID of handler.binds )
 		this.prototype[bindID].binds.push(handler.name);
 }
-
-// Propagates data change
-
 
 /**
  * Propagates stat change to array IDs

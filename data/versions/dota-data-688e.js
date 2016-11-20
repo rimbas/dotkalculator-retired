@@ -2396,7 +2396,7 @@ DotaData.addVersion({
 		"slardar": {
 			"Name": "Slardar",
 			"LoreName": "Slithereen Guard",
-			"Aliases": ["ugly"],
+			"Aliases": ["ugly", "sladar"],
 			"Ability1": "slardar_sprint",
 			"Ability2": "slardar_slithereen_crush",
 			"Ability3": "slardar_bash",
@@ -3558,6 +3558,7 @@ DotaData.addVersion({
 		},
 		"orb_of_venom": {
 			"Name": "Orb of Venom",
+			"Aliases": ["oov"],
 			"Cost": 275,
 			"Section": "Armaments",
 			"SectionIndex": 5
@@ -4751,6 +4752,7 @@ DotaData.addVersion({
 		/* Artifacts */
 		"mask_of_madness": {
 			"Name": "Mask of Madness",
+			"Aliases": ["mom"],
 			"Cost": 1800,
 			"Components": ["lifesteal", 900],
 			"Section": "Artifacts",
@@ -6005,41 +6007,104 @@ DotaData.addVersion({
 		},
 		"invoker_quas": {
 			"Name": "Quas",
+			"Meta": { "Wrap": ["LevelAdjusted"] },
 			"Strength": function() { return this.Level * 2 },
 			"LevelMax": 7,
 			"Restrictions": [1, 3, 5, 7, 9, 11, 13],
+			"LockedCharges": true,
 			"Charges": 0,
-			"ChargesMax": 3,
+			"ChargesSemantic": "Instances",
 			"LevelAdjusted": function() {
 				let bonus = this.heroTotal.HasAghanims && this.Level > 0 ? 1 : 0;
 				return this.Level + bonus;
 			},
 			"HealthRegeneration": function() { return this.Charges * this.Level },
+			"HiddenAction": function(){ return this.Charges > 2 },
 			"Action": {
-				"Type": "Manipulation",
-				"Function": function applyQuas() {
-					// temp
-				},
-			}
+				"Type": "Operation",
+				"Function": function applyQuas(){
+					let abilities = this.heroRef.AbilityIds,
+						instanceStack = abilities.invoker_invoke.InstanceStack,
+						lastIndex = 0;
+					if (instanceStack[0] == this.ID)
+						lastIndex = instanceStack.lastIndexOf(this.ID, 1) + 1
+					if (instanceStack.length > 2) {
+						let [lastInstance] = instanceStack.splice(lastIndex, 1)
+						if (abilities[lastInstance].Charges > 0)
+							abilities[lastInstance].Charges--;
+					}
+					instanceStack.push(this.ID)
+					this.Charges++;
+				}
+			},
 		},
 		"invoker_wex": {
 			"Name": "Wex",
+			"Meta": { "Wrap": ["LevelAdjusted"] },
 			"Agility": function() { return this.Level * 2 },
 			"LevelMax": 7,
 			"Restrictions": [1, 3, 5, 7, 9, 11, 13],
+			"LockedCharges": true,
 			"Charges": 0,
-			"ChargesMax": 3,
+			"ChargesSemantic": "Instances",
+			"LevelAdjusted": function() {
+				let bonus = this.heroTotal.HasAghanims && this.Level > 0 ? 1 : 0;
+				return this.Level + bonus;
+			},
 			"AttackSpeed": function() { return this.Charges * this.Level * 2 },
-			"MovementSpeedPercentage": function() { return this.Charges * this.Level * 0.01 }
+			"MovementSpeedPercentage": function() { return this.Charges * this.Level * 0.01 },
+			"HiddenAction": function(){ return this.Charges > 2 },
+			"Action": {
+				"Type": "Operation",
+				"Function": function applyWex(){
+					let abilities = this.heroRef.AbilityIds,
+						instanceStack = abilities.invoker_invoke.InstanceStack,
+						lastIndex = 0;
+					if (instanceStack[0] == this.ID)
+						lastIndex = instanceStack.lastIndexOf(this.ID, 1) + 1
+					if (instanceStack.length > 2) {
+						let [lastInstance] = instanceStack.splice(lastIndex, 1)
+						if (abilities[lastInstance].Charges > 0)
+							abilities[lastInstance].Charges--;
+					}
+					instanceStack.push(this.ID)
+					this.Charges++;
+				}
+			},
 		},
 		"invoker_exort": {
 			"Name": "Exort",
+			"Meta": { "Wrap": ["LevelAdjusted"] },
 			"Intelligence": function() { return this.Level * 2 },
 			"LevelMax": 7,
 			"Restrictions": [1, 3, 5, 7, 9, 11, 13],
+			"LockedCharges": true,
 			"Charges": 0,
+			"ChargesSemantic": "Instances",
 			"ChargesMax": 3,
-			"Damage": function() { return this.Charges * this.Level * 3 }
+			"LevelAdjusted": function() {
+				let bonus = this.heroTotal.HasAghanims && this.Level > 0 ? 1 : 0;
+				return this.Level + bonus;
+			},
+			"Damage": function() { return this.Charges * this.Level * 3 },
+			"HiddenAction": function(){ return this.Charges > 2 },
+			"Action": {
+				"Type": "Operation",
+				"Function": function applyExort(){
+					let abilities = this.heroRef.AbilityIds,
+						instanceStack = abilities.invoker_invoke.InstanceStack,
+						lastIndex = 0;
+					if (instanceStack[0] == this.ID)
+						lastIndex = instanceStack.lastIndexOf(this.ID, 1) + 1
+					if (instanceStack.length > 2) {
+						let [lastInstance] = instanceStack.splice(lastIndex, 1)
+						if (abilities[lastInstance].Charges > 0)
+							abilities[lastInstance].Charges--;
+					}
+					instanceStack.push(this.ID)
+					this.Charges++;
+				}
+			},
 		},
 		"invoker_invoke": {
 			"Name": "Invoke",
@@ -6075,6 +6140,7 @@ DotaData.addVersion({
 					return 0;
 				return this.Level * 20;
 			},
+			"InstanceStack": [], // the orb activation order
 		},
 		"invoker_cold_snap": {
 			"Name": "Cold snap",
@@ -6083,9 +6149,21 @@ DotaData.addVersion({
 		},
 		"invoker_ghost_walk": {
 			"Name": "Ghost walk",
-			"LevelMax": 8,
-			"Buff": {
-				"Name": "invoker_ghost_walk_buff",
+			"Level": true,
+			"HiddenAction": function(){
+				if (this.heroRef == undefined ||
+					this.heroRef.AbilityIds.invoker_wex.Level == 0 ||
+					this.heroRef.AbilityIds.invoker_quas.Level == 0)
+					return true
+				return false
+			},
+			"Action": {
+				"Type": "Buff",
+				"Id": "invoker_ghost_walk_buff",
+				"Modifier": function ghostWalkModifier(newBuff) {
+					newBuff.Quas = this.heroRef.AbilityIds.invoker_quas.LevelAdjusted
+					newBuff.Wex = this.heroRef.AbilityIds.invoker_wex.LevelAdjusted
+				},
 				"NoTarget": true,
 				"Self": true,
 				"Refresh": "override"
@@ -6105,15 +6183,26 @@ DotaData.addVersion({
 		},
 		"invoker_alacrity": {
 			"Name": "Alacrity",
-			"LevelMax": 8,
-			"Buff": {
-				"Name": "invoker_alacrity_buff",
-				"NoTarget": true,
+			"Level": true,
+			"HiddenAction": function(){
+				if (this.heroRef == undefined ||
+					this.heroRef.AbilityIds.invoker_wex.Level == 0 ||
+					this.heroRef.AbilityIds.invoker_exort.Level == 0)
+					return true
+				return false
+			},
+			"Action": {
+				"Type": "Buff",
+				"Id": "invoker_alacrity_buff",
+				"Modifier": function alacrityModifier(newBuff) {
+					newBuff.Wex = this.heroRef.AbilityIds.invoker_wex.LevelAdjusted
+					newBuff.Exort = this.heroRef.AbilityIds.invoker_exort.LevelAdjusted
+				},
 				"Self": true,
 				"Teammates": true,
-				"Refresh": "override"
+				"NoTarget": true,
+				"Refresh": "override",
 			},
-			"Warning": "While no proper implementation exists, assumes equal levels of wex and exort",
 			"Cooldown": 15,
 			"ManaCost": 45,
 		},
@@ -8058,18 +8147,6 @@ DotaData.addVersion({
 			"Image": "empty",
 			"Class": "Buff"
 		},
-		"test_buff": {
-			"Name": "Test buff",
-			"Class": "Buff",
-			"Image": "empty",
-			"Level": 0,
-			"LevelMax": 10,
-			"Charges": 0,
-			"Strength": function() { return this.Charges + this.Level },
-			"Agility": function() { return this.Level },
-			"Intelligence": function() { return this.Charges },
-			"Damage": 100
-		},
 		"abaddon_frostmourne_buff": {
 			"Name": "Curse of avernus",
 			"Image": "abaddon_frostmourne",
@@ -8289,18 +8366,18 @@ DotaData.addVersion({
 			"Name": "Ghost walk",
 			"Image": "invoker_ghost_walk",
 			"Class": "Buff",
-			"Level": 0,
-			"LockedLevel": true,
-			"MovementSpeedPercentage": function() { return (this.Level - 4) * 0.1 }
+			"Quas": 0,
+			"Wex": 0,
+			"MovementSpeedPercentage": function() { return (this.Wex - 4) * 0.1 }
 		},
 		"invoker_alacrity_buff": {
 			"Name": "Alacrity",
 			"Image": "invoker_alacrity",
 			"Class": "Buff",
-			"Level": 0,
-			"LockedLevel": true,
-			"AttackSpeed": function() { return (this.Level + 2) * 10 },
-			"Damage": function() { return (this.Level + 2) * 10 }
+			"Wex": 0,
+			"Exort": 0,
+			"AttackSpeed": function() { return 10 + (this.Wex - 1) * 15 },
+			"Damage": function() { return 10 + (this.Exort - 1) * 15 },
 		},
 		"legion_commander_overwhelming_odds_buff": {
 			"Name": "Overwhelming odds",
@@ -8852,7 +8929,6 @@ DotaData.addVersion({
 		},
 		"mask_of_madness_buff": {
 			"Name": "Berserk",
-			"Aliases": ["mom"],
 			"Image": "mask_of_madness",
 			"AttackSpeed": 100,
 			"MovementSpeedPercentage": 0.17

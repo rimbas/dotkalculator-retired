@@ -1,6 +1,8 @@
 // Main Dota data object
 
 DotaData = {};
+
+{
 DotaData.Versions = {}
 DotaData.NewestVersion = "";
 DotaData.NewestMajor = "";
@@ -25,7 +27,7 @@ DotaData.Meta = {
 	TechnicalAutoProperties: [
 		"LevelMin", "LevelMax", "ChargesMin", "ChargesMax", "Image",
 		"ManaCost", "Cooldown", "Hidden", "Buff", "HasAghanims", "Class",
-		"Invisible", "Revealed", "MovementSpeedUncapped",
+		"Invisible", "Revealed", "MovementSpeedUncapped", "HiddenAction",
 	]
 }
 
@@ -140,6 +142,8 @@ DotaData.positiveNegativeStats = [
 
 // stat formatter, oh boy
 DotaData.statToReadable = function(stat, val) {
+	if (val == undefined)
+		val = 0;
 	if (DotaData.negatedValues.includes(stat))
 		val = -val;
 	let key = DotaData.readableStatStrings[stat] || stat,
@@ -171,7 +175,7 @@ DotaData.statToReadable = function(stat, val) {
 }
 
 DotaData.numericToRoman = function(num) {
-	return  0 <= num && num <= 10 ? ["-", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"][Math.floor(num)] : num;
+	return  ["-", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"][Math.floor(num)] || num;
 }
 
 // Formatter for <HTMLElement>.textContent
@@ -182,6 +186,21 @@ DotaData.formatStatTextContent = function formatStatTextContent(val) {
 	else if (val < 0)
 		return "" + val // derp
 	return null
+}
+
+
+let cloneObject = function cloneObject(obj) {
+	if (obj instanceof Object && !(obj instanceof Function)) {
+		if (Array.isArray(obj))
+			return obj.slice()
+		else {
+			let newObj = {};
+			for (let key in obj)
+				newObj[key] = obj[key];
+			return newObj
+		}
+	}
+	return obj
 }
 
 // Unified data aggregator
@@ -198,9 +217,10 @@ DotaData.getTypeData = function getTypeData(type, id, version) {
 		let base = getTypeData(type, id, dotaVersion.Meta.Base);
 
 		if (dotaVersion[type]) {
-			let data = dotaVersion[type][id];
-			for (let prop in data)
-				base[prop] = data[prop];
+			let dataObj = dotaVersion[type][id];
+			for (let prop in dataObj) {
+				base[prop] = cloneObject(dataObj[prop]);
+			}
 		}
 		base.Version = version;
 		return base
@@ -208,19 +228,21 @@ DotaData.getTypeData = function getTypeData(type, id, version) {
 	else {
 		let constructedData = {};
 		// Absolute base data
-		if (dotaVersion[type] == undefined) {
-			throw `Version "${version}" without "${type}" type!`
-		}
-		let base = dotaVersion[type]._base,
-			data = dotaVersion[type][id];
-		if (data === undefined)
-			throw `No such id "${id}" in type ${type} in version "${version}"!`
+		if (dotaVersion[type] == undefined)
+			throw `Version "${version}" without "${type}" type!`;
+
+		let baseObj = dotaVersion[type]._base,
+			dataObj = dotaVersion[type][id];
+		if (dataObj === undefined)
+			throw `No such id "${id}" in type ${type} in version "${version}"!`;
 		for (let prop in dotaVersion[type]._base)
-			constructedData[prop] = base[prop];
-		for (let prop in data)
-			constructedData[prop] = data[prop];
+			constructedData[prop] = cloneObject(baseObj[prop]);
+		for (let prop in dataObj)
+			constructedData[prop] = cloneObject(dataObj[prop]);
 
 		constructedData.Version = version;
 		return constructedData
 	}
+}
+
 }

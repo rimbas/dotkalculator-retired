@@ -222,11 +222,13 @@ UIHelper.createDisplayElement = function(object) {
 		div.appendChild(chargeElement);
 	}
 
-	if (object.Buff) {
-		var activateButton = document.createElement("button");
-		activateButton.className = "item-display-activate";
-		activateButton.onclick = object.activate.bind(object);
-		div.appendChild(activateButton);
+	if (object.Buff || object.Action) {
+		let activateButton = div.appendChild(document.createElement("button"));
+		activateButton.classList.add("item-display-activate")
+		activateButton.onclick = object.activate.bind(object)
+		if (object.HiddenAction === true || object.Level === 0)
+			activateButton.style.display = "none";
+		object.actionButton = activateButton;
 	}
 
 	if (object instanceof ItemInstance || object instanceof BuffInstance && object.Class != "Aura") {
@@ -260,7 +262,7 @@ UIHelper.createDetailedTooltip = function ( object ) {
 		v.textContent = "("+object.Version+")";
 	}
 
-	if ("Level" in object && !object.emitterRef && !object.LockedLevel) {
+	if (typeof object.Level === "number") {
 		var levelLabel = document.createElement("span");
 		levelLabel.textContent = "Level:";
 		levelLabel.style.textAlign = "right";
@@ -275,18 +277,21 @@ UIHelper.createDetailedTooltip = function ( object ) {
 		levelInput.max = object.LevelMax;
 		levelInput.type = "number";
 		levelInput.className = "mini-spinner";
-		levelInput.onchange = (function(e,u){
-			object.Level = Number.parseInt(e.target.value);
-			if ("Charges" in object && "ChargesMax" in object)
-				object.Charges = Math.min(object.Charges, object.ChargesMax);
-			object.update()
-		})
+		if (object.emitterRef || object.LockedLevel)
+			levelInput.disabled = true;
+		else
+			levelInput.onchange = (function(e,u){
+				object.Level = Number.parseInt(e.target.value);
+				if ("Charges" in object && "ChargesMax" in object)
+					object.Charges = Math.min(object.Charges, object.ChargesMax);
+				object.update()
+			})
 		el.appendChild(levelInput);
 
 		el.appendChild(document.createElement("br"));
 	}
 
-	if ("Charges" in object && !object.emitterRef && !object.LockedCharges) {
+	if ("Charges" in object) {
 		var chargeLabel = document.createElement("span");
 		if (object.ChargesSemantic)
 			chargeLabel.textContent = object.ChargesSemantic.toString() + ":";
@@ -305,10 +310,13 @@ UIHelper.createDetailedTooltip = function ( object ) {
 		chargeInput.max = (typeof object.ChargesMax == "number") ? object.ChargesMax : 1000;
 		chargeInput.type = "number";
 		chargeInput.className = "mini-spinner";
-		chargeInput.onchange = (function(e,u) {
-			object.Charges = Number.parseInt(e.target.value);
-			object.update()
-		})
+		if (object.emitterRef || object.LockedCharges)
+			chargeInput.disabled = true;
+		else
+			chargeInput.onchange = (function(e,u) {
+				object.Charges = Number.parseInt(e.target.value);
+				object.update()
+			})
 		el.appendChild(chargeInput);
 		object.chargeInput = chargeInput
 
@@ -319,7 +327,8 @@ UIHelper.createDetailedTooltip = function ( object ) {
 		statValues = {};
 
 	for (var stat of statOrder)
-		if (typeof object[stat] !== "undefined")
+		//if (typeof object[stat] !== "undefined")
+		if (object.hasOwnProperty(stat))
 			statValues[stat] = object[stat];
 
 	// handler for ItemInstance special stats
@@ -327,10 +336,7 @@ UIHelper.createDetailedTooltip = function ( object ) {
 		for (var stat in object.Family.Stats)
 			statValues[stat] = object.Family.Stats[stat]
 
-	//for (var stat in statValues) {
-	for (var stat of statOrder) {
-		if (statValues[stat] === undefined)
-			continue;
+	for (var stat in statValues) {
 		var readable = DotaData.statToReadable(stat, statValues[stat]),
 			valueLabel = el.appendChild(document.createElement("span"));
 			valueLabel.className = "item-display-options value";
@@ -344,8 +350,8 @@ UIHelper.createDetailedTooltip = function ( object ) {
 			valueLabel.classList.add("negative");
 		else if (readable.negativeOverride && statValues[stat] > 0)
 			valueLabel.classList.add("negative");
-
 		valueLabel.textContent = readable.value;
+
 		var spanLabel = document.createElement("span");
 			spanLabel.className = "item-display-options label";
 			spanLabel.textContent = readable.key;
@@ -353,22 +359,24 @@ UIHelper.createDetailedTooltip = function ( object ) {
 		el.appendChild(document.createElement("br"));
 	}
 
-	if ( typeof object.Cooldown == "number" ) {
+	if ("Cooldown" in object) {
 		let cooldown = document.createElement("span")
 		cooldown.className = "item-display-options cooldown";
-		let reduction = heroTotal.CooldownReduction || 1;
-		cooldown.textContent = Math.round(object.Cooldown * reduction * 100)/100
+		let value = object.Cooldown || 0,
+			reduction = heroTotal.CooldownReduction || 1;
+		cooldown.textContent = Math.round(value * reduction * 100)/100
 		el.appendChild(cooldown)
 		object.cooldownElement = cooldown;
 		if (object.Level === 0)
 			object.cooldownElement.style.display = "none"
 	}
 
-	if ( typeof object.ManaCost == "number" ) {
+	if ("ManaCost" in object) {
 		let manacost = document.createElement("span")
 		manacost.className = "item-display-options manacost";
-		let reduction = heroTotal.ManaCostReduction || 1
-		manacost.textContent = Math.round(object.ManaCost * reduction*100)/100
+		let value = object.ManaCost,
+			reduction = heroTotal.ManaCostReduction || 1
+		manacost.textContent = Math.round(value * reduction*100)/100
 		el.appendChild(manacost)
 		object.manacostElement = manacost;
 		if (object.Level === 0)
@@ -456,7 +464,7 @@ UIHelper.updateDisplayElements = function ( object ) {
 		if (object.Level === 0)
 			object.cooldownElement.style.display = "none"
 		else {
-			object.cooldownElement.style.display = ""
+			object.cooldownElement.style.display = null;
 			let reduction = heroTotal.CooldownReduction || 1
 			object.cooldownElement.textContent = Math.round(object.Cooldown * reduction * 100)/100
 		}
@@ -464,8 +472,15 @@ UIHelper.updateDisplayElements = function ( object ) {
 		if (object.Level === 0)
 			object.manacostElement.style.display = "none"
 		else {
-			object.manacostElement.style.display = ""
+			object.manacostElement.style.display = null;
 			let reduction = heroTotal.ManaCostReduction || 1
 			object.manacostElement.textContent = Math.round(object.ManaCost * reduction*100)/100
 		}
+	if (object.actionButton)
+		if (object.Level === 0 || object.Level === false || object.HiddenAction)
+			object.actionButton.style.display = "none"
+		else {
+			object.actionButton.style.display = null;
+		}
+
 }
