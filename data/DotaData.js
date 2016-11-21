@@ -7,6 +7,7 @@ DotaData.Versions = {}
 DotaData.NewestVersion = "";
 DotaData.NewestMajor = "";
 
+// Shared metadata for module use
 DotaData.Meta = {
 	TeamList: ["Radiant", "Dire"],
 	TypeList: ["Strength", "Agility", "Intelligence"],
@@ -16,19 +17,23 @@ DotaData.Meta = {
 	// List of properties that should be automatically handled.
 	// This list is also a reference list of stats that should be displayed in tooltips
 	StatAutoProperties: [
-		"Strength", "Agility", "Intelligence", "Health", "Mana",
+		"AttackType", "Strength", "Agility", "Intelligence", "Health", "Mana",
 		"HealthRegeneration", "ManaRegenerationPercentage", "ManaRegenerationFlat",
 		"MagicalResistance", "Evasion", "Armor", "MovementSpeed", "MovementSpeedPercentage",
 		"Damage", "DamageBase", "DamagePercentage", "DamageReductionPercentage", "DamageReduction",
 		"AttackSpeed", "AttackRate", "Range", "Haste", "ManaCostReduction", "CooldownReduction",
-		"VisionNight",
+		"VisionNight", "CastRange", "BuffDuration",
 	],
 	// Technical or hidden automatically handled properties
 	TechnicalAutoProperties: [
 		"LevelMin", "LevelMax", "ChargesMin", "ChargesMax", "Image",
 		"ManaCost", "Cooldown", "Hidden", "Buff", "HasAghanims", "Class",
 		"Invisible", "Revealed", "MovementSpeedUncapped", "HiddenAction",
-	]
+	],
+	// Properties that have plain display style
+	TooltipPlainStyle: [
+		"CastRange", "BuffDuration", "AttackType",
+	],
 }
 
 DotaData.getCurrentHeroList = function() {
@@ -133,6 +138,7 @@ DotaData.readableStatStrings = {
 	"DamageReductionPercentage": "Damage",
 	"ManaCostReduction": "Mana cost reduction",
 	"CooldownReduction": "Cooldown reduction",
+	"AttackType": "Attack type",
 }
 
 // Lookup list when positive stats are detrimental
@@ -152,13 +158,15 @@ DotaData.statToReadable = function(stat, val) {
 		printableValue = val,
 		signPrefix = val > 0 ? "+" : "";
 
-	// Format printable value depending if its a percentage or normal value
-	if (percentageTest || DotaData.percentageValues.includes(stat))
-		printableValue = signPrefix + (val * 100).toFixed(0)+"%";
-	else if ( val != Math.trunc(val))
-		printableValue = signPrefix + printableValue.toFixed(2)
-	else
-		printableValue = signPrefix + printableValue
+	if (typeof val !== "string") {
+		// Format printable value depending if its a percentage or normal value
+		if (percentageTest || DotaData.percentageValues.includes(stat))
+			printableValue = signPrefix + (val * 100).toFixed(0)+"%";
+		else if ( val != Math.trunc(val))
+			printableValue = signPrefix + printableValue.toFixed(2)
+		else
+			printableValue = signPrefix + printableValue
+	}
 
 	// Flag if it's possible to calculate a value for this property by replacing
 	// the suffix "Percentage" with "Base"

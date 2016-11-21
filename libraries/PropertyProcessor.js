@@ -25,9 +25,6 @@ PropertyProcessor.properties = {
 PropertyProcessor.applyDataProperties = function applyDataProps(newobj, dataobj) {
 	let meta = dataobj.Meta || { "Wrap": [] }
 	for (let prop in dataobj) {
-		if (prop == "Meta")
-			continue;
-
 		let value = dataobj[prop];
 		if (PropertyProcessor.autoPropertyCheck(prop, value, dataobj)) {
 			if (value instanceof Function)

@@ -6014,6 +6014,7 @@ DotaData.addVersion({
 			"LockedCharges": true,
 			"Charges": 0,
 			"ChargesSemantic": "Instances",
+			"ChargesMax": function(){ return this.Level > 0 ? 3 : 0 },
 			"LevelAdjusted": function() {
 				let bonus = this.heroTotal.HasAghanims && this.Level > 0 ? 1 : 0;
 				return this.Level + bonus;
@@ -6047,6 +6048,7 @@ DotaData.addVersion({
 			"LockedCharges": true,
 			"Charges": 0,
 			"ChargesSemantic": "Instances",
+			"ChargesMax": function(){ return this.Level > 0 ? 3 : 0 },
 			"LevelAdjusted": function() {
 				let bonus = this.heroTotal.HasAghanims && this.Level > 0 ? 1 : 0;
 				return this.Level + bonus;
@@ -6081,7 +6083,7 @@ DotaData.addVersion({
 			"LockedCharges": true,
 			"Charges": 0,
 			"ChargesSemantic": "Instances",
-			"ChargesMax": 3,
+			"ChargesMax": function(){ return this.Level > 0 ? 3 : 0 },
 			"LevelAdjusted": function() {
 				let bonus = this.heroTotal.HasAghanims && this.Level > 0 ? 1 : 0;
 				return this.Level + bonus;
@@ -6183,6 +6185,11 @@ DotaData.addVersion({
 		},
 		"invoker_alacrity": {
 			"Name": "Alacrity",
+			"Meta": {
+				"TooltipStats": ["Wex", "Exort"],
+				"TooltipPlain": ["Wex", "Exort"],
+				"Wrap": ["Wex", "Exort"],
+			},
 			"Level": true,
 			"HiddenAction": function(){
 				if (this.heroRef == undefined ||
@@ -6202,6 +6209,16 @@ DotaData.addVersion({
 				"Teammates": true,
 				"NoTarget": true,
 				"Refresh": "override",
+			},
+			"Wex": function() {
+				if (this.heroRef && this.heroRef.AbilityIds)
+					return this.heroRef.AbilityIds.invoker_wex.Level
+				return 0
+			},
+			"Exort": function() {
+				if (this.heroRef && this.heroRef.AbilityIds)
+					return this.heroRef.AbilityIds.invoker_exort.Level
+				return 0
 			},
 			"Cooldown": 15,
 			"ManaCost": 45,
@@ -7691,26 +7708,29 @@ DotaData.addVersion({
 		},
 		"troll_warlord_berserkers_rage": {
 			"Name": "Berserker's rage",
-			"Charges": 0,
-			"ChargesMax": function(){ return this.Level > 0 ? 1 : 0 },
-			"ChargesSemantic": "Active",
-			"Image": function(){ return this.Charges ? "troll_warlord_berserkers_rage_active" : "troll_warlord_berserkers_rage" },
-			"AttackType": function(){ return this.Charges ? "Melee" : "Ranged" },
-			"Range": function(){ return this.Charges ? -350 : 0 },
-			"MovementSpeed": function(){ return this.Charges ? 10 * this.Level : 0},
-			"AttackRate": function(){ return this.Charges ? -0.2 : 0},
-			"Armor": function(){ return this.Charges ? 6 : 0 },
+			"Active": false,
+			"Image": function(){ return "troll_warlord_berserkers_rage" + (this.Active ? "_active" : "") },
+			"AttackType": function(){ return this.Active ? "Melee" : "Ranged" },
+			"Range": function(){ return this.Active ? -350 : 0 },
+			"MovementSpeed": function(){ return this.Active ? 10 * this.Level : 0},
+			"AttackRate": function(){ return this.Active ? -0.2 : 0},
+			"Armor": function(){ return this.Active ? 6 : 0 },
+			"Action": {
+				"Type": "Operation",
+				"Function": function(){ this.Active = !this.Active },
+			},
 		},
 		"troll_warlord_whirling_axes_ranged": {
-			"Name": "Whirling axes (Ranged)",
-			"Image": function(){
-				if (this.heroRef &&
-					this.heroRef.AbilityIds["troll_warlord_berserkers_rage"] &&
-					this.heroRef.AbilityIds["troll_warlord_berserkers_rage"].Charges > 0 )
-					return "troll_warlord_whirling_axes_melee"
-				return "troll_warlord_whirling_axes_ranged";
+			//"Name": "Whirling axes (Ranged)",
+			"Name": "Whirling axes",
+			"Meta": { "Wrap": ["Active"] },
+			"Active": function() {
+				if (this.heroRef &&	this.heroRef.AbilityIds)
+					return this.heroRef.AbilityIds.troll_warlord_berserkers_rage.Active
+				return false
 			},
-			"Cooldown": function(){ return 22 - this.Level * 3 },
+			"Image": function(){ return "troll_warlord_whirling_axes_" + (this.Active ? "melee" : "ranged") },
+			"Cooldown": function(){ return this.Active ? 12 : 22 - this.Level * 3 },
 			"ManaCost": 50
 		},
 		"troll_warlord_whirling_axes_melee": {

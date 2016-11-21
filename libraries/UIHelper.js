@@ -263,14 +263,14 @@ UIHelper.createDetailedTooltip = function ( object ) {
 	}
 
 	if (typeof object.Level === "number") {
-		var levelLabel = document.createElement("span");
+		let levelLabel = document.createElement("span");
 		levelLabel.textContent = "Level:";
 		levelLabel.style.textAlign = "right";
 		//levelLabel.style.padding = "3px";
 		levelLabel.style.width = "50px";
 		el.appendChild(levelLabel);
 
-		var levelInput = document.createElement("input");
+		let levelInput = document.createElement("input");
 		levelInput.style.width = "3em";
 		levelInput.value = object.Level;
 		levelInput.min = typeof object.LevelMin === "number" ? object.LevelMin : 0;
@@ -292,7 +292,7 @@ UIHelper.createDetailedTooltip = function ( object ) {
 	}
 
 	if ("Charges" in object) {
-		var chargeLabel = document.createElement("span");
+		let chargeLabel = document.createElement("span");
 		if (object.ChargesSemantic)
 			chargeLabel.textContent = object.ChargesSemantic.toString() + ":";
 		else if (object instanceof AbilityInstance || object instanceof BuffInstance)
@@ -303,7 +303,7 @@ UIHelper.createDetailedTooltip = function ( object ) {
 		chargeLabel.style.width = "50px";
 		el.appendChild(chargeLabel);
 
-		var chargeInput = document.createElement("input");
+		let chargeInput = document.createElement("input");
 		chargeInput.style.width = "3em";
 		chargeInput.value = object.Charges;
 		chargeInput.min = (typeof object.ChargesMin == "number") ? object.ChargesMin : 0;
@@ -323,39 +323,61 @@ UIHelper.createDetailedTooltip = function ( object ) {
 		el.appendChild(document.createElement("br"));
 	}
 
-	var statOrder = DotaData.Meta.StatAutoProperties;
+	let statOrder = DotaData.Meta.StatAutoProperties;
 		statValues = {};
 
-	for (var stat of statOrder)
-		//if (typeof object[stat] !== "undefined")
+	for (let stat of statOrder)
 		if (object.hasOwnProperty(stat))
 			statValues[stat] = object[stat];
+
+	if (object.Meta && object.Meta.TooltipStats)
+		for (let stat of object.Meta.TooltipStats)
+			statValues[stat] = object[stat]
 
 	// handler for ItemInstance special stats
 	if (object.Family)
 		for (var stat in object.Family.Stats)
 			statValues[stat] = object.Family.Stats[stat]
 
-	for (var stat in statValues) {
-		var readable = DotaData.statToReadable(stat, statValues[stat]),
-			valueLabel = el.appendChild(document.createElement("span"));
-			valueLabel.className = "item-display-options value";
-			object.dynamicElements[stat] = valueLabel;
+	for (let stat in statValues) {
+		let readable = DotaData.statToReadable(stat, statValues[stat]),
+			valueLabel = document.createElement("span"),
+			spanLabel = document.createElement("span");
+		valueLabel.className = "item-display-options";
+		spanLabel.className = "item-display-options label";
+		object.dynamicElements[stat] = valueLabel;
 
+		if (DotaData.Meta.TooltipPlainStyle.includes(stat) ||
+			(object.Meta && object.Meta.TooltipPlain && object.Meta.TooltipPlain.includes(stat))) {
+			spanLabel.textContent = readable.key + ": "
+			valueLabel.textContent = statValues[stat]
+
+			el.appendChild(spanLabel)
+			el.appendChild(valueLabel)
+		}
+		else {
 		// mouseover tooltip displaying
-		if (readable.isPercentage)
-			valueLabel.title = (statValues[stat] * heroTotal[readable.baseName]).toFixed(0);
-
-		if (readable.negativeOverride === undefined && statValues[stat] < 0)
-			valueLabel.classList.add("negative");
-		else if (readable.negativeOverride && statValues[stat] > 0)
-			valueLabel.classList.add("negative");
-		valueLabel.textContent = readable.value;
-
-		var spanLabel = document.createElement("span");
-			spanLabel.className = "item-display-options label";
+			valueLabel.classList.add("value")
 			spanLabel.textContent = readable.key;
-		el.appendChild(spanLabel);
+			if (readable.isPercentage)
+				valueLabel.title = (statValues[stat] * heroTotal[readable.baseName]).toFixed(0);
+
+			if (readable.negativeOverride)
+				if (statValues[stat] <= 0)
+					valueLabel.classList.remove("negative");
+				else
+					valueLabel.classList.add("negative");
+			else
+				if (statValues[stat] >= 0)
+					valueLabel.classList.remove("negative");
+				else
+					valueLabel.classList.add("negative");
+			valueLabel.textContent = readable.value;
+			el.appendChild(valueLabel)
+			el.appendChild(spanLabel)
+		}
+
+
 		el.appendChild(document.createElement("br"));
 	}
 
@@ -391,7 +413,7 @@ UIHelper.createDetailedTooltip = function ( object ) {
 	}
 
 	if ( object.Warning ) {
-		var warning = document.createElement("span")
+		let warning = document.createElement("span")
 		warning.className = "item-display-options warning"
 		warning.textContent = object.Warning;
 		el.appendChild(warning)
@@ -399,7 +421,7 @@ UIHelper.createDetailedTooltip = function ( object ) {
 	}
 
 	if ( object.Lore ) {
-		var lore = document.createElement("span")
+		let lore = document.createElement("span")
 		lore.className = "item-display-options lore"
 		lore.textContent = object.Lore
 		el.appendChild(lore)
@@ -421,7 +443,7 @@ UIHelper.updateDisplayElements = function ( object ) {
 			return;
 		}
 		else
-			object.displayElement.style.display = ""
+			object.displayElement.style.display = null
 	if (object.Image)
 		if (object instanceof ItemInstance)
 			object.displayElement.style.backgroundImage = "url(images/items/" + object.Image + ".png)";
@@ -439,26 +461,33 @@ UIHelper.updateDisplayElements = function ( object ) {
 
 	if (object.levelElement)
 		object.levelElement.textContent = DotaData.numericToRoman(object.Level);
-	for (var stat in object.dynamicElements) {
-		var statValue = stat in object ? object[stat] : object.Family.Stats[stat];
+	for (let stat in object.dynamicElements) {
+		let statValue = stat in object ? object[stat] : object.Family.Stats[stat];
 		if (object.Level === 0)
 			statValue = 0;
-		var readable = DotaData.statToReadable(stat, statValue);
-		var dynElement = object.dynamicElements[stat]
-		dynElement.textContent = readable.value;
-		if (readable.isPercentage)
-			dynElement.title = (statValue * heroTotal[readable.baseName+"Base"]).toFixed(2);
+		let dynElement = object.dynamicElements[stat],
+			readable = DotaData.statToReadable(stat, statValue);
 
-		if (readable.negativeOverride === undefined)
-			if (statValue < 0)
-				dynElement.classList.add("negative");
+		if (DotaData.Meta.TooltipPlainStyle.includes(stat) ||
+			(object.Meta && object.Meta.TooltipPlain && object.Meta.TooltipPlain.includes(stat))) {
+			dynElement.textContent = statValue;
+		}
+		else {
+			dynElement.textContent = readable.value;
+			if (readable.isPercentage)
+				dynElement.title = (statValue * heroTotal[readable.baseName+"Base"]).toFixed(2);
+
+			if (readable.negativeOverride)
+				if (statValue <= 0)
+					dynElement.classList.remove("negative");
+				else
+					dynElement.classList.add("negative");
 			else
-				dynElement.classList.remove("negative");
-		else if (readable.negativeOverride)
-			if (statValue > 0)
-				dynElement.classList.add("negative");
-			else
-				dynElement.classList.remove("negative");
+				if (statValue >= 0)
+					dynElement.classList.remove("negative");
+				else
+					dynElement.classList.add("negative");
+		}
 	}
 	if (object.cooldownElement)
 		if (object.Level === 0)
