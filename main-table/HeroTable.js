@@ -348,7 +348,7 @@ HeroTable.addEvaluator({
 	type: "General",
 	description: "Displays hero name",
 	init: function(cell, heroInstance){
-		cell.textContent = heroInstance.Raw.Name;
+		cell.textContent = heroInstance.Base.Name;
 	}
 });
 
@@ -357,19 +357,22 @@ HeroTable.addEvaluator({
 	name: "Level",
 	header: "Lvl",
 	type: "Base",
-	description: "Displays hero level",
+	description: "Displays and changes hero level",
 	init: function(cell, heroInstance) {
-		var input = document.createElement("input");
-		input.value = heroInstance.Meta.Level;
+		let input = document.createElement("input"),
+			deferredInstance = heroInstance;
+		input.value = heroInstance.Base.Level;
 		input.style.width = "2.5em";
-		var change = (function(hero,e,u) {
-				hero.LevelChange(e.target.value);
-				this.refreshHero(hero);
-			}).bind(this, heroInstance);
+		let change = (function(e,u) {
+				deferredInstance.Base.Level = e.target.value
+				deferredInstance.Base.updateHero()
+				//hero.LevelChange(e.target.value);
+				//this.refreshHero(hero);
+			})//.bind(this, heroInstance);
 		cell.appendChild(input);
 		$(input).spinner({
-			min: 1,
-			max: 25,
+			min: heroInstance.Base.LevelMin,
+			max: heroInstance.Base.LevelMax,
 			stop: change
 		});
 	},
@@ -437,7 +440,7 @@ HeroTable.addEvaluator({
 	type: "Base",
 	description: "Displays hero base attack time value",
 	eval: function(cell, hero) {
-		cell.textContent = hero.Raw.AttackRate;
+		cell.textContent = hero.Total.AttackRate;
 	},
 	sorter: "number"
 });
@@ -492,7 +495,7 @@ HeroTable.addEvaluator({
 		var el = document.createElement("div");
 		el.className = "mheroicon " + heroInstance.Meta.ID;
 		cell.appendChild(el);
-		cell.sortingProperty = heroInstance.Raw.Name;
+		cell.sortingProperty = heroInstance.Base.Name;
 	},
 	sorter: "propertyText"
 });
@@ -579,7 +582,7 @@ HeroTable.addEvaluator({
 		cell.className = "box-content";
 		var container = document.createElement("div");
 		container.ondrop = function(e) {
-			hero.addItem(new ItemInstance(e.dataTransfer.getData("text/item-id"), {
+			hero.addItem(new ItemObject(e.dataTransfer.getData("text/item-id"), {
 				version: e.dataTransfer.getData("text/item-version")
 			}));
 		}
@@ -593,8 +596,8 @@ HeroTable.addEvaluator({
 	eval: function(cell, hero) {
 		cell = cell.firstChild;
 		for (var item of hero.Items)
-			if (!cell.contains(item.createDisplayElement()))
-				cell.appendChild(item.createDisplayElement())
+			if (!cell.contains(item.createDisplay()))
+				cell.appendChild(item.createDisplay())
 	},
 	sorter: false
 });
@@ -611,7 +614,7 @@ HeroTable.addEvaluator({
 		container.className = "item-container abilities"
 		cell.appendChild(container);
 		for (var ability of hero.Abilities)
-			container.appendChild(ability.createDisplayElement());
+			container.appendChild(ability.createDisplay());
 	},
 	sorter: false
 });
@@ -638,8 +641,8 @@ HeroTable.addEvaluator({
 	eval: function(cell, hero) {
 		cell = cell.firstChild;
 		for (var buff of hero.Buffs)
-			if (!cell.contains(buff.createDisplayElement()))
-				cell.appendChild(buff.createDisplayElement())
+			if (!cell.contains(buff.createDisplay()))
+				cell.appendChild(buff.createDisplay())
 	},
 	sorter: false
 })
@@ -651,7 +654,7 @@ HeroTable.addEvaluator({
 	type: "General",
 	description: "Displays hero balance patch version",
 	eval: function(cell, hero) {
-		cell.textContent = hero.Raw.Version;
+		cell.textContent = hero.Base.Version;
 	}
 });
 
@@ -688,7 +691,7 @@ HeroTable.addEvaluator({
 	type: "Derived",
 	description: "Attacks per second that hero makes",
 	eval: function(cell, hero) {
-		var attackTime = (hero.Total.AttackSpeed / 100) / hero.Raw.AttackRate;
+		var attackTime = (hero.Total.AttackSpeed / 100) / hero.Total.AttackRate;
 		cell.textContent = attackTime.toFixed(2);
 		cell.sortingProperty = attackTime;
 	},
@@ -869,14 +872,14 @@ HeroTable.addEvaluator({
 	type: "General",
 	description: "Adds a way to clone a hero",
 	init: function(cell, heroInstance){
+		let deferredThis = this,
+			button = document.createElement("button");
 		cell.classList.add("single-button")
-		var button = document.createElement("button");
 		button.className = "copy-button";
 		cell.appendChild(button);
 		button.HeroInstanceRef = heroInstance;
-		button.TableInstanceRef = this;
 		button.onclick = function(e){
-			this.TableInstanceRef.addHero(this.HeroInstanceRef.copy(e.shiftKey));
+			deferredThis.addHero(this.HeroInstanceRef.copy(e.shiftKey));
 		};
 	},
 	sorter: false

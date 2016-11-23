@@ -18,7 +18,7 @@ DotaData.addVersion({
 	//
 
 	"Heroes": {
-		"_base": // Special base entry
+		[DotaData.Basis]: // Special base entry
 		{
 			"Name": "NO-DISPLAY-NAME",
 			"Class": "Hero",
@@ -42,23 +42,27 @@ DotaData.addVersion({
 			"IntelligenceBase": 0,
 			"IntelligenceGain": 0,
 			"Type": "Strength",
-			"Enabled": -1,
+			"Enabled": true,
 			"HasInventory": true,
 			"Level": 1,
-			"Armor": -1.0,
+			"LevelMin": 1,
+			"LevelMax": 25,
+			"ArmorBase": -1.0,
 			"ArmorType": "Hero",
 			"ArmorPerAgility": 0.14,
 			"MagicalResistance": 0.25,
-			"MagicalAmpPerIntelligence": 0.0625,
+			"MagicAmplificationPerIntelligence": 0.000625,
 			"MovementSpeed": 300,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 900,
-			"Health": 200,
-			"HealthRegeneration": 0.25,
+			"HealthBase": 200,
 			"HealthPerStrength": 20,
-			"Mana": 50,
-			"ManaRegeneration": 0.01,
+			"HealthRegenerationBase": 0.25,
+			"HealthRegenerationPerStrength": 0.03,
+			"ManaBase": 50,
 			"ManaPerIntelligence": 12,
+			"ManaRegenerationBase": 0.01,
+			"ManaRegenerationPerIntelligence": 0.04,
 			"VisionDaytime": 1800,
 			"VisionNighttime": 800,
 			"Team": "Radiant"
@@ -71,7 +75,7 @@ DotaData.addVersion({
 			"Ability3": "abaddon_frostmourne",
 			"Ability4": "abaddon_borrowed_time",
 			"Ability5": "attribute_bonus",
-			"Armor": -1.0,
+			"ArmorBase": -1.0,
 			"AttackPoint": 0.56,
 			"AttackType": "Melee",
 			"DamageMax": 42,
@@ -85,7 +89,6 @@ DotaData.addVersion({
 			"IntelligenceBase": 21,
 			"IntelligenceGain": 2.0,
 			"Type": "Strength",
-			"Enabled": 1,
 			"MovementSpeed": 310,
 			"TurnRate": 0.5,
 			"Team": "Dire"
@@ -99,7 +102,7 @@ DotaData.addVersion({
 			"Ability4": "alchemist_chemical_rage",
 			"Ability5": "attribute_bonus",
 			//"Ability6": "alchemist_unstable_concoction_throw",
-			"Armor": 0,
+			"ArmorBase": 0,
 			"AttackPoint": 0.35,
 			"AttackType": "Melee",
 			"DamageMax": 33,
@@ -113,7 +116,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 1.8,
 			"Type": "Strength",
 			"StrengthGain": 1.8,
-			"Enabled": 1,
 			"MovementSpeed": 295,
 			"TurnRate": 0.6,
 			"Team": "Radiant"
@@ -128,7 +130,7 @@ DotaData.addVersion({
 			"Ability4": "ancient_apparition_ice_blast",
 			//"Ability5": "ancient_apparition_ice_blast_release",
 			//"Ability6": "attribute_bonus",
-			"Armor": -1,
+			"ArmorBase": -1,
 			"AttackPoint": 0.45,
 			"AttackType": "Ranged",
 			"DamageMax": 29,
@@ -142,7 +144,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 2.6,
 			"Type": "Intelligence",
 			"StrengthGain": 1.4,
-			"Enabled": 1,
 			"MovementSpeed": 295,
 			"TurnRate": 0.6,
 			"ProjectileSpeed": 1250,
@@ -155,7 +156,7 @@ DotaData.addVersion({
 			"Ability2": "antimage_blink",
 			"Ability3": "antimage_spell_shield",
 			"Ability4": "antimage_mana_void",
-			"Armor": -1,
+			"ArmorBase": -1,
 			"AttackPoint": 0.3,
 			"AttackType": "Melee",
 			"DamageMax": 31,
@@ -169,7 +170,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 1.8,
 			"Type": "Agility",
 			"StrengthGain": 1.2,
-			"Enabled": 1,
 			"MovementSpeed": 315,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 0,
@@ -182,7 +182,7 @@ DotaData.addVersion({
 			"Ability2": "axe_battle_hunger",
 			"Ability3": "axe_counter_helix",
 			"Ability4": "axe_culling_blade",
-			"Armor": -1,
+			"ArmorBase": -1,
 			"AttackPoint": 0.5,
 			"AttackType": "Melee",
 			"DamageMax": 28,
@@ -196,10 +196,9 @@ DotaData.addVersion({
 			"IntelligenceGain": 1.6,
 			"Type": "Strength",
 			"StrengthGain": 2.5,
-			"Enabled": 1,
 			"MovementSpeed": 290,
 			"TurnRate": 0.6,
-			"HealthRegeneration": 3.0,
+			"HealthRegenerationBase": 3.0,
 			"Team": "Dire"
 		},
 		"bane": {
@@ -211,7 +210,7 @@ DotaData.addVersion({
 			"Ability4": "bane_fiends_grip",
 			"Ability5": "attribute_bonus",
 			//"Ability6": "bane_nightmare_end",
-			"Armor": 1,
+			"ArmorBase": 1,
 			"AttackPoint": 0.3,
 			"AttackType": "Ranged",
 			"DamageMax": 39,
@@ -225,7 +224,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 2.1,
 			"Type": "Intelligence",
 			"StrengthGain": 2.1,
-			"Enabled": 1,
 			"MovementSpeed": 310,
 			"TurnRate": 0.6,
 			"ProjectileSpeed": 900,
@@ -237,7 +235,7 @@ DotaData.addVersion({
 			"Ability2": "batrider_flamebreak",
 			"Ability3": "batrider_firefly",
 			"Ability4": "batrider_flaming_lasso",
-			"Armor": 0,
+			"ArmorBase": 0,
 			"AttackPoint": 0.3,
 			"AttackType": "Ranged",
 			"DamageMax": 18,
@@ -251,11 +249,10 @@ DotaData.addVersion({
 			"IntelligenceBase": 24,
 			"IntelligenceGain": 2.5,
 			"Type": "Intelligence",
-			"Enabled": 1,
 			"MovementSpeed": 290,
 			"TurnRate": 1.0,
 			"ProjectileSpeed": 900,
-			"HealthRegeneration": 2.0,
+			"HealthRegenerationBase": 2.0,
 			"Team": "Dire",
 			"VisionDaytime": 1200
 		},
@@ -270,7 +267,7 @@ DotaData.addVersion({
 			"Ability5": "beastmaster_primal_roar",
 			"Ability6": "attribute_bonus",
 			"AbilityLayout": 5,
-			"Armor": 2,
+			"ArmorBase": 2,
 			"AttackPoint": 0.3,
 			"AttackType": "Melee",
 			"DamageMax": 45,
@@ -284,7 +281,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 1.9,
 			"Type": "Strength",
 			"StrengthGain": 2.2,
-			"Enabled": 1,
 			"MovementSpeed": 310,
 			"TurnRate": 0.4,
 			"ProjectileSpeed": 0,
@@ -298,7 +294,7 @@ DotaData.addVersion({
 			"Ability2": "bloodseeker_blood_bath",
 			"Ability3": "bloodseeker_thirst",
 			"Ability4": "bloodseeker_rupture",
-			"Armor": 0,
+			"ArmorBase": 0,
 			"AttackPoint": 0.43,
 			"AttackType": "Melee",
 			"DamageMax": 35,
@@ -312,7 +308,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 1.7,
 			"Type": "Agility",
 			"StrengthGain": 2.0,
-			"Enabled": 1,
 			"MovementSpeed": 290,
 			"TurnRate": 0.5,
 			"Team": "Dire"
@@ -325,7 +320,7 @@ DotaData.addVersion({
 			"Ability2": "bounty_hunter_jinada",
 			"Ability3": "bounty_hunter_wind_walk",
 			"Ability4": "bounty_hunter_track",
-			"Armor": 3,
+			"ArmorBase": 3,
 			"AttackPoint": 0.59,
 			"AttackType": "Melee",
 			"DamageMax": 38,
@@ -339,10 +334,9 @@ DotaData.addVersion({
 			"IntelligenceGain": 2.0,
 			"Type": "Agility",
 			"StrengthGain": 1.8,
-			"Enabled": 1,
 			"MovementSpeed": 315,
 			"TurnRate": 0.6,
-			"HealthRegeneration": 0.75,
+			"HealthRegenerationBase": 0.75,
 			"Team": "Radiant",
 			"VisionDaytime": 1800,
 			"VisionNighttime": 1000
@@ -355,7 +349,7 @@ DotaData.addVersion({
 			"Ability3": "brewmaster_drunken_brawler",
 			"Ability4": "brewmaster_primal_split",
 			"Ability5": "attribute_bonus",
-			"Armor": -1.0,
+			"ArmorBase": -1.0,
 			"AttackPoint": 0.35,
 			"AttackType": "Melee",
 			"DamageMax": 36,
@@ -369,10 +363,9 @@ DotaData.addVersion({
 			"IntelligenceGain": 1.25,
 			"Type": "Strength",
 			"StrengthGain": 2.9,
-			"Enabled": 1,
 			"MovementSpeed": 300,
 			"TurnRate": 0.6,
-			"HealthRegeneration": 0.75,
+			"HealthRegenerationBase": 0.75,
 			"Team": "Radiant"
 		},
 		"bristleback": {
@@ -384,7 +377,7 @@ DotaData.addVersion({
 			"Ability3": "bristleback_bristleback",
 			"Ability4": "bristleback_warpath",
 			"Ability5": "attribute_bonus",
-			"Armor": 1.0,
+			"ArmorBase": 1.0,
 			"AttackPoint": 0.3,
 			"AttackType": "Melee",
 			"DamageMax": 36,
@@ -398,7 +391,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 2.8,
 			"Type": "Strength",
 			"StrengthGain": 2.2,
-			"Enabled": 1,
 			"MovementSpeed": 290,
 			"TurnRate": 1.0,
 			"Team": "Radiant"
@@ -411,7 +403,7 @@ DotaData.addVersion({
 			"Ability2": "broodmother_spin_web",
 			"Ability3": "broodmother_incapacitating_bite",
 			"Ability4": "broodmother_insatiable_hunger",
-			"Armor": 0,
+			"ArmorBase": 0,
 			"AttackPoint": 0.4,
 			"AttackType": "Melee",
 			"DamageMax": 32,
@@ -425,7 +417,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 2.0,
 			"Type": "Agility",
 			"StrengthGain": 2.5,
-			"Enabled": 1,
 			"MovementSpeed": 295,
 			"TurnRate": 0.5,
 			"Team": "Dire"
@@ -438,7 +429,7 @@ DotaData.addVersion({
 			"Ability3": "centaur_return",
 			"Ability4": "centaur_stampede",
 			"Ability5": "attribute_bonus",
-			"Armor": 1,
+			"ArmorBase": 1,
 			"AttackPoint": 0.3,
 			"AttackType": "Melee",
 			"DamageMax": 34,
@@ -452,7 +443,6 @@ DotaData.addVersion({
 			"IntelligenceBase": 15,
 			"IntelligenceGain": 1.6,
 			"Type": "Strength",
-			"Enabled": 1,
 			"MovementSpeed": 300,
 			"TurnRate": 0.5,
 			"Team": "Radiant"
@@ -465,7 +455,7 @@ DotaData.addVersion({
 			"Ability3": "chaos_knight_chaos_strike",
 			"Ability4": "chaos_knight_phantasm",
 			"Ability5": "attribute_bonus",
-			"Armor": 2,
+			"ArmorBase": 2,
 			"AttackPoint": 0.5,
 			"AttackType": "Melee",
 			"DamageMax": 59,
@@ -479,7 +469,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 1.2,
 			"Type": "Strength",
 			"StrengthGain": 2.9,
-			"Enabled": 1,
 			"MovementSpeed": 325,
 			"TurnRate": 0.5,
 			"Team": "Dire"
@@ -494,7 +483,7 @@ DotaData.addVersion({
 			"Ability5": "chen_hand_of_god",
 			"Ability6": "attribute_bonus",
 			"AbilityLayout": 5,
-			"Armor": -1,
+			"ArmorBase": -1,
 			"AttackPoint": 0.5,
 			"AttackType": "Ranged",
 			"DamageMax": 32,
@@ -508,7 +497,6 @@ DotaData.addVersion({
 			"IntelligenceBase": 21,
 			"IntelligenceGain": 2.8,
 			"Type": "Intelligence",
-			"Enabled": 1,
 			"MovementSpeed": 300,
 			"TurnRate": 0.6,
 			"ProjectileSpeed": 1100,
@@ -521,7 +509,7 @@ DotaData.addVersion({
 			"Ability2": "clinkz_searing_arrows",
 			"Ability3": "clinkz_wind_walk",
 			"Ability4": "clinkz_death_pact",
-			"Armor": -1,
+			"ArmorBase": -1,
 			"AttackPoint": 0.7,
 			"AttackType": "Ranged",
 			"DamageMax": 21,
@@ -535,7 +523,6 @@ DotaData.addVersion({
 			"IntelligenceBase": 16,
 			"IntelligenceGain": 1.55,
 			"Type": "Agility",
-			"Enabled": 1,
 			"MovementSpeed": 300,
 			"TurnRate": 0.4,
 			"ProjectileSpeed": 900,
@@ -549,7 +536,7 @@ DotaData.addVersion({
 			"Ability2": "crystal_maiden_frostbite",
 			"Ability3": "crystal_maiden_brilliance_aura",
 			"Ability4": "crystal_maiden_freezing_field",
-			"Armor": -1,
+			"ArmorBase": -1,
 			"AttackPoint": 0.55,
 			"AttackType": "Ranged",
 			"DamageMax": 25,
@@ -563,7 +550,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 2.9,
 			"Type": "Intelligence",
 			"StrengthGain": 1.7,
-			"Enabled": 1,
 			"MovementSpeed": 280,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 900,
@@ -577,7 +563,7 @@ DotaData.addVersion({
 			"Ability2": "dark_seer_ion_shell",
 			"Ability3": "dark_seer_surge",
 			"Ability4": "dark_seer_wall_of_replica",
-			"Armor": 5,
+			"ArmorBase": 5,
 			"AttackPoint": 0.59,
 			"AttackType": "Melee",
 			"DamageMax": 37,
@@ -591,7 +577,6 @@ DotaData.addVersion({
 			"IntelligenceBase": 25,
 			"IntelligenceGain": 2.7,
 			"Type": "Intelligence",
-			"Enabled": 1,
 			"MovementSpeed": 300,
 			"TurnRate": 0.6,
 			"Team": "Dire"
@@ -603,7 +588,7 @@ DotaData.addVersion({
 			"Ability2": "dazzle_shallow_grave",
 			"Ability3": "dazzle_shadow_wave",
 			"Ability4": "dazzle_weave",
-			"Armor": -1,
+			"ArmorBase": -1,
 			"AttackPoint": 0.3,
 			"AttackType": "Ranged",
 			"DamageMax": 32,
@@ -617,7 +602,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 3.4,
 			"Type": "Intelligence",
 			"StrengthGain": 1.85,
-			"Enabled": 1,
 			"MovementSpeed": 305,
 			"TurnRate": 0.6,
 			"ProjectileSpeed": 1200,
@@ -631,7 +615,7 @@ DotaData.addVersion({
 			"Ability2": "death_prophet_silence",
 			"Ability3": "death_prophet_spirit_siphon",
 			"Ability4": "death_prophet_exorcism",
-			"Armor": 1,
+			"ArmorBase": 1,
 			"AttackPoint": 0.56,
 			"AttackType": "Ranged",
 			"DamageMax": 36,
@@ -645,11 +629,10 @@ DotaData.addVersion({
 			"IntelligenceBase": 20,
 			"IntelligenceGain": 3.0,
 			"Type": "Intelligence",
-			"Enabled": 1,
 			"MovementSpeed": 310,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 1000,
-			"HealthRegeneration": 0.75,
+			"HealthRegenerationBase": 0.75,
 			"Team": "Dire"
 		},
 		"disruptor": {
@@ -660,7 +643,7 @@ DotaData.addVersion({
 			"Ability3": "disruptor_kinetic_field",
 			"Ability4": "disruptor_static_storm",
 			"Ability5": "attribute_bonus",
-			"Armor": -1.0,
+			"ArmorBase": -1.0,
 			"AttackPoint": 0.4,
 			"AttackType": "Ranged",
 			"DamageMax": 31,
@@ -674,7 +657,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 2.5,
 			"Type": "Intelligence",
 			"StrengthGain": 1.9,
-			"Enabled": 1,
 			"MovementSpeed": 300,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 1200,
@@ -691,7 +673,7 @@ DotaData.addVersion({
 			"Ability4": "doom_bringer_doom",
 			//"Ability7": "attribute_bonus",
 			"AbilityLayout": 6,
-			"Armor": -1,
+			"ArmorBase": -1,
 			"AttackPoint": 0.5,
 			"AttackType": "Melee",
 			"DamageMax": 43,
@@ -705,7 +687,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 2.1,
 			"Type": "Strength",
 			"StrengthGain": 3.2,
-			"Enabled": 1,
 			"MovementSpeed": 290,
 			"TurnRate": 0.5,
 			"Team": "Dire"
@@ -718,7 +699,7 @@ DotaData.addVersion({
 			"Ability2": "dragon_knight_dragon_tail",
 			"Ability3": "dragon_knight_dragon_blood",
 			"Ability4": "dragon_knight_elder_dragon_form",
-			"Armor": 1,
+			"ArmorBase": 1,
 			"AttackPoint": 0.5,
 			"AttackType": "Melee",
 			"DamageMax": 37,
@@ -732,7 +713,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 1.7,
 			"Type": "Strength",
 			"StrengthGain": 2.8,
-			"Enabled": 1,
 			"MovementSpeed": 290,
 			"TurnRate": 0.6,
 			"ProjectileSpeed": 900,
@@ -746,7 +726,7 @@ DotaData.addVersion({
 			"Ability2": "drow_ranger_wave_of_silence",
 			"Ability3": "drow_ranger_trueshot",
 			"Ability4": "drow_ranger_marksmanship",
-			"Armor": -3,
+			"ArmorBase": -3,
 			"AttackPoint": 0.7,
 			"AttackType": "Ranged",
 			"DamageMax": 25,
@@ -760,7 +740,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 1.4,
 			"Type": "Agility",
 			"StrengthGain": 1.9,
-			"Enabled": 1,
 			"MovementSpeed": 300,
 			"TurnRate": 0.7,
 			"ProjectileSpeed": 1250,
@@ -778,7 +757,7 @@ DotaData.addVersion({
 			"Ability6": "earth_spirit_magnetize",
 			"Ability7": "attribute_bonus",
 			"AbilityLayout": 5,
-			"Armor": 1.0,
+			"ArmorBase": 1.0,
 			"AttackPoint": 0.35,
 			"AttackType": "Melee",
 			"DamageMax": 35,
@@ -792,7 +771,6 @@ DotaData.addVersion({
 			"IntelligenceBase": 18,
 			"IntelligenceGain": 2.1,
 			"Type": "Strength",
-			"Enabled": 1,
 			"MovementSpeed": 305,
 			"TurnRate": 0.6,
 			"Team": "Radiant"
@@ -805,7 +783,7 @@ DotaData.addVersion({
 			"Ability2": "earthshaker_enchant_totem",
 			"Ability3": "earthshaker_aftershock",
 			"Ability4": "earthshaker_echo_slam",
-			"Armor": 1,
+			"ArmorBase": 1,
 			"AttackPoint": 0.467,
 			"AttackType": "Melee",
 			"DamageMax": 34,
@@ -819,7 +797,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 1.8,
 			"Type": "Strength",
 			"StrengthGain": 2.9,
-			"Enabled": 1,
 			"MovementSpeed": 310,
 			"TurnRate": 0.9,
 			"ProjectileSpeed": 0,
@@ -834,7 +811,7 @@ DotaData.addVersion({
 			"Ability3": "elder_titan_natural_order",
 			"Ability4": "elder_titan_earth_splitter",
 			//"Ability5": "elder_titan_return_spirit",
-			"Armor": 1.0,
+			"ArmorBase": 1.0,
 			"AttackPoint": 0.35,
 			"AttackType": "Melee",
 			"DamageMax": 33,
@@ -848,7 +825,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 1.6,
 			"Type": "Strength",
 			"StrengthGain": 2.3,
-			"Enabled": 1,
 			"MovementSpeed": 315,
 			"TurnRate": 0.4,
 			"Team": "Radiant"
@@ -864,7 +840,7 @@ DotaData.addVersion({
 			"Ability5": "ember_spirit_activate_fire_remnant",
 			"Ability6": "attribute_bonus",
 			"AbilityLayout": 5,
-			"Armor": -2.0,
+			"ArmorBase": -2.0,
 			"AttackPoint": 0.4,
 			"AttackType": "Melee",
 			"DamageMax": 34,
@@ -878,10 +854,9 @@ DotaData.addVersion({
 			"IntelligenceGain": 1.8,
 			"Type": "Agility",
 			"StrengthGain": 2.0,
-			"Enabled": 1,
 			"MovementSpeed": 310,
 			"TurnRate": 0.5,
-			"HealthRegeneration": 0.75,
+			"HealthRegenerationBase": 0.75,
 			"Team": "Radiant"
 		},
 		"enchantress": {
@@ -892,7 +867,7 @@ DotaData.addVersion({
 			"Ability2": "enchantress_enchant",
 			"Ability3": "enchantress_natures_attendants",
 			"Ability4": "enchantress_impetus",
-			"Armor": -2.0,
+			"ArmorBase": -2.0,
 			"AttackPoint": 0.3,
 			"AttackType": "Ranged",
 			"DamageMax": 41,
@@ -906,7 +881,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 2.8,
 			"Type": "Intelligence",
 			"StrengthGain": 1.0,
-			"Enabled": 1,
 			"MovementSpeed": 335,
 			"TurnRate": 0.4,
 			"ProjectileSpeed": 900,
@@ -918,7 +892,7 @@ DotaData.addVersion({
 			"Ability2": "enigma_demonic_conversion",
 			"Ability3": "enigma_midnight_pulse",
 			"Ability4": "enigma_black_hole",
-			"Armor": 2,
+			"ArmorBase": 2,
 			"AttackPoint": 0.4,
 			"AttackType": "Ranged",
 			"DamageMax": 28,
@@ -932,7 +906,6 @@ DotaData.addVersion({
 			"IntelligenceBase": 20,
 			"IntelligenceGain": 3.4,
 			"Type": "Intelligence",
-			"Enabled": 1,
 			"MovementSpeed": 300,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 900,
@@ -946,7 +919,7 @@ DotaData.addVersion({
 			"Ability2": "faceless_void_time_dilation",
 			"Ability3": "faceless_void_time_lock",
 			"Ability4": "faceless_void_chronosphere",
-			"Armor": 1,
+			"ArmorBase": 1,
 			"AttackPoint": 0.5,
 			"AttackType": "Melee",
 			"DamageMax": 39,
@@ -960,10 +933,9 @@ DotaData.addVersion({
 			"IntelligenceBase": 15,
 			"IntelligenceGain": 1.5,
 			"Type": "Agility",
-			"Enabled": 1,
 			"MovementSpeed": 300,
 			"TurnRate": 1.0,
-			"HealthRegeneration": 0.75,
+			"HealthRegenerationBase": 0.75,
 			"Team": "Dire"
 		},
 		"furion": {
@@ -974,7 +946,7 @@ DotaData.addVersion({
 			"Ability2": "furion_teleportation",
 			"Ability3": "furion_force_of_nature",
 			"Ability4": "furion_wrath_of_nature",
-			"Armor": 1,
+			"ArmorBase": 1,
 			"AttackPoint": 0.4,
 			"AttackType": "Ranged",
 			"DamageMax": 38,
@@ -988,7 +960,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 2.9,
 			"Type": "Intelligence",
 			"StrengthGain": 1.8,
-			"Enabled": 1,
 			"MovementSpeed": 295,
 			"TurnRate": 0.6,
 			"ProjectileSpeed": 1125,
@@ -1001,7 +972,7 @@ DotaData.addVersion({
 			"Ability2": "gyrocopter_homing_missile",
 			"Ability3": "gyrocopter_flak_cannon",
 			"Ability4": "gyrocopter_call_down",
-			"Armor": 1,
+			"ArmorBase": 1,
 			"AttackPoint": 0.2,
 			"AttackType": "Ranged",
 			"DamageMax": 23,
@@ -1015,7 +986,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 2.1,
 			"Type": "Agility",
 			"StrengthGain": 1.8,
-			"Enabled": 1,
 			"MovementSpeed": 315,
 			"TurnRate": 0.6,
 			"ProjectileSpeed": 3000,
@@ -1028,7 +998,7 @@ DotaData.addVersion({
 			"Ability2": "huskar_burning_spear",
 			"Ability3": "huskar_berserkers_blood",
 			"Ability4": "huskar_life_break",
-			"Armor": -1,
+			"ArmorBase": -1,
 			"AttackPoint": 0.4,
 			"AttackType": "Ranged",
 			"DamageMax": 30,
@@ -1042,7 +1012,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 1.5,
 			"Type": "Strength",
 			"StrengthGain": 2.4,
-			"Enabled": 1,
 			"MovementSpeed": 300,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 1400,
@@ -1071,7 +1040,7 @@ DotaData.addVersion({
 			//"Ability15": "invoker_ice_wall",
 			//"Ability16": "invoker_deafening_blast",
 			"AbilityLayout": 6,
-			"Armor": -1,
+			"ArmorBase": -1,
 			"AttackPoint": 0.4,
 			"AttackType": "Ranged",
 			"DamageMax": 25,
@@ -1085,7 +1054,6 @@ DotaData.addVersion({
 			"IntelligenceBase": 16,
 			"IntelligenceGain": 4,
 			"Type": "Intelligence",
-			"Enabled": 1,
 			"MovementSpeed": 280,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 900,
@@ -1098,7 +1066,7 @@ DotaData.addVersion({
 			"Ability2": "jakiro_ice_path",
 			"Ability3": "jakiro_liquid_fire",
 			"Ability4": "jakiro_macropyre",
-			"Armor": 1,
+			"ArmorBase": 1,
 			"AttackPoint": 0.4,
 			"AttackType": "Ranged",
 			"DamageMax": 33,
@@ -1112,7 +1080,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 2.8,
 			"Type": "Intelligence",
 			"StrengthGain": 2.3,
-			"Enabled": 1,
 			"MovementSpeed": 290,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 1100,
@@ -1125,7 +1092,7 @@ DotaData.addVersion({
 			"Ability2": "juggernaut_healing_ward",
 			"Ability3": "juggernaut_blade_dance",
 			"Ability4": "juggernaut_omni_slash",
-			"Armor": 0,
+			"ArmorBase": 0,
 			"AttackPoint": 0.33,
 			"AttackType": "Melee",
 			"DamageMax": 26,
@@ -1139,11 +1106,10 @@ DotaData.addVersion({
 			"IntelligenceGain": 1.4,
 			"Type": "Agility",
 			"StrengthGain": 1.9,
-			"Enabled": 1,
 			"MovementSpeed": 305,
 			"TurnRate": 0.6,
 			"ProjectileSpeed": 0,
-			"HealthRegeneration": 0.75,
+			"HealthRegenerationBase": 0.75,
 			"Team": "Radiant"
 		},
 		"keeper_of_the_light": {
@@ -1161,7 +1127,7 @@ DotaData.addVersion({
 			//"Ability8": "keeper_of_the_light_spirit_form_illuminate",
 			//"Ability9": "keeper_of_the_light_spirit_form_illuminate_end",
 			"AbilityLayout": 6,
-			"Armor": -1.0,
+			"ArmorBase": -1.0,
 			"AttackPoint": 0.3,
 			"AttackType": "Ranged",
 			"DamageMax": 32,
@@ -1175,7 +1141,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 2.8,
 			"Type": "Intelligence",
 			"StrengthGain": 1.8,
-			"Enabled": 1,
 			"MovementSpeed": 335,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 900,
@@ -1189,7 +1154,7 @@ DotaData.addVersion({
 			"Ability3": "kunkka_x_marks_the_spot",
 			"Ability4": "kunkka_ghostship",
 			//"Ability6": "kunkka_return",
-			"Armor": 2,
+			"ArmorBase": 2,
 			"AttackPoint": 0.4,
 			"AttackType": "Melee",
 			"DamageMax": 36,
@@ -1203,7 +1168,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 1.5,
 			"Type": "Strength",
 			"StrengthGain": 3,
-			"Enabled": 1,
 			"MovementSpeed": 300,
 			"TurnRate": 0.6,
 			"Team": "Radiant"
@@ -1217,7 +1181,7 @@ DotaData.addVersion({
 			"Ability3": "legion_commander_moment_of_courage",
 			"Ability4": "legion_commander_duel",
 			"Ability5": "attribute_bonus",
-			"Armor": 0.0,
+			"ArmorBase": 0.0,
 			"AttackPoint": 0.46,
 			"AttackType": "Melee",
 			"DamageMax": 39,
@@ -1231,7 +1195,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 2.2,
 			"Type": "Strength",
 			"StrengthGain": 2.6,
-			"Enabled": 1,
 			"MovementSpeed": 320,
 			"TurnRate": 0.5,
 			"Team": "Radiant"
@@ -1244,7 +1207,7 @@ DotaData.addVersion({
 			"Ability2": "leshrac_diabolic_edict",
 			"Ability3": "leshrac_lightning_storm",
 			"Ability4": "leshrac_pulse_nova",
-			"Armor": 0,
+			"ArmorBase": 0,
 			"AttackPoint": 0.4,
 			"AttackType": "Ranged",
 			"DamageMax": 19,
@@ -1258,7 +1221,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 3,
 			"Type": "Intelligence",
 			"StrengthGain": 1.5,
-			"Enabled": 1,
 			"MovementSpeed": 325,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 900,
@@ -1271,7 +1233,7 @@ DotaData.addVersion({
 			"Ability2": "lich_frost_armor",
 			"Ability3": "lich_dark_ritual",
 			"Ability4": "lich_chain_frost",
-			"Armor": -1,
+			"ArmorBase": -1,
 			"AttackPoint": 0.46,
 			"AttackType": "Ranged",
 			"DamageMax": 33,
@@ -1285,7 +1247,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 3.25,
 			"Type": "Intelligence",
 			"StrengthGain": 1.55,
-			"Enabled": 1,
 			"MovementSpeed": 315,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 900,
@@ -1304,7 +1265,7 @@ DotaData.addVersion({
 			//"Ability7": "life_stealer_control",
 			//"Ability8": "life_stealer_consume",
 			//"Ability9": "attribute_bonus",
-			"Armor": -1,
+			"ArmorBase": -1,
 			"AttackPoint": 0.39,
 			"AttackType": "Melee",
 			"DamageMax": 42,
@@ -1318,7 +1279,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 1.75,
 			"Type": "Strength",
 			"StrengthGain": 3.0,
-			"Enabled": 1,
 			"MovementSpeed": 315,
 			"TurnRate": 1.0,
 			"Team": "Dire"
@@ -1330,7 +1290,7 @@ DotaData.addVersion({
 			"Ability2": "lina_light_strike_array",
 			"Ability3": "lina_fiery_soul",
 			"Ability4": "lina_laguna_blade",
-			"Armor": -1,
+			"ArmorBase": -1,
 			"AttackPoint": 0.75,
 			"AttackType": "Ranged",
 			"DamageMax": 31,
@@ -1344,7 +1304,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 3.2,
 			"Type": "Intelligence",
 			"StrengthGain": 1.5,
-			"Enabled": 1,
 			"MovementSpeed": 295,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 1000,
@@ -1357,7 +1316,7 @@ DotaData.addVersion({
 			"Ability2": "lion_voodoo",
 			"Ability3": "lion_mana_drain",
 			"Ability4": "lion_finger_of_death",
-			"Armor": -1,
+			"ArmorBase": -1,
 			"AttackPoint": 0.43,
 			"AttackType": "Ranged",
 			"DamageMax": 33,
@@ -1371,7 +1330,6 @@ DotaData.addVersion({
 			"IntelligenceBase": 20,
 			"IntelligenceGain": 3.0,
 			"Type": "Intelligence",
-			"Enabled": 1,
 			"MovementSpeed": 290,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 900,
@@ -1389,7 +1347,7 @@ DotaData.addVersion({
 			//"Ability6": "lone_druid_true_form_druid",
 			"Ability6": "lone_druid_true_form_battle_cry",
 			"AbilityLayout": 5,
-			"Armor": 0,
+			"ArmorBase": 0,
 			"AttackPoint": 0.33,
 			"AttackType": "Ranged",
 			"DamageMax": 26,
@@ -1403,11 +1361,10 @@ DotaData.addVersion({
 			"IntelligenceGain": 1.4,
 			"Type": "Agility",
 			"StrengthGain": 2.1,
-			"Enabled": 1,
 			"MovementSpeed": 325,
 			"TurnRate": 0.4,
 			"ProjectileSpeed": 900,
-			"HealthRegeneration": 0.5,
+			"HealthRegenerationBase": 0.5,
 			"Team": "Radiant"
 		},
 		"luna": {
@@ -1417,7 +1374,7 @@ DotaData.addVersion({
 			"Ability2": "luna_moon_glaive",
 			"Ability3": "luna_lunar_blessing",
 			"Ability4": "luna_eclipse",
-			"Armor": 1,
+			"ArmorBase": 1,
 			"AttackPoint": 0.46,
 			"AttackType": "Ranged",
 			"DamageMax": 32,
@@ -1431,7 +1388,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 1.85,
 			"Type": "Agility",
 			"StrengthGain": 2.2,
-			"Enabled": 1,
 			"MovementSpeed": 330,
 			"TurnRate": 0.6,
 			"ProjectileSpeed": 900,
@@ -1446,7 +1402,7 @@ DotaData.addVersion({
 			"Ability3": "lycan_feral_impulse",
 			"Ability4": "lycan_shapeshift",
 			"Ability5": "attribute_bonus",
-			"Armor": 1,
+			"ArmorBase": 1,
 			"AttackPoint": 0.55,
 			"AttackType": "Melee",
 			"DamageMax": 41,
@@ -1460,7 +1416,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 1.55,
 			"Type": "Strength",
 			"StrengthGain": 3,
-			"Enabled": 1,
 			"MovementSpeed": 305,
 			"TurnRate": 0.5,
 			"Team": "Dire"
@@ -1474,7 +1429,7 @@ DotaData.addVersion({
 			"Ability3": "magnataur_skewer",
 			"Ability4": "magnataur_reverse_polarity",
 			"Ability5": "attribute_bonus",
-			"Armor": 2,
+			"ArmorBase": 2,
 			"AttackPoint": 0.5,
 			"AttackType": "Melee",
 			"DamageMax": 44,
@@ -1488,10 +1443,9 @@ DotaData.addVersion({
 			"IntelligenceBase": 19,
 			"IntelligenceGain": 1.65,
 			"Type": "Strength",
-			"Enabled": 1,
 			"MovementSpeed": 315,
 			"TurnRate": 0.8,
-			"HealthRegeneration": 0.75,
+			"HealthRegenerationBase": 0.75,
 			"Team": "Dire"
 		},
 		"medusa": {
@@ -1502,7 +1456,7 @@ DotaData.addVersion({
 			"Ability3": "medusa_mana_shield",
 			"Ability4": "medusa_stone_gaze",
 			"Ability5": "attribute_bonus",
-			"Armor": -1,
+			"ArmorBase": -1,
 			"AttackPoint": 0.5,
 			"AttackType": "Ranged",
 			"DamageMax": 30,
@@ -1516,7 +1470,6 @@ DotaData.addVersion({
 			"IntelligenceBase": 19,
 			"IntelligenceGain": 2.1,
 			"Type": "Agility",
-			"Enabled": 1,
 			"MovementSpeed": 290,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 1200,
@@ -1530,7 +1483,7 @@ DotaData.addVersion({
 			"Ability3": "meepo_geostrike",
 			"Ability4": "meepo_divided_we_stand",
 			"Ability5": "attribute_bonus",
-			"Armor": 1.0,
+			"ArmorBase": 1.0,
 			"AttackPoint": 0.38,
 			"AttackType": "Melee",
 			"DamageMax": 26,
@@ -1544,7 +1497,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 1.6,
 			"Type": "Agility",
 			"StrengthGain": 1.6,
-			"Enabled": 1,
 			"MagicalResistance": 0.35,
 			"MovementSpeed": 315,
 			"TurnRate": 0.65,
@@ -1558,7 +1510,7 @@ DotaData.addVersion({
 			"Ability2": "mirana_arrow",
 			"Ability3": "mirana_leap",
 			"Ability4": "mirana_invis",
-			"Armor": -1,
+			"ArmorBase": -1,
 			"AttackPoint": 0.3,
 			"AttackType": "Ranged",
 			"DamageMax": 29,
@@ -1572,7 +1524,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 1.65,
 			"Type": "Agility",
 			"StrengthGain": 1.85,
-			"Enabled": 1,
 			"MovementSpeed": 300,
 			"TurnRate": 0.4,
 			"ProjectileSpeed": 900,
@@ -1591,7 +1542,7 @@ DotaData.addVersion({
 			//"Ability7": "morphling_morph",
 			//"Ability8": "morphling_morph_replicate",
 			"AbilityLayout": 5,
-			"Armor": -2,
+			"ArmorBase": -2,
 			"AttackPoint": 0.5,
 			"AttackType": "Ranged",
 			"DamageMax": 22,
@@ -1605,7 +1556,6 @@ DotaData.addVersion({
 			"IntelligenceBase": 17,
 			"IntelligenceGain": 1.1,
 			"Type": "Agility",
-			"Enabled": 1,
 			"MovementSpeed": 285,
 			"TurnRate": 0.6,
 			"ProjectileSpeed": 1300,
@@ -1620,7 +1570,7 @@ DotaData.addVersion({
 			"Ability4": "naga_siren_song_of_the_siren",
 			"Ability5": "attribute_bonus",
 			//"Ability6": "naga_siren_song_of_the_siren_cancel",
-			"Armor": 3,
+			"ArmorBase": 3,
 			"AttackPoint": 0.5,
 			"AttackType": "Melee",
 			"DamageMax": 25,
@@ -1634,10 +1584,9 @@ DotaData.addVersion({
 			"IntelligenceBase": 21,
 			"IntelligenceGain": 2.0,
 			"Type": "Agility",
-			"Enabled": 1,
 			"MovementSpeed": 320,
 			"TurnRate": 0.5,
-			"HealthRegeneration": 0.75,
+			"HealthRegenerationBase": 0.75,
 			"Team": "Radiant"
 		},
 		"necrolyte": {
@@ -1648,7 +1597,7 @@ DotaData.addVersion({
 			"Ability2": "necrolyte_heartstopper_aura",
 			"Ability3": "necrolyte_sadist",
 			"Ability4": "necrolyte_reapers_scythe",
-			"Armor": 1.0,
+			"ArmorBase": 1.0,
 			"AttackPoint": 0.53,
 			"AttackType": "Ranged",
 			"DamageMax": 26,
@@ -1662,7 +1611,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 2.5,
 			"Type": "Intelligence",
 			"StrengthGain": 2.0,
-			"Enabled": 1,
 			"MovementSpeed": 290,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 900,
@@ -1680,7 +1628,7 @@ DotaData.addVersion({
 			"Ability4": "nevermore_requiem",
 			"Ability5": "attribute_bonus",
 			"AbilityLayout": 6,
-			"Armor": -2,
+			"ArmorBase": -2,
 			"AttackPoint": 0.5,
 			"AttackType": "Ranged",
 			"DamageMax": 21,
@@ -1694,11 +1642,10 @@ DotaData.addVersion({
 			"IntelligenceGain": 2.0,
 			"Type": "Agility",
 			"StrengthGain": 2.0,
-			"Enabled": 1,
 			"MovementSpeed": 315,
 			"TurnRate": 1.0,
 			"ProjectileSpeed": 1200,
-			"HealthRegeneration": 0.5,
+			"HealthRegenerationBase": 0.5,
 			"Team": "Dire"
 		},
 		"night_stalker": {
@@ -1709,7 +1656,7 @@ DotaData.addVersion({
 			"Ability2": "night_stalker_crippling_fear",
 			"Ability3": "night_stalker_hunter_in_the_night",
 			"Ability4": "night_stalker_darkness",
-			"Armor": 3,
+			"ArmorBase": 3,
 			"AttackPoint": 0.55,
 			"AttackType": "Melee",
 			"DamageMax": 42,
@@ -1723,10 +1670,9 @@ DotaData.addVersion({
 			"IntelligenceGain": 1.6,
 			"Type": "Strength",
 			"StrengthGain": 2.8,
-			"Enabled": 1,
 			"MovementSpeed": 295,
 			"TurnRate": 0.5,
-			"HealthRegeneration": 2,
+			"HealthRegenerationBase": 2,
 			"Team": "Dire",
 			"VisionDaytime": 1200,
 			"VisionNighttime": 1800
@@ -1741,7 +1687,7 @@ DotaData.addVersion({
 			"Ability5": "attribute_bonus",
 			"Ability6": "nyx_assassin_burrow",
 			//"Ability5": "nyx_assassin_unburrow",
-			"Armor": 1.0,
+			"ArmorBase": 1.0,
 			"AttackPoint": 0.46,
 			"AttackType": "Melee",
 			"DamageMax": 34,
@@ -1755,10 +1701,9 @@ DotaData.addVersion({
 			"IntelligenceBase": 18,
 			"IntelligenceGain": 2.1,
 			"Type": "Agility",
-			"Enabled": 1,
 			"MovementSpeed": 305,
 			"TurnRate": 0.5,
-			"HealthRegeneration": 3.5,
+			"HealthRegenerationBase": 3.5,
 			"Team": "Dire"
 		},
 		"obsidian_destroyer": {
@@ -1772,7 +1717,7 @@ DotaData.addVersion({
 			"Ability3": "obsidian_destroyer_essence_aura",
 			"Ability4": "obsidian_destroyer_sanity_eclipse",
 			"Ability5": "attribute_bonus",
-			"Armor": 0.5,
+			"ArmorBase": 0.5,
 			"AttackPoint": 0.46,
 			"AttackType": "Ranged",
 			"DamageMax": 35,
@@ -1786,7 +1731,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 3.3,
 			"Type": "Intelligence",
 			"StrengthGain": 2.3,
-			"Enabled": 1,
 			"MovementSpeed": 315,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 900,
@@ -1801,7 +1745,7 @@ DotaData.addVersion({
 			"Ability4": "ogre_magi_unrefined_fireblast",
 			"Ability5": "ogre_magi_multicast",
 			"Ability6": "attribute_bonus",
-			"Armor": 6.0,
+			"ArmorBase": 6.0,
 			"AttackPoint": 0.3,
 			"AttackType": "Melee",
 			"DamageMax": 47,
@@ -1815,10 +1759,9 @@ DotaData.addVersion({
 			"IntelligenceGain": 2.4,
 			"Type": "Intelligence",
 			"StrengthGain": 3.2,
-			"Enabled": 1,
 			"MovementSpeed": 295,
 			"TurnRate": 0.6,
-			"HealthRegeneration": 3.5,
+			"HealthRegenerationBase": 3.5,
 			"Team": "Radiant"
 		},
 		"omniknight": {
@@ -1828,7 +1771,7 @@ DotaData.addVersion({
 			"Ability2": "omniknight_repel",
 			"Ability3": "omniknight_degen_aura",
 			"Ability4": "omniknight_guardian_angel",
-			"Armor": 3,
+			"ArmorBase": 3,
 			"AttackPoint": 0.433,
 			"AttackType": "Melee",
 			"DamageMax": 41,
@@ -1842,7 +1785,6 @@ DotaData.addVersion({
 			"IntelligenceBase": 17,
 			"IntelligenceGain": 1.8,
 			"Type": "Strength",
-			"Enabled": 1,
 			"MovementSpeed": 305,
 			"TurnRate": 0.6,
 			"Team": "Radiant"
@@ -1855,7 +1797,7 @@ DotaData.addVersion({
 			"Ability3": "oracle_purifying_flames",
 			"Ability4": "oracle_false_promise",
 			"Ability5": "attribute_bonus",
-			"Armor": 0,
+			"ArmorBase": 0,
 			"AttackPoint": 0.3,
 			"AttackType": "Ranged",
 			"DamageMax": 22,
@@ -1869,7 +1811,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 2.9,
 			"Type": "Intelligence",
 			"StrengthGain": 1.9,
-			"Enabled": 1,
 			"MovementSpeed": 305,
 			"TurnRate": 0.4,
 			"ProjectileSpeed": 900,
@@ -1883,7 +1824,7 @@ DotaData.addVersion({
 			"Ability2": "phantom_assassin_phantom_strike",
 			"Ability3": "phantom_assassin_blur",
 			"Ability4": "phantom_assassin_coup_de_grace",
-			"Armor": 1,
+			"ArmorBase": 1,
 			"AttackPoint": 0.3,
 			"AttackType": "Melee",
 			"DamageMax": 25,
@@ -1897,7 +1838,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 1.4,
 			"Type": "Agility",
 			"StrengthGain": 1.85,
-			"Enabled": 1,
 			"MovementSpeed": 310,
 			"TurnRate": 0.6,
 			"Team": "Dire"
@@ -1910,7 +1850,7 @@ DotaData.addVersion({
 			"Ability2": "phantom_lancer_doppelwalk",
 			"Ability3": "phantom_lancer_phantom_edge",
 			"Ability4": "phantom_lancer_juxtapose",
-			"Armor": 0,
+			"ArmorBase": 0,
 			"AttackPoint": 0.5,
 			"AttackType": "Melee",
 			"DamageMax": 44,
@@ -1924,10 +1864,9 @@ DotaData.addVersion({
 			"IntelligenceGain": 2.0,
 			"Type": "Agility",
 			"StrengthGain": 1.7,
-			"Enabled": 1,
 			"MovementSpeed": 290,
 			"TurnRate": 0.6,
-			"HealthRegeneration": 0.75,
+			"HealthRegenerationBase": 0.75,
 			"Team": "Radiant"
 		},
 		"phoenix": {
@@ -1944,7 +1883,7 @@ DotaData.addVersion({
 			//"Ability9": "phoenix_sun_ray_toggle_move",
 			"Ability5": "attribute_bonus",
 			"AbilityLayout": 5,
-			"Armor": -2,
+			"ArmorBase": -2,
 			"AttackPoint": 0.35,
 			"AttackType": "Ranged",
 			"DamageMax": 36,
@@ -1958,7 +1897,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 1.8,
 			"Type": "Strength",
 			"StrengthGain": 2.9,
-			"Enabled": 1,
 			"MovementSpeed": 285,
 			"TurnRate": 1.0,
 			"ProjectileSpeed": 1100,
@@ -1974,7 +1912,7 @@ DotaData.addVersion({
 			"Ability5": "puck_dream_coil",
 			"Ability6": "attribute_bonus",
 			"AbilityLayout": 5,
-			"Armor": -1,
+			"ArmorBase": -1,
 			"AttackPoint": 0.5,
 			"AttackType": "Ranged",
 			"DamageMax": 33,
@@ -1988,7 +1926,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 2.4,
 			"Type": "Intelligence",
 			"StrengthGain": 1.7,
-			"Enabled": 1,
 			"MovementSpeed": 295,
 			"TurnRate": 0.4,
 			"ProjectileSpeed": 900,
@@ -2003,7 +1940,7 @@ DotaData.addVersion({
 			"Ability2": "pudge_rot",
 			"Ability3": "pudge_flesh_heap",
 			"Ability4": "pudge_dismember",
-			"Armor": -1,
+			"ArmorBase": -1,
 			"AttackPoint": 0.5,
 			"AttackType": "Melee",
 			"DamageMax": 33,
@@ -2017,7 +1954,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 1.5,
 			"Type": "Strength",
 			"StrengthGain": 3.2,
-			"Enabled": 1,
 			"MovementSpeed": 285,
 			"TurnRate": 0.7,
 			"ProjectileSpeed": 0,
@@ -2029,7 +1965,7 @@ DotaData.addVersion({
 			"Ability2": "pugna_decrepify",
 			"Ability3": "pugna_nether_ward",
 			"Ability4": "pugna_life_drain",
-			"Armor": -1,
+			"ArmorBase": -1,
 			"AttackPoint": 0.5,
 			"AttackType": "Ranged",
 			"DamageMax": 27,
@@ -2043,7 +1979,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 4.0,
 			"Type": "Intelligence",
 			"StrengthGain": 1.2,
-			"Enabled": 1,
 			"MovementSpeed": 330,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 900,
@@ -2057,7 +1992,7 @@ DotaData.addVersion({
 			"Ability2": "queenofpain_blink",
 			"Ability3": "queenofpain_scream_of_pain",
 			"Ability4": "queenofpain_sonic_wave",
-			"Armor": -1,
+			"ArmorBase": -1,
 			"AttackPoint": 0.56,
 			"AttackType": "Ranged",
 			"DamageMax": 33,
@@ -2071,7 +2006,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 2.5,
 			"Type": "Intelligence",
 			"StrengthGain": 1.7,
-			"Enabled": 1,
 			"MovementSpeed": 295,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 1500,
@@ -2084,7 +2018,7 @@ DotaData.addVersion({
 			"Ability2": "rattletrap_power_cogs",
 			"Ability3": "rattletrap_rocket_flare",
 			"Ability4": "rattletrap_hookshot",
-			"Armor": 0,
+			"ArmorBase": 0,
 			"AttackPoint": 0.33,
 			"AttackType": "Melee",
 			"DamageMax": 33,
@@ -2098,7 +2032,6 @@ DotaData.addVersion({
 			"IntelligenceBase": 17,
 			"IntelligenceGain": 1.3,
 			"Type": "Strength",
-			"Enabled": 1,
 			"MovementSpeed": 315,
 			"TurnRate": 0.6,
 			"Team": "Radiant"
@@ -2110,7 +2043,7 @@ DotaData.addVersion({
 			"Ability2": "razor_static_link",
 			"Ability3": "razor_unstable_current",
 			"Ability4": "razor_eye_of_the_storm",
-			"Armor": -1,
+			"ArmorBase": -1,
 			"AttackPoint": 0.3,
 			"AttackType": "Ranged",
 			"DamageMax": 25,
@@ -2124,7 +2057,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 1.8,
 			"Type": "Agility",
 			"StrengthGain": 2.3,
-			"Enabled": 1,
 			"MovementSpeed": 295,
 			"TurnRate": 0.4,
 			"ProjectileSpeed": 2000,
@@ -2138,7 +2070,7 @@ DotaData.addVersion({
 			"Ability2": "riki_blink_strike",
 			"Ability3": "riki_permanent_invisibility",
 			"Ability4": "riki_tricks_of_the_trade",
-			"Armor": 0,
+			"ArmorBase": 0,
 			"AttackPoint": 0.3,
 			"AttackType": "Melee",
 			"DamageMax": 8,
@@ -2152,10 +2084,9 @@ DotaData.addVersion({
 			"IntelligenceBase": 14,
 			"IntelligenceGain": 1.3,
 			"Type": "Agility",
-			"Enabled": 1,
 			"MovementSpeed": 290,
 			"TurnRate": 0.6,
-			"HealthRegeneration": 0.25,
+			"HealthRegenerationBase": 0.25,
 			"Team": "Radiant"
 		},
 		"rubick": {
@@ -2173,7 +2104,7 @@ DotaData.addVersion({
 			//"Ability10": "rubick_hidden2",
 			//"Ability11": "rubick_hidden3",
 			"AbilityLayout": 6,
-			"Armor": -1.0,
+			"ArmorBase": -1.0,
 			"AttackPoint": 0.4,
 			"AttackType": "Ranged",
 			"DamageMax": 27,
@@ -2187,7 +2118,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 2.4,
 			"Type": "Intelligence",
 			"StrengthGain": 1.5,
-			"Enabled": 1,
 			"MovementSpeed": 290,
 			"TurnRate": 0.7,
 			"ProjectileSpeed": 1125,
@@ -2201,7 +2131,7 @@ DotaData.addVersion({
 			"Ability2": "sandking_sand_storm",
 			"Ability3": "sandking_caustic_finale",
 			"Ability4": "sandking_epicenter",
-			"Armor": 0,
+			"ArmorBase": 0,
 			"AttackPoint": 0.53,
 			"AttackType": "Melee",
 			"DamageMax": 41,
@@ -2215,7 +2145,6 @@ DotaData.addVersion({
 			"IntelligenceBase": 16,
 			"IntelligenceGain": 1.8,
 			"Type": "Strength",
-			"Enabled": 1,
 			"MovementSpeed": 295,
 			"TurnRate": 0.5,
 			"Team": "Dire"
@@ -2230,7 +2159,7 @@ DotaData.addVersion({
 			"Ability5": "shadow_demon_demonic_purge",
 			"Ability6": "attribute_bonus",
 			"AbilityLayout": 5,
-			"Armor": 0,
+			"ArmorBase": 0,
 			"AttackPoint": 0.35,
 			"AttackType": "Ranged",
 			"DamageMax": 31,
@@ -2244,7 +2173,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 2.7,
 			"Type": "Intelligence",
 			"StrengthGain": 1.9,
-			"Enabled": 1,
 			"MovementSpeed": 295,
 			"TurnRate": 0.6,
 			"ProjectileSpeed": 900,
@@ -2258,7 +2186,7 @@ DotaData.addVersion({
 			"Ability2": "shadow_shaman_voodoo",
 			"Ability3": "shadow_shaman_shackles",
 			"Ability4": "shadow_shaman_mass_serpent_ward",
-			"Armor": -1,
+			"ArmorBase": -1,
 			"AttackPoint": 0.3,
 			"AttackType": "Ranged",
 			"DamageMax": 33,
@@ -2272,7 +2200,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 3.0,
 			"Type": "Intelligence",
 			"StrengthGain": 1.8,
-			"Enabled": 1,
 			"MovementSpeed": 285,
 			"TurnRate": 0.4,
 			"ProjectileSpeed": 900,
@@ -2291,7 +2218,7 @@ DotaData.addVersion({
 			//"Ability7": "shredder_return_chakram",
 			"Ability5": "attribute_bonus",
 			"AbilityLayout": 4,
-			"Armor": -2,
+			"ArmorBase": -2,
 			"AttackPoint": 0.36,
 			"AttackType": "Melee",
 			"DamageMax": 30,
@@ -2305,7 +2232,6 @@ DotaData.addVersion({
 			"IntelligenceBase": 21,
 			"IntelligenceGain": 2.4,
 			"Type": "Strength",
-			"Enabled": 1,
 			"MovementSpeed": 290,
 			"TurnRate": 0.6,
 			"Team": "Radiant"
@@ -2317,7 +2243,7 @@ DotaData.addVersion({
 			"Ability2": "silencer_glaives_of_wisdom",
 			"Ability3": "silencer_last_word",
 			"Ability4": "silencer_global_silence",
-			"Armor": -1,
+			"ArmorBase": -1,
 			"AttackPoint": 0.5,
 			"AttackType": "Ranged",
 			"DamageMax": 30,
@@ -2331,7 +2257,6 @@ DotaData.addVersion({
 			"IntelligenceBase": 27,
 			"IntelligenceGain": 2.5,
 			"Type": "Intelligence",
-			"Enabled": 1,
 			"MagicalResistance": 0.25,
 			"MovementSpeed": 295,
 			"TurnRate": 0.6,
@@ -2346,7 +2271,7 @@ DotaData.addVersion({
 			"Ability2": "skeleton_king_vampiric_aura",
 			"Ability3": "skeleton_king_mortal_strike",
 			"Ability4": "skeleton_king_reincarnation",
-			"Armor": 0,
+			"ArmorBase": 0,
 			"AttackPoint": 0.56,
 			"AttackType": "Melee",
 			"DamageMax": 41,
@@ -2360,7 +2285,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 1.6,
 			"Type": "Strength",
 			"StrengthGain": 2.9,
-			"Enabled": 1,
 			"MovementSpeed": 300,
 			"TurnRate": 0.4,
 			"ProjectileSpeed": 0,
@@ -2373,7 +2297,7 @@ DotaData.addVersion({
 			"Ability2": "skywrath_mage_concussive_shot",
 			"Ability3": "skywrath_mage_ancient_seal",
 			"Ability4": "skywrath_mage_mystic_flare",
-			"Armor": -2,
+			"ArmorBase": -2,
 			"AttackPoint": 0.4,
 			"AttackType": "Ranged",
 			"DamageMax": 22,
@@ -2387,7 +2311,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 3.6,
 			"Type": "Intelligence",
 			"StrengthGain": 1.5,
-			"Enabled": 1,
 			"MovementSpeed": 325,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 1000,
@@ -2401,7 +2324,7 @@ DotaData.addVersion({
 			"Ability2": "slardar_slithereen_crush",
 			"Ability3": "slardar_bash",
 			"Ability4": "slardar_amplify_damage",
-			"Armor": 3,
+			"ArmorBase": 3,
 			"AttackPoint": 0.36,
 			"AttackType": "Melee",
 			"DamageMax": 38,
@@ -2415,7 +2338,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 1.5,
 			"Type": "Strength",
 			"StrengthGain": 2.8,
-			"Enabled": 1,
 			"MovementSpeed": 290,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 0,
@@ -2430,7 +2352,7 @@ DotaData.addVersion({
 			"Ability3": "slark_essence_shift",
 			"Ability4": "slark_shadow_dance",
 			"Ability5": "attribute_bonus",
-			"Armor": -1,
+			"ArmorBase": -1,
 			"AttackPoint": 0.5,
 			"AttackType": "Melee",
 			"DamageMax": 41,
@@ -2444,7 +2366,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 1.9,
 			"Type": "Agility",
 			"StrengthGain": 1.8,
-			"Enabled": 1,
 			"MovementSpeed": 305,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 0,
@@ -2460,7 +2381,7 @@ DotaData.addVersion({
 			"Ability2": "sniper_headshot",
 			"Ability3": "sniper_take_aim",
 			"Ability4": "sniper_assassinate",
-			"Armor": -1,
+			"ArmorBase": -1,
 			"AttackPoint": 0.17,
 			"AttackType": "Ranged",
 			"DamageMax": 21,
@@ -2474,7 +2395,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 2.6,
 			"Type": "Agility",
 			"StrengthGain": 1.7,
-			"Enabled": 1,
 			"MovementSpeed": 290,
 			"TurnRate": 0.7,
 			"ProjectileSpeed": 3000,
@@ -2491,7 +2411,7 @@ DotaData.addVersion({
 			"Ability5": "spectre_haunt",
 			"Ability6": "attribute_bonus",
 			"AbilityLayout": 5,
-			"Armor": 0,
+			"ArmorBase": 0,
 			"AttackPoint": 0.3,
 			"AttackType": "Melee",
 			"DamageMax": 27,
@@ -2505,7 +2425,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 1.9,
 			"Type": "Agility",
 			"StrengthGain": 2.0,
-			"Enabled": 1,
 			"MovementSpeed": 290,
 			"TurnRate": 0.4,
 			"Team": "Dire"
@@ -2519,7 +2438,7 @@ DotaData.addVersion({
 			"Ability3": "spirit_breaker_greater_bash",
 			"Ability4": "spirit_breaker_nether_strike",
 			"Ability5": "attribute_bonus",
-			"Armor": 3.0,
+			"ArmorBase": 3.0,
 			"AttackPoint": 0.6,
 			"AttackType": "Melee",
 			"DamageMax": 41,
@@ -2533,10 +2452,9 @@ DotaData.addVersion({
 			"IntelligenceGain": 1.8,
 			"Type": "Strength",
 			"StrengthGain": 2.4,
-			"Enabled": 1,
 			"MovementSpeed": 290,
 			"TurnRate": 0.4,
-			"HealthRegeneration": 0.75,
+			"HealthRegenerationBase": 0.75,
 			"Team": "Dire"
 		},
 		"storm_spirit": {
@@ -2547,7 +2465,7 @@ DotaData.addVersion({
 			"Ability2": "storm_spirit_electric_vortex",
 			"Ability3": "storm_spirit_overload",
 			"Ability4": "storm_spirit_ball_lightning",
-			"Armor": 2,
+			"ArmorBase": 2,
 			"AttackPoint": 0.5,
 			"AttackType": "Ranged",
 			"DamageMax": 32,
@@ -2561,7 +2479,6 @@ DotaData.addVersion({
 			"IntelligenceBase": 24,
 			"IntelligenceGain": 3.0,
 			"Type": "Intelligence",
-			"Enabled": 1,
 			"MovementSpeed": 285,
 			"TurnRate": 0.8,
 			"ProjectileSpeed": 1100,
@@ -2574,7 +2491,7 @@ DotaData.addVersion({
 			"Ability2": "sven_great_cleave",
 			"Ability3": "sven_warcry",
 			"Ability4": "sven_gods_strength",
-			"Armor": 2,
+			"ArmorBase": 2,
 			"AttackPoint": 0.4,
 			"AttackType": "Melee",
 			"DamageMax": 43,
@@ -2588,7 +2505,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 1.3,
 			"Type": "Strength",
 			"StrengthGain": 2.7,
-			"Enabled": 1,
 			"MovementSpeed": 290,
 			"TurnRate": 0.6,
 			"ProjectileSpeed": 0,
@@ -2606,7 +2522,7 @@ DotaData.addVersion({
 			"Ability4": "techies_remote_mines",
 			"Ability5": "attribute_bonus",
 			"AbilityLayout": 6,
-			"Armor": 5,
+			"ArmorBase": 5,
 			"AttackPoint": 0.5,
 			"AttackType": "Ranged",
 			"DamageMax": 9,
@@ -2620,12 +2536,11 @@ DotaData.addVersion({
 			"IntelligenceGain": 2.9,
 			"Type": "Intelligence",
 			"StrengthGain": 2.0,
-			"Enabled": 1,
 			"MagicalResistance": 0.25,
 			"MovementSpeed": 270,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 900,
-			"ManaRegeneration": 0.02,
+			"ManaRegenerationBase": 0.02,
 			"Team": "Radiant"
 		},
 		"templar_assassin": {
@@ -2639,7 +2554,7 @@ DotaData.addVersion({
 			"Ability5": "templar_assassin_trap",
 			"Ability6": "attribute_bonus",
 			"AbilityLayout": 5,
-			"Armor": 1,
+			"ArmorBase": 1,
 			"AttackPoint": 0.3,
 			"AttackType": "Ranged",
 			"DamageMax": 36,
@@ -2653,7 +2568,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 2.0,
 			"Type": "Agility",
 			"StrengthGain": 2.1,
-			"Enabled": 1,
 			"MovementSpeed": 305,
 			"TurnRate": 0.7,
 			"ProjectileSpeed": 900,
@@ -2667,7 +2581,7 @@ DotaData.addVersion({
 			"Ability2": "terrorblade_conjure_image",
 			"Ability3": "terrorblade_metamorphosis",
 			"Ability4": "terrorblade_sunder",
-			"Armor": 7,
+			"ArmorBase": 7,
 			"AttackPoint": 0.3,
 			"AttackType": "Melee",
 			"DamageMax": 32,
@@ -2681,11 +2595,10 @@ DotaData.addVersion({
 			"IntelligenceGain": 1.75,
 			"Type": "Agility",
 			"StrengthGain": 1.4,
-			"Enabled": 1,
 			"MovementSpeed": 315,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 900,
-			"HealthRegeneration": 2.0,
+			"HealthRegenerationBase": 2.0,
 			"Team": "Dire"
 		},
 		"tidehunter": {
@@ -2695,7 +2608,7 @@ DotaData.addVersion({
 			"Ability2": "tidehunter_kraken_shell",
 			"Ability3": "tidehunter_anchor_smash",
 			"Ability4": "tidehunter_ravage",
-			"Armor": 1,
+			"ArmorBase": 1,
 			"AttackPoint": 0.6,
 			"AttackType": "Melee",
 			"DamageMax": 31,
@@ -2709,7 +2622,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 1.7,
 			"Type": "Strength",
 			"StrengthGain": 3.0,
-			"Enabled": 1,
 			"MovementSpeed": 305,
 			"TurnRate": 0.4,
 			"Team": "Dire"
@@ -2721,7 +2633,7 @@ DotaData.addVersion({
 			"Ability2": "tinker_heat_seeking_missile",
 			"Ability3": "tinker_march_of_the_machines",
 			"Ability4": "tinker_rearm",
-			"Armor": 2,
+			"ArmorBase": 2,
 			"AttackPoint": 0.35,
 			"AttackType": "Ranged",
 			"DamageMax": 28,
@@ -2735,7 +2647,6 @@ DotaData.addVersion({
 			"IntelligenceBase": 30,
 			"IntelligenceGain": 2.2,
 			"Type": "Intelligence",
-			"Enabled": 1,
 			"MovementSpeed": 305,
 			"TurnRate": 0.6,
 			"ProjectileSpeed": 900,
@@ -2747,7 +2658,7 @@ DotaData.addVersion({
 			"Ability2": "tiny_toss",
 			"Ability3": "tiny_craggy_exterior",
 			"Ability4": "tiny_grow",
-			"Armor": -1,
+			"ArmorBase": -1,
 			"AttackPoint": 0.49,
 			"AttackType": "Melee",
 			"DamageMax": 43,
@@ -2761,7 +2672,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 1.6,
 			"Type": "Strength",
 			"StrengthGain": 3.0,
-			"Enabled": 1,
 			"MovementSpeed": 285,
 			"TurnRate": 0.5,
 			"Team": "Radiant"
@@ -2776,7 +2686,7 @@ DotaData.addVersion({
 			"Ability4": "treant_eyes_in_the_forest",
 			"Ability5": "treant_overgrowth",
 			"Ability6": "attribute_bonus",
-			"Armor": -1,
+			"ArmorBase": -1,
 			"AttackPoint": 0.6,
 			"AttackType": "Melee",
 			"DamageMax": 70,
@@ -2790,7 +2700,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 1.8,
 			"Type": "Strength",
 			"StrengthGain": 3.3,
-			"Enabled": 1,
 			"MovementSpeed": 300,
 			"TurnRate": 0.5,
 			"Team": "Radiant"
@@ -2804,7 +2713,7 @@ DotaData.addVersion({
 			"Ability3": "troll_warlord_fervor",
 			"Ability4": "troll_warlord_battle_trance",
 			"Ability5": "attribute_bonus",
-			"Armor": -1,
+			"ArmorBase": -1,
 			"AttackPoint": 0.3,
 			"AttackType": "Ranged",
 			"DamageMax": 35,
@@ -2818,7 +2727,6 @@ DotaData.addVersion({
 			"IntelligenceBase": 13,
 			"IntelligenceGain": 1.0,
 			"Type": "Agility",
-			"Enabled": 1,
 			"MovementSpeed": 300,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 1200,
@@ -2835,7 +2743,7 @@ DotaData.addVersion({
 			"Ability5": "tusk_walrus_kick",
 			"Ability6": "attribute_bonus",
 			"AbilityLayout": 5,
-			"Armor": 0.0,
+			"ArmorBase": 0.0,
 			"AttackPoint": 0.36,
 			"AttackType": "Melee",
 			"DamageMax": 31,
@@ -2849,7 +2757,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 1.7,
 			"Type": "Strength",
 			"StrengthGain": 2.3,
-			"Enabled": 1,
 			"MovementSpeed": 300,
 			"TurnRate": 0.5,
 			"Team": "Radiant"
@@ -2862,7 +2769,7 @@ DotaData.addVersion({
 			"Ability3": "undying_tombstone",
 			"Ability4": "undying_flesh_golem",
 			"Ability5": "attribute_bonus",
-			"Armor": 2,
+			"ArmorBase": 2,
 			"AttackPoint": 0.3,
 			"AttackType": "Melee",
 			"DamageMax": 43,
@@ -2876,7 +2783,6 @@ DotaData.addVersion({
 			"IntelligenceBase": 27,
 			"IntelligenceGain": 2.8,
 			"Type": "Strength",
-			"Enabled": 1,
 			"MovementSpeed": 310,
 			"TurnRate": 0.6,
 			"Team": "Dire"
@@ -2888,7 +2794,7 @@ DotaData.addVersion({
 			"Ability2": "ursa_overpower",
 			"Ability3": "ursa_fury_swipes",
 			"Ability4": "ursa_enrage",
-			"Armor": 3,
+			"ArmorBase": 3,
 			"AttackPoint": 0.3,
 			"AttackType": "Melee",
 			"DamageMax": 31,
@@ -2902,10 +2808,9 @@ DotaData.addVersion({
 			"IntelligenceGain": 1.5,
 			"Type": "Agility",
 			"StrengthGain": 2.7,
-			"Enabled": 1,
 			"MovementSpeed": 310,
 			"TurnRate": 0.5,
-			"HealthRegeneration": 0.75,
+			"HealthRegenerationBase": 0.75,
 			"Team": "Radiant"
 		},
 		"vengefulspirit": {
@@ -2915,7 +2820,7 @@ DotaData.addVersion({
 			"Ability2": "vengefulspirit_wave_of_terror",
 			"Ability3": "vengefulspirit_command_aura",
 			"Ability4": "vengefulspirit_nether_swap",
-			"Armor": 0,
+			"ArmorBase": 0,
 			"AttackPoint": 0.33,
 			"AttackType": "Ranged",
 			"DamageMax": 26,
@@ -2929,7 +2834,6 @@ DotaData.addVersion({
 			"IntelligenceBase": 13,
 			"IntelligenceGain": 1.5,
 			"Type": "Agility",
-			"Enabled": 1,
 			"MovementSpeed": 300,
 			"TurnRate": 0.6,
 			"ProjectileSpeed": 1500,
@@ -2942,7 +2846,7 @@ DotaData.addVersion({
 			"Ability2": "venomancer_poison_sting",
 			"Ability3": "venomancer_plague_ward",
 			"Ability4": "venomancer_poison_nova",
-			"Armor": 0,
+			"ArmorBase": 0,
 			"AttackPoint": 0.3,
 			"AttackType": "Ranged",
 			"DamageMax": 21,
@@ -2956,11 +2860,10 @@ DotaData.addVersion({
 			"IntelligenceBase": 17,
 			"IntelligenceGain": 1.8,
 			"Type": "Agility",
-			"Enabled": 1,
 			"MovementSpeed": 285,
 			"TurnRate": 0.4,
 			"ProjectileSpeed": 900,
-			"HealthRegeneration": 0.25,
+			"HealthRegenerationBase": 0.25,
 			"Team": "Dire"
 		},
 		"viper": {
@@ -2971,7 +2874,7 @@ DotaData.addVersion({
 			"Ability2": "viper_nethertoxin",
 			"Ability3": "viper_corrosive_skin",
 			"Ability4": "viper_viper_strike",
-			"Armor": -1,
+			"ArmorBase": -1,
 			"AttackPoint": 0.33,
 			"AttackType": "Ranged",
 			"DamageMax": 25,
@@ -2985,7 +2888,6 @@ DotaData.addVersion({
 			"IntelligenceBase": 15,
 			"IntelligenceGain": 1.8,
 			"Type": "Agility",
-			"Enabled": 1,
 			"MovementSpeed": 285,
 			"TurnRate": 0.4,
 			"ProjectileSpeed": 1200,
@@ -2999,7 +2901,7 @@ DotaData.addVersion({
 			"Ability3": "visage_gravekeepers_cloak",
 			"Ability4": "visage_summon_familiars",
 			"Ability5": "attribute_bonus",
-			"Armor": -2.0,
+			"ArmorBase": -2.0,
 			"AttackPoint": 0.46,
 			"AttackType": "Ranged",
 			"DamageMax": 34,
@@ -3013,7 +2915,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 2.5,
 			"Type": "Intelligence",
 			"StrengthGain": 2.4,
-			"Enabled": 1,
 			"MagicalResistance": 0.10,
 			"MovementSpeed": 285,
 			"TurnRate": 0.5,
@@ -3027,7 +2928,7 @@ DotaData.addVersion({
 			"Ability2": "warlock_shadow_word",
 			"Ability3": "warlock_upheaval",
 			"Ability4": "warlock_rain_of_chaos",
-			"Armor": 1,
+			"ArmorBase": 1,
 			"AttackPoint": 0.3,
 			"AttackType": "Ranged",
 			"DamageMax": 32,
@@ -3041,7 +2942,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 2.7,
 			"Type": "Intelligence",
 			"StrengthGain": 2.5,
-			"Enabled": 1,
 			"MovementSpeed": 295,
 			"TurnRate": 0.4,
 			"ProjectileSpeed": 1200,
@@ -3055,7 +2955,7 @@ DotaData.addVersion({
 			"Ability2": "weaver_shukuchi",
 			"Ability3": "weaver_geminate_attack",
 			"Ability4": "weaver_time_lapse",
-			"Armor": -1,
+			"ArmorBase": -1,
 			"AttackPoint": 0.64,
 			"AttackType": "Ranged",
 			"DamageMax": 51,
@@ -3069,7 +2969,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 1.8,
 			"Type": "Agility",
 			"StrengthGain": 1.5,
-			"Enabled": 1,
 			"MovementSpeed": 290,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 900,
@@ -3083,7 +2982,7 @@ DotaData.addVersion({
 			"Ability2": "windrunner_powershot",
 			"Ability3": "windrunner_windrun",
 			"Ability4": "windrunner_focusfire",
-			"Armor": -1,
+			"ArmorBase": -1,
 			"AttackPoint": 0.4,
 			"AttackType": "Ranged",
 			"DamageMax": 34,
@@ -3097,7 +2996,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 2.6,
 			"Type": "Intelligence",
 			"StrengthGain": 2.5,
-			"Enabled": 1,
 			"MovementSpeed": 295,
 			"TurnRate": 0.6,
 			"ProjectileSpeed": 1250,
@@ -3112,7 +3010,7 @@ DotaData.addVersion({
 			"Ability3": "winter_wyvern_cold_embrace",
 			"Ability4": "winter_wyvern_winters_curse",
 			"Ability5": "attribute_bonus",
-			"Armor": -1,
+			"ArmorBase": -1,
 			"AttackPoint": 0.25,
 			"AttackType": "Ranged",
 			"DamageMax": 20,
@@ -3126,7 +3024,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 3.1,
 			"Type": "Intelligence",
 			"StrengthGain": 2.1,
-			"Enabled": 1,
 			"MagicalResistance": 0.25,
 			"MovementSpeed": 285,
 			"TurnRate": 0.4,
@@ -3150,7 +3047,7 @@ DotaData.addVersion({
 			//"Ability9": "wisp_spirits_in",
 			//"Ability10": "wisp_spirits_out",
 			"AbilityLayout": 6,
-			"Armor": -2.0,
+			"ArmorBase": -2.0,
 			"AttackPoint": 0.15,
 			"AttackType": "Ranged",
 			"DamageMax": 35,
@@ -3164,7 +3061,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 1.7,
 			"Type": "Strength",
 			"StrengthGain": 1.9,
-			"Enabled": 1,
 			"MovementSpeed": 295,
 			"TurnRate": 0.7,
 			"ProjectileSpeed": 1200,
@@ -3178,7 +3074,7 @@ DotaData.addVersion({
 			"Ability2": "witch_doctor_voodoo_restoration",
 			"Ability3": "witch_doctor_maledict",
 			"Ability4": "witch_doctor_death_ward",
-			"Armor": -1,
+			"ArmorBase": -1,
 			"AttackPoint": 0.4,
 			"AttackType": "Ranged",
 			"DamageMax": 37,
@@ -3192,7 +3088,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 2.9,
 			"Type": "Intelligence",
 			"StrengthGain": 1.8,
-			"Enabled": 1,
 			"MovementSpeed": 305,
 			"TurnRate": 0.4,
 			"ProjectileSpeed": 1200,
@@ -3205,7 +3100,7 @@ DotaData.addVersion({
 			"Ability2": "zuus_lightning_bolt",
 			"Ability3": "zuus_static_field",
 			"Ability4": "zuus_thundergods_wrath",
-			"Armor": 0,
+			"ArmorBase": 0,
 			"AttackPoint": 0.633,
 			"AttackType": "Ranged",
 			"DamageMax": 29,
@@ -3219,7 +3114,6 @@ DotaData.addVersion({
 			"IntelligenceGain": 2.7,
 			"Type": "Intelligence",
 			"StrengthGain": 2.3,
-			"Enabled": 1,
 			"MovementSpeed": 295,
 			"TurnRate": 0.6,
 			"ProjectileSpeed": 1100,
@@ -3228,6 +3122,7 @@ DotaData.addVersion({
 		"arc_warden": {
 			"Name": "Arc Warden",
 			"LoreName": "Zet",
+			"Enabled": false,
 			"Ability1": "arc_warden_flux",
 			"Ability2": "arc_warden_magnetic_field",
 			"Ability3": "arc_warden_spark_wraith",
@@ -3246,8 +3141,7 @@ DotaData.addVersion({
 			"IntelligenceBase": 24,
 			"IntelligenceGain": 2.6,
 			"Type": "Agility",
-			"Enabled": 1,
-			"Armor": -2,
+			"ArmorBase": -2,
 			"MovementSpeed": 295,
 			"TurnRate": 0.4,
 			"Team": "Dire"
@@ -3255,8 +3149,8 @@ DotaData.addVersion({
 		"abyssal_underlord": {
 			"Name": "Underlord",
 			"LoreName": "Vrogros",
+			"Enabled": false,
 			"Aliases": ["Abyssal Underlord"],
-			"Enabled": 1,
 			"Ability1": "abyssal_underlord_firestorm",
 			"Ability2": "abyssal_underlord_pit_of_malice",
 			"Ability3": "abyssal_underlord_atrophy_aura",
@@ -3276,11 +3170,11 @@ DotaData.addVersion({
 			"IntelligenceBase": 17,
 			"IntelligenceGain": 2.6,
 			"Type": "Strength",
-			"Armor": 2,
+			"ArmorBase": 2,
 			"MovementSpeed": 305,
 			"TurnRate": 0.6,
 			"Team": "Dire"
-		}
+		},
 	},
 
 	//
@@ -3288,7 +3182,7 @@ DotaData.addVersion({
 	//
 
 	"Items": {
-		"_base": {
+		[DotaData.Basis]: {
 			"Name": "NO-DISPLAY-NAME",
 			"Cost": 0
 		},
@@ -3699,7 +3593,6 @@ DotaData.addVersion({
 			"Cost": 900,
 			"Section": "Arcane",
 			"SectionIndex": 10
-			//"UniqueAttackModifier": "lifesteal_15"
 		},
 		"shadow_amulet": {
 			"Name": "Shadow Amulet",
@@ -3800,7 +3693,8 @@ DotaData.addVersion({
 			"SectionIndex": 6,
 			"Family": { "Name": "Boots", "Level": 45, "Stats": { "MovementSpeed": 45 } },
 			"Damage": 24,
-			"Buff": {
+			"Action": {
+				"Type": "Buff",
 				"NoTarget": true,
 				"Self": "phase_boots_buff",
 				"Refresh": "leave"
@@ -3894,8 +3788,9 @@ DotaData.addVersion({
 			"Section": "Common",
 			"SectionIndex": 12,
 			"AttackSpeed": 120,
-			"Buff": {
-				"Name": "moon_shard_buff",
+			"Action": {
+				"Type": "Buff",
+				"Id": "moon_shard_buff",
 				"NoTarget": true,
 				"Self": true,
 				"Refresh": "leave"
@@ -3943,8 +3838,9 @@ DotaData.addVersion({
 			"Agility": 2,
 			"Intelligence": 2,
 			"Armor": 5,
-			"Buff": {
-				"Name": "buckler_buff",
+			"Action": {
+				"Type": "Buff",
+				"Id": "buckler_buff",
 				"NoTarget": true,
 				"Self": true,
 				"Teammates": true,
@@ -4004,7 +3900,8 @@ DotaData.addVersion({
 			"SectionIndex": 7,
 			"Armor": 7,
 			"ManaRegenerationPercentage": 0.5,
-			"Buff": {
+			"Action": {
+				"Type": "Buff",
 				"NoTarget": true,
 				"Self": "medallion_of_courage_debuff",
 				"Teammates": "medallion_of_courage_buff",
@@ -4038,8 +3935,9 @@ DotaData.addVersion({
 			"Damage": 3,
 			"HealthRegeneration": 3,
 			"Aura": "ancient_janggo_aura",
-			"Buff": {
-				"Name": "ancient_janggo_buff",
+			"Action": {
+				"Type": "Buff",
+				"Id": "ancient_janggo_buff",
 				"NoTarget": true,
 				"Self": true,
 				"Teammates": true,
@@ -4059,8 +3957,9 @@ DotaData.addVersion({
 			"Intelligence": 5,
 			"Armor": 5,
 			"Aura": "mekansm_aura",
-			"Buff": {
-				"Name": "mekansm_buff",
+			"Action": {
+				"Type": "Buff",
+				"Id": "mekansm_buff",
 				"NoTarget": true,
 				"Self": true,
 				"Teammates": true,
@@ -4119,8 +4018,9 @@ DotaData.addVersion({
 			"SectionIndex": 0,
 			"AttackSpeed": 20,
 			"MagicalResistance": 0.15,
-			"Buff": {
-				"Name": "glimmer_cape_buff",
+			"Action": {
+				"Type": "Buff",
+				"Id": "glimmer_cape_buff",
 				"NoTarget": true,
 				"Self": true,
 				"Teammates": true,
@@ -4166,7 +4066,7 @@ DotaData.addVersion({
 			"Mana": 250,
 			"HealthRegeneration": 8,
 			"RangeCasting": 200,
-			"MagicalAmplification": 0.05
+			"MagicAmplification": 0.05
 		},
 		"necronomicon": {
 			"Name": "Necronomicon",
@@ -4282,7 +4182,8 @@ DotaData.addVersion({
 			"Armor": 10,
 			"ManaRegenerationPercentage": 0.75,
 			"Evasion": 0.25,
-			"Buff": {
+			"Action": {
+				"Type": "Buff",
 				"NoTarget": true,
 				"Self": "solar_crest_debuff_self",
 				"Teammates": "solar_crest_buff",
@@ -4326,10 +4227,10 @@ DotaData.addVersion({
 			"Intelligence": 10,
 			"Health": 175,
 			"Mana": 175,
-			"Buff": {
-				"Name": "ultimate_scepter_buff",
+			"Action": {
+				"Type": "Buff",
+				"Self": "ultimate_scepter_buff",
 				"NoTarget": true,
-				"Self": true,
 				"Refresh": "leave"
 			},
 			"HasAghanims": true
@@ -4391,7 +4292,8 @@ DotaData.addVersion({
 			"Damage": 9,
 			"Armor": 5,
 			"AttackSpeed": 25,
-			"Buff": {
+			"Action": {
+				"Type": "Buff",
 				"NoTarget": true,
 				"Self": "armlet_buff",
 				"Refresh": "leave"
@@ -4503,7 +4405,8 @@ DotaData.addVersion({
 			"Damage": 30,
 			"AttackSpeed": 30,
 			"Evasion": 0.35,
-			"Buff": {
+			"Action": {
+				"Type": "Buff",
 				"NoTarget": true,
 				"Self": "butterfly_buff",
 				"Refresh": "leave"
@@ -4600,8 +4503,9 @@ DotaData.addVersion({
 			"Health": 250,
 			"HealthRegeneration": 8,
 			"Armor": 5,
-			"Buff": {
-				"Name": "crimson_guard_buff",
+			"Action": {
+				"Type": "Buff",
+				"Id": "crimson_guard_buff",
 				"NoTarget": true,
 				"Self": true,
 				"Teammates": true,
@@ -4622,7 +4526,8 @@ DotaData.addVersion({
 			"Strength": 10,
 			"Damage": 24,
 			"Cooldown": function(){ return 85 - 5 * this.Level },
-			"Buff": {
+			"Action": {
+				"Type": "Buff",
 				"NoTarget": true,
 				"Self": "black_king_bar_buff",
 				"Refresh": "override"
@@ -4685,7 +4590,7 @@ DotaData.addVersion({
 			"MovementSpeedPercentage": 0.1,
 			"ManaCost": 125,
 			"Cooldown": function(){
-				if (this.heroTotal.AttackType == "Melee")
+				if (this.$total.AttackType == "Melee")
 					return 30;
 				return 45;
 			}
@@ -4716,8 +4621,15 @@ DotaData.addVersion({
 			"Regeneration": 4,
 			"Agility": 20,
 			"Strength": 15,
-			"Range": 140,
-			"Buff": {
+			"Family": {
+				"Name": "Lance",
+				"Level": 140,
+				"Stats": {
+					"Range": function(){ return this.$total.AttackType == "Ranged" ? 140 : 0 },
+				}
+			},
+			"Action": {
+				"Type": "Buff",
 				"NoTarget": true,
 				"Self": "hurricane_pike_buff",
 				"Refresh": "override"
@@ -4744,7 +4656,7 @@ DotaData.addVersion({
 			"Strength": 45,
 			"Health": 250,
 			"Cooldown": function(){
-				if (this.heroTotal.AttackType == "Melee")
+				if (this.$total.AttackType == "Melee")
 					return 5;
 				return 7;
 			}
@@ -4758,10 +4670,10 @@ DotaData.addVersion({
 			"Section": "Artifacts",
 			"SectionIndex": 0,
 			"Lore": "Once this mask is worn, its bearer becomes an uncontrollable aggressive force.",
-			"Buff": {
-				"Name": "mask_of_madness_buff",
+			"Action": {
+				"Type" : "Buff",
+				"Self": "mask_of_madness_buff",
 				"NoTarget": true,
-				"Self": true,
 				"Refresh": "leave"
 			},
 			"Cooldown": 25,
@@ -4789,7 +4701,13 @@ DotaData.addVersion({
 			"SectionIndex": 2,
 			"Strength": 13,
 			"Agility": 14,
-			"Range": function(){ return this.heroTotal.AttackType == "Ranged" ? 140 : 0 },
+			"Family": {
+				"Name": "Lance",
+				"Level": 140,
+				"Stats": {
+					"Range": function(){ return this.$total.AttackType == "Ranged" ? 140 : 0 },
+				}
+			},
 		},
 		"sange": {
 			"Name": "Sange",
@@ -5024,19 +4942,13 @@ DotaData.addVersion({
 	//
 
 	"Abilities": {
-		"_base": {
+		[DotaData.Basis]: {
 			"Name": "Unimplemented ability",
 			"Level": 0,
+			"LevelMin": 0,
 			"LevelMax": "4",
 			"Class": "Ability",
 			"Restrictions": [1, 3, 5, 7]
-		},
-		"empty": {
-			"Name": "Empty",
-			"Level": 0,
-			"LevelMax": 0,
-			"Class": "Ability",
-			"Restrictions": []
 		},
 		"attribute_bonus": {
 			"Name": "Attribute bonus",
@@ -5061,8 +4973,9 @@ DotaData.addVersion({
 		},
 		"abaddon_frostmourne": {
 			"Name": "Curse of Avernus",
-			"Buff": {
-				"Name": "abaddon_frostmourne_buff",
+			"Action": {
+				"Type": "Buff",
+				"Id": "abaddon_frostmourne_buff",
 				"NoTarget" : true,
 				"Self" : true,
 				"Teammates" : true,
@@ -5095,10 +5008,10 @@ DotaData.addVersion({
 			"Class": "Ultimate",
 			"LevelMax": 3,
 			"Restrictions": [6, 11, 16],
-			"Buff": {
-				"Name": "alchemist_chemical_rage_buff",
+			"Action": {
+				"Type": "Buff",
+				"Self": "alchemist_chemical_rage_buff",
 				"NoTarget": true,
-				"Self": true,
 				"Refresh": "override"
 			},
 			"Cooldown": 45,
@@ -5150,8 +5063,9 @@ DotaData.addVersion({
 		},
 		"axe_berserkers_call": {
 			"Name": "Berserker's call",
-			"Buff": {
-				"Name": "axe_berserkers_call_buff",
+			"Action": {
+				"Type": "Buff",
+				"Self": "axe_berserkers_call_buff",
 				"NoTarget": true,
 				"Self": true,
 				"Refresh": "leave"
@@ -5173,15 +5087,16 @@ DotaData.addVersion({
 			"Class": "Ultimate",
 			"LevelMax": 3,
 			"Restrictions": [6, 11, 16],
-			"Buff": {
-				"Name": "axe_culling_blade_buff",
+			"Action": {
+				"Type": "Buff",
+				"Id": "axe_culling_blade_buff",
 				"NoTarget": true,
 				"Self": true,
 				"Teammates": true,
 				"Refresh": "leave"
 			},
 			"Cooldown": function() {
-				if (this.heroTotal.HasAghanims)
+				if (this.$total.HasAghanims)
 					return 6;
 				return 85 - this.Level * 10;
 			},
@@ -5249,8 +5164,8 @@ DotaData.addVersion({
 			"ManaCost": 25,
 			"LockedLevel": true,
 			"Level": function() {
-				if (this.heroRef && this.heroRef.AbilityIds["beastmaster_call_of_the_wild"])
-					return this.heroRef.AbilityIds["beastmaster_call_of_the_wild"].Level
+				if (this.$hero && this.$hero.AbilityIds["beastmaster_call_of_the_wild"])
+					return this.$hero.AbilityIds["beastmaster_call_of_the_wild"].Level
 				return 0
 			},
 		},
@@ -5264,7 +5179,7 @@ DotaData.addVersion({
 			"LevelMax": 3,
 			"Restrictions": [6, 11, 16],
 			"Cooldown": function() {
-				if (this.heroTotal.HasAghanims)
+				if (this.$total.HasAghanims)
 					return 45;
 				return 85 - this.Level * 5;
 			},
@@ -5312,10 +5227,10 @@ DotaData.addVersion({
 		},
 		"bounty_hunter_wind_walk": {
 			"Name": "Shadow walk",
-			"Buff": {
-				"Name": "bounty_hunter_wind_walk_buff",
+			"Action": {
+				"Type": "Buff",
+				"Self": "bounty_hunter_wind_walk_buff",
 				"NoTarget": true,
-				"Self": true,
 				"Refresh": "override"
 			},
 			"Cooldown": 15,
@@ -5326,8 +5241,9 @@ DotaData.addVersion({
 			"Class": "Ultimate",
 			"LevelMax": 3,
 			"Restrictions": [6, 11, 16],
-			"Buff": {
-				"Name": "bounty_hunter_track_buff",
+			"Action": {
+				"Type": "Buff",
+				"ID": "bounty_hunter_track_buff",
 				"NoTarget": true,
 				"Self": true,
 				"Teammates": true,
@@ -5391,9 +5307,9 @@ DotaData.addVersion({
 			"Name": "Spin web",
 			"Cooldown": 40,
 			"ManaCost": 50,
-			"Buff": {
-				"Name": "broodmother_spin_web_buff",
-				"Self": true,
+			"Action": {
+				"Type": "Buff",
+				"Self": "broodmother_spin_web_buff",
 				"NoTarget": true,
 				"Refresh": true
 			}
@@ -5406,9 +5322,9 @@ DotaData.addVersion({
 			"Class": "Ultimate",
 			"LevelMax": 3,
 			"Restrictions": [6, 11, 16],
-			"Buff": {
-				"Name": "broodmother_insatiable_hunger_buff",
-				"Self": true,
+			"Action": {
+				"Type" :"Buff",
+				"Self": "broodmother_insatiable_hunger_buff",
 				"NoTarget": true,
 				"Refresh": "override"
 			},
@@ -5483,10 +5399,10 @@ DotaData.addVersion({
 		},
 		"clinkz_strafe": {
 			"Name": "Strafe",
-			"Buff": {
-				"Name": "clinkz_strafe_buff",
+			"Action": {
+				"Type": "Buff",
+				"Self": "clinkz_strafe_buff",
 				"NoTarget": true,
-				"Self": true,
 				"Refresh": "override"
 			},
 			"Cooldown": function(){ return 45 - this.Level * 5 },
@@ -5495,8 +5411,9 @@ DotaData.addVersion({
 		"clinkz_searing_arrows": {
 			"Name": "Searing arrows",
 			"Damage": function() { return 20 + this.Level * 10 },
-			"Buff": {
-				"Name": "clinkz_searing_arrows_buff",
+			"Action": {
+				"Type": "Buff",
+				"Id": "clinkz_searing_arrows_buff",
 				"NoTarget": false,
 				"Self": true,
 				"Refresh": true
@@ -5505,7 +5422,8 @@ DotaData.addVersion({
 		},
 		"clinkz_wind_walk": {
 			"Name": "Skeleton walk",
-			"Buff": {
+			"Action": {
+				"Type": "Buff",
 				"NoTarget": true,
 				"Self": "clinkz_wind_walk_buff",
 				"Refresh": "override"
@@ -5518,7 +5436,8 @@ DotaData.addVersion({
 			"Class": "Ultimate",
 			"LevelMax": 3,
 			"Restrictions": [6, 11, 16],
-			"Buff": {
+			"Action": {
+				"Type": "Buff",
 				"NoTarget": true,
 				"Self": "clinkz_death_pact_buff",
 				"Refresh": "override"
@@ -5544,6 +5463,8 @@ DotaData.addVersion({
 			"Name": "Freezing field",
 			"Class": "Ultimate",
 			"LevelMax": 3,
+			"Meta": { "Wrap": ["AghsUpgraded"] },
+			"AghsUpgraded": function(){ return this.$total.HasAghanims },
 			"Restrictions": [6, 11, 16],
 			"Cooldown": 90,
 			"ManaCost": function(){return this.Level * 200}
@@ -5591,22 +5512,16 @@ DotaData.addVersion({
 			"Class": "Ultimate",
 			"LevelMax": 3,
 			"Restrictions": [6, 11, 16],
-			"Buff": function() {
-				if (this.heroTotal.HasAghanims)
-					return {
-						"Name": "dazzle_weave_buff",
-						"NoTarget": true,
-						"Self": true,
-						"Teammates": true,
-						"Refresh": "override"
-					};
-				return {
-					"Name": "dazzle_weave_buff_aghs",
-					"NoTarget": true,
-					"Self": true,
-					"Teammates": true,
-					"Refresh": "override"
-				};
+			"Action": {
+				"Type": "Buff",
+				"Id": function(){ return {
+					Id: "dazzle_weave_buff",
+					AghsUpgraded: this.$total.HasAghanims ? true : false
+				}},
+				"NoTarget": true,
+				"Self": true,
+				"Teammates": true,
+				"Refresh": "override",
 			},
 			"Cooldown": 40,
 			"ManaCost": 100
@@ -5663,10 +5578,10 @@ DotaData.addVersion({
 		},
 		"doom_bringer_scorched_earth": {
 			"Name": "Scorched earth",
-			"Buff": {
-				"Name": "doom_bringer_scorched_earth_buff",
+			"Action": {
+				"Type": "Buff",
+				"Self": "doom_bringer_scorched_earth_buff",
 				"NoTarget": true,
-				"Self": true,
 				"Refresh": "override"
 			},
 			"Cooldown": 55,
@@ -5705,7 +5620,8 @@ DotaData.addVersion({
 			"Class": "Ultimate",
 			"LevelMax": 3,
 			"Restrictions": [6, 11, 16],
-			"Buff": {
+			"Action": {
+				"Type": "Buff",
 				"NoTarget": true,
 				"Self": "dragon_knight_elder_dragon_form_buff",
 				"Refresh": "override"
@@ -5724,9 +5640,18 @@ DotaData.addVersion({
 		},
 		"drow_ranger_trueshot": {
 			"Name": "Precision aura",
+			"Meta": {
+				"Wrap": ["AgilityDamage", "Agility percentage"],
+				"TooltipStats": ["Agility percentage"],
+				"TooltipPlain": ["Agility percentage"]
+			},
 			"Class": "Aura",
-			"TriggerChangeUpdate": true,
+			"UpdateExternals": true,
 			"Aura": "drow_ranger_trueshot_aura",
+			"Agility percentage": function(){return (this.Level > 0 ? 14 + this.Level * 6 : 0)+ "%"},
+			"AgilityDamage": function() {
+				return Math.floor((this.$total.Agility || 0) * (0.14 + this.Level * 0.06))
+			},
 			"Cooldown": 100
 		},
 		"drow_ranger_marksmanship": {
@@ -5761,14 +5686,14 @@ DotaData.addVersion({
 		"earth_spirit_petrify": {
 			"Name": "Enchant remnant",
 			"Level": function() {
-				if (this.heroTotal.HasAghanims)
+				if (this.$total.HasAghanims)
 					return 1;
 				return 0;
 			},
 			"LevelMax": 1,
 			"LockedLevel": true,
 			"Hidden": function() {
-				if (this.heroTotal.HasAghanims)
+				if (this.$total.HasAghanims)
 					return false
 				return true
 			},
@@ -5790,10 +5715,10 @@ DotaData.addVersion({
 		},
 		"earthshaker_enchant_totem": {
 			"Name": "Enchant totem",
-			"Buff": {
-				"Name": "earthshaker_enchant_totem_buff",
+			"Action": {
+				"Type": "Buff",
+				"Self": "earthshaker_enchant_totem_buff",
 				"NoTarget": true,
-				"Self": true,
 				"Refresh": "override"
 			},
 			"Cooldown": 5,
@@ -5858,8 +5783,8 @@ DotaData.addVersion({
 		"ember_spirit_activate_fire_remnant": {
 			"Name": "Activate fire remnant",
 			"Level": function() {
-				if (this.heroRef && this.heroRef.AbilityIds["ember_spirit_fire_remnant"])
-					return this.heroRef.AbilityIds["ember_spirit_fire_remnant"].Level > 0 ? 1 : 0
+				if (this.$hero && this.$hero.AbilityIds["ember_spirit_fire_remnant"])
+					return this.$hero.AbilityIds["ember_spirit_fire_remnant"].Level > 0 ? 1 : 0
 				return 0
 			},
 			"LockedLevel": true
@@ -5976,8 +5901,9 @@ DotaData.addVersion({
 		},
 		"huskar_inner_vitality": {
 			"Name": "Inner vitality",
-			"Buff": {
-				"Name": "huskar_inner_vitality_buff",
+			"Action": {
+				"Type": "Buff",
+				"Id": "huskar_inner_vitality_buff",
 				"NoTarget": true,
 				"Self": true,
 				"Teammates": true,
@@ -6016,7 +5942,7 @@ DotaData.addVersion({
 			"ChargesSemantic": "Instances",
 			"ChargesMax": function(){ return this.Level > 0 ? 3 : 0 },
 			"LevelAdjusted": function() {
-				let bonus = this.heroTotal.HasAghanims && this.Level > 0 ? 1 : 0;
+				let bonus = this.$total.HasAghanims && this.Level > 0 ? 1 : 0;
 				return this.Level + bonus;
 			},
 			"HealthRegeneration": function() { return this.Charges * this.Level },
@@ -6024,7 +5950,7 @@ DotaData.addVersion({
 			"Action": {
 				"Type": "Operation",
 				"Function": function applyQuas(){
-					let abilities = this.heroRef.AbilityIds,
+					let abilities = this.$hero.AbilityIds,
 						instanceStack = abilities.invoker_invoke.InstanceStack,
 						lastIndex = 0;
 					if (instanceStack[0] == this.ID)
@@ -6050,7 +5976,7 @@ DotaData.addVersion({
 			"ChargesSemantic": "Instances",
 			"ChargesMax": function(){ return this.Level > 0 ? 3 : 0 },
 			"LevelAdjusted": function() {
-				let bonus = this.heroTotal.HasAghanims && this.Level > 0 ? 1 : 0;
+				let bonus = this.$total.HasAghanims && this.Level > 0 ? 1 : 0;
 				return this.Level + bonus;
 			},
 			"AttackSpeed": function() { return this.Charges * this.Level * 2 },
@@ -6059,7 +5985,7 @@ DotaData.addVersion({
 			"Action": {
 				"Type": "Operation",
 				"Function": function applyWex(){
-					let abilities = this.heroRef.AbilityIds,
+					let abilities = this.$hero.AbilityIds,
 						instanceStack = abilities.invoker_invoke.InstanceStack,
 						lastIndex = 0;
 					if (instanceStack[0] == this.ID)
@@ -6085,7 +6011,7 @@ DotaData.addVersion({
 			"ChargesSemantic": "Instances",
 			"ChargesMax": function(){ return this.Level > 0 ? 3 : 0 },
 			"LevelAdjusted": function() {
-				let bonus = this.heroTotal.HasAghanims && this.Level > 0 ? 1 : 0;
+				let bonus = this.$total.HasAghanims && this.Level > 0 ? 1 : 0;
 				return this.Level + bonus;
 			},
 			"Damage": function() { return this.Charges * this.Level * 3 },
@@ -6093,7 +6019,7 @@ DotaData.addVersion({
 			"Action": {
 				"Type": "Operation",
 				"Function": function applyExort(){
-					let abilities = this.heroRef.AbilityIds,
+					let abilities = this.$hero.AbilityIds,
 						instanceStack = abilities.invoker_invoke.InstanceStack,
 						lastIndex = 0;
 					if (instanceStack[0] == this.ID)
@@ -6111,34 +6037,35 @@ DotaData.addVersion({
 		"invoker_invoke": {
 			"Name": "Invoke",
 			"Class": "Ultimate",
+			"Meta": {"SavedProperties": ["InstanceStack"] },
 			"Level": 1,
 			"LevelMin": 1,
 			"LevelMax": 4,
 			"Restrictions": [6, 11, 16],
 			"Strength": function() {
-				if (this.heroRef && this.heroRef.Meta.Level >= 25)
+				if (this.$hero && this.$hero.Meta.Level >= 25)
 					return 6;
 				return 0;
 			},
 			"Agility": function() {
-				if (this.heroRef && this.heroRef.Meta.Level >= 25)
+				if (this.$hero && this.$hero.Meta.Level >= 25)
 					return 6;
 				return 0;
 			},
 			"Intelligence": function() {
-				if (this.heroRef && this.heroRef.Meta.Level >= 25)
+				if (this.$hero && this.$hero.Meta.Level >= 25)
 					return 6;
 				return 0;
 			},
 			"Warning": "At hero level 25, this skill gives +6 to all stats",
 			"Lore": "So begins a new age of knowledge",
 			"Cooldown": function(){
-				if (this.heroTotal.HasAghanims)
+				if (this.$total.HasAghanims)
 					return 2 ** (5 - this.Level);
 				return [0, 22, 17, 12, 5][this.Level]
 			},
 			"ManaCost": function(){
-				if (this.heroTotal.HasAghanims)
+				if (this.$total.HasAghanims)
 					return 0;
 				return this.Level * 20;
 			},
@@ -6153,21 +6080,20 @@ DotaData.addVersion({
 			"Name": "Ghost walk",
 			"Level": true,
 			"HiddenAction": function(){
-				if (this.heroRef == undefined ||
-					this.heroRef.AbilityIds.invoker_wex.Level == 0 ||
-					this.heroRef.AbilityIds.invoker_quas.Level == 0)
+				if (this.$hero == undefined ||
+					this.$hero.AbilityIds.invoker_wex.Level == 0 ||
+					this.$hero.AbilityIds.invoker_quas.Level == 0)
 					return true
 				return false
 			},
 			"Action": {
 				"Type": "Buff",
-				"Id": "invoker_ghost_walk_buff",
-				"Modifier": function ghostWalkModifier(newBuff) {
-					newBuff.Quas = this.heroRef.AbilityIds.invoker_quas.LevelAdjusted
-					newBuff.Wex = this.heroRef.AbilityIds.invoker_wex.LevelAdjusted
-				},
+				"Self": function ghostwalkProps(){ return {
+					Id: "invoker_ghost_walk_buff",
+					Quas: this.$hero.AbilityIds.invoker_quas.LevelAdjusted,
+					Wex: this.$hero.AbilityIds.invoker_wex.LevelAdjusted
+				}},
 				"NoTarget": true,
-				"Self": true,
 				"Refresh": "override"
 			},
 			"Cooldown": 45,
@@ -6192,18 +6118,19 @@ DotaData.addVersion({
 			},
 			"Level": true,
 			"HiddenAction": function(){
-				if (this.heroRef == undefined ||
-					this.heroRef.AbilityIds.invoker_wex.Level == 0 ||
-					this.heroRef.AbilityIds.invoker_exort.Level == 0)
+				if (this.$hero == undefined ||
+					this.$hero.AbilityIds.invoker_wex.Level == 0 ||
+					this.$hero.AbilityIds.invoker_exort.Level == 0)
 					return true
 				return false
 			},
 			"Action": {
 				"Type": "Buff",
-				"Id": "invoker_alacrity_buff",
-				"Modifier": function alacrityModifier(newBuff) {
-					newBuff.Wex = this.heroRef.AbilityIds.invoker_wex.LevelAdjusted
-					newBuff.Exort = this.heroRef.AbilityIds.invoker_exort.LevelAdjusted
+				"Id": function alacrityProps() {	return {
+						Id: "invoker_alacrity_buff",
+						Wex: this.$hero.AbilityIds.invoker_wex.LevelAdjusted,
+						Exort: this.$hero.AbilityIds.invoker_exort.LevelAdjusted
+					}
 				},
 				"Self": true,
 				"Teammates": true,
@@ -6211,13 +6138,13 @@ DotaData.addVersion({
 				"Refresh": "override",
 			},
 			"Wex": function() {
-				if (this.heroRef && this.heroRef.AbilityIds)
-					return this.heroRef.AbilityIds.invoker_wex.Level
+				if (this.$hero && this.$hero.AbilityIds)
+					return this.$hero.AbilityIds.invoker_wex.Level
 				return 0
 			},
 			"Exort": function() {
-				if (this.heroRef && this.heroRef.AbilityIds)
-					return this.heroRef.AbilityIds.invoker_exort.Level
+				if (this.$hero && this.$hero.AbilityIds)
+					return this.$hero.AbilityIds.invoker_exort.Level
 				return 0
 			},
 			"Cooldown": 15,
@@ -6310,8 +6237,8 @@ DotaData.addVersion({
 			"Name": "Blinding light",
 			"LockedLevel": true,
 			"Level": function() {
-				if (this.heroRef && this.heroRef.AbilityIds["keeper_of_the_light_spirit_form"])
-					return this.heroRef.AbilityIds["keeper_of_the_light_spirit_form"].Level
+				if (this.$hero && this.$hero.AbilityIds["keeper_of_the_light_spirit_form"])
+					return this.$hero.AbilityIds["keeper_of_the_light_spirit_form"].Level
 				return 0
 			},
 			"Cooldown": function(){ return 24 - this.Level * 4 },
@@ -6321,8 +6248,8 @@ DotaData.addVersion({
 			"Name": "Recall",
 			"LockedLevel": true,
 			"Level": function() {
-				if (this.heroRef && this.heroRef.AbilityIds["keeper_of_the_light_spirit_form"])
-					return this.heroRef.AbilityIds["keeper_of_the_light_spirit_form"].Level
+				if (this.$hero && this.$hero.AbilityIds["keeper_of_the_light_spirit_form"])
+					return this.$hero.AbilityIds["keeper_of_the_light_spirit_form"].Level
 				return 0
 			},
 			"Cooldown": 15,
@@ -6360,10 +6287,10 @@ DotaData.addVersion({
 		},
 		"legion_commander_overwhelming_odds": {
 			"Name": "Overwhelming odds",
-			"Buff": {
-				"Name": "legion_commander_overwhelming_odds_buff",
+			"Action": {
+				"Type": "Buff",
+				"Self": "legion_commander_overwhelming_odds_buff",
 				"NoTarget": true,
-				"Self": true,
 				"Refresh": "override"
 			},
 			"Cooldown": 15,
@@ -6371,8 +6298,9 @@ DotaData.addVersion({
 		},
 		"legion_commander_press_the_attack": {
 			"Name": "Press the attack",
-			"Buff": {
-				"Name": "legion_commander_press_the_attack_buff",
+			"Action": {
+				"Type": "Buff",
+				"Id": "legion_commander_press_the_attack_buff",
 				"NoTarget": true,
 				"Self": true,
 				"Teammates": true,
@@ -6423,8 +6351,9 @@ DotaData.addVersion({
 		},
 		"lich_frost_armor": {
 			"Name": "Frost armor",
-			"Buff": {
-				"Name": "lich_frost_armor_buff",
+			"Action": {
+				"Type": "Buff",
+				"Id": "lich_frost_armor_buff",
 				"NoTarget": true,
 				"Self": true,
 				"Teammates": true,
@@ -6448,10 +6377,10 @@ DotaData.addVersion({
 		},
 		"life_stealer_rage": {
 			"Name": "Rage",
-			"Buff": {
-				"Name": "life_stealer_rage_buff",
+			"Action": {
+				"Type": "Buff",
+				"Self": "life_stealer_rage_buff",
 				"NoTarget": true,
-				"Self": true,
 				"Refresh": "Override"
 			},
 			"Cooldown": 16,
@@ -6495,6 +6424,8 @@ DotaData.addVersion({
 			"Name": "Laguna blade",
 			"Class": "Ultimate",
 			"LevelMax": 3,
+			"Meta": { "Wrap": ["AghsUpgraded"] },
+			"AghsUpgraded": function(){ return this.$total.HasAghanims },
 			"Restrictions": [6, 11, 16],
 			"Cooldown": function(){ return 80 - this.Level * 10 },
 			"ManaCost": [280, 420, 680],
@@ -6521,7 +6452,7 @@ DotaData.addVersion({
 			"Restrictions": [6, 11, 16],
 			"Cooldown": function(){ return 220 - this.Level * 60 },
 			"ManaCost": function(){
-				if (this.heroTotal.HasAghanims)
+				if (this.$total.HasAghanims)
 					return [0, 200, 420, 625][this.Level] // Wow, 25 mana less
 				return [0, 200, 420, 650][this.Level]
 			},
@@ -6533,10 +6464,10 @@ DotaData.addVersion({
 		},
 		"lone_druid_rabid": {
 			"Name": "Rabid",
-			"Buff": {
-				"Name": "lone_druid_rabid_buff",
+			"Action": {
+				"Type": "Buff",
+				"Self": "lone_druid_rabid_buff",
 				"NoTarget": true,
-				"Self": true,
 				"Refresh": "override"
 			},
 			"Cooldown": 30,
@@ -6552,10 +6483,10 @@ DotaData.addVersion({
 			"Class": "Ultimate",
 			"LevelMax": 3,
 			"Restrictions": [6, 11, 16],
-			"Buff": {
-				"Name": "lone_druid_true_form_buff",
+			"Action": {
+				"Type": "Buff",
+				"Self": "lone_druid_true_form_buff",
 				"NoTarget": true,
-				"Self": true,
 				"Refresh": "override"
 			},
 			"ManaCost": 25,
@@ -6563,12 +6494,13 @@ DotaData.addVersion({
 		"lone_druid_true_form_battle_cry": {
 			"Name": "Battle cry",
 			"Level": function() {
-				if (this.heroRef && this.heroRef.AbilityIds.lone_druid_true_form)
-					return this.heroRef.AbilityIds["lone_druid_true_form"].Level
+				if (this.$hero && this.$hero.AbilityIds.lone_druid_true_form)
+					return this.$hero.AbilityIds["lone_druid_true_form"].Level
 				return 0
 			},
 			"LockedLevel": true,
-			"Buff": {
+			"Action": {
+				"Type": "Buff",
 				"NoTarget": true,
 				"Self": "lone_druid_true_form_battle_cry_buff",
 				"Refresh": "override"
@@ -6604,8 +6536,9 @@ DotaData.addVersion({
 		},
 		"lycan_howl": {
 			"Name": "Howl",
-			"Buff": {
-				"Name": "lycan_howl_buff",
+			"Action": {
+				"Type": "Buff",
+				"Id": "lycan_howl_buff",
 				"NoTarget": true,
 				"Self": true,
 				"Teammates": true,
@@ -6626,10 +6559,10 @@ DotaData.addVersion({
 			"Restrictions": [6, 11, 16],
 			"Cooldown": function(){ return 150 - this.Level * 30 },
 			"ManaCost": 100,
-			"Buff": {
-				"Name": "lycan_shapeshift_buff",
+			"Action": {
+				"Type": "Buff",
+				"Self": "lycan_shapeshift_buff",
 				"NoTarget": true,
-				"Self": true,
 				"Refresh": "override",
 			}
 		},
@@ -6640,8 +6573,9 @@ DotaData.addVersion({
 		},
 		"magnataur_empower": {
 			"Name": "Empower",
-			"Buff": {
-				"Name": "magnataur_empower_buff",
+			"Action": {
+				"Type": "Buff",
+				"Id": "magnataur_empower_buff",
 				"NoTarget": true,
 				"Teammates": true,
 				"Self": true,
@@ -6743,8 +6677,8 @@ DotaData.addVersion({
 			"Strength": function(){ return this.Level > 0 ? 2 + this.Level : 0 },
 			"LockedLevel": true,
 			"Level": function() {
-				if (this.heroRef && this.heroRef.AbilityIds.morphling_morph_agi)
-					return this.heroRef.AbilityIds.morphling_morph_agi.Level
+				if (this.$hero && this.$hero.AbilityIds.morphling_morph_agi)
+					return this.$hero.AbilityIds.morphling_morph_agi.Level
 				return 0
 			},
 		},
@@ -6759,14 +6693,14 @@ DotaData.addVersion({
 		"morphling_hybrid": {
 			"Name": "Hybrid",
 			"Level": function() {
-				if (this.heroTotal.HasAghanims)
+				if (this.$total.HasAghanims)
 					return 1
 				return 0
 			},
 			"LevelMin": 1,
 			"LevelMax": 1,
 			"Hidden": function() {
-				if (this.heroTotal.HasAghanims)
+				if (this.$total.HasAghanims)
 					return false
 				return true
 			},
@@ -6818,12 +6752,12 @@ DotaData.addVersion({
 			"LevelMax": 3,
 			"Restrictions": [6, 11, 16],
 			"Cooldown": function(){
-				if (this.heroTotal.HasAghanims)
+				if (this.$total.HasAghanims)
 					return 70
 				return 115 - this.Level * 15
 			},
 			"ManaCost": function() {
-				if (this.heroTotal.HasAghanims)
+				if (this.$total.HasAghanims)
 					return [0, 150, 340, 500][this.Level]
 				return [0, 175, 340, 500][this.Level]
 			},
@@ -6849,7 +6783,7 @@ DotaData.addVersion({
 			"ChargesMax": function(){
 				if (this.Level < 1)
 					return 0;
-				if (this.heroTotal.HasAghanims)
+				if (this.$total.HasAghanims)
 					return 14 + this.Level * 8
 				return 12 + this.Level * 6
 			},
@@ -6899,22 +6833,22 @@ DotaData.addVersion({
 		"nyx_assassin_burrow": {
 			"Name": "Burrow",
 			"Level": function() {
-				if (this.heroTotal.HasAghanims)
+				if (this.$total.HasAghanims)
 					return 1
 				return 0
 			},
 			"Hidden": function() {
-				if (this.heroTotal.HasAghanims)
+				if (this.$total.HasAghanims)
 					return false
 				return true
 			},
 		},
 		"nyx_assassin_vendetta": {
 			"Name": "Vendetta",
-			"Buff": {
-				"Name": "nyx_assassin_vendetta_buff",
+			"Action": {
+				"Type": "Buff",
+				"Self": "nyx_assassin_vendetta_buff",
 				"NoTarget": true,
-				"Self": true,
 				"Refresh": "override"
 			},
 			"Class": "Ultimate",
@@ -6923,10 +6857,14 @@ DotaData.addVersion({
 		},
 		"obsidian_destroyer_arcane_orb": {
 			"Name": "Arcane orb",
-			"Buff": {
-				"NoTarget": true,
-				"Self": "obsidian_destroyer_arcane_orb_buff",
-				"Refresh": "override"
+			"Charges": 0,
+			"ChargesSemantic": "Stolen int",
+			"Intelligence": function(){ return this.Charges * this.Level },
+			"Action": {
+				"Type": "Autocast",
+				"Stats": {
+					"DamagePure": function(){ return 50 },
+				}
 			}
 		},
 		"obsidian_destroyer_astral_imprisonment": {
@@ -6950,8 +6888,9 @@ DotaData.addVersion({
 		},
 		"ogre_magi_bloodlust": {
 			"Name": "Bloodlust",
-			"Buff": {
-				"Name": "ogre_magi_bloodlust_buff",
+			"Action": {
+				"Type": "Buff",
+				"Id": "ogre_magi_bloodlust_buff",
 				"Self": true,
 				"Teammates": true,
 				"NoTarget": true,
@@ -6961,12 +6900,12 @@ DotaData.addVersion({
 		"ogre_magi_unrefined_fireblast": {
 			"Name": "Unrefined fireblast",
 			"Level": function() {
-				if (this.heroTotal.HasAghanims)
+				if (this.$total.HasAghanims)
 					return 1
 				return 0
 			},
 			"Hidden": function() {
-				if (this.heroTotal.HasAghanims)
+				if (this.$total.HasAghanims)
 					return false
 				return true
 			},
@@ -7011,7 +6950,7 @@ DotaData.addVersion({
 		"oracle_purifying_flames": {
 			"Name": "Purifying flames",
 			"Cooldown": function(){
-				return this.heroTotal.HasAghanims ? 2.25 : 1
+				return this.$total.HasAghanims ? 2.25 : 1
 			},
 			"ManaCost": function(){ return 40 + this.Level * 10 },
 		},
@@ -7026,7 +6965,8 @@ DotaData.addVersion({
 		},
 		"phantom_assassin_phantom_strike": {
 			"Name": "Phantom strike",
-			"Buff": {
+			"Action": {
+				"Type": "Buff",
 				"NoTarget": true,
 				"Self": "phantom_assassin_phantom_strike_buff",
 				"Refresh": "leave"
@@ -7084,8 +7024,8 @@ DotaData.addVersion({
 		"puck_ethereal_jaunt": {
 			"Name": "Ethereal jaunt",
 			"Level": function() {
-				if (this.heroRef && this.heroRef.AbilityIds["puck_illusory_orb"])
-					return this.heroRef.AbilityIds["puck_illusory_orb"].Level > 0 ? 1 : 0
+				if (this.$hero && this.$hero.AbilityIds["puck_illusory_orb"])
+					return this.$hero.AbilityIds["puck_illusory_orb"].Level > 0 ? 1 : 0
 				return 0
 			},
 		},
@@ -7098,7 +7038,7 @@ DotaData.addVersion({
 		"pudge_meat_hook": {
 			"Name": "Meat hook",
 			"Cooldown": function(){
-				if (this.heroTotal.HasAghanims)
+				if (this.$total.HasAghanims)
 					return 4
 				return 15 - this.Level
 			},
@@ -7138,8 +7078,9 @@ DotaData.addVersion({
 		},
 		"pugna_decrepify": {
 			"Name": "Decrepify",
-			"Buff": {
-				"Name": "pugna_decrepify_buff",
+			"Action": {
+				"Type": "Buff",
+				"Id": "pugna_decrepify_buff",
 				"NoTarget": true,
 				"Self": true,
 				"Teammates": true,
@@ -7158,7 +7099,7 @@ DotaData.addVersion({
 			"Class": "Ultimate",
 			"LevelMax": 3,
 			"Restrictions": [6, 11, 16],
-			"Cooldown": function(){	return this.heroTotal.HasAghanims ? 22 : 0 },
+			"Cooldown": function(){	return this.$total.HasAghanims ? 22 : 0 },
 			"ManaCost": function(){ return 75 + this.Level * 50 },
 		},
 		"queenofpain_shadow_strike": {
@@ -7196,7 +7137,8 @@ DotaData.addVersion({
 		},
 		"razor_static_link": {
 			"Name": "Static link",
-			"Buff": {
+			"Action": {
+				"Type": "Buff",
 				"NoTarget": true,
 				"Self": "razor_static_link_buff",
 				"Refresh": "override"
@@ -7288,8 +7230,8 @@ DotaData.addVersion({
 		"shadow_demon_shadow_poison_release": {
 			"Name": "Shadow poison release",
 			"Level": function() {
-				if (this.heroRef && this.heroRef.AbilityIds["shadow_demon_shadow_poison"])
-					return this.heroRef.AbilityIds["shadow_demon_shadow_poison"].Level > 0 ? 1 : 0
+				if (this.$hero && this.$hero.AbilityIds["shadow_demon_shadow_poison"])
+					return this.$hero.AbilityIds["shadow_demon_shadow_poison"].Level > 0 ? 1 : 0
 				return 0
 			},
 		},
@@ -7299,7 +7241,7 @@ DotaData.addVersion({
 			"LevelMax": 3,
 			"Restrictions": [6, 11, 16],
 			"Cooldown": function(){
-				if (this.heroTotal.HasAghanims)
+				if (this.$total.HasAghanims)
 					return 40
 				return 50
 			},
@@ -7390,7 +7332,8 @@ DotaData.addVersion({
 		},
 		"slardar_sprint": {
 			"Name": "Sprint",
-			"Buff": {
+			"Action": {
+				"Type": "Buff",
 				"NoTarget": true,
 				"Self": "slardar_sprint_buff",
 				"Refresh": "override"
@@ -7444,7 +7387,8 @@ DotaData.addVersion({
 		},
 		"spectre_spectral_dagger": {
 			"Name": "Spectral dagger",
-			"Buff": {
+			"Action": {
+				"Type": "Buff",
 				"NoTarget": true,
 				"Self": "spectre_spectral_dagger_buff",
 				"Refresh": "override"
@@ -7490,7 +7434,8 @@ DotaData.addVersion({
 		},
 		"storm_spirit_electric_vortex": {
 			"Name": "Electric vortex",
-			"Buff": {
+			"Action": {
+				"Type": "Buff",
 				"NoTarget": true,
 				"Self": "storm_spirit_electric_vortex_self",
 				"Refresh": "leave"
@@ -7513,8 +7458,9 @@ DotaData.addVersion({
 		},
 		"sven_warcry": {
 			"Name": "Warcry",
-			"Buff": {
-				"Name": "sven_warcry_buff",
+			"Action": {
+				"Type": "Buff",
+				"Id": "sven_warcry_buff",
 				"Self": true,
 				"NoTarget": true,
 				"Teammates": true,
@@ -7526,11 +7472,15 @@ DotaData.addVersion({
 			"Class": "Ultimate",
 			"LevelMax": 3,
 			"Restrictions": [6, 11, 16],
-			"Buff": function() { // either brilliant use of what's possible now, or very stupid
-				if (this.heroTotal.HasAghanims)
-					return { "NoTarget": true, "Self": "sven_gods_strength_buff",
-					"Teammates": "sven_gods_strength_buff_aghanims", "Refresh": "override" }
-				return { "NoTarget": true, "Self": "sven_gods_strength_buff", "Refresh": "override" }
+			"Action": {
+				"Type": "Buff",
+				"NoTarget": true,
+				"Self": "sven_gods_strength_buff",
+				"Teammates": function(){
+					if (this.$total.HasAghanims)
+						return "sven_gods_strength_buff_aghanims"
+				},
+				"Refresh": "override",
 			}
 		},
 		"techies_land_mines": {
@@ -7556,7 +7506,8 @@ DotaData.addVersion({
 		},
 		"templar_assassin_refraction": {
 			"Name": "Refraction",
-			"Buff": {
+			"Action": {
+				"Type": "Buff",
 				"NoTarget": true,
 				"Refresh": "override",
 				"Self": [
@@ -7567,7 +7518,8 @@ DotaData.addVersion({
 		},
 		"templar_assassin_meld": {
 			"Name": "Meld",
-			"Buff": {
+			"Action": {
+				"Type": "Buff",
 				"NoTarget": true,
 				"Self": "templar_assassin_meld_buff",
 				"Refresh": "override"
@@ -7586,8 +7538,8 @@ DotaData.addVersion({
 		"templar_assassin_trap": {
 			"Name": "Trap",
 			"Level": function() {
-				if (this.heroRef && this.heroRef.AbilityIds["templar_assassin_psionic_trap"])
-					return this.heroRef.AbilityIds["templar_assassin_psionic_trap"].Level > 0 ? 1 : 0
+				if (this.$hero && this.$hero.AbilityIds["templar_assassin_psionic_trap"])
+					return this.$hero.AbilityIds["templar_assassin_psionic_trap"].Level > 0 ? 1 : 0
 				return 0
 			},
 			"LockedLevel": true
@@ -7604,7 +7556,8 @@ DotaData.addVersion({
 		},
 		"terrorblade_metamorphosis": {
 			"Name": "Metamorphosis",
-			"Buff": {
+			"Action": {
+				"Type": "Buff",
 				"NoTarget": true,
 				"Self": "terrorblade_metamorphosis_buff",
 				"Refresh": "override"
@@ -7673,7 +7626,7 @@ DotaData.addVersion({
 			"MovementSpeed": function(){ return this.Level > 0 ? 30 + 1 * this.Level : 0 },
 			"AttackSpeed": function(){ return this.Level > 0 ? -5 - 15 * this.Level : 0 },
 			"Range": function() {
-				if (this.heroRef && this.heroRef.Total.HasAghanims)
+				if (this.$hero && this.$hero.Total.HasAghanims)
 					return 85
 				return 0
 			},
@@ -7690,12 +7643,12 @@ DotaData.addVersion({
 		"treant_eyes_in_the_forest": {
 			"Name": "Eyes in the forest",
 			"Level": function() {
-				if (this.heroTotal.HasAghanims)
+				if (this.$total.HasAghanims)
 					return 1
 				return 0
 			},
 			"Hidden": function() {
-				if (this.heroTotal.HasAghanims)
+				if (this.$total.HasAghanims)
 					return false
 				return true
 			},
@@ -7708,6 +7661,7 @@ DotaData.addVersion({
 		},
 		"troll_warlord_berserkers_rage": {
 			"Name": "Berserker's rage",
+			"Meta": { "SavedProperties": ["Active"] },
 			"Active": false,
 			"Image": function(){ return "troll_warlord_berserkers_rage" + (this.Active ? "_active" : "") },
 			"AttackType": function(){ return this.Active ? "Melee" : "Ranged" },
@@ -7721,12 +7675,11 @@ DotaData.addVersion({
 			},
 		},
 		"troll_warlord_whirling_axes_ranged": {
-			//"Name": "Whirling axes (Ranged)",
-			"Name": "Whirling axes",
+			"Name": function (){ return "Whirling axes " + (this.Active ? "(Melee)" : "(Ranged)") },
 			"Meta": { "Wrap": ["Active"] },
 			"Active": function() {
-				if (this.heroRef &&	this.heroRef.AbilityIds)
-					return this.heroRef.AbilityIds.troll_warlord_berserkers_rage.Active
+				if (this.$hero && this.$hero.AbilityIds)
+					return this.$hero.AbilityIds.troll_warlord_berserkers_rage.Active
 				return false
 			},
 			"Image": function(){ return "troll_warlord_whirling_axes_" + (this.Active ? "melee" : "ranged") },
@@ -7750,8 +7703,9 @@ DotaData.addVersion({
 			"Class": "Ultimate",
 			"LevelMax": 3,
 			"Restrictions": [6, 11, 16],
-			"Buff": {
-				"Name": "troll_warlord_battle_trance_buff",
+			"Action": {
+				"Type": "Buff",
+				"Id": "troll_warlord_battle_trance_buff",
 				"NoTarget": true,
 				"Self": true,
 				"Teammates": true,
@@ -7787,12 +7741,12 @@ DotaData.addVersion({
 			"Name": "Walrus kick",
 			"LevelMax": 1,
 			"Level": function() {
-				if (this.heroTotal.HasAghanims)
+				if (this.$total.HasAghanims)
 					return 1
 				return 0
 			},
 			"Hidden": function() {
-				if (this.heroTotal.HasAghanims)
+				if (this.$total.HasAghanims)
 					return false
 				return true
 			},
@@ -7804,7 +7758,7 @@ DotaData.addVersion({
 			"Charges": 0,
 			"ChargesSemantic": "Stolen str",
 			"Strength": function(){
-				if (this.heroTotal.HasAghanims)
+				if (this.$total.HasAghanims)
 					return 10 * this.Charges
 				return 4 * this.Charges
 			}
@@ -7828,7 +7782,8 @@ DotaData.addVersion({
 		},
 		"ursa_overpower": {
 			"Name": "Overpower",
-			"Buff": {
+			"Action": {
+				"Type": "Buff",
 				"NoTarget": true,
 				"Self": "ursa_overpower_buff",
 				"Refresh": "override"
@@ -7846,6 +7801,8 @@ DotaData.addVersion({
 			"Name": "Enrage",
 			"Class": "Ultimate",
 			"LevelMax": 3,
+			"Meta": { "Wrap": ["AghsUpgraded"] },
+			"AghsUpgraded": function(){ return this.$total.HasAghanims },
 			"Restrictions": [6, 11, 16],
 			"Cooldown": function(){ return 60 - this.Level * 10 },
 			"ManaCost": 0,
@@ -7870,7 +7827,7 @@ DotaData.addVersion({
 			"LevelMax": 3,
 			"Restrictions": [6, 11, 16],
 			"Cooldown": function(){
-				if (this.heroTotal.HasAghanims)
+				if (this.$total.HasAghanims)
 					return 10;
 				return 45;
 			},
@@ -7942,7 +7899,8 @@ DotaData.addVersion({
 		},
 		"warlock_shadow_word": {
 			"Name": "Shadow word",
-			"Buff": {
+			"Action": {
+				"Type": "Buff",
 				"Name": "warlock_shadow_word_buff",
 				"NoTarget": true,
 				"Self": true,
@@ -7986,7 +7944,8 @@ DotaData.addVersion({
 		},
 		"windrunner_windrun": {
 			"Name": "Windrun",
-			"Buff": {
+			"Action": {
+				"Type": "Buff",
 				"NoTarget": true,
 				"Self": "windrunner_windrun_buff",
 				"Refresh": "override"
@@ -7999,13 +7958,14 @@ DotaData.addVersion({
 			"Class": "Ultimate",
 			"LevelMax": 3,
 			"Restrictions": [6, 11, 16],
-			"Buff": function() { // either brilliant use of what's possible now, or very stupid
-				if (this.heroTotal.HasAghanims)
-					return { "NoTarget": true, "Self": "windrunner_focusfire_buff", "Refresh": "override" }
-				return { "NoTarget": true, "Self": "windrunner_focusfire_buff_aghs", "Refresh": "override" }
+			"Action": {
+				"Type": "Buff",
+				"Self": "windrunner_focusfire_buff",
+				"NoTarget": true,
+				"Refresh": "override",
 			},
 			"Cooldown": function(){
-				if (this.heroTotal.HasAghanims)
+				if (this.$total.HasAghanims)
 					return 15
 				return 60
 			},
@@ -8023,8 +7983,9 @@ DotaData.addVersion({
 		},
 		"winter_wyvern_cold_embrace": {
 			"Name": "Cold embrace",
-			"Buff": {
-				"Name": "winter_wyvern_cold_embrace_buff",
+			"Action": {
+				"Type": "Buff",
+				"Id": "winter_wyvern_cold_embrace_buff",
 				"Self": true,
 				"Teammates": true,
 				"NoTarget": true,
@@ -8043,8 +8004,9 @@ DotaData.addVersion({
 		},
 		"wisp_tether": {
 			"Name": "Tether",
-			"Buff": {
-				"Name": "wisp_tether_buff",
+			"Action": {
+				"Type": "Buff",
+				"Id": "wisp_tether_buff",
 				"Self": true,
 				"Teammates": true,
 				"NoTarget": true,
@@ -8056,7 +8018,8 @@ DotaData.addVersion({
 		},
 		"wisp_overcharge": {
 			"Name": "Overcharge",
-			"Buff": {
+			"Action": {
+				"Type": "Buff",
 				"NoTarget": true,
 				"Self": "wisp_overcharge_debuff",
 				"Teammates":"wisp_overcharge_buff",
@@ -8112,8 +8075,9 @@ DotaData.addVersion({
 		},
 		"arc_warden_magnetic_field": {
 			"Name": "Magnetic field",
-			"Buff": {
-				"Name": "arc_warden_magnetic_field_buff",
+			"Action": {
+				"Type": "Buff",
+				"Id": "arc_warden_magnetic_field_buff",
 				"NoTarget": true,
 				"Self": true,
 				"Teammates": true,
@@ -8162,7 +8126,7 @@ DotaData.addVersion({
 	//
 
 	"Buffs": {
-		"_base": {
+		[DotaData.Basis]: {
 			"Name": "Dummy buff",
 			"Image": "empty",
 			"Class": "Buff"
@@ -8206,14 +8170,14 @@ DotaData.addVersion({
 			"Class": "Aura",
 			"Image": "beastmaster_inner_beast",
 			"Level": function() {
-				return this.emitterRef ? this.emitterRef.Level : 0;
+				return this.$emitter ? this.$emitter.Level : 0;
 			},
 			"AttackSpeed": function () {
-				if (!this.emitterRef) {
+				if (!this.$emitter) {
 					return 0;
 				}
-				if (this.emitterRef.Level > 0)
-					return 5 + this.emitterRef.Level * 10
+				if (this.$emitter.Level > 0)
+					return 5 + this.$emitter.Level * 10
 				return 0;
 			},
 			"Hidden": function(){
@@ -8288,13 +8252,13 @@ DotaData.addVersion({
 			"Name": "Arcane aura",
 			"Class": "Aura",
 			"Image": "crystal_maiden_brilliance_aura",
-			"Level": function() { return this.emitterRef ? this.emitterRef.Level : 0 },
+			"Level": function() { return this.$emitter ? this.$emitter.Level : 0 },
 			"ManaRegenerationFlat": function() {
-				/*	if (!this.emitterRef)
+				/*	if (!this.$emitter)
 						return 0;
 					if (this.Level < 1)
 						return 0;*/
-					if (this.heroRef && this.heroRef.AbilityIds.crystal_maiden_brilliance_aura)
+					if (this.$hero && this.$hero.AbilityIds.crystal_maiden_brilliance_aura)
 						return [0, 2, 3, 4, 8][this.Level]
 					return [0, 1, 1.5, 2, 3][this.Level]
 			},
@@ -8310,19 +8274,13 @@ DotaData.addVersion({
 			"Level": 0,
 			"Charges": 0,
 			"ChargesMax": 24,
+			"AghsUpgraded": false,
 			"ChargesSemantic": "Duration",
-			"Armor": function(){ return (0.5 + this.Level * 0.25) * this.Charges },
-		},
-		"dazzle_weave_buff_aghs": {
-			"Name": "Weave (upgraded)",
-			"Class": "Buff",
-			"Image": "dazzle_weave",
-			"LockedLevel": true,
-			"Level": 0,
-			"Charges": 0,
-			"ChargesMax": 24,
-			"ChargesSemantic": "Duration",
-			"Armor": function(){ return this.Level > 0 ? (1.0 + this.Level * 0.25) * this.Charges : 0 }
+			"Armor": function(){
+				if (this.AghsUpgraded)
+					return (1.0 + this.Level * 0.25) * this.Charges
+				return (0.5 + this.Level * 0.25) * this.Charges
+			},
 		},
 		"doom_bringer_scorched_earth_buff": {
 			"Name": "Scorched earth",
@@ -8347,15 +8305,11 @@ DotaData.addVersion({
 			"Class": "Aura",
 			"Image": "drow_ranger_trueshot",
 			"Level": function() {
-				return this.emitterRef ? this.emitterRef.Level : 0;
+				return this.$emitter ? this.$emitter.Level : 0;
 			},
 			"Damage": function() {
-					if (!this.emitterRef)
-						return 0;
-					if (this.heroTotal.AttackType != "Ranged")
-						return 0;
-					if (this.emitterRef.Level > 0)
-						return Math.floor(this.ownerRef.Total.Agility * (0.14 + this.emitterRef.Level * 0.06))
+					if (this.Level > 0 && this.$total.AttackType === "Ranged")
+						return this.$emitter.AgilityDamage
 					return	0;
 			},
 			"Hidden": function(){
@@ -8378,13 +8332,14 @@ DotaData.addVersion({
 			"ChargesMax": 1,
 			"ChargesSemantic": "Treshold",
 			"HealthRegeneration": function() {
-				let primaryAtt = this.heroRef ? this.heroRef.Total[this.heroRef.Raw.Type] : 0;
+				let primaryAtt = this.$hero ? this.$hero.Total[this.$hero.Raw.Type] : 0;
 				return primaryAtt * this.Level * 0.05 * (this.Charges ? 4 : 1)
 			}
 		},
 		"invoker_ghost_walk_buff": {
 			"Name": "Ghost walk",
 			"Image": "invoker_ghost_walk",
+			"Meta": { "SavedProperties": ["Wex", "Quas"] },
 			"Class": "Buff",
 			"Quas": 0,
 			"Wex": 0,
@@ -8393,6 +8348,7 @@ DotaData.addVersion({
 		"invoker_alacrity_buff": {
 			"Name": "Alacrity",
 			"Image": "invoker_alacrity",
+			"Meta": { "SavedProperties": ["Wex", "Exort"] },
 			"Class": "Buff",
 			"Wex": 0,
 			"Exort": 0,
@@ -8466,13 +8422,13 @@ DotaData.addVersion({
 			"Class": "Aura",
 			"Image": "luna_lunar_blessing",
 			"Level": function() {
-				return this.emitterRef ? this.emitterRef.Level : 0;
+				return this.$emitter ? this.$emitter.Level : 0;
 			},
 			"Damage": function () {
-				if (!this.emitterRef)
+				if (!this.$emitter)
 					return 0;
-				if (this.emitterRef.Level > 0)
-					return 6 + this.emitterRef.Level * 8;
+				if (this.$emitter.Level > 0)
+					return 6 + this.$emitter.Level * 8;
 				return 0;
 			},
 			"Hidden": function(){
@@ -8558,10 +8514,10 @@ DotaData.addVersion({
 			"Class": "Aura",
 			"Image": "rubick_null_field",
 			"Level": function() {
-				return this.emitterRef ? this.emitterRef.Level : 0;
+				return this.$emitter ? this.$emitter.Level : 0;
 			},
 			"MagicalResistance": function () {
-				if (!this.emitterRef)
+				if (!this.$emitter)
 					return 0;
 				return this.Level * 0.05
 			},
@@ -8588,13 +8544,13 @@ DotaData.addVersion({
 			"Class": "Aura",
 			"Image": "spirit_breaker_empowering_haste",
 			"Level": function() {
-				return this.emitterRef ? this.emitterRef.Level : 0;
+				return this.$emitter ? this.$emitter.Level : 0;
 			},
 			"Charges": function() {
-				return this.emitterRef ? this.emitterRef.Charges : 0;
+				return this.$emitter ? this.$emitter.Charges : 0;
 			},
 			"MovementSpeedPercentage": function () {
-				if (!this.emitterRef)
+				if (!this.$emitter)
 					return 0;
 				var speed = this.Level > 0 ? 0.02 + 0.04 * this.Level : 0
 				if (this.Charges == 1)
@@ -8630,7 +8586,7 @@ DotaData.addVersion({
 			"DamagePercentage": function(){ return 0.5 + 0.5 * this.Level }
 		},
 		"sven_gods_strength_buff_aghanims": {
-			"Name": "God's strength (upgraded)",
+			"Name": "God's strength",
 			"Image": "sven_gods_strength",
 			"Level": 0,
 			"LockedLevel": true,
@@ -8678,10 +8634,10 @@ DotaData.addVersion({
 			"Class": "Aura",
 			"Image": "vengefulspirit_command_aura",
 			"Level": function() {
-				return this.emitterRef ? this.emitterRef.Level : 0;
+				return this.$emitter ? this.$emitter.Level : 0;
 			},
 			"DamagePercentage": function () {
-				if (!this.emitterRef) {
+				if (!this.$emitter) {
 					return 0;
 				}
 				return this.Level > 0 ? 0.04 + 0.08 * this.Level : 0
@@ -8711,6 +8667,8 @@ DotaData.addVersion({
 			"Level": 0,
 			"LockedLevel": true,
 			"DamageReductionPercentage": function() {
+				if (this.$total.HasAghanims)
+					return -0.45 + 0.15 * this.Level
 				return -0.6 + 0.1 * this.Level
 			},
 			"AttackSpeed": 500
@@ -8721,8 +8679,8 @@ DotaData.addVersion({
 			"Level": 0,
 			"LockedLevel": true,
 			"HealthRegeneration": function(){
-				if (this.heroRef != undefined)
-					return 20 + this.heroRef.Total.Health * (0.02 + 0.01 * this.Level)
+				if (this.$hero != undefined)
+					return 20 + this.$hero.Total.Health * (0.02 + 0.01 * this.Level)
 				return 20;
 			}
 		},
@@ -8868,7 +8826,7 @@ DotaData.addVersion({
 			"Name": "Phase",
 			"Image": "phase_boots",
 			"MovementSpeedPercentage": function() {
-					if (this.heroRef && this.heroRef.Total.AttackType == "Ranged")
+					if (this.$hero && this.$hero.Total.AttackType == "Ranged")
 						return 0.2;
 					return 0.24;
 				}
@@ -9029,6 +8987,17 @@ DotaData.addVersion({
 			"Haste": 522,
 		},
 
+	},
+
+	"AttackModifiers": {
+		[DotaData.Basis]: {
+
+		},
+
+		"lesser_crit_am": {
+			"Name": "Critical strike",
+
+		}
 	}
 
 });

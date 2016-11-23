@@ -11,12 +11,12 @@ window.addEventListener("DOMContentLoaded", function(e){
 	MainTable.addHero(new HeroInstance("drow_ranger", {
 		level: 16,
 		items: [
-			new ItemInstance("greater_crit"),
-			new ItemInstance("butterfly"),
-			new ItemInstance("power_treads_agility"),
-			new ItemInstance("sange_and_yasha"),
-			new ItemInstance("dragon_lance"),
-			new ItemInstance("mask_of_madness")
+			new ItemObject("greater_crit"),
+			new ItemObject("butterfly"),
+			new ItemObject("power_treads_agility"),
+			new ItemObject("sange_and_yasha"),
+			new ItemObject("dragon_lance"),
+			new ItemObject("mask_of_madness")
 		],
 		abilities: {
 			"drow_ranger_frost_arrows": 4,
@@ -36,12 +36,12 @@ window.addEventListener("DOMContentLoaded", function(e){
 			"ursa_enrage": 2
 		},
 		items: [
-			new ItemInstance("vladmir"),
-			new ItemInstance("phase_boots"),
-			new ItemInstance("skadi"),
-			new ItemInstance("blink"),
-			new ItemInstance("black_king_bar"),
-			new ItemInstance("monkey_king_bar")
+			new ItemObject("vladmir"),
+			new ItemObject("phase_boots"),
+			new ItemObject("skadi"),
+			new ItemObject("blink"),
+			new ItemObject("black_king_bar"),
+			new ItemObject("monkey_king_bar")
 		]
 	}));
 	MainTable.addHero(new HeroInstance("alchemist", {
@@ -54,16 +54,16 @@ window.addEventListener("DOMContentLoaded", function(e){
 			"attribute_bonus": 10
 		},
 		buffs: [
-			new BuffInstance("alchemist_chemical_rage_buff", { level: 3 }),
-			new BuffInstance("moon_shard_buff")
+			new BuffObject("alchemist_chemical_rage_buff", { level: 3 }),
+			new BuffObject("moon_shard_buff")
 		],
 		items: [
-			new ItemInstance("assault"),
-			new ItemInstance("travel_boots_2"),
-			new ItemInstance("abyssal_blade"),
-			new ItemInstance("mjollnir"),
-			new ItemInstance("heart"),
-			new ItemInstance("moon_shard")
+			new ItemObject("assault"),
+			new ItemObject("travel_boots_2"),
+			new ItemObject("abyssal_blade"),
+			new ItemObject("mjollnir"),
+			new ItemObject("heart"),
+			new ItemObject("moon_shard")
 		],
 		team: "Dire"
 	}))
@@ -78,19 +78,20 @@ window.addEventListener("DOMContentLoaded", function(e){
 			attribute_bonus: 10
 		},
 		items: [
-			new ItemInstance("blink"),
-			new ItemInstance("guardian_greaves"),
-			new ItemInstance("sheepstick"),
-			new ItemInstance("glimmer_cape"),
-			new ItemInstance("force_staff"),
-			new ItemInstance("cyclone")
+			new ItemObject("blink"),
+			new ItemObject("guardian_greaves"),
+			new ItemObject("sheepstick"),
+			new ItemObject("glimmer_cape"),
+			new ItemObject("force_staff"),
+			new ItemObject("cyclone")
 		],
 		buffs: [
-			new BuffInstance("ultimate_scepter_buff")
+			new BuffObject("ultimate_scepter_buff")
 		]
 	}))
 	MainTable.addHero(new HeroInstance("lina", {
 		level: 16,
+		team: "Radiant",
 		abilities: {
 			lina_dragon_slave: 4,
 			lina_light_strike_array: 4,
@@ -99,12 +100,12 @@ window.addEventListener("DOMContentLoaded", function(e){
 			attribute_bonus: 1
 		},
 		items: [
-			new ItemInstance("octarine_core"),
-			new ItemInstance("cyclone"),
-			new ItemInstance("blink"),
-			new ItemInstance("smoke_of_deceit", {charges: 2}),
-			new ItemInstance("travel_boots"),
-			new ItemInstance("hand_of_midas"),
+			new ItemObject("octarine_core"),
+			new ItemObject("cyclone"),
+			new ItemObject("blink"),
+			new ItemObject("ultimate_scepter"),
+			new ItemObject("travel_boots"),
+			new ItemObject("hand_of_midas"),
 		]
 	}))
 

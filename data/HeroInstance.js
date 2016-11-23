@@ -3,8 +3,7 @@
 */
 
 /**
- * Creates a hero instance
- * @constructor
+ * @constructor Creates a hero instance
  * @param {String} heroId Internal Dota 2 hero ID.
  * @param {Object=} options Optional arguments.
  * @param {String} options.version Dota 2 version override.
@@ -14,31 +13,43 @@
  * @param {boolean} options.dead Hero death status override.
  * @param {Integer} options.gold Gold amount override.
  * @param {object[].<String, number>} options.abilities String indexed skill levels.
- * @param {BuffInstance[]} options.buffs Array of buff instances.
- * @param {(ItemInstance[]|string[])} options.items Array of string item IDs or ItemInstance.
+ * @param {BuffObject[]} options.buffs Array of buff instances.
+ * @param {(ItemObject[]|string[])} options.items Array of string item IDs or ItemObject.
  */
-function HeroInstance(heroId, options) {
-	if (!options) options = {};
-
-	this.Raw = DotaData.getTypeData("Heroes", heroId, options.version);
+function HeroInstance(heroId, options = {}) {
+	if (options.version === undefined)
+		options.version = DotaData.NewestVersion;
 	this.Meta = { "ID": heroId,
-				  "Level": Math.min(Math.max(options.level, 1), 25) || this.Raw.Level,
-				  "Label": options.label || this.Raw.Name,
+				  "Label": options.label || "",
 				  "Team": options.team || undefined,
 				  "Dead": options.dead || false,
-				  "Gold": Number.isInteger(options.gold) || 625 };
-	this.Base = {};
+				  "Gold": Number.parseInt(options.gold) || 625 };
+	this.Base = new AttributesObject(heroId, {
+		version: options.version,
+		level: Math.min(Math.max(options.level, 1), 25)
+	})
+	this.Base._heroRef = this
 	this.Item = {};
 	this.Buff = {};
 	this.Items = [];
 	this.Buffs = [];
-	if (options.items && ItemInstance.isValidArray(options.items))
-		for (var item of options.items)
-			this.addItem(item);
+	if (Array.isArray(options.items))
+		for (let item of options.items)
+			if (item instanceof ItemObject)
+				this.addItem(item)
+			else if (typeof item === "string")
+				this.addItem(new ItemObject(item, {version: options.version}))
+			else if (item && "Id" in item)
+				this.addItem(new ItemObject(item.Id, item));
 	this.addAbilities(options.abilities);
 	if (Array.isArray(options.buffs))
-		for (var buff of options.buffs)
-			this.addBuff(buff)
+		for (let buff of options.buffs)
+			if (buff instanceof BuffObject)
+				this.addBuff(buff)
+			else if (typeof buff === "string")
+				this.addBuff(new BuffObject(buff, {version: options.version}))
+			else if (buff && "Id" in buff)
+				this.addBuff(new BuffObject(buff.Id, buff));
 
 	this.LevelChange();
 	this.ItemChange();
@@ -50,14 +61,14 @@ function HeroInstance(heroId, options) {
  * Gets the string representation of this instance
  * @returns {string} String representation
  */
-HeroInstance.prototype.toString = function() {
+HeroInstance.prototype.toString = function HeroToString() {
 	return "[HeroInstance "+this.Meta.ID+"]";
 }
 
 HeroInstance.prototype.copy = function(teamless) {
 	let opts = {
-		version: this.Raw.Version,
-		level: this.Meta.Level,
+		version: this.Base.Version,
+		level: this.Base.Level,
 		label: this.Meta.Label,
 		team: teamless ? undefined : this.Meta.Team,
 		dead: this.Meta.Dead,
@@ -65,15 +76,14 @@ HeroInstance.prototype.copy = function(teamless) {
 	}
 	let items = [], abilities = {}, buffs = [];
 	for (let i of this.Items)
-		items.push(i.copy())
+		items.push(i.serialize())
+
 	for (let a in this.AbilityIds) {
-		abilities[a] = {level: this.AbilityIds[a].Level};
-		if (typeof this.AbilityIds[a].Charges == "number")
-			abilities[a].charges = this.AbilityIds[a].Charges;
+		abilities[a] = this.AbilityIds[a].serialize()
 	}
 	for (let b of this.Buffs) {
-		if (b.Class != "Aura")
-			buffs.push(b.copy())
+		if (b.Class !== "Aura")
+			buffs.push(b.serialize())
 	}
 	opts.items = items;
 	opts.abilities = abilities;
@@ -128,49 +138,37 @@ HeroInstance.prototype.propagateChange = function (propagationIdList) {
 
 // Convenience function for constructor
 HeroInstance.prototype.addAbilities = function(abilityOptions) {
-	let team = this.getTeammates(), test;
+	let test;
 	this.Ability = {};
 	this.Abilities = [];
 	this.AbilityIds = {};
-	// Ability definition in heroes not final, but this will do for now...
-	for (var prop in this.Raw)
-		if (test = /Ability(\d+)/.exec(prop)) {
-			var abilityInstance = new AbilityInstance(this.Raw[prop], {
-				version: this.Raw.Version
-			});
-			abilityInstance.boundUpdate = this.AbilityChange.bind(this);
-			abilityInstance.heroRef = this;
-			abilityInstance.addOwner(this);
-			this.Abilities[parseInt(test[1])-1] = abilityInstance;
-			this.AbilityIds[this.Raw[prop]] = abilityInstance;
-			for (var teammate of team)
+
+	for (let heroProp in this.Base)
+		if (test = /Ability(\d+)/.exec(heroProp)) {
+			let props = {version: this.Base.Version}, abilityProps
+			if (abilityOptions && abilityOptions[this.Base[heroProp]])
+				abilityProps = abilityOptions[this.Base[heroProp]]
+			if (typeof abilityProps === "number")
+				props.level = abilityProps
+			else if (abilityProps instanceof Object)
+				for (let key in abilityProps)
+					props[key] = abilityProps[key]
+			let abilityInstance = new AbilityObject(this.Base[heroProp], props);
+			abilityInstance._heroRef = this;
+			this.Abilities.splice(parseInt(test[1])-1, 0, abilityInstance)
+			this.AbilityIds[this.Base[heroProp]] = abilityInstance;
+			abilityInstance.addTeammate(this);
+			for (let teammate of this.getTeammates())
 				abilityInstance.addTeammate(teammate);
-		}
-	if (abilityOptions)
-		for (var abilityId in abilityOptions) {
-			if (!(abilityId in this.AbilityIds)) {
-				console.warn("Invalid ability ID "+abilityId+"!");
-				continue;
-			}
-			var abilityData = abilityOptions[abilityId];
-			if (Number.isInteger(abilityData) && abilityData >= 0) {
-				this.AbilityIds[abilityId].Level = abilityData;
-				continue;
-			}
-			if (abilityData.level)
-				this.AbilityIds[abilityId].Level = abilityData.level;
-			if (typeof this.AbilityIds[abilityId].Charges == "number" && typeof abilityData.charges == "number")
-				this.AbilityIds[abilityId].Charges = abilityData.charges;
 		}
 }
 
 HeroInstance.prototype.delete = function() {
-	// Items and abilities can emit buffs, so clean them up first
-	for (var item of this.Items)
+	for (let item of this.Items)
 		item.delete()
-	for (var ability of this.Abilities)
+	for (let ability of this.Abilities)
 		ability.delete()
-	for (var buff of this.Buffs)
+	for (let buff of this.Buffs)
 		buff.delete()
 }
 
@@ -181,13 +179,11 @@ HeroInstance.prototype.delete = function() {
 // returns index if success
 HeroInstance.prototype.addItem = function (item, forceInsert) {
 	if (this.Items.length >= 6 && !forceInsert) {
-		return -1;
+		return false;
 	}
 	var index = this.Items.push(item);
-	item.boundDelete = (function(b){this.Items.splice(this.Items.indexOf(b), 1);}).bind(this, item)
-	item.boundUpdate = this.ItemChange.bind(this);
-	item.heroRef = this;
-	item.addOwner(this);
+	item._heroRef = this;
+	item.addTeammate(this);
 	if (this.Total)
 		this.ItemChange();
 	for (var teammate of this.getTeammates())
@@ -195,18 +191,19 @@ HeroInstance.prototype.addItem = function (item, forceInsert) {
 	return index;
 }
 
-// removes item from a hero
-// item (integer) - removes item at index
-// item (itemInstance) - removes itemInstance
+/** removes item from a hero
+* @param item {integer} - removes item at index
+* @param item {ItemObject} - removes ItemObject
+*/
 HeroInstance.prototype.removeItem = function (item) {
 	if (Number.isInteger(item)) {
-		this.Items.splice(item, 1);
+		this.Items[item].delete()
+		this.ItemChange();
 	}
-	else if (item instanceof ItemInstance) {
-		this.Items.splice(this.Items.indexOf(item), 1);
+	else if (item instanceof ItemObject) {
+		item.delete()
+		this.ItemChange();
 	}
-	item.heroRef = undefined;
-	this.ItemChange();
 }
 
 // adds a buff to hero
@@ -216,38 +213,57 @@ HeroInstance.prototype.removeItem = function (item) {
 // "override"	- change the existing buff
 // "leave"		- leave if buff with same ID already exists
 HeroInstance.prototype.addBuff = function (buff, method) {
-	if (!(buff instanceof BuffInstance))
+	if (!(buff instanceof BuffObject))
 		throw "Attempting to add invalid buff "+buff;
-	if (method == "override" && this.Total)
+	else if (method === "override" && this.Total)
 		this.removeBuff(buff.ID)
-	if (method == "leave")
-		if (this.getBuffs(buff.ID).length > 0)
-			return;
+	else if (method === "leave" && this.getBuffIds(buff.ID).length > 0)
+		return;
 
 	this.Buffs.push(buff)
-	buff.boundDelete = (function(b){ this.Buffs.splice(this.Buffs.indexOf(b), 1);}).bind(this, buff)
-	buff.boundUpdate = this.BuffChange.bind(this);
-	buff.heroRef = this;
+	buff._heroRef = this;
 	if (this.Total)
 		this.BuffChange();
 }
 
 HeroInstance.prototype.removeBuff = function(buff) {
-	if (Array.isArray(buff))
-		for (var b of buff)
-			b.delete()
-	else if (typeof buff == "string")
-		this.removeBuffsWithID(buff)
-	else if (buff instanceof BuffInstance)
+	if (typeof buff === "string") {
+		let updateFlag = false;
+		for (let buffObj of this.Buffs)
+			if (buff === buffObj.ID) {
+				buffObj.delete()
+				updateFlag = true;
+			}
+
+		if (this.Total && updateFlag)
+			this.BuffChange()
+	}
+	else if (this.Buffs.includes(buff)) {
 		buff.delete()
-	this.BuffChange()
+		if (this.Total)
+			this.BuffChange()
+		return
+	}
 }
 
-HeroInstance.prototype.removeBuffsWithID = function (buffID) {
-	this.removeBuff(this.getBuffs(buffID))
+/**
+ * Removes references to StatObject in the hero
+ */
+HeroInstance.prototype.remove = function(statInstance) {
+	if (statInstance._heroRef !== this)
+		return
+	statInstance._heroRef = undefined
+	if (statInstance instanceof ItemObject) {
+		this.Items.splice(this.Items.indexOf(statInstance), 1);
+		this.ItemChange()
+	}
+	else if (statInstance instanceof BuffObject && this.Buffs.includes(statInstance)) {
+		this.Buffs.splice(this.Buffs.indexOf(statInstance), 1)
+		this.BuffChange()
+	}
 }
 
-HeroInstance.prototype.getBuffs = function(buffId) {
+HeroInstance.prototype.getBuffIds = function(buffId) {
 	var list = [];
 	for (var buff of this.Buffs)
 		if (buff.ID == buffId)
@@ -280,7 +296,7 @@ HeroInstance.addHandler({
 	name: "LevelChange",
 	binds: [],
 	handler: function(lvl){
-		if (lvl) {
+		/*if (lvl) {
 			this.Meta.Level = lvl;
 		}
 		this.Base.StrengthFloat = this.Raw.StrengthBase + this.Raw.StrengthGain * (this.Meta.Level-1);
@@ -302,7 +318,12 @@ HeroInstance.addHandler({
 		else if ( this.Raw.Type == "Intelligence" )
 			primaryStat = this.Base.Intelligence;
 		this.Base.DamageMin = this.Raw.DamageMin + primaryStat;
-		this.Base.DamageMax = this.Raw.DamageMax + primaryStat;
+		this.Base.DamageMax = this.Raw.DamageMax + primaryStat;*/
+		return {
+			Strength: this.Base.Strength,
+			Agility: this.Base.Agility,
+			Intelligence: this.Base.Intelligence,
+		}
 	}
 });
 
@@ -319,12 +340,12 @@ HeroInstance.addHandler({
 			"MagicalAmplification": 0, "CooldownReduction": 0 },
 			f = {};
 		for (let item of this.Items) {
-			if (item.Family)
+			if (item.Family) {
 				if (!f[item.Family.Name])
 					f[item.Family.Name] = item.Family;
 				else if (f[item.Family.Name].Level < item.Family.Level)
 					f[item.Family.Name] = item.Family;
-
+			}
 			for (let prop in a)
 				a[prop] = PropertyProcessor.calculate(prop, a[prop], item[prop]);
 		}
@@ -334,7 +355,7 @@ HeroInstance.addHandler({
 			for (let prop in family.Stats)
 				a[prop] = PropertyProcessor.calculate(prop, a[prop], family.Stats[prop]);
 		}
-		this.Item = a;
+		return this.Item = a;
 	}
 });
 
@@ -343,15 +364,14 @@ HeroInstance.addHandler({
 	name: "AbilityChange",
 	binds: ["LevelChange"],
 	handler: function() {
-		var a = { "Strength": 0, "Agility": 0, "Intelligence": 0, "MovementSpeed": 0,
-				"AttackType": null, "ProjectileSpeed": null };
+		var a = PropertyProcessor.StatTemplate()
 		for (var ability of this.Abilities) {
 			if (ability.Level < 1)
 				continue;
 			for (var prop in a)
 				a[prop] = PropertyProcessor.calculate(prop, a[prop], ability[prop]);
 		}
-		this.Ability = a;
+		return this.Ability = a;
 	}
 });
 
@@ -359,12 +379,12 @@ HeroInstance.addHandler({
 	name: "BuffChange",
 	binds: [],
 	handler: function() {
-		var a = { "Strength": 0, "Agility": 0, "Intelligence": 0, "MovementSpeed": 0,
+		let aggregated = { "Strength": 0, "Agility": 0, "Intelligence": 0, "MovementSpeed": 0,
 				"AttackType": null, "ProjectileSpeed": null, "HasAghanims": null };
-		for (var buff of this.Buffs)
-			for (var prop in a)
-				a[prop] = PropertyProcessor.calculate(prop, a[prop], buff[prop]);
-		this.Buff = a;
+		for (let buff of this.Buffs)
+			for (let prop in aggregated)
+				aggregated[prop] = PropertyProcessor.calculate(prop, aggregated[prop], buff[prop]);
+		return this.Buff = aggregated;
 	}
 })
 
@@ -372,18 +392,18 @@ HeroInstance.addHandler({
 	name: "PreTotalChange",
 	binds: ["LevelChange", "ItemChange", "AbilityChange", "BuffChange"],
 	handler: function() {
-		var a = {};
-		a.StrengthBonus = this.Item.Strength + this.Ability.Strength + this.Buff.Strength;
-		a.Strength = this.Base.Strength + a.StrengthBonus;
-		a.AgilityBonus = this.Item.Agility + this.Ability.Agility + this.Buff.Agility;
-		a.AgilityFloat = this.Base.AgilityFloat + a.AgilityBonus;
-		a.Agility = this.Base.Agility + a.AgilityBonus;
-		a.IntelligenceBonus = this.Item.Intelligence + this.Ability.Intelligence + this.Buff.Intelligence;
-		a.Intelligence = this.Base.Intelligence + a.IntelligenceBonus;
-		a.MovementSpeedBase = this.Raw.MovementSpeed + this.Item.MovementSpeed + this.Ability.MovementSpeed + this.Buff.MovementSpeed;
-		a.HasAghanims = this.Buff.HasAghanims || this.Item.HasAghanims || false;
-		a.AttackType = this.Ability.AttackType || this.Buff.AttackType || this.Raw.AttackType;
-		this.Total = a;
+		let aggregated = {};
+		aggregated.StrengthBonus = this.Item.Strength + this.Ability.Strength + this.Buff.Strength;
+		aggregated.Strength = this.Base.Strength + aggregated.StrengthBonus;
+		aggregated.AgilityBonus = this.Item.Agility + this.Ability.Agility + this.Buff.Agility;
+		aggregated.AgilityFloat = this.Base.AgilityFloat + aggregated.AgilityBonus;
+		aggregated.Agility = this.Base.Agility + aggregated.AgilityBonus;
+		aggregated.IntelligenceBonus = this.Item.Intelligence + this.Ability.Intelligence + this.Buff.Intelligence;
+		aggregated.Intelligence = this.Base.Intelligence + aggregated.IntelligenceBonus;
+		aggregated.MovementSpeedBase = this.Base.MovementSpeed + this.Item.MovementSpeed + this.Ability.MovementSpeed + this.Buff.MovementSpeed;
+		aggregated.HasAghanims = this.Buff.HasAghanims || this.Item.HasAghanims || false;
+		aggregated.AttackType = this.Ability.AttackType || this.Buff.AttackType || this.Base.AttackType;
+		return this.Total = aggregated;
 	}
 })
 
@@ -391,11 +411,13 @@ HeroInstance.addHandler({
 	name: "PostItemChange",
 	binds: ["PreTotalChange"],
 	handler: function() {
-		var a = { "Range": 0 };
-		for (var buff of this.Items)
-			for (var prop in a)
+		let a = { "Range": 0 };
+		for (let buff of this.Items)
+			for (let prop in a)
 				a[prop] = PropertyProcessor.calculate(prop, a[prop], buff[prop]);
+
 		this.Item.Range = a.Range;
+		return this.Item
 	}
 });
 
@@ -403,21 +425,14 @@ HeroInstance.addHandler({
 	name: "PostAbilityChange",
 	binds: ["PreTotalChange"],
 	handler: function() {
-		var a = { "Strength": 0, "Agility": 0, "Intelligence": 0,
-			"MovementSpeed": 0, "MovementSpeedPercentage": 0,
-			"Armor": 0, "MagicalResistance": 0, "Evasion": 0,
-			"Health": 0, "HealthRegeneration": 0, "Mana": 0, "ManaRegenerationFlat": 0,
-			"ManaRegenerationPercentage": 0, "Damage": 0, "DamageBase": 0, "AttackRate": 0,
-			"AttackSpeed": 0, "Range": 0, "VisionDay": 0, "VisionNight": 0, "AttackType": null,
-			"ManaRegenerationBase": 0, "ProjectileSpeed": null, "Invisible": false,
-			"MovementSpeedUncapped": false };
-		for (var ability of this.Abilities) {
+		let aggregated = PropertyProcessor.StatTemplate(true);
+		for (let ability of this.Abilities) {
 			if (ability.Level < 1)
 				continue;
-			for (var prop in a)
-				a[prop] = PropertyProcessor.calculate(prop, a[prop], ability[prop]);
+			for (let prop in aggregated)
+				aggregated[prop] = PropertyProcessor.calculate(prop, aggregated[prop], ability[prop]);
 		}
-		this.Ability = a;
+		return this.Ability = aggregated
 	}
 });
 
@@ -426,31 +441,23 @@ HeroInstance.addHandler({
 	name: "PostBuffChange",
 	binds: ["PreTotalChange"],
 	handler: function() {
-		var a = { "Strength": 0, "Agility": 0, "Intelligence": 0, "MovementSpeed": 0,
-				"MovementSpeedPercentage": 0, "Armor": 0, "Evasion": 0, "Blind": 0,
-				"MagicalResistance": 0, "Health": 0, "HealthPercentage": 0, "HealthRegeneration": 0,
-				"Mana": 0, "ManaRegenerationFlat": 0, "Damage": 0, "DamagePercentage": 0,
-                "DamageReductionPercentage": 0,	"AttackSpeed": 0, "ManaRegenerationPercentage": 0,
-                "AttackRate": 0, "Range": 0, "ManaRegenerationBase": 0, "DamageBase": 0,
-                "ProjectileSpeed": null, "AttackType": null, "HasAghanims": null,
-				"CooldownReduction": 0, "Haste": 0, "Invisible": false, "Revealed": false,
-				"VisionNight": 0, "ManaCostReduction": 0 },
+		let aggregated = PropertyProcessor.StatTemplate(true);
 			f = {};
-		for (var buff of this.Buffs) {
+		for (let buff of this.Buffs) {
 			if (buff.Family)
 				if (!f[buff.Family.Name])
 					f[buff.Family.Name] = buff.Family;
 				else if (f[buff.Family.Name].Level < buff.Family.Level)
 					f[buff.Family.Name] = buff.Family;
-			for (var prop in a)
-				a[prop] = PropertyProcessor.calculate(prop, a[prop], buff[prop]);
+			for (let prop in aggregated)
+				aggregated[prop] = PropertyProcessor.calculate(prop, aggregated[prop], buff[prop]);
 		}
-		for (var familyName in f) {
-			var family = f[familyName];
-			for (var prop in family.Stats)
-				a[prop] = PropertyProcessor.calculate(prop, a[prop], family.Stats[prop]);
+		for (let familyName in f) {
+			let family = f[familyName];
+			for (let prop in family.Stats)
+				aggregated[prop] = PropertyProcessor.calculate(prop, aggregated[prop], family.Stats[prop]);
 		}
-		this.Buff = a;
+		return this.Buff = aggregated
 	}
 })
 
@@ -458,68 +465,118 @@ HeroInstance.addHandler({
 	name: "TotalChange",
 	binds: ["LevelChange", "PostAbilityChange", "PostBuffChange", "PostItemChange"],
 	handler: function() {
-		var a = this.Total;
-		a.MovementSpeedPercentage = this.Item.MovementSpeedPercentage +	this.Ability.MovementSpeedPercentage + this.Buff.MovementSpeedPercentage;
-		let movementSpeed = Math.max(a.MovementSpeedBase * (1 + a.MovementSpeedPercentage), 100);
+		// EUGH, there has to be a better way
+		let aggregated = this.Total;
+		aggregated.MovementSpeedPercentage = this.Item.MovementSpeedPercentage +	this.Ability.MovementSpeedPercentage + this.Buff.MovementSpeedPercentage;
+		let movementSpeed = Math.max(aggregated.MovementSpeedBase * (1 + aggregated.MovementSpeedPercentage), 100);
 		movementSpeed = this.Ability.MovementSpeedUncapped ? movementSpeed : Math.min(movementSpeed, 522)
-		a.Haste = this.Buff.Haste;
-		a.MovementSpeed = Math.max(this.Buff.Haste, movementSpeed);
-		a.ArmorBonus = this.Item.Armor + this.Ability.Armor + this.Buff.Armor;
-		a.ArmorBase = this.Raw.Armor + Math.round(a.AgilityFloat * this.Raw.ArmorPerAgility * 100) / 100;
-		a.Armor = a.ArmorBase + a.ArmorBonus;
-		a.Evasion = this.Item.Evasion + (1-this.Item.Evasion) * this.Ability.Evasion;
-		a.Evasion = a.Evasion + (1-a.Evasion) * this.Buff.Evasion;
-		let magicalResistance = this.Raw.MagicalResistance + (1 - this.Raw.MagicalResistance) * this.Item.MagicalResistance;
+		aggregated.Haste = this.Buff.Haste;
+		aggregated.MovementSpeed = Math.max(this.Buff.Haste, movementSpeed);
+		aggregated.ArmorBase =	this.Base.ArmorBase +
+								aggregated.AgilityFloat * this.Base.ArmorPerAgility
+		aggregated.ArmorBonus = this.Item.Armor +
+								this.Ability.Armor +
+								this.Buff.Armor;
+		aggregated.Armor = aggregated.ArmorBase + aggregated.ArmorBonus;
+		aggregated.Evasion = this.Item.Evasion + (1-this.Item.Evasion) * this.Ability.Evasion;
+		aggregated.Evasion = aggregated.Evasion + (1-aggregated.Evasion) * this.Buff.Evasion;
+		let magicalResistance = this.Base.MagicalResistance + (1 - this.Base.MagicalResistance) * this.Item.MagicalResistance;
 		magicalResistance += (1 - magicalResistance) * this.Ability.MagicalResistance;
-		a.MagicalResistance += (1 - magicalResistance) * this.Buff.MagicalResistance;
-		a.HealthBase = this.Raw.Health + a.Strength * this.Raw.HealthPerStrength + this.Item.Health + this.Ability.Health + this.Buff.Health;
-		a.Health = a.HealthBase * (1 + this.Buff.HealthPercentage);
-		a.HealthRegenerationBase = this.Raw.HealthRegeneration + a.Strength * 0.03;
-		a.HealthRegenerationBonus = this.Item.HealthRegeneration + this.Ability.HealthRegeneration + this.Buff.HealthRegeneration;
-		a.HealthRegeneration = a.HealthRegenerationBase + a.HealthRegenerationBonus;
-		a.ManaBase = this.Raw.Mana + a.Intelligence * this.Raw.ManaPerIntelligence;
-		a.ManaBonus = this.Ability.Mana + this.Buff.Mana + this.Item.Mana;
-		a.Mana = a.ManaBase + a.ManaBonus;
-		a.ManaRegenerationBase = this.Raw.ManaRegeneration + a.Intelligence * 0.04 + this.Ability.ManaRegenerationBase + this.Buff.ManaRegenerationBase;
-		a.ManaRegenerationFlat = this.Item.ManaRegenerationFlat + this.Ability.ManaRegenerationFlat + this.Buff.ManaRegenerationFlat;
-		a.ManaRegenerationPercentage = this.Item.ManaRegenerationPercentage + this.Ability.ManaRegenerationPercentage + this.Buff.ManaRegenerationPercentage;
-		a.ManaRegeneration = a.ManaRegenerationBase * (1 + a.ManaRegenerationPercentage) + a.ManaRegenerationFlat;
-		a.DamageBaseMin = this.Raw.DamageMin + a[this.Raw.Type] + this.Ability.DamageBase + this.Buff.DamageBase;
-		a.DamageBaseMax = this.Raw.DamageMax + a[this.Raw.Type] + this.Ability.DamageBase + this.Buff.DamageBase;
-		a.DamageBase = Math.floor((a.DamageBaseMin + a.DamageBaseMax) / 2);
-		a.DamageBonus = this.Item.Damage + this.Ability.Damage + this.Buff.Damage + Math.trunc(a.DamageBase * this.Buff.DamagePercentage);
-		a.DamageTotal = a.DamageBase + a.DamageBonus;
-		a.DamageBonus = Math.trunc(a.DamageBonus + this.Buff.DamageReductionPercentage * a.DamageTotal);
-		a.DamageTotal = a.DamageBase + a.DamageBonus;
-		a.AttackRate = this.Raw.AttackRate + this.Ability.AttackRate + this.Buff.AttackRate;
-		a.AttackSpeed = Math.max(Math.min(100 + a.Agility + this.Item.AttackSpeed + this.Ability.AttackSpeed + this.Buff.AttackSpeed, 600), 20);
-		a.Range = this.Raw.Range + this.Ability.Range + this.Item.Range + this.Buff.Range;
-		a.VisionDay = this.Raw.VisionDaytime;
-		a.VisionNight = this.Raw.VisionNighttime + this.Ability.VisionNight + this.Item.VisionNight + this.Buff.VisionNight;
-		a.Cost = this.Item.Cost;
-		a.ProjectileSpeed = this.Buff.ProjectileSpeed || this.Raw.ProjectileSpeed;
-		a.MagicalAmplification = this.Base.Intelligence * this.Raw.MagicalAmpPerIntelligence + this.Item.MagicalAmplification;
+		aggregated.MagicalResistance = (1 - magicalResistance) * this.Buff.MagicalResistance;
+		aggregated.HealthBase = this.Base.HealthBase +
+								aggregated.Strength * this.Base.HealthPerStrength +
+								this.Item.Health +
+								this.Ability.Health +
+								this.Buff.Health;
+		aggregated.Health = aggregated.HealthBase * (1 + this.Buff.HealthPercentage);
+		aggregated.HealthRegenerationFlat = this.Base.HealthRegenerationBase +
+											aggregated.Strength * this.Base.HealthRegenerationPerStrength +
+											this.Item.HealthRegeneration +
+											this.Ability.HealthRegeneration +
+											this.Buff.HealthRegeneration;
+		aggregated.HealthRegeneration = aggregated.HealthRegenerationFlat
+		aggregated.Mana	=	this.Base.ManaBase +
+							aggregated.Intelligence * this.Base.ManaPerIntelligence +
+							this.Ability.Mana +
+							this.Buff.Mana +
+							this.Item.Mana;
+		aggregated.ManaRegenerationBase = 	this.Base.ManaRegenerationBase +
+											aggregated.Intelligence * this.Base.ManaRegenerationPerIntelligence +
+											this.Item.ManaRegenerationBase +
+											this.Ability.ManaRegenerationBase +
+											this.Buff.ManaRegenerationBase;
+		aggregated.ManaRegenerationPercentage =	this.Item.ManaRegenerationPercentage +
+												this.Ability.ManaRegenerationPercentage +
+												this.Buff.ManaRegenerationPercentage;
+		aggregated.ManaRegenerationFlat =	this.Item.ManaRegenerationFlat +
+											this.Ability.ManaRegenerationFlat +
+											this.Buff.ManaRegenerationFlat;
+		aggregated.ManaRegeneration =	aggregated.ManaRegenerationBase * (1 + aggregated.ManaRegenerationPercentage) +
+										aggregated.ManaRegenerationFlat;
+		aggregated.DamageBaseMin =	this.Base.DamageMin +
+									aggregated[this.Base.Type] +
+									this.Ability.DamageBase +
+									this.Buff.DamageBase;
+		aggregated.DamageBaseMax =	this.Base.DamageMax +
+									aggregated[this.Base.Type] +
+									this.Ability.DamageBase +
+									this.Buff.DamageBase;
+		aggregated.DamageBase = Math.floor((aggregated.DamageBaseMin + aggregated.DamageBaseMax) / 2);
+		aggregated.DamageBonus =	this.Item.Damage +
+									this.Ability.Damage +
+									this.Buff.Damage +
+									Math.trunc(aggregated.DamageBase * this.Buff.DamagePercentage);
+		aggregated.DamageTotal =	aggregated.DamageBase +
+									aggregated.DamageBonus;
+		aggregated.DamageBonus = Math.trunc(aggregated.DamageBonus + this.Buff.DamageReductionPercentage * aggregated.DamageTotal);
+		aggregated.Damage = aggregated.DamageBase + aggregated.DamageBonus;
+		aggregated.AttackRate = this.Base.AttackRate +
+								this.Ability.AttackRate +
+								this.Buff.AttackRate;
+		aggregated.AttackSpeed = Math.max(Math.min(100 +
+													aggregated.Agility +
+													this.Item.AttackSpeed +
+													this.Ability.AttackSpeed +
+													this.Buff.AttackSpeed, 600), 20);
+		aggregated.Range =	this.Base.Range +
+							this.Ability.Range +
+							this.Item.Range +
+							this.Buff.Range;
+		aggregated.VisionDay = this.Base.VisionDaytime;
+		aggregated.VisionNight =	this.Base.VisionNighttime +
+									this.Ability.VisionNight +
+									this.Item.VisionNight +
+									this.Buff.VisionNight;
+		aggregated.Cost = this.Item.Cost;
+		aggregated.ProjectileSpeed = this.Buff.ProjectileSpeed || this.Base.ProjectileSpeed;
+		aggregated.MagicalAmplification =	this.Base.Intelligence * this.Base.MagicalAmpPerIntelligence +
+											this.Item.MagicalAmplification;
 		let cooldownReduction = 1 - this.Buff.CooldownReduction
-		a.CooldownReduction = cooldownReduction - cooldownReduction * this.Item.CooldownReduction;
-		a.ManaCostReduction = this.Buff.ManaCostReduction;
-		a.Revealed = this.Buff.Revealed;
-		a.Invisible = this.Buff.Invisible || this.Ability.Invisible;
+		aggregated.CooldownReduction = cooldownReduction - cooldownReduction * this.Item.CooldownReduction;
+		aggregated.ManaCostReduction = this.Buff.ManaCostReduction;
+		aggregated.Revealed = this.Buff.Revealed;
+		aggregated.Invisible = this.Buff.Invisible || this.Ability.Invisible;
 
-		this.Total = a;
-		this.updateTable();
-		for (var item of this.Items)
-			item.updateDisplayElement()
-		for (var ability of this.Abilities) {
-			if (ability.TriggerChangeUpdate)
-				ability.updateExternal()
-			ability.updateDisplayElement()
-		}
-		for (var buff of this.Buffs)
-			buff.updateDisplayElement()
+		this.Total = aggregated;
 	}
 });
 
-
+HeroInstance.addHandler({
+	name: "PostTotalUpdate",
+	binds: ["TotalChange"],
+	handler: function() {
+		this.updateTable();
+		for (var item of this.Items)
+			item.updateDisplay()
+		for (var ability of this.Abilities) {
+			if (ability.UpdateExternals)
+				ability.updateEmittedBuffs()
+			ability.updateDisplay()
+		}
+		for (var buff of this.Buffs)
+			buff.updateDisplay()
+	}
+});
 
 
 

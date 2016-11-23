@@ -6,6 +6,8 @@ DotaData = {};
 DotaData.Versions = {}
 DotaData.NewestVersion = "";
 DotaData.NewestMajor = "";
+// Symbol to define base object in data definition files
+DotaData.Basis = Symbol("Base object");
 
 // Shared metadata for module use
 DotaData.Meta = {
@@ -29,6 +31,7 @@ DotaData.Meta = {
 		"LevelMin", "LevelMax", "ChargesMin", "ChargesMax", "Image",
 		"ManaCost", "Cooldown", "Hidden", "Buff", "HasAghanims", "Class",
 		"Invisible", "Revealed", "MovementSpeedUncapped", "HiddenAction",
+		"Name",
 	],
 	// Properties that have plain display style
 	TooltipPlainStyle: [
@@ -57,7 +60,8 @@ DotaData.addVersion = function(data) {
 	if (version > DotaData.NewestVersion)
 		DotaData.NewestVersion = version;
 	if (!data.Meta.Base && version > DotaData.NewestMajor)
-		 DotaData.NewestMajor = version;
+		DotaData.NewestMajor = version;
+
 	DotaData.Versions[version] = data;
 }
 
@@ -197,14 +201,14 @@ DotaData.formatStatTextContent = function formatStatTextContent(val) {
 }
 
 
-let cloneObject = function cloneObject(obj) {
+DotaData.copyDataObject = function cloneObject(obj) {
 	if (obj instanceof Object && !(obj instanceof Function)) {
 		if (Array.isArray(obj))
 			return obj.slice()
 		else {
 			let newObj = {};
 			for (let key in obj)
-				newObj[key] = obj[key];
+				newObj[key] = cloneObject(obj[key]);
 			return newObj
 		}
 	}
@@ -227,30 +231,42 @@ DotaData.getTypeData = function getTypeData(type, id, version) {
 		if (dotaVersion[type]) {
 			let dataObj = dotaVersion[type][id];
 			for (let prop in dataObj) {
-				base[prop] = cloneObject(dataObj[prop]);
+				base[prop] = DotaData.copyDataObject(dataObj[prop]);
 			}
 		}
 		base.Version = version;
 		return base
 	}
 	else {
-		let constructedData = {};
 		// Absolute base data
+		let constructedData = {};
 		if (dotaVersion[type] == undefined)
 			throw `Version "${version}" without "${type}" type!`;
 
-		let baseObj = dotaVersion[type]._base,
+		let baseObj = dotaVersion[type][DotaData.Basis],
 			dataObj = dotaVersion[type][id];
 		if (dataObj === undefined)
 			throw `No such id "${id}" in type ${type} in version "${version}"!`;
-		for (let prop in dotaVersion[type]._base)
-			constructedData[prop] = cloneObject(baseObj[prop]);
+		for (let prop in baseObj)
+			constructedData[prop] = DotaData.copyDataObject(baseObj[prop]);
 		for (let prop in dataObj)
-			constructedData[prop] = cloneObject(dataObj[prop]);
+			constructedData[prop] = DotaData.copyDataObject(dataObj[prop]);
 
 		constructedData.Version = version;
 		return constructedData
 	}
+}
+
+DotaData.compareStatObjects = function(first, second) {
+	if (!(first instanceof Object || second instanceof Object))
+		return false
+	for (let key in first)
+		if (!(key in second) || first[key] !== second[key])
+			return false
+	for (let key in second)
+		if (!(key in first) || first[key] !== second[key])
+			return false
+	return true
 }
 
 }
