@@ -440,7 +440,7 @@ HeroTable.addEvaluator({
 	type: "Base",
 	description: "Displays hero base attack time value",
 	eval: function(cell, hero) {
-		cell.textContent = hero.Total.AttackRate;
+		cell.textContent = UIHelper.precisionNumber(hero.Total.AttackRate, 2)
 	},
 	sorter: "number"
 });
@@ -754,7 +754,7 @@ HeroTable.addEvaluator({
 	type: "Base",
 	description: "Displays hero mana regeneration",
 	eval: function(cell, heroInstance) {
-		cell.textContent = heroInstance.Total.ManaRegeneration.toFixed(2)
+		cell.textContent = UIHelper.precisionNumber(heroInstance.Total.ManaRegeneration, 2)
 	},
 	sorter: "number"
 })

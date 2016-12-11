@@ -184,4 +184,6 @@ UIHelper.appendSettings = function(win, options) {
 	};
 }
 
-
+UIHelper.precisionNumber = function(number, precision) {
+	return number.toFixed(precision).toString().replace(/\.?0+$/, "")
+}

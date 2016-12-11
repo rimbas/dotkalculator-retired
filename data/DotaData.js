@@ -24,7 +24,7 @@ DotaData.Meta = {
 		"MagicalResistance", "Evasion", "Armor", "MovementSpeed", "MovementSpeedPercentage",
 		"Damage", "DamageBase", "DamagePercentage", "DamageReductionPercentage", "DamageReduction",
 		"AttackSpeed", "AttackRate", "Range", "Haste", "ManaCostReduction", "CooldownReduction",
-		"VisionNight", "CastRange", "BuffDuration",
+		"VisionNight", "CastRange", "BuffDuration", "ManaRegenerationBase",
 	],
 	// Technical or hidden automatically handled properties
 	TechnicalAutoProperties: [
@@ -130,6 +130,7 @@ DotaData.readableStatStrings = {
 	"ManaRegeneration": "Mana regeneration",
 	"ManaRegenerationPercentage": "Mana regeneration",
 	"ManaRegenerationFlat": "Mana regeneration",
+	"ManaRegenerationBase": "Base mana regeneration",
 	"MovementSpeed": "Movement speed",
 	"MovementSpeedPercentage": "Movement speed",
 	"VisionDay": "Day vision",

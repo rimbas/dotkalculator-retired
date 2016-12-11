@@ -347,6 +347,7 @@ HeroInstance.addHandler({
 			"MovementSpeed": 0, "MovementSpeedPercentage": 0,
 			"Armor": 0, "MagicalResistance": 0, "Evasion": 0,
 			"Health":0, "HealthRegeneration":0, "Mana": 0, "ManaRegenerationFlat": 0,
+			"ManaRegenerationBase": 0,
 			"ManaRegenerationPercentage": 0, "Damage": 0, "AttackSpeed": 0,
 			"VisionDay": 0, "VisionNight": 0, "Cost": 0, "HasAghanims": null,
 			"MagicalAmplification": 0, "CooldownReduction": 0 },
@@ -494,7 +495,7 @@ HeroInstance.addHandler({
 		aggregated.Evasion = aggregated.Evasion + (1-aggregated.Evasion) * this.Buff.Evasion;
 		let magicalResistance = this.Base.MagicalResistance + (1 - this.Base.MagicalResistance) * this.Item.MagicalResistance;
 		magicalResistance += (1 - magicalResistance) * this.Ability.MagicalResistance;
-		aggregated.MagicalResistance = (1 - magicalResistance) * this.Buff.MagicalResistance;
+		aggregated.MagicalResistance = magicalResistance + (1 - magicalResistance) * this.Buff.MagicalResistance;
 		aggregated.HealthBase = this.Base.HealthBase +
 								aggregated.Strength * this.Base.HealthPerStrength +
 								this.Item.Health +
