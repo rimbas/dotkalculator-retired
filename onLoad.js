@@ -91,7 +91,6 @@ window.addEventListener("DOMContentLoaded", function(e){
 	}))
 	MainTable.addHero(new HeroInstance("lina", {
 		level: 16,
-		team: "Radiant",
 		abilities: {
 			lina_dragon_slave: 4,
 			lina_light_strike_array: 4,
@@ -103,7 +102,7 @@ window.addEventListener("DOMContentLoaded", function(e){
 			new ItemObject("octarine_core"),
 			new ItemObject("cyclone"),
 			new ItemObject("blink"),
-			new ItemObject("ultimate_scepter"),
+			new ItemObject("greater_crit"),
 			new ItemObject("travel_boots"),
 			new ItemObject("hand_of_midas"),
 		]

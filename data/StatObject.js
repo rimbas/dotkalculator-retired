@@ -599,7 +599,7 @@ class StatObject {
 		if (this.Aura && !this._buffReferences.has(newTeammate)) {
 			let newBuff = new BuffObject(this.Aura, {version: this.Version})
 			newBuff._emitterRef = this
-			newBuff._boundUnlink = this._buffReferences.delete.bind(this._buffReferences, newBuff)
+			newBuff._boundUnlink = this._buffReferences.delete.bind(this._buffReferences, newTeammate)
 			newTeammate.addBuff(newBuff, "leave")
 			this._buffReferences.set(newTeammate, newBuff)
 		}

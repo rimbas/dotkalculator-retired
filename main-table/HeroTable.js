@@ -525,14 +525,14 @@ HeroTable.addEvaluator({
 	type: "General",
 	description: "Adds a way to remove hero",
 	init: function(cell, heroInstance){
+		let button = document.createElement("button"),
+			deferredTable = this,
+			deferredHero = heroInstance;
 		cell.classList.add("single-button")
-		var button = document.createElement("button");
 		button.className = "delete-button";
 		cell.appendChild(button);
-		button.HeroInstanceRef = heroInstance;
-		button.TableInstanceRef = this;
 		button.onclick = function(){
-			this.TableInstanceRef.removeHero(this.HeroInstanceRef);
+			deferredTable.removeHero(heroInstance);
 		};
 	},
 	sorter: false
@@ -872,14 +872,15 @@ HeroTable.addEvaluator({
 	type: "General",
 	description: "Adds a way to clone a hero",
 	init: function(cell, heroInstance){
-		let deferredThis = this,
+		let deferredTable = this,
+			deferredHero = heroInstance,
 			button = document.createElement("button");
 		cell.classList.add("single-button")
 		button.className = "copy-button";
+		button.title = "Shift click to copy without the team"
 		cell.appendChild(button);
-		button.HeroInstanceRef = heroInstance;
 		button.onclick = function(e){
-			deferredThis.addHero(this.HeroInstanceRef.copy(e.shiftKey));
+			deferredTable.addHero(deferredHero.copy(e.shiftKey));
 		};
 	},
 	sorter: false

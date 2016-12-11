@@ -164,12 +164,24 @@ HeroInstance.prototype.addAbilities = function(abilityOptions) {
 }
 
 HeroInstance.prototype.delete = function() {
-	for (let item of this.Items)
-		item.delete()
-	for (let ability of this.Abilities)
-		ability.delete()
-	for (let buff of this.Buffs)
-		buff.delete()
+	let Items = this.Items,
+		Abilities = this.Abilities,
+		Buffs = this.Buffs;
+	for (let i = Items.length - 1; i >= 0; i--) {
+		let item = Items[i];
+		if (item !== undefined)
+			item.delete()
+	}
+	for (let i = Abilities.length - 1; i >= 0; i--) {
+		let ability = Abilities[i];
+		if (ability !== undefined)
+			ability.delete()
+	}
+	for (let i = Buffs.length - 1; i >= 0; i--) {
+		let buff = Buffs[i];
+		if (buff !== undefined)
+			buff.delete()
+	}
 }
 
 // Adds an item to the hero

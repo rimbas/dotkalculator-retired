@@ -1,13 +1,13 @@
 # Dotkalculator _alpha_
-A table based Dota 2 hero stat comparison engine
+Spreadsheet-like Dota 2 hero stat calculation and comparison
 
 ## Current features
-* Hero stat calculation (gained from level, items, abilites, buffs)
+* Hero stat calculation (gained from levels, items, abilites, buffs)
 * Easy stat comparison
 * Hero grouping by teams
 * Simple table column modification
 * Data definitions that support small updates
-* Only Webkit-based browser support for now
+* Unfortunately due to in-dev nature, only newest Chromium, Opera browsers are supported
 
 ### Roadmap
 * All ability stats defined
