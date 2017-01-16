@@ -20,7 +20,7 @@ class StatObject {
 		let typeData = DotaData.getTypeData(type, objId, properties.version)
 		PropertyProcessor.applyDataProperties(this, typeData)
 		Object.defineProperty(this, "ID", {value: objId, enumerable: true});
-		//
+		// HTML element collections
 		Object.defineProperty(this, "_HTML", {value: {}});
 		Object.defineProperty(this, "_HTML_DynamicElements", {value: {}});
 		// host of this StatInstance
@@ -228,11 +228,9 @@ class StatObject {
 	createTooltip() {
 		let el = document.createElement("div"),
 			heading = el.appendChild(document.createElement("span")),
-			heroTotal = this.heroTotal,
 			deferredThis = this;
 		el.className = "item-tooltip"
 		heading.className = "label-name"
-
 
 		this._HTML.NameElement = heading
 
@@ -385,7 +383,6 @@ class StatObject {
 			el.appendChild(document.createElement("br"))
 		}
 
-		this._HTML.DisplayElement.appendChild(el)
 		this.updateTooltip()
 		return el
 	}

@@ -168,7 +168,6 @@ window.createAllHeroes = function(team) {
 		let settings = {};
 		if (team)
 			settings.team = team;
-		if (list[heroId].Enabled > 0)
-			MainTable.addHero(new HeroInstance(heroId, settings));
+		MainTable.addHero(new HeroInstance(heroId, settings));
 	}
 }

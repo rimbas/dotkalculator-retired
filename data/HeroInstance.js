@@ -143,9 +143,26 @@ HeroInstance.prototype.addAbilities = function(abilityOptions) {
 	this.Abilities = [];
 	this.AbilityIds = {};
 
+	if (this.Base.Talent) {
+		let props = {version: this.Base.Version},
+			talentProps
+		if (abilityOptions && (talentProps = abilityOptions[this.Base.Talent]) && Array.isArray(talentProps)) {
+			props.choices = talentProps
+		}
+		let talent = new TalentObject(this.Base.Talent, props)
+		this.Talent = talent
+		talent._heroRef = this
+		this.Abilities.push(talent)
+		this.AbilityIds[this.Base.Talent] = talent;
+		talent.addTeammate(this)
+		for (let teammate of this.getTeammates())
+			abilityInstance.addTeammate(teammate);
+	}
+
 	for (let heroProp in this.Base)
 		if (test = /Ability(\d+)/.exec(heroProp)) {
-			let props = {version: this.Base.Version}, abilityProps
+			let props = {version: this.Base.Version},
+				abilityProps
 			if (abilityOptions && abilityOptions[this.Base[heroProp]])
 				abilityProps = abilityOptions[this.Base[heroProp]]
 			if (typeof abilityProps === "number")
@@ -155,7 +172,8 @@ HeroInstance.prototype.addAbilities = function(abilityOptions) {
 					props[key] = abilityProps[key]
 			let abilityInstance = new AbilityObject(this.Base[heroProp], props);
 			abilityInstance._heroRef = this;
-			this.Abilities.splice(parseInt(test[1])-1, 0, abilityInstance)
+			//this.Abilities.splice(parseInt(test[1])-1, 0, abilityInstance)
+			this.Abilities.splice(parseInt(test[1]), 0, abilityInstance)
 			this.AbilityIds[this.Base[heroProp]] = abilityInstance;
 			abilityInstance.addTeammate(this);
 			for (let teammate of this.getTeammates())

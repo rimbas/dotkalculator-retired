@@ -1,7 +1,7 @@
 
 // Major version
 
-"use strict"; // Collective nerfbat edition
+"use strict"; // Fuck all shit up edition
 {
 DotaData.addVersion({
 
@@ -10,7 +10,8 @@ DotaData.addVersion({
 	//
 
 	"Meta": {
-		"Version": "6.88e"
+		"Version": "7.00",
+		"MovementSpeedMax": 550,
 	},
 
 	//
@@ -22,11 +23,6 @@ DotaData.addVersion({
 		{
 			"Name": "NO-DISPLAY-NAME",
 			"Class": "Hero",
-			"Ability1": "empty",
-			"Ability2": "empty",
-			"Ability3": "empty",
-			"Ability4": "empty",
-			"Ability5": "attribute_bonus",
 			"AbilityLayout": 4,
 			"AttackPoint": 0.75,
 			"AttackType": "Ranged",
@@ -74,7 +70,6 @@ DotaData.addVersion({
 			"Ability2": "abaddon_aphotic_shield",
 			"Ability3": "abaddon_frostmourne",
 			"Ability4": "abaddon_borrowed_time",
-			"Ability5": "attribute_bonus",
 			"ArmorBase": -1.0,
 			"AttackPoint": 0.56,
 			"AttackType": "Melee",
@@ -100,7 +95,6 @@ DotaData.addVersion({
 			"Ability2": "alchemist_unstable_concoction",
 			"Ability3": "alchemist_goblins_greed",
 			"Ability4": "alchemist_chemical_rage",
-			"Ability5": "attribute_bonus",
 			//"Ability6": "alchemist_unstable_concoction_throw",
 			"ArmorBase": 0,
 			"AttackPoint": 0.35,
@@ -129,7 +123,6 @@ DotaData.addVersion({
 			"Ability3": "ancient_apparition_chilling_touch",
 			"Ability4": "ancient_apparition_ice_blast",
 			//"Ability5": "ancient_apparition_ice_blast_release",
-			//"Ability6": "attribute_bonus",
 			"ArmorBase": -1,
 			"AttackPoint": 0.45,
 			"AttackType": "Ranged",
@@ -208,7 +201,6 @@ DotaData.addVersion({
 			"Ability2": "bane_brain_sap",
 			"Ability3": "bane_nightmare",
 			"Ability4": "bane_fiends_grip",
-			"Ability5": "attribute_bonus",
 			//"Ability6": "bane_nightmare_end",
 			"ArmorBase": 1,
 			"AttackPoint": 0.3,
@@ -265,7 +257,6 @@ DotaData.addVersion({
 			"Ability3": "beastmaster_call_of_the_wild_boar",
 			"Ability4": "beastmaster_inner_beast",
 			"Ability5": "beastmaster_primal_roar",
-			"Ability6": "attribute_bonus",
 			"AbilityLayout": 5,
 			"ArmorBase": 2,
 			"AttackPoint": 0.3,
@@ -348,7 +339,6 @@ DotaData.addVersion({
 			"Ability2": "brewmaster_drunken_haze",
 			"Ability3": "brewmaster_drunken_brawler",
 			"Ability4": "brewmaster_primal_split",
-			"Ability5": "attribute_bonus",
 			"ArmorBase": -1.0,
 			"AttackPoint": 0.35,
 			"AttackType": "Melee",
@@ -376,7 +366,6 @@ DotaData.addVersion({
 			"Ability2": "bristleback_quill_spray",
 			"Ability3": "bristleback_bristleback",
 			"Ability4": "bristleback_warpath",
-			"Ability5": "attribute_bonus",
 			"ArmorBase": 1.0,
 			"AttackPoint": 0.3,
 			"AttackType": "Melee",
@@ -428,7 +417,6 @@ DotaData.addVersion({
 			"Ability2": "centaur_double_edge",
 			"Ability3": "centaur_return",
 			"Ability4": "centaur_stampede",
-			"Ability5": "attribute_bonus",
 			"ArmorBase": 1,
 			"AttackPoint": 0.3,
 			"AttackType": "Melee",
@@ -454,7 +442,6 @@ DotaData.addVersion({
 			"Ability2": "chaos_knight_reality_rift",
 			"Ability3": "chaos_knight_chaos_strike",
 			"Ability4": "chaos_knight_phantasm",
-			"Ability5": "attribute_bonus",
 			"ArmorBase": 2,
 			"AttackPoint": 0.5,
 			"AttackType": "Melee",
@@ -481,7 +468,6 @@ DotaData.addVersion({
 			"Ability3": "chen_test_of_faith_teleport",
 			"Ability4": "chen_holy_persuasion",
 			"Ability5": "chen_hand_of_god",
-			"Ability6": "attribute_bonus",
 			"AbilityLayout": 5,
 			"ArmorBase": -1,
 			"AttackPoint": 0.5,
@@ -642,7 +628,6 @@ DotaData.addVersion({
 			"Ability2": "disruptor_glimpse",
 			"Ability3": "disruptor_kinetic_field",
 			"Ability4": "disruptor_static_storm",
-			"Ability5": "attribute_bonus",
 			"ArmorBase": -1.0,
 			"AttackPoint": 0.4,
 			"AttackType": "Ranged",
@@ -671,7 +656,6 @@ DotaData.addVersion({
 			//"Ability4": "doom_bringer_empty1",
 			//"Ability5": "doom_bringer_empty2",
 			"Ability4": "doom_bringer_doom",
-			//"Ability7": "attribute_bonus",
 			"AbilityLayout": 6,
 			"ArmorBase": -1,
 			"AttackPoint": 0.5,
@@ -726,6 +710,7 @@ DotaData.addVersion({
 			"Ability2": "drow_ranger_wave_of_silence",
 			"Ability3": "drow_ranger_trueshot",
 			"Ability4": "drow_ranger_marksmanship",
+			"Talent": "drow_ranger_talent",
 			"ArmorBase": -3,
 			"AttackPoint": 0.7,
 			"AttackType": "Ranged",
@@ -733,14 +718,14 @@ DotaData.addVersion({
 			"DamageMin": 14,
 			"Range": 625,
 			"AttackRate": 1.7,
-			"AgilityGain": 1.9,
-			"AgilityBase": 26,
-			"IntelligenceBase": 15,
 			"StrengthBase": 17,
+			"StrengthGain": 1.6,
+			"AgilityBase": 26,
+			"AgilityGain": 1.9,
+			"IntelligenceBase": 15,
 			"IntelligenceGain": 1.4,
 			"Type": "Agility",
-			"StrengthGain": 1.9,
-			"MovementSpeed": 300,
+			"MovementSpeed": 290,
 			"TurnRate": 0.7,
 			"ProjectileSpeed": 1250,
 			"Team": "Radiant"
@@ -755,7 +740,6 @@ DotaData.addVersion({
 			"Ability4": "earth_spirit_stone_caller",
 			"Ability5": "earth_spirit_petrify",
 			"Ability6": "earth_spirit_magnetize",
-			"Ability7": "attribute_bonus",
 			"AbilityLayout": 5,
 			"ArmorBase": 1.0,
 			"AttackPoint": 0.35,
@@ -838,7 +822,6 @@ DotaData.addVersion({
 			"Ability3": "ember_spirit_flame_guard",
 			"Ability4": "ember_spirit_fire_remnant",
 			"Ability5": "ember_spirit_activate_fire_remnant",
-			"Ability6": "attribute_bonus",
 			"AbilityLayout": 5,
 			"ArmorBase": -2.0,
 			"AttackPoint": 0.4,
@@ -874,13 +857,13 @@ DotaData.addVersion({
 			"DamageMin": 31,
 			"Range": 550,
 			"AttackRate": 1.7,
-			"AgilityGain": 1.8,
-			"AgilityBase": 19,
-			"IntelligenceBase": 16,
+			"StrengthGain": 1.0,
 			"StrengthBase": 16,
+			"AgilityBase": 19,
+			"AgilityGain": 1.8,
+			"IntelligenceBase": 16,
 			"IntelligenceGain": 2.8,
 			"Type": "Intelligence",
-			"StrengthGain": 1.0,
 			"MovementSpeed": 335,
 			"TurnRate": 0.4,
 			"ProjectileSpeed": 900,
@@ -919,7 +902,7 @@ DotaData.addVersion({
 			"Ability2": "faceless_void_time_dilation",
 			"Ability3": "faceless_void_time_lock",
 			"Ability4": "faceless_void_chronosphere",
-			"ArmorBase": 1,
+			"ArmorBase": 0,
 			"AttackPoint": 0.5,
 			"AttackType": "Melee",
 			"DamageMax": 39,
@@ -1120,9 +1103,8 @@ DotaData.addVersion({
 			"Ability2": "keeper_of_the_light_mana_leak",
 			"Ability3": "keeper_of_the_light_chakra_magic",
 			"Ability4": "keeper_of_the_light_spirit_form",
-			"Ability5": "attribute_bonus",
 			"Ability6": "keeper_of_the_light_blinding_light",
-			"Ability7": "keeper_of_the_light_recall",
+			//"Ability7": "keeper_of_the_light_recall",
 			//"Ability7": "keeper_of_the_light_illuminate_end",
 			//"Ability8": "keeper_of_the_light_spirit_form_illuminate",
 			//"Ability9": "keeper_of_the_light_spirit_form_illuminate_end",
@@ -1180,7 +1162,6 @@ DotaData.addVersion({
 			"Ability2": "legion_commander_press_the_attack",
 			"Ability3": "legion_commander_moment_of_courage",
 			"Ability4": "legion_commander_duel",
-			"Ability5": "attribute_bonus",
 			"ArmorBase": 0.0,
 			"AttackPoint": 0.46,
 			"AttackType": "Melee",
@@ -1264,7 +1245,6 @@ DotaData.addVersion({
 			"Ability4": "life_stealer_infest",
 			//"Ability7": "life_stealer_control",
 			//"Ability8": "life_stealer_consume",
-			//"Ability9": "attribute_bonus",
 			"ArmorBase": -1,
 			"AttackPoint": 0.39,
 			"AttackType": "Melee",
@@ -1343,7 +1323,6 @@ DotaData.addVersion({
 			"Ability2": "lone_druid_rabid",
 			"Ability3": "lone_druid_savage_roar",
 			"Ability4": "lone_druid_true_form",
-			"Ability5": "attribute_bonus",
 			//"Ability6": "lone_druid_true_form_druid",
 			"Ability6": "lone_druid_true_form_battle_cry",
 			"AbilityLayout": 5,
@@ -1401,7 +1380,6 @@ DotaData.addVersion({
 			"Ability2": "lycan_howl",
 			"Ability3": "lycan_feral_impulse",
 			"Ability4": "lycan_shapeshift",
-			"Ability5": "attribute_bonus",
 			"ArmorBase": 1,
 			"AttackPoint": 0.55,
 			"AttackType": "Melee",
@@ -1428,7 +1406,6 @@ DotaData.addVersion({
 			"Ability2": "magnataur_empower",
 			"Ability3": "magnataur_skewer",
 			"Ability4": "magnataur_reverse_polarity",
-			"Ability5": "attribute_bonus",
 			"ArmorBase": 2,
 			"AttackPoint": 0.5,
 			"AttackType": "Melee",
@@ -1455,7 +1432,6 @@ DotaData.addVersion({
 			"Ability2": "medusa_mystic_snake",
 			"Ability3": "medusa_mana_shield",
 			"Ability4": "medusa_stone_gaze",
-			"Ability5": "attribute_bonus",
 			"ArmorBase": -1,
 			"AttackPoint": 0.5,
 			"AttackType": "Ranged",
@@ -1482,7 +1458,6 @@ DotaData.addVersion({
 			"Ability2": "meepo_poof",
 			"Ability3": "meepo_geostrike",
 			"Ability4": "meepo_divided_we_stand",
-			"Ability5": "attribute_bonus",
 			"ArmorBase": 1.0,
 			"AttackPoint": 0.38,
 			"AttackType": "Melee",
@@ -1490,13 +1465,13 @@ DotaData.addVersion({
 			"DamageMin": 20,
 			"Range": 150,
 			"AttackRate": 1.7,
-			"AgilityGain": 2.2,
-			"AgilityBase": 23,
-			"IntelligenceBase": 20,
 			"StrengthBase": 23,
+			"StrengthGain": 1.3,
+			"AgilityBase": 23,
+			"AgilityGain": 2.2,
+			"IntelligenceBase": 20,
 			"IntelligenceGain": 1.6,
 			"Type": "Agility",
-			"StrengthGain": 1.6,
 			"MagicalResistance": 0.35,
 			"MovementSpeed": 315,
 			"TurnRate": 0.65,
@@ -1537,7 +1512,6 @@ DotaData.addVersion({
 			"Ability3": "morphling_morph_agi",
 			"Ability4": "morphling_morph_str",
 			"Ability5": "morphling_replicate",
-			"Ability6": "attribute_bonus",
 			"Ability7": "morphling_hybrid",
 			//"Ability7": "morphling_morph",
 			//"Ability8": "morphling_morph_replicate",
@@ -1545,8 +1519,8 @@ DotaData.addVersion({
 			"ArmorBase": -2,
 			"AttackPoint": 0.5,
 			"AttackType": "Ranged",
-			"DamageMax": 22,
-			"DamageMin": 13,
+			"DamageMax": 18,
+			"DamageMin": 9,
 			"Range": 350,
 			"AttackRate": 1.6,
 			"StrengthBase": 19,
@@ -1568,7 +1542,6 @@ DotaData.addVersion({
 			"Ability2": "naga_siren_ensnare",
 			"Ability3": "naga_siren_rip_tide",
 			"Ability4": "naga_siren_song_of_the_siren",
-			"Ability5": "attribute_bonus",
 			//"Ability6": "naga_siren_song_of_the_siren_cancel",
 			"ArmorBase": 3,
 			"AttackPoint": 0.5,
@@ -1626,7 +1599,6 @@ DotaData.addVersion({
 			"Ability2": "nevermore_necromastery",
 			"Ability3": "nevermore_dark_lord",
 			"Ability4": "nevermore_requiem",
-			"Ability5": "attribute_bonus",
 			"AbilityLayout": 6,
 			"ArmorBase": -2,
 			"AttackPoint": 0.5,
@@ -1684,7 +1656,6 @@ DotaData.addVersion({
 			"Ability2": "nyx_assassin_mana_burn",
 			"Ability3": "nyx_assassin_spiked_carapace",
 			"Ability4": "nyx_assassin_vendetta",
-			"Ability5": "attribute_bonus",
 			"Ability6": "nyx_assassin_burrow",
 			//"Ability5": "nyx_assassin_unburrow",
 			"ArmorBase": 1.0,
@@ -1716,12 +1687,11 @@ DotaData.addVersion({
 			"Ability2": "obsidian_destroyer_astral_imprisonment",
 			"Ability3": "obsidian_destroyer_essence_aura",
 			"Ability4": "obsidian_destroyer_sanity_eclipse",
-			"Ability5": "attribute_bonus",
 			"ArmorBase": 0.5,
 			"AttackPoint": 0.46,
 			"AttackType": "Ranged",
-			"DamageMax": 35,
-			"DamageMin": 20,
+			"DamageMax": 29,
+			"DamageMin": 14,
 			"Range": 450,
 			"AttackRate": 1.7,
 			"AgilityGain": 2.0,
@@ -1744,7 +1714,6 @@ DotaData.addVersion({
 			"Ability3": "ogre_magi_bloodlust",
 			"Ability4": "ogre_magi_unrefined_fireblast",
 			"Ability5": "ogre_magi_multicast",
-			"Ability6": "attribute_bonus",
 			"ArmorBase": 6.0,
 			"AttackPoint": 0.3,
 			"AttackType": "Melee",
@@ -1796,7 +1765,6 @@ DotaData.addVersion({
 			"Ability2": "oracle_fates_edict",
 			"Ability3": "oracle_purifying_flames",
 			"Ability4": "oracle_false_promise",
-			"Ability5": "attribute_bonus",
 			"ArmorBase": 0,
 			"AttackPoint": 0.3,
 			"AttackType": "Ranged",
@@ -1881,7 +1849,6 @@ DotaData.addVersion({
 			//"Ability7": "phoenix_icarus_dive_stop",
 			//"Ability8": "phoenix_sun_ray_stop",
 			//"Ability9": "phoenix_sun_ray_toggle_move",
-			"Ability5": "attribute_bonus",
 			"AbilityLayout": 5,
 			"ArmorBase": -2,
 			"AttackPoint": 0.35,
@@ -1908,9 +1875,8 @@ DotaData.addVersion({
 			"Ability1": "puck_illusory_orb",
 			"Ability2": "puck_waning_rift",
 			"Ability3": "puck_phase_shift",
-			"Ability4": "puck_ethereal_jaunt",
-			"Ability5": "puck_dream_coil",
-			"Ability6": "attribute_bonus",
+			//"Ability4": "puck_ethereal_jaunt",
+			"Ability4": "puck_dream_coil",
 			"AbilityLayout": 5,
 			"ArmorBase": -1,
 			"AttackPoint": 0.5,
@@ -1998,7 +1964,7 @@ DotaData.addVersion({
 			"DamageMax": 33,
 			"DamageMin": 25,
 			"Range": 550,
-			"AttackRate": 1.6,
+			"AttackRate": 1.5,
 			"AgilityGain": 2,
 			"AgilityBase": 18,
 			"IntelligenceBase": 24,
@@ -2099,7 +2065,6 @@ DotaData.addVersion({
 			//"Ability5": "rubick_empty1",
 			//"Ability6": "rubick_empty2",
 			"Ability4": "rubick_spell_steal",
-			"Ability5": "attribute_bonus",
 			//"Ability9": "rubick_hidden1",
 			//"Ability10": "rubick_hidden2",
 			//"Ability11": "rubick_hidden3",
@@ -2157,7 +2122,6 @@ DotaData.addVersion({
 			"Ability3": "shadow_demon_shadow_poison",
 			"Ability4": "shadow_demon_shadow_poison_release",
 			"Ability5": "shadow_demon_demonic_purge",
-			"Ability6": "attribute_bonus",
 			"AbilityLayout": 5,
 			"ArmorBase": 0,
 			"AttackPoint": 0.35,
@@ -2216,7 +2180,6 @@ DotaData.addVersion({
 			//"Ability5": "shredder_return_chakram_2",
 			"Ability4": "shredder_chakram",
 			//"Ability7": "shredder_return_chakram",
-			"Ability5": "attribute_bonus",
 			"AbilityLayout": 4,
 			"ArmorBase": -2,
 			"AttackPoint": 0.36,
@@ -2351,7 +2314,6 @@ DotaData.addVersion({
 			"Ability2": "slark_pounce",
 			"Ability3": "slark_essence_shift",
 			"Ability4": "slark_shadow_dance",
-			"Ability5": "attribute_bonus",
 			"ArmorBase": -1,
 			"AttackPoint": 0.5,
 			"AttackType": "Melee",
@@ -2359,13 +2321,13 @@ DotaData.addVersion({
 			"DamageMin": 33,
 			"Range": 150,
 			"AttackRate": 1.7,
-			"AgilityGain": 1.5,
-			"AgilityBase": 21,
-			"IntelligenceBase": 16,
 			"StrengthBase": 21,
+			"StrengthGain": 1.8,
+			"AgilityBase": 21,
+			"AgilityGain": 1.5,
+			"IntelligenceBase": 16,
 			"IntelligenceGain": 1.9,
 			"Type": "Agility",
-			"StrengthGain": 1.8,
 			"MovementSpeed": 305,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 0,
@@ -2409,7 +2371,6 @@ DotaData.addVersion({
 			"Ability3": "spectre_dispersion",
 			"Ability4": "spectre_reality",
 			"Ability5": "spectre_haunt",
-			"Ability6": "attribute_bonus",
 			"AbilityLayout": 5,
 			"ArmorBase": 0,
 			"AttackPoint": 0.3,
@@ -2437,7 +2398,6 @@ DotaData.addVersion({
 			"Ability2": "spirit_breaker_empowering_haste",
 			"Ability3": "spirit_breaker_greater_bash",
 			"Ability4": "spirit_breaker_nether_strike",
-			"Ability5": "attribute_bonus",
 			"ArmorBase": 3.0,
 			"AttackPoint": 0.6,
 			"AttackType": "Melee",
@@ -2520,7 +2480,6 @@ DotaData.addVersion({
 			//"Ability4": "techies_focused_detonate",
 			//"Ability5": "techies_minefield_sign",
 			"Ability4": "techies_remote_mines",
-			"Ability5": "attribute_bonus",
 			"AbilityLayout": 6,
 			"ArmorBase": 5,
 			"AttackPoint": 0.5,
@@ -2552,7 +2511,6 @@ DotaData.addVersion({
 			"Ability3": "templar_assassin_psi_blades",
 			"Ability4": "templar_assassin_psionic_trap",
 			"Ability5": "templar_assassin_trap",
-			"Ability6": "attribute_bonus",
 			"AbilityLayout": 5,
 			"ArmorBase": 1,
 			"AttackPoint": 0.3,
@@ -2685,7 +2643,6 @@ DotaData.addVersion({
 			"Ability3": "treant_living_armor",
 			"Ability4": "treant_eyes_in_the_forest",
 			"Ability5": "treant_overgrowth",
-			"Ability6": "attribute_bonus",
 			"ArmorBase": -1,
 			"AttackPoint": 0.6,
 			"AttackType": "Melee",
@@ -2712,7 +2669,6 @@ DotaData.addVersion({
 			//"Ability3": "troll_warlord_whirling_axes_melee",
 			"Ability3": "troll_warlord_fervor",
 			"Ability4": "troll_warlord_battle_trance",
-			"Ability5": "attribute_bonus",
 			"ArmorBase": -1,
 			"AttackPoint": 0.3,
 			"AttackType": "Ranged",
@@ -2741,7 +2697,6 @@ DotaData.addVersion({
 			//"Ability4": "tusk_launch_snowball",
 			"Ability4": "tusk_walrus_punch",
 			"Ability5": "tusk_walrus_kick",
-			"Ability6": "attribute_bonus",
 			"AbilityLayout": 5,
 			"ArmorBase": 0.0,
 			"AttackPoint": 0.36,
@@ -2768,7 +2723,6 @@ DotaData.addVersion({
 			"Ability2": "undying_soul_rip",
 			"Ability3": "undying_tombstone",
 			"Ability4": "undying_flesh_golem",
-			"Ability5": "attribute_bonus",
 			"ArmorBase": 2,
 			"AttackPoint": 0.3,
 			"AttackType": "Melee",
@@ -2900,7 +2854,6 @@ DotaData.addVersion({
 			"Ability2": "visage_soul_assumption",
 			"Ability3": "visage_gravekeepers_cloak",
 			"Ability4": "visage_summon_familiars",
-			"Ability5": "attribute_bonus",
 			"ArmorBase": -2.0,
 			"AttackPoint": 0.46,
 			"AttackType": "Ranged",
@@ -2962,13 +2915,13 @@ DotaData.addVersion({
 			"DamageMin": 41,
 			"Range": 425,
 			"AttackRate": 1.8,
-			"AgilityGain": 2.5,
-			"AgilityBase": 14,
-			"IntelligenceBase": 15,
 			"StrengthBase": 15,
+			"StrengthGain": 1.5,
+			"AgilityBase": 14,
+			"AgilityGain": 2.8,
+			"IntelligenceBase": 15,
 			"IntelligenceGain": 1.8,
 			"Type": "Agility",
-			"StrengthGain": 1.5,
 			"MovementSpeed": 290,
 			"TurnRate": 0.5,
 			"ProjectileSpeed": 900,
@@ -3009,7 +2962,6 @@ DotaData.addVersion({
 			"Ability2": "winter_wyvern_splinter_blast",
 			"Ability3": "winter_wyvern_cold_embrace",
 			"Ability4": "winter_wyvern_winters_curse",
-			"Ability5": "attribute_bonus",
 			"ArmorBase": -1,
 			"AttackPoint": 0.25,
 			"AttackType": "Ranged",
@@ -3043,7 +2995,6 @@ DotaData.addVersion({
 			//"Ability5": "wisp_empty1",
 			//"Ability6": "wisp_empty2",
 			"Ability4": "wisp_relocate",
-			"Ability5": "attribute_bonus",
 			//"Ability9": "wisp_spirits_in",
 			//"Ability10": "wisp_spirits_out",
 			"AbilityLayout": 6,
@@ -3142,7 +3093,7 @@ DotaData.addVersion({
 			"IntelligenceGain": 2.6,
 			"Type": "Agility",
 			"ArmorBase": -2,
-			"MovementSpeed": 295,
+			"MovementSpeed": 285,
 			"TurnRate": 0.4,
 			"Team": "Dire"
 		},
@@ -3155,7 +3106,6 @@ DotaData.addVersion({
 			"Ability2": "abyssal_underlord_pit_of_malice",
 			"Ability3": "abyssal_underlord_atrophy_aura",
 			"Ability4": "abyssal_underlord_dark_rift",
-			"Ability5": "attribute_bonus",
 			//"Ability5": "abyssal_underlord_cancel_dark_rift",
 			"AttackPoint": 0.45,
 			"AttackType": "Melee",
@@ -3194,7 +3144,8 @@ DotaData.addVersion({
 			"SectionIndex": 0,
 			"Charges": 1,
 			"ChargesStack": true,
-			"Consumable": true
+			"Consumable": true,
+			"Shops": ["Home"],
 		},
 		"faerie_fire": {
 			"Name": "Faerie fire",
@@ -3203,15 +3154,17 @@ DotaData.addVersion({
 			"SectionIndex": 1,
 			"Damage": 2,
 			"Consumable": true,
-			"Cooldown": 5
+			"Cooldown": 5,
+			"Shops": ["Home"],
 		},
 		"enchanted_mango": {
 			"Name": "Enchanted Mango",
-			"Cost": 125,
+			"Cost": 110,
 			"Section": "Consumables",
 			"SectionIndex": 2,
 			"Consumable": true,
-			"HealthRegeneration": 1
+			"HealthRegeneration": 1,
+			"Shops": ["Home"],
 		},
 		"tango": {
 			"Name": "Tango",
@@ -3220,7 +3173,8 @@ DotaData.addVersion({
 			"SectionIndex": 3,
 			"Charges": 4,
 			"ChargesStack": true,
-			"Consumable": true
+			"Consumable": true,
+			"Shops": ["Home"],
 		},
 		"salve": {
 			"Name": "Salve",
@@ -3229,7 +3183,8 @@ DotaData.addVersion({
 			"SectionIndex": 4,
 			"Charges": 1,
 			"ChargesStack": true,
-			"Consumable": true
+			"Consumable": true,
+			"Shops": ["Home"],
 		},
 		"smoke_of_deceit": {
 			"Name": "Smoke of Deceit",
@@ -3239,7 +3194,8 @@ DotaData.addVersion({
 			"Charges": 1,
 			"ChargesStack": true,
 			"Consumable": true,
-			"Cooldown": 1
+			"Cooldown": 1,
+			"Shops": ["Home"],
 		},
 		"tpscroll": {
 			"Name": "Town Portal Scroll",
@@ -3251,7 +3207,8 @@ DotaData.addVersion({
 			"ChargesStack": true,
 			"Consumable": true,
 			"Cooldown": 70,
-			"ManaCost": 75
+			"ManaCost": 75,
+			"Shops": ["Home", "Side"],
 		},
 		"dust": {
 			"Name": "Dust of Appearance",
@@ -3261,7 +3218,8 @@ DotaData.addVersion({
 			"Charges": 2,
 			"ChargesStack": true,
 			"Consumable": true,
-			"Cooldown": 30
+			"Cooldown": 30,
+			"Shops": ["Home"],
 		},
 		"courier": {
 			"Name": "Animal Courier",
@@ -3270,7 +3228,8 @@ DotaData.addVersion({
 			"Section": "Consumables",
 			"SectionIndex": 8,
 			"Charges": 1,
-			"Consumable": true
+			"Consumable": true,
+			"Shops": ["Home"],
 		},
 		"flying_courier": {
 			"Name": "Flying Courier",
@@ -3280,7 +3239,8 @@ DotaData.addVersion({
 			"SectionIndex": 9,
 			"Charges": 1,
 			"ChargesStack": false,
-			"Consumable": true
+			"Consumable": true,
+			"Shops": ["Home"],
 		},
 		"ward_observer": {
 			"Name": "Observer Ward",
@@ -3290,7 +3250,8 @@ DotaData.addVersion({
 			"Charges": 1,
 			"ChargesStack": true,
 			"Consumable": true,
-			"Cooldown": 1
+			"Cooldown": 1,
+			"Shops": ["Home"],
 		},
 		"ward_sentry": {
 			"Name": "Sentry Ward",
@@ -3300,7 +3261,8 @@ DotaData.addVersion({
 			"Charges": 2,
 			"ChargesStack": true,
 			"Consumable": true,
-			"Cooldown": 1
+			"Cooldown": 1,
+			"Shops": ["Home"],
 		},
 		"tome_of_knowledge": {
 			"Name": "Tome of Knowledge",
@@ -3309,7 +3271,8 @@ DotaData.addVersion({
 			"SectionIndex": 12,
 			"Charges": 1,
 			"ChargesStack": true,
-			"Consumable": true
+			"Consumable": true,
+			"Shops": ["Home"],
 		},
 		"bottle": {
 			"Name": "Bottle",
@@ -3326,7 +3289,8 @@ DotaData.addVersion({
 			"Section": "Consumables",
 			"SectionIndex": 13,
 			"Charges": 3,
-			"ChargesMax": 3
+			"ChargesMax": 3,
+			"Shops": ["Home", "Side"],
 		},
 
 		/* Attributes */
@@ -3338,28 +3302,32 @@ DotaData.addVersion({
 			"SectionIndex": 0,
 			"Strength": 1,
 			"Agility": 1,
-			"Intelligence": 1
+			"Intelligence": 1,
+			"Shops": ["Home"],
 		},
 		"gauntlets": {
 			"Name": "Gauntlets of Strength",
 			"Cost": 150,
 			"Section": "Attributes",
 			"SectionIndex": 1,
-			"Strength": 3
+			"Strength": 3,
+			"Shops": ["Home"],
 		},
 		"slippers": {
 			"Name": "Slippers of Agility",
 			"Cost": 150,
 			"Section": "Attributes",
 			"SectionIndex": 2,
-			"Agility": 3
+			"Agility": 3,
+			"Shops": ["Home", "Side"],
 		},
 		"mantle": {
 			"Name": "Mantle of Intelligence",
 			"Cost": 150,
 			"Section": "Attributes",
 			"SectionIndex": 3,
-			"Intelligence": 3
+			"Intelligence": 3,
+			"Shops": ["Home"],
 		},
 		"circlet": {
 			"Name": "Circlet",
@@ -3368,49 +3336,56 @@ DotaData.addVersion({
 			"SectionIndex": 4,
 			"Strength": 2,
 			"Agility": 2,
-			"Intelligence": 2
+			"Intelligence": 2,
+			"Shops": ["Home"],
 		},
 		"belt_of_strength": {
 			"Name": "Belt of Strength",
 			"Cost": 450,
 			"Section": "Attributes",
 			"SectionIndex": 5,
-			"Strength": 6
+			"Strength": 6,
+			"Shops": ["Home", "Side"],
 		},
 		"band_of_elvenskin": {
 			"Name": "Band of Elvenskin",
 			"Cost": 450,
 			"Section": "Attributes",
 			"SectionIndex": 6,
-			"Agility": 6
+			"Agility": 6,
+			"Shops": ["Home", "Side"],
 		},
 		"robe": {
 			"Name": "Robe of the Magi",
 			"Cost": 450,
 			"Section": "Attributes",
 			"SectionIndex": 7,
-			"Intelligence": 6
+			"Intelligence": 6,
+			"Shops": ["Home", "Side"],
 		},
 		"ogre_axe": {
 			"Name": "Ogre Club",
 			"Cost": 1000,
 			"Section": "Attributes",
 			"SectionIndex": 8,
-			"Strength": 10
+			"Strength": 10,
+			"Shops": ["Home"],
 		},
 		"blade_of_alacrity": {
 			"Name": "Blade of Alacrity",
 			"Cost": 1000,
 			"Section": "Attributes",
 			"SectionIndex": 9,
-			"Agility": 10
+			"Agility": 10,
+			"Shops": ["Home"],
 		},
 		"staff_of_wizardry": {
 			"Name": "Staff of Wizardry",
 			"Cost": 1000,
 			"Section": "Attributes",
 			"SectionIndex": 10,
-			"Intelligence": 10
+			"Intelligence": 10,
+			"Shops": ["Home"],
 		},
 		/* Armamaments */
 		"ring_of_protection": {
@@ -3419,20 +3394,23 @@ DotaData.addVersion({
 			"Cost": 175,
 			"Section": "Armaments",
 			"SectionIndex": 0,
-			"Armor": 2
+			"Armor": 2,
+			"Shops": ["Home"],
 		},
 		"stout_shield": {
 			"Name": "Stout Shield",
 			"Cost": 200,
 			"Section": "Armaments",
-			"SectionIndex": 1
+			"SectionIndex": 1,
+			"Shops": ["Home", "Side"],
 		},
 		"quelling_blade": {
 			"Name": "Quelling blade",
 			"Cost": 200,
 			"Section": "Armaments",
 			"SectionIndex": 2,
-			"Cooldown": 4
+			"Cooldown": 4,
+			"Shops": ["Home", "Side"],
 		},
 		"infused_raindrop": {
 			"Name": "Infused Raindrop",
@@ -3442,34 +3420,39 @@ DotaData.addVersion({
 			"Charges": 5,
 			"ChargesStack": false,
 			"ManaRegenerationFlat": 0.85,
-			"Cooldown": 6,
+			"Cooldown": 7,
+			"Shops": ["Home"],
 		},
 		"blight_stone": {
 			"Name": "Blight Stone",
 			"Cost": 300,
 			"Section": "Armaments",
-			"SectionIndex": 4
+			"SectionIndex": 4,
+			"Shops": ["Home", "Side"],
 		},
 		"orb_of_venom": {
 			"Name": "Orb of Venom",
 			"Aliases": ["oov"],
 			"Cost": 275,
 			"Section": "Armaments",
-			"SectionIndex": 5
+			"SectionIndex": 5,
+			"Shops": ["Home", "Side"],
 		},
 		"blades_of_attack": {
 			"Name": "Blades of Attack",
 			"Cost": 420,
 			"Section": "Armaments",
 			"SectionIndex": 6,
-			"Damage": 9
+			"Damage": 9,
+			"Shops": ["Home", "Side"],
 		},
 		"chainmail": {
 			"Name": "Chainmail",
 			"Cost": 550,
 			"Section": "Armaments",
 			"SectionIndex": 7,
-			"Armor": 5
+			"Armor": 5,
+			"Shops": ["Home", "Side"],
 		},
 		"quarterstaff": {
 			"Name": "Quarterstaff",
@@ -3477,7 +3460,8 @@ DotaData.addVersion({
 			"Section": "Armaments",
 			"SectionIndex": 8,
 			"Damage": 10,
-			"AttackSpeed": 10
+			"AttackSpeed": 10,
+			"Shops": ["Home", "Side"],
 		},
 		"helm_of_iron_will": {
 			"Name": "Helm of Iron Will",
@@ -3485,43 +3469,49 @@ DotaData.addVersion({
 			"Section": "Armaments",
 			"SectionIndex": 9,
 			"Armor": 5,
-			"HealthRegeneration": 3
+			"HealthRegeneration": 3,
+			"Shops": ["Home", "Side"],
 		},
 		"broadsword": {
 			"Name": "Broadsword",
 			"Cost": 1200,
 			"Section": "Armaments",
 			"SectionIndex": 10,
-			"Damage": 18
+			"Damage": 18,
+			"Shops": ["Home", "Side"],
 		},
 		"claymore": {
 			"Name": "Claymore",
 			"Cost": 1400,
 			"Section": "Armaments",
 			"SectionIndex": 11,
-			"Damage": 21
+			"Damage": 21,
+			"Shops": ["Home"],
 		},
 		"javelin": {
 			"Name": "Javelin",
 			"Cost": 1500,
 			"Section": "Armaments",
 			"SectionIndex": 12,
-			"Damage": 10
+			"Damage": 10,
+			"Shops": ["Home"],
 		},
 		"mithril_hammer": {
 			"Name": "Mithril Hammer",
 			"Cost": 1600,
 			"Section": "Armaments",
 			"SectionIndex": 13,
-			"Damage": 24
+			"Damage": 24,
+			"Shops": ["Home"],
 		},
 		/* Arcane */
 		"wind_lace": {
 			"Name": "Wind Lace",
-			"Cost": 235,
+			"Cost": 250,
 			"Section": "Arcane",
 			"SectionIndex": 0,
-			"MovementSpeed": 235
+			"MovementSpeed": 235,
+			"Shops": ["Home"],
 		},
 		"magic_stick": {
 			"Name": "Magic Stick",
@@ -3530,7 +3520,8 @@ DotaData.addVersion({
 			"SectionIndex": 1,
 			"Charges": 0,
 			"ChargesMax": 10,
-			"Cooldown": 13
+			"Cooldown": 13,
+			"Shops": ["Home", "Side"],
 		},
 		"sobi_mask": {
 			"Name": "Sage's mask",
@@ -3538,7 +3529,8 @@ DotaData.addVersion({
 			"Cost": 325,
 			"Section": "Arcane",
 			"SectionIndex": 2,
-			"ManaRegenerationPercentage": 0.5
+			"ManaRegenerationPercentage": 0.5,
+			"Shops": ["Home", "Side"],
 		},
 		"ring_of_regen": {
 			"Name": "Ring of Regen",
@@ -3546,6 +3538,7 @@ DotaData.addVersion({
 			"Section": "Arcane",
 			"SectionIndex": 3,
 			"HealthRegeneration": 3,
+			"Shops": ["Home", "Side"],
 		},
 		"boots": {
 			"Name": "Boots of Speed",
@@ -3553,46 +3546,54 @@ DotaData.addVersion({
 			"Section": "Arcane",
 			"SectionIndex": 4,
 			"Family": { "Name": "Boots", "Level": 45, "Stats": { "MovementSpeed": 45 } },
+			"Shops": ["Home", "Side"],
 		},
 		"gloves_of_haste": {
 			"Name": "Gloves of Haste",
 			"Cost": 500,
 			"Section": "Arcane",
 			"SectionIndex": 5,
-			"AttackSpeed": 20
+			"AttackSpeed": 20,
+			"Shops": ["Home", "Side"],
 		},
 		"cloak": {
 			"Name": "Cloak",
 			"Cost": 550,
 			"Section": "Arcane",
 			"SectionIndex": 6,
-			"MagicalResistance": 0.15
+			"MagicalResistance": 0.15,
+			"Shops": ["Home", "Side"],
 		},
 		"ring_of_health": {
 			"Name": "Ring of Health",
 			"Cost": 850,
 			"Section": "Arcane",
 			"SectionIndex": 7,
-			"HealthRegeneration": 6
+			"HealthRegeneration": 6,
+			"Shops": ["Home", "Side"],
 		},
 		"void_stone": {
 			"Name": "Void Stone",
 			"Cost": 850,
 			"Section": "Arcane",
 			"SectionIndex": 8,
+			"Shops": ["Home", "Side"],
 		},
 		"gem": {
 			"Name": "Gem of True Sight",
 			"Cost": 900,
 			"Section": "Arcane",
-			"SectionIndex": 9
-			//"Aura": "true_sight"
+			"SectionIndex": 9,
+			//"Aura": "true_sight",
+			"Shops": ["Home"],
 		},
 		"lifesteal": {
 			"Name": "Morbid Mask",
-			"Cost": 900,
+			"Cost": 1200,
 			"Section": "Arcane",
-			"SectionIndex": 10
+			"SectionIndex": 10,
+			"Damage": 15,
+			"Shops": ["Home", "Side"],
 		},
 		"shadow_amulet": {
 			"Name": "Shadow Amulet",
@@ -3600,7 +3601,8 @@ DotaData.addVersion({
 			"Section": "Arcane",
 			"SectionIndex": 11,
 			"AttackSpeed": 20,
-			"Cooldown": 10
+			"Cooldown": 7,
+			"Shops": ["Home"],
 		},
 		"ghost": {
 			"Name": "Ghost Scepter",
@@ -3610,14 +3612,16 @@ DotaData.addVersion({
 			"Strength": 5,
 			"Agility": 5,
 			"Intelligence": 5,
-			"Cooldown": 25
+			"Cooldown": 25,
+			"Shops": ["Home"],
 		},
 		"blink": {
 			"Name": "Blink Dagger",
 			"Cost": 2250,
 			"Section": "Arcane",
 			"SectionIndex": 13,
-			"Cooldown": 12
+			"Cooldown": 12,
+			"Shops": ["Home", "Side"],
 		},
 		/* Common */
 		"magic_wand": {
@@ -3666,8 +3670,8 @@ DotaData.addVersion({
 		},
 		"bracer": {
 			"Name": "Bracer",
-			"Cost": 525,
-			"Components": ["circlet", "gauntlets", 210],
+			"Cost": 505,
+			"Components": ["circlet", "gauntlets", 19],
 			"Section": "Common",
 			"SectionIndex": 4,
 			"Strength": 6,
@@ -3677,8 +3681,8 @@ DotaData.addVersion({
 		},
 		"soul_ring": {
 			"Name": "Soul ring",
-			"Cost": 775,
-			"Components": ["ring_of_regen", "sobi_mask", 125],
+			"Cost": 800,
+			"Components": ["ring_of_regen", "sobi_mask", 150],
 			"Section": "Common",
 			"SectionIndex": 5,
 			"HealthRegeneration": 3,
@@ -3735,9 +3739,9 @@ DotaData.addVersion({
 			"Components": ["quarterstaff", "robe", "sobi_mask"],
 			"Section": "Common",
 			"SectionIndex": 8,
-			"Intelligence": 6,
+			"Intelligence": 10,
 			"AttackSpeed": 10,
-			"Damage": 15,
+			"Damage": 10,
 			"ManaRegenerationPercentage": 0.75
 		},
 		"pers": {
@@ -3788,6 +3792,7 @@ DotaData.addVersion({
 			"Section": "Common",
 			"SectionIndex": 12,
 			"AttackSpeed": 120,
+			"VisionNighttime": 300,
 			"Action": {
 				"Type": "Buff",
 				"Id": "moon_shard_buff",
@@ -3815,7 +3820,7 @@ DotaData.addVersion({
 			"Section": "Support",
 			"SectionIndex": 1,
 			"Armor": 2,
-			"Cooldown": 14
+			"Cooldown": 20
 		},
 		"headdress": {
 			"Name": "Headress",
@@ -3922,18 +3927,18 @@ DotaData.addVersion({
 			"Cooldown": 55
 		},
 		"ancient_janggo": {
-			"Name": "Drums of Endurance",
-			"Cost": 1785,
-			"Components": ["bracer", "ring_of_regen", "wind_lace", 700],
+			"Name": "Drum of Endurance",
+			"Cost": 1780,
+			"Components": ["bracer", "sobi_mask", "wind_lace", 700],
 			"Charges": 6,
 			"ChargesMax": 6,
 			"Section": "Support",
 			"SectionIndex": 9,
 			"Strength": 6,
 			"Agility": 3,
-			"Intelligence": 9,
+			"Intelligence": 6,
 			"Damage": 3,
-			"HealthRegeneration": 3,
+			"ManaRegenerationPercentage": 0.5,
 			"Aura": "ancient_janggo_aura",
 			"Action": {
 				"Type": "Buff",
@@ -3972,7 +3977,7 @@ DotaData.addVersion({
 			"Name": "Vladmir's Offering",
 			"Aliases": ["vladmirs offering", "vladimirs"],
 			"Cost": 2275,
-			"Components": ["ring_of_basilius", "headdress", "lifesteal", 300],
+			"Components": ["ring_of_basilius", "headdress", "lifesteal"],
 			"Section": "Support",
 			"SectionIndex": 11,
 			"Strength": 2,
@@ -4011,7 +4016,7 @@ DotaData.addVersion({
 		/* Caster */
 		"glimmer_cape": {
 			"Name": "Glimmer Cape",
-			"Cost": 1950,
+			"Cost": 1850,
 			"Components": ["shadow_amulet", "hood"],
 			"Disassemble": true,
 			"Section": "Caster",
@@ -4026,7 +4031,7 @@ DotaData.addVersion({
 				"Teammates": true,
 				"Refresh": "leave"
 			},
-			"Cooldown": 16,
+			"Cooldown": 14,
 			"ManaCost": 90
 		},
 		"force_staff": {
@@ -4059,8 +4064,8 @@ DotaData.addVersion({
 		},
 		"aether_lens": {
 			"Name": "Aether lens",
-			"Cost": 2300,
-			"Components": ["energy_booster", "ring_of_health", 550],
+			"Cost": 2350,
+			"Components": ["energy_booster", "ring_of_health", 600],
 			"Section": "Caster",
 			"SectionIndex": 3,
 			"Mana": 250,
@@ -4162,7 +4167,7 @@ DotaData.addVersion({
 		"cyclone": {
 			"Name": "Eul's Scepter of Divinity",
 			"Aliases": ["cyclone", "euls"],
-			"Cost": 2735,
+			"Cost": 2750,
 			"Components": ["staff_of_wizardry", "wind_lace", "void_stone", 650],
 			"Section": "Caster",
 			"SectionIndex": 6,
@@ -4174,7 +4179,7 @@ DotaData.addVersion({
 		},
 		"solar_crest": {
 			"Name": "Solar Crest",
-			"Cost": 2875,
+			"Cost": 2625,
 			"Components": ["medallion_of_courage", "talisman_of_evasion"],
 			"Disassemble": true,
 			"Section": "Caster",
@@ -4199,7 +4204,7 @@ DotaData.addVersion({
 			"SectionIndex": 8,
 			"Intelligence": 30,
 			"Health": 350,
-			"Cooldown": 10,
+			"Cooldown": 16,
 			"ManaCost": 50
 		},
 		"orchid": {
@@ -4270,7 +4275,6 @@ DotaData.addVersion({
 			"Intelligence": 25,
 			"Health": 425,
 			"Mana": 425,
-			"ManaRegenerationPercentage": 0.5,
 			"CooldownReduction": 0.25
 		},
 		/* Weapons */
@@ -4384,7 +4388,6 @@ DotaData.addVersion({
 			"Section": "Weapons",
 			"SectionIndex": 8,
 			"Damage": 66,
-			"AttackSpeed": 15
 		},
 		"greater_crit": {
 			"Name": "Daedalus",
@@ -4392,12 +4395,12 @@ DotaData.addVersion({
 			"Components": ["lesser_crit", "demon_edge", 1000],
 			"Section": "Weapons",
 			"SectionIndex": 9,
-			"Damage": 81
+			"Damage": 76
 		},
 		"butterfly": {
 			"Name": "Butterfly",
 			"Aliases": ["bfly"],
-			"Cost": 5775,
+			"Cost": 5525,
 			"Components": ["eagle", "talisman_of_evasion", "quarterstaff"],
 			"Section": "Weapons",
 			"SectionIndex": 10,
@@ -4489,7 +4492,6 @@ DotaData.addVersion({
 			"SectionIndex": 3,
 			"Health": 425,
 			"Mana": 425,
-			"ManaRegenerationPercentage": 0.5
 		},
 		"crimson_guard": {
 			"Name": "Crimson Guard",
@@ -4564,7 +4566,7 @@ DotaData.addVersion({
 		"bloodstone": {
 			"Name": "Bloodstone",
 			"Aliases": ["bs"],
-			"Cost": 4875,
+			"Cost": 4900,
 			"Components": ["soul_booster", "soul_ring", 900],
 			"Section": "Armor",
 			"SectionIndex": 8,
@@ -4643,7 +4645,7 @@ DotaData.addVersion({
 			"Section": "Armor",
 			"SectionIndex": 12,
 			"Armor": 10,
-			"AttackSpeed": 35,
+			"AttackSpeed": 30,
 			"Aura": "assault_aura"
 		},
 		"heart": {
@@ -4666,10 +4668,11 @@ DotaData.addVersion({
 			"Name": "Mask of Madness",
 			"Aliases": ["mom"],
 			"Cost": 1800,
-			"Components": ["lifesteal", 900],
+			"Components": ["lifesteal", 700],
 			"Section": "Artifacts",
 			"SectionIndex": 0,
 			"Lore": "Once this mask is worn, its bearer becomes an uncontrollable aggressive force.",
+			"Damage": 15,
 			"Action": {
 				"Type" : "Buff",
 				"Self": "mask_of_madness_buff",
@@ -4683,15 +4686,15 @@ DotaData.addVersion({
 			"Name": "Helm of the Dominator",
 			"Aliases": ["hotd"],
 			"Cost": 1800,
-			"Components": ["helm_of_iron_will", "lifesteal"],
-			"Disassemble": true,
+			"Components": ["gloves_of_haste", "headress", 725],
 			"Section": "Artifacts",
 			"SectionIndex": 1,
-			"HealthRegeneration": 3,
-			"Damage": 20,
-			"Armor": 5,
+			"Strength": 6,
+			"Agility": 6,
+			"Intelligence": 6,
+			"AttackSpeed": 10,
 			"Cooldown": 60,
-			"ManaCost": 75
+			"Aura": "helm_of_the_dominator_aura",
 		},
 		"dragon_lance": {
 			"Name": "Dragon lance",
@@ -4699,7 +4702,7 @@ DotaData.addVersion({
 			"Components": ["ogre_axe", "band_of_elvenskin", "band_of_elvenskin"],
 			"Section": "Artifacts",
 			"SectionIndex": 2,
-			"Strength": 13,
+			"Strength": 12,
 			"Agility": 14,
 			"Family": {
 				"Name": "Lance",
@@ -4780,7 +4783,7 @@ DotaData.addVersion({
 		},
 		"heavens_halberd": {
 			"Name": "Heaven's Halberd",
-			"Cost": 3850,
+			"Cost": 3500,
 			"Components": ["sange", "talisman_of_evasion"],
 			"Disassemble": true,
 			"Section": "Artifacts",
@@ -4832,13 +4835,12 @@ DotaData.addVersion({
 		},
 		"satanic": {
 			"Name": "Satanic",
-			"Cost": 5900,
-			"Components": ["reaver", "helm_of_the_dominator", 1100],
+			"Cost": 5800,
+			"Components": ["reaver", "lifesteal", "mithril_hammer"],
 			"Section": "Artifacts",
 			"SectionIndex": 13,
 			"Strength": 25,
-			"Damage": 20,
-			"Armor": 5,
+			"Damage": 50,
 			"Cooldown": 35
 		},
 
@@ -4848,7 +4850,8 @@ DotaData.addVersion({
 			"Cost": 900,
 			"Section": "Secret",
 			"SectionIndex": 0,
-			"Mana": 250
+			"Mana": 250,
+			"Shops": ["Secret"],
 		},
 		"point_booster": {
 			"Name": "Point Booster",
@@ -4856,35 +4859,40 @@ DotaData.addVersion({
 			"Section": "Secret",
 			"SectionIndex": 1,
 			"Health": 175,
-			"Mana": 175
+			"Mana": 175,
+			"Shops": ["Secret"],
 		},
 		"vitality_booster": {
 			"Name": "Vitality Booster",
 			"Cost": 1100,
 			"Section": "Secret",
 			"SectionIndex": 2,
-			"Health": 250
+			"Health": 250,
+			"Shops": ["Secret"],
 		},
 		"platemail": {
 			"Name": "Platemail",
 			"Cost": 1400,
 			"Section": "Secret",
 			"SectionIndex": 3,
-			"Armor": 10
+			"Armor": 10,
+			"Shops": ["Secret"],
 		},
 		"talisman_of_evasion": {
 			"Name": "Talisman of Evasion",
-			"Cost": 1700,
+			"Cost": 1450,
 			"Section": "Secret",
 			"SectionIndex": 4,
-			"Evasion": 0.25
+			"Evasion": 0.2,
+			"Shops": ["Secret"],
 		},
 		"hyperstone": {
 			"Name": "Hyperstone",
 			"Cost": 2000,
 			"Section": "Secret",
 			"SectionIndex": 5,
-			"AttackSpeed": 55
+			"AttackSpeed": 55,
+			"Shops": ["Secret"],
 		},
 		"ultimate_orb": {
 			"Name": "Ultimate Orb",
@@ -4893,45 +4901,56 @@ DotaData.addVersion({
 			"SectionIndex": 6,
 			"Strength": 10,
 			"Agility": 10,
-			"Intelligence": 10
+			"Intelligence": 10,
+			"Shops": ["Secret"],
 		},
 		"demon_edge": {
 			"Name": "Demon Edge",
 			"Cost": 2400,
 			"Section": "Secret",
 			"SectionIndex": 7,
-			"Damage": 46
+			"Damage": 46,
+			"Shops": ["Secret"],
 		},
 		"mystic_staff": {
 			"Name": "Mystic Staff",
 			"Cost": 2700,
 			"Section": "Secret",
 			"SectionIndex": 8,
-			"Intelligence": 25
+			"Intelligence": 25,
+			"Shops": ["Secret"],
 		},
 		"reaver": {
 			"Name": "Reaver",
 			"Cost": 3000,
 			"Section": "Secret",
 			"SectionIndex": 9,
-			"Strength": 25
+			"Strength": 25,
+			"Shops": ["Secret"],
 		},
 		"eagle": {
 			"Name": "Eaglesong",
 			"Cost": 3200,
 			"Section": "Secret",
 			"SectionIndex": 10,
-			"Agility": 25
+			"Agility": 25,
+			"Shops": ["Secret"],
 		},
 		"relic": {
 			"Name": "Sacred Relic",
 			"Cost": 3800,
 			"Section": "Secret",
 			"SectionIndex": 11,
-			"Damage": 60
+			"Damage": 60,
+			"Shops": ["Secret"],
 		},
 		"aegis": {
 			"Name": "Aegis",
+			"Cost": 0,
+			"Section": "Unlisted"
+		},
+		"cheese": {
+			"Name": "Cheese",
 			"Cost": 0,
 			"Section": "Unlisted"
 		},
@@ -4950,7 +4969,19 @@ DotaData.addVersion({
 			"Class": "Ability",
 			"Restrictions": [1, 3, 5, 7]
 		},
-		"attribute_bonus": {
+		"template_ultimate": {
+			[DotaData.Basis]: DotaData.Basis,
+			"Class": "Ultimate",
+			"LevelMax": 3,
+			"Restrictions": [6, 12, 18],
+		},
+		"template_talent": {
+			[DotaData.Basis]: null,
+			"Class": "Talent",
+			"Restrictions": [10, 15, 20, 25],
+			"Choices": [],
+		},
+		"attribute_bonus": { // left for legacy *shrugs*
 			"Name": "Attribute bonus",
 			"Level": 0,
 			"LevelMax": 10,
@@ -4986,8 +5017,9 @@ DotaData.addVersion({
 			"Name": "Borrowed time",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
-			"Cooldown": function(){ return 70 - this.Level * 10 }
+			"Restrictions": [6, 12, 18],
+			"Cooldown": function(){ return 70 - this.Level * 10 },
+			"AghsUpgraded": function(){ return this.$total.HasAghanims },
 		},
 		"alchemist_acid_spray": {
 			"Name": "Acid spray",
@@ -5007,7 +5039,7 @@ DotaData.addVersion({
 			"Name": "Chemical rage",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Action": {
 				"Type": "Buff",
 				"Self": "alchemist_chemical_rage_buff",
@@ -5036,9 +5068,10 @@ DotaData.addVersion({
 			"Name": "Ice blast",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": 40,
-			"ManaCost": function(){ return 75 + this.Level * 25 }
+			"ManaCost": function(){ return 75 + this.Level * 25 },
+			"AghsUpgraded": function(){ return this.$total.HasAghanims },
 		},
 		"antimage_mana_break": {
 			"Name": "Mana break"
@@ -5051,13 +5084,14 @@ DotaData.addVersion({
 		"antimage_spell_shield": {
 			"Name": "Spell shield",
 			"Class": "Passive",
-			"MagicalResistance": function() { return 0.18 + this.Level * 0.08 }
+			"MagicalResistance": function() { return 0.18 + this.Level * 0.08 },
+			"AghsUpgraded": function(){ return this.$total.HasAghanims },
 		},
 		"antimage_mana_void": {
 			"Name": "Mana void",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": 70,
 			"ManaCost": function(){ return 50 + this.Level * 75 }
 		},
@@ -5086,7 +5120,7 @@ DotaData.addVersion({
 			"Name": "Culling blade",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Action": {
 				"Type": "Buff",
 				"Id": "axe_culling_blade_buff",
@@ -5100,7 +5134,8 @@ DotaData.addVersion({
 					return 6;
 				return 85 - this.Level * 10;
 			},
-			"ManaCost": function(){ return this.Level * 60 }
+			"ManaCost": function(){ return this.Level * 60 },
+			"AghsUpgraded": function(){ return this.$total.HasAghanims },
 		},
 		"bane_enfeeble": {
 			"Name": "Enfeeble",
@@ -5121,9 +5156,10 @@ DotaData.addVersion({
 			"Name": "Fiend's grip",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": 100,
-			"ManaCost": function(){ return 100 + this.Level * 100 }
+			"ManaCost": function(){ return 100 + this.Level * 100 },
+			"AghsUpgraded": function(){ return this.$total.HasAghanims },
 		},
 		"batrider_sticky_napalm": {
 			"Name": "Sticky napalm",
@@ -5144,9 +5180,10 @@ DotaData.addVersion({
 			"Name": "Flaming lasso",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": function(){ return 105 - this.Level * 15 },
-			"ManaCost": 225
+			"ManaCost": 225,
+			"AghsUpgraded": function(){ return this.$total.HasAghanims },
 		},
 		"beastmaster_wild_axes": {
 			"Name": "Wild axes",
@@ -5177,13 +5214,14 @@ DotaData.addVersion({
 			"Name": "Primal roar",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": function() {
 				if (this.$total.HasAghanims)
 					return 45;
 				return 85 - this.Level * 5;
 			},
-			"ManaCost": function(){ return 125 + this.Level * 25 }
+			"ManaCost": function(){ return 125 + this.Level * 25 },
+			"AghsUpgraded": function(){ return this.$total.HasAghanims },
 		},
 		"bloodseeker_bloodrage": {
 			"Name": "Bloodrage",
@@ -5212,9 +5250,10 @@ DotaData.addVersion({
 			"Name": "Rupture",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": 60,
-			"ManaCost": function(){ return 100 + this.Level * 50 }
+			"ManaCost": function(){ return 100 + this.Level * 50 },
+			"AghsUpgraded": function(){ return this.$total.HasAghanims },
 		},
 		"bounty_hunter_shuriken_toss": {
 			"Name": "Shuriken toss",
@@ -5240,7 +5279,7 @@ DotaData.addVersion({
 			"Name": "Track",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Action": {
 				"Type": "Buff",
 				"ID": "bounty_hunter_track_buff",
@@ -5260,7 +5299,7 @@ DotaData.addVersion({
 		"brewmaster_drunken_haze": {
 			"Name": "Drunken haze",
 			"Cooldown": function(){ return 9 - this.Level },
-			"ManaCost": 50
+			"ManaCost": 25,
 		},
 		"brewmaster_drunken_brawler": {
 			"Name": "Drunken brawler",
@@ -5270,14 +5309,16 @@ DotaData.addVersion({
 			"Name": "Primal split",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": function(){ return 160 - this.Level * 20 },
-			"ManaCost": function(){ return 100 + this.Level * 25 }
+			"ManaCost": function(){ return 100 + this.Level * 25 },
+			"AghsUpgraded": function(){ return this.$total.HasAghanims },
 		},
 		"bristleback_viscous_nasal_goo": {
 			"Name": "Viscous nasal goo",
 			"Cooldown": 1.5,
-			"ManaCost": 25
+			"ManaCost": 25,
+			"AghsUpgraded": function(){ return this.$total.HasAghanims },
 		},
 		"bristleback_quill_spray": {
 			"Name": "Quill spray",
@@ -5291,9 +5332,9 @@ DotaData.addVersion({
 			"Name": "Warpath",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Charges": 0,
-			"ChargesMax": function(){ return this.Level > 0 ? 4 + this.Level : 0 },
+			"ChargesMax": function(){ return this.Level > 0 ? 3 + this.Level * 2 : 0 },
 			"ChargesSemantic": "Stacks",
 			"MovementSpeedPercentage": function() { return (0.02 + 0.01 * this.Level) * this.Charges },
 			"Damage": function() { return (15 + 5 * this.Level) * this.Charges  }
@@ -5321,7 +5362,7 @@ DotaData.addVersion({
 			"Name": "Insatiable hunger",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Action": {
 				"Type" :"Buff",
 				"Self": "broodmother_insatiable_hunger_buff",
@@ -5346,9 +5387,10 @@ DotaData.addVersion({
 		"centaur_stampede": {
 			"Name": "Stampede",
 			"Class": "Ultimate",
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": function(){ return 105 - this.Level * 15 },
-			"ManaCost": 100
+			"ManaCost": 100,
+			"AghsUpgraded": function(){ return this.$total.HasAghanims },
 		},
 		"chaos_knight_chaos_bolt": {
 			"Name": "Chaos bolt",
@@ -5366,9 +5408,14 @@ DotaData.addVersion({
 		"chaos_knight_phantasm": {
 			"Name": "Phantasm",
 			"Class": "Ultimate",
-			"Restrictions": [6, 11, 16],
-			"Cooldown": 130,
-			"ManaCost": function(){ return 50 + this.Level * 75 }
+			"Restrictions": [6, 12, 18],
+			"Cooldown": function() {
+				if (this.$total.HasAghanims)
+					return 110;
+				return 130;
+			},
+			"ManaCost": function(){ return 50 + this.Level * 75 },
+			"AghsUpgraded": function(){ return this.$total.HasAghanims },
 		},
 		"chen_penitence": {
 			"Name": "Penitence",
@@ -5393,9 +5440,10 @@ DotaData.addVersion({
 		"chen_hand_of_god": {
 			"Name": "Hand of god",
 			"Class": "Ultimate",
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": function(){ return 180 - this.Level * 20 },
-			"ManaCost": function(){ return 100 + this.Level * 100 }
+			"ManaCost": function(){ return 100 + this.Level * 100 },
+			"AghsUpgraded": function(){ return this.$total.HasAghanims },
 		},
 		"clinkz_strafe": {
 			"Name": "Strafe",
@@ -5435,14 +5483,14 @@ DotaData.addVersion({
 			"Name": "Death pact",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Action": {
 				"Type": "Buff",
 				"NoTarget": true,
 				"Self": "clinkz_death_pact_buff",
 				"Refresh": "override"
 			},
-			"Cooldown": function(){ return 55 - this.Level * 10 },
+			"Cooldown": function(){ return 60 - this.Level * 15 },
 			"ManaCost": 100
 		},
 		"crystal_maiden_crystal_nova": {
@@ -5465,7 +5513,7 @@ DotaData.addVersion({
 			"LevelMax": 3,
 			"Meta": { "Wrap": ["AghsUpgraded"] },
 			"AghsUpgraded": function(){ return this.$total.HasAghanims },
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": 90,
 			"ManaCost": function(){return this.Level * 200}
 		},
@@ -5488,7 +5536,7 @@ DotaData.addVersion({
 			"Name": "Wall of replica",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": 100,
 			"ManaCost": function(){ return this.Level * 125 }
 		},
@@ -5511,7 +5559,8 @@ DotaData.addVersion({
 			"Name": "Weave",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
+			"AghsUpgraded": function(){ return this.$total.HasAghanims },
 			"Action": {
 				"Type": "Buff",
 				"Id": function(){ return {
@@ -5544,7 +5593,7 @@ DotaData.addVersion({
 			"Name": "Exorcism",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": 145,
 			"ManaCost": function(){ return 100 + this.Level * 100 },
 		},
@@ -5567,7 +5616,7 @@ DotaData.addVersion({
 			"Name": "Static storm",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": function(){ return 100 - this.Level * 10 },
 			"ManaCost": function(){ return 75 + this.Level * 50 },
 		},
@@ -5596,7 +5645,7 @@ DotaData.addVersion({
 			"Name": "Doom",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": 145,
 			"ManaCost": function(){ return 100 + this.Level * 50 }
 		},
@@ -5619,7 +5668,7 @@ DotaData.addVersion({
 			"Name": "Elder dragon form",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Action": {
 				"Type": "Buff",
 				"NoTarget": true,
@@ -5628,6 +5677,17 @@ DotaData.addVersion({
 			},
 			"Cooldown": 115,
 			"ManaCost": 50,
+		},
+		"drow_ranger_talent": {
+			[DotaData.Basis]: "template_talent",
+			"Strength": function() {
+				return (this.Left1 ? 5 : 0) + (this.Left3 ? 14 : 0)
+			},
+			"Agility": function() { return this.Left1 ? 5 : 0 },
+			"Intelligence": function() { return this.Left1 ? 5 : 0 },
+			"MovementSpeed": function() { return this.Right1 ? 15 : 0 },
+			"AttackSpeed": function() { return this.Left2 ? 20 : 0 },
+			"Health": function() { return this.Right2 ? 175 : 0 },
 		},
 		"drow_ranger_frost_arrows": {
 			"Name": "Frost arrows",
@@ -5648,9 +5708,11 @@ DotaData.addVersion({
 			"Class": "Aura",
 			"UpdateExternals": true,
 			"Aura": "drow_ranger_trueshot_aura",
-			"Agility percentage": function(){return (this.Level > 0 ? 14 + this.Level * 6 : 0)+ "%"},
+			"Agility percentage": function(){
+				return (this.Level > 0 ? 14 + this.Level * 6 + (this.$hero.Talent.Right3 ? 6 : 0) : 0)+ "%"
+			},
 			"AgilityDamage": function() {
-				return Math.floor((this.$total.Agility || 0) * (0.14 + this.Level * 0.06))
+				return Math.floor((this.$total.Agility || 0) * (0.14 + this.Level * 0.06 + (this.$hero.Talent.Right3 ? 0.06 : 0)))
 			},
 			"Cooldown": 100
 		},
@@ -5659,8 +5721,10 @@ DotaData.addVersion({
 			"Class": "Passive",
 			"Level": 0,
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
-			"Agility": function() { return 20 + this.Level * 20 },
+			"Restrictions": [6, 12, 18],
+			"Agility": function() {
+				return 20 + this.Level * 20  + (this.$hero.Talent.Left4 ? 25 : 0)
+			},
 		},
 		"earth_spirit_boulder_smash": {
 			"Name": "Boulder smash",
@@ -5704,7 +5768,7 @@ DotaData.addVersion({
 			"Name": "Magnetize",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": function(){ return 110 - this.Level * 10 },
 			"ManaCost": 100
 		},
@@ -5731,7 +5795,7 @@ DotaData.addVersion({
 			"Name": "Echo slam",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": function(){ return 170 - this.Level * 20 },
 			"ManaCost": function(){ return 85 + this.Level * 60 }
 		},
@@ -5752,7 +5816,7 @@ DotaData.addVersion({
 			"Name": "Earth splitter",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": 100,
 			"ManaCost": function(){ return 50 + this.Level * 100 }
 		},
@@ -5778,7 +5842,7 @@ DotaData.addVersion({
 			"Name": "Fire remnant",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 12, 18]
 		},
 		"ember_spirit_activate_fire_remnant": {
 			"Name": "Activate fire remnant",
@@ -5806,7 +5870,7 @@ DotaData.addVersion({
 			"Name": "Impetus",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"ManaCost": function(){ return 50 + this.Level * 5 }
 		},
 		"enigma_malefice": {
@@ -5828,7 +5892,7 @@ DotaData.addVersion({
 			"Name": "Black hole",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": function(){ return 220 - this.Level * 20 },
 			"ManaCost": function(){ return 225 + this.Level * 50 },
 		},
@@ -5849,7 +5913,7 @@ DotaData.addVersion({
 			"Name": "Chronosphere",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": function(){ return 155 - this.Level * 15 },
 			"ManaCost": function(){ return 75 + this.Level * 75 }
 		},
@@ -5872,7 +5936,7 @@ DotaData.addVersion({
 			"Name": "Wrath of nature",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": function(){ return 105 - this.Level * 5 },
 			"ManaCost": function(){ return 125 + this.Level * 50 },
 		},
@@ -5895,7 +5959,7 @@ DotaData.addVersion({
 			"Name": "Call down",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": function(){ return 60 - this.Level * 5 },
 			"ManaCost": 125,
 		},
@@ -5928,13 +5992,12 @@ DotaData.addVersion({
 			"Name": "Life break",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": 12,
 		},
 		"invoker_quas": {
 			"Name": "Quas",
 			"Meta": { "Wrap": ["LevelAdjusted"] },
-			"Strength": function() { return this.Level * 2 },
 			"LevelMax": 7,
 			"Restrictions": [1, 3, 5, 7, 9, 11, 13],
 			"LockedCharges": true,
@@ -5945,7 +6008,7 @@ DotaData.addVersion({
 				let bonus = this.$total.HasAghanims && this.Level > 0 ? 1 : 0;
 				return this.Level + bonus;
 			},
-			"HealthRegeneration": function() { return this.Charges * this.Level },
+			"HealthRegeneration": function() { return this.Charges * this.Level * 1.5 },
 			"HiddenAction": function(){ return this.Charges > 2 },
 			"Action": {
 				"Type": "Operation",
@@ -5968,7 +6031,6 @@ DotaData.addVersion({
 		"invoker_wex": {
 			"Name": "Wex",
 			"Meta": { "Wrap": ["LevelAdjusted"] },
-			"Agility": function() { return this.Level * 2 },
 			"LevelMax": 7,
 			"Restrictions": [1, 3, 5, 7, 9, 11, 13],
 			"LockedCharges": true,
@@ -6003,7 +6065,6 @@ DotaData.addVersion({
 		"invoker_exort": {
 			"Name": "Exort",
 			"Meta": { "Wrap": ["LevelAdjusted"] },
-			"Intelligence": function() { return this.Level * 2 },
 			"LevelMax": 7,
 			"Restrictions": [1, 3, 5, 7, 9, 11, 13],
 			"LockedCharges": true,
@@ -6014,7 +6075,7 @@ DotaData.addVersion({
 				let bonus = this.$total.HasAghanims && this.Level > 0 ? 1 : 0;
 				return this.Level + bonus;
 			},
-			"Damage": function() { return this.Charges * this.Level * 3 },
+			"Damage": function() { return this.Charges * this.Level * 4 },
 			"HiddenAction": function(){ return this.Charges > 2 },
 			"Action": {
 				"Type": "Operation",
@@ -6038,37 +6099,10 @@ DotaData.addVersion({
 			"Name": "Invoke",
 			"Class": "Ultimate",
 			"Meta": {"SavedProperties": ["InstanceStack"] },
-			"Level": 1,
-			"LevelMin": 1,
-			"LevelMax": 4,
-			"Restrictions": [6, 11, 16],
-			"Strength": function() {
-				if (this.$hero && this.$hero.Meta.Level >= 25)
-					return 6;
-				return 0;
-			},
-			"Agility": function() {
-				if (this.$hero && this.$hero.Meta.Level >= 25)
-					return 6;
-				return 0;
-			},
-			"Intelligence": function() {
-				if (this.$hero && this.$hero.Meta.Level >= 25)
-					return 6;
-				return 0;
-			},
-			"Warning": "At hero level 25, this skill gives +6 to all stats",
+			"Level": true,
 			"Lore": "So begins a new age of knowledge",
-			"Cooldown": function(){
-				if (this.$total.HasAghanims)
-					return 2 ** (5 - this.Level);
-				return [0, 22, 17, 12, 5][this.Level]
-			},
-			"ManaCost": function(){
-				if (this.$total.HasAghanims)
-					return 0;
-				return this.Level * 20;
-			},
+			"Cooldown": function(){	return this.$total.HasAghanims ? 2 : 6 },
+			"ManaCost": function(){	return this.$total.HasAghanims ? 0 : 60 },
 			"InstanceStack": [], // the orb activation order
 		},
 		"invoker_cold_snap": {
@@ -6193,7 +6227,7 @@ DotaData.addVersion({
 			"Name": "Macropyre",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": 60,
 			"ManaCost": function(){ return 110 + this.Level * 110 },
 		},
@@ -6205,7 +6239,7 @@ DotaData.addVersion({
 		"juggernaut_healing_ward": {
 			"Name": "Healing ward",
 			"Cooldown": 60,
-			"ManaCost": function(){ return 115 + this.Level * 5 },
+			"ManaCost": 140,
 		},
 		"juggernaut_blade_dance": {
 			"Name": "Blade dance"
@@ -6214,7 +6248,7 @@ DotaData.addVersion({
 			"Name": "Omnislash",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": function(){ return 140 - this.Level * 10 },
 			"ManaCost": function(){ return 125 + this.Level * 75 },
 		},
@@ -6259,14 +6293,14 @@ DotaData.addVersion({
 			"Name": "Spirit form",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": function(){ return 90 - this.Level * 10 },
 			"ManaCost": 100,
 		},
 		"kunkka_torrent": {
 			"Name": "Torrent",
 			"Cooldown": 10,
-			"ManaCost": function(){ return 80 + this.Level * 10 },
+			"Cooldown": function(){ return 18 + this.Level * 2 },
 		},
 		"kunkka_tidebringer": {
 			"Name": "Tidebringer",
@@ -6281,7 +6315,7 @@ DotaData.addVersion({
 			"Name": "Ghostship",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": function(){ return 70 - this.Level * 10 },
 			"ManaCost": function(){ return 50 + this.Level * 75 },
 		},
@@ -6317,7 +6351,7 @@ DotaData.addVersion({
 			"Name": "Duel",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": 50,
 			"ManaCost": 75,
 		},
@@ -6340,7 +6374,7 @@ DotaData.addVersion({
 			"Name": "Pulse nova",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": 1,
 			"ManaCost": function(){ return 50 + this.Level * 20 },
 		},
@@ -6371,7 +6405,7 @@ DotaData.addVersion({
 			"Name": "Chain frost",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": function(){ return 150 - this.Level * 30 },
 			"ManaCost": [200, 325, 500],
 		},
@@ -6398,7 +6432,7 @@ DotaData.addVersion({
 			"Name": "Infest",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": function(){ return 125 - this.Level * 5 },
 			"ManaCost": 50,
 		},
@@ -6426,7 +6460,7 @@ DotaData.addVersion({
 			"LevelMax": 3,
 			"Meta": { "Wrap": ["AghsUpgraded"] },
 			"AghsUpgraded": function(){ return this.$total.HasAghanims },
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": function(){ return 80 - this.Level * 10 },
 			"ManaCost": [280, 420, 680],
 		},
@@ -6449,7 +6483,7 @@ DotaData.addVersion({
 			"Name": "Finger of death",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": function(){ return 220 - this.Level * 60 },
 			"ManaCost": function(){
 				if (this.$total.HasAghanims)
@@ -6482,7 +6516,7 @@ DotaData.addVersion({
 			"Name": "True form",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Action": {
 				"Type": "Buff",
 				"Self": "lone_druid_true_form_buff",
@@ -6519,13 +6553,13 @@ DotaData.addVersion({
 		"luna_lunar_blessing": {
 			"Name": "Lunar blessing",
 			"Aura": "luna_lunar_blessing_aura",
-			"VisionNight": 1000
+			"VisionNighttime": 1000
 		},
 		"luna_eclipse": {
 			"Name": "Eclipse",
 			"LevelMax": 3,
 			"Class": "Ultimate",
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": 140,
 			"ManaCost": function(){ return 100 + this.Level * 50 },
 		},
@@ -6549,14 +6583,14 @@ DotaData.addVersion({
 		},
 		"lycan_feral_impulse": {
 			"Name": "Feral impulse",
-			"AttackSpeed": function(){ return 10 + 5 * this.Level },
-			"DamagePercentage": function(){ return 0.1 + 0.05 * this.Level }
+			"DamagePercentage": function(){ return 0.4 + 0.11 * this.Level },
+			"HealthRegeneration": function(){ return -3 + this.Level * 4 },
 		},
 		"lycan_shapeshift": {
 			"Name": "Shapeshift",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": function(){ return 150 - this.Level * 30 },
 			"ManaCost": 100,
 			"Action": {
@@ -6586,14 +6620,14 @@ DotaData.addVersion({
 		},
 		"magnataur_skewer": {
 			"Name": "Skewer",
-			"Cooldown": 30,
+			"Cooldown": 25,
 			"ManaCost": 80,
 		},
 		"magnataur_reverse_polarity": {
 			"Name": "Reverse polarity",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": function(){ return 130 - this.Level * 10 },
 			"ManaCost": function(){ return 150 + this.Level * 50 },
 		},
@@ -6612,7 +6646,7 @@ DotaData.addVersion({
 			"Name": "Stone gaze",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": 90,
 			"ManaCost": 200,
 		},
@@ -6654,7 +6688,7 @@ DotaData.addVersion({
 			"Name": "Moonlight shadow",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": function(){ return 160 - this.Level * 20 },
 			"ManaCost": 75,
 		},
@@ -6686,7 +6720,7 @@ DotaData.addVersion({
 			"Name": "Replicate",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": 80,
 			"ManaCost": 25,
 		},
@@ -6726,7 +6760,7 @@ DotaData.addVersion({
 			"Name": "Song of the Siren",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": function(){ return 240 - this.Level * 60 },
 			"ManaCost": 100,
 		},
@@ -6750,10 +6784,10 @@ DotaData.addVersion({
 			"Name": "Reaper's scythe",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": function(){
 				if (this.$total.HasAghanims)
-					return 70
+					return 70 - this.Level * 15
 				return 115 - this.Level * 15
 			},
 			"ManaCost": function() {
@@ -6761,6 +6795,7 @@ DotaData.addVersion({
 					return [0, 150, 340, 500][this.Level]
 				return [0, 175, 340, 500][this.Level]
 			},
+			"AghsUpgraded": function(){ return this.$total.HasAghanims },
 		},
 		"nevermore_shadowraze1": {
 			"Name": "Shadowraze (near)",
@@ -6797,7 +6832,7 @@ DotaData.addVersion({
 			"Name": "Requiem of Souls",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": function(){ return 130 - this.Level * 10 },
 			"ManaCost": function(){ return 125 + this.Level * 25 },
 		},
@@ -6819,7 +6854,7 @@ DotaData.addVersion({
 			"Name": "Darkness",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 12, 18]
 		},
 		"nyx_assassin_impale": {
 			"Name": "Impale"
@@ -6853,7 +6888,7 @@ DotaData.addVersion({
 			},
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 12, 18]
 		},
 		"obsidian_destroyer_arcane_orb": {
 			"Name": "Arcane orb",
@@ -6878,7 +6913,7 @@ DotaData.addVersion({
 			"Name": "Sanity's eclipse",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 12, 18]
 		},
 		"ogre_magi_fireblast": {
 			"Name": "Fireblast"
@@ -6914,16 +6949,16 @@ DotaData.addVersion({
 			"Name": "Multicast",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 12, 18]
 		},
 		"omniknight_purification": {
 			"Name": "Purification",
-			"Cooldown": 10,
-			"ManaCost": function(){ return 80 + this.Level * 20 },
+			"Cooldown": function(){ return 12 - this.Level },
+			"ManaCost": function(){ return 50 + this.Level * 20 },
 		},
 		"omniknight_repel": {
 			"Name": "Repel",
-			"Cooldown": 14,
+			"Cooldown": function(){ return 34 - this.Level * 4 },
 			"ManaCost": 50,
 		},
 		"omniknight_degen_aura": {
@@ -6933,7 +6968,7 @@ DotaData.addVersion({
 			"Name": "Guardian angel",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": 150,
 			"ManaCost": [125, 175, 250],
 		},
@@ -6952,13 +6987,13 @@ DotaData.addVersion({
 			"Cooldown": function(){
 				return this.$total.HasAghanims ? 2.25 : 1
 			},
-			"ManaCost": function(){ return 40 + this.Level * 10 },
+			"ManaCost": function(){ return 75 + this.Level * 5 },
 		},
 		"oracle_false_promise": {
 			"Name": "False promise",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 12, 18]
 		},
 		"phantom_assassin_stifling_dagger": {
 			"Name": "Stifling dagger"
@@ -6980,7 +7015,7 @@ DotaData.addVersion({
 			"Name": "Coup de Grace",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 12, 18]
 		},
 		"phantom_lancer_spirit_lance": {
 			"Name": "Spirit lance"
@@ -6995,7 +7030,7 @@ DotaData.addVersion({
 			"Name": "Juxtapose",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 12, 18]
 		},
 		"phoenix_icarus_dive": {
 			"Name": "Icarus dive"
@@ -7010,16 +7045,21 @@ DotaData.addVersion({
 			"Name": "Supernova",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 12, 18]
 		},
 		"puck_illusory_orb": {
-			"Name": "Illusory orb"
+			"Name": "Illusory orb",
+			"Cooldown": function(){ return 15 - this.Level },
+			"ManaCost": function(){ return 60 + this.Level * 20 },
 		},
 		"puck_waning_rift": {
-			"Name": "Waning rift"
+			"Name": "Waning rift",
+			"Cooldown": function(){ return 17 - this.Level },
+			"ManaCost": function(){ return 90 + this.Level * 10 },
 		},
 		"puck_phase_shift": {
-			"Name": "Phase shift"
+			"Name": "Phase shift",
+			"Cooldown": 6,
 		},
 		"puck_ethereal_jaunt": {
 			"Name": "Ethereal jaunt",
@@ -7033,7 +7073,9 @@ DotaData.addVersion({
 			"Name": "Dream coil",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 12, 18],
+			"Cooldown": 75,
+			"ManaCost": function(){ return 50 + this.Level * 50 },
 		},
 		"pudge_meat_hook": {
 			"Name": "Meat hook",
@@ -7058,7 +7100,7 @@ DotaData.addVersion({
 			"Strength": function() {
 				if (this.Level < 1 || this.Charges < 1)
 					return 0
-				return Math.floor((0.5 + this.Level * 0.5) * this.Charges)
+				return Math.ceil((0.5 + this.Level * 0.5) * this.Charges)
 			},
 			//"MagicalResistance": function() { return this.Level > 0 ? 0.04 + this.Level * 0.02 : 0 }
 			"MagicalResistance": function() { return 0.04 + this.Level * 0.02 }
@@ -7067,7 +7109,7 @@ DotaData.addVersion({
 			"Name": "Dismember",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": function(){ return 35 - this.Level * 5 },
 			"ManaCost": [100, 130, 170],
 		},
@@ -7098,7 +7140,7 @@ DotaData.addVersion({
 			"Name": "Life drain",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": function(){	return this.$total.HasAghanims ? 22 : 0 },
 			"ManaCost": function(){ return 75 + this.Level * 50 },
 		},
@@ -7115,7 +7157,7 @@ DotaData.addVersion({
 			"Name": "Sonic wave",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 12, 18]
 		},
 		"rattletrap_battery_assault": {
 			"Name": "Battery assault"
@@ -7130,7 +7172,7 @@ DotaData.addVersion({
 			"Name": "Hookshot",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 12, 18]
 		},
 		"razor_plasma_field": {
 			"Name": "Plasma field"
@@ -7151,7 +7193,7 @@ DotaData.addVersion({
 			"Name": "Eye of the storm",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 12, 18]
 		},
 		"riki_smoke_screen": {
 			"Name": "Smoke screen",
@@ -7171,7 +7213,7 @@ DotaData.addVersion({
 			"Name": "Tricks of the trade",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": function(){ return 45 - this.Level * 5 },
 			"ManaCost": 75,
 		},
@@ -7189,7 +7231,7 @@ DotaData.addVersion({
 			"Name": "Spell steal",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 12, 18]
 		},
 		"sandking_burrowstrike": {
 			"Name": "Burrowstrike",
@@ -7208,7 +7250,7 @@ DotaData.addVersion({
 			"Name": "Epicenter",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": function(){ return 130 - this.Level * 10 },
 			"ManaCost": function(){ return 75 + this.Level * 75 },
 		},
@@ -7225,7 +7267,7 @@ DotaData.addVersion({
 		"shadow_demon_shadow_poison": {
 			"Name": "Shadow poison",
 			"Cooldown": 2.5,
-			"ManaCost": 40,
+			"ManaCost": 55,
 		},
 		"shadow_demon_shadow_poison_release": {
 			"Name": "Shadow poison release",
@@ -7239,7 +7281,7 @@ DotaData.addVersion({
 			"Name": "Demonic purge",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": function(){
 				if (this.$total.HasAghanims)
 					return 40
@@ -7248,42 +7290,61 @@ DotaData.addVersion({
 			"ManaCost": 200,
 		},
 		"shadow_shaman_ether_shock": {
-			"Name": "Ether shock"
+			"Name": "Ether shock",
+			"Cooldown": 8,
+			"ManaCost": [95, 105, 135, 160],
 		},
 		"shadow_shaman_voodoo": {
-			"Name": "Hex"
+			"Name": "Hex",
+			"Cooldown": 13,
+			"ManaCost": function(){ return 80 + this.Level * 30 },
 		},
 		"shadow_shaman_shackles": {
-			"Name": "Shackles"
+			"Name": "Shackles",
+			"Cooldown": 10,
+			"ManaCost": function(){ return 130 + this.Level * 10 },
 		},
 		"shadow_shaman_mass_serpent_ward": {
 			"Name": "Mass serpent ward",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 12, 18],
+			"Cooldown": 120,
+			"ManaCost": [200, 350, 600],
+			"AghsUpgraded": function(){ return this.$total.HasAghanims },
 		},
 		"shredder_whirling_death": {
-			"Name": "Whirling death"
+			"Name": "Whirling death",
+			"Cooldown": 6,
+			"ManaCost": 70,
 		},
 		"shredder_timber_chain": {
-			"Name": "Timber chain"
+			"Name": "Timber chain",
+			"Cooldown": 4,
+			"ManaCost": function(){ return 50 + this.Level * 10 },
 		},
 		"shredder_reactive_armor": {
 			"Name": "Reactive armor",
+			"Meta": { "Wrap": ["Multiplier"] },
+			"Multiplier": function(){ return 0.8 + this.Level * 0.2 },
 			"Charges": 1,
 			"ChargesMax": function() { return this.Level * 5 },
 			"ChargesSemantic": "Stacks",
-			"Armor": function(){ return this.Level > 0 ? this.Charges : 0 },
-			"HealthRegeneration": function(){ return this.Level > 0 ? this.Charges : 0 }
+			"Armor": function(){ return this.Charges * this.Multiplier },
+			"HealthRegeneration": function(){ return this.Charges * this.Multiplier }
 		},
 		"shredder_chakram": {
 			"Name": "Chakram",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 12, 18],
+			"Cooldown": 8,
+			"ManaCost": function(){ return 50 + this.Level * 50 },
 		},
 		"silencer_curse_of_the_silent": {
-			"Name": "Arcane curse"
+			"Name": "Arcane curse",
+			"Cooldown": function(){ return 22 - this.Level * 2 },
+			"ManaCost": function(){ return 55 + this.Level * 20 },
 		},
 		"silencer_glaives_of_wisdom": {
 			"Name": "Glaives of wisdom",
@@ -7292,16 +7353,22 @@ DotaData.addVersion({
 			"Intelligence": function(){ return this.Charges }
 		},
 		"silencer_last_word": {
-			"Name": "Last word"
+			"Name": "Last word",
+			"Cooldown": function(){ return 36 - this.Level * 6 },
+			"ManaCost": 115,
 		},
 		"silencer_global_silence": {
 			"Name": "Global silence",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 12, 18],
+			"Cooldown": 130,
+			"ManaCost": function(){ return 125 + this.Level * 125 },
 		},
 		"skeleton_king_hellfire_blast": {
-			"Name": "Hellfire blast"
+			"Name": "Hellfire blast",
+			"Cooldown": 8,
+			"ManaCost": 140,
 		},
 		"skeleton_king_vampiric_aura": {
 			"Name": "Vampiric aura"
@@ -7313,25 +7380,35 @@ DotaData.addVersion({
 			"Name": "Reincarnation",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 12, 18],
+			"Cooldown": function(){ return 340 - this.Level * 100 },
+			"ManaCost": 160,
 		},
 		"skywrath_mage_arcane_bolt": {
-			"Name": "Arcane bolt"
+			"Name": "Arcane bolt",
+			"Cooldown": function(){ return 6 - this.Level },
+			"ManaCost": 70,
 		},
 		"skywrath_mage_concussive_shot": {
-			"Name": "Concussive shot"
+			"Name": "Concussive shot",
+			"Cooldown": function(){ return 20 - this.Level * 2 },
+			"ManaCost": 95,
 		},
 		"skywrath_mage_ancient_seal": {
-			"Name": "Ancient seal"
+			"Name": "Ancient seal",
+			"Cooldown": 14,
+			"ManaCost": function(){ return 70 + this.Level * 10 },
 		},
 		"skywrath_mage_mystic_flare": {
 			"Name": "Mystic flare",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 12, 18],
+			"Cooldown": function(){ return 80 - this.Level * 20 },
+			"ManaCost": [350, 575, 800],
 		},
 		"slardar_sprint": {
-			"Name": "Sprint",
+			"Name": "Guardian Sprint",
 			"Action": {
 				"Type": "Buff",
 				"NoTarget": true,
@@ -7343,13 +7420,13 @@ DotaData.addVersion({
 			"Name": "Slithereen crush"
 		},
 		"slardar_bash": {
-			"Name": "Bash"
+			"Name": "Bash of the Deep"
 		},
 		"slardar_amplify_damage": {
-			"Name": "Amplify damage",
+			"Name": "Corrosive Haze",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 12, 18]
 		},
 		"slark_dark_pact": {
 			"Name": "Dark pact"
@@ -7367,7 +7444,7 @@ DotaData.addVersion({
 			"Name": "Shadow dance",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 12, 18]
 		},
 		"sniper_shrapnel": {
 			"Name": "Shrapnel"
@@ -7383,7 +7460,7 @@ DotaData.addVersion({
 			"Name": "Assassinate",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 12, 18]
 		},
 		"spectre_spectral_dagger": {
 			"Name": "Spectral dagger",
@@ -7407,7 +7484,7 @@ DotaData.addVersion({
 			"Name": "Haunt",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 12, 18]
 		},
 		"spirit_breaker_charge_of_darkness": {
 			"Name": "Charge of darkness"
@@ -7427,7 +7504,7 @@ DotaData.addVersion({
 			"Name": "Nether strike",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 12, 18]
 		},
 		"storm_spirit_static_remnant": {
 			"Name": "Static remnant"
@@ -7448,7 +7525,7 @@ DotaData.addVersion({
 			"Name": "Ball lightning",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 12, 18]
 		},
 		"sven_storm_bolt": {
 			"Name": "Storm bolt"
@@ -7471,7 +7548,7 @@ DotaData.addVersion({
 			"Name": "God's strength",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Action": {
 				"Type": "Buff",
 				"NoTarget": true,
@@ -7502,7 +7579,7 @@ DotaData.addVersion({
 			"Name": "Remote mines",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 12, 18]
 		},
 		"templar_assassin_refraction": {
 			"Name": "Refraction",
@@ -7533,7 +7610,7 @@ DotaData.addVersion({
 			"Name": "Psionic trap",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 12, 18]
 		},
 		"templar_assassin_trap": {
 			"Name": "Trap",
@@ -7569,39 +7646,53 @@ DotaData.addVersion({
 			"Name": "Sunder",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": function(){ return 160 - this.Level * 40 },
 			"ManaCost": function(){ return 300 - this.Level * 100 },
 		},
 		"tidehunter_gush": {
-			"Name": "Gush"
+			"Name": "Gush",
+			"AghsUpgraded": function(){ return this.$total.HasAghanims },
+			"Cooldown": function(){ return this.$total.HasAghanims ? 7 : 12 },
+			"ManaCost": 120,
 		},
 		"tidehunter_kraken_shell": {
-			"Name": "Kraken shell"
+			"Name": "Kraken shell",
 		},
 		"tidehunter_anchor_smash": {
-			"Name": "Anchor smash"
+			"Name": "Anchor smash",
+			"Cooldown": function(){ return 8 - this.Level },
+			"ManaCost": function(){ return 20 + this.Level * 10 },
 		},
 		"tidehunter_ravage": {
 			"Name": "Ravage",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 12, 18],
+			"Cooldown": 150,
+			"ManaCost": [150, 225, 325],
 		},
 		"tinker_laser": {
-			"Name": "Laser"
+			"Name": "Laser",
+			"Cooldown": 14,
+			"ManaCost": function(){ return 70 + this.Level * 25 },
 		},
 		"tinker_heat_seeking_missile": {
-			"Name": "Heat seeking missile"
+			"Name": "Heat seeking missile",
+			"Cooldown": 25,
+			"ManaCost": function(){ return 100 + this.Level * 20 },
 		},
 		"tinker_march_of_the_machines": {
-			"Name": "March of the machines"
+			"Name": "March of the machines",
+			"Cooldown": 35,
+			"ManaCost": [145, 150, 165, 190],
 		},
 		"tinker_rearm": {
 			"Name": "Rearm",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 12, 18],
+			"ManaCost": function(){ return this.Level * 100 },
 		},
 		"tiny_avalanche": {
 			"Name": "Avalance",
@@ -7615,49 +7706,50 @@ DotaData.addVersion({
 		},
 		"tiny_craggy_exterior": {
 			"Name": "Craggy exterior",
-			"Armor": function(){ return this.Level > 0 ? 1 + this.Level : 0 }
+			"Armor": function(){ return 2 + this.Level }
 		},
 		"tiny_grow": {
 			"Name": "Grow",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"DamageBase": function(){ return 50 * this.Level },
-			"MovementSpeed": function(){ return this.Level > 0 ? 30 + 1 * this.Level : 0 },
-			"AttackSpeed": function(){ return this.Level > 0 ? -5 - 15 * this.Level : 0 },
+			"MovementSpeed": function(){ return 30 + 10 * this.Level },
+			"AttackSpeed": function(){ return -5 - 15 * this.Level },
 			"Range": function() {
-				if (this.$hero && this.$hero.Total.HasAghanims)
+				if (this.$total.HasAghanims)
 					return 85
 				return 0
 			},
 		},
 		"treant_natures_guise": {
-			"Name": "Nature's guise"
+			"Name": "Nature's guise",
+			"Cooldown": function(){ return 7 - this.Level },
 		},
 		"treant_leech_seed": {
-			"Name": "Leech seed"
+			"Name": "Leech seed",
+			"Cooldown": function(){ return 19 - this.Level * 3 },
+			"ManaCost": function(){ return 65 + this.Level * 15 },
 		},
 		"treant_living_armor": {
-			"Name": "Living armor"
+			"Name": "Living armor",
+			"Cooldown": function(){ return 36 - this.Level * 6 },
+			"ManaCost": 50,
 		},
 		"treant_eyes_in_the_forest": {
 			"Name": "Eyes in the forest",
-			"Level": function() {
-				if (this.$total.HasAghanims)
-					return 1
-				return 0
-			},
-			"Hidden": function() {
-				if (this.$total.HasAghanims)
-					return false
-				return true
-			},
+			"Level": function() { return this.$total.HasAghanims },
+			"Hidden": function() { return this.$total.HasAghanims },
+			"Cooldown": 25,
+			"ManaCost": 100,
 		},
 		"treant_overgrowth": {
 			"Name": "Overgrowth",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 12, 18],
+			"Cooldown": 70,
+			"ManaCost": function(){ return 125 + this.Level * 25 },
 		},
 		"troll_warlord_berserkers_rage": {
 			"Name": "Berserker's rage",
@@ -7702,7 +7794,7 @@ DotaData.addVersion({
 			"Name": "Battle trance",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Action": {
 				"Type": "Buff",
 				"Id": "troll_warlord_battle_trance_buff",
@@ -7733,7 +7825,7 @@ DotaData.addVersion({
 			"Name": "",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": function(){ return 48 - this.Level * 12 },
 			"ManaCost": function(){ return 25 + this.Level * 25 }
 		},
@@ -7757,23 +7849,32 @@ DotaData.addVersion({
 			"Name": "Decay",
 			"Charges": 0,
 			"ChargesSemantic": "Stolen str",
+			"AghsUpgraded": function(){ return this.$total.HasAghanims },
 			"Strength": function(){
 				if (this.$total.HasAghanims)
 					return 10 * this.Charges
 				return 4 * this.Charges
-			}
+			},
+			"Cooldown": function(){ return 12 - this.Level * 2 },
+			"ManaCost": function(){ return 50 + this.Level * 20 },
 		},
 		"undying_soul_rip": {
-			"Name": "Soul rip"
+			"Name": "Soul rip",
+			"Cooldown": function(){ return 30 - this.Level * 6 },
+			"ManaCost": function(){ return 90 + this.Level * 10 },
 		},
 		"undying_tombstone": {
-			"Name": "Tombstone"
+			"Name": "Tombstone",
+			"Cooldown": 70,
+			"ManaCost": function(){ return 110 + this.Level * 10 },
 		},
 		"undying_flesh_golem": {
 			"Name": "Flesh golem",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 12, 18],
+			"Cooldown": 75,
+			"ManaCost": 100,
 		},
 		"ursa_earthshock": {
 			"Name": "Earthshock",
@@ -7803,7 +7904,7 @@ DotaData.addVersion({
 			"LevelMax": 3,
 			"Meta": { "Wrap": ["AghsUpgraded"] },
 			"AghsUpgraded": function(){ return this.$total.HasAghanims },
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": function(){ return 60 - this.Level * 10 },
 			"ManaCost": 0,
 		},
@@ -7825,7 +7926,7 @@ DotaData.addVersion({
 			"Name": "Nether swap",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": function(){
 				if (this.$total.HasAghanims)
 					return 10;
@@ -7850,7 +7951,7 @@ DotaData.addVersion({
 			"Name": "Poison nova",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": function(){ return 160 - this.Level * 20 },
 			"ManaCost": function(){ return 100 + this.Level * 100 },
 		},
@@ -7870,32 +7971,39 @@ DotaData.addVersion({
 			"Name": "Viper strike",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": 10,
 			"ManaCost": [125, 175, 250],
 		},
 		"visage_grave_chill": {
-			"Name": "Grave chill"
+			"Name": "Grave chill",
+			"Cooldown": function(){ return 18 - this.Level * 2 },
+			"ManaCost": 100,
 		},
 		"visage_soul_assumption": {
-			"Name": "Soul assumption"
+			"Name": "Soul assumption",
+			"Cooldown": 4,
+			"ManaCost": function(){ return 180 - this.Level * 10 },
 		},
 		"visage_gravekeepers_cloak": {
 			"Name": "Gravekeeper's cloak",
 			"Charges": 4,
 			"ChargesMax": 4,
 			"ChargesSemantic": "Layers",
-			"Armor": function(){ return 1.5 * this.Level * this.Charges },
-			"MagicalResistance": function(){ return 0.05 * this.Level * this.Charges }
+			"DamageResistance": function(){ return (0.04 + this.Level * 0.04) * this.Charges },
 		},
 		"visage_summon_familiars": {
 			"Name": "Summon familiars",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 12, 18],
+			"Cooldown": function(){ return 175 - this.Level * 15 },
+			"ManaCost": 150,
 		},
 		"warlock_fatal_bonds": {
-			"Name": "Fatal bonds"
+			"Name": "Fatal bonds",
+			"Cooldown": function(){ return 26 - this.Level * 2 },
+			"ManaCost": 140,
 		},
 		"warlock_shadow_word": {
 			"Name": "Shadow word",
@@ -7906,31 +8014,48 @@ DotaData.addVersion({
 				"Self": true,
 				"Teammates": true,
 				"Refresh": "override"
-			}
+			},
+			"Cooldown": 16,
+			"ManaCost": function(){ return 70 + this.Level * 20 },
 		},
 		"warlock_upheaval": {
-			"Name": "Upheaval"
+			"Name": "Upheaval",
+			"Cooldown": function(){ return 54 - this.Level * 4 },
+			"ManaCost": function(){ return 90 + this.Level * 10 },
 		},
 		"warlock_rain_of_chaos": {
 			"Name": "Chaotic offering",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 12, 18],
+			"Cooldown": 165,
+			"ManaCost": function(){ return 100 + this.Level * 100 },
 		},
 		"weaver_the_swarm": {
-			"Name": "The swarm"
+			"Name": "The swarm",
+			"Cooldown": function(){ return 40 - this.Level * 5 },
+			"ManaCost": function(){ return 60 + this.Level * 10 },
 		},
 		"weaver_shukuchi": {
-			"Name": "Shukuchi"
+			"Name": "Shukuchi",
+			"Cooldown": function(){ return 14 - this.Level * 2 },
+			"ManaCost": 60,
 		},
 		"weaver_geminate_attack": {
-			"Name": "Geminate attack"
+			"Name": "Geminate attack",
+			"Cooldown": function(){ return 7 - this.Level },
 		},
 		"weaver_time_lapse": {
 			"Name": "Time lapse",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 12, 18],
+			"Cooldown": function(){
+				if ( this.$total.HasAghanims )
+					return 16
+				return 70 - this.Level * 10
+			},
+			"ManaCost": function(){ return 225 - this.Level * 75 },
 		},
 		"windrunner_shackleshot": {
 			"Name": "Shackleshot",
@@ -7957,7 +8082,7 @@ DotaData.addVersion({
 			"Name": "Focus fire",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Action": {
 				"Type": "Buff",
 				"Self": "windrunner_focusfire_buff",
@@ -7998,7 +8123,7 @@ DotaData.addVersion({
 			"Name": "Winters curse",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": 80,
 			"ManaCost": 250,
 		},
@@ -8011,10 +8136,14 @@ DotaData.addVersion({
 				"Teammates": true,
 				"NoTarget": true,
 				"Refresh": "override"
-			}
+			},
+			"Cooldown": 12,
+			"ManaCost": 40,
 		},
 		"wisp_spirits": {
-			"Name": "Spirits"
+			"Name": "Spirits",
+			"Cooldown": function(){ return 22 - this.Level * 2 },
+			"ManaCost": function(){ return 110 + this.Level * 10 },
 		},
 		"wisp_overcharge": {
 			"Name": "Overcharge",
@@ -8024,28 +8153,38 @@ DotaData.addVersion({
 				"Self": "wisp_overcharge_debuff",
 				"Teammates":"wisp_overcharge_buff",
 				"Refresh": "override"
-			}
+			},
+			"Cooldown": 2,
 		},
 		"wisp_relocate": {
 			"Name": "Relocate",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 12, 18],
+			"Cooldown": function(){ return 105 - this.Level * 15 },
+			"ManaCost": 100,
 		},
 		"witch_doctor_paralyzing_cask": {
-			"Name": "Paralyzing cask"
+			"Name": "Paralyzing cask",
+			"Cooldown": function(){ return 22 - this.Level * 2 },
+			"ManaCost": function(){ return 100 + this.Level * 10 },
 		},
 		"witch_doctor_voodoo_restoration": {
-			"Name": "Voodoo restoration"
+			"Name": "Voodoo restoration",
+			"ManaCost": function(){ return 10 + this.Level * 10 },
 		},
 		"witch_doctor_maledict": {
-			"Name": "Maledict"
+			"Name": "Maledict",
+			"Cooldown": 20,
+			"ManaCost": function(){ return 100 + this.Level * 5 },
 		},
 		"witch_doctor_death_ward": {
 			"Name": "Death ward",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16]
+			"Restrictions": [6, 12, 18],
+			"Cooldown": 80,
+			"ManaCost": 200,
 		},
 		"zuus_arc_lightning": {
 			"Name": "Arc lightning",
@@ -8064,7 +8203,7 @@ DotaData.addVersion({
 			"Name": "Thundergod's wrath",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": 90,
 			"ManaCost": [225, 325, 450],
 		},
@@ -8095,8 +8234,8 @@ DotaData.addVersion({
 			"Name": "Tempest double",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
-			"Cooldown": function(){ return 45 - this.Level * 5 },
+			"Restrictions": [6, 12, 18],
+			"Cooldown": function(){ return 70 - this.Level * 10 },
 		},
 		"abyssal_underlord_firestorm": {
 			"Name": "Firestorm",
@@ -8105,7 +8244,7 @@ DotaData.addVersion({
 		},
 		"abyssal_underlord_pit_of_malice": {
 			"Name": "Pit of Malice",
-			"Cooldown": function(){ return 24 - this.Level * 3},
+			"Cooldown": function(){ return 34 - this.Level * 4},
 			"ManaCost": function(){ return 85 + this.Level * 15},
 		},
 		"abyssal_underlord_atrophy_aura": {
@@ -8115,7 +8254,7 @@ DotaData.addVersion({
 			"Name": "Dark rift",
 			"Class": "Ultimate",
 			"LevelMax": 3,
-			"Restrictions": [6, 11, 16],
+			"Restrictions": [6, 12, 18],
 			"Cooldown": function(){ return 140 - this.Level * 10},
 			"ManaCost": function(){ return this.Level * 75},
 		},
@@ -8440,7 +8579,8 @@ DotaData.addVersion({
 			"Image": "lycan_howl",
 			"Level": 0,
 			"LockedLevel": true,
-			"Damage": function() { return this.Level > 0 ? 2 + 12 * this.Level : 0 }
+			"Damage": function() { return (5 + this.Level * 5) * 2 },
+			"Health": function() { return (50 * this.Level) * 2 },
 		},
 		"lycan_shapeshift_buff": {
 			"Name": "Shapeshift",
@@ -8448,7 +8588,7 @@ DotaData.addVersion({
 			"Level": 0,
 			"LockedLevel": true,
 			"Haste": 650,
-			"VisionNight": 1000,
+			"VisionNighttime": 1000,
 		},
 		"magnataur_empower_buff": {
 			"Name": "Empower",
@@ -8694,15 +8834,18 @@ DotaData.addVersion({
 		"wisp_overcharge_buff": {
 			"Name": "Overcharge",
 			"Image": "wisp_overcharge",
-			"Level": 0,
+			"Level": 1,
 			"LockedLevel": true,
-			"AttackSpeed": function(){ return 30 + 10 * this.Level }
+			"AttackSpeed": function(){ return 30 + 10 * this.Level },
+			"DamageResistance": function(){ return this.Level * 0.05 },
 		},
 		"wisp_overcharge_debuff": {
 			"Name": "Overcharge",
 			"Image": "wisp_overcharge",
+			"Level": 1,
 			"LockedLevel": true,
-			"AttackSpeed": function(){ return 30 + 10 * this.Level }
+			"AttackSpeed": function(){ return 30 + 10 * this.Level },
+			"DamageResistance": function(){ return this.Level * 0.05 },
 		},
 		"arc_warden_magnetic_field_buff": {
 			"Name": "Magnetic field",
@@ -8774,8 +8917,7 @@ DotaData.addVersion({
 				"Name": "Drums",
 				"Level": 1,
 				"Stats": {
-					"MovementSpeedPercentage": 0.05,
-					"AttackSpeed": 5
+					"MovementSpeed": 20
 				}
 			}
 		},
@@ -8817,7 +8959,7 @@ DotaData.addVersion({
 				"Name": "Assault",
 				"Level": 1,
 				"Stats": {
-					"AttackSpeed": 20,
+					"AttackSpeed": 25,
 					"Armor": 5
 				}
 			}
@@ -8909,7 +9051,8 @@ DotaData.addVersion({
 			"Name": "Berserk",
 			"Image": "mask_of_madness",
 			"AttackSpeed": 100,
-			"MovementSpeedPercentage": 0.17
+			"MovementSpeedPercentage": 0.17,
+			"Armor": -5,
 		},
 		"medallion_of_courage_debuff": {
 			"Name": "Valor (debuff)",
@@ -8986,7 +9129,13 @@ DotaData.addVersion({
 			"Image": "rune_haste",
 			"Haste": 522,
 		},
-
+		"helm_of_the_dominator_aura": {
+			"Name": "Dominator Aura",
+			"Type": "Aura",
+			"Image": "helm_of_the_dominator",
+			"AttackSpeed": 10,
+			"HealthRegeneration": 8,
+		},
 	},
 
 	"AttackModifiers": {

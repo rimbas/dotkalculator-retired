@@ -465,7 +465,7 @@ HeroTable.addEvaluator({
 	description: "Displays hero armor",
 	eval: function(cell, heroInstance){
 		var bonus = heroInstance.Total.ArmorBonus
-		cell.textContent = heroInstance.Total.ArmorBase.toFixed(2) + (bonus === 0 ? "" : "+" + heroInstance.Total.ArmorBonus);
+		cell.textContent = heroInstance.Total.ArmorBase.toFixed(1) + (bonus === 0 ? "" : "+" + heroInstance.Total.ArmorBonus);
 		cell.sortingProperty = heroInstance.Total.ArmorBase + bonus
 	},
 	sorter: "propertyNumber"

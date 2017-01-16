@@ -6,8 +6,8 @@ DotaData = {};
 DotaData.Versions = {}
 DotaData.NewestVersion = "";
 DotaData.NewestMajor = "";
-// Symbol to define base object in data definition files
-DotaData.Basis = Symbol("Base object");
+// Symbol to define base/template object in data definition files
+DotaData.Basis = Symbol("Base template object");
 
 // Shared metadata for module use
 DotaData.Meta = {
@@ -239,17 +239,27 @@ DotaData.getTypeData = function getTypeData(type, id, version) {
 		return base
 	}
 	else {
-		// Absolute base data
+		// Constructed data
 		let constructedData = {};
 		if (dotaVersion[type] == undefined)
 			throw `Version "${version}" without "${type}" type!`;
 
-		let baseObj = dotaVersion[type][DotaData.Basis],
-			dataObj = dotaVersion[type][id];
+		let dataObj = dotaVersion[type][id], // data
+			baseObj;
+
 		if (dataObj === undefined)
 			throw `No such id "${id}" in type ${type} in version "${version}"!`;
-		for (let prop in baseObj)
-			constructedData[prop] = DotaData.copyDataObject(baseObj[prop]);
+
+		if (((DotaData.Basis in dataObj) || id !== DotaData.Basis) && dataObj[DotaData.Basis] !== null) {
+			let baseId = dataObj[DotaData.Basis] || DotaData.Basis
+			baseObj = getTypeData(type, baseId, version)
+		}
+
+		if (baseObj !== undefined) {
+			for (let prop in baseObj)
+				constructedData[prop] = DotaData.copyDataObject(baseObj[prop]);
+		}
+
 		for (let prop in dataObj)
 			constructedData[prop] = DotaData.copyDataObject(dataObj[prop]);
 
