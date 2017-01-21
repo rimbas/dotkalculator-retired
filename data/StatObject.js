@@ -12,7 +12,7 @@ class StatObject {
 	 * @param {String} objId Identifier for the stats
 	 * @param {Object} [properties={}] Customizalbe properties
 	 *
-	 * @memberOf StatObject
+	 * @memberof StatObject
 	 */
 	constructor(type, objId, properties = {}) {
 		if (this.constructor === StatObject)
@@ -25,10 +25,13 @@ class StatObject {
 		Object.defineProperty(this, "_HTML_DynamicElements", {value: {}});
 		// host of this StatInstance
 		Object.defineProperty(this, "_heroRef", {writable: true});
+		// Method to remove self from a hero, set
+		Object.defineProperty(this, "_boundDelete", {writable: true});
 		// buff emitted from this instance and existing on host hero
 		Object.defineProperty(this, "_boundUnlink", {writable: true});
 		// ability/item that emits this StatObject
 		Object.defineProperty(this, "_emitterRef", {writable: true});
+		// List of emitted buffs. (HeroInstance, BuffObject) keyval pairs
 		Object.defineProperty(this, "_buffReferences", {value: new Map()});
 
 		if (typeof properties.level === "number" && !Object.is(NaN, properties.level))
@@ -52,11 +55,12 @@ class StatObject {
 	}
 
 	/**
-	 * Utility getter for properties
+	 * Utility getter for properties, returns the Total object of hero or an
+	 * empty object
 	 *
 	 * @readonly
 	 *
-	 * @memberOf StatObject
+	 * @memberof StatObject
 	 */
 	get $total() {
 		if (this._heroRef && this._heroRef.Total)
@@ -69,7 +73,7 @@ class StatObject {
 	 *
 	 * @readonly
 	 *
-	 * @memberOf StatObject
+	 * @memberof StatObject
 	 */
 	get $hero() {
 		if (this._heroRef)
@@ -81,7 +85,7 @@ class StatObject {
 	 *
 	 * @readonly
 	 *
-	 * @memberOf StatObject
+	 * @memberof StatObject
 	 */
 	get $emitter() {
 		if (this._emitterRef)
@@ -91,11 +95,11 @@ class StatObject {
 	toString() { return `[${this.ID} ${this.constructor.name}]` }
 
 	/**
-	 * Copy methdod. Returns same type as child
+	 * Copy methdod. Returns same type as original object
 	 *
 	 * @returns StatObject
 	 *
-	 * @memberOf StatObject
+	 * @memberof StatObject
 	 */
 	copy() {
 		let props = {
@@ -115,7 +119,7 @@ class StatObject {
 	 *
 	 * @returns
 	 *
-	 * @memberOf StatObject
+	 * @memberof StatObject
 	 */
 	serialize() {
 		let props = {version: this.Version}
@@ -131,7 +135,7 @@ class StatObject {
 	/**
 	 * Host hero update method
 	 *
-	 * @memberOf StatObject
+	 * @memberof StatObject
 	 */
 	update() {
 		if (this._heroRef.Total)
@@ -139,18 +143,34 @@ class StatObject {
 	}
 
 	/**
+	 *  Method to remove this object and clean up its emitted objects
+	 *
+	 * @memberof StatObject
+	 */
+	delete() {
+		if (this._boundUnlink)
+			this._boundUnlink();
+		for (let [key, buff] of this._buffReferences)
+			buff.delete();
+		if (this._boundDelete)
+			this._boundDelete();
+		if (this._HTML.DisplayElement && this._HTML.DisplayElement.parentElement)
+			this._HTML.DisplayElement.parentElement.removeChild(this._HTML.DisplayElement);
+	}
+
+	/**
 	 * Method to update the host hero
 	 *
 	 * @abstract
 	 *
-	 * @memberOf StatObject
+	 * @memberof StatObject
 	 */
 	updateHero() {}
 
 	/**
 	 * Method to update emitted buffs. Called only by the host hero.
 	 *
-	 * @memberOf StatObject
+	 * @memberof StatObject
 	 */
 	updateEmittedBuffs() {
 		for (let [hero, buff] of this._buffReferences)
@@ -163,7 +183,7 @@ class StatObject {
 	 *
 	 * @returns HTMLElement
 	 *
-	 * @memberOf StatObject
+	 * @memberof StatObject
 	 */
 	createDisplay() {
 		if (this._HTML.DisplayElement !== undefined)
@@ -223,7 +243,7 @@ class StatObject {
 	 *
 	 * @returns HTMLElement
 	 *
-	 * @memberOf StatObject
+	 * @memberof StatObject
 	 */
 	createTooltip() {
 		let el = document.createElement("div"),
@@ -390,7 +410,7 @@ class StatObject {
 	/**
 	 * Method to update data in the base display
 	 *
-	 * @memberOf StatObject
+	 * @memberof StatObject
 	 */
 	updateDisplay() {
 		if (!this._HTML.DisplayElement)
@@ -430,7 +450,7 @@ class StatObject {
 	/**
 	 * Method to update data in the tooltip
 	 *
-	 * @memberOf StatObject
+	 * @memberof StatObject
 	 */
 	updateTooltip() {
 		let heroTotal = this.$total;
@@ -507,25 +527,9 @@ class StatObject {
 	}
 
 	/**
-	 *  Method to remove this object and clean up its emitted objects
-	 *
-	 * @memberOf StatObject
-	 */
-	delete() {
-		if (this._boundUnlink)
-			this._boundUnlink();
-		for (let [key, buff] of this._buffReferences)
-			buff.delete();
-		if (this._heroRef)
-			this._heroRef.remove(this);
-		if (this._HTML.DisplayElement && this._HTML.DisplayElement.parentElement)
-			this._HTML.DisplayElement.parentElement.removeChild(this._HTML.DisplayElement);
-	}
-
-	/**
 	 * Method to invoke special operations defined by the stats
 	 *
-	 * @memberOf StatObject
+	 * @memberof StatObject
 	 */
 	activate() {
 		if (!this.Action)
@@ -590,7 +594,7 @@ class StatObject {
 	/**
 	 * @param {HeroInstance} newTeammate
 	 *
-	 * @memberOf StatObject
+	 * @memberof StatObject
 	 */
 	addTeammate(newTeammate) {
 		if (this.Aura && !this._buffReferences.has(newTeammate)) {
@@ -605,7 +609,7 @@ class StatObject {
 	/**
 	 * @param {HeroInstance} oldTeammate
 	 *
-	 * @memberOf StatObject
+	 * @memberof StatObject
 	 */
 	removeTeammate(oldTeammate) {
 		if (this._buffReferences.has(oldTeammate)) {

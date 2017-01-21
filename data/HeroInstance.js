@@ -138,7 +138,8 @@ HeroInstance.prototype.propagateChange = function (propagationIdList) {
 
 // Convenience function for constructor
 HeroInstance.prototype.addAbilities = function(abilityOptions) {
-	let test;
+	let deferredThis = this,
+		test;
 	this.Ability = {};
 	this.Abilities = [];
 	this.AbilityIds = {};
@@ -152,11 +153,18 @@ HeroInstance.prototype.addAbilities = function(abilityOptions) {
 		let talent = new TalentObject(this.Base.Talent, props)
 		this.Talent = talent
 		talent._heroRef = this
+		talent._boundDelete = function(){
+			deferredThis.Abilities.splice(deferredThis.Abilities.indexOf(talent), 1)
+			deferredThis.AbilityIds[deferredThis.Base.Talent] = undefined
+			deferredThis.Talent = undefined
+			talent._boundDelete = undefined
+			talent._heroRef = undefined
+		}
 		this.Abilities.push(talent)
 		this.AbilityIds[this.Base.Talent] = talent;
 		talent.addTeammate(this)
 		for (let teammate of this.getTeammates())
-			abilityInstance.addTeammate(teammate);
+			talent.addTeammate(teammate);
 	}
 
 	for (let heroProp in this.Base)
@@ -172,6 +180,12 @@ HeroInstance.prototype.addAbilities = function(abilityOptions) {
 					props[key] = abilityProps[key]
 			let abilityInstance = new AbilityObject(this.Base[heroProp], props);
 			abilityInstance._heroRef = this;
+			abilityInstance._boundDelete = function(){
+				deferredThis.Abilities.splice(deferredThis.Abilities.indexOf(abilityInstance), 1)
+				deferredThis.AbilityIds[deferredThis.Base[heroProp]] = undefined
+				abilityInstance._boundDelete = undefined
+				abilityInstance._heroRef = undefined
+			}
 			//this.Abilities.splice(parseInt(test[1])-1, 0, abilityInstance)
 			this.Abilities.splice(parseInt(test[1]), 0, abilityInstance)
 			this.AbilityIds[this.Base[heroProp]] = abilityInstance;
@@ -181,24 +195,30 @@ HeroInstance.prototype.addAbilities = function(abilityOptions) {
 		}
 }
 
+/**
+ * @description Deletes the hero instance
+ */
 HeroInstance.prototype.delete = function() {
 	let Items = this.Items,
 		Abilities = this.Abilities,
 		Buffs = this.Buffs;
+
 	for (let i = Items.length - 1; i >= 0; i--) {
 		let item = Items[i];
 		if (item !== undefined)
 			item.delete()
 	}
-	for (let i = Abilities.length - 1; i >= 0; i--) {
-		let ability = Abilities[i];
-		if (ability !== undefined)
-			ability.delete()
-	}
+
 	for (let i = Buffs.length - 1; i >= 0; i--) {
 		let buff = Buffs[i];
 		if (buff !== undefined)
 			buff.delete()
+	}
+
+	for (let i = Abilities.length - 1; i >= 0; i--) {
+		let ability = Abilities[i];
+		if (ability !== undefined && ability.constructor !== TalentObject)
+			ability.delete()
 	}
 }
 
@@ -211,12 +231,18 @@ HeroInstance.prototype.addItem = function (item, forceInsert) {
 	if (this.Items.length >= 6 && !forceInsert) {
 		return false;
 	}
-	var index = this.Items.push(item);
+	let index = this.Items.push(item),
+		deferredThis = this;
 	item._heroRef = this;
+	item._boundDelete = function(){
+		deferredThis.Items.splice(deferredThis.Items.indexOf(item), 1)
+		item._heroRef = undefined
+		item._boundDelete = undefined
+	}
 	item.addTeammate(this);
 	if (this.Total)
 		this.ItemChange();
-	for (var teammate of this.getTeammates())
+	for (let teammate of this.getTeammates())
 		item.addTeammate(teammate)
 	return index;
 }
@@ -250,8 +276,15 @@ HeroInstance.prototype.addBuff = function (buff, method) {
 	else if (method === "leave" && this.getBuffIds(buff.ID).length > 0)
 		return;
 
+	let deferredThis = this
 	this.Buffs.push(buff)
 	buff._heroRef = this;
+	buff._boundDelete = function(){
+		deferredThis.Buffs.splice(deferredThis.Buffs.indexOf(buff), 1)
+		buff._boundDelete = undefined
+		buff._heroRef = undefined
+	}
+
 	if (this.Total)
 		this.BuffChange();
 }
@@ -273,23 +306,6 @@ HeroInstance.prototype.removeBuff = function(buff) {
 		if (this.Total)
 			this.BuffChange()
 		return
-	}
-}
-
-/**
- * Removes references to StatObject in the hero
- */
-HeroInstance.prototype.remove = function(statInstance) {
-	if (statInstance._heroRef !== this)
-		return
-	statInstance._heroRef = undefined
-	if (statInstance instanceof ItemObject) {
-		this.Items.splice(this.Items.indexOf(statInstance), 1);
-		this.ItemChange()
-	}
-	else if (statInstance instanceof BuffObject && this.Buffs.includes(statInstance)) {
-		this.Buffs.splice(this.Buffs.indexOf(statInstance), 1)
-		this.BuffChange()
 	}
 }
 

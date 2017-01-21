@@ -17,11 +17,11 @@ class TalentObject extends AbilityObject {
 	}
 
 	/**
-	 * Method to save object state into a serializable format
+	 * Method to save object state into a serialized format
 	 *
 	 * @returns
 	 *
-	 * @memberOf StatObject
+	 * @memberof StatObject
 	 */
 	serialize() {
 		let props = {version: this.Version}
