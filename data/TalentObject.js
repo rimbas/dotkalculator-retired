@@ -46,14 +46,46 @@ class TalentObject extends AbilityObject {
 
 	createTooltip() {
 		let el = document.createElement("div")
+		el.classList.add("talent-tooltip")
 
-		el.classList.add("item-tooltip")
-		el.textContent = "talent display"
+		let table = el.appendChild(document.createElement("table")),
+			tbody = table.createTBody();
+		table.classList.add("talent-table")
 
+		let levelList = {}
+		this._HTML.LevelList = levelList;
 
-		this._HTML.DisplayElement.appendChild(el)
-		this.updateTooltip()
+		for (let i = this.Restrictions.length - 1; i >= 0; i--) {
+			let talentLevel = this.Restrictions[i]
+			let row = tbody.insertRow();
+			let cellLeft = row.insertCell(),
+				cellLevel = row.insertCell(),
+				cellRight = row.insertCell();
+			cellLeft.textContent = "Left " + (i + 1)
+			cellRight.textContent = "Right " + (i + 1)
+			let levelCircle = cellLevel.appendChild(document.createElement("div"))
+			levelCircle.textContent = "" + talentLevel
+			levelCircle.classList.add("talent-level")
+			levelList[talentLevel] = levelCircle;
+		}
+
 		return el
+	}
+
+	updateDisplay() {
+		this.updateTooltip()
+	}
+
+	updateTooltip() {
+		for (let level in this._HTML.LevelList) {
+			let levelCircle = this._HTML.LevelList[level]
+			if (this.$hero.Base.Level < level) {
+				levelCircle.classList.add("disabled")
+			}
+			else {
+				levelCircle.classList.remove("disabled")
+			}
+		}
 	}
 
 }

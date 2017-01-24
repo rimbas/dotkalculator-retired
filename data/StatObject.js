@@ -472,9 +472,9 @@ class StatObject {
 
 		if (this._HTML.AghsElement) {
 			if (this.AghsUpgraded == true)
-				this._HTML.AghsElement.classList.remove("disabled")
+				this._HTML.AghsElement.classList.remove("unavailable")
 			else
-				this._HTML.AghsElement.classList.add("disabled")
+				this._HTML.AghsElement.classList.add("unavailable")
 		}
 
 		for (let stat in this._HTML_DynamicElements) {

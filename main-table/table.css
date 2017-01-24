@@ -1,11 +1,13 @@
+
 /* Hero table styles */
+
 .hero-table {
 	margin: 10px;
 	font-size: 12pt;
 	margin-bottom: 300px;
 }
 .hero-table caption {
-	border: 4px solid #9A1E00;
+	border: 4px solid var(--color-accent1);
 	border-bottom: none;
 	font-size: 16pt;
 }
@@ -14,10 +16,10 @@
 	padding-left: 4px;
 	padding-right: 4px;
 }
-td.single-button + td.single-button {
+.hero-table td.single-button + td.single-button {
 	padding-left: 0px;
 }
-td.box-content + td.box-content {
+.hero-table td.box-content + td.box-content {
 	padding-left: 0px;
 }
 .hero-table tr:nth-child(2n), .hero-table thead > tr {
@@ -28,11 +30,11 @@ td.box-content + td.box-content {
 	padding-bottom: 0.4em;
 }
 .hero-table thead tr:last-child th {
-	border-bottom: 3px solid #9A1E00;
+	border-bottom: 3px solid var(--color-accent1);
 }
 
 .hero-table tr.selected {
-	background-color: #9A1E00;
+	background-color: var(--color-accent1);
 }
 
 /* shitty overrides for jquery-ui widgets */
@@ -44,20 +46,20 @@ td.box-content + td.box-content {
 .hero-table .ui-spinner-input {
 	margin: 0px;
 	text-indent: 2px;
-	color: gold;
+	color: var(--color-accent2);
 	width: 100%;
 }
 .ui-spinner, .ui-spinner-button, .ui-spinner-button.ui-state-default {
-	border-color: gold;
+	border-color: var(--color-accent2);
 }
 
 .hero-table .hero-label {
 	background: none;
 	border: none;
 	outline: none;
-	color: gold;
+	color: var(--color-accent2);
 	font-size: 1em;
-	border: 1px solid gold;
+	border: 1px solid var(--color-accent2);
 	width: 9em;
 }
 .hero-table .delete-button {
@@ -81,7 +83,7 @@ td.box-content + td.box-content {
 /* Classes for  item, ability and buff containers */
 .hero-table .item-container {
 	display: block;
-	border: 1px solid gold;
+	border: 1px solid var(--color-accent2);
 	height: 28px;
 	white-space: nowrap;
 }
@@ -121,15 +123,15 @@ td.box-content + td.box-content {
 .hero-table .item-display.ability {
 	width: 28px;
 }
-.item-tooltip {
+.hero-table .item-tooltip {
 	user-select: text;
 	display: none;
 	position: absolute;
 	top:28px;
 	/*left: -1px;*/ /* left-aligned tooltip*/
 	transform: translateX(-50%); /* centered tooltip */
-	background: #003045;
-	border: 1px solid gold;
+	background: var(--color-main);
+	border: 1px solid var(--color-accent2);
 	padding: 3px;
 	overflow: visible;
 	width: 200px;
@@ -138,11 +140,11 @@ td.box-content + td.box-content {
 	white-space: normal;
 }
 
-.item-display:hover > .item-tooltip {
-	display: inline-block;
+.hero-table .item-display:hover > .item-tooltip {
+	display: block;
 	box-shadow: 1px 1px 5px black;
 }
-.item-display-charges {
+.hero-table .item-display-charges {
 	position: absolute;
 	cursor: default;
 	bottom: 0px;
@@ -150,7 +152,7 @@ td.box-content + td.box-content {
 	text-align: right;
 	text-shadow: -1px -1px 1px rgba(0, 0, 0, 1), 1px 1px 1px rgba(0, 0, 0, 1);
 }
-.item-display-levels {
+.hero-table .item-display-levels {
 	position: absolute;
 	cursor: default;
 	top: 0px;
@@ -159,7 +161,7 @@ td.box-content + td.box-content {
 	text-shadow: -1px -1px 1px rgba(0, 0, 0, 1), 1px 1px 1px rgba(0, 0, 0, 1);
 	font-family: serif;
 }
-.item-display-delete {
+.hero-table .item-display-delete {
 	position: absolute;
 	display: none;
 	top: 0px;
@@ -172,10 +174,10 @@ td.box-content + td.box-content {
 	background-size: cover;
 	cursor: pointer;
 }
-.item-display:hover > .item-display-delete {
+.hero-table .item-display:hover > .item-display-delete {
 	display: block;
 }
-.item-display-activate {
+.hero-table .item-display-activate {
 	position: absolute;
 	display: none;
 	bottom: 0px;
@@ -189,23 +191,23 @@ td.box-content + td.box-content {
 	background-repeat: no-repeat;
 	cursor: pointer;
 }
-.item-display:hover > .item-display-activate {
+.hero-table .item-display:hover > .item-display-activate {
 	display: block;
 }
-.item-tooltip > .label-name {
+.hero-table .item-tooltip > .label-name {
 	display: inline-block;
 	font-weight: bold;
 	padding: 2px;
 	font-size: 1em;
 }
 
-.item-tooltip > .label-version {
+.hero-table .item-tooltip > .label-version {
 	padding: 2px;
 	float: right;
 	color: rgba(251, 216, 80, 0.33);
 }
 
-.label-aghanims {
+.hero-table .label-aghanims {
 	margin-left: 2px;
 	vertical-align: text-top;
 	display: inline-block;
@@ -214,82 +216,130 @@ td.box-content + td.box-content {
 	background: url(ultimate_scepter_icon.png);
 }
 
-.item-display-options.label {
+.hero-table .item-display-options.label {
 	margin-left: 0.5ch;
 }
-.item-display-options.value {
+.hero-table .item-display-options.value {
 	font-weight: bold;
 	color: limegreen;
 }
-.item-display-options.warning {
+.hero-table .item-display-options.warning {
 	color: darkorange;
 }
-.item-display-options.lore {
+.hero-table .item-display-options.lore {
 	color: #ffe86d;
 	font-style: italic;
 }
-.item-display-options.cooldown, .item-display-options.manacost {
+.hero-table .item-display-options.cooldown, .item-display-options.manacost {
 	display: inline-block;
 	width: 82px;
 	margin-top: 1px;
 }
-.item-display-options.cooldown[style*="display: none"] +
+.hero-table .item-display-options.cooldown[style*="display: none"] +
 .item-display-options.manacost[style*="display: none"] + br {
 	display: none;
 }
-.item-display-options[style*="display: none"] + br.single-mode {
+.hero-table .item-display-options[style*="display: none"] + br.single-mode {
 	display: none;
 }
 
-.item-display-options.cooldown::before {
+.hero-table .item-display-options.cooldown::before {
 	content: url("cooldown.png");
 	vertical-align: middle;
     margin-right: 4px;
     margin-left: 4px;
 }
-.item-display-options.manacost::before {
+.hero-table .item-display-options.manacost::before {
 	content: url("mana.png");
 	vertical-align: middle;
     margin-right: 4px;
     margin-left: 4px;
 }
-.value.negative {
+.hero-table .value.negative {
 	color: red;
 }
-.label.dynamic {
+.hero-table .label.dynamic {
 	color: orange;
 }
-.mini-spinner {
-	border: 1px solid gold;
-	color: gold;
+.hero-table .mini-spinner {
+	border: 1px solid var(--color-accent2);
+	color: var(--color-accent2);
 	height: 14px;
 	padding: 0px;
 	margin-bottom: 1px;
-	background: #003045;
+	background: var(--color-main);
 }
-.mini-spinner:disabled {
+.hero-table .mini-spinner:disabled {
 	border: none;
 	margin: 1px;
 }
-.mini-spinner-label {
+.hero-table .mini-spinner-label {
 	vertical-align: middle;
 	text-align: left;
 	margin-left: 3px;
 }
 
-.info-damage.base {
+.hero-table .info-damage.base {
 	color: gold;
 }
-.info-damage.bonus {
+.hero-table .info-damage.bonus {
 	color: limegreen;
 }
-.info-damage.magic {
+.hero-table .info-damage.magic {
 	color: dodgerblue;
 }
-.info-damage.pure {
+.hero-table .info-damage.pure {
 	color: red;
 }
 
-.hero-table .disabled {
+.hero-table .unavailable {
 	filter: grayscale(100%) brightness(40%);
 }
+
+.hero-table .talent-tooltip {
+	user-select: text;
+	display: none;
+	position: absolute;
+	top:28px;
+	/*left: -1px;*/ /* left-aligned tooltip*/
+	transform: translateX(-50%); /* centered tooltip */
+	background: var(--color-main);
+	border: 1px solid var(--color-accent2);
+	overflow: visible;
+	z-index: 1;
+	text-align: left;
+	white-space: normal;
+}
+
+.hero-table .item-display:hover > .talent-tooltip {
+	display: block;
+	box-shadow: 1px 1px 5px black;
+}
+
+.hero-table .talent-table {
+	border: none;
+}
+
+.hero-table .talent-table td {
+	padding: 0px;
+	align-content: center;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.hero-table .talent-level {
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	border-radius: 100%;
+	border: solid 1px var(--color-accent2);
+	width: 25px;
+	height: 25px;
+	margin: 2px;
+}
+
+.hero-table .talent-table .disabled {
+	color: lightgrey;
+	border-color: lightgrey;
+}
+

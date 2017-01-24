@@ -217,7 +217,7 @@ HeroInstance.prototype.delete = function() {
 
 	for (let i = Abilities.length - 1; i >= 0; i--) {
 		let ability = Abilities[i];
-		if (ability !== undefined && ability.constructor !== TalentObject)
+		if (ability !== undefined)
 			ability.delete()
 	}
 }
@@ -342,29 +342,6 @@ HeroInstance.addHandler({
 	name: "LevelChange",
 	binds: [],
 	handler: function(lvl){
-		/*if (lvl) {
-			this.Meta.Level = lvl;
-		}
-		this.Base.StrengthFloat = this.Raw.StrengthBase + this.Raw.StrengthGain * (this.Meta.Level-1);
-		this.Base.Strength = Math.round(this.Base.StrengthFloat);
-		this.Base.AgilityFloat = this.Raw.AgilityBase + this.Raw.AgilityGain * (this.Meta.Level-1);
-		this.Base.Agility = Math.round(this.Base.AgilityFloat);
-		this.Base.IntelligenceFloat = this.Raw.IntelligenceBase + this.Raw.IntelligenceGain * (this.Meta.Level-1);
-		this.Base.Intelligence = Math.round(this.Base.IntelligenceFloat);
-		this.Base.Armor = this.Raw.Armor + this.Base.Agility * this.Raw.ArmorPerAgility;
-		this.Base.Health = this.Raw.Health + this.Base.Strength * this.Raw.HealthPerStrength;
-		this.Base.HealthRegeneration = this.Raw.HealthRegeneration + this.Base.Strength * 0.03;
-		this.Base.Mana = this.Raw.Mana + this.Base.Intelligence * this.Raw.ManaPerIntelligence;
-		this.Base.ManaRegeneration = this.Raw.ManaRegeneration + this.Base.Intelligence * 0.04;
-		let primaryStat = 0;
-		if ( this.Raw.Type == "Strength" )
-			primaryStat = this.Base.Strength;
-		else if ( this.Raw.Type == "Agility" )
-			primaryStat = this.Base.Agility;
-		else if ( this.Raw.Type == "Intelligence" )
-			primaryStat = this.Base.Intelligence;
-		this.Base.DamageMin = this.Raw.DamageMin + primaryStat;
-		this.Base.DamageMax = this.Raw.DamageMax + primaryStat;*/
 		return {
 			Strength: this.Base.Strength,
 			Agility: this.Base.Agility,

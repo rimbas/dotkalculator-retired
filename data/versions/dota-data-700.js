@@ -5725,6 +5725,7 @@ DotaData.addVersion({
 			"Agility": function() {
 				return 20 + this.Level * 20  + (this.$hero.Talent.Left4 ? 25 : 0)
 			},
+			"AghsUpgraded": function(){ return this.$total.HasAghanims },
 		},
 		"earth_spirit_boulder_smash": {
 			"Name": "Boulder smash",
